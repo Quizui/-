@@ -1,0 +1,9 @@
+21:50:37 **** Clean-only build of configuration Debug for project SAudioPlatForm_OpenALSoft ****
+mingw32-make clean 
+rm -rf ./OpenALSource/open_al_interface.d ./OpenALSource/open_al_interface.o
+rm -rf ./DllFunction/DllMain.d ./DllFunction/DllMain.o
+rm -rf PlatFormSound_OpenAL.dll
+ 
+
+21:50:37 Build Finished. 0 errors, 0 warnings. (took 144ms)
+

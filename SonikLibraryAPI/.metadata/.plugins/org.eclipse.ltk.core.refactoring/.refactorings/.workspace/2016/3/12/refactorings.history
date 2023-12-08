@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="リソース &apos;SonikLibraryAPI/MathBit/SonikSort.h&apos; を削除" deleteContents="false" description="リソース &apos;SonikLibraryAPI/MathBit/SonikSort.h&apos; を削除" element1="/SonikLibraryAPI/MathBit/SonikSort.h" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1457978306396"/>
+</session>

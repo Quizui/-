@@ -1,0 +1,209 @@
+/*
+ * SonikMathStandard.cpp
+ *
+ *  Created on: 2019/06/20
+ *      Author: SONIC
+ */
+
+#include "SonikMathStandard.h"
+#include "SonikMathTrigonometric.h"
+#include "memory.h"
+
+namespace SonikMath
+{
+	//2を底とする対数を計算します。
+	int log2(int x)
+	{
+		int y;
+
+		y = 0;
+		while (x > 1)
+		{
+			x >>= 1;
+			y++;
+		}
+
+		return y;
+	};
+
+	//指定した値の2の累乗(るいじょう)数を計算します。
+	int pow2(int x)
+	{
+		int y;
+
+		if (x == 0)
+		{
+			y = 1;
+		}
+		else
+		{
+			y = 2 << (x - 1);
+		}
+
+		return y;
+	};
+
+
+	//FFT(高速フーリエ変換)を行います。
+	void FFT(double* p_real, double* p_imag, int TargetSampling)
+	{
+		const double Local_M_PI = 3.14159265358979323846;
+		int number_of_stage = log2(TargetSampling);
+
+		for(int stage=1; stage <= number_of_stage; ++stage)
+		{
+			int powval		= pow2( stage - 1 );
+			int pow_stage_val	= pow2( number_of_stage - stage );
+			for(int i=0; i < powval; ++i)
+			{
+				for( int j=0; j < pow_stage_val; ++j )
+				{
+					int first_index = pow2(number_of_stage - stage + 1) * i + j;
+					int second_index = pow2(number_of_stage - stage) + first_index;
+					int r = pow2(stage - 1) * j;
+
+					int a_r = p_real[first_index];
+					int a_i = p_imag[first_index];
+					int b_r = p_real[second_index];
+					int b_i = p_imag[second_index];
+					int c_r = SonikMath::Cos( (2.0 * Local_M_PI * r) / TargetSampling );
+					int c_i = -SonikMath::Sin( (2.0 * Local_M_PI * r) / TargetSampling );
+
+					if( stage < number_of_stage )
+					{
+						p_real[first_index] = a_r + b_r;
+						p_imag[first_index] = a_i + b_i;
+
+						p_real[second_index] = (a_r - b_r) * c_r - (a_i - b_i) * c_i;
+						p_imag[second_index] = (a_i - b_i) * c_r + (a_r - b_r) * c_i;
+
+						continue;
+					};
+
+					p_real[first_index] = a_r + b_r;
+					p_imag[first_index] = a_i + b_i;
+					p_real[second_index] = a_r - b_r;
+					p_imag[second_index] = a_i - b_i;
+
+				};
+			};
+		};
+
+		int stage;
+		int index_pows;
+		int stage_pows;
+		int* local_index = new int[TargetSampling];
+		memset(local_index, 0, (sizeof(int) * TargetSampling));
+
+		for(stage =1; stage <= number_of_stage; ++stage)
+		{
+			index_pows = pow2(stage -1);
+			stage_pows = pow2(number_of_stage - stage);
+			for(int k=0; k < index_pows; ++k)
+			{
+				local_index[ index_pows + k ] = local_index[k] + stage_pows;
+			};
+		};
+
+		int ml_real;
+		int ml_imag;
+		for(int m=0; m < TargetSampling; ++m)
+		{
+			if( local_index[m] > m )
+			{
+				ml_real = p_real[local_index[m]];
+				ml_imag = p_imag[local_index[m]];
+				p_real[local_index[m]] = p_real[m];
+				p_imag[local_index[m]] = p_imag[m];
+				p_real[m] = ml_real;
+				p_imag[m] = ml_imag;
+			};
+		};
+
+		delete[] local_index;
+	};
+
+	void ReverseFFT(double* p_real, double* p_imag, int TargetSampling)
+	{
+		const double Local_M_PI = 3.14159265358979323846;
+		int number_of_stage = log2(TargetSampling);
+
+		int stage;
+		for(stage=1; stage <= number_of_stage; ++stage)
+		{
+			int stage_pow = pow2(stage -1);
+			for(int i=0; i < stage_pow; ++i)
+			{
+				int number_of_pow = pow2(number_of_stage - stage);
+				for(int j=0; j < number_of_pow; ++j)
+				{
+					int first_index = pow2(number_of_stage - stage + 1) * i + j;
+					int second_index = pow2(number_of_stage - stage) + first_index;
+					int r = pow2( stage - 1 ) * j;
+
+					int a_r = p_real[first_index];
+					int a_i = p_imag[first_index];
+					int b_r = p_real[second_index];
+					int b_i = p_imag[second_index];
+					int c_r = SonikMath::Cos( (2.0 * Local_M_PI * r) / TargetSampling );
+					int c_i = SonikMath::Sin( (2.0 * Local_M_PI * r) / TargetSampling );
+
+					if( stage < number_of_stage )
+					{
+						p_real[first_index] = a_r + b_r;
+						p_imag[first_index] = a_i + b_i;
+						p_real[second_index] = (a_r - b_r) * c_r - (a_i - b_i) * c_i;
+						p_imag[second_index] = (a_i - b_i) * c_r + (a_r - b_r) * c_i;
+
+						continue;
+					};
+
+					p_real[first_index] = a_r + b_r;
+					p_imag[first_index] = a_i + b_i;
+					p_real[second_index] = a_r - b_r;
+					p_imag[second_index] = a_i - b_i;
+				};
+			};
+		};
+
+		int* local_index = new int[TargetSampling];
+		memset(local_index, 0, (sizeof(int) * TargetSampling));
+
+		for(stage=1; stage <= number_of_stage; ++stage)
+		{
+			int m_stage_pows = pow2(stage - 1);
+			int m_numof_pows = pow2(number_of_stage - stage);
+			for(int m=0; m < m_stage_pows; ++m)
+			{
+				local_index[m_stage_pows + m] = local_index[m] + m_numof_pows;
+			};
+		};
+
+		delete[] local_index;
+//		int ml_real;
+//		int ml_imag;
+//		for( int n=0; n < TargetSampling; ++n )
+//		{
+//			if(local_index[n] > n)
+//			{
+//				ml_real = p_real[ local_index[n] ];
+//				ml_imag = p_imag[ local_index[n] ];
+//				p_real[ local_index[n] ] = p_real[n];
+//				p_imag[ local_index[n] ] = p_imag[n];
+//				p_real[n] = ml_real;
+//				p_imag[n] = ml_imag;
+//			};
+//		};
+//
+//		for(int k = 0; k < TargetSampling; ++k)
+//		{
+//			p_real[k] /= TargetSampling;
+//			p_imag[k] /= TargetSampling;
+//		};
+//
+//		delete[] local_index;
+	};
+
+};
+
+

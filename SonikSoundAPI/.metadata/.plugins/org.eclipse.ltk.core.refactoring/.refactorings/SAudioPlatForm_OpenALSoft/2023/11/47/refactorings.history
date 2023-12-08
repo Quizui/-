@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="リソース名 &apos;SAudioPlatForm_OpenALSoft/OpenAlFormat.h&apos; を &apos;OpenALFormat.h&apos; に変更します" description="リソース &apos;OpenAlFormat.h&apos; の名前変更" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="OpenAlFormat.h" name="OpenALFormat.h" stamp="1700931108081" updateReferences="true"/>
+</session>

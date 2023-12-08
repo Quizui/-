@@ -1,0 +1,218 @@
+02:33:40 **** Build of configuration Release_X64 for project SonikSoundAccesser ****
+mingw32-make all 
+Building file: ../Task/AudioPlayerTaskManager.cpp
+Invoking: GCC C++ Compiler
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_RELEASE -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL -I"D:\MyLibrary\include\Audio\SoundSystem\Accesser" -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Task/AudioPlayerTaskManager.d" -MT"Task/AudioPlayerTaskManager.o" -o "Task/AudioPlayerTaskManager.o" "../Task/AudioPlayerTaskManager.cpp"
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+In file included from ../Task/AudioPlayerTaskManager.cpp:8:
+In file included from ../Task/AudioPlayerTaskManager.h:11:
+In file included from ../Task/PlayerTaskInterface.h:11:
+../Task/../AudioSmartPointer.h:51:5: warning: deleting pointer to incomplete type 'SonikAudioData::SonikAudioControlData' may cause undefined behavior [-Wdelete-incomplete]
+   51 |                                 delete m_Pointer;
+      |                                 ^      ~~~~~~~~~
+../Task/../AudioSmartPointer.h:83:4: note: in instantiation of member function 'SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData>::Release' requested here
+   83 |                         Release();
+      |                         ^
+../Task/PlayerTaskInterface.h:30:3: note: in instantiation of member function 'SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData>::~SonikAudioInterfaceSmtPtr' requested here
+   30 |                 PlayerTaskInterface(void)
+      |                 ^
+../Task/PlayerTaskInterface.h:16:8: note: forward declaration of 'SonikAudioData::SonikAudioControlData'
+   16 |         class SonikAudioControlData;
+      |               ^
+2 warnings generated.
+Finished building: ../Task/AudioPlayerTaskManager.cpp
+ 
+Building file: ../Task/PlayerTask.cpp
+Invoking: GCC C++ Compiler
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_RELEASE -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL -I"D:\MyLibrary\include\Audio\SoundSystem\Accesser" -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Task/PlayerTask.d" -MT"Task/PlayerTask.o" -o "Task/PlayerTask.o" "../Task/PlayerTask.cpp"
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+1 warning generated.
+Finished building: ../Task/PlayerTask.cpp
+ 
+Building file: ../Player/SonikAudioPlayer.cpp
+Invoking: GCC C++ Compiler
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_RELEASE -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL -I"D:\MyLibrary\include\Audio\SoundSystem\Accesser" -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Player/SonikAudioPlayer.d" -MT"Player/SonikAudioPlayer.o" -o "Player/SonikAudioPlayer.o" "../Player/SonikAudioPlayer.cpp"
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+In file included from ../Player/SonikAudioPlayer.cpp:12:
+In file included from ../Player/../Task/AudioPlayerTaskManager.h:12:
+In file included from D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../SonikWorkThread/SonikWorkThreadEx.h:24:
+In file included from D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../SonikWorkThread/SonikThreadPack.h:11:
+D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp:46:5: warning: deleting pointer to incomplete type 'SonikLib::FunctionSystem_Base' may cause undefined behavior [-Wdelete-incomplete]
+   46 |                                 delete m_Pointer;
+      |                                 ^      ~~~~~~~~~
+D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp:95:4: note: in instantiation of member function 'SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>::Release' requested here
+   95 |                         Release();
+      |                         ^
+D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../SonikWorkThread/SonikThreadPack.h:40:3: note: in instantiation of member function 'SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>::~NormalSmtPtr' requested here
+   40 |                 ThreadPack(void)
+      |                 ^
+D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../SonikWorkThread/SonikThreadPack.h:15:8: note: forward declaration of 'SonikLib::FunctionSystem_Base'
+   15 |         class FunctionSystem_Base;
+      |               ^
+2 warnings generated.
+Finished building: ../Player/SonikAudioPlayer.cpp
+ 
+Building file: ../Player/SonikAudioPlayer_ControlData.cpp
+Invoking: GCC C++ Compiler
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_RELEASE -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL -I"D:\MyLibrary\include\Audio\SoundSystem\Accesser" -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Player/SonikAudioPlayer_ControlData.d" -MT"Player/SonikAudioPlayer_ControlData.o" -o "Player/SonikAudioPlayer_ControlData.o" "../Player/SonikAudioPlayer_ControlData.cpp"
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+1 warning generated.
+Finished building: ../Player/SonikAudioPlayer_ControlData.cpp
+ 
+Building file: ../Mixer/SonikAudio_Mixer.cpp
+Invoking: GCC C++ Compiler
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_RELEASE -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL -I"D:\MyLibrary\include\Audio\SoundSystem\Accesser" -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Mixer/SonikAudio_Mixer.d" -MT"Mixer/SonikAudio_Mixer.o" -o "Mixer/SonikAudio_Mixer.o" "../Mixer/SonikAudio_Mixer.cpp"
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+../Mixer/SonikAudio_Mixer.cpp:241:9: warning: unused variable 'lis_x' [-Wunused-variable]
+  241 |                 float lis_x, lis_y, lis_z;
+      |                       ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:241:16: warning: unused variable 'lis_y' [-Wunused-variable]
+  241 |                 float lis_x, lis_y, lis_z;
+      |                              ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:241:23: warning: unused variable 'lis_z' [-Wunused-variable]
+  241 |                 float lis_x, lis_y, lis_z;
+      |                                     ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:269:9: warning: unused variable 'lis_x' [-Wunused-variable]
+  269 |                 float lis_x, lis_y, lis_z;
+      |                       ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:269:16: warning: unused variable 'lis_y' [-Wunused-variable]
+  269 |                 float lis_x, lis_y, lis_z;
+      |                              ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:269:23: warning: unused variable 'lis_z' [-Wunused-variable]
+  269 |                 float lis_x, lis_y, lis_z;
+      |                                     ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:299:9: warning: unused variable 'lis_x' [-Wunused-variable]
+  299 |                 float lis_x, lis_y, lis_z;
+      |                       ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:299:16: warning: unused variable 'lis_y' [-Wunused-variable]
+  299 |                 float lis_x, lis_y, lis_z;
+      |                              ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:299:23: warning: unused variable 'lis_z' [-Wunused-variable]
+  299 |                 float lis_x, lis_y, lis_z;
+      |                                     ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:333:9: warning: unused variable 'lis_x' [-Wunused-variable]
+  333 |                 float lis_x, lis_y, lis_z;
+      |                       ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:333:16: warning: unused variable 'lis_y' [-Wunused-variable]
+  333 |                 float lis_x, lis_y, lis_z;
+      |                              ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:333:23: warning: unused variable 'lis_z' [-Wunused-variable]
+  333 |                 float lis_x, lis_y, lis_z;
+      |                                     ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:369:9: warning: unused variable 'lis_x' [-Wunused-variable]
+  369 |                 float lis_x, lis_y, lis_z;
+      |                       ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:369:16: warning: unused variable 'lis_y' [-Wunused-variable]
+  369 |                 float lis_x, lis_y, lis_z;
+      |                              ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:369:23: warning: unused variable 'lis_z' [-Wunused-variable]
+  369 |                 float lis_x, lis_y, lis_z;
+      |                                     ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:405:9: warning: unused variable 'lis_x' [-Wunused-variable]
+  405 |                 float lis_x, lis_y, lis_z;
+      |                       ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:405:16: warning: unused variable 'lis_y' [-Wunused-variable]
+  405 |                 float lis_x, lis_y, lis_z;
+      |                              ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:405:23: warning: unused variable 'lis_z' [-Wunused-variable]
+  405 |                 float lis_x, lis_y, lis_z;
+      |                                     ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:432:9: warning: unused variable 'lis_x' [-Wunused-variable]
+  432 |                 float lis_x, lis_y, lis_z;
+      |                       ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:432:16: warning: unused variable 'lis_y' [-Wunused-variable]
+  432 |                 float lis_x, lis_y, lis_z;
+      |                              ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:432:23: warning: unused variable 'lis_z' [-Wunused-variable]
+  432 |                 float lis_x, lis_y, lis_z;
+      |                                     ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:462:9: warning: unused variable 'lis_x' [-Wunused-variable]
+  462 |                 float lis_x, lis_y, lis_z;
+      |                       ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:462:16: warning: unused variable 'lis_y' [-Wunused-variable]
+  462 |                 float lis_x, lis_y, lis_z;
+      |                              ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:462:23: warning: unused variable 'lis_z' [-Wunused-variable]
+  462 |                 float lis_x, lis_y, lis_z;
+      |                                     ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:495:9: warning: unused variable 'lis_x' [-Wunused-variable]
+  495 |                 float lis_x, lis_y, lis_z;
+      |                       ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:495:16: warning: unused variable 'lis_y' [-Wunused-variable]
+  495 |                 float lis_x, lis_y, lis_z;
+      |                              ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:495:23: warning: unused variable 'lis_z' [-Wunused-variable]
+  495 |                 float lis_x, lis_y, lis_z;
+      |                                     ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:530:9: warning: unused variable 'lis_x' [-Wunused-variable]
+  530 |                 float lis_x, lis_y, lis_z;
+      |                       ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:530:16: warning: unused variable 'lis_y' [-Wunused-variable]
+  530 |                 float lis_x, lis_y, lis_z;
+      |                              ^~~~~
+../Mixer/SonikAudio_Mixer.cpp:530:23: warning: unused variable 'lis_z' [-Wunused-variable]
+  530 |                 float lis_x, lis_y, lis_z;
+      |                                     ^~~~~
+31 warnings generated.
+Finished building: ../Mixer/SonikAudio_Mixer.cpp
+ 
+Building file: ../Interface/SonikAudioCreator.cpp
+Invoking: GCC C++ Compiler
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_RELEASE -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL -I"D:\MyLibrary\include\Audio\SoundSystem\Accesser" -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Interface/SonikAudioCreator.d" -MT"Interface/SonikAudioCreator.o" -o "Interface/SonikAudioCreator.o" "../Interface/SonikAudioCreator.cpp"
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+1 warning generated.
+Finished building: ../Interface/SonikAudioCreator.cpp
+ 
+Building file: ../Interface/SonikAudio_Implement.cpp
+Invoking: GCC C++ Compiler
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_RELEASE -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL -I"D:\MyLibrary\include\Audio\SoundSystem\Accesser" -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Interface/SonikAudio_Implement.d" -MT"Interface/SonikAudio_Implement.o" -o "Interface/SonikAudio_Implement.o" "../Interface/SonikAudio_Implement.cpp"
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+In file included from ../Interface/SonikAudio_Implement.cpp:16:
+In file included from ../Interface/../Task/AudioPlayerTaskManager.h:12:
+In file included from D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../SonikWorkThread/SonikWorkThreadEx.h:24:
+In file included from D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../SonikWorkThread/SonikThreadPack.h:11:
+D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp:46:5: warning: deleting pointer to incomplete type 'SonikLib::FunctionSystem_Base' may cause undefined behavior [-Wdelete-incomplete]
+   46 |                                 delete m_Pointer;
+      |                                 ^      ~~~~~~~~~
+D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp:95:4: note: in instantiation of member function 'SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>::Release' requested here
+   95 |                         Release();
+      |                         ^
+D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../SonikWorkThread/SonikThreadPack.h:40:3: note: in instantiation of member function 'SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>::~NormalSmtPtr' requested here
+   40 |                 ThreadPack(void)
+      |                 ^
+D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../SonikWorkThread/SonikThreadPack.h:15:8: note: forward declaration of 'SonikLib::FunctionSystem_Base'
+   15 |         class FunctionSystem_Base;
+      |               ^
+2 warnings generated.
+Finished building: ../Interface/SonikAudio_Implement.cpp
+ 
+Building target: libRx64_SonikSoundAccesser.a
+Invoking: GCC Archiver
+ar -r  "libRx64_SonikSoundAccesser.a" ./Task/AudioPlayerTaskManager.o ./Task/PlayerTask.o  ./Player/SonikAudioPlayer.o ./Player/SonikAudioPlayer_ControlData.o  ./Mixer/SonikAudio_Mixer.o  ./Interface/SonikAudioCreator.o ./Interface/SonikAudio_Implement.o   
+D:/Development/MSYS64/clang64/bin/ar.exe: warning: creating libRx64_SonikSoundAccesser.a
+Finished building target: libRx64_SonikSoundAccesser.a
+ 
+
+02:33:48 Build Finished. 0 errors, 40 warnings. (took 8s.150ms)
+
