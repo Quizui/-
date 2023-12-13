@@ -1,67 +1,65 @@
 /*
- * SonikString.cpp
+ * SonikString_x64.cpp
  *
  *  Created on: 2019/02/10
  *      Author: SONIK
  */
 
-#ifdef __SONIK_I686__
-//64bit definition
 #include <new>
 #include <algorithm>
 #include <cstring>
 #include <locale.h>
 #include <cstdint>
 #include "SonikString.h"
-#include "..//SonikCASUse.h"
-#include "..//SonikMathBitsUse.h"
+#include "../SonikCAS/SonikAtomicLock.h"
+#include "../MathBit/MathBit.h"
 
 namespace SonikLib
 {
 	//UTF8, UTF16, SJISが扱えるstringクラスです。
-	//処理自体はスレッドセーフですが、文字列をgetした後にバッファを書き換えられる恐れがあります。
+	//c:処理自体はスレッドセーフですが、文字列をgetした後にバッファを書き換えられる恐れがあります。
 	class SonikString::SonikString_pImpl
 	{
 	private:
-		//文字列領域
+		//c:文字列領域
 		uint8_t* Stringval_;
 
 		//c:格納している最大文字数
-		uint32_t MaxLength_;
+		uint64_t MaxLength_;
 
-		//現在の文字列のタイプ
+		//c:現在の文字列のタイプ
 		SonikLibConvertType CType;
-		//文字列領域のサイズ
-		uint32_t buffer_;
-		//マルチスレッドブロック
-		SonikLib::SonikAtomicLock string_atm_lock;
-		//マルチスレッドブロック（オペレータ)
-		SonikLib::SonikAtomicLock string_operator_lock;
+		//c:文字列領域のサイズ
+		uint64_t buffer_;
+		//c:マルチスレッドブロック
+		SonikLib::S_CAS::SonikAtomicLock string_atm_lock;
+		//c:マルチスレッドブロック（オペレータ)
+		SonikLib::S_CAS::SonikAtomicLock string_operator_lock;
 
 	private:
-		//内部用リサイズ関数です。
-		bool ReAlloc(uint32_t ReSize);
+		//c:内部用リサイズ関数です。
+		bool ReAlloc(uint64_t ReSize);
 
-		//現在のバッファタイプを指定のバッファタイプに変更します。
-		//変更の際に、バッファに対して変換作業が行われます。
-		//変換の際に失敗した場合は、falseになり、タイプの切り替えと変換作業は行われません。
+		//c:現在のバッファタイプを指定のバッファタイプに変更します。
+		//c:変更の際に、バッファに対して変換作業が行われます。
+		//c:変換の際に失敗した場合は、falseになり、タイプの切り替えと変換作業は行われません。
 		//SCHTYPE_UNKNOWNを指定した場合は、必ずfalseとなります。
 		bool SetCharacterType(SonikLibConvertType SetType);
 
 	public:
-		//コンストラクタ
+		//c:コンストラクタ
 		SonikString_pImpl(void);
-		//コンストラクタオーバーロード
+		//c:コンストラクタオーバーロード
 		SonikString_pImpl(const char* SetStr);
-		//コンストラクタオーバーロード
+		//c:コンストラクタオーバーロード
 		SonikString_pImpl(const char16_t* SetStr);
 
-		//コピーコンストラクタ
+		//c:コピーコンストラクタ
 		SonikString_pImpl(const SonikString_pImpl& t_his);
-		//ムーブコンストラクタ
+		//c:ムーブコンストラクタ
 		SonikString_pImpl(SonikString_pImpl&& Move);
 
-		//デストラクタ
+		//c:デストラクタ
 		~SonikString_pImpl(void);
 
 
@@ -73,23 +71,23 @@ namespace SonikLib
 		const char* utf8_str(void);
 
 		//SJIS形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
-		//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
-		uint32_t GetCpy_c_str(char* dstBuffer = nullptr);
+		//c:第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
+		uint64_t GetCpy_c_str(char* dstBuffer = nullptr);
 		//UTF16形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
-		//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
-		uint32_t GetCpy_c_wcstr(char16_t* dstBuffer = nullptr);
+		//c:第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
+		uint64_t GetCpy_c_wcstr(char16_t* dstBuffer = nullptr);
 		//UTF8形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
-		//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
-		uint32_t GetCpy_utf8_str(char* dstBuffer = nullptr);
+		//c:第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
+		uint64_t GetCpy_utf8_str(char* dstBuffer = nullptr);
 
 		//c:文字列のByte数を取得します。（Null終端文字をカウントに含まない)
-		uint32_t Count_Byte_NotNull(void);
+		uint64_t Count_Byte_NotNull(void);
 		//c:文字列数を取得します。（Null終端文字をカウントに含まない)
-		uint32_t Count_Str_NotNull(void);
+		uint64_t Count_Str_NotNull(void);
 
-		//文字列中の全角英数字を半角英数字に変換します。
+		//c: 文字列中の全角英数字を半角英数字に変換します。
 		bool ConvertFWANtoHWAN(void);
-		//文字列中の全角カナを半角カナに変換します。
+		//c: 文字列中の全角カナを半角カナに変換します。
 		bool ConvertFWKNtoHWKN(void);
 
 		//c: 指定位置の文字を削除します。
@@ -97,31 +95,30 @@ namespace SonikLib
 		//c: 指定の開始位置から指定された文字数を削除します。
 		void EraseStr(uint64_t ChrStartPoint, uint64_t ChrEndPoint);
 
-		//指定したAsciiコードをデリミタとしてSplitを行います。
+		//c: 指定したAsciiコードをデリミタとしてSplitを行います。
 		bool SplitForUTF8(uint8_t delim, SonikLib::SonikVariableArrayContainer<SonikLib::SonikString>& Container);
 
-
-		//各入力フォーマットから現在のバッファに変換して代入します。
+		//c: 各入力フォーマットから現在のバッファに変換して代入します。
 		SonikString_pImpl& operator =(const SonikString_pImpl& t_his);
 		SonikString_pImpl& operator =(SonikString_pImpl&& Move);
 		SonikString_pImpl& operator =(const char* Str);
 		SonikString_pImpl& operator =(const char16_t* w_Str);
 
-		//各入力フォーマットから現在のバッファに変換して結合します。
-		//コピー元とコピー先が同じオブジェクトの場合、そのまま結合します。
+		//c: 各入力フォーマットから現在のバッファに変換して結合します。
+		//c: コピー元とコピー先が同じオブジェクトの場合、そのまま結合します。
 		SonikString_pImpl& operator +=(const SonikString_pImpl& t_his);
 		SonikString_pImpl& operator +=(const char* Str);
 		SonikString_pImpl& operator +=(const char16_t* w_Str);
 
-		//現在のバッファと入力バッファを結合し、別のオブジェクトとして返却します。
-		//コピー元とコピー先が同じオブジェクトの場合、そのまま結合します。
+		//c: 現在のバッファと入力バッファを結合し、別のオブジェクトとして返却します。
+		//c: コピー元とコピー先が同じオブジェクトの場合、そのまま結合します。
 		SonikString_pImpl operator +(const SonikString_pImpl& t_his);
 		SonikString_pImpl operator +(const char* Str);
 		SonikString_pImpl operator +(const char16_t* w_Str);
 
 		//c: 文字列同士を比較します。(strcmp)
 		//c: 一致の場合true 不一致の場合 falseを返却します。
-		bool operator ==(const SonikString_pImpl& t_his);
+		bool operator ==(const SonikString_pImpl& t_his) ;
 		bool operator ==(const char* Str);
 		bool operator ==(const char16_t* w_Str);
 
@@ -136,6 +133,7 @@ namespace SonikLib
 		bool Less(const char* CompareArg2val);
 		bool GreaterEqual(const char* CompareArg2val);
 		bool LessEqual(const char* CompareArg2val);
+
 	};
 
 
@@ -163,7 +161,7 @@ namespace SonikLib
 		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
 
 		//NULL文字文追加(+1)して格納
-		uint32_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
 
 		if( SrcByte > buffer_ )
 		{
@@ -193,7 +191,7 @@ namespace SonikLib
 		buffer_ = 100;
 		CType = SCHTYPE_UTF16;
 
-		uint32_t SrcLen = SonikLibStringConvert::GetStringLengthByte(SetStr);
+		uint64_t SrcLen = SonikLibStringConvert::GetStringLengthByte(SetStr);
 
 		if(buffer_ < SrcLen)
 		{
@@ -260,7 +258,8 @@ namespace SonikLib
 	{
 		string_atm_lock.lock();
 
-		uint32_t convSize_ = 0;
+		uint64_t convSize_ = 0;
+//		unsigned long bufsize_ = SonikLibStringConvert::GetStringLength(reinterpret_cast<char*>(Stringval_));
 		switch(CType)
 		{
 		case SCHTYPE_SJIS:
@@ -276,8 +275,14 @@ namespace SonikLib
 
 			case SCHTYPE_UTF16:
 				//UTF16への変換
+//				mbstowcs_s(&convSize_, 0, 0, reinterpret_cast<char*>(Stringval_), bufsize_);
 				SonikLibStringConvert::ConvertMBStoUTF16(reinterpret_cast<char*>(Stringval_), 0, &convSize_);
+				//convSize_ *= 2;
 
+//				if( (convSize_ & 0x01) == 1 )
+//				{
+//					++convSize_;
+//				};
 
 				if( (convSize_ +1) > buffer_ )
 				{
@@ -295,6 +300,11 @@ namespace SonikLib
 					return false;
 				};
 
+//				if( mbstowcs_s(0, Stringval_, (convSize_ >> 1), reinterpret_cast<char*>(Stringval_), (convSize_ >> 1)) != 0 )
+//				{
+//					string_atm_lock.Unlock();
+//					return false;
+//				};
 
 				CType = SetType;
 				string_atm_lock.Unlock();
@@ -305,6 +315,10 @@ namespace SonikLib
 				//SJISからUTF8への変換を行う。
 				SonikLibStringConvert::ConvertMBSToUTF8(reinterpret_cast<char*>(Stringval_), 0, &convSize_);
 
+//				if( (convSize_ & 0x01) == 1 )
+//				{
+//					--convSize_;
+//				};
 
 				if( (convSize_ +1) > buffer_ )
 				{
@@ -346,6 +360,7 @@ namespace SonikLib
 			{
 			case SCHTYPE_SJIS:
 				//UTF16からSJISへの変換
+//				wcstombs_s(&convSize_, 0, 0, Stringval_, (bufsize_ * 2));
 				SonikLibStringConvert::ConvertUTF16toMBS(reinterpret_cast<char16_t*>(Stringval_), 0, &convSize_);
 
 				if( (convSize_ & 0x01) == 1 )
@@ -363,6 +378,7 @@ namespace SonikLib
 
 				};
 
+				//convSize_ = buffer_ << 1; // x * 2 = x << 1
 				if( !SonikLibStringConvert::ConvertUTF16toMBS(reinterpret_cast<char16_t*>(Stringval_), reinterpret_cast<char*>(Stringval_), &convSize_) )
 				{
 					string_atm_lock.Unlock();
@@ -468,6 +484,11 @@ namespace SonikLib
 				//UTF8からUTF16へ変換
 				SonikLibStringConvert::ConvertUTF8ToUTF16(reinterpret_cast<char*>(Stringval_), 0, &convSize_);
 
+//				if( (convSize_ & 0x01) == 1 )
+//				{
+//					++convSize_;
+//				};
+//				convSize_ <<= 1;
 
 				if( (convSize_ +2) > buffer_ )
 				{
@@ -479,7 +500,7 @@ namespace SonikLib
 
 				};
 
-
+//				convSize_ >>= 1;
 				if( !SonikLibStringConvert::ConvertUTF8ToUTF16(reinterpret_cast<char*>(Stringval_), reinterpret_cast<char16_t*>(Stringval_), &convSize_) )
 				{
 					string_atm_lock.Unlock();
@@ -529,10 +550,19 @@ namespace SonikLib
 		return false;
 	};
 
-	bool SonikString::SonikString_pImpl::ReAlloc(uint32_t ReArraySize)
+	bool SonikString::SonikString_pImpl::ReAlloc(uint64_t ReArraySize)
 	{
 		uint8_t* pTmp = 0;
-
+		//コピー元なのでNULL文字は数えない。
+//		unsigned long bufsize_ = SonikLibStringConvert::GetStringCount(Stringval_) + 1;
+//
+//		try
+//		{
+//			pTmp = new char[ReSize];
+//		}catch(std::bad_alloc&)
+//		{
+//			return false;
+//		};
 
 		pTmp = new(std::nothrow) uint8_t[ReArraySize];
 
@@ -594,7 +624,7 @@ namespace SonikLib
 		return reinterpret_cast<char*>(Stringval_);
 	};
 
-	uint32_t SonikString::SonikString_pImpl::GetCpy_c_str(char* dstBuffer)
+	uint64_t SonikString::SonikString_pImpl::GetCpy_c_str(char* dstBuffer)
 	{
 		if(CType == SCHTYPE_UNKNOWN)
 		{
@@ -611,7 +641,7 @@ namespace SonikLib
 		};
 
 		//NULL文字分追加 (+1)して格納
-		uint32_t cpysize = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_))  + 1;
+		uint64_t cpysize = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_))  + 1;
 
 		if( dstBuffer == 0 || dstBuffer == nullptr )
 		{
@@ -625,7 +655,7 @@ namespace SonikLib
 		return cpysize;
 	};
 
-	uint32_t SonikString::SonikString_pImpl::GetCpy_c_wcstr(char16_t* dstBuffer)
+	uint64_t SonikString::SonikString_pImpl::GetCpy_c_wcstr(char16_t* dstBuffer)
 	{
 		if(CType == SCHTYPE_UNKNOWN)
 		{
@@ -642,7 +672,7 @@ namespace SonikLib
 		};
 
 		//NULL文字分追加(wide = +2) して格納
-		uint32_t cpysize = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char16_t*>(Stringval_)) + 2;
+		uint64_t cpysize = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char16_t*>(Stringval_)) + 2;
 
 		if( dstBuffer == 0 || dstBuffer == nullptr )
 		{
@@ -656,7 +686,7 @@ namespace SonikLib
 		return cpysize;
 	};
 
-	uint32_t SonikString::SonikString_pImpl::GetCpy_utf8_str(char* dstBuffer)
+	uint64_t SonikString::SonikString_pImpl::GetCpy_utf8_str(char* dstBuffer)
 	{
 		if(CType == SCHTYPE_UNKNOWN)
 		{
@@ -673,7 +703,7 @@ namespace SonikLib
 		};
 
 		//NULL文字分追加 (+1)して格納
-		uint32_t cpysize = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_)) + 1;
+		uint64_t cpysize = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_)) + 1;
 
 		if( dstBuffer == 0 || dstBuffer == nullptr )
 		{
@@ -688,13 +718,13 @@ namespace SonikLib
 	};
 
 	//c:文字列のByte数を取得します。（Null終端文字をカウントに含まない)
-	uint32_t SonikString::SonikString_pImpl::Count_Byte_NotNull(void)
+	uint64_t SonikString::SonikString_pImpl::Count_Byte_NotNull(void)
 	{
 		return SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
 	};
 
 	//c:文字列数を取得します。（Null終端文字をカウントに含まない)
-	uint32_t SonikString::SonikString_pImpl::Count_Str_NotNull(void)
+	uint64_t SonikString::SonikString_pImpl::Count_Str_NotNull(void)
 	{
 		return MaxLength_;
 	};
@@ -715,7 +745,7 @@ namespace SonikLib
 
 		string_atm_lock.lock();
 		//全角半角変換
-		uint32_t Size = 0;
+		uint64_t Size = 0;
 		//サイズ取得
 		SonikLibStringConvert::ConvertUTF8FWCToHWCForAN(reinterpret_cast<char*>(Stringval_), nullptr, Size);
 		//領域取得
@@ -766,7 +796,7 @@ namespace SonikLib
 
 		string_atm_lock.lock();
 		//全角半角変換
-		uint32_t Size = 0;
+		uint64_t Size = 0;
 		//サイズ取得
 		SonikLibStringConvert::ConvertUTF8FWCToHWCForKANA(reinterpret_cast<char*>(Stringval_), nullptr, Size);
 		//領域取得
@@ -825,12 +855,11 @@ namespace SonikLib
 		};
 	};
 
-
 	bool SonikString::SonikString_pImpl::SplitForUTF8(uint8_t delim, SonikLib::SonikVariableArrayContainer<SonikLib::SonikString>& Container)
 	{
 		this->utf8_str();
 
-		uint32_t bitcnt = 0;
+		uint64_t bitcnt = 0;
 		unsigned char swapbit = 0;
 		uint8_t* pTmpstr = reinterpret_cast<uint8_t*>(Stringval_);
 		uint8_t* pTmpstr_St = pTmpstr;
@@ -847,20 +876,21 @@ namespace SonikLib
 			bitcnt |= (bitcnt << 4);
 			bitcnt |= (bitcnt << 8);
 			bitcnt |= (bitcnt << 16);
+			bitcnt |= (bitcnt << 32);
 
-			bitcnt = (bitcnt & 0x55555555) + ( (bitcnt >> 1) & 0x55555555 );
-			bitcnt = (bitcnt & 0x33333333) + ( (bitcnt >> 2) & 0x33333333 );
-			bitcnt = (bitcnt & 0x0F0F0F0F) + ( (bitcnt >> 4) & 0x0F0F0F0F );
-			bitcnt = (bitcnt & 0x00FF00FF) + ( (bitcnt >> 8) & 0x00FF00FF );
+			bitcnt = (bitcnt & 0x5555555555555555) + ( (bitcnt >> 1) & 0x5555555555555555 );
+			bitcnt = (bitcnt & 0x3333333333333333) + ( (bitcnt >> 2) & 0x3333333333333333 );
+			bitcnt = (bitcnt & 0x0F0F0F0F0F0F0F0F) + ( (bitcnt >> 4) & 0x0F0F0F0F0F0F0F0F );
+			bitcnt = (bitcnt & 0x00FF00FF00FF00FF) + ( (bitcnt >> 8) & 0x00FF00FF00FF00FF );
+			bitcnt = (bitcnt & 0x0000FFFF0000FFFF) + ( (bitcnt >> 16) & 0x0000FFFF0000FFFF );
 
-			bitcnt = (bitcnt & 0x0000FFFF) + ( (bitcnt >> 16) & 0x0000FFFF);
-			bitcnt = (32 - bitcnt);
+			bitcnt = (bitcnt & 0x00000000FFFFFFFF) + ( (bitcnt >> 32) & 0x00000000FFFFFFFF);
+			bitcnt = (64 - bitcnt);
 
 			if( bitcnt == 0 )
 			{
 				++bitcnt;
 			};
-
 
 			if( (*pTmpstr) == delim )
 			{
@@ -884,7 +914,6 @@ namespace SonikLib
 		PushStr = reinterpret_cast<char*>(pTmpstr_St);
 		if( !Container.PushBack(PushStr) )
 		{
-			(*pTmpstr) = delim;
 			return false;
 		};
 
@@ -965,7 +994,7 @@ namespace SonikLib
 		};
 
 		CType = SonikLibStringConvert::CheckConvertType(Str);
-		uint32_t Size_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(Str);
 
 
 		if(buffer_ < (Size_ + 1))
@@ -1001,7 +1030,7 @@ namespace SonikLib
 		};
 
 		CType = SCHTYPE_UTF16;
-		uint32_t Size_ = SonikLibStringConvert::GetStringLengthByte(w_Str);
+		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(w_Str);
 
 		if( (Size_ +2) > buffer_ )
 		{
@@ -1034,8 +1063,8 @@ namespace SonikLib
 		};
 
 		//カウントを行い、結合時にはみ出すようなら再確保
-		uint32_t CopySize_;
-		uint32_t bufuse_;
+		uint64_t CopySize_;
+		uint64_t bufuse_;
 		uint32_t sizeofsize_ = 0;
 		if(t_his.CType == SCHTYPE_UTF16)
 		{
@@ -1053,8 +1082,8 @@ namespace SonikLib
 		}else
 		{
 
-			CopySize_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(t_his.Stringval_));
-			bufuse_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+			CopySize_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(t_his.Stringval_));
+			bufuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
 
 			if( buffer_ < (CopySize_ + bufuse_) + 1 )
 			{
@@ -1069,6 +1098,7 @@ namespace SonikLib
 		bufuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
 
 		memcpy_s(&(reinterpret_cast<char*>(Stringval_)[bufuse_]), (CopySize_ + sizeofsize_), t_his.Stringval_, CopySize_);
+		Stringval_[bufuse_ + CopySize_] = 0;
 
 		if( CType == SCHTYPE_UTF16 )
 		{
@@ -1107,8 +1137,8 @@ namespace SonikLib
 		};
 
 		//カウントを行い、結合時にはみ出すようなら再確保
-		uint32_t CopySize_ = SonikLibStringConvert::GetStringLengthByte(Str);
-		uint32_t bufuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
+		uint64_t CopySize_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		uint64_t bufuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
 
 		if( (CopySize_ + bufuse_) > buffer_ )
 		{
@@ -1120,6 +1150,10 @@ namespace SonikLib
 
 		memcpy_s(&(reinterpret_cast<char*>(Stringval_)[bufuse_]), (CopySize_ + 1) , Str, CopySize_ );
 		Stringval_[bufuse_ + CopySize_] = 0;
+
+		//utf8の残骸が後ろに残っている可能性があるので、0を直接埋め込む
+		Stringval_[bufuse_ + CopySize_] = 0;
+
 		//最後に全部コピー元の形に変換
 //		SetCharacterType(CType);
 
@@ -1150,8 +1184,8 @@ namespace SonikLib
 		};
 
 		//カウントを行い、結合時にはみ出すようなら再確保
-		uint32_t CopySize_ = SonikLibStringConvert::GetStringLengthByte(w_Str);
-		uint32_t bufuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char16_t*>(Stringval_));
+		uint64_t CopySize_ = SonikLibStringConvert::GetStringLengthByte(w_Str);
+		uint64_t bufuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char16_t*>(Stringval_));
 
 		if( (CopySize_ + bufuse_) + 2 > buffer_ )
 		{
@@ -1163,9 +1197,6 @@ namespace SonikLib
 
 		memcpy_s(&(reinterpret_cast<char*>(Stringval_)[bufuse_]), (CopySize_ + 2), w_Str, CopySize_);
 		Stringval_[bufuse_ + CopySize_] = 0;
-
-		//utf8の残骸が後ろに残っている可能性があるので、0を直接埋め込む
-		Stringval_[bufuse_ + CopySize_ + 1] = 0;
 
 		//最後に全部コピー元の形に変換
 //		SetCharacterType(CType);
@@ -1206,6 +1237,7 @@ namespace SonikLib
 
 	};
 
+
 	//c: 文字列同士を比較します。(strcmp)
 	//c: 一致の場合true 不一致の場合 falseを返却します。
 	bool SonikString::SonikString_pImpl::operator ==(const SonikString_pImpl& t_his)
@@ -1221,8 +1253,8 @@ namespace SonikLib
 		};
 
 		//c: 文字数が違えば違う文字列として判定(不一致)
-		uint32_t myuse_ = 0;
-		uint32_t targetuse_ = 0;
+		uint64_t myuse_ = 0;
+		uint64_t targetuse_ = 0;
 		if( CType == SCHTYPE_UTF16 )
 		{
 			myuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char16_t*>(Stringval_));
@@ -1241,7 +1273,7 @@ namespace SonikLib
 		};
 
 		//c: 文字数も一緒であればByte精査
-		for(uint32_t i=0; i < myuse_; ++i)
+		for(uint64_t i=0; i < myuse_; ++i)
 		{
 			if( Stringval_[i] != t_his.Stringval_[i] )
 			{
@@ -1269,8 +1301,8 @@ namespace SonikLib
 		};
 
 		//c: 文字数が違えば違う文字列として判定(不一致)
-		uint32_t myuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
-		uint32_t targetuse_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		uint64_t myuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
+		uint64_t targetuse_ = SonikLibStringConvert::GetStringLengthByte(Str);
 
 		if( myuse_ != targetuse_ )
 		{
@@ -1278,7 +1310,7 @@ namespace SonikLib
 		};
 
 		//c: 文字数も一緒であればByte精査
-		for(uint32_t i=0; i < myuse_; ++i)
+		for(uint64_t i=0; i < myuse_; ++i)
 		{
 			if( Stringval_[i] != Str[i] )
 			{
@@ -1304,8 +1336,8 @@ namespace SonikLib
 		};
 
 		//c: 文字数が違えば違う文字列として判定(不一致)
-		uint32_t myuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char16_t*>(Stringval_));
-		uint32_t targetuse_ = SonikLibStringConvert::GetStringLengthByte(w_Str);
+		uint64_t myuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char16_t*>(Stringval_));
+		uint64_t targetuse_ = SonikLibStringConvert::GetStringLengthByte(w_Str);
 
 		if( myuse_ != targetuse_ )
 		{
@@ -1313,7 +1345,7 @@ namespace SonikLib
 		};
 
 		//c: 文字数も一緒であればByte精査
-		for(uint32_t i=0; i < myuse_; ++i)
+		for(uint64_t i=0; i < myuse_; ++i)
 		{
 			if( Stringval_[i] != w_Str[i] )
 			{
@@ -1341,8 +1373,8 @@ namespace SonikLib
 		};
 
 		//c: 文字数が違えば違う文字列として判定(不一致)
-		uint32_t myuse_ = 0;
-		uint32_t targetuse_ = 0;
+		uint64_t myuse_ = 0;
+		uint64_t targetuse_ = 0;
 		if( CType == SCHTYPE_UTF16 )
 		{
 			myuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char16_t*>(Stringval_));
@@ -1361,7 +1393,7 @@ namespace SonikLib
 		};
 
 		//c: 文字数も一緒であればByte精査
-		for(uint32_t i=0; i < myuse_; ++i)
+		for(uint64_t i=0; i < myuse_; ++i)
 		{
 			if( Stringval_[i] != t_his.Stringval_[i] )
 			{
@@ -1389,8 +1421,8 @@ namespace SonikLib
 		};
 
 		//c: 文字数が違えば違う文字列として判定(不一致)
-		uint32_t myuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
-		uint32_t targetuse_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		uint64_t myuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
+		uint64_t targetuse_ = SonikLibStringConvert::GetStringLengthByte(Str);
 
 		if( myuse_ != targetuse_ )
 		{
@@ -1398,7 +1430,7 @@ namespace SonikLib
 		};
 
 		//c: 文字数も一緒であればByte精査
-		for(uint32_t i=0; i < myuse_; ++i)
+		for(uint64_t i=0; i < myuse_; ++i)
 		{
 			if( Stringval_[i] != Str[i] )
 			{
@@ -1424,8 +1456,8 @@ namespace SonikLib
 		};
 
 		//c: 文字数が違えば違う文字列として判定(不一致)
-		uint32_t myuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char16_t*>(Stringval_));
-		uint32_t targetuse_ = SonikLibStringConvert::GetStringLengthByte(w_Str);
+		uint64_t myuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char16_t*>(Stringval_));
+		uint64_t targetuse_ = SonikLibStringConvert::GetStringLengthByte(w_Str);
 
 		if( myuse_ != targetuse_ )
 		{
@@ -1433,7 +1465,7 @@ namespace SonikLib
 		};
 
 		//c: 文字数も一緒であればByte精査
-		for(uint32_t i=0; i < myuse_; ++i)
+		for(uint64_t i=0; i < myuse_; ++i)
 		{
 			if( Stringval_[i] != w_Str[i] )
 			{
@@ -1471,6 +1503,7 @@ namespace SonikLib
 	{
 		return !(this->Greater(CompareArg2val));
 	};
+
 //===========================================================
 //
 //				pImpl使用（外側)クラスの実装
@@ -1575,33 +1608,33 @@ namespace SonikLib
 
 	//SJIS形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
 	//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
-	uint32_t SonikString::GetCpy_c_str(char* dstBuffer)
+	uint64_t SonikString::GetCpy_c_str(char* dstBuffer)
 	{
 		return pImpl->GetCpy_c_str(dstBuffer);
 	};
 
 	//UTF16形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
 	//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
-	uint32_t SonikString::GetCpy_c_wcstr(char16_t* dstBuffer)
+	uint64_t SonikString::GetCpy_c_wcstr(char16_t* dstBuffer)
 	{
 		return pImpl->GetCpy_c_wcstr(dstBuffer);
 	};
 
 	//UTF8形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
 	//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
-	uint32_t SonikString::GetCpy_utf8_str(char* dstBuffer)
+	uint64_t SonikString::GetCpy_utf8_str(char* dstBuffer)
 	{
 		return pImpl->GetCpy_utf8_str(dstBuffer);
 	};
 
 	//c:文字列のByte数を取得します。（Null終端文字をカウントに含まない)
-	uint32_t SonikString::Count_Byte_NotNull(void)
+	uint64_t SonikString::Count_Byte_NotNull(void)
 	{
 		return pImpl->Count_Byte_NotNull();
 	};
 
 	//c:文字列数を取得します。（Null終端文字をカウントに含まない)
-	uint32_t SonikString::Count_Str_NotNull(void)
+	uint64_t SonikString::Count_Str_NotNull(void)
 	{
 		return pImpl->Count_Str_NotNull();
 	};
@@ -1619,13 +1652,13 @@ namespace SonikLib
 	};
 
 	//c: 指定位置の文字を削除します。
-	void SonikString::EraseChar(uint32_t ChrPoint)
+	void SonikString::EraseChar(uint64_t ChrPoint)
 	{
 		pImpl->EraseChar(ChrPoint);
 	};
 
 	//c: 指定の開始位置から指定された文字数を削除します。
-	void SonikString::EraseStr(uint32_t ChrStartPoint, uint32_t ChrEndPoint)
+	void SonikString::EraseStr(uint64_t ChrStartPoint, uint64_t ChrEndPoint)
 	{
 		pImpl->EraseStr(ChrStartPoint, ChrEndPoint);
 	};
@@ -1717,6 +1750,41 @@ namespace SonikLib
 		return str_;
 	};
 
+	//c: 文字列同士を比較します。(strcmp)
+	//c: 一致の場合true 不一致の場合 falseを返却します。
+	bool SonikString::operator ==(const SonikString& t_his)
+	{
+		return (*pImpl) == (*t_his.pImpl);
+	};
+
+	bool SonikString::operator ==(const char* Str)
+	{
+		return (*pImpl) == Str;
+	};
+
+	bool SonikString::operator ==(const char16_t* w_Str)
+	{
+		return (*pImpl) == w_Str;
+	};
+
+	//c: 文字列同士を比較します。(strcmp)
+	//c: 不一致の場合true　一致の場合 falseを返却します。
+	bool SonikString::operator !=(const SonikString& t_his)
+	{
+		return (*pImpl) != (*t_his.pImpl);
+	};
+
+	bool SonikString::operator !=(const char* Str)
+	{
+		return (*pImpl) != Str;
+	};
+
+	bool SonikString::operator !=(const char16_t* w_Str)
+	{
+		return (*pImpl) != w_Str;
+	};
+
+
 	bool operator <(const SonikString& CompareArg1val, const SonikString& CompareArg2val)
 	{
 		return CompareArg1val.pImpl->Greater(CompareArg2val.pImpl->c_str());
@@ -1737,11 +1805,4 @@ namespace SonikLib
 		return CompareArg1val.pImpl->LessEqual(CompareArg2val.pImpl->c_str());
 	};
 
-
-
 };
-
-#endif
-
-
-

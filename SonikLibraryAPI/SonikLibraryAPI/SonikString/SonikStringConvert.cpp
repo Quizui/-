@@ -1,11 +1,9 @@
 /*
- * SonikStringConvert.cpp
+ * SonikStringConvert_x64.cpp
  *
  *  Created on: 2019/02/09
  *      Author: SONIK
  */
-
-#ifdef __SONIK_I686__
 
 #include <cstring>
 #include <cstdlib>
@@ -15,7 +13,7 @@
 #include "stdint.h"
 #include "wchar.h"
 #include "SonikStringConvert.h"
-#include "../SonikMathBitsUse.h"
+#include "../MathBit/MathBit.h"
 
 namespace SonikConvStaticTable
 {
@@ -44,33 +42,30 @@ namespace SonikConvStaticTable
 //2019/01/14 SJISの場合、utf-8が後ろに入っている場合もあるので、utf-8が出るまですべて読み込みます。
 SonikLibConvertType SonikLibStringConvert::CheckConvertType(const char* pCheckSrc)
 {
-	SonikLibConvertType conv_t = SCHTYPE_UNKNOWN;
 
-	if(pCheckSrc == 0)
+	if(pCheckSrc == nullptr)
 	{
-		return conv_t;
+		return SCHTYPE_UNKNOWN;
 	};
 
 	uint32_t Len = strlen(pCheckSrc);
 	uint32_t lop = 0;
 	unsigned char val;
 
+	if(Len < 3 )
+	{
+		const uint32_t* p_src = reinterpret_cast<const uint32_t*>(pCheckSrc);
+		if( (*p_src) >= 0xEFBBBF00 )
+		{
+			return SCHTYPE_BOMUTF8;
+		};
+	};
+
+	SonikLibConvertType conv_t = SCHTYPE_UNKNOWN;
+	unsigned char sjis_check_val;
 	for(lop =0; lop < Len; ++lop)
 	{
-		val = pCheckSrc[lop];
-
-		if(lop == 0 && Len > 3)
-		{
-			if(static_cast<unsigned char>(pCheckSrc[0]) == 0xEF
-			   && static_cast<unsigned char>(pCheckSrc[1]) == 0xBB
-			   && static_cast<unsigned char>(pCheckSrc[2]) == 0xBF
-			)
-			{
-				//BOM付きUTF8
-				conv_t = SCHTYPE_BOMUTF8;
-				break;
-			};
-		};
+		val = (*(pCheckSrc+lop));
 
 		if( 0x01 <= val && val <= 0x7E )
 		{
@@ -85,7 +80,7 @@ SonikLibConvertType SonikLibStringConvert::CheckConvertType(const char* pCheckSr
 			//SJIS判定確定
 			conv_t = SCHTYPE_SJIS;
 //			continue;
-//			break;
+			break;
 		};
 
 		if( 0xC2 <= val && val <= 0xDF )
@@ -112,12 +107,12 @@ SonikLibConvertType SonikLibStringConvert::CheckConvertType(const char* pCheckSr
 				break;
 			};
 
-			if( 0x80 <= static_cast<unsigned char>(pCheckSrc[lop+1]) && static_cast<unsigned char>(pCheckSrc[lop+1]) <= 0x9F )
+			sjis_check_val = static_cast<unsigned char>( (*(pCheckSrc + (lop+1))) );
+			if( 0x80 <= sjis_check_val && sjis_check_val <= 0x9F )
 			{
-				//SJIS第１かもしれないので予想としてSJISをセットして次へ
-				conv_t = SCHTYPE_SJIS;
 
-				if( 0xE0 <= static_cast<unsigned char>(pCheckSrc[lop+2]) && static_cast<unsigned char>(pCheckSrc[lop+2]) <= 0xEF )
+				sjis_check_val = static_cast<unsigned char>( (*(pCheckSrc + (lop+2))) );
+				if( 0xE0 <= sjis_check_val && sjis_check_val <= 0xEF )
 				{
 					//SJIS確定
 					conv_t = SCHTYPE_SJIS;
@@ -137,7 +132,8 @@ SonikLibConvertType SonikLibStringConvert::CheckConvertType(const char* pCheckSr
 		{
 			if(lop > 0 )
 			{
-				if( static_cast<unsigned char>(pCheckSrc[lop - 1]) >= 0x80 && static_cast<unsigned char>(pCheckSrc[lop - 1]) <= 0x9F )
+				sjis_check_val = static_cast<unsigned char>( (*(pCheckSrc + (lop - 1))) );
+				if( sjis_check_val  >= 0x80 && sjis_check_val  <= 0x9F )
 				{
 					//SJISの組み合わせ
 					conv_t = SCHTYPE_SJIS;
@@ -180,8 +176,13 @@ SonikLibConvertType SonikLibStringConvert::CheckConvertType(const char* pCheckSr
 //文字列のタイプをチェックし、その文字列で使用されているバイト数を返却します。
 //文字列のタイプチェックは可能性の範囲のチェックとなります。
 //SJIS, UTF-8のみに対応。
-uint32_t SonikLibStringConvert::GetStringLengthByte(const char* pCheckSrc)
+uint64_t SonikLibStringConvert::GetStringLengthByte(const char* pCheckSrc)
 {
+	if(pCheckSrc == nullptr)
+	{
+		return 0;
+	};
+
 	SonikLibConvertType Type_ = SonikLibStringConvert::CheckConvertType(pCheckSrc);
 	uint64_t cnt = 0;
 
@@ -202,9 +203,14 @@ uint32_t SonikLibStringConvert::GetStringLengthByte(const char* pCheckSrc)
 };
 
 //unicode文字の文字列バイト数を返却します。
-uint32_t SonikLibStringConvert::GetStringLengthByte(const char16_t* pCheckSrc)
+uint64_t SonikLibStringConvert::GetStringLengthByte(const char16_t* pCheckSrc)
 {
-	uint32_t cnt = 0;
+	if(pCheckSrc == nullptr)
+	{
+		return 0;
+	};
+
+	uint64_t cnt = 0;
 
 	while( (*pCheckSrc) != 0 )
 	{
@@ -217,8 +223,13 @@ uint32_t SonikLibStringConvert::GetStringLengthByte(const char16_t* pCheckSrc)
 
 //unicode(UTF-32)文字の文字列バイト数を返却します。
 //ただのループ。
-uint32_t SonikLibStringConvert::GetStringLengthByte(const int32_t* pCheckSrc)
+uint64_t SonikLibStringConvert::GetStringLengthByte(const int32_t* pCheckSrc)
 {
+	if(pCheckSrc == nullptr)
+	{
+		return 0;
+	};
+
 	uint64_t cnt_ = 0;
 
 	while( (*pCheckSrc) != 0 )
@@ -234,33 +245,40 @@ uint32_t SonikLibStringConvert::GetStringLengthByte(const int32_t* pCheckSrc)
 //文字列のタイプをチェックし、その文字列で使用されている文字数を返却します。
 //文字列のタイプチェックは可能性の範囲のチェックとなります。
 //SJIS, UTF-8のみに対応。
-uint32_t SonikLibStringConvert::GetStringCount(const char* pCheckSrc)
+uint64_t SonikLibStringConvert::GetStringCount(const char* pCheckSrc)
 {
+	if(pCheckSrc == nullptr)
+	{
+		return 0;
+	};
+
 	SonikLibConvertType Type_ = SonikLibStringConvert::CheckConvertType(pCheckSrc);
-	uint32_t cnt = 0;
-	uint32_t bitcnt = 0;
+	uint64_t cnt = 0;
+	uint64_t bitcnt = 0;
 	unsigned char swapbit = 0;
+	const unsigned char* pchecsrc_val = reinterpret_cast<const unsigned char*>((*pCheckSrc));;
 
 	if( Type_ == SCHTYPE_SJIS )
 	{
-		while( static_cast<unsigned char>((*pCheckSrc)) != 0x00 )
+		while((*pchecsrc_val) != 0x00 )
 		{
-			if( (0x80 <= static_cast<unsigned char>((*pCheckSrc)) && static_cast<unsigned char>((*pCheckSrc)) <= 0x9F) ||  (0xE0 <= static_cast<unsigned char>((*pCheckSrc)) && static_cast<unsigned char>((*pCheckSrc)) <= 0xFC) )
+
+			if( (0x80 <= (*pchecsrc_val)  && (*pchecsrc_val)  <= 0x9F) ||  (0xE0 <= (*pchecsrc_val)  && (*pchecsrc_val)  <= 0xFC) )
 			{
 
 //				++cnt;
-				++pCheckSrc;
+				++pchecsrc_val;
 			};
 
 			++cnt;
-			++pCheckSrc;
+			++pchecsrc_val;
 		};
 
 	}else if( Type_ == SCHTYPE_UTF8 )
 	{
-		while( static_cast<unsigned char>((*pCheckSrc)) != 0x00 )
+		while( (*pchecsrc_val)  != 0x00 )
 		{
-			swapbit = (*pCheckSrc);
+			swapbit = (*pchecsrc_val);
 			swapbit = SonikMathBit::BitSwapFor8bit(swapbit);
 
 			bitcnt =  ~(swapbit);
@@ -270,15 +288,16 @@ uint32_t SonikLibStringConvert::GetStringCount(const char* pCheckSrc)
 			bitcnt |= (bitcnt << 4);
 			bitcnt |= (bitcnt << 8);
 			bitcnt |= (bitcnt << 16);
+			bitcnt |= (bitcnt << 32);
 
-			bitcnt = (bitcnt & 0x55555555) + ( (bitcnt >> 1) & 0x55555555 );
-			bitcnt = (bitcnt & 0x33333333) + ( (bitcnt >> 2) & 0x33333333 );
-			bitcnt = (bitcnt & 0x0F0F0F0F) + ( (bitcnt >> 4) & 0x0F0F0F0F );
-			bitcnt = (bitcnt & 0x00FF00FF) + ( (bitcnt >> 8) & 0x00FF00FF );
+			bitcnt = (bitcnt & 0x5555555555555555) + ( (bitcnt >> 1) & 0x5555555555555555 );
+			bitcnt = (bitcnt & 0x3333333333333333) + ( (bitcnt >> 2) & 0x3333333333333333 );
+			bitcnt = (bitcnt & 0x0F0F0F0F0F0F0F0F) + ( (bitcnt >> 4) & 0x0F0F0F0F0F0F0F0F );
+			bitcnt = (bitcnt & 0x00FF00FF00FF00FF) + ( (bitcnt >> 8) & 0x00FF00FF00FF00FF );
+			bitcnt = (bitcnt & 0x0000FFFF0000FFFF) + ( (bitcnt >> 16) & 0x0000FFFF0000FFFF );
 
-			bitcnt = (bitcnt & 0x0000FFFF) + ( (bitcnt >> 16) & 0x0000FFFF);
-
-			bitcnt = (32 - bitcnt);
+			bitcnt = (bitcnt & 0x00000000FFFFFFFF) + ( (bitcnt >> 32) & 0x00000000FFFFFFFF);
+			bitcnt = (64 - bitcnt);
 
 			if( bitcnt == 0 )
 			{
@@ -286,7 +305,7 @@ uint32_t SonikLibStringConvert::GetStringCount(const char* pCheckSrc)
 			};
 
 			++cnt;
-			pCheckSrc += bitcnt;
+			pchecsrc_val += bitcnt;
 
 		};
 
@@ -299,38 +318,43 @@ uint32_t SonikLibStringConvert::GetStringCount(const char* pCheckSrc)
 };
 
 //第２引数に指定したタイプで強制的にカウントを行います。(SJIS混じりUTF8の対処)
-uint32_t SonikLibStringConvert::GetStringCount(const char* pCheckSrc, SonikLibConvertType CountStrType)
+uint64_t SonikLibStringConvert::GetStringCount(const char* pCheckSrc, SonikLibConvertType CountStrType)
 {
+	if(pCheckSrc == nullptr)
+	{
+		return 0;
+	};
+
 	if( CountStrType != SCHTYPE_SJIS && CountStrType != SCHTYPE_UTF8)
 	{
 		return 0;
 	};
 
-//	SonikLibConvertType Type_ = SonikLibStringConvert::CheckConvertType(pCheckSrc);
-	uint32_t cnt = 0;
-	uint32_t bitcnt = 0;
+	uint64_t cnt = 0;
+	uint64_t bitcnt = 0;
 	unsigned char swapbit = 0;
+	const unsigned char* pchecsrc_val = reinterpret_cast<const unsigned char*>((*pCheckSrc));
 
 	if( CountStrType == SCHTYPE_SJIS )
 	{
-		while( (*pCheckSrc) != 0x00 )
+		while( (*pchecsrc_val) != 0x00 )
 		{
-			if( (0x80 <= static_cast<unsigned char>((*pCheckSrc)) && static_cast<unsigned char>((*pCheckSrc)) <= 0x9F) ||  (0xE0 <= static_cast<unsigned char>((*pCheckSrc)) && static_cast<unsigned char>((*pCheckSrc)) <= 0xFC) )
+			if( (0x80 <= (*pchecsrc_val) && (*pchecsrc_val) <= 0x9F) ||  (0xE0 <= (*pchecsrc_val) && (*pchecsrc_val) <= 0xFC) )
 			{
 
 //				++cnt;
-				++pCheckSrc;
+				++pchecsrc_val;
 			};
 
 			++cnt;
-			++pCheckSrc;
+			++pchecsrc_val;
 		};
 
 	}else if( CountStrType == SCHTYPE_UTF8 )
 	{
-		while( (*pCheckSrc) != 0x00 )
+		while( (*pchecsrc_val) != 0x00 )
 		{
-			swapbit = (*pCheckSrc);
+			swapbit = (*pchecsrc_val);
 			swapbit = SonikMathBit::BitSwapFor8bit(swapbit);
 
 			bitcnt =  ~(swapbit);
@@ -340,22 +364,24 @@ uint32_t SonikLibStringConvert::GetStringCount(const char* pCheckSrc, SonikLibCo
 			bitcnt |= (bitcnt << 4);
 			bitcnt |= (bitcnt << 8);
 			bitcnt |= (bitcnt << 16);
+			bitcnt |= (bitcnt << 32);
 
-			bitcnt = (bitcnt & 0x55555555) + ( (bitcnt >> 1) & 0x55555555 );
-			bitcnt = (bitcnt & 0x33333333) + ( (bitcnt >> 2) & 0x33333333 );
-			bitcnt = (bitcnt & 0x0F0F0F0F) + ( (bitcnt >> 4) & 0x0F0F0F0F );
-			bitcnt = (bitcnt & 0x00FF00FF) + ( (bitcnt >> 8) & 0x00FF00FF );
+			bitcnt = (bitcnt & 0x5555555555555555) + ( (bitcnt >> 1) & 0x5555555555555555 );
+			bitcnt = (bitcnt & 0x3333333333333333) + ( (bitcnt >> 2) & 0x3333333333333333 );
+			bitcnt = (bitcnt & 0x0F0F0F0F0F0F0F0F) + ( (bitcnt >> 4) & 0x0F0F0F0F0F0F0F0F );
+			bitcnt = (bitcnt & 0x00FF00FF00FF00FF) + ( (bitcnt >> 8) & 0x00FF00FF00FF00FF );
+			bitcnt = (bitcnt & 0x0000FFFF0000FFFF) + ( (bitcnt >> 16) & 0x0000FFFF0000FFFF );
 
-			bitcnt = (bitcnt & 0x0000FFFF) + ( (bitcnt >> 16) & 0x0000FFFF);
+			bitcnt = (bitcnt & 0x00000000FFFFFFFF) + ( (bitcnt >> 32) & 0x00000000FFFFFFFF);
 
-			bitcnt = (32 - bitcnt);
+			bitcnt = (64 - bitcnt);
 			if( bitcnt == 0 )
 			{
 				++bitcnt;
 			};
 
 			++cnt;
-			pCheckSrc += bitcnt;
+			pchecsrc_val += bitcnt;
 
 		};
 
@@ -369,9 +395,14 @@ uint32_t SonikLibStringConvert::GetStringCount(const char* pCheckSrc, SonikLibCo
 
 
 //unicode(UTF-16)文字の文字数を返却します。
-uint32_t SonikLibStringConvert::GetStringCount(const char16_t* pCheckSrc)
+uint64_t SonikLibStringConvert::GetStringCount(const char16_t* pCheckSrc)
 {
-	uint32_t cnt =0;
+	if(pCheckSrc == nullptr)
+	{
+		return 0;
+	};
+
+	uint64_t cnt =0;
 
 	while( (*pCheckSrc) != 0 )
 	{
@@ -384,9 +415,14 @@ uint32_t SonikLibStringConvert::GetStringCount(const char16_t* pCheckSrc)
 };
 
 //unicode(UTF-32)文字の文字数を返却します。
-uint32_t SonikLibStringConvert::GetStringCount(const int32_t* pCheckSrc)
+uint64_t SonikLibStringConvert::GetStringCount(const int32_t* pCheckSrc)
 {
-	uint32_t cnt_ = 0;
+	if(pCheckSrc == nullptr)
+	{
+		return 0;
+	};
+
+	uint64_t cnt_ = 0;
 
 	while( (*pCheckSrc) != 0 )
 	{
@@ -400,117 +436,116 @@ uint32_t SonikLibStringConvert::GetStringCount(const int32_t* pCheckSrc)
 
 
 //UTF-8をUNICODE(UTF-32)に変換します。
-bool SonikLibStringConvert::ConvertUTF8ToUTF32(char* pSrc, int32_t* pDest, uint32_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertUTF8ToUTF32(char* pSrc, int32_t* pDest, uint64_t* DestBufferSize)
 {
-	if( pSrc == 0 )
+	if( pSrc == nullptr || DestBufferSize == nullptr)
 	{
 		return false;
 	};
 
-	uint32_t SrcLen = GetStringCount(pSrc);
+	uint64_t SrcLen = GetStringCount(pSrc);
 
 
-	if(pDest == 0 || pDest == nullptr)
+	if(pDest == nullptr && DestBufferSize != nullptr)
 	{
-		if(DestBufferSize != 0 && DestBufferSize != nullptr)
-		{
-			(*DestBufferSize) = SrcLen + 1;
-		}
+		(*DestBufferSize) = SrcLen + 1;
 		return false;
 	};
 
 	uint32_t* pUtf32_ = 0;
 
 	pUtf32_ = new(std::nothrow) uint32_t[(SrcLen) + 1];
-	if(pUtf32_ == 0 || pUtf32_ == nullptr)
+	if(pUtf32_ == nullptr)
 	{
 		return false;
 	}
 	std::fill_n(pUtf32_, (SrcLen+1), 0);
 
 
-	uint32_t utf8_i = 0;
-	uint32_t utf32_i = 0;
+	uint64_t utf8_i = 0;
+	uint64_t utf32_i = 0;
 	unsigned char val = 0;
-	uint32_t numBytes = 0;
-	uint32_t offset_ = 0;
+	uint64_t numBytes = 0;
+	uint64_t offset_ = 0;
+    unsigned char* control_src = reinterpret_cast<unsigned char*>(pSrc);
 
 	for(offset_=0; offset_ < SrcLen;/*省略*/)
 	{
-		val = pSrc[utf8_i];
-		numBytes = 0;
 
-	    unsigned char* control_src = reinterpret_cast<unsigned char*>(pSrc);
+		control_src += utf8_i;
+
+		val = (*control_src);
+		numBytes = 0;
 
 		//utfのバイトセットチェック。
 	    if (0 <= val && val < 0x80)
 	    {
 	    	numBytes = 1;
 
-	    	pUtf32_[utf32_i] = (static_cast<uint32_t>(control_src[utf8_i]));
+	    	pUtf32_[utf32_i] = static_cast<uint32_t>( (*control_src) ) ;
 
 	    }else if (0xC2 <= val && val < 0xE0)
 	    {
 	    	numBytes = 2;
 
-	    	if (!(0x80 <= control_src[utf8_i+1] && control_src[utf8_i+1] < 0xC0))
+	    	if (!(0x80 <= (*(control_src +1)) && (*(control_src +1)) < 0xC0))
             {
             	delete[] pUtf32_;
                 return false;
             };
-            if ((control_src[utf8_i] & 0x1E) == 0)
+            if (((*control_src) & 0x1E) == 0)
             {
             	delete[] pUtf32_;
                 return false;
             };
 
-            pUtf32_[utf32_i] = (static_cast<uint32_t>(control_src[utf8_i] & 0x1F)) << 6;
-            pUtf32_[utf32_i] |= static_cast<uint32_t>(control_src[utf8_i] & 0x3F);
+            pUtf32_[utf32_i] = (static_cast<uint32_t>((*control_src) & 0x1F)) << 6;
+            pUtf32_[utf32_i] |= static_cast<uint32_t>((*control_src) & 0x3F);
 
 	    }else if (0xE0 <= val && val < 0xF0)
 	    {
 	    	numBytes = 3;
 
-            if ((!(0x80 <= control_src[utf8_i+1] && control_src[utf8_i+1] < 0xC0)) ||
-            	(!(0x80 <= control_src[utf8_i+2] && control_src[utf8_i+2] < 0xC0))
+            if ((!(0x80 <= (*(control_src +1)) && (*(control_src +1)) < 0xC0)) ||
+            	(!(0x80 <= (*(control_src +2)) && (*(control_src +2)) < 0xC0))
 				)
             {
             	delete[] pUtf32_;
                 return false;
             };
-            if ((control_src[utf8_i] & 0x0F) == 0 &&
-                (control_src[utf8_i+1] & 0x20) == 0)
+            if (((*control_src) & 0x0F) == 0 &&
+                ((*(control_src +1)) & 0x20) == 0)
             {
             	delete[] pUtf32_;
                 return false;
             };
 
-            pUtf32_[utf32_i] = static_cast<uint32_t>(control_src[utf8_i] & 0x0F) << 12;
-            pUtf32_[utf32_i] |= static_cast<uint32_t>(control_src[utf8_i+1] & 0x3F) << 6;
-            pUtf32_[utf32_i] |= static_cast<uint32_t>(control_src[utf8_i+2] & 0x3F);
+            pUtf32_[utf32_i] = static_cast<uint32_t>((*control_src ) & 0x0F) << 12;
+            pUtf32_[utf32_i] |= static_cast<uint32_t>((*(control_src +1)) & 0x3F) << 6;
+            pUtf32_[utf32_i] |= static_cast<uint32_t>((*(control_src +2)) & 0x3F);
 
 	    }else if (0xF0 <= val && val < 0xF8)
 	    {
 	    	numBytes = 4;
 
-            if ((!(0x80 <= control_src[utf8_i+1] && control_src[utf8_i+1] < 0xC0)) ||
-            	(!(0x80 <= control_src[utf8_i+2] && control_src[utf8_i+2] < 0xC0)) ||
-				(!(0x80 <= control_src[utf8_i+3] && control_src[utf8_i+3] < 0xC0)))
+            if ((!(0x80 <= (*(control_src +1)) && (*(control_src +1)) < 0xC0)) ||
+            	(!(0x80 <= (*(control_src +2)) && (*(control_src +2)) < 0xC0)) ||
+				(!(0x80 <= (*(control_src +3)) && (*(control_src +3)) < 0xC0)))
             {
             	delete[] pUtf32_;
                 return false;
             };
-            if ((control_src[utf8_i] & 0x07) == 0 &&
-                (control_src[utf8_i+1] & 0x30) == 0)
+            if (((*control_src ) & 0x07) == 0 &&
+                ((*(control_src +1)) & 0x30) == 0)
             {
             	delete[] pUtf32_;
                 return false;
             };
 
-            pUtf32_[utf32_i] = static_cast<uint32_t>(control_src[utf8_i] & 0x07) << 18;
-            pUtf32_[utf32_i] |= static_cast<uint32_t>(control_src[utf8_i+1] & 0x3F) << 12;
-            pUtf32_[utf32_i] |= static_cast<uint32_t>(control_src[utf8_i+2] & 0x3F) << 6;
-            pUtf32_[utf32_i] |= static_cast<uint32_t>(control_src[utf8_i+3] & 0x3F);
+            pUtf32_[utf32_i] = static_cast<uint32_t>((*control_src) & 0x07) << 18;
+            pUtf32_[utf32_i] |= static_cast<uint32_t>((*(control_src +1)) & 0x3F) << 12;
+            pUtf32_[utf32_i] |= static_cast<uint32_t>((*(control_src +2)) & 0x3F) << 6;
+            pUtf32_[utf32_i] |= static_cast<uint32_t>((*(control_src +3)) & 0x3F);
 
 	    };
 
@@ -519,6 +554,8 @@ bool SonikLibStringConvert::ConvertUTF8ToUTF32(char* pSrc, int32_t* pDest, uint3
 	    	delete[] pUtf32_;
 	    	return false;
 	    };
+
+	    control_src -= utf8_i;
 
 	    utf8_i += numBytes;
 	    ++offset_;
@@ -540,14 +577,14 @@ bool SonikLibStringConvert::ConvertUTF8ToUTF32(char* pSrc, int32_t* pDest, uint3
 };
 
 //UNICODE(UTF-32)をUTF-8に変換します。
-bool SonikLibStringConvert::ConvertUTF32ToUTF8(int32_t* pSrc, char* pDest, uint32_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertUTF32ToUTF8(int32_t* pSrc, char* pDest, uint64_t* DestBufferSize)
 {
-	if( pSrc == 0 )
+	if( pSrc == nullptr || DestBufferSize == nullptr)
 	{
 		return false;
 	};
 
-	uint32_t strcnt_ = 0;
+	uint64_t strcnt_ = 0;
 	uint32_t* tmpsrc = reinterpret_cast<uint32_t*>(pSrc);
 	while( (*tmpsrc) != 0 )
 	{
@@ -555,23 +592,19 @@ bool SonikLibStringConvert::ConvertUTF32ToUTF8(int32_t* pSrc, char* pDest, uint3
 		++strcnt_;
 	};
 
-	if(pDest == 0 || pDest == nullptr)
+	if(pDest == nullptr && DestBufferSize != nullptr)
 	{
-		if(DestBufferSize != 0 && DestBufferSize != nullptr)
-		{
-			(*DestBufferSize) = (strcnt_ << 2) + 1; // x * 4 = x << 2;
-		};
+		(*DestBufferSize) = (strcnt_ << 2) + 1; // x * 4 = x << 2;
 		return false;
 	}
 
 	uint8_t* utf8buffer = new(std::nothrow) uint8_t[(strcnt_ << 2) +1]; // x * 4 = x << 2
-	if(utf8buffer == 0 || utf8buffer == nullptr)
+	if(utf8buffer == nullptr)
 	{
 		return false;
 	};
 	std::fill_n(utf8buffer, ((strcnt_ << 2) +1), 0); // x * 4 = x << 2
 
-	//unsigned long utf8offset = 0;
 	unsigned char* p_utf8offset = reinterpret_cast<unsigned char*>(utf8buffer);
 
 	tmpsrc = reinterpret_cast<uint32_t*>(pSrc);
@@ -585,30 +618,18 @@ bool SonikLibStringConvert::ConvertUTF32ToUTF8(int32_t* pSrc, char* pDest, uint3
 
 		if( (*tmpsrc) < 128 )
 		{
-//			utf8buffer[utf8offset] = static_cast<char>((*pSrc));
 			(*p_utf8offset) = static_cast<unsigned char>((*tmpsrc));
 			++p_utf8offset;
-//			utf8buffer[utf8offset+1] = 0;
-//			utf8buffer[utf8offset+2] = 0;
-//			utf8buffer[utf8offset+3] = 0;
 
 		}else if( (*tmpsrc) < 2048 )
 		{
-//			utf8buffer[utf8offset] = 0xC0 | static_cast<char>( ((*pSrc) >> 6) );
 			(*p_utf8offset) = 0xC0 | static_cast<unsigned char>( ((*tmpsrc) >> 6) );
 			++p_utf8offset;
-//			utf8buffer[utf8offset+1] = 0x80 | static_cast<char>( ((*pSrc) & 0x3F) );
 			(*p_utf8offset) = 0x80 | static_cast<unsigned char>( ((*tmpsrc) & 0x3F) );
 			++p_utf8offset;
-//			utf8buffer[utf8offset+2] = 0;
-//			utf8buffer[utf8offset+3] = 0;
 
 		}else if( (*tmpsrc) < 65536 )
 		{
-//			utf8buffer[utf8offset] = 0xE0 | static_cast<char>( ((*pSrc) >>12) );
-//			utf8buffer[utf8offset+1] = 0x80 | static_cast<char>( (((*pSrc) >> 6) & 0x3F) );
-//			utf8buffer[utf8offset+2] = 0x80 | static_cast<char>( ((*pSrc) & 0x3F) );
-//			utf8buffer[utf8offset+3] = 0;
 			(*p_utf8offset) = 0xE0 | static_cast<unsigned char>( ((*tmpsrc) >>12) );
 			++p_utf8offset;
 			(*p_utf8offset) = 0x80 | static_cast<unsigned char>( (((*tmpsrc) >> 6) & 0x3F) );
@@ -618,10 +639,6 @@ bool SonikLibStringConvert::ConvertUTF32ToUTF8(int32_t* pSrc, char* pDest, uint3
 
 		}else
 		{
-//			utf8buffer[utf8offset] = static_cast<char>( ((*pSrc) >> 18) );
-//			utf8buffer[utf8offset+1] = static_cast<char>( ((*pSrc) >> 12) & 0x3F );
-//			utf8buffer[utf8offset+2] = static_cast<char>( ((*pSrc) >> 6) & 0x3F );
-//			utf8buffer[utf8offset+3] = static_cast<char>( ((*pSrc) & 0x3F) );
 			(*p_utf8offset) = static_cast<unsigned char>( ((*tmpsrc) >> 18) );
 			++p_utf8offset;
 			(*p_utf8offset) = static_cast<unsigned char>( ((*tmpsrc) >> 12) & 0x3F );
@@ -634,7 +651,6 @@ bool SonikLibStringConvert::ConvertUTF32ToUTF8(int32_t* pSrc, char* pDest, uint3
 		};
 
 		++tmpsrc;
-//		utf8offset += 4;
 	};
 
 	errno_t a = memcpy_s(pDest, (*DestBufferSize), utf8buffer, (strcnt_*4+1));
@@ -649,28 +665,24 @@ bool SonikLibStringConvert::ConvertUTF32ToUTF8(int32_t* pSrc, char* pDest, uint3
 };
 
 //UNICODE(UTF-32)をUNICODE(UTF-16)に変換します。
-bool SonikLibStringConvert::ConvertUTF32ToUTF16(int32_t* pSrc, char16_t* pDest, uint32_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertUTF32ToUTF16(int32_t* pSrc, char16_t* pDest, uint64_t* DestBufferSize)
 {
-	if( pSrc == 0 )
+	if( pSrc == nullptr || DestBufferSize == nullptr)
 	{
 		return false;
 	};
 
-	uint32_t srclen_ = SonikLibStringConvert::GetStringCount(pSrc);
-	uint32_t wsrclen_ = (srclen_ << 1) + 1;  // x * 2 = x << 1 * NULL終端
+	uint64_t srclen_ = SonikLibStringConvert::GetStringCount(pSrc);
+	uint64_t wsrclen_ = (srclen_ << 1) + 1;  // x * 2 = x << 1 * NULL終端
 
-	if(pDest == 0 || pDest == nullptr)
+	if(pDest == nullptr && DestBufferSize != nullptr)
 	{
-		if(DestBufferSize != 0 && DestBufferSize != nullptr)
-		{
-			//NULL終端追加
-			(*DestBufferSize) = wsrclen_;
-		};
+		(*DestBufferSize) = wsrclen_;
 		return false;
 	}
 
 	uint16_t* utf16buffer = new(std::nothrow) uint16_t[ wsrclen_ ];
-	if(utf16buffer == 0 || utf16buffer == nullptr)
+	if(utf16buffer == nullptr)
 	{
 		return false;
 	};
@@ -682,34 +694,31 @@ bool SonikLibStringConvert::ConvertUTF32ToUTF16(int32_t* pSrc, char16_t* pDest, 
 	uint16_t* p_cont_utf16buffer = utf16buffer;
 	for(uint64_t i=0; i < srclen_; ++i)
 	{
-		if(utf32_Src[i] < 0 || utf32_Src[i] > 0x10FFFF)
+		utf32_Src += i;
+
+		if((*utf32_Src) < 0 || (*utf32_Src) > 0x10FFFF)
 		{
 			delete[] utf16buffer;
 			return false;
 		};
 
-		if(utf32_Src[i] < 0x10000)
+		if((*utf32_Src) < 0x10000)
 		{
-//			utf16buffer[utf16offset] = static_cast<wchar_t>(pSrc[i]);
-//			utf16buffer[utf16offset] = 0;
-			pSrc_shortbyte = reinterpret_cast<uint16_t*>(&utf32_Src[i]);
+			pSrc_shortbyte = reinterpret_cast<uint16_t*>(utf32_Src);
 			(*p_cont_utf16buffer) = (*pSrc_shortbyte);
 			++p_cont_utf16buffer;
 			++pSrc_shortbyte;
-//			(*p_cont_utf16buffer) = (*pSrc_shortbyte);
-//			++p_cont_utf16buffer;
 
 		}else
 		{
-//			utf16buffer[utf16offset] = static_cast<wchar_t>( ((pSrc[i] - 0x10000) >> 10) + 0xD800 ); // x / 0x400 = x / 1024 = x >> 10
-//			utf16buffer[utf16offset] = static_cast<wchar_t>( ((pSrc[i] - 0x10000) & 0x3FF) + 0xD800 ); // x % 0x400 = x % 1024 = x & 1023 = x & (0x400 - 1) = x & 0x3FF
 
-			(*p_cont_utf16buffer) = static_cast<uint16_t>( ((utf32_Src[i] - 0x10000) >> 10) + 0xD800 ); // x / 0x400 = x / 1024 = x >> 10
+			(*p_cont_utf16buffer) = static_cast<uint16_t>( (((*utf32_Src) - 0x10000) >> 10) + 0xD800 ); // x / 0x400 = x / 1024 = x >> 10
 			++p_cont_utf16buffer;
-			(*p_cont_utf16buffer) = static_cast<uint16_t>( ((utf32_Src[i] - 0x10000) & 0x3FF) + 0xD800 ); // x % 0x400 = x % 1024 = x & 1023 = x & (0x400 - 1) = x & 0x3FF
+			(*p_cont_utf16buffer) = static_cast<uint16_t>( (((*utf32_Src) - 0x10000) & 0x3FF) + 0xD800 ); // x % 0x400 = x % 1024 = x & 1023 = x & (0x400 - 1) = x & 0x3FF
 			++p_cont_utf16buffer;
 		};
 
+		utf32_Src -= i;
 	};
 
 	errno_t a = memcpy_s(pDest, (*DestBufferSize) << 1, utf16buffer, (wsrclen_ << 1));
@@ -719,31 +728,29 @@ bool SonikLibStringConvert::ConvertUTF32ToUTF16(int32_t* pSrc, char16_t* pDest, 
 		return false;
 	};
 
+	delete[] utf16buffer;
 	return true;
 };
 
 //UNICODE(UTF-16)をUNICODE(UTF-32)に変換します。
-bool SonikLibStringConvert::ConvertUTF16ToUTF32(char16_t* pSrc, int32_t* pDest, uint32_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertUTF16ToUTF32(char16_t* pSrc, int32_t* pDest, uint64_t* DestBufferSize)
 {
-	if( pSrc == 0 )
+	if( pSrc == nullptr || DestBufferSize == nullptr)
 	{
 		return false;
 	};
 
-	uint32_t srclen_ = SonikLibStringConvert::GetStringCount(pSrc);
+	uint64_t srclen_ = SonikLibStringConvert::GetStringCount(pSrc);
 
-	if( pDest == 0 || pDest ==nullptr )
+	if( pDest ==nullptr && DestBufferSize != nullptr)
 	{
-		if(DestBufferSize != 0 && DestBufferSize != nullptr)
-		{
-			(*DestBufferSize) = srclen_ + 1;
-		}
+		(*DestBufferSize) = srclen_ + 1;
 		return false;
 	}
 
 
 	uint32_t* utf32buffer = new(std::nothrow) uint32_t[ srclen_ + 1 ]; //NULL文字分追加
-	if(utf32buffer == 0 || utf32buffer == nullptr)
+	if(utf32buffer == nullptr)
 	{
 		return false;
 	};
@@ -754,19 +761,20 @@ bool SonikLibStringConvert::ConvertUTF16ToUTF32(char16_t* pSrc, int32_t* pDest, 
 	//配列組み換え
 	uint16_t* utf16buffer = reinterpret_cast<uint16_t*>(pSrc);
 
-	for(uint32_t i=0; i < srclen_; ++i)
+	for(uint64_t i=0; i < srclen_; ++i)
 	{
-		if( 0xD800 <= utf16buffer[0] && utf16buffer[0] < 0xDC00  )
+		if( 0xD800 <= (*utf16buffer) && (*utf16buffer) < 0xDC00  )
 		{
-			if( 0xDC00 <= utf16buffer[1] && utf16buffer[1] < 0xDC00 )
+//			if( 0xDC00 <= utf16buffer[1] && utf16buffer[1] < 0xDC00 )
+			if( 0xDC00 <= (*(utf16buffer +1)))
 			{
-				utf32buffer[i] = 0x10000 + ( utf16buffer[0] - 0xD800 ) * 0x400 + ( utf16buffer[1] - 0xDC00 );
+				utf32buffer[i] = 0x10000 + ( (*utf16buffer) - 0xD800 ) * 0x400 + ( (*(utf16buffer +1)) - 0xDC00 );
 
 				utf16buffer += 2;
 
-			}else if( utf16buffer[1] == 0 )
+			}else if( (*(utf16buffer+1)) == 0 )
 			{
-				utf32buffer[i] = utf16buffer[0];
+				utf32buffer[i] = (*utf16buffer);
 
 				utf16buffer += 1;
 
@@ -778,9 +786,9 @@ bool SonikLibStringConvert::ConvertUTF16ToUTF32(char16_t* pSrc, int32_t* pDest, 
 
 		}else if( 0xDC00 <= (*utf16buffer) && (*utf16buffer) < 0xE000 )
 		{
-			if( utf16buffer[1] == 0 )
+			if( (*(utf16buffer+1)) == 0 )
 			{
-				utf32buffer[i] = utf16buffer[0];
+				utf32buffer[i] = (*utf16buffer);
 
 				utf16buffer += 1;
 
@@ -792,7 +800,7 @@ bool SonikLibStringConvert::ConvertUTF16ToUTF32(char16_t* pSrc, int32_t* pDest, 
 
 		}else
 		{
-			utf32buffer[i] = utf16buffer[0];
+			utf32buffer[i] = (*utf16buffer);
 
 			utf16buffer += 1;
 
@@ -815,13 +823,18 @@ bool SonikLibStringConvert::ConvertUTF16ToUTF32(char16_t* pSrc, int32_t* pDest, 
 
 
 //UNICODE(UTF-16)をUTF8に変換します。
-bool SonikLibStringConvert::ConvertUTF16ToUTF8(char16_t* pSrc, char* pDest, uint32_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertUTF16ToUTF8(char16_t* pSrc, char* pDest, uint64_t* DestBufferSize)
 {
-	uint32_t buffersize = 0;
+	if( pSrc == nullptr || DestBufferSize == nullptr)
+	{
+		return false;
+	};
+
+	uint64_t buffersize = 0;
 	SonikLibStringConvert::ConvertUTF16ToUTF32(pSrc, nullptr, &buffersize);
 
 	int32_t* utf32buffer = new(std::nothrow) int32_t[buffersize];
-	if(utf32buffer == 0 || utf32buffer == nullptr)
+	if(utf32buffer == nullptr)
 	{
 		return false;
 	};
@@ -834,18 +847,15 @@ bool SonikLibStringConvert::ConvertUTF16ToUTF8(char16_t* pSrc, char* pDest, uint
 
 	SonikLibStringConvert::ConvertUTF32ToUTF8(utf32buffer, nullptr, &buffersize);
 
-	if(pDest == 0 || pDest == nullptr)
+	if(pDest == nullptr && DestBufferSize != nullptr)
 	{
-		if(DestBufferSize != 0 && DestBufferSize != nullptr)
-		{
-			(*DestBufferSize) = buffersize;
-		};
+		(*DestBufferSize) = buffersize;
 		delete[] utf32buffer;
 		return false;
 	};
 
 	char* utf8buffer = new(std::nothrow) char[buffersize];
-	if(utf8buffer == 0 || utf8buffer == nullptr)
+	if(utf8buffer == nullptr)
 	{
 		delete[] utf32buffer;
 		return false;
@@ -871,14 +881,20 @@ bool SonikLibStringConvert::ConvertUTF16ToUTF8(char16_t* pSrc, char* pDest, uint
 	return true;
 };
 
+
 //UTF8をUNICODE(UTF-16)に変換します。
-bool SonikLibStringConvert::ConvertUTF8ToUTF16(char* pSrc, char16_t* pDest, uint32_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertUTF8ToUTF16(char* pSrc, char16_t* pDest, uint64_t* DestBufferSize)
 {
-	uint32_t buffersize = 0;
+	if( pSrc == nullptr || DestBufferSize == nullptr)
+	{
+		return false;
+	};
+
+	uint64_t buffersize = 0;
 	SonikLibStringConvert::ConvertUTF8ToUTF32(pSrc, nullptr, &buffersize);
 
 	int32_t* utf32buffer = new(std::nothrow) int32_t[buffersize];
-	if(utf32buffer == 0 || utf32buffer == nullptr)
+	if(utf32buffer == nullptr)
 	{
 		return false;
 	};
@@ -891,18 +907,15 @@ bool SonikLibStringConvert::ConvertUTF8ToUTF16(char* pSrc, char16_t* pDest, uint
 
 	SonikLibStringConvert::ConvertUTF32ToUTF16(utf32buffer, nullptr, &buffersize);
 
-	if(pDest == 0 || pDest == nullptr)
+	if(pDest == nullptr && DestBufferSize != nullptr)
 	{
-		if(DestBufferSize != 0 && DestBufferSize != nullptr)
-		{
-			(*DestBufferSize) = buffersize;
-		};
+		(*DestBufferSize) = buffersize;
 		delete[] utf32buffer;
 		return false;
 	}
 
 	char16_t* utf16buffer = new(std::nothrow) char16_t[buffersize];
-	if(utf16buffer == 0 || utf16buffer == nullptr)
+	if(utf16buffer == nullptr)
 	{
 		delete[] utf32buffer;
 		return false;
@@ -929,9 +942,9 @@ bool SonikLibStringConvert::ConvertUTF8ToUTF16(char* pSrc, char16_t* pDest, uint
 
 //マルチバイト文字列をUTF8文字列に変換します。
 //第１引数の文字列は、可能性の判定として、SJIS判定であれば処理を行います。
-bool SonikLibStringConvert::ConvertMBSToUTF8(char* pSrc, char* pDest, uint32_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertMBSToUTF8(char* pSrc, char* pDest, uint64_t* DestBufferSize)
 {
-	if( pSrc == 0 )
+	if( pSrc == nullptr || DestBufferSize == nullptr)
 	{
 		return false;
 	};
@@ -941,16 +954,13 @@ bool SonikLibStringConvert::ConvertMBSToUTF8(char* pSrc, char* pDest, uint32_t* 
 		return false;
 	};
 
-	uint32_t SrcLen = SonikLibStringConvert::GetStringCount(pSrc);
-	uint32_t utf16Len = SrcLen;
+	uint64_t SrcLen = SonikLibStringConvert::GetStringCount(pSrc);
+	uint64_t utf16Len = SrcLen;
 
 	char16_t* unicode_buf = 0;
 
-	try
-	{
-		unicode_buf = new char16_t[utf16Len + 1];
-
-	}catch(std::bad_alloc& e)
+	unicode_buf = new(std::nothrow) char16_t[utf16Len + 1];
+	if(unicode_buf == nullptr)
 	{
 		return false;
 	};
@@ -961,9 +971,10 @@ bool SonikLibStringConvert::ConvertMBSToUTF8(char* pSrc, char* pDest, uint32_t* 
 	setlocale(LC_CTYPE, "jpn");
 
 	//sjis -> utf16
-	uint32_t retsize = 0;
+	uint64_t retsize = 0;
 	errno_t err = 0;
-	err = mbstowcs_s(reinterpret_cast<size_t*>(&retsize), reinterpret_cast<wchar_t*>(unicode_buf), utf16Len+1, pSrc, SrcLen);
+	err = mbstowcs_s(&retsize, NULL, 0, pSrc, 0);
+	err = mbstowcs_s(&retsize, reinterpret_cast<wchar_t*>(unicode_buf), utf16Len+1, pSrc, SrcLen);
 	if( err != 0 )
 	{
 		delete[] unicode_buf;
@@ -972,15 +983,12 @@ bool SonikLibStringConvert::ConvertMBSToUTF8(char* pSrc, char* pDest, uint32_t* 
 
 	setlocale(LC_CTYPE, "");
 
-	uint32_t sizecheck = 0;
-	if(pDest == 0)
+	uint64_t sizecheck = 0;
+	if(pDest == nullptr && DestBufferSize != nullptr)
 	{
-		if( DestBufferSize != 0 )
-		{
-			//utf16->utf8 サイズチェック
-			SonikLibStringConvert::ConvertUTF16ToUTF8(unicode_buf, 0, &sizecheck);
-			(*DestBufferSize) = sizecheck;
-		};
+		//utf16->utf8 サイズチェック
+		SonikLibStringConvert::ConvertUTF16ToUTF8(unicode_buf, 0, &sizecheck);
+		(*DestBufferSize) = sizecheck;
 		delete[] unicode_buf;
 		return false;
 	};
@@ -999,9 +1007,9 @@ bool SonikLibStringConvert::ConvertMBSToUTF8(char* pSrc, char* pDest, uint32_t* 
 //UTF8文字列をマルチバイト文字列に変換します。
 //第１引数の文字列は、可能性の判定として、SJIS判定であれば処理を行います。
 //第１引数の文字列に対して、Null終端がない場合の動作は、strlenと同様にバッファオーバーランを起こします。
-bool SonikLibStringConvert::ConvertUTF8ToMBS(char* pSrc, char* pDest, uint32_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertUTF8ToMBS(char* pSrc, char* pDest, uint64_t* DestBufferSize)
 {
-	if( pSrc == 0 )
+	if( pSrc == nullptr || DestBufferSize == nullptr)
 	{
 		return false;
 	};
@@ -1011,18 +1019,13 @@ bool SonikLibStringConvert::ConvertUTF8ToMBS(char* pSrc, char* pDest, uint32_t* 
 		return false;
 	};
 
-//	unsigned int SrcLen = strlen(pSrc);
-	uint32_t utf16Len = 0;
+	uint64_t utf16Len = 0;
 
 	SonikLibStringConvert::ConvertUTF8ToUTF16(pSrc, 0, &utf16Len);
-//	++utf16Len;
 
 	char16_t* unicode_buf = 0;
-	try
-	{
-		unicode_buf = new char16_t[utf16Len + 1];
-
-	}catch(std::bad_alloc& e)
+	unicode_buf = new(std::nothrow) char16_t[utf16Len + 1];
+	if(unicode_buf == nullptr)
 	{
 		return false;
 	};
@@ -1035,30 +1038,21 @@ bool SonikLibStringConvert::ConvertUTF8ToMBS(char* pSrc, char* pDest, uint32_t* 
 		return false;
 	};
 
-	uint32_t retsize = 0;
-	if(pDest == 0)
+	uint64_t retsize = 0;
+	if(pDest == nullptr && DestBufferSize != nullptr)
 	{
-		if( DestBufferSize != 0 )
-		{
-			//utf16->SJIS サイズチェック
-			setlocale(LC_CTYPE, "jpn");
-			wcstombs_s(reinterpret_cast<size_t*>(&retsize), 0, 0, reinterpret_cast<wchar_t*>(unicode_buf), utf16Len);
-			setlocale(LC_CTYPE, "");
-			(*DestBufferSize) = retsize;
-		};
-		delete[] unicode_buf;
-		return false;
-	};
-
-	if( DestBufferSize == 0 )
-	{
+		//utf16->SJIS サイズチェック
+		setlocale(LC_CTYPE, "jpn");
+		wcstombs_s(&retsize, 0, 0, reinterpret_cast<wchar_t*>(unicode_buf), utf16Len);
+		setlocale(LC_CTYPE, "");
+		(*DestBufferSize) = retsize;
 		delete[] unicode_buf;
 		return false;
 	};
 
 	//utf16->SJIS 本番
 	setlocale(LC_CTYPE, "jpn");
-	if( wcstombs_s(reinterpret_cast<size_t*>(&retsize), pDest, (*DestBufferSize), reinterpret_cast<wchar_t*>(unicode_buf), (utf16Len +1)) != 0 )
+	if( wcstombs_s(&retsize, pDest, (*DestBufferSize), reinterpret_cast<wchar_t*>(unicode_buf), (utf16Len +1)) != 0 )
 	{
 		delete[] unicode_buf;
 		setlocale(LC_CTYPE, "");
@@ -1071,43 +1065,31 @@ bool SonikLibStringConvert::ConvertUTF8ToMBS(char* pSrc, char* pDest, uint32_t* 
 
 //マルチバイト文字列をUTF16文字列に変換します。
 //内部ではmbstowcs_s関数を使用しますが、一時領域を確保し、コピーして処理を行うため、コピー元領域、コピー先領域が重なっていても正常にコピーされます。
-bool SonikLibStringConvert::ConvertMBStoUTF16(char* pSrc, char16_t* pDest, uint32_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertMBStoUTF16(char* pSrc, char16_t* pDest, uint64_t* DestBufferSize)
 {
-	if( pSrc == 0 || SonikLibStringConvert::CheckConvertType(pSrc) != SCHTYPE_SJIS)
+	if( pSrc == nullptr || DestBufferSize == nullptr || SonikLibStringConvert::CheckConvertType(pSrc) != SCHTYPE_SJIS)
 	{
 		return false;
 	};
 
 	setlocale(LC_CTYPE, "jpn");
 
-	uint32_t size_ = 0;
-	uint32_t SrcLen = SonikLibStringConvert::GetStringLengthByte(pSrc);
-	mbstowcs_s(reinterpret_cast<size_t*>(&size_), 0, 0, pSrc, SrcLen);
+	uint64_t size_ = 0;
+	uint64_t SrcLen = SonikLibStringConvert::GetStringLengthByte(pSrc);
+	mbstowcs_s(&size_, 0, 0, pSrc, SrcLen);
 
 	char16_t* tmpBuf = 0;
-	try
-	{
-		tmpBuf = new char16_t[size_ + 1]; // NULL終端追加
-	}catch(std::bad_alloc&)
+	tmpBuf = new(std::nothrow) char16_t[size_ + 1]; // NULL終端追加
+	if(tmpBuf == nullptr)
 	{
 		return false;
 	};
 
 	std::fill_n(tmpBuf, size_ + 1, 0);
 
-	if( pDest == 0 )
+	if( pDest == nullptr && DestBufferSize != nullptr)
 	{
-		if( DestBufferSize != 0 )
-		{
-			(*DestBufferSize) = size_;
-			setlocale(LC_CTYPE, "");
-			delete[] tmpBuf;
-			return false;
-		};
-	};
-
-	if( DestBufferSize == 0 )
-	{
+		(*DestBufferSize) = size_;
 		setlocale(LC_CTYPE, "");
 		delete[] tmpBuf;
 		return false;
@@ -1134,43 +1116,31 @@ bool SonikLibStringConvert::ConvertMBStoUTF16(char* pSrc, char16_t* pDest, uint3
 
 //UTF16文字列をマルチバイト文字列に変換します。
 //内部ではmbstowcs_s関数を使用しますが、一時領域を確保し、コピーして処理を行うため、コピー元領域、コピー先領域が重なっていても正常にコピーされます。
-bool SonikLibStringConvert::ConvertUTF16toMBS(char16_t* pSrc, char* pDest, uint32_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertUTF16toMBS(char16_t* pSrc, char* pDest, uint64_t* DestBufferSize)
 {
-	if( pSrc == 0 )
+	if( pSrc == nullptr || DestBufferSize == nullptr )
 	{
 		return false;
 	};
 
 	setlocale(LC_CTYPE, "jpn");
 
-	uint32_t size_ = 0;
-	uint32_t SrcLen = SonikLibStringConvert::GetStringLengthByte(pSrc);
-	wcstombs_s(reinterpret_cast<size_t*>(&size_), 0, 0, reinterpret_cast<wchar_t*>(pSrc), SrcLen);
+	uint64_t size_ = 0;
+	uint64_t SrcLen = SonikLibStringConvert::GetStringLengthByte(pSrc);
+	wcstombs_s(&size_, 0, 0, reinterpret_cast<wchar_t*>(pSrc), SrcLen);
 
 	char* tmpBuf = 0;
-	try
-	{
-		tmpBuf = new char[size_ + 1];
-	}catch(std::bad_alloc&)
+	tmpBuf = new(std::nothrow) char[size_ + 1];
+	if(tmpBuf == nullptr)
 	{
 		return false;
 	};
 
 	std::fill_n(tmpBuf, size_ + 1, 0);
 
-	if( pDest == 0 )
+	if( pDest == nullptr && DestBufferSize != nullptr)
 	{
-		if( DestBufferSize != 0 )
-		{
-			(*DestBufferSize) = size_ + 1;
-			setlocale(LC_CTYPE, "");
-			delete[] tmpBuf;
-			return false;
-		};
-	};
-
-	if( DestBufferSize == 0 )
-	{
+		(*DestBufferSize) = size_ + 1;
 		setlocale(LC_CTYPE, "");
 		delete[] tmpBuf;
 		return false;
@@ -1196,8 +1166,13 @@ bool SonikLibStringConvert::ConvertUTF16toMBS(char16_t* pSrc, char* pDest, uint3
 };
 
 
-bool SonikLibStringConvert::ConvertUTF8FWCToHWCForAN(const char* ConvertStr, char* dst, uint32_t& UsedSize)
+bool SonikLibStringConvert::ConvertUTF8FWCToHWCForAN(const char* ConvertStr, char* dst, uint64_t& UsedSize)
 {
+	if(ConvertStr == nullptr)
+	{
+		return false;
+	};
+
 	SonikLibConvertType type_ = 	CheckConvertType(ConvertStr);
 	if( SonikLibConvertType::SCHTYPE_UTF8 != type_ )
 	{
@@ -1205,29 +1180,30 @@ bool SonikLibStringConvert::ConvertUTF8FWCToHWCForAN(const char* ConvertStr, cha
 		return false;
 	};
 
-	uint32_t StrByte = SonikLibStringConvert::GetStringLengthByte(ConvertStr);
+	uint64_t StrByte = SonikLibStringConvert::GetStringLengthByte(ConvertStr);
 	if( (StrByte & 0x01) != 0 )
 	{
 		++StrByte;
 	};
 	char16_t* buffer = new(std::nothrow) char16_t[ (StrByte >> 1) ];
-	if( buffer == nullptr || buffer == 0 )
+	if( buffer == nullptr)
 	{
-		//c:確保失敗
+		//確保失敗
 		return false;
 	};
 
 
-	uint32_t cnt = 0;
-	uint32_t bitcnt = 0;
-	uint32_t PlusValue = 0;
-	uint32_t Offset = 0;
+	uint64_t cnt = 0;
+	uint64_t bitcnt = 0;
+	uint64_t PlusValue = 0;
+	uint64_t Offset = 0;
 	unsigned char swapbit = 0;
 	char* InsertPoint = reinterpret_cast<char*>(buffer);
+	const unsigned char* l_convstr = reinterpret_cast<const unsigned char*>(ConvertStr);
 
-	while( static_cast<unsigned char>((*ConvertStr)) != 0x00 )
+	while( (*l_convstr) != 0x00 )
 	{
-		swapbit = (*ConvertStr);
+		swapbit = (*l_convstr);
 		swapbit = SonikMathBit::BitSwapFor8bit(swapbit);
 
 		bitcnt =  ~(swapbit);
@@ -1237,15 +1213,17 @@ bool SonikLibStringConvert::ConvertUTF8FWCToHWCForAN(const char* ConvertStr, cha
 		bitcnt |= (bitcnt << 4);
 		bitcnt |= (bitcnt << 8);
 		bitcnt |= (bitcnt << 16);
+		bitcnt |= (bitcnt << 32);
 
-		bitcnt = (bitcnt & 0x55555555) + ( (bitcnt >> 1) & 0x55555555 );
-		bitcnt = (bitcnt & 0x33333333) + ( (bitcnt >> 2) & 0x33333333 );
-		bitcnt = (bitcnt & 0x0F0F0F0F) + ( (bitcnt >> 4) & 0x0F0F0F0F );
-		bitcnt = (bitcnt & 0x00FF00FF) + ( (bitcnt >> 8) & 0x00FF00FF );
+		bitcnt = (bitcnt & 0x5555555555555555) + ( (bitcnt >> 1) & 0x5555555555555555 );
+		bitcnt = (bitcnt & 0x3333333333333333) + ( (bitcnt >> 2) & 0x3333333333333333 );
+		bitcnt = (bitcnt & 0x0F0F0F0F0F0F0F0F) + ( (bitcnt >> 4) & 0x0F0F0F0F0F0F0F0F );
+		bitcnt = (bitcnt & 0x00FF00FF00FF00FF) + ( (bitcnt >> 8) & 0x00FF00FF00FF00FF );
+		bitcnt = (bitcnt & 0x0000FFFF0000FFFF) + ( (bitcnt >> 16) & 0x0000FFFF0000FFFF );
 
-		bitcnt = (bitcnt & 0x0000FFFF) + ( (bitcnt >> 16) & 0x0000FFFF);
-		bitcnt = (32 - bitcnt);
+		bitcnt = (bitcnt & 0x00000000FFFFFFFF) + ( (bitcnt >> 32) & 0x00000000FFFFFFFF);
 
+		bitcnt = (64 - bitcnt);
 		if( bitcnt == 0 )
 		{
 			++bitcnt;
@@ -1255,34 +1233,33 @@ bool SonikLibStringConvert::ConvertUTF8FWCToHWCForAN(const char* ConvertStr, cha
 		Offset = 0;
 		if( bitcnt == 3 )
 		{
-			PlusValue |= static_cast<unsigned char>(ConvertStr[0]);
-			PlusValue = ( (PlusValue << 8) | static_cast<unsigned char>(ConvertStr[1]) );
-			PlusValue = ( (PlusValue << 8) | static_cast<unsigned char>(ConvertStr[2]) );
+			PlusValue |= (*l_convstr);
+			PlusValue = ( (PlusValue << 8) | (*(l_convstr+1)) );
+			PlusValue = ( (PlusValue << 8) | (*(l_convstr+2)) );
 
 			if( 0xEFBC81 <= PlusValue && PlusValue <= 0xEFBD9E )
 			{
 				//c:範囲内なら処理
 				PlusValue -= 0xEFBC60;
 				//BCとBD間は0x40(64)ずらすとぴったしになる。
-				Offset = (static_cast<unsigned char>(ConvertStr[1]) - 0xBC) * 64;
+				Offset = ( (*(l_convstr+1)) - 0xBC) * 64;
 				PlusValue += Offset;
 
 				(*InsertPoint) = static_cast<char>(PlusValue);
 				++InsertPoint;
 				++cnt;
 
-				ConvertStr += bitcnt;
-
+				l_convstr += bitcnt;
 
 				continue;
 			};
 
 		};
 
-		memmove(InsertPoint, ConvertStr, bitcnt);
+		memmove(InsertPoint, l_convstr, bitcnt);
 
 		InsertPoint += bitcnt;
-		ConvertStr += bitcnt;
+		l_convstr += bitcnt;
 		cnt += bitcnt;
 
 
@@ -1293,15 +1270,16 @@ bool SonikLibStringConvert::ConvertUTF8FWCToHWCForAN(const char* ConvertStr, cha
 
 	if( dst == nullptr )
 	{
+		//使用サイズを要素数を返却。
 		UsedSize = cnt;
-		delete buffer;
+		delete[] buffer;
 		return true;
 	};
 
 	if( UsedSize < cnt )
 	{
-		//c:領域不足
-		delete buffer;
+		//領域不足
+		delete[] buffer;
 		return false;
 	};
 
@@ -1312,8 +1290,13 @@ bool SonikLibStringConvert::ConvertUTF8FWCToHWCForAN(const char* ConvertStr, cha
 };
 
 //UTF8文字列のおける、全角カナを半角カナに変換します。
-bool SonikLibStringConvert::ConvertUTF8FWCToHWCForKANA(const char* ConvertStr, char* dst, uint32_t& UsedSize)
+bool SonikLibStringConvert::ConvertUTF8FWCToHWCForKANA(const char* ConvertStr, char* dst, uint64_t& UsedSize)
 {
+	if(ConvertStr == nullptr)
+	{
+		return false;
+	};
+
 	SonikLibConvertType type_ = 	CheckConvertType(ConvertStr);
 	if( SonikLibConvertType::SCHTYPE_UTF8 != type_ )
 	{
@@ -1322,7 +1305,7 @@ bool SonikLibStringConvert::ConvertUTF8FWCToHWCForKANA(const char* ConvertStr, c
 	};
 
 	//c:最大現在のサイズ * 2のサイズになるので確保する。
-	uint32_t StrSize = SonikLibStringConvert::GetStringLengthByte(ConvertStr);
+	uint64_t StrSize = SonikLibStringConvert::GetStringLengthByte(ConvertStr);
 	//NULL文字分プラス
 	++StrSize;
 
@@ -1330,20 +1313,22 @@ bool SonikLibStringConvert::ConvertUTF8FWCToHWCForKANA(const char* ConvertStr, c
 	char16_t* buffer = new(std::nothrow) char16_t[ StrSize ];
 	memset(buffer, 0, (StrSize << 1) );
 
-	uint32_t cnt = 0;
-	uint32_t bitcnt = 0;
-	uint32_t PlusValue = 0;
+	uint64_t cnt = 0;
+	uint64_t bitcnt = 0;
+	uint64_t PlusValue = 0;
 //	unsigned long PlusValue_sec = 0;
-	uint32_t Offset_first = 0;
-	uint32_t Offset_second = 0;
+	uint64_t Offset_first = 0;
+	uint64_t Offset_second = 0;
 	unsigned char swapbit = 0;
 	char* InsertPoint = reinterpret_cast<char*>(buffer);
 	char* InsertTopPoint = InsertPoint;
 	unsigned char* PlusValueAccess = nullptr;
+	const unsigned char* l_convstr = reinterpret_cast<const unsigned char*>(ConvertStr);
 
-	while( static_cast<unsigned char>((*ConvertStr)) != 0x00 )
+
+	while( (*l_convstr) != 0x00 )
 	{
-		swapbit = (*ConvertStr);
+		swapbit = (*l_convstr);
 		swapbit = SonikMathBit::BitSwapFor8bit(swapbit);
 
 		bitcnt =  ~(swapbit);
@@ -1353,14 +1338,17 @@ bool SonikLibStringConvert::ConvertUTF8FWCToHWCForKANA(const char* ConvertStr, c
 		bitcnt |= (bitcnt << 4);
 		bitcnt |= (bitcnt << 8);
 		bitcnt |= (bitcnt << 16);
+		bitcnt |= (bitcnt << 32);
 
-		bitcnt = (bitcnt & 0x55555555) + ( (bitcnt >> 1) & 0x55555555 );
-		bitcnt = (bitcnt & 0x33333333) + ( (bitcnt >> 2) & 0x33333333 );
-		bitcnt = (bitcnt & 0x0F0F0F0F) + ( (bitcnt >> 4) & 0x0F0F0F0F );
-		bitcnt = (bitcnt & 0x00FF00FF) + ( (bitcnt >> 8) & 0x00FF00FF );
+		bitcnt = (bitcnt & 0x5555555555555555) + ( (bitcnt >> 1) & 0x5555555555555555 );
+		bitcnt = (bitcnt & 0x3333333333333333) + ( (bitcnt >> 2) & 0x3333333333333333 );
+		bitcnt = (bitcnt & 0x0F0F0F0F0F0F0F0F) + ( (bitcnt >> 4) & 0x0F0F0F0F0F0F0F0F );
+		bitcnt = (bitcnt & 0x00FF00FF00FF00FF) + ( (bitcnt >> 8) & 0x00FF00FF00FF00FF );
+		bitcnt = (bitcnt & 0x0000FFFF0000FFFF) + ( (bitcnt >> 16) & 0x0000FFFF0000FFFF );
 
-		bitcnt = (bitcnt & 0x0000FFFF) + ( (bitcnt >> 16) & 0x0000FFFF);
-		bitcnt = (32 - bitcnt);
+		bitcnt = (bitcnt & 0x00000000FFFFFFFF) + ( (bitcnt >> 32) & 0x00000000FFFFFFFF);
+
+		bitcnt = (64 - bitcnt);
 
 		if( bitcnt == 0 )
 		{
@@ -1368,51 +1356,50 @@ bool SonikLibStringConvert::ConvertUTF8FWCToHWCForKANA(const char* ConvertStr, c
 		};
 
 		PlusValue = 0;
-//		PlusValue_sec = 0;
 		Offset_first = 0;
 		Offset_second = 0;
 		if( bitcnt == 3 )
 		{
-			PlusValue |= static_cast<unsigned char>(ConvertStr[0]);
-			PlusValue = ( (PlusValue << 8) | static_cast<unsigned char>(ConvertStr[1]) );
-			PlusValue = ( (PlusValue << 8) | static_cast<unsigned char>(ConvertStr[2]) );
+			PlusValue |= (*l_convstr);
+			PlusValue = ( (PlusValue << 8) | (*(l_convstr+1)) );
+			PlusValue = ( (PlusValue << 8) | (*(l_convstr+2)) );
 
 			if( 0xE382A1 <= PlusValue && PlusValue <= 0xE383BA )
 			{
 				//c:範囲内なら処理
-				Offset_first = static_cast<unsigned char>(ConvertStr[1]) - 0x82;
-				Offset_second = PlusValue - SonikConvStaticTable::HW_KANA_OFFSET_STARTPOINT[ (static_cast<unsigned char>(ConvertStr[1]) - 0x82) ] + (Offset_first * 33);
+				Offset_first = (*(l_convstr+1)) - 0x82;
+				Offset_second = PlusValue - SonikConvStaticTable::HW_KANA_OFFSET_STARTPOINT[ ((*(l_convstr+1)) - 0x82) ] + (Offset_first * 33);
 
 
 				//c:配列から値検索
 				PlusValue = SonikConvStaticTable::HW_KANA[Offset_second];
 				PlusValueAccess = reinterpret_cast<unsigned char*>(&PlusValue);
-				Offset_first = ( ( ( PlusValueAccess[0] & 0x80 ) >> 7 ) * 3) + 3;	//InsertPointをずらす値を取得
-				Offset_second = ( PlusValueAccess[0] & 0x7F );		//c: 濁点位置の取得
+				Offset_first = ( ( ( (*PlusValueAccess) & 0x80 ) >> 7 ) * 3) + 3;	//InsertPointをずらす値を取得
+				Offset_second = ( (*PlusValueAccess) & 0x7F );		//c: 濁点位置の取得
 
 				//c:変更前のポイントの取得
 				InsertTopPoint = InsertPoint;
 				//c:代入処理
-				(*InsertPoint) = static_cast<char>(PlusValueAccess[3]);
+				(*InsertPoint) = static_cast<char>( (*(PlusValueAccess+3)) );
 				++InsertPoint;
-				(*InsertPoint) = static_cast<char>(PlusValueAccess[2]);
+				(*InsertPoint) = static_cast<char>( (*(PlusValueAccess+2)) );
 				++InsertPoint;
-				(*InsertPoint) = static_cast<char>(PlusValueAccess[1]);
+				(*InsertPoint) = static_cast<char>( (*(PlusValueAccess+1)) );
 				++InsertPoint;
 
 				//c:濁点位置に代入。0ならｧが入るが、ポインタは３つしか動かないため、次回代入時に消えるか１Byte目に終点文字である0が入る
 				PlusValue = SonikConvStaticTable::HW_KANA[Offset_second];
-				(*InsertPoint) = static_cast<char>(PlusValueAccess[3]);
+				(*InsertPoint) = static_cast<char>( (*(PlusValueAccess+3)) );
 				++InsertPoint;
-				(*InsertPoint) = static_cast<char>(PlusValueAccess[2]);
+				(*InsertPoint) = static_cast<char>( (*(PlusValueAccess+2)) );
 				++InsertPoint;
-				(*InsertPoint) = static_cast<char>(PlusValueAccess[1]);
+				(*InsertPoint) = static_cast<char>( (*(PlusValueAccess+1)) );
 
 				//c;オフセット適用
 				InsertPoint = InsertTopPoint + Offset_first;
 
 				//c:入力位置を進める。
-				ConvertStr += bitcnt;
+				l_convstr += bitcnt;
 				//c:使用サイズカウント
 				cnt += Offset_first;
 				continue;
@@ -1420,10 +1407,10 @@ bool SonikLibStringConvert::ConvertUTF8FWCToHWCForKANA(const char* ConvertStr, c
 
 		};
 
-		memcpy(InsertPoint, ConvertStr, bitcnt);
+		memcpy(InsertPoint, l_convstr, bitcnt);
 
 		InsertPoint += bitcnt;
-		ConvertStr += bitcnt;
+		l_convstr += bitcnt;
 		cnt += bitcnt;
 	};//end while
 
@@ -1432,6 +1419,7 @@ bool SonikLibStringConvert::ConvertUTF8FWCToHWCForKANA(const char* ConvertStr, c
 
 	if( dst == nullptr )
 	{
+		//必要サイズ返却
 		UsedSize = cnt;
 		delete[] buffer;
 		return true;
@@ -1456,8 +1444,13 @@ bool SonikLibStringConvert::ConvertUTF8FWCToHWCForKANA(const char* ConvertStr, c
 //==========================================
 //========    StringControl    =============
 //==========================================
-bool SonikLibStringControl::StringPointEraser(char* ControlStr, uint32_t StartPoint, uint32_t EndPoint, uint32_t MaxStrCnt)
+bool SonikLibStringControl::StringPointEraser(char* ControlStr, uint64_t StartPoint, uint64_t EndPoint, uint64_t MaxStrCnt)
 {
+	if( (ControlStr == nullptr) || (EndPoint > MaxStrCnt) || (StartPoint > MaxStrCnt) )
+	{
+		return false;
+	};
+
 	if( StartPoint == 0 )
 	{
 		StartPoint = 1;
@@ -1468,22 +1461,12 @@ bool SonikLibStringControl::StringPointEraser(char* ControlStr, uint32_t StartPo
 		EndPoint = MaxStrCnt;
 	};
 
-	if( EndPoint > MaxStrCnt )
-	{
-		return false;
-	};
-
-	if( StartPoint > MaxStrCnt )
-	{
-		return false;
-	};
-
 	//c:ポイントの捜索
 	SonikLibConvertType Type_ = SonikLibStringConvert::CheckConvertType(ControlStr);
-	uint32_t cnt = 0;
-	uint32_t endcnt = MaxStrCnt+1;
-	uint32_t OffsetCnt = 1;
-	uint32_t bitcnt = 0;
+	uint64_t cnt = 0;
+	uint64_t endcnt = MaxStrCnt+1;
+	uint64_t OffsetCnt = 1;
+	uint64_t bitcnt = 0;
 	unsigned char swapbit = 0;
 	unsigned char* pCheckSrc = reinterpret_cast<unsigned char*>(ControlStr);
 
@@ -1512,7 +1495,6 @@ bool SonikLibStringControl::StringPointEraser(char* ControlStr, uint32_t StartPo
 			if( cnt == endcnt )
 			{
 				EndPointAddress = reinterpret_cast<uintptr_t>(pCheckSrc);
-//				EndPoint -= sizeof(uint8_t);
 			};
 
 			pCheckSrc += OffsetCnt;
@@ -1533,14 +1515,16 @@ bool SonikLibStringControl::StringPointEraser(char* ControlStr, uint32_t StartPo
 			bitcnt |= (bitcnt << 4);
 			bitcnt |= (bitcnt << 8);
 			bitcnt |= (bitcnt << 16);
+			bitcnt |= (bitcnt << 32);
 
-			bitcnt = (bitcnt & 0x55555555) + ( (bitcnt >> 1) & 0x55555555 );
-			bitcnt = (bitcnt & 0x33333333) + ( (bitcnt >> 2) & 0x33333333 );
-			bitcnt = (bitcnt & 0x0F0F0F0F) + ( (bitcnt >> 4) & 0x0F0F0F0F );
-			bitcnt = (bitcnt & 0x00FF00FF) + ( (bitcnt >> 8) & 0x00FF00FF );
+			bitcnt = (bitcnt & 0x5555555555555555) + ( (bitcnt >> 1) & 0x5555555555555555 );
+			bitcnt = (bitcnt & 0x3333333333333333) + ( (bitcnt >> 2) & 0x3333333333333333 );
+			bitcnt = (bitcnt & 0x0F0F0F0F0F0F0F0F) + ( (bitcnt >> 4) & 0x0F0F0F0F0F0F0F0F );
+			bitcnt = (bitcnt & 0x00FF00FF00FF00FF) + ( (bitcnt >> 8) & 0x00FF00FF00FF00FF );
+			bitcnt = (bitcnt & 0x0000FFFF0000FFFF) + ( (bitcnt >> 16) & 0x0000FFFF0000FFFF );
 
-			bitcnt = (bitcnt & 0x0000FFFF) + ( (bitcnt >> 16) & 0x0000FFFF);
-			bitcnt = (32 - bitcnt);
+			bitcnt = (bitcnt & 0x00000000FFFFFFFF) + ( (bitcnt >> 32) & 0x00000000FFFFFFFF);
+			bitcnt = (64 - bitcnt);
 
 			if( bitcnt == 0 )
 			{
@@ -1555,13 +1539,13 @@ bool SonikLibStringControl::StringPointEraser(char* ControlStr, uint32_t StartPo
 				endcnt = cnt + EndPoint -1;
 			};
 
+			pCheckSrc += bitcnt;
+
 			if( cnt == endcnt )
 			{
 				EndPointAddress = reinterpret_cast<uintptr_t>(pCheckSrc);
-//				EndPoint -= sizeof(uint8_t);
 			};
 
-			pCheckSrc += bitcnt;
 		};
 
 	}else
@@ -1585,5 +1569,5 @@ bool SonikLibStringControl::StringPointEraser(char* ControlStr, uint32_t StartPo
 };
 
 
-#endif
+
 
