@@ -893,8 +893,6 @@ bool SonikLibStringConvert::ConvertUTF8ToUTF16(char* pSrc, char16_t* pDest, uint
 		return false;
 	};
 
-	std::fill_n(utf32buffer, buffersize, 0);
-
 	if( !SonikLibStringConvert::ConvertUTF8ToUTF32(pSrc, utf32buffer, nullptr) )
 	{
 		delete[] utf32buffer;
@@ -1033,10 +1031,9 @@ bool SonikLibStringConvert::ConvertUTF8ToMBS(char* pSrc, char* pDest, uint64_t* 
 		return false;
 	};
 
-	setlocale(LC_CTYPE, "jpn");
-
 	uint64_t retsize = 0;
-	wcstombs_s(&retsize, nullptr, 0, reinterpret_cast<wchar_t*>(unicode_buf), utf16Len);
+	wcstombs_s(&retsize, 0, 0, reinterpret_cast<wchar_t*>(unicode_buf), utf16Len);
+	setlocale(LC_CTYPE, "jpn");
 	if(pDest == nullptr && DestBufferSize != nullptr)
 	{
 		//utf16->SJIS サイズチェック

@@ -893,8 +893,6 @@ bool SonikLibStringConvert::ConvertUTF8ToUTF16(char* pSrc, char16_t* pDest, uint
 		return false;
 	};
 
-	std::fill_n(utf32buffer, buffersize, 0);
-
 	if( !SonikLibStringConvert::ConvertUTF8ToUTF32(pSrc, utf32buffer, nullptr) )
 	{
 		delete[] utf32buffer;
