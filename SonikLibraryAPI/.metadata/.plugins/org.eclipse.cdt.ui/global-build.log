@@ -1,8 +1,8 @@
-21:37:08 **** Clean-only build of configuration Release_x64 for project SonikLibraryAPI ****
+21:58:29 **** Clean-only build of configuration Release_x64 for project SonikLibraryAPI ****
 mingw32-make clean 
 rm -rf ./TimerClock/SonikElapsedTimer.d ./TimerClock/SonikElapsedTimer.o ./TimerClock/SonikElapsedTimer_x64.d ./TimerClock/SonikElapsedTimer_x64.o
 rm -rf ./SonikWorkThread/SonikWorkThreadEx.d ./SonikWorkThread/SonikWorkThreadEx.o ./SonikWorkThread/SonikWorkThreadManagerEx.d ./SonikWorkThread/SonikWorkThreadManagerEx.o
-rm -rf ./SonikString/SonikString.d ./SonikString/SonikString.o ./SonikString/SonikStringConvert.d ./SonikString/SonikStringConvert.o ./SonikString/SonikStringConvert_x64.d ./SonikString/SonikStringConvert_x64.o ./SonikString/SonikString_x64.d ./SonikString/SonikString_x64.o
+rm -rf ./SonikString/SonikString.d ./SonikString/SonikString.o ./SonikString/SonikStringConvert.d ./SonikString/SonikStringConvert.o
 rm -rf ./SonikFrameControl/SonikFrameControl.d ./SonikFrameControl/SonikFrameControl.o ./SonikFrameControl/SonikFrameControl_x64.d ./SonikFrameControl/SonikFrameControl_x64.o
 rm -rf ./SonikFileSystems/SonikFileController_SJISx64.d ./SonikFileSystems/SonikFileController_SJISx64.o ./SonikFileSystems/SonikFileController_SJISx86.d ./SonikFileSystems/SonikFileController_SJISx86.o ./SonikFileSystems/SonikFileController_UTF16x64.d ./SonikFileSystems/SonikFileController_UTF16x64.o ./SonikFileSystems/SonikFileController_UTF16x86.d ./SonikFileSystems/SonikFileController_UTF16x86.o ./SonikFileSystems/SonikFileController_UTF8x64.d ./SonikFileSystems/SonikFileController_UTF8x64.o ./SonikFileSystems/SonikFileController_UTF8x86.d ./SonikFileSystems/SonikFileController_UTF8x86.o ./SonikFileSystems/SonikFileController_x64.d ./SonikFileSystems/SonikFileController_x64.o ./SonikFileSystems/SonikFileController_x86.d ./SonikFileSystems/SonikFileController_x86.o ./SonikFileSystems/SonikFileSystems.d ./SonikFileSystems/SonikFileSystems.o
 rm -rf ./SonikCAS/SonikAtomicLock.d ./SonikCAS/SonikAtomicLock.o
@@ -14,7 +14,7 @@ rm -rf ./Audio/Format/SonikAppleAiffFormat.d ./Audio/Format/SonikAppleAiffFormat
 rm -rf ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.d ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o
 rm -rf lib_Rx64_SonikLibraryAPI.a
  
-21:37:09 **** Build of configuration Release_x64 for project SonikLibraryAPI ****
+21:58:29 **** Build of configuration Release_x64 for project SonikLibraryAPI ****
 mingw32-make all 
 Building file: ../TimerClock/SonikElapsedTimer.cpp
 Invoking: GCC C++ Compiler
