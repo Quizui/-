@@ -2,12 +2,14 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Greater"/>
+		<item key="selection" value="MaxLength_"/>
 		<item key="casesensitive" value="true"/>
 		<item key="incremental" value="true"/>
 		<item key="wrap" value="true"/>
 		<item key="wholeword" value="false"/>
 		<list key="findhistory">
+			<item value="MaxLength_"/>
+			<item value="Realloc"/>
 			<item value="Greater"/>
 			<item value="SonikLib::NormalSmtPtr&lt;SonikLib::FunctionSystem_Base&gt; tmp;"/>
 			<item value="SonikAtomicLock"/>
@@ -21,8 +23,6 @@
 			<item value="SetSentinelFlag"/>
 			<item value="GetSentinelFlag"/>
 			<item value="SetClsTypeObject"/>
-			<item value=" GetClsTypeObject"/>
-			<item value="FunctionSystem_Base"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>

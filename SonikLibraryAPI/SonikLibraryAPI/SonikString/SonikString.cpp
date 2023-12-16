@@ -138,26 +138,34 @@ namespace SonikLib
 
 
 	SonikString::SonikString_pImpl::SonikString_pImpl(void)
-	:MaxLength_(0)
+	:Stringval_(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
 	{
-		Stringval_ = 0;
-		buffer_ = 100;
-		CType = SCHTYPE_NULLTEXT;
-
 		try
 		{
 			Stringval_ = new uint8_t[buffer_];
 		}catch(std::bad_alloc& e)
 		{
-			throw;
+			delete[] Stringval_;
+			throw std::bad_alloc(e);
+
+		}catch(std::bad_array_new_length& e)
+		{
+			delete[] Stringval_;
+			throw std::bad_array_new_length(e);
 		};
 
 		std::fill_n(Stringval_, buffer_, 0);
 	};
 
 	SonikString::SonikString_pImpl::SonikString_pImpl(const char* SetStr)
+	:Stringval_(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
 	{
-		buffer_ = 100;
 		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
 
 		//NULL文字文追加(+1)して格納
@@ -173,7 +181,13 @@ namespace SonikLib
 			Stringval_ = new uint8_t[buffer_];
 		}catch(std::bad_alloc& e)
 		{
-			throw;
+			delete[] Stringval_;
+			throw std::bad_alloc(e);
+
+		}catch(std::bad_array_new_length& e)
+		{
+			delete[] Stringval_;
+			throw std::bad_array_new_length(e);
 		};
 
 		std::fill_n(Stringval_, buffer_, 0);
@@ -181,53 +195,58 @@ namespace SonikLib
 		memcpy(Stringval_, SetStr, SrcByte);
 		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
 
-
 		CType = tmpType;
-
 	};
 
 	SonikString::SonikString_pImpl::SonikString_pImpl(const char16_t* SetStr)
+	:Stringval_(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_UTF16)
+	,buffer_(100)
 	{
-		buffer_ = 100;
-		CType = SCHTYPE_UTF16;
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 2; //Null文字分 shortサイズ分追加。
 
-		uint64_t SrcLen = SonikLibStringConvert::GetStringLengthByte(SetStr);
-
-		if(buffer_ < SrcLen)
+		if( SrcByte > buffer_ )
 		{
-			buffer_ = SrcLen;
+			buffer_ = SrcByte;
 		};
 
 		try
 		{
 			Stringval_ = new uint8_t[buffer_];
-		}catch(std::bad_alloc&)
+		}catch(std::bad_alloc& e)
 		{
-			throw;
+			delete[] Stringval_;
+			throw std::bad_alloc(e);
+
+		}catch(std::bad_array_new_length& e)
+		{
+			delete[] Stringval_;
+			throw std::bad_array_new_length(e);
 		};
 
 		std::fill_n(Stringval_, buffer_, 0);
 
-		memcpy(Stringval_, SetStr, SrcLen);
+		memcpy(Stringval_, SetStr, SrcByte);
 		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char16_t*>(Stringval_));
 	};
 
 	SonikString::SonikString_pImpl::SonikString_pImpl(const SonikString_pImpl& t_his)
 	{
+		try
+		{
+			Stringval_ = new uint8_t[t_his.buffer_];
+		}catch(std::bad_alloc& e)
+		{
+			delete[] Stringval_;
+			throw std::bad_alloc(e);
+		};
+
 		buffer_ = t_his.buffer_;
 		CType = t_his.CType;
 		MaxLength_ = t_his.MaxLength_;
 
-		try
-		{
-			Stringval_ = new uint8_t[buffer_];
-		}catch(std::bad_alloc&)
-		{
-			throw;
-		};
-
 		memcpy(Stringval_, t_his.Stringval_, buffer_);
-
 	};
 
 	SonikString::SonikString_pImpl::SonikString_pImpl(SonikString_pImpl&& Move)
@@ -275,18 +294,11 @@ namespace SonikLib
 
 			case SCHTYPE_UTF16:
 				//UTF16への変換
-//				mbstowcs_s(&convSize_, 0, 0, reinterpret_cast<char*>(Stringval_), bufsize_);
-				SonikLibStringConvert::ConvertMBStoUTF16(reinterpret_cast<char*>(Stringval_), 0, &convSize_);
-				//convSize_ *= 2;
+				SonikLibStringConvert::ConvertMBStoUTF16(reinterpret_cast<char*>(Stringval_), nullptr, &convSize_);
 
-//				if( (convSize_ & 0x01) == 1 )
-//				{
-//					++convSize_;
-//				};
-
-				if( (convSize_ +1) > buffer_ )
+				if( convSize_ > buffer_ )
 				{
-					if( !this->ReAlloc( (convSize_+1) ) )
+					if( !this->ReAlloc( convSize_ ) )
 					{
 						string_atm_lock.Unlock();
 						return false;
@@ -294,17 +306,11 @@ namespace SonikLib
 
 				};
 
-				if( !SonikLibStringConvert::ConvertMBStoUTF16(reinterpret_cast<char*>(Stringval_), reinterpret_cast<char16_t*>(Stringval_), &buffer_) )
+				if( !SonikLibStringConvert::ConvertMBStoUTF16(reinterpret_cast<char*>(Stringval_), reinterpret_cast<char16_t*>(Stringval_), nullptr) )
 				{
 					string_atm_lock.Unlock();
 					return false;
 				};
-
-//				if( mbstowcs_s(0, Stringval_, (convSize_ >> 1), reinterpret_cast<char*>(Stringval_), (convSize_ >> 1)) != 0 )
-//				{
-//					string_atm_lock.Unlock();
-//					return false;
-//				};
 
 				CType = SetType;
 				string_atm_lock.Unlock();
@@ -313,16 +319,11 @@ namespace SonikLib
 
 			case SCHTYPE_UTF8:
 				//SJISからUTF8への変換を行う。
-				SonikLibStringConvert::ConvertMBSToUTF8(reinterpret_cast<char*>(Stringval_), 0, &convSize_);
+				SonikLibStringConvert::ConvertMBSToUTF8(reinterpret_cast<char*>(Stringval_), nullptr, &convSize_);
 
-//				if( (convSize_ & 0x01) == 1 )
-//				{
-//					--convSize_;
-//				};
-
-				if( (convSize_ +1) > buffer_ )
+				if( convSize_ > buffer_ )
 				{
-					if( !this->ReAlloc( (convSize_ +1) ) )
+					if( !this->ReAlloc( convSize_ ) )
 					{
 						string_atm_lock.Unlock();
 						return false;
@@ -330,7 +331,7 @@ namespace SonikLib
 
 				};
 
-				if( !SonikLibStringConvert::ConvertMBSToUTF8(reinterpret_cast<char*>(Stringval_), reinterpret_cast<char*>(Stringval_), &convSize_) )
+				if( !SonikLibStringConvert::ConvertMBSToUTF8(reinterpret_cast<char*>(Stringval_), reinterpret_cast<char*>(Stringval_), nullptr) )
 				{
 					string_atm_lock.Unlock();
 					return false;
@@ -360,15 +361,14 @@ namespace SonikLib
 			{
 			case SCHTYPE_SJIS:
 				//UTF16からSJISへの変換
-//				wcstombs_s(&convSize_, 0, 0, Stringval_, (bufsize_ * 2));
-				SonikLibStringConvert::ConvertUTF16toMBS(reinterpret_cast<char16_t*>(Stringval_), 0, &convSize_);
+				SonikLibStringConvert::ConvertUTF16toMBS(reinterpret_cast<char16_t*>(Stringval_), nullptr, &convSize_);
 
-				if( (convSize_ & 0x01) == 1 )
-				{
-					++convSize_;
-				};
+//				if( (convSize_ & 0x01) == 1 )
+//				{
+//					++convSize_;
+//				};
 
-				if( (convSize_) > buffer_ )
+				if( convSize_ > buffer_ )
 				{
 					if( !this->ReAlloc(convSize_) )
 					{
@@ -379,12 +379,11 @@ namespace SonikLib
 				};
 
 				//convSize_ = buffer_ << 1; // x * 2 = x << 1
-				if( !SonikLibStringConvert::ConvertUTF16toMBS(reinterpret_cast<char16_t*>(Stringval_), reinterpret_cast<char*>(Stringval_), &convSize_) )
+				if( !SonikLibStringConvert::ConvertUTF16toMBS(reinterpret_cast<char16_t*>(Stringval_), reinterpret_cast<char*>(Stringval_), nullptr) )
 				{
 					string_atm_lock.Unlock();
 					return false;
 				};
-
 
 				CType = SetType;
 				string_atm_lock.Unlock();
@@ -401,16 +400,16 @@ namespace SonikLib
 
 			case SCHTYPE_UTF8:
 				//UTF16 から UTF8への変換
-				SonikLibStringConvert::ConvertUTF16ToUTF8(reinterpret_cast<char16_t*>(Stringval_), 0, &convSize_);
+				SonikLibStringConvert::ConvertUTF16ToUTF8(reinterpret_cast<char16_t*>(Stringval_), nullptr, &convSize_);
 
-				if( (convSize_ & 0x01) == 1 )
-				{
-					++convSize_;
-				};
+//				if( (convSize_ & 0x01) == 1 )
+//				{
+//					++convSize_;
+//				};
 
-				if( (convSize_ +1) > buffer_ )
+				if( convSize_  > buffer_ )
 				{
-					if( !this->ReAlloc(convSize_ +1) )
+					if( !this->ReAlloc(convSize_) )
 					{
 						string_atm_lock.Unlock();
 						return false;
@@ -418,7 +417,7 @@ namespace SonikLib
 
 				};
 
-				if( !SonikLibStringConvert::ConvertUTF16ToUTF8(reinterpret_cast<char16_t*>(Stringval_), reinterpret_cast<char*>(Stringval_), &convSize_) )
+				if( !SonikLibStringConvert::ConvertUTF16ToUTF8(reinterpret_cast<char16_t*>(Stringval_), reinterpret_cast<char*>(Stringval_), nullptr) )
 				{
 					string_atm_lock.Unlock();
 					return false;
@@ -451,16 +450,16 @@ namespace SonikLib
 			{
 			case SCHTYPE_SJIS:
 				//UTF8からSJISへの変換
-				SonikLibStringConvert::ConvertUTF8ToMBS(reinterpret_cast<char*>(Stringval_), 0, &convSize_);
+				SonikLibStringConvert::ConvertUTF8ToMBS(reinterpret_cast<char*>(Stringval_), nullptr, &convSize_);
 
-				if( (convSize_ & 0x01) == 1 )
-				{
-					++convSize_;
-				};
+//				if( (convSize_ & 0x01) == 1 )
+//				{
+//					++convSize_;
+//				};
 
-				if( (convSize_+1) > buffer_ )
+				if( convSize_ > buffer_ )
 				{
-					if( !this->ReAlloc(convSize_ +1) )
+					if( !this->ReAlloc(convSize_) )
 					{
 						string_atm_lock.Unlock();
 						return false;
@@ -468,7 +467,7 @@ namespace SonikLib
 
 				};
 
-				if( !SonikLibStringConvert::ConvertUTF8ToMBS(reinterpret_cast<char*>(Stringval_), reinterpret_cast<char*>(Stringval_), &convSize_) )
+				if( !SonikLibStringConvert::ConvertUTF8ToMBS(reinterpret_cast<char*>(Stringval_), reinterpret_cast<char*>(Stringval_), nullptr) )
 				{
 					string_atm_lock.Unlock();
 					return false;
@@ -482,17 +481,11 @@ namespace SonikLib
 
 			case SCHTYPE_UTF16:
 				//UTF8からUTF16へ変換
-				SonikLibStringConvert::ConvertUTF8ToUTF16(reinterpret_cast<char*>(Stringval_), 0, &convSize_);
+				SonikLibStringConvert::ConvertUTF8ToUTF16(reinterpret_cast<char*>(Stringval_), nullptr, &convSize_);
 
-//				if( (convSize_ & 0x01) == 1 )
-//				{
-//					++convSize_;
-//				};
-//				convSize_ <<= 1;
-
-				if( (convSize_ +2) > buffer_ )
+				if( convSize_ > buffer_ )
 				{
-					if( !this->ReAlloc(convSize_ +2) )
+					if( !this->ReAlloc(convSize_) )
 					{
 						string_atm_lock.Unlock();
 						return false;
@@ -500,8 +493,7 @@ namespace SonikLib
 
 				};
 
-//				convSize_ >>= 1;
-				if( !SonikLibStringConvert::ConvertUTF8ToUTF16(reinterpret_cast<char*>(Stringval_), reinterpret_cast<char16_t*>(Stringval_), &convSize_) )
+				if( !SonikLibStringConvert::ConvertUTF8ToUTF16(reinterpret_cast<char*>(Stringval_), reinterpret_cast<char16_t*>(Stringval_), nullptr) )
 				{
 					string_atm_lock.Unlock();
 					return false;
@@ -553,18 +545,12 @@ namespace SonikLib
 	bool SonikString::SonikString_pImpl::ReAlloc(uint64_t ReArraySize)
 	{
 		uint8_t* pTmp = 0;
-		//コピー元なのでNULL文字は数えない。
-//		unsigned long bufsize_ = SonikLibStringConvert::GetStringCount(Stringval_) + 1;
-//
-//		try
-//		{
-//			pTmp = new char[ReSize];
-//		}catch(std::bad_alloc&)
-//		{
-//			return false;
-//		};
 
 		pTmp = new(std::nothrow) uint8_t[ReArraySize];
+		if(pTmp == nullptr)
+		{
+			return false;
+		};
 
 		std::fill_n(pTmp, ReArraySize, 0);
 
@@ -643,7 +629,7 @@ namespace SonikLib
 		//NULL文字分追加 (+1)して格納
 		uint64_t cpysize = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_))  + 1;
 
-		if( dstBuffer == 0 || dstBuffer == nullptr )
+		if(dstBuffer == nullptr )
 		{
 			//サイズ返却して終了
 			return cpysize;
@@ -674,7 +660,7 @@ namespace SonikLib
 		//NULL文字分追加(wide = +2) して格納
 		uint64_t cpysize = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char16_t*>(Stringval_)) + 2;
 
-		if( dstBuffer == 0 || dstBuffer == nullptr )
+		if(dstBuffer == nullptr )
 		{
 			//サイズ返却して終了
 			return cpysize;
@@ -705,7 +691,7 @@ namespace SonikLib
 		//NULL文字分追加 (+1)して格納
 		uint64_t cpysize = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_)) + 1;
 
-		if( dstBuffer == 0 || dstBuffer == nullptr )
+		if(dstBuffer == nullptr )
 		{
 			//サイズ返却して終了
 			return cpysize;
@@ -755,7 +741,7 @@ namespace SonikLib
 		};
 
 		uint8_t* tmp_Str = new(std::nothrow) uint8_t[Size];
-		if( tmp_Str == nullptr || tmp_Str == 0 )
+		if( tmp_Str == nullptr )
 		{
 			string_atm_lock.Unlock();
 			return false;
@@ -806,7 +792,7 @@ namespace SonikLib
 		};
 
 		uint8_t* tmp_Str = new(std::nothrow) uint8_t[Size];
-		if( tmp_Str == nullptr || tmp_Str == 0 )
+		if( tmp_Str == nullptr )
 		{
 			string_atm_lock.Unlock();
 			return false;
@@ -866,8 +852,7 @@ namespace SonikLib
 		SonikLib::SonikString PushStr;
 		while( (*pTmpstr) != 0x00 )
 		{
-			swapbit = (*pTmpstr);
-			swapbit = SonikMathBit::BitSwapFor8bit(swapbit);
+			swapbit = SonikMathBit::BitSwapFor8bit((*pTmpstr));
 
 			bitcnt =  ~(swapbit);
 
@@ -922,28 +907,36 @@ namespace SonikLib
 
 	SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator =(const SonikString_pImpl& t_his)
 	{
-		buffer_ = t_his.buffer_;
-		CType = t_his.CType;
-		MaxLength_ = t_his.MaxLength_;
 
 		if( this == &t_his )
 		{
 			return (*this);
 		};
 
+		uint8_t* tmpbuffer = nullptr;
+		try
+		{
+			tmpbuffer = new uint8_t[ t_his.buffer_];
+
+		}catch(std::bad_alloc& e)
+		{
+			throw std::bad_alloc(e);
+
+		}catch(std::bad_array_new_length& e)
+		{
+			throw std::bad_array_new_length(e);
+		};
+
 		if( Stringval_ != 0 )
 		{
 			delete[] Stringval_;
-
 		};
 
-		try
-		{
-			Stringval_ = new uint8_t[buffer_];
-		}catch(std::bad_alloc&)
-		{
-			throw;
-		};
+		Stringval_ = tmpbuffer;
+
+		buffer_ = t_his.buffer_;
+		CType = t_his.CType;
+		MaxLength_ = t_his.MaxLength_;
 
 		memcpy(Stringval_, t_his.Stringval_, buffer_);
 
@@ -985,6 +978,17 @@ namespace SonikLib
 
 		string_operator_lock.lock();
 
+		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		if(buffer_ < (Size_ + 1))
+		{
+			//null終端分追加
+			if(!this->ReAlloc( Size_ +1 ))
+			{
+				string_operator_lock.Unlock();
+				throw std::bad_alloc();
+			};
+		};
+
 		std::fill_n(Stringval_, buffer_, 0);
 		if( strcmp(Str, "") == 0 )
 		{
@@ -994,14 +998,6 @@ namespace SonikLib
 		};
 
 		CType = SonikLibStringConvert::CheckConvertType(Str);
-		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(Str);
-
-
-		if(buffer_ < (Size_ + 1))
-		{
-			//null終端分追加
-			this->ReAlloc( Size_ +1 );
-		};
 
 		memcpy_s(Stringval_, buffer_ , Str, Size_);
 
@@ -1021,6 +1017,17 @@ namespace SonikLib
 
 		string_operator_lock.lock();
 
+		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(w_Str) + 2;
+		if(buffer_ < Size_)
+		{
+			//null終端分追加
+			if(!this->ReAlloc( Size_ ))
+			{
+				string_operator_lock.Unlock();
+				throw std::bad_alloc();
+			};
+		};
+
 		std::fill_n(Stringval_, buffer_, 0);
 		if( (*w_Str) == 0x00 )
 		{
@@ -1030,12 +1037,6 @@ namespace SonikLib
 		};
 
 		CType = SCHTYPE_UTF16;
-		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(w_Str);
-
-		if( (Size_ +2) > buffer_ )
-		{
-			this->ReAlloc(Size_ + 2);
-		};
 
 		memcpy_s(Stringval_, buffer_, w_Str, Size_);
 
@@ -1074,7 +1075,11 @@ namespace SonikLib
 
 			if( buffer_ < (CopySize_ + bufuse_ ))
 			{
-				this->ReAlloc((CopySize_ + bufuse_) + 2);
+				if(!this->ReAlloc((CopySize_ + bufuse_) + 2))
+				{
+					string_operator_lock.Unlock();
+					throw std::bad_alloc();
+				};
 			};
 
 			sizeofsize_ = 2;
@@ -1087,7 +1092,11 @@ namespace SonikLib
 
 			if( buffer_ < (CopySize_ + bufuse_) + 1 )
 			{
-				this->ReAlloc((CopySize_ + bufuse_) + 1);
+				if(!this->ReAlloc((CopySize_ + bufuse_) + 1))
+				{
+					string_operator_lock.Unlock();
+					throw std::bad_alloc();
+				};
 			};
 
 			sizeofsize_ = 1;
@@ -1108,10 +1117,6 @@ namespace SonikLib
 			MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
 
 		};
-
-
-		//最後に全部元の形に変換
-//		SetCharacterType(CType);
 
 		string_operator_lock.Unlock();
 		return (*this);
@@ -1142,7 +1147,11 @@ namespace SonikLib
 
 		if( (CopySize_ + bufuse_) > buffer_ )
 		{
-			this->ReAlloc( (CopySize_ + bufuse_) + 1);
+			if(!this->ReAlloc( (CopySize_ + bufuse_) + 1))
+			{
+				string_operator_lock.Unlock();
+				throw std::bad_alloc();
+			};
 		};
 
 		CopySize_ = SonikLibStringConvert::GetStringLengthByte(Str);
@@ -1153,9 +1162,6 @@ namespace SonikLib
 
 		//utf8の残骸が後ろに残っている可能性があるので、0を直接埋め込む
 		Stringval_[bufuse_ + CopySize_] = 0;
-
-		//最後に全部コピー元の形に変換
-//		SetCharacterType(CType);
 
 		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
 
@@ -1189,17 +1195,15 @@ namespace SonikLib
 
 		if( (CopySize_ + bufuse_) + 2 > buffer_ )
 		{
-			this->ReAlloc( (CopySize_ + bufuse_) + 2);
+			if(!this->ReAlloc( (CopySize_ + bufuse_) + 2))
+			{
+				string_operator_lock.Unlock();
+				throw std::bad_alloc();
+			};
 		};
-
-//		CopySize_ = SonikLibStringConvert::GetStringLengthByte(w_Str);
-//		bufuse_ = SonikLibStringConvert::GetStringLengthByte(Stringval_);
 
 		memcpy_s(&(reinterpret_cast<char*>(Stringval_)[bufuse_]), (CopySize_ + 2), w_Str, CopySize_);
 		Stringval_[bufuse_ + CopySize_] = 0;
-
-		//最後に全部コピー元の形に変換
-//		SetCharacterType(CType);
 
 		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char16_t*>(Stringval_));
 
@@ -1512,43 +1516,61 @@ namespace SonikLib
 
 	SonikString::SonikString(void)
 	{
-		pImpl = 0;
+		pImpl = nullptr;
 
 		try
 		{
 			pImpl = new SonikString_pImpl;
-		}catch(std::bad_alloc&)
+		}catch(std::bad_alloc& e)
 		{
-			throw;
-		};
+			delete pImpl;
+			throw std::bad_alloc(e);
 
+		}catch(std::bad_array_new_length& e)
+		{
+			delete pImpl;
+			throw std::bad_array_new_length(e);
+		};
 	};
 	SonikString::SonikString(const SonikString& t_his)
 	{
-		pImpl = 0;
+		pImpl = nullptr;
 
 		try
 		{
 			pImpl = new SonikString_pImpl;
 			(*pImpl) = (*(t_his.pImpl));
-		}catch(std::bad_alloc&)
+		}catch(std::bad_alloc& e)
 		{
-			throw;
+			delete pImpl;
+			throw std::bad_alloc(e);
+
+		}catch(std::bad_array_new_length& e)
+		{
+			delete pImpl;
+			throw std::bad_array_new_length(e);
 		};
 	};
 
 	SonikString::SonikString(const char* SetStr)
 	{
-		pImpl = 0;
+		pImpl = nullptr;
 
 		try
 		{
 			pImpl = new SonikString_pImpl;
 			(*pImpl) = SetStr;
-		}catch(std::bad_alloc&)
+		}catch(std::bad_alloc& e)
 		{
-			throw;
+			delete pImpl;
+			throw std::bad_alloc(e);
+
+		}catch(std::bad_array_new_length& e)
+		{
+			delete pImpl;
+			throw std::bad_array_new_length(e);
 		};
+
 	};
 
 	SonikString::SonikString(const char16_t* SetStr)
@@ -1559,9 +1581,16 @@ namespace SonikLib
 		{
 			pImpl = new SonikString_pImpl;
 			(*pImpl) = SetStr;
-		}catch(std::bad_alloc&)
+		}catch(std::bad_alloc& e)
 		{
-			throw;
+			delete pImpl;
+			throw std::bad_alloc(e);
+
+		}catch(std::bad_array_new_length& e)
+		{
+
+			delete pImpl;
+			throw std::bad_array_new_length(e);
 		};
 	};
 
@@ -1573,9 +1602,16 @@ namespace SonikLib
 		{
 			pImpl = new SonikString_pImpl;
 			(*pImpl) = std::move( (*(Move.pImpl)) );
-		}catch(std::bad_alloc&)
+		}catch(std::bad_alloc& e)
 		{
-			throw;
+			delete pImpl;
+			throw std::bad_alloc(e);
+
+		}catch(std::bad_array_new_length& e)
+		{
+
+			delete pImpl;
+			throw std::bad_array_new_length(e);
 		};
 
 	};

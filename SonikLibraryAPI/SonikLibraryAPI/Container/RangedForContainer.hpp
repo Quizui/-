@@ -33,12 +33,13 @@ namespace SonikLib
 		{
 			try
 			{
-				AllocAreaPtr = new(std::nothrow) uint8_t[ sizeof(T) * ElemCnt ];
+				AllocAreaPtr = new uint8_t[ sizeof(T) * ElemCnt ];
 
 			}catch(std::bad_alloc& e)
 			{
 				//メモリの確保に失敗。
 				delete[] AllocAreaPtr;
+				throw std::bad_alloc(e);
 			};
 
 		};

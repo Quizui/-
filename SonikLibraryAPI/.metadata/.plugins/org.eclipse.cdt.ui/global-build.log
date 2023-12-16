@@ -1,4 +1,20 @@
-01:32:00 **** Build of configuration Debug_x64 for project SonikLibraryAPI ****
+03:01:46 **** Clean-only build of configuration Debug_x64 for project SonikLibraryAPI ****
+mingw32-make clean 
+rm -rf ./TimerClock/SonikElapsedTimer.d ./TimerClock/SonikElapsedTimer.o ./TimerClock/SonikElapsedTimer_x64.d ./TimerClock/SonikElapsedTimer_x64.o
+rm -rf ./SonikWorkThread/SonikWorkThreadEx.d ./SonikWorkThread/SonikWorkThreadEx.o ./SonikWorkThread/SonikWorkThreadManagerEx.d ./SonikWorkThread/SonikWorkThreadManagerEx.o
+rm -rf ./SonikString/SonikString.d ./SonikString/SonikString.o ./SonikString/SonikStringConvert.d ./SonikString/SonikStringConvert.o
+rm -rf ./SonikFrameControl/SonikFrameControl.d ./SonikFrameControl/SonikFrameControl.o ./SonikFrameControl/SonikFrameControl_x64.d ./SonikFrameControl/SonikFrameControl_x64.o
+rm -rf ./SonikFileSystems/SonikFileController_SJISx64.d ./SonikFileSystems/SonikFileController_SJISx64.o ./SonikFileSystems/SonikFileController_SJISx86.d ./SonikFileSystems/SonikFileController_SJISx86.o ./SonikFileSystems/SonikFileController_UTF16x64.d ./SonikFileSystems/SonikFileController_UTF16x64.o ./SonikFileSystems/SonikFileController_UTF16x86.d ./SonikFileSystems/SonikFileController_UTF16x86.o ./SonikFileSystems/SonikFileController_UTF8x64.d ./SonikFileSystems/SonikFileController_UTF8x64.o ./SonikFileSystems/SonikFileController_UTF8x86.d ./SonikFileSystems/SonikFileController_UTF8x86.o ./SonikFileSystems/SonikFileController_x64.d ./SonikFileSystems/SonikFileController_x64.o ./SonikFileSystems/SonikFileController_x86.d ./SonikFileSystems/SonikFileController_x86.o ./SonikFileSystems/SonikFileSystems.d ./SonikFileSystems/SonikFileSystems.o
+rm -rf ./SonikCAS/SonikAtomicLock.d ./SonikCAS/SonikAtomicLock.o
+rm -rf ./MultiMedia/SonikMM_AudioInfoImple.d ./MultiMedia/SonikMM_AudioInfoImple.o ./MultiMedia/SonikMultiMediaInterface.d ./MultiMedia/SonikMultiMediaInterface.o
+rm -rf ./MathBit/MathBit.d ./MathBit/MathBit.o ./MathBit/SonikKeyFrameMath.d ./MathBit/SonikKeyFrameMath.o ./MathBit/SonikMathDistance.d ./MathBit/SonikMathDistance.o ./MathBit/SonikMathStandard.d ./MathBit/SonikMathStandard.o ./MathBit/SonikMathTrigonometric.d ./MathBit/SonikMathTrigonometric.o ./MathBit/SonikNormalize.d ./MathBit/SonikNormalize.o
+rm -rf ./DllAccess/SonikDllAccessManager.d ./DllAccess/SonikDllAccessManager.o ./DllAccess/SonikDllAccessManager_x64.d ./DllAccess/SonikDllAccessManager_x64.o ./DllAccess/SonikDllLoader.d ./DllAccess/SonikDllLoader.o ./DllAccess/SonikDllLoader_x64.d ./DllAccess/SonikDllLoader_x64.o
+rm -rf ./Audio/Functions/LoadFunction.d ./Audio/Functions/LoadFunction.o ./Audio/Functions/WaveBitConvert.d ./Audio/Functions/WaveBitConvert.o ./Audio/Functions/WriteFunction.d ./Audio/Functions/WriteFunction.o
+rm -rf ./Audio/Format/SonikAppleAiffFormat.d ./Audio/Format/SonikAppleAiffFormat.o ./Audio/Format/SonikWindowsWaveFormat.d ./Audio/Format/SonikWindowsWaveFormat.o
+rm -rf ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.d ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o
+rm -rf lib_Dx64_SonikLibraryAPI.a
+ 
+03:01:47 **** Build of configuration Debug_x64 for project SonikLibraryAPI ****
 mingw32-make all 
 Building file: ../TimerClock/SonikElapsedTimer.cpp
 Invoking: GCC C++ Compiler
@@ -67,7 +83,61 @@ In file included from <built-in>:469:
 <command line>:3:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
     3 | #define __cplusplus 202002L
       |         ^
-1 warning generated.
+../SonikString/SonikString.cpp:154:10: warning: exception of type 'std::bad_array_new_length &' will be caught by earlier handler [-Wexceptions]
+  154 |                 }catch(std::bad_array_new_length& e)
+      |                        ^
+../SonikString/SonikString.cpp:149:10: note: for type 'std::bad_alloc &'
+  149 |                 }catch(std::bad_alloc& e)
+      |                        ^
+../SonikString/SonikString.cpp:187:10: warning: exception of type 'std::bad_array_new_length &' will be caught by earlier handler [-Wexceptions]
+  187 |                 }catch(std::bad_array_new_length& e)
+      |                        ^
+../SonikString/SonikString.cpp:182:10: note: for type 'std::bad_alloc &'
+  182 |                 }catch(std::bad_alloc& e)
+      |                        ^
+../SonikString/SonikString.cpp:222:10: warning: exception of type 'std::bad_array_new_length &' will be caught by earlier handler [-Wexceptions]
+  222 |                 }catch(std::bad_array_new_length& e)
+      |                        ^
+../SonikString/SonikString.cpp:217:10: note: for type 'std::bad_alloc &'
+  217 |                 }catch(std::bad_alloc& e)
+      |                        ^
+../SonikString/SonikString.cpp:925:10: warning: exception of type 'std::bad_array_new_length &' will be caught by earlier handler [-Wexceptions]
+  925 |                 }catch(std::bad_array_new_length& e)
+      |                        ^
+../SonikString/SonikString.cpp:921:10: note: for type 'std::bad_alloc &'
+  921 |                 }catch(std::bad_alloc& e)
+      |                        ^
+../SonikString/SonikString.cpp:1529:10: warning: exception of type 'std::bad_array_new_length &' will be caught by earlier handler [-Wexceptions]
+ 1529 |                 }catch(std::bad_array_new_length& e)
+      |                        ^
+../SonikString/SonikString.cpp:1524:10: note: for type 'std::bad_alloc &'
+ 1524 |                 }catch(std::bad_alloc& e)
+      |                        ^
+../SonikString/SonikString.cpp:1548:10: warning: exception of type 'std::bad_array_new_length &' will be caught by earlier handler [-Wexceptions]
+ 1548 |                 }catch(std::bad_array_new_length& e)
+      |                        ^
+../SonikString/SonikString.cpp:1543:10: note: for type 'std::bad_alloc &'
+ 1543 |                 }catch(std::bad_alloc& e)
+      |                        ^
+../SonikString/SonikString.cpp:1568:10: warning: exception of type 'std::bad_array_new_length &' will be caught by earlier handler [-Wexceptions]
+ 1568 |                 }catch(std::bad_array_new_length& e)
+      |                        ^
+../SonikString/SonikString.cpp:1563:10: note: for type 'std::bad_alloc &'
+ 1563 |                 }catch(std::bad_alloc& e)
+      |                        ^
+../SonikString/SonikString.cpp:1589:10: warning: exception of type 'std::bad_array_new_length &' will be caught by earlier handler [-Wexceptions]
+ 1589 |                 }catch(std::bad_array_new_length& e)
+      |                        ^
+../SonikString/SonikString.cpp:1584:10: note: for type 'std::bad_alloc &'
+ 1584 |                 }catch(std::bad_alloc& e)
+      |                        ^
+../SonikString/SonikString.cpp:1610:10: warning: exception of type 'std::bad_array_new_length &' will be caught by earlier handler [-Wexceptions]
+ 1610 |                 }catch(std::bad_array_new_length& e)
+      |                        ^
+../SonikString/SonikString.cpp:1605:10: note: for type 'std::bad_alloc &'
+ 1605 |                 }catch(std::bad_alloc& e)
+      |                        ^
+10 warnings generated.
 Finished building: ../SonikString/SonikString.cpp
  
 Building file: ../SonikString/SonikStringConvert.cpp
@@ -77,7 +147,10 @@ In file included from <built-in>:469:
 <command line>:3:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
     3 | #define __cplusplus 202002L
       |         ^
-1 warning generated.
+../SonikString/SonikStringConvert.cpp:965:11: warning: unused variable 'SrcLen' [-Wunused-variable]
+  965 |         uint64_t SrcLen = SonikLibStringConvert::GetStringCount(pSrc);
+      |                  ^~~~~~
+2 warnings generated.
 Finished building: ../SonikString/SonikStringConvert.cpp
  
 Building file: ../SonikFrameControl/SonikFrameControl.cpp
@@ -130,17 +203,17 @@ In file included from <built-in>:469:
 1 warning generated.
 Finished building: ../SonikFileSystems/SonikFileController_UTF16x64.cpp
  
-Building file: ../SonikFileSystems/SonikFileController_UTF16x86.cpp
-Invoking: GCC C++ Compiler
-clang++ -std=c++20 -D__SONIK_x86_64__=1 -D_DEBUG -D__cplusplus=202002L -D_WIN64 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SonikFileSystems/SonikFileController_UTF16x86.d" -MT"SonikFileSystems/SonikFileController_UTF16x86.o" -o "SonikFileSystems/SonikFileController_UTF16x86.o" "../SonikFileSystems/SonikFileController_UTF16x86.cpp"
 In file included from <built-in>:469:
 <command line>:3:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+Building file: ../SonikFileSystems/SonikFileController_UTF16x86.cpp
     3 | #define __cplusplus 202002L
-      |         ^
-1 warning generated.
+Invoking: GCC C++ Compiler
+clang++ -std=c++20 -D__SONIK_x86_64__=1 -D_DEBUG -D__cplusplus=202002L -D_WIN64 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SonikFileSystems/SonikFileController_UTF16x86.d" -MT"SonikFileSystems/SonikFileController_UTF16x86.o" -o "SonikFileSystems/SonikFileController_UTF16x86.o" "../SonikFileSystems/SonikFileController_UTF16x86.cpp"
 Finished building: ../SonikFileSystems/SonikFileController_UTF16x86.cpp
  
 Building file: ../SonikFileSystems/SonikFileController_UTF8x64.cpp
+      |         ^
+1 warning generated.
 Invoking: GCC C++ Compiler
 clang++ -std=c++20 -D__SONIK_x86_64__=1 -D_DEBUG -D__cplusplus=202002L -D_WIN64 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SonikFileSystems/SonikFileController_UTF8x64.d" -MT"SonikFileSystems/SonikFileController_UTF8x64.o" -o "SonikFileSystems/SonikFileController_UTF8x64.o" "../SonikFileSystems/SonikFileController_UTF8x64.cpp"
 In file included from <built-in>:469:
