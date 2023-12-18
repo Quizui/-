@@ -1319,7 +1319,8 @@ bool SonikLibStringConvert::ConvertUTF8FWCToHWCForKANA(const char* ConvertStr, c
 	//バイト数取得。
 	uint64_t StrSize = SonikLibStringConvert::GetStringLengthByte(ConvertStr);
 	//NULL文字分プラスして一時的にバッファサイズも２倍確保
-	StrSize  = ((StrSize + 1) << 1) ;
+//	StrSize  = ((StrSize + 1) << 1);
+	StrSize  = (StrSize + 2);
 
 	//一時的に2倍のサイズが必要。
 	char* buffer = new(std::nothrow) char[ StrSize];
