@@ -39,7 +39,7 @@ namespace SonikLib
 		//UTF16形式に変換して取得します。(バッファタイプも書き換わります。)
 		const char16_t* c_wcstr(void);
 		//UTF8形式に変換して取得します。(バッファタイプも書き換わります。)
-		const char* utf8_str(void);
+		const uint8_t* utf8_str(void);
 
 		//SJIS形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
 		//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
