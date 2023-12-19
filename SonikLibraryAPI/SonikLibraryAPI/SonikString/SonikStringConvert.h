@@ -9,7 +9,7 @@
 #ifndef SONIKString_SONIKStringCONVERT_H_
 #define SONIKString_SONIKStringCONVERT_H_
 
-#include <cstdint>
+#include <stdint.h>
 
 enum SonikLibConvertType
 {

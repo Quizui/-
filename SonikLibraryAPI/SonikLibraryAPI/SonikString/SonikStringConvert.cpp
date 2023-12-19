@@ -1029,8 +1029,7 @@ bool SonikLibStringConvert::ConvertUTF8ToMBS(char* pSrc, char* pDest, uint64_t* 
 
 	SonikLibStringConvert::ConvertUTF8ToUTF16(pSrc, nullptr, &utf16Len); //計算済みのバイト数が返却される。
 
-	char16_t* unicode_buf = 0;
-	unicode_buf = new(std::nothrow) char16_t[(utf16Len >> 1)];
+	char16_t* unicode_buf = new(std::nothrow) char16_t[(utf16Len >> 1)];;
 	if(unicode_buf == nullptr)
 	{
 		return false;
@@ -1041,6 +1040,7 @@ bool SonikLibStringConvert::ConvertUTF8ToMBS(char* pSrc, char* pDest, uint64_t* 
 	//UTF8 -> UTF16
 	if( !SonikLibStringConvert::ConvertUTF8ToUTF16(pSrc, unicode_buf, nullptr) )
 	{
+		delete[] unicode_buf;
 		return false;
 	};
 
@@ -1088,11 +1088,9 @@ bool SonikLibStringConvert::ConvertMBStoUTF16(char* pSrc, char16_t* pDest, uint6
 	setlocale(LC_CTYPE, "jpn");
 
 	uint64_t size_ = 0;
-//	uint64_t SrcLen = SonikLibStringConvert::GetStringLengthByte(pSrc);
 	mbstowcs_s(&size_, nullptr, 0, pSrc, _TRUNCATE);
 
-	char16_t* tmpBuf = 0;
-	tmpBuf = new(std::nothrow) char16_t[(size_ + 1) ]; // NULL終端追加
+	char16_t* tmpBuf = new(std::nothrow) char16_t[(size_ + 1) ]; // NULL終端追加;
 	if(tmpBuf == nullptr)
 	{
 		return false;
@@ -1140,12 +1138,10 @@ bool SonikLibStringConvert::ConvertUTF16toMBS(char16_t* pSrc, char* pDest, uint6
 	setlocale(LC_CTYPE, "jpn");
 
 	uint64_t size_ = 0;
-//	uint64_t SrcLen = SonikLibStringConvert::GetStringLengthByte(pSrc);
 	wcstombs_s(&size_, nullptr, 0, reinterpret_cast<wchar_t*>(pSrc), _TRUNCATE);
 
-	char* tmpBuf = 0;
 	size_ = (size_ + 1) << 1;//1文字あたりのバイト数に変換。
-	tmpBuf = new(std::nothrow) char[size_]; //1~2Byteで構成されるためすべて１文字あたり2Byteとして扱う。
+	char* tmpBuf = new(std::nothrow) char[size_]; //1~2Byteで構成されるためすべて１文字あたり2Byteとして扱う。;
 	if(tmpBuf == nullptr)
 	{
 		return false;
@@ -1208,6 +1204,7 @@ bool SonikLibStringConvert::ConvertUTF8FWCToHWCForAN(const char* ConvertStr, cha
 		return false;
 	};
 
+	std::fill_n(buffer, (StrByte >> 1) , 0);
 
 	uint64_t cnt = 0;
 	uint64_t bitcnt = 0;
@@ -1319,19 +1316,24 @@ bool SonikLibStringConvert::ConvertUTF8FWCToHWCForKANA(const char* ConvertStr, c
 		return false;
 	};
 
-	//c:最大現在のサイズ * 2のサイズになるので確保する。
+	//バイト数取得。
 	uint64_t StrSize = SonikLibStringConvert::GetStringLengthByte(ConvertStr);
-	//NULL文字分プラス
-	++StrSize;
+	//NULL文字分プラスして一時的にバッファサイズも２倍確保
+	StrSize  = ((StrSize + 1) << 1) ;
 
-	//1Byteカウントで2Byte配列なのでそのまま指定で２倍サイズ。
-	char16_t* buffer = new(std::nothrow) char16_t[ StrSize ];
-	memset(buffer, 0, (StrSize << 1) );
+	//一時的に2倍のサイズが必要。
+	char* buffer = new(std::nothrow) char[ StrSize];
+	if(buffer == nullptr)
+	{
+		return false;
+	};
+
+	std::fill_n(buffer, StrSize, 0);
+
 
 	uint64_t cnt = 0;
 	uint64_t bitcnt = 0;
 	uint64_t PlusValue = 0;
-//	unsigned long PlusValue_sec = 0;
 	uint64_t Offset_first = 0;
 	uint64_t Offset_second = 0;
 	unsigned char swapbit = 0;
@@ -1421,7 +1423,7 @@ bool SonikLibStringConvert::ConvertUTF8FWCToHWCForKANA(const char* ConvertStr, c
 
 		};
 
-		memcpy(InsertPoint, l_convstr, bitcnt);
+		memcpy_s(InsertPoint, bitcnt, l_convstr, bitcnt);
 
 		InsertPoint += bitcnt;
 		l_convstr += bitcnt;
@@ -1517,7 +1519,7 @@ bool SonikLibStringControl::StringPointEraser(char* ControlStr, uint64_t StartPo
 
 	}else if( Type_ == SCHTYPE_UTF8 )
 	{
-		while( static_cast<unsigned char>((*pCheckSrc)) != 0x00 )
+		while( (*pCheckSrc) != 0x00 )
 		{
 			swapbit = SonikMathBit::BitSwapFor8bit((*pCheckSrc));
 

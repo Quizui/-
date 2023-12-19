@@ -2,12 +2,16 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="MaxLength_"/>
+		<item key="selection" value="SonikString"/>
 		<item key="casesensitive" value="true"/>
 		<item key="incremental" value="true"/>
 		<item key="wrap" value="true"/>
 		<item key="wholeword" value="false"/>
 		<list key="findhistory">
+			<item value="SonikString"/>
+			<item value="SonikString::SonikString"/>
+			<item value="SonikString::SonikString_pImpl"/>
+			<item value="SonikString_pImpl"/>
 			<item value="MaxLength_"/>
 			<item value="Realloc"/>
 			<item value="Greater"/>
@@ -19,12 +23,11 @@
 			<item value="S_Inner_PListQSortNode"/>
 			<item value="Queue_RoundCount"/>
 			<item value="SetNext"/>
-			<item value="GetNext"/>
-			<item value="SetSentinelFlag"/>
-			<item value="GetSentinelFlag"/>
-			<item value="SetClsTypeObject"/>
 		</list>
 		<list key="replacehistory">
+			<item value="SonikStringUTF16"/>
+			<item value="SonikStringUTF16::SonikStringUTF16_pImpl"/>
+			<item value="SonikStringUTF16_pImpl"/>
 			<item value=""/>
 			<item value="m_pThreads"/>
 			<item value="SONIK_DLL"/>
@@ -37,7 +40,6 @@
 			<item value="SonikString_pImp"/>
 			<item value="JobQueue-&gt;EnQueue"/>
 			<item value="JobQueue.EnQueue(packtmp);"/>
-			<item value="SonikFunctionSystem::FunctionSystem_Base"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

@@ -1,4 +1,4 @@
-03:01:46 **** Clean-only build of configuration Debug_x64 for project SonikLibraryAPI ****
+01:04:19 **** Clean-only build of configuration Debug_x64 for project SonikLibraryAPI ****
 mingw32-make clean 
 rm -rf ./TimerClock/SonikElapsedTimer.d ./TimerClock/SonikElapsedTimer.o ./TimerClock/SonikElapsedTimer_x64.d ./TimerClock/SonikElapsedTimer_x64.o
 rm -rf ./SonikWorkThread/SonikWorkThreadEx.d ./SonikWorkThread/SonikWorkThreadEx.o ./SonikWorkThread/SonikWorkThreadManagerEx.d ./SonikWorkThread/SonikWorkThreadManagerEx.o
@@ -14,7 +14,7 @@ rm -rf ./Audio/Format/SonikAppleAiffFormat.d ./Audio/Format/SonikAppleAiffFormat
 rm -rf ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.d ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o
 rm -rf lib_Dx64_SonikLibraryAPI.a
  
-03:01:47 **** Build of configuration Debug_x64 for project SonikLibraryAPI ****
+01:04:19 **** Build of configuration Debug_x64 for project SonikLibraryAPI ****
 mingw32-make all 
 Building file: ../TimerClock/SonikElapsedTimer.cpp
 Invoking: GCC C++ Compiler
@@ -107,35 +107,35 @@ In file included from <built-in>:469:
 ../SonikString/SonikString.cpp:921:10: note: for type 'std::bad_alloc &'
   921 |                 }catch(std::bad_alloc& e)
       |                        ^
-../SonikString/SonikString.cpp:1529:10: warning: exception of type 'std::bad_array_new_length &' will be caught by earlier handler [-Wexceptions]
- 1529 |                 }catch(std::bad_array_new_length& e)
+../SonikString/SonikString.cpp:1540:10: warning: exception of type 'std::bad_array_new_length &' will be caught by earlier handler [-Wexceptions]
+ 1540 |                 }catch(std::bad_array_new_length& e)
       |                        ^
-../SonikString/SonikString.cpp:1524:10: note: for type 'std::bad_alloc &'
- 1524 |                 }catch(std::bad_alloc& e)
+../SonikString/SonikString.cpp:1535:10: note: for type 'std::bad_alloc &'
+ 1535 |                 }catch(std::bad_alloc& e)
       |                        ^
-../SonikString/SonikString.cpp:1548:10: warning: exception of type 'std::bad_array_new_length &' will be caught by earlier handler [-Wexceptions]
- 1548 |                 }catch(std::bad_array_new_length& e)
+../SonikString/SonikString.cpp:1559:10: warning: exception of type 'std::bad_array_new_length &' will be caught by earlier handler [-Wexceptions]
+ 1559 |                 }catch(std::bad_array_new_length& e)
       |                        ^
-../SonikString/SonikString.cpp:1543:10: note: for type 'std::bad_alloc &'
- 1543 |                 }catch(std::bad_alloc& e)
+../SonikString/SonikString.cpp:1554:10: note: for type 'std::bad_alloc &'
+ 1554 |                 }catch(std::bad_alloc& e)
       |                        ^
-../SonikString/SonikString.cpp:1568:10: warning: exception of type 'std::bad_array_new_length &' will be caught by earlier handler [-Wexceptions]
- 1568 |                 }catch(std::bad_array_new_length& e)
+../SonikString/SonikString.cpp:1579:10: warning: exception of type 'std::bad_array_new_length &' will be caught by earlier handler [-Wexceptions]
+ 1579 |                 }catch(std::bad_array_new_length& e)
       |                        ^
-../SonikString/SonikString.cpp:1563:10: note: for type 'std::bad_alloc &'
- 1563 |                 }catch(std::bad_alloc& e)
+../SonikString/SonikString.cpp:1574:10: note: for type 'std::bad_alloc &'
+ 1574 |                 }catch(std::bad_alloc& e)
       |                        ^
-../SonikString/SonikString.cpp:1589:10: warning: exception of type 'std::bad_array_new_length &' will be caught by earlier handler [-Wexceptions]
- 1589 |                 }catch(std::bad_array_new_length& e)
+../SonikString/SonikString.cpp:1600:10: warning: exception of type 'std::bad_array_new_length &' will be caught by earlier handler [-Wexceptions]
+ 1600 |                 }catch(std::bad_array_new_length& e)
       |                        ^
-../SonikString/SonikString.cpp:1584:10: note: for type 'std::bad_alloc &'
- 1584 |                 }catch(std::bad_alloc& e)
+../SonikString/SonikString.cpp:1595:10: note: for type 'std::bad_alloc &'
+ 1595 |                 }catch(std::bad_alloc& e)
       |                        ^
-../SonikString/SonikString.cpp:1610:10: warning: exception of type 'std::bad_array_new_length &' will be caught by earlier handler [-Wexceptions]
- 1610 |                 }catch(std::bad_array_new_length& e)
+../SonikString/SonikString.cpp:1621:10: warning: exception of type 'std::bad_array_new_length &' will be caught by earlier handler [-Wexceptions]
+ 1621 |                 }catch(std::bad_array_new_length& e)
       |                        ^
-../SonikString/SonikString.cpp:1605:10: note: for type 'std::bad_alloc &'
- 1605 |                 }catch(std::bad_alloc& e)
+../SonikString/SonikString.cpp:1616:10: note: for type 'std::bad_alloc &'
+ 1616 |                 }catch(std::bad_alloc& e)
       |                        ^
 10 warnings generated.
 Finished building: ../SonikString/SonikString.cpp
@@ -203,17 +203,17 @@ In file included from <built-in>:469:
 1 warning generated.
 Finished building: ../SonikFileSystems/SonikFileController_UTF16x64.cpp
  
-In file included from <built-in>:469:
-<command line>:3:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
 Building file: ../SonikFileSystems/SonikFileController_UTF16x86.cpp
-    3 | #define __cplusplus 202002L
 Invoking: GCC C++ Compiler
 clang++ -std=c++20 -D__SONIK_x86_64__=1 -D_DEBUG -D__cplusplus=202002L -D_WIN64 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SonikFileSystems/SonikFileController_UTF16x86.d" -MT"SonikFileSystems/SonikFileController_UTF16x86.o" -o "SonikFileSystems/SonikFileController_UTF16x86.o" "../SonikFileSystems/SonikFileController_UTF16x86.cpp"
+In file included from <built-in>:469:
+<command line>:3:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    3 | #define __cplusplus 202002L
+      |         ^
+1 warning generated.
 Finished building: ../SonikFileSystems/SonikFileController_UTF16x86.cpp
  
 Building file: ../SonikFileSystems/SonikFileController_UTF8x64.cpp
-      |         ^
-1 warning generated.
 Invoking: GCC C++ Compiler
 clang++ -std=c++20 -D__SONIK_x86_64__=1 -D_DEBUG -D__cplusplus=202002L -D_WIN64 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SonikFileSystems/SonikFileController_UTF8x64.d" -MT"SonikFileSystems/SonikFileController_UTF8x64.o" -o "SonikFileSystems/SonikFileController_UTF8x64.o" "../SonikFileSystems/SonikFileController_UTF8x64.cpp"
 In file included from <built-in>:469:
