@@ -30,9 +30,13 @@ namespace std
 	class condition_variable;
 }
 
+namespace SonikFunctionObjectDefines
+{
+	class FunctionObjectSystemInterface;
+};
 namespace SonikLib
 {
-	class FunctionSystem_Base;
+using SonikFOSInterface = SonikFunctionObjectDefines::FunctionObjectSystemInterface;
 };
 
 namespace SonikThreadImpl
@@ -71,8 +75,8 @@ namespace SonikLib
 		//確実にセットしたい場合、前にセットされた関数があれば、それが終了し、関数がtrueを返却するまでループします。
 		//別途QUEUEがセットされている場合、この関数は必ずfalseを返却します。
 		//マルチスレッドにより、同時にキューセットと本関数が呼ばれた場合で、本関数が先にコールされた場合、本関数は、trueを返却します。
-		bool SetCallFunction(SonikLib::FunctionSystem_Base* CallFunctionObject, bool DeleteFlag = false);
-		bool SetCallFunction(SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> CallFunctionObject, bool DeleteFlag = true);
+		bool SetCallFunction(SonikLib::SonikFOSInterface* CallFunctionObject, bool DeleteFlag = false);
+		bool SetCallFunction(SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> CallFunctionObject, bool DeleteFlag = true);
 
 		//外部のキューをセットします。
 		//本関数はSetCallFunctionと同時にコールされた場合で、SetCallFunctionが先に実行された場合、セットされた関数が終了するまで処理を返却しません。

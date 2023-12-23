@@ -12,7 +12,7 @@
 //#include <mutex>
 #include <condition_variable>
 
-#include "../FunctionObject/TemplateFuncDefinition.hpp"
+#include "../FunctionObject/FunctionObjectSystemImpl.hpp"
 #include "../Container/SonikAtomicQueue.hpp"
 #include "../SonikCAS/SonikAtomicLock.h"
 #include "SonikWorkThreadEx.h"
@@ -63,12 +63,12 @@ namespace SonikLib
 
 		//メンバ関数セット 関数==================================================================================================================================================================================================================================
 		//引数6個まで実装
-		template <class CLSTYPE, class Arg1Val, class Arg2Val, class Arg3Val, class Arg4Val, class Arg5Val, class Arg6Val>
+		template <class CLSTYPE, class Arg1Val, class Arg2Val, class Arg3Val, class Arg4Val, class Arg5Val, class Arg6Val, std::enable_if_t<!std::is_pointer_v<CLSTYPE>, bool> = true>
 		bool SetClassFunction(CLSTYPE* pcls,void (CLSTYPE::*pFunc)(Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val, Arg6Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, Arg4Val arg4val, Arg5Val arg5val, Arg6Val arg6val)
 		{
-			typedef SonikLib::Members_6_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val, Arg6Val> M6FUNC_;
+			typedef SonikFunctionObjectDefines::Members_6_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val, Arg6Val> M6FUNC_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -114,12 +114,12 @@ namespace SonikLib
 
 			return true;
 		};
-		template <class CLSTYPE, class Arg1Val, class Arg2Val, class Arg3Val, class Arg4Val, class Arg5Val, class Arg6Val>
-		bool SetClassFunction(CLSTYPE* pcls,void (CLSTYPE::*pFunc)(Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val, Arg6Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, Arg4Val arg4val, Arg5Val arg5val, Arg6Val arg6val, SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>& GetSmtPtr)
+		template <class CLSTYPE, class Arg1Val, class Arg2Val, class Arg3Val, class Arg4Val, class Arg5Val, class Arg6Val, std::enable_if_t<!std::is_pointer_v<CLSTYPE>, bool> = true>
+		bool SetClassFunction(CLSTYPE* pcls,void (CLSTYPE::*pFunc)(Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val, Arg6Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, Arg4Val arg4val, Arg5Val arg5val, Arg6Val arg6val, SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& GetSmtPtr)
 		{
-			typedef SonikLib::Members_6_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val, Arg6Val> M6FUNC_;
+			typedef SonikFunctionObjectDefines::Members_6_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val, Arg6Val> M6FUNC_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -169,12 +169,12 @@ namespace SonikLib
 		};
 
 
-		template <class CLSTYPE, class Arg1Val, class Arg2Val, class Arg3Val, class Arg4Val, class Arg5Val>
+		template <class CLSTYPE, class Arg1Val, class Arg2Val, class Arg3Val, class Arg4Val, class Arg5Val, std::enable_if_t<!std::is_pointer_v<CLSTYPE>, bool> = true>
 		bool SetClassFunction(CLSTYPE* pcls,void (CLSTYPE::*pFunc)(Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, Arg4Val arg4val, Arg5Val arg5val)
 		{
-			typedef SonikLib::Members_5_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val> M5FUNC_;
+			typedef SonikFunctionObjectDefines::Members_5_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val> M5FUNC_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -220,12 +220,12 @@ namespace SonikLib
 
 			return true;
 		};
-		template <class CLSTYPE, class Arg1Val, class Arg2Val, class Arg3Val, class Arg4Val, class Arg5Val>
-		bool SetClassFunction(CLSTYPE* pcls,void (CLSTYPE::*pFunc)(Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, Arg4Val arg4val, Arg5Val arg5val, SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>& GetSmtPtr)
+		template <class CLSTYPE, class Arg1Val, class Arg2Val, class Arg3Val, class Arg4Val, class Arg5Val, std::enable_if_t<!std::is_pointer_v<CLSTYPE>, bool> = true>
+		bool SetClassFunction(CLSTYPE* pcls,void (CLSTYPE::*pFunc)(Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, Arg4Val arg4val, Arg5Val arg5val, SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& GetSmtPtr)
 		{
-			typedef SonikLib::Members_5_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val> M5FUNC_;
+			typedef SonikFunctionObjectDefines::Members_5_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val> M5FUNC_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -277,12 +277,12 @@ namespace SonikLib
 		};
 
 
-		template <class CLSTYPE, class Arg1Val, class Arg2Val, class Arg3Val, class Arg4Val>
+		template <class CLSTYPE, class Arg1Val, class Arg2Val, class Arg3Val, class Arg4Val, std::enable_if_t<!std::is_pointer_v<CLSTYPE>, bool> = true>
 		bool SetClassFunction(CLSTYPE* pcls, void (CLSTYPE::*pFunc)(Arg1Val, Arg2Val, Arg3Val, Arg4Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, Arg4Val arg4val)
 		{
-			typedef SonikLib::Members_4_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val, Arg4Val> M4FUNC_;
+			typedef SonikFunctionObjectDefines::Members_4_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val, Arg4Val> M4FUNC_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -328,12 +328,12 @@ namespace SonikLib
 
 			return true;
 		};
-		template <class CLSTYPE, class Arg1Val, class Arg2Val, class Arg3Val, class Arg4Val>
-		bool SetClassFunction(CLSTYPE* pcls, void (CLSTYPE::*pFunc)(Arg1Val, Arg2Val, Arg3Val, Arg4Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, Arg4Val arg4val, SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>& GetSmtPtr)
+		template <class CLSTYPE, class Arg1Val, class Arg2Val, class Arg3Val, class Arg4Val, std::enable_if_t<!std::is_pointer_v<CLSTYPE>, bool> = true>
+		bool SetClassFunction(CLSTYPE* pcls, void (CLSTYPE::*pFunc)(Arg1Val, Arg2Val, Arg3Val, Arg4Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, Arg4Val arg4val, SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& GetSmtPtr)
 		{
-			typedef SonikLib::Members_4_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val, Arg4Val> M4FUNC_;
+			typedef SonikFunctionObjectDefines::Members_4_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val, Arg4Val> M4FUNC_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -382,12 +382,12 @@ namespace SonikLib
 		};
 
 
-		template <class CLSTYPE, class Arg1Val, class Arg2Val, class Arg3Val>
+		template <class CLSTYPE, class Arg1Val, class Arg2Val, class Arg3Val, std::enable_if_t<!std::is_pointer_v<CLSTYPE>, bool> = true>
 		bool SetClassFunction(CLSTYPE* pcls, void (CLSTYPE::*pFunc)(Arg1Val, Arg2Val, Arg3Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val)
 		{
-			typedef SonikLib::Members_3_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val> M3FUNC_;
+			typedef SonikFunctionObjectDefines::Members_3_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val> M3FUNC_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -433,12 +433,12 @@ namespace SonikLib
 
 			return true;
 		};
-		template <class CLSTYPE, class Arg1Val, class Arg2Val, class Arg3Val>
-		bool SetClassFunction(CLSTYPE* pcls, void (CLSTYPE::*pFunc)(Arg1Val, Arg2Val, Arg3Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>& GetSmtPtr)
+		template <class CLSTYPE, class Arg1Val, class Arg2Val, class Arg3Val, std::enable_if_t<!std::is_pointer_v<CLSTYPE>, bool> = true>
+		bool SetClassFunction(CLSTYPE* pcls, void (CLSTYPE::*pFunc)(Arg1Val, Arg2Val, Arg3Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& GetSmtPtr)
 		{
-			typedef SonikLib::Members_3_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val> M3FUNC_;
+			typedef SonikFunctionObjectDefines::Members_3_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val> M3FUNC_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -487,12 +487,12 @@ namespace SonikLib
 		};
 
 
-		template <class CLSTYPE, class Arg1Val, class Arg2Val>
+		template <class CLSTYPE, class Arg1Val, class Arg2Val, std::enable_if_t<!std::is_pointer_v<CLSTYPE>, bool> = true>
 		bool SetClassFunction(CLSTYPE* pcls, void (CLSTYPE::*pFunc)(Arg1Val, Arg2Val), Arg1Val arg1val, Arg2Val arg2val)
 		{
-			typedef SonikLib::Members_2_Func<CLSTYPE, Arg1Val, Arg2Val> M2FUNC_;
+			typedef SonikFunctionObjectDefines::Members_2_Func<CLSTYPE, Arg1Val, Arg2Val> M2FUNC_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -538,12 +538,12 @@ namespace SonikLib
 
 			return true;
 		};
-		template <class CLSTYPE, class Arg1Val, class Arg2Val>
-		bool SetClassFunction(CLSTYPE* pcls, void (CLSTYPE::*pFunc)(Arg1Val, Arg2Val), Arg1Val arg1val, Arg2Val arg2val, SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>& GetSmtPtr)
+		template <class CLSTYPE, class Arg1Val, class Arg2Val, std::enable_if_t<!std::is_pointer_v<CLSTYPE>, bool> = true>
+		bool SetClassFunction(CLSTYPE* pcls, void (CLSTYPE::*pFunc)(Arg1Val, Arg2Val), Arg1Val arg1val, Arg2Val arg2val, SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& GetSmtPtr)
 		{
-			typedef SonikLib::Members_2_Func<CLSTYPE, Arg1Val, Arg2Val> M2FUNC_;
+			typedef SonikFunctionObjectDefines::Members_2_Func<CLSTYPE, Arg1Val, Arg2Val> M2FUNC_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -592,12 +592,12 @@ namespace SonikLib
 		};
 
 
-		template <class CLSTYPE, class Arg1Val>
+		template <class CLSTYPE, class Arg1Val, std::enable_if_t<!std::is_pointer_v<CLSTYPE>, bool> = true>
 		bool SetClassFunction(CLSTYPE* pcls, void (CLSTYPE::*pFunc)(Arg1Val), Arg1Val arg1val)
 		{
-			typedef SonikLib::Members_1_Func<CLSTYPE, Arg1Val> M1FUNC_;
+			typedef SonikFunctionObjectDefines::Members_1_Func<CLSTYPE, Arg1Val> M1FUNC_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -643,12 +643,12 @@ namespace SonikLib
 
 			return true;
 		};
-		template <class CLSTYPE, class Arg1Val>
-		bool SetClassFunction(CLSTYPE* pcls, void (CLSTYPE::*pFunc)(Arg1Val), Arg1Val arg1val, SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>& GetSmtPtr)
+		template <class CLSTYPE, class Arg1Val, std::enable_if_t<!std::is_pointer_v<CLSTYPE>, bool> = true>
+		bool SetClassFunction(CLSTYPE* pcls, void (CLSTYPE::*pFunc)(Arg1Val), Arg1Val arg1val, SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& GetSmtPtr)
 		{
-			typedef SonikLib::Members_1_Func<CLSTYPE, Arg1Val> M1FUNC_;
+			typedef SonikFunctionObjectDefines::Members_1_Func<CLSTYPE, Arg1Val> M1FUNC_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -697,12 +697,12 @@ namespace SonikLib
 		};
 
 
-		template <class CLSTYPE>
+		template <class CLSTYPE, std::enable_if_t<!std::is_pointer_v<CLSTYPE>, bool> = true>
 		bool SetClassFunction(CLSTYPE* pcls, void (CLSTYPE::*pFunc)(void))
 		{
-			typedef SonikLib::Members_0_Func<CLSTYPE> M0FUNC_;
+			typedef SonikFunctionObjectDefines::Members_0_Func<CLSTYPE> M0FUNC_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -748,12 +748,12 @@ namespace SonikLib
 
 			return true;
 		};
-		template <class CLSTYPE>
-		bool SetClassFunction(CLSTYPE* pcls, void (CLSTYPE::*pFunc)(void), SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>& GetSmtPtr)
+		template <class CLSTYPE, std::enable_if_t<!std::is_pointer_v<CLSTYPE>, bool> = true>
+		bool SetClassFunction(CLSTYPE* pcls, void (CLSTYPE::*pFunc)(void), SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& GetSmtPtr)
 		{
-			typedef SonikLib::Members_0_Func<CLSTYPE> M0FUNC_;
+			typedef SonikFunctionObjectDefines::Members_0_Func<CLSTYPE> M0FUNC_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -806,9 +806,9 @@ namespace SonikLib
 		template <class Arg1Val, class Arg2Val, class Arg3Val, class Arg4Val, class Arg5Val, class Arg6Val>
 		bool SetStaticFunction(void (*pFunc)(Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val, Arg6Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, Arg4Val arg4val, Arg5Val arg5val, Arg6Val arg6val)
 		{
-			typedef SonikLib::Members_6_FuncG<Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val, Arg6Val> M6FUNCG_;
+			typedef SonikFunctionObjectDefines::Members_6_FuncG<Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val, Arg6Val> M6FUNCG_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -854,11 +854,11 @@ namespace SonikLib
 			return true;
 		};
 		template <class Arg1Val, class Arg2Val, class Arg3Val, class Arg4Val, class Arg5Val, class Arg6Val>
-		bool SetStaticFunction(void (*pFunc)(Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val, Arg6Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, Arg4Val arg4val, Arg5Val arg5val, Arg6Val arg6val, SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>& GetSmtPtr)
+		bool SetStaticFunction(void (*pFunc)(Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val, Arg6Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, Arg4Val arg4val, Arg5Val arg5val, Arg6Val arg6val, SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& GetSmtPtr)
 		{
-			typedef SonikLib::Members_6_FuncG<Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val, Arg6Val> M6FUNCG_;
+			typedef SonikFunctionObjectDefines::Members_6_FuncG<Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val, Arg6Val> M6FUNCG_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -909,9 +909,9 @@ namespace SonikLib
 		template <class Arg1Val, class Arg2Val, class Arg3Val, class Arg4Val, class Arg5Val>
 		bool SetStaticFunction(void (*pFunc)(Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, Arg4Val arg4val, Arg5Val arg5val)
 		{
-			typedef SonikLib::Members_5_FuncG<Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val> M5FUNCG_;
+			typedef SonikFunctionObjectDefines::Members_5_FuncG<Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val> M5FUNCG_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -957,11 +957,11 @@ namespace SonikLib
 			return true;
 		};
 		template <class Arg1Val, class Arg2Val, class Arg3Val, class Arg4Val, class Arg5Val>
-		bool SetStaticFunction(void (*pFunc)(Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, Arg4Val arg4val, Arg5Val arg5val, SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>& GetSmtPtr)
+		bool SetStaticFunction(void (*pFunc)(Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, Arg4Val arg4val, Arg5Val arg5val, SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& GetSmtPtr)
 		{
-			typedef SonikLib::Members_5_FuncG<Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val> M5FUNCG_;
+			typedef SonikFunctionObjectDefines::Members_5_FuncG<Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val> M5FUNCG_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -1012,9 +1012,9 @@ namespace SonikLib
 		template <class Arg1Val, class Arg2Val, class Arg3Val, class Arg4Val>
 		bool SetStaticFunction(void (*pFunc)(Arg1Val, Arg2Val, Arg3Val, Arg4Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, Arg4Val arg4val)
 		{
-			typedef SonikLib::Members_4_FuncG<Arg1Val, Arg2Val, Arg3Val, Arg4Val> M4FUNCG_;
+			typedef SonikFunctionObjectDefines::Members_4_FuncG<Arg1Val, Arg2Val, Arg3Val, Arg4Val> M4FUNCG_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -1060,11 +1060,11 @@ namespace SonikLib
 			return true;
 		};
 		template <class Arg1Val, class Arg2Val, class Arg3Val, class Arg4Val>
-		bool SetStaticFunction(void (*pFunc)(Arg1Val, Arg2Val, Arg3Val, Arg4Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, Arg4Val arg4val, SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>& GetSmtPtr)
+		bool SetStaticFunction(void (*pFunc)(Arg1Val, Arg2Val, Arg3Val, Arg4Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, Arg4Val arg4val, SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& GetSmtPtr)
 		{
-			typedef SonikLib::Members_4_FuncG<Arg1Val, Arg2Val, Arg3Val, Arg4Val> M4FUNCG_;
+			typedef SonikFunctionObjectDefines::Members_4_FuncG<Arg1Val, Arg2Val, Arg3Val, Arg4Val> M4FUNCG_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -1115,9 +1115,9 @@ namespace SonikLib
 		template <class Arg1Val, class Arg2Val, class Arg3Val>
 		bool SetStaticFunction(void (*pFunc)(Arg1Val, Arg2Val, Arg3Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val)
 		{
-			typedef SonikLib::Members_3_FuncG<Arg1Val, Arg2Val, Arg3Val> M3FUNCG_;
+			typedef SonikFunctionObjectDefines::Members_3_FuncG<Arg1Val, Arg2Val, Arg3Val> M3FUNCG_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -1163,11 +1163,11 @@ namespace SonikLib
 			return true;
 		};
 		template <class Arg1Val, class Arg2Val, class Arg3Val>
-		bool SetStaticFunction(void (*pFunc)(Arg1Val, Arg2Val, Arg3Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>& GetSmtPtr)
+		bool SetStaticFunction(void (*pFunc)(Arg1Val, Arg2Val, Arg3Val), Arg1Val arg1val, Arg2Val arg2val, Arg3Val arg3val, SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& GetSmtPtr)
 		{
-			typedef SonikLib::Members_3_FuncG<Arg1Val, Arg2Val, Arg3Val> M3FUNCG_;
+			typedef SonikFunctionObjectDefines::Members_3_FuncG<Arg1Val, Arg2Val, Arg3Val> M3FUNCG_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -1218,9 +1218,9 @@ namespace SonikLib
 		template <class Arg1Val, class Arg2Val>
 		bool SetStaticFunction(void (*pFunc)(Arg1Val, Arg2Val), Arg1Val arg1val, Arg2Val arg2val)
 		{
-			typedef SonikLib::Members_2_FuncG<Arg1Val, Arg2Val> M2FUNCG_;
+			typedef SonikFunctionObjectDefines::Members_2_FuncG<Arg1Val, Arg2Val> M2FUNCG_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -1266,11 +1266,11 @@ namespace SonikLib
 			return true;
 		};
 		template <class Arg1Val, class Arg2Val>
-		bool SetStaticFunction(void (*pFunc)(Arg1Val, Arg2Val), Arg1Val arg1val, Arg2Val arg2val, SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>& GetSmtPtr)
+		bool SetStaticFunction(void (*pFunc)(Arg1Val, Arg2Val), Arg1Val arg1val, Arg2Val arg2val, SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& GetSmtPtr)
 		{
-			typedef SonikLib::Members_2_FuncG<Arg1Val, Arg2Val> M2FUNCG_;
+			typedef SonikFunctionObjectDefines::Members_2_FuncG<Arg1Val, Arg2Val> M2FUNCG_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -1321,9 +1321,9 @@ namespace SonikLib
 		template <class Arg1Val>
 		bool SetStaticFunction(void (*pFunc)(Arg1Val), Arg1Val arg1val)
 		{
-			typedef SonikLib::Members_1_FuncG<Arg1Val> M1FUNCG_;
+			typedef SonikFunctionObjectDefines::Members_1_FuncG<Arg1Val> M1FUNCG_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -1369,11 +1369,11 @@ namespace SonikLib
 			return true;
 		};
 		template <class Arg1Val>
-		bool SetStaticFunction(void (*pFunc)(Arg1Val), Arg1Val arg1val, SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>& GetSmtPtr)
+		bool SetStaticFunction(void (*pFunc)(Arg1Val), Arg1Val arg1val, SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& GetSmtPtr)
 		{
-			typedef SonikLib::Members_1_FuncG<Arg1Val> M1FUNCG_;
+			typedef SonikFunctionObjectDefines::Members_1_FuncG<Arg1Val> M1FUNCG_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -1423,9 +1423,9 @@ namespace SonikLib
 
 		bool SetStaticFunction(void (*pFunc)(void))
 		{
-			typedef SonikLib::Members_0_FuncG M0FUNCG_;
+			typedef SonikFunctionObjectDefines::Members_0_FuncG M0FUNCG_;
 
-			SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> tmp;
+			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
@@ -1472,7 +1472,7 @@ namespace SonikLib
 		};
 
 		//c: セットしてあるジョブをキューから取得します。
-		bool GetJobFunction(SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>& jobfunc)
+		bool GetJobFunction(SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& jobfunc)
 		{
 			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 

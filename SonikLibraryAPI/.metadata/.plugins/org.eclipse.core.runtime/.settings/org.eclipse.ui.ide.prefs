@@ -4,9 +4,13 @@ PROBLEMS_FILTERS_MIGRATE=true
 TASKS_FILTERS_MIGRATE=true
 eclipse.preferences.version=1
 <<<<<<< HEAD
+<<<<<<< HEAD
 platformState=1702897838817
 =======
 platformState=1703000641139
+>>>>>>> b1_edit
+=======
+platformState=1703321878372
 >>>>>>> b1_edit
 quickStart=false
 tipsAndTricks=true
