@@ -6,6 +6,7 @@ Player/SonikAudioPlayer_ControlData.o: \
   ../Player/../PlayStateEnums.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../AudioLoadTypedef.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././FormatSmtPtr/AudioSmartPointer.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././Format/SonikAudioFormat.h \
   ../Player/../SAudioAccesserTypedef.h \
   ../Player/.././AudioSmartPointer.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Format/SonikAudioFormat.h
@@ -15,6 +16,7 @@ D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikCAS/SonikAtomicLoc
 ../Player/../PlayStateEnums.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../AudioLoadTypedef.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././FormatSmtPtr/AudioSmartPointer.h:
+D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././Format/SonikAudioFormat.h:
 ../Player/../SAudioAccesserTypedef.h:
 ../Player/.././AudioSmartPointer.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Format/SonikAudioFormat.h:

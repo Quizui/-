@@ -1,6 +1,21 @@
-21:50:37 **** Clean-only build of configuration Debug for project SAudioPlatForm_OpenALSoft ****
-mingw32-make clean 
-rm -rf ./OpenALSource/open_al_interface.d ./OpenALSource/open_al_interface.o
-rm -rf ./DllFunction/DllMain.d ./DllFunction/DllMain.o
-rm -rf PlatFormSound_OpenAL.dll
+04:04:46 **** Build of configuration Debug for project SAudioPlatForm_OpenALSoft ****
+mingw32-make all 
+Building file: ../OpenALSource/open_al_interface.cpp
+Invoking: GCC C++ Compiler
+clang++ -std=c++17 -D_DEBUG -D__SONIK_x86_64__ -D_WIN64 -DHAVE_FSEEKO -DFLAC__NO_DLL -I"D:\MyLibrary\include\Audio\SoundSystem" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"OpenALSource/open_al_interface.d" -MT"OpenALSource/open_al_interface.o" -o "OpenALSource/open_al_interface.o" "../OpenALSource/open_al_interface.cpp"
+../OpenALSource/open_al_interface.cpp:152:11: warning: variable 'err_' set but not used [-Wunused-but-set-variable]
+  152 |                 ALCenum err_;
+      |                         ^
+1 warning generated.
+Finished building: ../OpenALSource/open_al_interface.cpp
+ 
+Building file: ../DllFunction/DllMain.cpp
+Invoking: GCC C++ Compiler
+clang++ -std=c++17 -D_DEBUG -D__SONIK_x86_64__ -D_WIN64 -DHAVE_FSEEKO -DFLAC__NO_DLL -I"D:\MyLibrary\include\Audio\SoundSystem" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"DllFunction/DllMain.d" -MT"DllFunction/DllMain.o" -o "DllFunction/DllMain.o" "../DllFunction/DllMain.cpp"
+Finished building: ../DllFunction/DllMain.cpp
+ 
+Building target: PlatFormSound_OpenAL.dll
+Invoking: MinGW C++ Linker
+g++ -L"D:\MyLibrary\lib\x64\Debug" -shared -o "PlatFormSound_OpenAL.dll" ./OpenALSource/open_al_interface.o  ./DllFunction/DllMain.o    -lDx64_SonikSoundAccesser -l_Dx64_SonikLibraryAPI -lfftw3
+Finished building target: PlatFormSound_OpenAL.dll
  

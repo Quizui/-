@@ -16,6 +16,7 @@ Mixer/SonikAudio_Mixer.o: ../Mixer/SonikAudio_Mixer.cpp \
   ../Mixer/../Player/../PlayStateEnums.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../AudioLoadTypedef.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././FormatSmtPtr/AudioSmartPointer.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././Format/SonikAudioFormat.h \
   ../Mixer/../Player/../SAudioAccesserTypedef.h \
   ../Mixer/../Player/.././AudioSmartPointer.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/SonikDllAccessManager.h \
@@ -23,8 +24,8 @@ Mixer/SonikAudio_Mixer.o: ../Mixer/SonikAudio_Mixer.cpp \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/../SonikString/SonikStringConvert.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/../SonikString/../Container/RangedForContainer.hpp \
   ../Mixer/../PlatformInterface/PlatformAudioInterface.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../FunctionObject/TemplateFuncDefinition.hpp \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../FunctionObject/WorkerFunctor_Base.hpp
+  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../FunctionObject/FunctionObjectSystemImpl.hpp \
+  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../FunctionObject/FunctionObjectSystemInterface.hpp
 ../Mixer/SonikAudio_Mixer.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../Container/SonikPriorityList.hpp:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../Container/../SonikCAS/SonikAtomicLock.h:
@@ -42,6 +43,7 @@ D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikCAS/SonikAtomicLoc
 ../Mixer/../Player/../PlayStateEnums.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../AudioLoadTypedef.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././FormatSmtPtr/AudioSmartPointer.h:
+D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././Format/SonikAudioFormat.h:
 ../Mixer/../Player/../SAudioAccesserTypedef.h:
 ../Mixer/../Player/.././AudioSmartPointer.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/SonikDllAccessManager.h:
@@ -49,5 +51,5 @@ D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/../SonikStrin
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/../SonikString/SonikStringConvert.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/../SonikString/../Container/RangedForContainer.hpp:
 ../Mixer/../PlatformInterface/PlatformAudioInterface.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../FunctionObject/TemplateFuncDefinition.hpp:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../FunctionObject/WorkerFunctor_Base.hpp:
+D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../FunctionObject/FunctionObjectSystemImpl.hpp:
+D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../FunctionObject/FunctionObjectSystemInterface.hpp:

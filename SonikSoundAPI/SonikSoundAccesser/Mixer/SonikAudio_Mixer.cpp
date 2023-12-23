@@ -11,7 +11,7 @@
 #include "../Player/SonikAudioPlayer_ControlData.h"
 #include "../../../DllAccess/SonikDllAccessManager.h"
 #include "../PlatformInterface/PlatformAudioInterface.h"
-#include "../../../FunctionObject/TemplateFuncDefinition.hpp"
+#include "../../../FunctionObject/FunctionObjectSystemImpl.hpp"
 
 namespace SonikAudio
 {
@@ -137,13 +137,13 @@ namespace SonikAudio
 		};
 
 		//セカンダリバッファまで作成。
-		mp_buffer = new(std::nothrow) char[OneSamplingByteSize * 2];
+		mp_buffer = new(std::nothrow) int8_t[OneSamplingByteSize];
 		if( mp_buffer == nullptr )
 		{
 			return false;
 		};
 
-		std::fill_n(mp_buffer, OneSamplingByteSize*2, 0);
+		std::fill_n(mp_buffer, OneSamplingByteSize, 0);
 
 		mp_AudioList = new(std::nothrow) SonikLib::SonikPriorityList<SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData>>(SetAudioListMax);
 		if( mp_AudioList == nullptr )
@@ -181,10 +181,23 @@ namespace SonikAudio
 
 		l_func->SetObject(this);
 		l_func->SetFunc(&SonikAudioMixer::MixerThreadFunc);
+
+		if( !Set_PFI_Pointer->AudioBfferPlayngStart() )
+		{
+			delete l_func;
+			delete mp_thread;
+			delete mp_AudioList;
+			delete[] mp_buffer;
+
+			mp_thread = nullptr;
+			mp_AudioList = nullptr;
+			mp_buffer = nullptr;
+			return false;
+		};
+
 		mp_thread->SetCallFunction(l_func);
 		m_samplingRate = SetSamplingRate;
 		mp_platform = Set_PFI_Pointer;
-		mp_buffer = mp_buffer_control;
 
 		return true;
 	};
@@ -209,7 +222,7 @@ namespace SonikAudio
 
 		l_ope = mp_AudioList->GetOperator();
 
-		std::fill_n(mp_buffer_control, OneSamplingByteSize, 0);
+		std::fill_n(mp_buffer, OneSamplingByteSize, 0);
 
 		while( !l_ope.NullPtrCheck() )
 		{
@@ -228,7 +241,7 @@ namespace SonikAudio
 			l_ope.NextMove();
 		};
 
-		mp_platform->PlayAudio(mp_buffer, OneSamplingByteSize);
+		mp_platform->BufferUpdate(mp_buffer);
 
 	};
 
@@ -241,18 +254,38 @@ namespace SonikAudio
 		const float* volume = ref_itr->GetVolume();
 		float pl_x, pl_y, pl_z;
 		float lis_x, lis_y, lis_z;
-		uint32_t _splitsize = m_samplingRate;//1chで決定しているので直値で記載。
+		uint32_t _splitsize = (m_samplingRate >> 3);//1chで決定しているので直値で記載。
 		int16_t* _buffer = reinterpret_cast<int16_t*>(mp_buffer);
 
 		ref_itr->GetPositionAll(pl_x, pl_y, pl_z);
 
 		for(uint32_t i = 0; i < _splitsize; ++i)
 		{
-			_buffer[i] += (*p_wave)[i] * (*volume);
-
+			(*_buffer) += (*(*p_wave)) * (*volume);
+			++_buffer;
+			++(*p_wave);
+			(*_buffer) += (*(*p_wave)) * (*volume);
+			++_buffer;
+			++(*p_wave);
+			(*_buffer) += (*(*p_wave)) * (*volume);
+			++_buffer;
+			++(*p_wave);
+			(*_buffer) += (*(*p_wave)) * (*volume);
+			++_buffer;
+			++(*p_wave);
+			(*_buffer) += (*(*p_wave)) * (*volume);
+			++_buffer;
+			++(*p_wave);
+			(*_buffer) += (*(*p_wave)) * (*volume);
+			++_buffer;
+			++(*p_wave);
+			(*_buffer) += (*(*p_wave)) * (*volume);
+			++_buffer;
+			++(*p_wave);
+			(*_buffer) += (*(*p_wave)) * (*volume);
+			++_buffer;
+			++(*p_wave);
 		};
-
-		(*p_wave) += m_samplingRate;
 
 		if( ref_itr->Get_EndPointer() )
 		{
@@ -269,20 +302,43 @@ namespace SonikAudio
 		const float* volume = ref_itr->GetVolume();
 		float pl_x, pl_y, pl_z;
 		float lis_x, lis_y, lis_z;
-		uint32_t _splitsize = (m_samplingRate >> 1);//2chで決定しているので直値で記載。/2をシフト演算で..。
+		uint32_t _splitsize = (m_samplingRate >> 2);//2chで決定しているので直値で記載。/4をシフト演算で..。
 		int16_t* _buffer = reinterpret_cast<int16_t*>(mp_buffer);
 
 		ref_itr->GetPositionAll(pl_x, pl_y, pl_z);
 
-		for(uint32_t i = 0; i < _splitsize;)
+		for(uint32_t i = 0; i < _splitsize; ++i)
 		{
-			_buffer[i] 		+= (*p_wave)[i] * (*volume);
-			_buffer[i+1]	+= (*p_wave)[i+1] * (*volume);
+			//2chなので2ポインタ進めて１回分。
+			(*_buffer) += (*(*p_wave)) * (*volume); // L
+			++_buffer;
+			++(*p_wave);
+			(*_buffer) += (*(*p_wave)) * (*volume); // R
+			++_buffer;
+			++(*p_wave);
 
-			i += 2;
+			(*_buffer) += (*(*p_wave)) * (*volume); // L
+			++_buffer;
+			++(*p_wave);
+			(*_buffer) += (*(*p_wave)) * (*volume); // R
+			++_buffer;
+			++(*p_wave);
+
+			(*_buffer) += (*(*p_wave)) * (*volume); // L
+			++_buffer;
+			++(*p_wave);
+			(*_buffer) += (*(*p_wave)) * (*volume); // R
+			++_buffer;
+			++(*p_wave);
+
+			(*_buffer) += (*(*p_wave)) * (*volume); // L
+			++_buffer;
+			++(*p_wave);
+			(*_buffer) += (*(*p_wave)) * (*volume); // R
+			++_buffer;
+			++(*p_wave);
+
 		};
-
-		(*p_wave) += m_samplingRate;
 
 		if( ref_itr->Get_EndPointer() )
 		{

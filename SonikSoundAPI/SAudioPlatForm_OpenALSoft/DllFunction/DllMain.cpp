@@ -43,7 +43,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDll, DWORD dwReason, LPVOID lpReserved)
 }
 
 
-bool PlatFormInitialize(char* DllPath, uint32_t SetBit, uint32_t SetSampling, uint32_t SetCh, uint32_t SetBufferCnt, SonikAudioPlatForm::SonikPlatformAudioInterface*& _GetAudioInterface_)
+bool PlatFormInitialize(char* DllPath, uint32_t SetBit, uint32_t SetSampling, uint32_t SetCh, SonikAudioPlatForm::SonikPlatformAudioInterface*& _GetAudioInterface_)
 {
 	static SonikLib::S_CAS::SonikAtomicLock lock_;
 
@@ -61,7 +61,7 @@ bool PlatFormInitialize(char* DllPath, uint32_t SetBit, uint32_t SetSampling, ui
 		};
 
 
-		if( !DLL_GLOBALPOINTER_SEVEADDRESS->InterfaceInitialize(DllPath, SetBit, SetSampling, SetCh, SetBufferCnt) )
+		if( !DLL_GLOBALPOINTER_SEVEADDRESS->InterfaceInitialize(DllPath, SetBit, SetSampling, SetCh) )
 		{
 			delete DLL_GLOBALPOINTER_SEVEADDRESS;
 			DLL_GLOBALPOINTER_SEVEADDRESS = nullptr;

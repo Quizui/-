@@ -42,8 +42,7 @@ namespace SonikAudio
 
 
 		//送出用バッファ
-		char* mp_buffer;
-		char* mp_buffer_control; //操作用ポインタ。
+		int8_t* mp_buffer;
 		//１サンプリングあたりの総合バイト数
 		//例：16bit 2ch 44100 -> bit * ch * Sampling = 16 * 2 * 44100 = 総合バイト数。
 		uint64_t OneSamplingByteSize;

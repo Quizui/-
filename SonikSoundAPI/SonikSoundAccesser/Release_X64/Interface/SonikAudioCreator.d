@@ -14,6 +14,7 @@ Interface/SonikAudioCreator.o: ../Interface/SonikAudioCreator.cpp \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/LoadFunction.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/../AudioLoadTypedef.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/.././FormatSmtPtr/AudioSmartPointer.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/.././Format/SonikAudioFormat.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Format/SonikAudioFormat.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../AudioLoadTypedef.h
 ../Interface/./SonikAudioCreator.h:
@@ -32,5 +33,6 @@ D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/../SonikStrin
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/LoadFunction.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/../AudioLoadTypedef.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/.././FormatSmtPtr/AudioSmartPointer.h:
+D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/.././Format/SonikAudioFormat.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Format/SonikAudioFormat.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../AudioLoadTypedef.h:

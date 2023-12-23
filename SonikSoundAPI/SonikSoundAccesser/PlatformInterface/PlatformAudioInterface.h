@@ -35,8 +35,10 @@ namespace SonikAudioPlatForm
 		};
 
 		//Pure Function
-		//オーディオの再生を開始します。
-		virtual void PlayAudio(uint8_t*& SetBuffer, const uint64_t& OneBufferSize, const uint32_t& SamplingRate) =0;
+		//オーディオのストリーミング再生を開始します。
+		virtual bool AudioBfferPlayngStart(void) =0;
+		//オーディオのストリーミングのバッファの空きバッファをセットされたバッファ情報で更新します。
+		virtual void BufferUpdate(int8_t* SetBuffer) =0;
 	};
 
 

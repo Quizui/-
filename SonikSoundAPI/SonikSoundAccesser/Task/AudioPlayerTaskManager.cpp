@@ -6,7 +6,7 @@
  */
 
 #include "AudioPlayerTaskManager.h"
-#include "../../../FunctionObject/TemplateFuncDefinition.hpp"
+#include "../../../FunctionObject/FunctionObjectSystemImpl.hpp"
 
 namespace SonikAudioPlayerTask
 {

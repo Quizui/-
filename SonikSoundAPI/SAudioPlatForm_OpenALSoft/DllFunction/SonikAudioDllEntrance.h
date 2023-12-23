@@ -19,7 +19,7 @@ namespace SonikAudioPlatForm
 extern "C"
 {
 	SONIKAUDIOEXPORTDLL
-	bool PlatFormInitialize(char* DllPath, uint32_t SetBit, uint32_t SetSampling, uint32_t SetCh, uint32_t SetBufferCnt, SonikAudioPlatForm::SonikPlatformAudioInterface*& _GetAudioInterface_);
+	bool PlatFormInitialize(char* DllPath, uint32_t SetBit, uint32_t SetSampling, uint32_t SetCh, SonikAudioPlatForm::SonikPlatformAudioInterface*& _GetAudioInterface_);
 	SONIKAUDIOEXPORTDLL
 	void PlatFormDelete(void);
 };

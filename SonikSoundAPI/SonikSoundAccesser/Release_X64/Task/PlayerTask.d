@@ -7,6 +7,7 @@ Task/PlayerTask.o: ../Task/PlayerTask.cpp ../Task/PlayerTask.h \
   ../Task/../Player/../PlayStateEnums.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../AudioLoadTypedef.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././FormatSmtPtr/AudioSmartPointer.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././Format/SonikAudioFormat.h \
   ../Task/../Player/../SAudioAccesserTypedef.h \
   ../Task/../Player/.././AudioSmartPointer.h
 ../Task/PlayerTask.h:
@@ -19,5 +20,6 @@ D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikCAS/SonikAtomicLoc
 ../Task/../Player/../PlayStateEnums.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../AudioLoadTypedef.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././FormatSmtPtr/AudioSmartPointer.h:
+D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././Format/SonikAudioFormat.h:
 ../Task/../Player/../SAudioAccesserTypedef.h:
 ../Task/../Player/.././AudioSmartPointer.h:

@@ -5,6 +5,7 @@ Interface/SonikAudio_Implement.o: ../Interface/SonikAudio_Implement.cpp \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/LoadFunction.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/../AudioLoadTypedef.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/.././FormatSmtPtr/AudioSmartPointer.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/.././Format/SonikAudioFormat.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Format/SonikAudioFormat.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/SonikDllAccessManager.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/../SonikString/SonikString.h \
@@ -40,6 +41,7 @@ Interface/SonikAudio_Implement.o: ../Interface/SonikAudio_Implement.cpp \
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/LoadFunction.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/../AudioLoadTypedef.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/.././FormatSmtPtr/AudioSmartPointer.h:
+D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/.././Format/SonikAudioFormat.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Format/SonikAudioFormat.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/SonikDllAccessManager.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/../SonikString/SonikString.h:

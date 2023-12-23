@@ -25,10 +25,12 @@ namespace AudioPlatformInterface
 	:m_aldev(nullptr)
 	,m_alcontext(nullptr)
 	,m_albuffers(nullptr)
-	,m_albuffersCnt(0)
+	,m_albuffersCnt(2)
 	,m_alsource(0)
 	,SamlingType(SonikAudio::SCVType::B16_CH2_SR44100)
 	,m_format(AL_FORMAT_STEREO16)
+	,m_SamplingRate(0)
+	,m_OneBufferDataSize(0)
 	,m_dataBufferfunc(nullptr)
 	,m_Queuefunc(nullptr)
 	,m_UnQueuefunc(nullptr)
@@ -59,7 +61,7 @@ namespace AudioPlatformInterface
 			//バッファーの破棄。
 			//FuncPointer = SonikLib::SonikDllHandleManager::Instance().GetDllProcAddress(l_handle, "alDeleteBuffers");
 			FuncPointer = m_openal->GetDllProcAddress("alDeleteBuffers");
-			(*reinterpret_cast<void(*)(ALsizei, ALuint*)>(FuncPointer))(m_common_buffercnt, m_albuffers);
+			(*reinterpret_cast<void(*)(ALsizei, ALuint*)>(FuncPointer))(m_albuffersCnt, m_albuffers);
 
 			//もろもろ破棄。
 			if( m_alcontext != nullptr )
@@ -87,7 +89,7 @@ namespace AudioPlatformInterface
 	};
 
 	//イニシャライザ
-	bool OpenALInterface::InterfaceInitialize(char* DllPath, uint32_t SetBit, uint32_t SetSampling, uint32_t SetCh, uint32_t buffercnt)
+	bool OpenALInterface::InterfaceInitialize(char* DllPath, uint32_t SetBit, uint32_t SetSampling, uint32_t SetCh)
 	{
 		unsigned long l_sampletype;
 
@@ -102,7 +104,8 @@ namespace AudioPlatformInterface
 		l_sampletype |= static_cast<unsigned long>(SetSampling * 0.001);
 
 		SamlingType = static_cast<SonikAudio::SCVType>(l_sampletype);
-		m_albuffersCnt = buffercnt;
+		m_SamplingRate = SetSampling;
+		m_OneBufferDataSize = (SetBit * 0.125) * SetCh * SetSampling;
 
 		//フォーマット変換(バッファへデータ格納するときに使うので...。
 		switch((l_sampletype & 0xFFFF00) >> 8)
@@ -128,28 +131,21 @@ namespace AudioPlatformInterface
 
 		if( !SonikLib::SonikDllHandleManager::Instance().DllGetLoad(_dllpath.c_str(), m_openal) )
 		{
+			m_OneBufferDataSize = 0;
+			m_SamplingRate = 0;
 			m_format = 0;
-			m_albuffersCnt = 0;
 			return false;
 		};
 
-		m_albuffers = new(std::nothrow) ALuint[buffercnt];
+		m_albuffers = new(std::nothrow) ALuint[m_albuffersCnt];
 		if( m_albuffers == nullptr )
 		{
 			m_openal.ResetPointer(nullptr);
+			m_OneBufferDataSize = 0;
+			m_SamplingRate = 0;
 			m_format = 0;
-			m_albuffersCnt = 0;
 			return false;
 		}
-
-
-//		SONIK_DLL_ACCESS_MANAGER_POINTER l_handle;
-//		l_handle = SonikLib::SonikDllHandleManager::Instance().GetHandle(dll_access_name);
-//		if( l_handle == 0 )
-//		{
-//			SonikLib::SonikDllHandleManager::Instance().FreeDll(dll_access_name);
-//			return false;
-//		};
 
 		//ハンドル取得まで確認できたので、とりあえずコンテキストの作成を行う。
 		uintptr_t FuncPointer = 0;
@@ -183,7 +179,7 @@ namespace AudioPlatformInterface
 		//バッファの作成(ダブルバッファで作っておく。)
 		//FuncPointer = SonikLib::SonikDllHandleManager::Instance().GetDllProcAddress(l_handle, "alGenBuffers");
 		FuncPointer = m_openal->GetDllProcAddress("alGenBuffers");
-		(*reinterpret_cast<void(*)(ALsizei,ALuint*)>(FuncPointer))(buffercnt, m_albuffers);
+		(*reinterpret_cast<void(*)(ALsizei,ALuint*)>(FuncPointer))(m_albuffersCnt, m_albuffers);
 		//ソースの作成
 		//FuncPointer = SonikLib::SonikDllHandleManager::Instance().GetDllProcAddress(l_handle, "alGenSources");
 		FuncPointer = m_openal->GetDllProcAddress("alGenSources");
@@ -217,7 +213,34 @@ namespace AudioPlatformInterface
 		return true;
 	};
 
-	void OpenALInterface::PlayAudio(uint8_t*& SetBuffer, const uint64_t& OneBufferSize, const uint32_t& SamplingRate)
+
+	//オーディオのストリーミング再生を開始します。
+	bool OpenALInterface::AudioBfferPlayngStart(void)
+	{
+		uint8_t* l_buffer = new(std::nothrow) uint8_t[m_OneBufferDataSize];
+		if(l_buffer == nullptr)
+		{
+			return false;
+		};
+
+		std::fill_n(l_buffer, m_OneBufferDataSize, 0);
+
+		for(uint32_t i = 0; i < m_albuffersCnt; ++i)
+		{
+			(*m_dataBufferfunc)(m_albuffers[i], m_format, l_buffer, m_OneBufferDataSize, m_SamplingRate);
+
+		};
+
+		(*m_Queuefunc)(m_alsource, m_albuffersCnt, m_albuffers);
+
+		uintptr_t FuncPointer = m_openal->GetDllProcAddress("alSourcePlay");
+		(*reinterpret_cast<void(*)(ALuint)>(FuncPointer))(m_alsource);
+
+		return true;
+	};
+
+	//オーディオのストリーミングのバッファの空きバッファをセットされたバッファ情報で更新します。
+	void OpenALInterface::BufferUpdate(int8_t* SetBuffer)
 	{
 		ALint l_processed = 0;
 		ALuint l_buffer = 0;
@@ -231,23 +254,15 @@ namespace AudioPlatformInterface
 		//使用可能バッファをキューから取得
 		(*m_UnQueuefunc)(m_alsource, 1, &l_buffer);
 		//バッファへデータコピー
-		(*m_dataBufferfunc)(l_buffer, m_format, SetBuffer, OneBufferSize, SamplingRate);
+		(*m_dataBufferfunc)(l_buffer, m_format, SetBuffer, m_OneBufferDataSize, m_SamplingRate);
 		//再キュー
 		(*m_Queuefunc)(m_alsource, 1, &l_buffer);
 
 		//終わり
 		return;
 
-//		//再生状態ではない時は再生します
-//		(*m_GetSource_i_func)(m_source, AL_SOURCE_STATE, &_processed);
-//		if( _processed == AL_STOPPED )
-//		{
-//			uintptr_t FuncPointer = m_openal->GetDllProcAddress("alSourcePlay");
-//			(*reinterpret_cast<void(*)(ALuint)>(FuncPointer))(m_source);
-//		};
 
 	};
-
 };
 
 

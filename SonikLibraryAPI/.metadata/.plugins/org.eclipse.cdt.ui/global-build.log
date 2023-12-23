@@ -1,4 +1,20 @@
-20:06:46 **** Build of configuration Release_x64 for project SonikLibraryAPI ****
+03:36:29 **** Clean-only build of configuration Release_x64 for project SonikLibraryAPI ****
+mingw32-make clean 
+rm -rf ./TimerClock/SonikElapsedTimer.d ./TimerClock/SonikElapsedTimer.o ./TimerClock/SonikElapsedTimer_x64.d ./TimerClock/SonikElapsedTimer_x64.o
+rm -rf ./SonikWorkThread/SonikWorkThreadEx.d ./SonikWorkThread/SonikWorkThreadEx.o ./SonikWorkThread/SonikWorkThreadManagerEx.d ./SonikWorkThread/SonikWorkThreadManagerEx.o
+rm -rf ./SonikString/SonikString.d ./SonikString/SonikString.o ./SonikString/SonikStringConvert.d ./SonikString/SonikStringConvert.o
+rm -rf ./SonikFrameControl/SonikFrameControl.d ./SonikFrameControl/SonikFrameControl.o ./SonikFrameControl/SonikFrameControl_x64.d ./SonikFrameControl/SonikFrameControl_x64.o
+rm -rf ./SonikFileSystems/SonikFileController_SJISx64.d ./SonikFileSystems/SonikFileController_SJISx64.o ./SonikFileSystems/SonikFileController_SJISx86.d ./SonikFileSystems/SonikFileController_SJISx86.o ./SonikFileSystems/SonikFileController_UTF16x64.d ./SonikFileSystems/SonikFileController_UTF16x64.o ./SonikFileSystems/SonikFileController_UTF16x86.d ./SonikFileSystems/SonikFileController_UTF16x86.o ./SonikFileSystems/SonikFileController_UTF8x64.d ./SonikFileSystems/SonikFileController_UTF8x64.o ./SonikFileSystems/SonikFileController_UTF8x86.d ./SonikFileSystems/SonikFileController_UTF8x86.o ./SonikFileSystems/SonikFileController_x64.d ./SonikFileSystems/SonikFileController_x64.o ./SonikFileSystems/SonikFileController_x86.d ./SonikFileSystems/SonikFileController_x86.o ./SonikFileSystems/SonikFileSystems.d ./SonikFileSystems/SonikFileSystems.o
+rm -rf ./SonikCAS/SonikAtomicLock.d ./SonikCAS/SonikAtomicLock.o
+rm -rf ./MultiMedia/SonikMM_AudioInfoImple.d ./MultiMedia/SonikMM_AudioInfoImple.o ./MultiMedia/SonikMultiMediaInterface.d ./MultiMedia/SonikMultiMediaInterface.o
+rm -rf ./MathBit/MathBit.d ./MathBit/MathBit.o ./MathBit/SonikKeyFrameMath.d ./MathBit/SonikKeyFrameMath.o ./MathBit/SonikMathDistance.d ./MathBit/SonikMathDistance.o ./MathBit/SonikMathStandard.d ./MathBit/SonikMathStandard.o ./MathBit/SonikMathTrigonometric.d ./MathBit/SonikMathTrigonometric.o ./MathBit/SonikNormalize.d ./MathBit/SonikNormalize.o
+rm -rf ./DllAccess/SonikDllAccessManager.d ./DllAccess/SonikDllAccessManager.o ./DllAccess/SonikDllAccessManager_x64.d ./DllAccess/SonikDllAccessManager_x64.o ./DllAccess/SonikDllLoader.d ./DllAccess/SonikDllLoader.o ./DllAccess/SonikDllLoader_x64.d ./DllAccess/SonikDllLoader_x64.o
+rm -rf ./Audio/Functions/LoadFunction.d ./Audio/Functions/LoadFunction.o ./Audio/Functions/WaveBitConvert.d ./Audio/Functions/WaveBitConvert.o ./Audio/Functions/WriteFunction.d ./Audio/Functions/WriteFunction.o
+rm -rf ./Audio/Format/SonikAppleAiffFormat.d ./Audio/Format/SonikAppleAiffFormat.o ./Audio/Format/SonikWindowsWaveFormat.d ./Audio/Format/SonikWindowsWaveFormat.o
+rm -rf ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.d ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o
+rm -rf lib_Rx64_SonikLibraryAPI.a
+ 
+03:36:30 **** Build of configuration Release_x64 for project SonikLibraryAPI ****
 mingw32-make all 
 Building file: ../TimerClock/SonikElapsedTimer.cpp
 Invoking: GCC C++ Compiler
