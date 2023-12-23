@@ -7,7 +7,7 @@
 
 #include "SonikWorkThreadEx.h"
 
-#include "../FunctionObject/WorkerFunctor_Base.hpp"
+#include "../FunctionObject/FunctionObjectSystemImpl.hpp"
 #include "../SonikCAS/SonikAtomicLock.h"
 
 #include <thread>
@@ -62,8 +62,8 @@ namespace SonikThreadImpl
 		~pImplEx(void);
 
 		//コールする関数オブジェクトをセットします。
-		bool SetCallFunction(SonikLib::FunctionSystem_Base* CallFunctionObject, bool Deleted = false);
-		bool SetCallFunction(SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>& CallFunctionObject, bool Deleted = false);
+		bool SetCallFunction(SonikLib::SonikFOSInterface* CallFunctionObject, bool Deleted = false);
+		bool SetCallFunction(SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& CallFunctionObject, bool Deleted = false);
 
 		//静的関数内で使用
 		SonikThreadPack::ThreadPack& GetFunctionPointer(void);
@@ -243,7 +243,7 @@ namespace SonikThreadImpl
 
 	//コールする関数オブジェクトをセットします。
 	//本関数は成功した場合、スレッドにセットされた関数が終了するまで、再セットは行いません。
-	bool pImplEx::SetCallFunction(SonikLib::FunctionSystem_Base* CallFunctionObject, bool Deleted)
+	bool pImplEx::SetCallFunction(SonikLib::SonikFOSInterface* CallFunctionObject, bool Deleted)
 	{
 		if( !atmlock_.TryLock() )
 		{
@@ -256,7 +256,7 @@ namespace SonikThreadImpl
 		};
 
 		//セット
-		FuncObj.pFunc = static_cast<SonikLib::FunctionSystem_Base*&&>(CallFunctionObject);
+		FuncObj.pFunc = static_cast<SonikLib::SonikFOSInterface*&&>(CallFunctionObject);
 		SetFunctionDeleteFlag(Deleted);
 		cond_.notify_one();
 		//ミューテックスのアンロックは静的関数内で行う。
@@ -264,7 +264,7 @@ namespace SonikThreadImpl
 
 	};
 
-	bool pImplEx::SetCallFunction(SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>& CallFunctionObject, bool Deleted)
+	bool pImplEx::SetCallFunction(SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& CallFunctionObject, bool Deleted)
 	{
 		if( !atmlock_.TryLock() )
 		{
@@ -277,7 +277,7 @@ namespace SonikThreadImpl
 		};
 
 		//セット
-		FuncObj.SmtPtrFunc = static_cast<SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base>&&>(CallFunctionObject);
+		FuncObj.SmtPtrFunc = static_cast<SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>&&>(CallFunctionObject);
 		SetFunctionDeleteFlag(Deleted);
 		cond_.notify_one();
 		//ミューテックスのアンロックは静的関数内で行う。
@@ -434,11 +434,11 @@ namespace SonikLib
 	//確実にセットしたい場合、前にセットされた関数があれば、それが終了し、関数がtrueを返却するまでループします。
 	//別途QUEUEがセットされている場合、この関数は必ずfalseを返却します。
 	//マルチスレッドにより、同時にキューセットと本関数が呼ばれた場合で、本関数が先にコールされた場合、本関数は、trueを返却します。
-	bool WorkThreadEx::SetCallFunction(SonikLib::FunctionSystem_Base* CallFunctionObject, bool DeleteFlag)
+	bool WorkThreadEx::SetCallFunction(SonikLib::SonikFOSInterface* CallFunctionObject, bool DeleteFlag)
 	{
 		return ImplObject->SetCallFunction(CallFunctionObject, DeleteFlag);
 	};
-	bool WorkThreadEx::SetCallFunction(SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> CallFunctionObject, bool DeleteFlag)
+	bool WorkThreadEx::SetCallFunction(SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> CallFunctionObject, bool DeleteFlag)
 	{
 		return ImplObject->SetCallFunction(CallFunctionObject, DeleteFlag);
 	};

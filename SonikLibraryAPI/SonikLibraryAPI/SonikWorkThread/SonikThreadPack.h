@@ -10,9 +10,9 @@
 
 #include "../SmartPointer/SonikSmartPointer.hpp"
 
-namespace SonikLib
+namespace SonikFunctionObjectDefines
 {
-	class FunctionSystem_Base;
+	class FunctionObjectSystemInterface;
 };
 
 namespace SonikThreadImpl
@@ -22,6 +22,7 @@ namespace SonikThreadImpl
 
 namespace SonikLib
 {
+	using SonikFOSInterface = SonikFunctionObjectDefines::FunctionObjectSystemInterface;
 	class SonikThreadManagerEx;
 };
 
@@ -33,8 +34,8 @@ namespace SonikThreadPack
 		friend class SonikThreadImpl::pImplEx;
 		friend class SonikLib::SonikThreadManagerEx;
 	private:
-		SonikLib::FunctionSystem_Base* pFunc;
-		SonikLib::NormalSmtPtr<SonikLib::FunctionSystem_Base> SmtPtrFunc;
+		SonikLib::SonikFOSInterface* pFunc;
+		SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> SmtPtrFunc;
 
 	public:
 		ThreadPack(void)
