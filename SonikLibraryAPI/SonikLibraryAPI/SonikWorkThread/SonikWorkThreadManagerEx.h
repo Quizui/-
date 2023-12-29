@@ -8,15 +8,11 @@
 #ifndef SONIKWORKTHREADMANAGEREX_H_
 #define SONIKWORKTHREADMANAGEREX_H_
 
-//#include <vector>
-//#include <mutex>
-#include <condition_variable>
-
+#include "../SmartPointer/SonikSmartPointer.hpp"
 #include "../FunctionObject/FunctionObjectSystemImpl.hpp"
 #include "../Container/SonikAtomicQueue.hpp"
 #include "../SonikCAS/SonikAtomicLock.h"
 #include "SonikWorkThreadEx.h"
-
 
 namespace SonikLib
 {
@@ -36,7 +32,7 @@ namespace SonikLib
 		S_CAS::SonikAtomicLock atmlock_;
 
 		//ジョブキュー(MTロックフリー)
-		SonikAtomicQueue<SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack>>* JobQueue;
+		SonikAtomicQueue<SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>>* JobQueue;
 
 
 	private:
@@ -69,14 +65,13 @@ namespace SonikLib
 			typedef SonikLib::Members_6_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val, Arg6Val> M6FUNC_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pcls == 0 || pFunc == 0)
+			if(pcls == nullptr || pFunc == nullptr)
 			{
 				return false;
 			};
@@ -90,17 +85,7 @@ namespace SonikLib
 			tmpfunc->SetObject(pcls);
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
-
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
-
-			tmp_tp->SmtPtrFunc = tmp;
-			packtmp.ResetPointer(tmp_tp);
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -120,14 +105,13 @@ namespace SonikLib
 			typedef SonikLib::Members_6_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val, Arg6Val> M6FUNC_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pcls == 0 || pFunc == 0)
+			if(pcls == nullptr || pFunc == nullptr)
 			{
 				return false;
 			};
@@ -142,18 +126,9 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
+			GetSmtPtr = tmp;
 
-			tmp_tp->SmtPtrFunc = tmp;
-			packtmp.ResetPointer(tmp_tp);
-
-			GetSmtPtr = packtmp->SmtPtrFunc;
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -175,14 +150,13 @@ namespace SonikLib
 			typedef SonikLib::Members_5_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val> M5FUNC_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pcls == 0 || pFunc == 0)
+			if(pcls == nullptr || pFunc == nullptr)
 			{
 				return false;
 			};
@@ -197,16 +171,7 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
-
-			tmp_tp->SmtPtrFunc = tmp;
-			packtmp.ResetPointer(tmp_tp);
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -226,14 +191,13 @@ namespace SonikLib
 			typedef SonikLib::Members_5_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val> M5FUNC_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pcls == 0 || pFunc == 0)
+			if(pcls == nullptr || pFunc == nullptr)
 			{
 				return false;
 			};
@@ -248,18 +212,9 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
+			GetSmtPtr = tmp;
 
-			tmp_tp->SmtPtrFunc = tmp;
-			packtmp.ResetPointer(tmp_tp);
-
-			GetSmtPtr = packtmp->SmtPtrFunc;
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			uint32_t TmpThreadNum = ManagedThreadNum;
 
@@ -283,14 +238,13 @@ namespace SonikLib
 			typedef SonikLib::Members_4_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val, Arg4Val> M4FUNC_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pcls == 0 || pFunc == 0)
+			if(pcls == nullptr || pFunc == nullptr)
 			{
 				return false;
 			};
@@ -305,16 +259,7 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
-
-			tmp_tp->SmtPtrFunc = tmp;
-			packtmp.ResetPointer(tmp_tp);
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -334,14 +279,13 @@ namespace SonikLib
 			typedef SonikLib::Members_4_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val, Arg4Val> M4FUNC_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pcls == 0 || pFunc == 0)
+			if(pcls == nullptr || pFunc == nullptr)
 			{
 				return false;
 			};
@@ -356,17 +300,9 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
+			GetSmtPtr = tmp;
 
-			tmp_tp->SmtPtrFunc = tmp;
-			packtmp.ResetPointer(tmp_tp);
-			GetSmtPtr = packtmp->SmtPtrFunc;
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -388,14 +324,13 @@ namespace SonikLib
 			typedef SonikLib::Members_3_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val> M3FUNC_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pcls == 0 || pFunc == 0)
+			if(pcls == nullptr || pFunc == nullptr)
 			{
 				return false;
 			};
@@ -410,16 +345,7 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
-
-			tmp_tp->SmtPtrFunc = tmp;
-			packtmp.ResetPointer(tmp_tp);
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -439,14 +365,13 @@ namespace SonikLib
 			typedef SonikLib::Members_3_Func<CLSTYPE, Arg1Val, Arg2Val, Arg3Val> M3FUNC_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pcls == 0 || pFunc == 0)
+			if(pcls == nullptr || pFunc == nullptr)
 			{
 				return false;
 			};
@@ -461,17 +386,9 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
+			GetSmtPtr = tmp;
 
-			tmp_tp->SmtPtrFunc = tmp;
-			packtmp.ResetPointer(tmp_tp);
-			GetSmtPtr = packtmp->SmtPtrFunc;
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -493,14 +410,13 @@ namespace SonikLib
 			typedef SonikLib::Members_2_Func<CLSTYPE, Arg1Val, Arg2Val> M2FUNC_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pcls == 0 || pFunc == 0)
+			if(pcls == nullptr || pFunc == nullptr)
 			{
 				return false;
 			};
@@ -515,16 +431,7 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
-
-			tmp_tp->SmtPtrFunc = tmp;
-			packtmp.ResetPointer(tmp_tp);
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -544,14 +451,13 @@ namespace SonikLib
 			typedef SonikLib::Members_2_Func<CLSTYPE, Arg1Val, Arg2Val> M2FUNC_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pcls == 0 || pFunc == 0)
+			if(pcls == nullptr || pFunc == nullptr)
 			{
 				return false;
 			};
@@ -566,17 +472,9 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
+			GetSmtPtr = tmp;
 
-			tmp_tp->SmtPtrFunc = tmp;
-			packtmp.ResetPointer(tmp_tp);
-			GetSmtPtr = packtmp->SmtPtrFunc;
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -598,14 +496,13 @@ namespace SonikLib
 			typedef SonikLib::Members_1_Func<CLSTYPE, Arg1Val> M1FUNC_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pcls == 0 || pFunc == 0)
+			if(pcls == nullptr || pFunc == nullptr)
 			{
 				return false;
 			};
@@ -620,16 +517,7 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
-
-			tmp_tp->SmtPtrFunc = tmp;
-			packtmp.ResetPointer(tmp_tp);
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -649,14 +537,13 @@ namespace SonikLib
 			typedef SonikLib::Members_1_Func<CLSTYPE, Arg1Val> M1FUNC_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pcls == 0 || pFunc == 0)
+			if(pcls == nullptr || pFunc == nullptr)
 			{
 				return false;
 			};
@@ -671,17 +558,7 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
-
-			tmp_tp->SmtPtrFunc = tmp;
-			packtmp.ResetPointer(tmp_tp);
-			GetSmtPtr = packtmp->SmtPtrFunc;
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -703,14 +580,13 @@ namespace SonikLib
 			typedef SonikLib::Members_0_Func<CLSTYPE> M0FUNC_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pcls == 0 || pFunc == 0)
+			if(pcls == nullptr || pFunc == nullptr)
 			{
 				return false;
 			};
@@ -725,16 +601,7 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
-
-			tmp_tp->SmtPtrFunc = tmp;
-			packtmp.ResetPointer(tmp_tp);
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -754,14 +621,13 @@ namespace SonikLib
 			typedef SonikLib::Members_0_Func<CLSTYPE> M0FUNC_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pcls == 0 || pFunc == 0)
+			if(pcls == nullptr || pFunc == nullptr)
 			{
 				return false;
 			};
@@ -776,17 +642,7 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
-
-			tmp_tp->SmtPtrFunc = tmp;
-			packtmp.ResetPointer(tmp_tp);
-			GetSmtPtr = packtmp->SmtPtrFunc;
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -809,14 +665,13 @@ namespace SonikLib
 			typedef SonikLib::Members_6_FuncG<Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val, Arg6Val> M6FUNCG_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pFunc == 0)
+			if(pFunc == nullptr)
 			{
 				return false;
 			};
@@ -830,16 +685,7 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
-
-			packtmp.ResetPointer(tmp_tp);
-			packtmp->SmtPtrFunc = tmp;
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -859,14 +705,13 @@ namespace SonikLib
 			typedef SonikLib::Members_6_FuncG<Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val, Arg6Val> M6FUNCG_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pFunc == 0)
+			if(pFunc == nullptr)
 			{
 				return false;
 			};
@@ -880,17 +725,9 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
+			GetSmtPtr = tmp;
 
-			packtmp.ResetPointer(tmp_tp);
-			packtmp->SmtPtrFunc = tmp;
-			GetSmtPtr = packtmp->SmtPtrFunc;
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -912,14 +749,13 @@ namespace SonikLib
 			typedef SonikLib::Members_5_FuncG<Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val> M5FUNCG_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pFunc == 0)
+			if(pFunc == nullptr)
 			{
 				return false;
 			};
@@ -933,16 +769,7 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
-
-			packtmp.ResetPointer(tmp_tp);
-			packtmp->SmtPtrFunc = tmp;
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -962,14 +789,13 @@ namespace SonikLib
 			typedef SonikLib::Members_5_FuncG<Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val> M5FUNCG_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pFunc == 0)
+			if(pFunc == nullptr)
 			{
 				return false;
 			};
@@ -983,17 +809,9 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
+			GetSmtPtr = tmp;
 
-			packtmp.ResetPointer(tmp_tp);
-			packtmp->SmtPtrFunc = tmp;
-			GetSmtPtr = packtmp->SmtPtrFunc;
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -1015,14 +833,13 @@ namespace SonikLib
 			typedef SonikLib::Members_4_FuncG<Arg1Val, Arg2Val, Arg3Val, Arg4Val> M4FUNCG_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pFunc == 0)
+			if(pFunc == nullptr)
 			{
 				return false;
 			};
@@ -1036,16 +853,7 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
-
-			packtmp.ResetPointer(tmp_tp);
-			packtmp->SmtPtrFunc = tmp;
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -1065,14 +873,13 @@ namespace SonikLib
 			typedef SonikLib::Members_4_FuncG<Arg1Val, Arg2Val, Arg3Val, Arg4Val> M4FUNCG_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pFunc == 0)
+			if(pFunc == nullptr)
 			{
 				return false;
 			};
@@ -1086,17 +893,9 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
+			GetSmtPtr = tmp;
 
-			packtmp.ResetPointer(tmp_tp);
-			packtmp->SmtPtrFunc = tmp;
-			GetSmtPtr = packtmp->SmtPtrFunc;
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -1118,14 +917,13 @@ namespace SonikLib
 			typedef SonikLib::Members_3_FuncG<Arg1Val, Arg2Val, Arg3Val> M3FUNCG_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pFunc == 0)
+			if(pFunc == nullptr)
 			{
 				return false;
 			};
@@ -1139,16 +937,7 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
-
-			packtmp.ResetPointer(tmp_tp);
-			packtmp->SmtPtrFunc = tmp;
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -1168,14 +957,13 @@ namespace SonikLib
 			typedef SonikLib::Members_3_FuncG<Arg1Val, Arg2Val, Arg3Val> M3FUNCG_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pFunc == 0)
+			if(pFunc == nullptr)
 			{
 				return false;
 			};
@@ -1189,17 +977,9 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
+			GetSmtPtr = tmp;
 
-			packtmp.ResetPointer(tmp_tp);
-			packtmp->SmtPtrFunc = tmp;
-			GetSmtPtr = packtmp->SmtPtrFunc;
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -1221,14 +1001,13 @@ namespace SonikLib
 			typedef SonikLib::Members_2_FuncG<Arg1Val, Arg2Val> M2FUNCG_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pFunc == 0)
+			if(pFunc == nullptr)
 			{
 				return false;
 			};
@@ -1242,16 +1021,7 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
-
-			packtmp.ResetPointer(tmp_tp);
-			packtmp->SmtPtrFunc = tmp;
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -1271,14 +1041,13 @@ namespace SonikLib
 			typedef SonikLib::Members_2_FuncG<Arg1Val, Arg2Val> M2FUNCG_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pFunc == 0)
+			if(pFunc == nullptr)
 			{
 				return false;
 			};
@@ -1292,17 +1061,9 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
+			GetSmtPtr = tmp;
 
-			packtmp.ResetPointer(tmp_tp);
-			packtmp->SmtPtrFunc = tmp;
-			GetSmtPtr = packtmp->SmtPtrFunc;
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -1324,14 +1085,13 @@ namespace SonikLib
 			typedef SonikLib::Members_1_FuncG<Arg1Val> M1FUNCG_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pFunc == 0)
+			if(pFunc == nullptr)
 			{
 				return false;
 			};
@@ -1345,16 +1105,7 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
-
-			packtmp.ResetPointer(tmp_tp);
-			packtmp->SmtPtrFunc = tmp;
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -1374,14 +1125,13 @@ namespace SonikLib
 			typedef SonikLib::Members_1_FuncG<Arg1Val> M1FUNCG_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pFunc == 0)
+			if(pFunc == nullptr)
 			{
 				return false;
 			};
@@ -1395,17 +1145,9 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
+			GetSmtPtr = tmp;
 
-			packtmp.ResetPointer(tmp_tp);
-			packtmp->SmtPtrFunc = tmp;
-			GetSmtPtr = packtmp->SmtPtrFunc;
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -1426,14 +1168,13 @@ namespace SonikLib
 			typedef SonikLib::Members_0_FuncG M0FUNCG_;
 
 			SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> tmp;
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
 
 			if(!Init_)
 			{
 				return false;
 			};
 
-			if(pFunc == 0)
+			if(pFunc == nullptr)
 			{
 				return false;
 			};
@@ -1447,16 +1188,7 @@ namespace SonikLib
 			tmpfunc->SetFunc(pFunc);
 			tmp.ResetPointer( tmpfunc );
 
-			SonikThreadPack::ThreadPack* tmp_tp = new(std::nothrow) SonikThreadPack::ThreadPack;
-			if( tmp_tp == nullptr )
-			{
-				return false;
-			};
-
-			packtmp.ResetPointer(tmp_tp);
-			packtmp->SmtPtrFunc = tmp;
-
-			JobQueue->EnQueue(packtmp);
+			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
 			{
@@ -1474,16 +1206,10 @@ namespace SonikLib
 		//c: セットしてあるジョブをキューから取得します。
 		bool GetJobFunction(SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& jobfunc)
 		{
-			SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack> packtmp;
-
-			if( !JobQueue->DeQueue(packtmp) )
+			if( !JobQueue->DeQueue(jobfunc) )
 			{
 				return false;
 			};
-
-			jobfunc = packtmp->SmtPtrFunc;
-
-			packtmp.~NormalSmtPtr();
 
 			return true;
 		};

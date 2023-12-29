@@ -31,6 +31,11 @@ namespace SonikLib
 		:AllocCount(0)
 		,MaxCnt(ElemCnt)
 		{
+			if(MaxCnt >= UINT32_MAX)
+			{
+				--MaxCnt;
+			};
+
 			try
 			{
 				AllocAreaPtr = new uint8_t[ sizeof(T) * ElemCnt ];

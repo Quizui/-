@@ -213,7 +213,6 @@
 						</toolChain>
 					</folderInfo>
 					<fileInfo id="cdt.managedbuild.config.gnu.cross.so.debug.2066471480.1571994854.1932601396.103325511" name="SonikWorkThreadManagerEx.h" rcbsApplicability="disable" resourcePath="SonikWorkThread/SonikWorkThreadManagerEx.h" toolsToInvoke=""/>
-					<fileInfo id="cdt.managedbuild.config.gnu.cross.so.debug.2066471480.1571994854.1932601396.1138410328" name="SonikThreadPack.h" rcbsApplicability="disable" resourcePath="SonikWorkThread/SonikThreadPack.h" toolsToInvoke=""/>
 					<fileInfo id="cdt.managedbuild.config.gnu.cross.so.debug.2066471480.1571994854.1932601396.1627163331" name="SonikWorkThreadEx.h" rcbsApplicability="disable" resourcePath="SonikWorkThread/SonikWorkThreadEx.h" toolsToInvoke="">
 						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.1640226733" name="Resource Custom Build Step">
 							<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.217893678" name="Resource Custom Build Step Input Type">
@@ -497,7 +496,6 @@
 						</toolChain>
 					</folderInfo>
 					<fileInfo id="cdt.managedbuild.config.gnu.cross.so.debug.2066471480.1571994854.1932601396.1792317318.SonikWorkThread/SonikWorkThreadManagerEx.h" name="SonikWorkThreadManagerEx.h" rcbsApplicability="disable" resourcePath="SonikWorkThread/SonikWorkThreadManagerEx.h" toolsToInvoke=""/>
-					<fileInfo id="cdt.managedbuild.config.gnu.cross.so.debug.2066471480.1571994854.1932601396.1792317318.SonikWorkThread/SonikThreadPack.h" name="SonikThreadPack.h" rcbsApplicability="disable" resourcePath="SonikWorkThread/SonikThreadPack.h" toolsToInvoke=""/>
 					<fileInfo id="cdt.managedbuild.config.gnu.cross.so.debug.2066471480.1571994854.1932601396.1792317318.SonikWorkThread/SonikWorkThreadEx.h" name="SonikWorkThreadEx.h" rcbsApplicability="disable" resourcePath="SonikWorkThread/SonikWorkThreadEx.h" toolsToInvoke="">
 						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.1640226733.1490954185" name="Resource Custom Build Step">
 							<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.217893678.1435153393" name="Resource Custom Build Step Input Type">
@@ -713,7 +711,6 @@
 						</toolChain>
 					</folderInfo>
 					<fileInfo id="cdt.managedbuild.config.gnu.cross.so.debug.2066471480.1571994854.1932601396.1896583174.SonikWorkThread/SonikWorkThreadManagerEx.h" name="SonikWorkThreadManagerEx.h" rcbsApplicability="disable" resourcePath="SonikWorkThread/SonikWorkThreadManagerEx.h" toolsToInvoke=""/>
-					<fileInfo id="cdt.managedbuild.config.gnu.cross.so.debug.2066471480.1571994854.1932601396.1896583174.SonikWorkThread/SonikThreadPack.h" name="SonikThreadPack.h" rcbsApplicability="disable" resourcePath="SonikWorkThread/SonikThreadPack.h" toolsToInvoke=""/>
 					<fileInfo id="cdt.managedbuild.config.gnu.cross.so.debug.2066471480.1571994854.1932601396.1896583174.SonikWorkThread/SonikWorkThreadEx.h" name="SonikWorkThreadEx.h" rcbsApplicability="disable" resourcePath="SonikWorkThread/SonikWorkThreadEx.h" toolsToInvoke="">
 						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.1640226733.923764917" name="Resource Custom Build Step">
 							<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.217893678.681356506" name="Resource Custom Build Step Input Type">
@@ -935,7 +932,6 @@
 						</toolChain>
 					</folderInfo>
 					<fileInfo id="cdt.managedbuild.config.gnu.cross.so.debug.2066471480.1571994854.1932601396.1896583174.784242344.SonikWorkThread/SonikWorkThreadManagerEx.h" name="SonikWorkThreadManagerEx.h" rcbsApplicability="disable" resourcePath="SonikWorkThread/SonikWorkThreadManagerEx.h" toolsToInvoke=""/>
-					<fileInfo id="cdt.managedbuild.config.gnu.cross.so.debug.2066471480.1571994854.1932601396.1896583174.784242344.SonikWorkThread/SonikThreadPack.h" name="SonikThreadPack.h" rcbsApplicability="disable" resourcePath="SonikWorkThread/SonikThreadPack.h" toolsToInvoke=""/>
 					<fileInfo id="cdt.managedbuild.config.gnu.cross.so.debug.2066471480.1571994854.1932601396.1896583174.784242344.SonikWorkThread/SonikWorkThreadEx.h" name="SonikWorkThreadEx.h" rcbsApplicability="disable" resourcePath="SonikWorkThread/SonikWorkThreadEx.h" toolsToInvoke="">
 						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.1640226733.923764917.594405889" name="Resource Custom Build Step">
 							<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.217893678.681356506.1648814207" name="Resource Custom Build Step Input Type">

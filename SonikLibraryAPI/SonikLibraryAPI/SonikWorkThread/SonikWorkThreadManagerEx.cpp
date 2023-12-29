@@ -72,7 +72,7 @@ namespace SonikLib
 
 		try
 		{
-			JobQueue = new SonikLib::SonikAtomicQueue<SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack>>(JobBufferSize);
+			JobQueue = new SonikLib::SonikAtomicQueue<SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>>(JobBufferSize);
 			m_pThreads = new SonikLib::WorkThreadEx[UseThreadNum];
 
 		}catch(...)

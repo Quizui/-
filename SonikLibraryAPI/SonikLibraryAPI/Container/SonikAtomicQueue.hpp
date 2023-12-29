@@ -65,21 +65,27 @@ namespace SonikLib
 		, _last(nullptr)
 		,Queue_RoundCount(QueueItemNum)
 		{
+
+			if(Queue_RoundCount >= UINT32_MAX)
+			{
+				--Queue_RoundCount;
+			};
+
 			try
 			{
 				//オブジェクトをカウント分ヒープからnewして再利用しまくる。
 				m_QueueAllocArea = new TypeNode[QueueItemNum];
 
-				//リンクをつなげる。
-				m_Free = m_QueueAllocArea;
-				for(uint32_t  i =0; i < (QueueItemNum -1); ++i)
-				{
-					m_Free[i].Next = &m_Free[ i + 1];
-				};
-
 			}catch(std::bad_alloc& e)
 			{
 				delete[] m_QueueAllocArea;
+			};
+
+			//リンクをつなげる。
+			m_Free = m_QueueAllocArea;
+			for(uint32_t  i =0; i < (QueueItemNum -1); ++i)
+			{
+				m_Free[i].Next = &m_Free[ i + 1];
 			};
 
 		};
@@ -97,6 +103,11 @@ namespace SonikLib
 
 		bool Initialize(uint32_t QueueItemMax)
 		{
+			if(QueueItemMax >= UINT32_MAX)
+			{
+				--QueueItemMax;
+			};
+
 			//オブジェクトをカウント分ヒープからnewして再利用しまくる。
 			m_QueueAllocArea = new(std::nothrow) TypeNode[QueueItemMax];
 			if( m_QueueAllocArea == nullptr )

@@ -49,10 +49,10 @@ namespace SonikLib
 				delete m_Pointer;
 				delete m_Count;
 
-				m_Pointer = nullptr;
-				m_Count = nullptr;
 			};
 
+			m_Pointer = nullptr;
+			m_Count = nullptr;
 		};
 
 	public:
@@ -233,11 +233,11 @@ namespace SonikLib
 				delete[] m_Pointer;
 				delete m_Count;
 
-				m_Pointer = nullptr;
-				m_Count = nullptr;
-				m_arraysize = 0;
 			};
 
+			m_Pointer = nullptr;
+			m_Count = nullptr;
+			m_arraysize = 0;
 		};
 
 	public:
@@ -249,6 +249,11 @@ namespace SonikLib
 		,m_Count(nullptr)
 		{
 
+			if(ArraySize >= UINT64_MAX)
+			{
+				m_arraysize = (UINT64_MAX - 1);
+			};
+
 			try
 			{
 				m_Pointer = new ArrayType[m_arraysize];
@@ -257,7 +262,7 @@ namespace SonikLib
 			{
 				if(m_Pointer != nullptr)
 				{
-					delete m_Pointer;
+					delete[] m_Pointer;
 				};
 
 				if(m_Count != nullptr)
@@ -266,20 +271,6 @@ namespace SonikLib
 				};
 
 				throw std::bad_alloc(e);
-
-			}catch(std::bad_array_new_length& e)
-			{
-				if(m_Pointer != nullptr)
-				{
-					delete m_Pointer;
-				};
-
-				if(m_Count != nullptr)
-				{
-					delete m_Count;
-				};
-
-				throw std::bad_array_new_length(e);
 			};
 
 			m_Count->store(1);
@@ -369,6 +360,12 @@ namespace SonikLib
 		{
 			Release();
 
+			m_arraysize = ReAllocSize;
+			if(m_arraysize >= UINT64_MAX)
+			{
+				--m_arraysize;
+			};
+
 			//再初期化
 			m_Pointer = nullptr;
 			m_Count = nullptr;
@@ -381,7 +378,7 @@ namespace SonikLib
 			{
 				if(m_Pointer != nullptr)
 				{
-					delete m_Pointer;
+					delete[] m_Pointer;
 				};
 
 				if(m_Count != nullptr)
@@ -390,20 +387,6 @@ namespace SonikLib
 				};
 
 				throw std::bad_alloc(e);
-
-			}catch(std::bad_array_new_length& e)
-			{
-				if(m_Pointer != nullptr)
-				{
-					delete m_Pointer;
-				};
-
-				if(m_Count != nullptr)
-				{
-					delete m_Count;
-				};
-
-				throw std::bad_array_new_length(e);
 			};
 
             m_Count->store(1);

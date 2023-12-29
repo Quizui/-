@@ -30,7 +30,8 @@ namespace SonikLib
 		SonikString(const SonikString& t_his);
 		SonikString(const char* SetStr);
 		SonikString(const char16_t* SetStr);
-		SonikString(SonikString&& Move);
+		SonikString(const wchar_t* SetPtr);
+		SonikString(SonikString&& Move) noexcept;
 
 		~SonikString(void);
 
@@ -47,6 +48,9 @@ namespace SonikLib
 		//UTF16形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
 		//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
 		uint64_t GetCpy_c_wcstr(char16_t* dstBuffer = nullptr);
+		//UTF16形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
+		//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
+		uint64_t GetCpy_c_wcstr(wchar_t* dstBuffer = nullptr);
 		//UTF8形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
 		//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
 		uint64_t GetCpy_utf8_str(char* dstBuffer = nullptr);
@@ -71,33 +75,38 @@ namespace SonikLib
 
 		//各入力フォーマットから現在のバッファに変換して代入します。
 		SonikString& operator =(const SonikString& t_his);
-		SonikString& operator =(SonikString&& Move);
+		SonikString& operator =(SonikString&& Move) noexcept;
 		SonikString& operator =(const char* Str);
 		SonikString& operator =(const char16_t* w_Str);
+		SonikString& operator =(const wchar_t* w_Str);
 
 		//各入力フォーマットから現在のバッファに変換して結合します。
 		//コピー元とコピー先が同じオブジェクトの場合、そのまま結合します。
 		SonikString& operator +=(const SonikString& t_his);
 		SonikString& operator +=(const char* Str);
 		SonikString& operator +=(const char16_t* w_Str);
+		SonikString& operator +=(const wchar_t* w_Str);
 
 		//現在のバッファと入力バッファを結合し、別のオブジェクトとして返却します。
 		//コピー元とコピー先が同じオブジェクトの場合、そのまま結合します。
 		SonikString operator +(const SonikString& t_his);
 		SonikString operator +(const char* Str);
 		SonikString operator +(const char16_t* w_Str);
+		SonikString operator +(const wchar_t* w_Str);
 
 		//c: 文字列同士を比較します。(strcmp)
 		//c: 一致の場合true 不一致の場合 falseを返却します。
 		bool operator ==(const SonikString& t_his);
 		bool operator ==(const char* Str);
 		bool operator ==(const char16_t* w_Str);
+		bool operator ==(const wchar_t* w_Str);
 
 		//c: 文字列同士を比較します。(strcmp)
 		//c: 不一致の場合true　一致の場合 falseを返却します。
 		bool operator !=(const SonikString& t_his);
 		bool operator !=(const char* Str);
 		bool operator !=(const char16_t* w_Str);
+		bool operator !=(const wchar_t* w_Str);
 
 	};
 

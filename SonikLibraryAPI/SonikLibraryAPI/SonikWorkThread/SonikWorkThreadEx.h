@@ -21,7 +21,6 @@
  *
  */
 
-#include "SonikThreadPack.h"
 #include "../SmartPointer/SonikSmartPointer.hpp"
 #include "../Container/SonikAtomicQueue.hpp"
 
@@ -39,19 +38,13 @@ namespace SonikLib
 using SonikFOSInterface = SonikFunctionObjectDefines::FunctionObjectSystemInterface;
 };
 
-namespace SonikThreadImpl
-{
-	class pImplEx;
-};
-
 namespace SonikLib
 {
-
 	class WorkThreadEx
 	{
 	private:
-
-		SonikThreadImpl::pImplEx* ImplObject;
+		class pImplEx;
+		pImplEx* ImplObject;
 
 	public:
 
@@ -63,26 +56,22 @@ namespace SonikLib
 
 		//関数オブジェクトポインタをセットします。
 		//引数1: スレッドで実行する関数オブジェクトを設定します。
-		//引数2: 指定した作成オブジェクトへのポインタを
-		//		 new演算子より作成した場合にコール終了後にデリートするかのフラグを指定します。
-		//		 ローカルで直接作成して指定した場合にデリートフラグをtrueにした場合、そのままdeletがコールされますが
-		//		 動作は未定義です。 deleteをコール後実行してほしい場合はtrue, してほしくない場合はfalseを指定します。
-		//		 デフォルトはfalseです。
+		//引数2: 実行関数の実行終了後、再度繰り返し実行させる場合はtrueを指定します。(default = false, １回コールのみ。)
+		//			  この引数をtrueにした状態のままで関数
 		//戻り値; スレッドが実行中の場合はfalseが返り、セットされません。
-		//		  そのままnewで指定した場合はフラグがfalseの場合はdeleteされません。(メモリリークの危険)
-		//このメソッドがfalseで返ってきた場合、deleteFlag設定は無視されます。(deleteされません)
 		//本関数はスレッドセーフです。
 		//確実にセットしたい場合、前にセットされた関数があれば、それが終了し、関数がtrueを返却するまでループします。
 		//別途QUEUEがセットされている場合、この関数は必ずfalseを返却します。
 		//マルチスレッドにより、同時にキューセットと本関数が呼ばれた場合で、本関数が先にコールされた場合、本関数は、trueを返却します。
-		bool SetCallFunction(SonikLib::SonikFOSInterface* CallFunctionObject, bool DeleteFlag = false);
-		bool SetCallFunction(SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> CallFunctionObject, bool DeleteFlag = true);
+		//いずれの関数を使用しても内部ではスマートポインタで扱います。
+		bool SetCallFunction(SonikLib::SonikFOSInterface* CallFunctionObject, bool _looped_ = false);
+		bool SetCallFunction(SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> CallFunctionObject, bool _looped_ = false);
 
 		//外部のキューをセットします。
 		//本関数はSetCallFunctionと同時にコールされた場合で、SetCallFunctionが先に実行された場合、セットされた関数が終了するまで処理を返却しません。
 		//本関数によりキューがセットされた後は、SetCallFunctionは無効となり、常にfalseを返却します。
 		//本関数でセットしたキューにエンキューを行った場合、dispatchQueue関数をコールし、エンキューを行ったことを通知しなければデキュー処理を行いません。
-		void Set_ExternalQueue(SonikLib::SonikAtomicQueue<SonikLib::NormalSmtPtr<SonikThreadPack::ThreadPack>>* pSetQueue);
+		void Set_ExternalQueue(SonikLib::SonikAtomicQueue<SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>>* pSetQueue);
 
 		//外部のキューをアンセットします。
 		void UnSet_ExternalQueue(void);
@@ -91,10 +80,13 @@ namespace SonikLib
 		void dispatchDeQueue(void);
 
 		//スレッド実行中に設定を変更したい場合に使う関数群========
-		//デリートフラグを ON にします。 SetCalFunction（）の設定をfalseにし、後に変更したくなった場合に使用します。
+		//関数コールのループフラグのON/OFFへの設定を行います。 SetCallFunction（）の設定をtrueにし、後に変更したくなった場合に使用します。
 		//現在のファンクションが終了し、判定箇所に来た場合に実行されます。
 		//設定関数実行後、判定箇所をスレッドが通過済みの場合、次の設定関数コール終了後に判定が行われます。
-		void SetFunctionDeleteFlagOn(void);
+		//Queueがセットされている場合はこの設定は常にOff状態となります。
+		//また、Queueをアンセットされる際にはOffの状態のままとなりますので、Onに戻したい場合はOnをコールしてください。
+		void SetFunctionloopEndFlagOn(void);
+		void SetFunctionloopEndFlagOff(void);
 
 		//スレッドの終了フラグをOnにします。
 		//これはSetFunctionDeleteFlagOn()関数と同様の判定方法を行います。
