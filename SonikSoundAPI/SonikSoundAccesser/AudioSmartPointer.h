@@ -25,7 +25,7 @@ void SmtPtrUpCast(SonikAudioPlayerSmtPtr<BeforeType>& be_smtptr, SonikAudioPlaye
 
 
 
-	template <class PointerType>
+	template <class PointerType, std::enable_if_t<!std::is_pointer_v<pType>, bool> = true>
 	class SonikAudioInterfaceSmtPtr
 	{
 		template<class BeforeType, class AfterType>
@@ -176,7 +176,7 @@ void SmtPtrUpCast(SonikAudioPlayerSmtPtr<BeforeType>& be_smtptr, SonikAudioPlaye
 
 
 
-	template <class PointerType>
+	template <class PointerType, std::enable_if_t<!std::is_pointer_v<pType>, bool> = true>
 	class SonikAudioPlayerSmtPtr
 	{
 		template<class BeforeType, class AfterType>
@@ -295,7 +295,7 @@ void SmtPtrUpCast(SonikAudioPlayerSmtPtr<BeforeType>& be_smtptr, SonikAudioPlaye
 
 
 
-	template <class PointerType>
+	template <class PointerType, std::enable_if_t<!std::is_pointer_v<pType>, bool> = true>
 	class SonikAudioNormalSmtPtr
 	{
 

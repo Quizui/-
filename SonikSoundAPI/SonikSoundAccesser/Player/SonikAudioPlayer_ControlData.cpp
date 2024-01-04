@@ -21,6 +21,7 @@ namespace SonikAudioData
 	,mp_posx(&m_posx)
 	,mp_posy(&m_posy)
 	,mp_posz(&m_posz)
+	,m_3dpos(0.0, 0.0, 0.0)
 	,m_volume(1.0f)
 	,m_repeat(false)
 	,m_AudioState(SonikAudioEnum::PlayStateID::PS_Stop)
@@ -63,24 +64,24 @@ namespace SonikAudioData
 	//ポジションのセット
 	void SonikAudioControlData::SetPositionX(float SetValue)
 	{
-		m_posx = SetValue;
+		(*m_3dpos.mp_x) = SetValue;
 	};
 
 	void SonikAudioControlData::SetPositionY(float SetValue)
 	{
-		m_posy = SetValue;
+		(*m_3dpos.mp_y) = SetValue;
 	};
 
 	void SonikAudioControlData::SetPositionZ(float SetValue)
 	{
-		m_posz = SetValue;
+		(*m_3dpos.mp_z) = SetValue;
 	};
 
 	void SonikAudioControlData::SetPositionAll(float x, float y, float z)
 	{
-		m_posx = x;
-		m_posy = y;
-		m_posz = z;
+		(*m_3dpos.mp_x) = x;
+		(*m_3dpos.mp_y) = y;
+		(*m_3dpos.mp_z) = z;
 	};
 
 
@@ -93,12 +94,12 @@ namespace SonikAudioData
 
 		if( x == nullptr )
 		{
-			mp_posx = &m_posx;
+			m_3dpos.mp_x = &m_3dpos.m_x;
 			PositionLock[0].Unlock();
 			return;
 		};
 
-		mp_posx = x;
+		m_3dpos.mp_x = x;
 
 		PositionLock[0].Unlock();
 	};
@@ -109,12 +110,12 @@ namespace SonikAudioData
 
 		if( y == nullptr )
 		{
-			mp_posy = &m_posy;
+			m_3dpos.mp_y = &m_3dpos.m_y;
 			PositionLock[1].Unlock();
 			return;
 		};
 
-		mp_posy = y;
+		m_3dpos.mp_y = y;
 		PositionLock[1].Unlock();
 
 	};
@@ -124,12 +125,12 @@ namespace SonikAudioData
 		PositionLock[2].lock();
 		if( z == nullptr )
 		{
-			mp_posz = &m_posz;
+			m_3dpos.mp_z = &m_3dpos.m_z;
 			PositionLock[2].Unlock();
 			return;
 		};
 
-		mp_posz = z;
+		m_3dpos.mp_z = z;
 		PositionLock[2].Unlock();
 
 	};
@@ -176,7 +177,7 @@ namespace SonikAudioData
 
 		PositionLock[0].lock();
 
-		_ret = mp_posx;
+		_ret = m_3dpos.mp_x;
 
 		PositionLock[0].Unlock();
 
@@ -189,7 +190,7 @@ namespace SonikAudioData
 
 		PositionLock[1].lock();
 
-		_ret = mp_posy;
+		_ret = m_3dpos.mp_y;
 
 		PositionLock[1].Unlock();
 
@@ -202,7 +203,7 @@ namespace SonikAudioData
 
 		PositionLock[2].lock();
 
-		_ret = mp_posz;
+		_ret = m_3dpos.mp_z;
 
 		PositionLock[2].Unlock();
 
@@ -215,9 +216,9 @@ namespace SonikAudioData
 		PositionLock[1].lock();
 		PositionLock[2].lock();
 
-		x = *mp_posx;
-		y = *mp_posy;
-		z = *mp_posz;
+		x = (*m_3dpos.mp_x);
+		y = (*m_3dpos.mp_y);
+		z = (*m_3dpos.mp_z);
 
 		PositionLock[0].Unlock();
 		PositionLock[1].Unlock();

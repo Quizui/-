@@ -1,0 +1,66 @@
+/*
+ * SonikMathDistance.h
+ *
+ *  Created on: 2015/08/17
+ *      Author: SONIK
+ */
+
+#ifndef SONIKMATHDISTANCE_H_
+#define SONIKMATHDISTANCE_H_
+
+namespace SonikMathDataBox
+{
+
+
+};
+
+namespace SonikMath
+{
+
+	class Sonik3DPoint
+	{
+	protected:
+		double m_x, m_y, m_z;
+
+	public:
+		Sonik3DPoint(double _x_ = 0.0, double _y_ = 0.0, double _z_ =0.0);
+		virtual ~Sonik3DPoint(void);
+
+		//本クラスと引数で指定されたオブジェクト或いは座標との距離を算出します。
+		double Distance(const Sonik3DPoint& _point_);
+		double Distance(const double& _x_, const double& _y_, const double& _z_);
+		double Distance(const double _x_, const double _y_, const double _z_);
+	};
+
+
+	class SonikBazierBox
+	{
+		protected:
+			double StartX, StartY; //始点
+			double EndX, EndY;	  //終点
+			double PivotX, PivotY; //制御点
+			unsigned long Elapsed_Frame;  //始点から終点まで、何フレームで到達するか。
+
+			double* m_saved_result;
+		public:
+
+			//引数最後のフラグは、先に計算を実施し、すべてのフレームの結果を保持しておくかどうかを設定します。(フレーム数 * doubleサイズ)分のメモリを使います。
+			SonikBazierBox(double _x_ = 0.0, double _y_ = 0.0, double _endx_ = 0.0, double _endy_ = 0.0, double _pivx_ = 0.0, double  _pivy_ = 0.0, unsigned long _ef_= 0, bool AllFlameSaved = false);
+			~SonikBazierBox(void);
+
+			//2次元のペジェ曲線に必要な情報を設定します。
+			//引数最後のフラグは、先に計算を実施し、すべてのフレームの結果を保持しておくかどうかを設定します。(フレーム数 * doubleサイズ)分のメモリを使います。
+			void SetValue(double _x_, double _y_, double _endx_, double _endy_, double _pivx_, double  _pivy_, unsigned long _ef_, bool AllFlameSaved)
+
+			//2次のベジェ曲線の位置点を算出します。
+			//引数1: 結果であるX値を格納するために変数を指定します。
+			//引数2: 結果であるY値を格納するために変数を指定します。
+			//引数3: 始点から終点までの総合フレームの中で、何フレーム目の値を取得するのかを指定します。
+			void Bezier_curveLine(float& GetX, float& GetY, float GetFrame);
+	};
+
+};
+
+
+
+#endif /* SONIKMATHDISTANCE_H_ */

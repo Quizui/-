@@ -6,107 +6,296 @@
  */
 
 #include "SonikMathDistance.h"
+#include "SonikMathStandard.h"
 
-#include <cstdint>
+#include <stdint.h>
+#include <new>
 
 namespace SonikMath
 {
-
-	//2点間の距離の差分を計算します。
-	//引数1: 地点A となる値を指定します。
-	//引数2: 地点B となる値を指定します。
-	//引数3: 地点間の距離差分の計算を、AからB（Aを主体）とみるか、BからA（B主体)と見るかを設定します。(省略可能です)
-	double TwoPointDistance(double SetPointA, double SetPointB, TwoPointeToPoint ToPoint)
+	//=====================================
+	//					Sonik3DPoint Implement
+	//=====================================
+	Sonik3DPoint::Sonik3DPoint(double _x_, double _y_, double _z_)
+	:m_x(_x_)
+	,m_y(_y_)
+	,m_z(_z_)
 	{
-		double ret = 0;
-		uint8_t signedvalue = 1;
-		double offset_ = 0.0;
-		uint8_t Woffset_ = 0;
-
-		double* LargeValue =0;
-		double* SmallValue =0;
-
-
-		if(SetPointA < 0)
-		{
-			offset_ += SetPointA * (-1);
-
-			Woffset_ += 1;
-		};
-
-		if(SetPointB < 0)
-		{
-			offset_ += SetPointB * (-1);
-
-			++Woffset_ += 1;
-		};
-
-		if( SetPointA > SetPointB )
-		{
-			LargeValue = &SetPointA;
-			SmallValue = &SetPointB;
-
-			if(ToPoint == AtoB)
-			{
-				signedvalue = -1;
-			};
-
-		}else
-		{
-			LargeValue = &SetPointB;
-			SmallValue = &SetPointA;
-
-			if(ToPoint == BtoA)
-			{
-				signedvalue = -1;
-			};
-
-		};
-
-		switch(Woffset_)
-		{
-		case 0:
-			ret = (*LargeValue) - (*SmallValue);
-
-			break;
-		case 1:
-			ret = (*LargeValue) + offset_;
-
-			break;
-
-		case 2:
-			ret = ( (*SmallValue) * (-1) ) - ( (*LargeValue) * (-1) );
-
-			break;
-
-		default:
-			break;
-		};
-
-		return ret * signedvalue;
 
 	};
 
-
-	//ベジェ曲線の位置点を算出します。(float版)
-	//引数1: ベジェ曲線の設定クラスである、BazierBoxクラスに任意の値を設定して指定します。
-	//引数2: 結果であるX値を格納するために変数を指定します。
-	//引数3: 結果であるY値を格納するために変数を指定します。
-	//引数4: 始点から終点までの総合フレームの中で、何フレーム目の値を取得するのかを指定します。
-	void Bezier_curveLineF(const SonikMathDataBox::BazierBoxF& StateBox, float& GetX, float& GetY, float GetFrame)
+	Sonik3DPoint::~Sonik3DPoint(void)
 	{
-		float time = 0.0f;
 
-		if(StateBox.Elapsed_Frame < GetFrame)
+	};
+
+	void Sonik3DPoint::Set3Point(double _x_, double _y_, double _z_)
+	{
+		m_x = _x_;
+		m_y = _y_;
+		m_z = _z_;
+	};
+
+	void Sonik3DPoint::SetX(double _x_)
+	{
+		m_x = _x_;
+	};
+	void Sonik3DPoint::SetY(double _y_)
+	{
+		m_y = _y_;
+	};
+	void Sonik3DPoint::SetZ(double _z_)
+	{
+		m_z = _z_;
+	};
+
+	void Sonik3DPoint::Get3Point(double& _x_, double& _y_, double& _z_)
+	{
+		_x_ = m_x;
+		_y_ = m_y;
+		_y_ = m_z;
+	};
+
+	void Sonik3DPoint::Get3Point(double* _x_, double* _y_, double* _z_)
+	{
+		if( _x_ == nullptr || _y_ == nullptr || _z_ == nullptr )
 		{
-			time = 1.0f;
-		}else
-		{
-			time = GetFrame * (1 * StateBox.Elapsed_Frame);
+			return;
 		};
 
-		GetX = ((1.0f - time) * (1.0f - time) * StateBox.StartX) + (2 * (1.0f - time) * time * StateBox.PivotX) + (time * time * StateBox.EndX);
-		GetY = ((1.0f - time) * (1.0f - time) * StateBox.StartY) + (2 * (1.0f - time) * time * StateBox.PivotY) + (time * time * StateBox.EndY);
+		(*_x_) = m_x;
+		(*_y_) = m_y;
+		(*_z_) = m_z;
+	};
+
+	void Sonik3DPoint::Get3Point(double** _x_, double** _y_, double** _z_)
+	{
+		(*_x_) = &m_x;
+		(*_y_) = &m_y;
+		(*_z_) = &m_z;
+	};
+
+	double Sonik3DPoint::GetX(void)
+	{
+		return m_x;
+	};
+
+	double* Sonik3DPoint::GetpX(void)
+	{
+		return &m_x;
+	};
+
+	void Sonik3DPoint::GetX(double& _x_)
+	{
+		_x_ = m_x;
+	};
+
+	void Sonik3DPoint::GetX(double* _x_)
+	{
+		if( _x_ == nullptr)
+		{
+			return;
+		};
+
+		(*_x_) = m_x;
+	};
+
+	double Sonik3DPoint::GetY(void)
+	{
+		return m_y;
+	};
+
+	double* Sonik3DPoint::GetpY(void)
+	{
+		return &m_y;
+	};
+
+	void Sonik3DPoint::GetY(double& _y_)
+	{
+		_y_ = m_y;
+
+	};
+
+	void Sonik3DPoint::GetY(double* _y_)
+	{
+		if(_y_ == nullptr)
+		{
+			return;
+		};
+
+		(*_y_) = m_y;
+	};
+
+	double Sonik3DPoint::GetZ(void)
+	{
+		return m_z;
+	};
+
+	double* Sonik3DPoint::GetpZ(void)
+	{
+		return &m_z;
+	};
+
+	void Sonik3DPoint::GetZ(double& _z_)
+	{
+		_z_ = m_z;
+	};
+
+	void Sonik3DPoint::GetZ(double* _z_)
+	{
+		if( _z_ == nullptr )
+		{
+			return;
+		};
+
+		(*_z_) = m_z;
+	};
+
+
+	//本クラスと引数で指定されたオブジェクト或いは座標との距離を算出します。
+	double Sonik3DPoint::Distance(const Sonik3DPoint& _point_)
+	{
+		double _distance[3];
+
+		_distance[0] = _point_.m_x - m_x;
+		_distance[1] = _point_.m_y - m_y;
+		_distance[2] = _point_.m_z - m_z;
+
+		return SonikMath::sqrt( _distance[0] * _distance[0] + _distance[1] * _distance[1] + _distance[2] * _distance[2]);
+
+	};
+
+	double Sonik3DPoint::Distance(const double _x_, const double _y_, const double _z_)
+	{
+
+		double _distance[3];
+
+		_distance[0] = _x_ - m_x;
+		_distance[1] = _y_ - m_y;
+		_distance[2] = _z_ - m_z;
+
+		return SonikMath::sqrt( _distance[0] * _distance[0] + _distance[1] * _distance[1] + _distance[2] * _distance[2]);
+	};
+
+
+	//=====================================
+	//					SonikBazierBox Implement
+	//=====================================
+	SonikBazierBox::SonikBazierBox(double _x_, double _y_, double _endx_, double _endy_, double _pivx_, double  _pivy_, unsigned long _ef_)
+	:StartX(_x_)
+	,StartY(_y_)
+	,EndX(_endx_)
+	,EndY(_endy_)
+	,PivotX(_pivx_)
+	,PivotY(_pivy_)
+	,Elapsed_Frame(_ef_)
+	,m_saved_result_X(nullptr)
+	,m_saved_result_Y(nullptr)
+	{
+
+	};
+	SonikBazierBox::~SonikBazierBox(void)
+	{
+		if( m_saved_result_X != nullptr )
+		{
+			delete[] m_saved_result_X;
+		};
+
+		if( m_saved_result_Y != nullptr )
+		{
+			delete[] m_saved_result_Y;
+		};
+
+	};
+
+	//セットされた値からすべてのフレーム結果を算出し、保持します。
+	bool SonikBazierBox::SavedResultFrame(void)
+	{
+		//すでに配列を持っていれば一回開放。
+		if( m_saved_result_X != nullptr )
+		{
+			delete[] m_saved_result_X;
+			m_saved_result_X = nullptr;
+		};
+		if( m_saved_result_Y != nullptr )
+		{
+			delete[] m_saved_result_Y;
+			m_saved_result_Y = nullptr;
+		};
+
+		//配列作成。
+		m_saved_result_X = new(std::nothrow) double[Elapsed_Frame];
+		if( m_saved_result_X == nullptr )
+		{
+			return false;
+		};
+
+		m_saved_result_Y = new(std::nothrow) double[Elapsed_Frame];
+		if( m_saved_result_X == nullptr )
+		{
+			delete[] m_saved_result_X;
+			m_saved_result_X = nullptr;
+			return false;
+		};
+
+		double _getx;
+		double _gety;
+		for(uint32_t i=0; i < Elapsed_Frame; ++i)
+		{
+			Bezier_curveLine(_getx, _gety, i);
+			m_saved_result_X[i] = _getx;
+			m_saved_result_Y[i] = _gety;
+		};
+
+		return true;
+	};
+	//保持しているフレーム結果をすべて破棄します。
+	void SonikBazierBox::SavedResultClear(void)
+	{
+		//すでに配列を持っていれば一回開放。
+		if( m_saved_result_X != nullptr )
+		{
+			delete[] m_saved_result_X;
+			m_saved_result_X = nullptr;
+		};
+		if( m_saved_result_Y != nullptr )
+		{
+			delete[] m_saved_result_Y;
+			m_saved_result_Y = nullptr;
+		};
+	};
+
+	//2次元のペジェ曲線に必要な情報を設定します。
+	//引数最後のフラグは、先に計算を実施し、すべてのフレームの結果を保持しておくかどうかを設定します。(フレーム数 * doubleサイズ)分のメモリを使います。
+	void SonikBazierBox::SetValue(double _x_, double _y_, double _endx_, double _endy_, double _pivx_, double  _pivy_, unsigned long _ef_)
+	{
+		StartX = _x_;
+		StartY = _y_;
+		EndX = _endx_;
+		EndY = _endy_;
+		PivotX = _pivx_;
+		PivotY = _pivy_;
+		Elapsed_Frame = _ef_;
+	};
+
+	//2次のベジェ曲線の位置点を算出します。
+	//引数1: 結果であるX値を格納するために変数を指定します。
+	//引数2: 結果であるY値を格納するために変数を指定します。
+	//引数3: 始点から終点までの総合フレームの中で、何フレーム目の値を取得するのかを指定します。
+	void SonikBazierBox::Bezier_curveLine(double& GetX, double& GetY, unsigned long GetFrame)
+	{
+		double time = 0.0;
+
+		if(Elapsed_Frame < GetFrame)
+		{
+			time = 1.0;
+		}else
+		{
+			time = GetFrame * (1 * Elapsed_Frame);
+		};
+
+		GetX = ((1.0 - time) * (1.0 - time) * StartX) + (2 * (1.0 - time) * time * PivotX) + (time * time * EndX);
+		GetY = ((1.0 - time) * (1.0 - time) * StartY) + (2 * (1.0 - time) * time * PivotY) + (time * time * EndY);
 	};
 
 

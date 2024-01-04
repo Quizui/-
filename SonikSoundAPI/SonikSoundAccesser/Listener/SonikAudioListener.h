@@ -35,11 +35,14 @@ namespace SonikAudio
 		void GetPosition(double& x, double& y, double& z);
 		void GetPosition(double*& x, double*& y, double*& z);
 		double GetPositionX(void);
-		double* GetPositionX(void);
+		const double* GetPositionX(void);
+		const double& GetPositionX(void);
 		double GetPositionY(void);
-		double* GetPositionY(void);
+		const double* GetPositionY(void);
+		const double& GetPositionY(void);
 		double GetPositionZ(void);
-		double* GetPositionZ(void);
+		const double* GetPositionZ(void);
+		const double& GetPositionZ(void);
 
 	};
 

@@ -17,6 +17,7 @@
 #include "../Mixer/SonikAudio_Mixer.h"
 #include "../Player/SonikAudioPlayer.h"
 #include "../Player/SonikAudioPlayer_ControlData.h"
+#include "../Listener/SonikAudioListener.h"
 
 
 namespace SonikAudio
@@ -31,20 +32,12 @@ namespace SonikAudio
 	SonikAudio_Implement::~SonikAudio_Implement()
 	{
 		//廃棄処理
-		/*uintptr_t func_ = 0;
-		func_ = m_handle->GetDllProcAddress("PlatFormDelete");
+		//PlatFormInterface以外はスマートポインタから破棄される。
 
-		(*reinterpret_cast<void(*)(void)>(func_))();
-		*/
-
-		m_TaskMng.ResetPointer(nullptr);
-
-		//PlatFormInterfaceのDLLはミキサ内のデストラクタでいなくなります。
-		if( mp_Mixer != nullptr )
-		{
-			delete mp_Mixer;
-		}
-
+		//PlatFormInterfaceのライフサイクル管理はAudioInterfaceの管轄のため
+		//ここでDeleteコール。
+		//DLL内でnewされているのでDLL内で開放処理をしてあげないといけない。
+		//ので専用のスマートポインタを作らずにハンドル管理。
 		uintptr_t func_ = 0;
 		func_ = m_platformHandle->GetDllProcAddress("PlatFormDelete");
 
@@ -56,28 +49,32 @@ namespace SonikAudio
 	{
 		//m_pfi = Set_PFI_Pointer;
 		//m_handle = SetHandle;
-		SamlingType = static_cast<SonikAudio::SCVType>(Set_Sampletype);
+		SamplingType = static_cast<SonikAudio::SCVType>(Set_Sampletype);
+
+		//リスナ生成。
+		SonikAudio::SonikAudioListener* lp_listener = new(std::nothrow) SonikAudio::SonikAudioListener();
+		if(lp_listener == nullptr)
+		{
+			SamplingType = SonikAudio::SCVType::B16_CH1_SR44100;
+			return false;
+		};
+
+		//スマートポインタへセット
+		m_TaskMng.ResetPointer(l_mng);
 
 		SonikAudioPlayerTask::SonikAudioPlayerTaskManager* l_mng = nullptr;
 		l_mng = new(std::nothrow) SonikAudioPlayerTask::SonikAudioPlayerTaskManager;
 		if(l_mng == nullptr)
 		{
-			uintptr_t func_ = 0;
-			func_ = SetHandle->GetDllProcAddress("PlatFormDelete");
-			(*reinterpret_cast<void(*)(void)>(func_))();
-
 			return false;
 		};
 
-		if( !l_mng->Initialize(1000) )
+		//スマートポインタへセット
+		m_TaskMng.ResetPointer(l_mng);
+
+		if( !m_TaskMng->Initialize(1000) )
 		{
-			delete l_mng;
-
-			uintptr_t func_ = 0;
-			func_ = SetHandle->GetDllProcAddress("PlatFormDelete");
-			(*reinterpret_cast<void(*)(void)>(func_))();
-
-			l_mng = nullptr;
+			SamplingType = SonikAudio::SCVType::B16_CH1_SR44100;
 			return false;
 		};
 
@@ -85,15 +82,12 @@ namespace SonikAudio
 		l_mixer = new(std::nothrow) SonikAudio::SonikAudioMixer();
 		if( l_mixer == nullptr )
 		{
-			delete l_mng;
-
-			uintptr_t func_ = 0;
-			func_ = SetHandle->GetDllProcAddress("PlatFormDelete");
-			(*reinterpret_cast<void(*)(void)>(func_))();
-
-			l_mng = nullptr;
+			SamplingType = SonikAudio::SCVType::B16_CH1_SR44100;
 			return false;
 		};
+
+		//スマートポインタへセット
+		mp_Mixer.ResetPointer(l_mixer);
 
 		uint32_t _samplingrate = (Set_Sampletype & 0x000000FF) * 1000;
 		if(_samplingrate == 44000)
@@ -106,20 +100,11 @@ namespace SonikAudio
 
 		if( !l_mixer->Initialize(1000, _bit, _ch, _samplingrate, Set_PFI_Pointer))
 		{
-			delete l_mixer;
-			delete l_mng;
 
-			uintptr_t func_ = 0;
-			func_ = SetHandle->GetDllProcAddress("PlatFormDelete");
-			(*reinterpret_cast<void(*)(void)>(func_))();
-
-			l_mixer = nullptr;
-			l_mng = nullptr;
+			SamplingType = SonikAudio::SCVType::B16_CH1_SR44100;
 			return false;
 		};
 
-		m_TaskMng.ResetPointer(l_mng);
-		mp_Mixer = l_mixer;
 		m_platformHandle = SetHandle;
 
 		return true;
@@ -143,6 +128,12 @@ namespace SonikAudio
 		};
 
 		return true;
+	};
+
+	//オーディオリスナの取得
+	void SonikAudio_Implement::GetListener(SAudioListener& _out_get_)
+	{
+		_out_get_ = mp_Listener;
 	};
 
 	//オーディオプレイヤー(コントローラ)作成

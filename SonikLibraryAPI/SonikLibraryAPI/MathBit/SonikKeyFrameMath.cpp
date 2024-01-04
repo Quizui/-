@@ -197,10 +197,12 @@ namespace SonikMath
 	//補足: sqrtを使用して現在の位置から中心点までの半径を計算し、回転を行います。
 	void SinglePointRotationSinglePointRotation(double CriteriaX, double CriteriaY, double ObjectPosX, double ObjectPosY, double digree, double& GetX, double& GetY)
 	{
+		SonikMath::Sonik3DPoint _point(ObjectPosX);
 		//底辺
-		double distant_Base = SonikMath::TwoPointDistance(ObjectPosX, CriteriaX);
+		double distant_Base = _point.Distance(CriteriaX);//SonikMath::TwoPointDistance(ObjectPosX, CriteriaX);
 		//高さ
-		double distant_Top = SonikMath::TwoPointDistance(ObjectPosY, CriteriaY);
+		_point.Set3Point(0.0, ObjectPosY, 0.0);
+		double distant_Top = _point.Distance(CriteriaY);//SonikMath::TwoPointDistance(ObjectPosY, CriteriaY);
 		//半径
 		double Radius = sqrt( ((distant_Base * distant_Base) + (distant_Top * distant_Top)) );
 
@@ -222,10 +224,12 @@ namespace SonikMath
 	//補足: sqrtを使用して現在の位置から中心点までの半径を計算し、回転を行います。
 	void SinglePointRotation_F(float CriteriaX, float CriteriaY, float ObjectPosX, float ObjectPosY, float digree, float& GetX, float& GetY)
 	{
+		SonikMath::Sonik3DPoint _point(ObjectPosX);
 		//底辺
-		float distant_Base = static_cast<float>( SonikMath::TwoPointDistance(ObjectPosX, CriteriaX) );
+		float distant_Base = static_cast<float>( _point.Distance(CriteriaX) );//SonikMath::TwoPointDistance(ObjectPosX, CriteriaX) );
 		//高さ
-		float distant_Top = static_cast<float>( SonikMath::TwoPointDistance(ObjectPosY, CriteriaY) );
+		_point.Set3Point(0.0, ObjectPosY, 0.0);
+		float distant_Top = static_cast<float>( _point.Distance(CriteriaY) );//SonikMath::TwoPointDistance(ObjectPosY, CriteriaY) );
 		//半径
 		float Radius = sqrtf( ((distant_Base * distant_Base) + (distant_Top * distant_Top)) );
 

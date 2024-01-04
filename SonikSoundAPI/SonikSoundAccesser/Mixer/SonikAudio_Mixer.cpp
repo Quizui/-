@@ -53,7 +53,7 @@ namespace SonikAudio
 	};
 
 	//イニシャライザ
-	bool SonikAudioMixer::Initialize(uint32_t SetAudioListMax, uint32_t FormatBit, uint16_t SetChannel, uint32_t SetSamplingRate, SonikAudioPlatForm::SonikPlatformAudioInterface* Set_PFI_Pointer)
+	bool SonikAudioMixer::Initialize(uint32_t SetAudioListMax, uint32_t FormatBit, uint16_t SetChannel, uint32_t SetSamplingRate, SonikAudioPlatForm::SonikPlatformAudioInterface* Set_PFI_Pointer, SonikAudioPointer::SonikAudioNormalSmtPtr<SonikAudio::SonikAudioListener> SetListener)
 	{
 		if(FormatBit == 16)
 		{
@@ -62,7 +62,7 @@ namespace SonikAudio
 			case 0x01:
 				p_mfunc_ = &SonikAudioMixer::Mixing_16bit_1ch;
 
-				OneSamplingByteSize =  (FormatBit * 0.125) * SetChannel * SetSamplingRate;
+				OneSamplingByteSize = (FormatBit * 0.125) * SetChannel * SetSamplingRate;
 				break;
 
 			case 0x02:
@@ -198,6 +198,7 @@ namespace SonikAudio
 		mp_thread->SetCallFunction(l_func);
 		m_samplingRate = SetSamplingRate;
 		mp_platform = Set_PFI_Pointer;
+		mp_Listener = SetListener;
 
 		return true;
 	};

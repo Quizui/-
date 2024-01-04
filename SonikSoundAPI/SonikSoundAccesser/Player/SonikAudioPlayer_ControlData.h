@@ -14,6 +14,7 @@
 #include "../PlayStateEnums.h"
 #include "../../AudioLoadTypedef.h"
 #include "../SAudioAccesserTypedef.h"
+#include "../AudioPosition/SonikAudio3DPoint.h"
 
 
 namespace SonikAudioData
@@ -23,14 +24,15 @@ namespace SonikAudioData
 	class SonikAudioControlData : public SonikAudioDataInterface::SADInterface_PlayerSide
 	{
 	private:
-		SonikAudio::SAudioFormat m_AudioData;		//オーディオデータへのスマートポインタ
-		char* mp_ControlData;						//操作用ポインタ
-		float m_posx, m_posy, m_posz;				//プレイヤーの3D空間におけるポジション
-		float *mp_posx, *mp_posy, *mp_posz;			//ポインタ先の付け替えを行うので、実際に使うポジション変数はこっち。
-		float m_volume;								//オーディオの音量
-		bool m_repeat;								//オーディオのリピートフラグ
-		SonikAudioEnum::PlayStateID m_AudioState;	//オーディオのステータス(プレイ、ストップ等)
-		uintptr_t m_uniqueid;						//メインインターフェースで管理される番号です。（自信のアドレス値をIDとして使います。)
+		SonikAudio::SAudioFormat m_AudioData;			//オーディオデータへのスマートポインタ
+		char* mp_ControlData;							//操作用ポインタ
+		float m_posx, m_posy, m_posz;					//プレイヤーの3D空間におけるポジション
+		float *mp_posx, *mp_posy, *mp_posz;				//ポインタ先の付け替えを行うので、実際に使うポジション変数はこっち。
+		SonikAudioPoint::SonikAudio3DPoint m_3dpos;	//3D座標ポジション
+		float m_volume;									//オーディオの音量
+		bool m_repeat;									//オーディオのリピートフラグ
+		SonikAudioEnum::PlayStateID m_AudioState;		//オーディオのステータス(プレイ、ストップ等)
+		uintptr_t m_uniqueid;							//メインインターフェースで管理される番号です。（自信のアドレス値をIDとして使います。)
 
 		//CASLock
 		SonikLib::S_CAS::SonikAtomicLock PositionLock[3];

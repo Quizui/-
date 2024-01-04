@@ -1,0 +1,28 @@
+/*
+ * SonikAudio3DPoint.h
+ *
+ *  Created on: 2024/01/04
+ *      Author: SONIC
+ */
+
+#ifndef AUDIOPOSITION_SONIKAUDIO3DPOINT_H_
+#define AUDIOPOSITION_SONIKAUDIO3DPOINT_H_
+
+#include "../../../MathBit/SonikMathDistance.h"
+
+namespace SonikAudioPoint
+{
+	class SonikAudio3DPoint : public SonikMath::Sonik3DPoint
+	{
+	public:
+		double* mp_x, mp_y, mp_z;
+
+
+
+
+	};
+};
+
+
+
+#endif /* AUDIOPOSITION_SONIKAUDIO3DPOINT_H_ */

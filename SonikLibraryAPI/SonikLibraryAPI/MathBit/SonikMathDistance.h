@@ -8,44 +8,83 @@
 #ifndef SONIKMATHDISTANCE_H_
 #define SONIKMATHDISTANCE_H_
 
-enum TwoPointeToPoint
-{
-	AtoB = 1,
-	BtoA,
-};
-
 namespace SonikMathDataBox
 {
-	class BazierBoxF
-	{
-	public:
-		float StartX, StartY; //始点
-		float EndX, EndY;	  //終点
-		float PivotX, PivotY; //制御点
-		float Elapsed_Frame;  //始点から終点まで、何フレームで到達するか。
 
-	public:
-		BazierBoxF(void);
-		~BazierBoxF(void);
-	};
 
 };
 
 namespace SonikMath
 {
 
-	//2点間の距離の差分を計算します。
-	//引数1: 地点A となる値を指定します。
-	//引数2: 地点B となる値を指定します。
-	//引数3: 地点間の距離差分の計算を、AからB（Aを主体）とみるか、BからA（B主体)と見るかを設定します。(省略可能です)
-	double TwoPointDistance(double SetPointA, double SetPointB, TwoPointeToPoint ToPoint = AtoB);
+	class Sonik3DPoint
+	{
+	protected:
+		double m_x, m_y, m_z;
 
-	//2次のベジェ曲線の位置点を算出します。(float版)
-	//引数1: ベジェ曲線の設定クラスである、BazierBoxクラスに任意の値を設定して指定します。
-	//引数2: 結果であるX値を格納するために変数を指定します。
-	//引数3: 結果であるY値を格納するために変数を指定します。
-	//引数4: 始点から終点までの総合フレームの中で、何フレーム目の値を取得するのかを指定します。
-	void Bezier_curveLineF(const SonikMathDataBox::BazierBoxF& StateBox, float& GetX, float& GetY, float GetFrame);
+	public:
+		Sonik3DPoint(double _x_ = 0.0, double _y_ = 0.0, double _z_ =0.0);
+		virtual ~Sonik3DPoint(void);
+
+		void Set3Point(double _x_, double _y_, double _z_);
+		void SetX(double _x_);
+		void SetY(double _y_);
+		void SetZ(double _z_);
+
+		void Get3Point(double& _x_, double& _y_, double& _z_);
+		void Get3Point(double* _x_, double* _y_, double* _z_);
+		void Get3Point(double** _x_, double** _y_, double** _z_);
+		double GetX(void);
+		double* GetpX(void);
+		void GetX(double& _x_);
+		void GetX(double* _x_);
+		double GetY(void);
+		double* GetpY(void);
+		void GetY(double& _y_);
+		void GetY(double* _y_);
+		double GetZ(void);
+		double* GetpZ(void);
+		void GetZ(double& _z_);
+		void GetZ(double* _z_);
+
+
+		//本クラスと引数で指定されたオブジェクト或いは座標との距離を算出します。
+		virtual double Distance(const Sonik3DPoint& _point_);
+		virtual double Distance(const double _x_ = 0.0, const double _y_ = 0.0, const double _z_ = 0.0);
+	};
+
+
+	class SonikBazierBox
+	{
+		protected:
+			double StartX, StartY; //始点
+			double EndX, EndY;	  //終点
+			double PivotX, PivotY; //制御点
+			unsigned long Elapsed_Frame;  //始点から終点まで、何フレームで到達するか。
+
+			double* m_saved_result_X;
+			double* m_saved_result_Y;
+		public:
+
+			//引数最後のフラグは、先に計算を実施し、すべてのフレームの結果を保持しておくかどうかを設定します。(フレーム数 * doubleサイズ)分のメモリを使います。
+			SonikBazierBox(double _x_ = 0.0, double _y_ = 0.0, double _endx_ = 0.0, double _endy_ = 0.0, double _pivx_ = 0.0, double  _pivy_ = 0.0, unsigned long _ef_= 0);
+			~SonikBazierBox(void);
+
+			//2次元のペジェ曲線に必要な情報を設定します。
+			//引数最後のフラグは、先に計算を実施し、すべてのフレームの結果を保持しておくかどうかを設定します。(フレーム数 * doubleサイズ)分のメモリを使います。
+			void SetValue(double _x_, double _y_, double _endx_, double _endy_, double _pivx_, double  _pivy_, unsigned long _ef_);
+
+			//セットされた値からすべてのフレーム結果を算出し、保持します。
+			bool SavedResultFrame(void);
+			//保持しているフレーム結果をすべて破棄します。
+			void SavedResultClear(void);
+
+			//2次のベジェ曲線の位置点を算出します。
+			//引数1: 結果であるX値を格納するために変数を指定します。
+			//引数2: 結果であるY値を格納するために変数を指定します。
+			//引数3: 始点から終点までの総合フレームの中で、何フレーム目の値を取得するのかを指定します。
+			void Bezier_curveLine(double& GetX, double& GetY, unsigned long GetFrame);
+	};
 
 };
 
