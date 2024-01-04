@@ -23,10 +23,17 @@ namespace SonikAudio
 
 namespace SonikAudio
 {
+	class SonikAudioListener;
+};
 
-	typedef SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudio::SonikAudioInterface> SAudioInterface;
+namespace SonikAudio
+{
 
-	typedef SonikAudioPointer::SonikAudioPlayerSmtPtr<SonikAudio::SonikAudioPlayer> SAudioPlayer;
+	using SAudioInterface = SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudio::SonikAudioInterface>;
+
+	using SAudioPlayer = SonikAudioPointer::SonikAudioPlayerSmtPtr<SonikAudio::SonikAudioPlayer>;
+
+	using SAudioListener = SonikAudioPointer::SonikAudioNormalSmtPtr<SonikAudio::SonikAudioListener>;
 
 };
 

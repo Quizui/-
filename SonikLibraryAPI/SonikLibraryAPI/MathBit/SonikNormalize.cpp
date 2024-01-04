@@ -5,46 +5,89 @@
  *      Author: SONIC
  */
 
+#include "SonikNormalize.h"
+
 namespace SonikMath
 {
-	//引数の値を1.0 ~ 0.0 の範囲に正規化します。
-	// Y = ( (X - 1) / (Xmax - 1) )
-	float Normalize_Zero_to_OneF(unsigned long NormalizeTargetValue)
+
+	//0.0 ~ 1.0へ正規化します。
+	inline float Normalize(const float& MaxValue, const float& NowValue)
 	{
-		float tmp = static_cast<float>(NormalizeTargetValue);
-		return (tmp - 1.0f) / (4294967295.0f - 1.0f);
-							  //↑ ULONG_MAX
+		if(NowValue >= MaxValue)
+		{
+			return 1.0f;
+
+		}else if(NowValue <= 0)
+		{
+			return 0.0f;
+		};
+
+		return NowValue / MaxValue;
 	};
 
-	//double版
-	double Normalize_Zero_to_One(unsigned long long NormalizeTargetValue)
+	//0.0 ~ 1.0へ正規化します。
+	//最大値を0.0
+	//最小値を1.0
+	//として扱います。
+	inline float NormalizeInverse(const float& MaxValue, const float& NowValue)
 	{
-		double tmp = static_cast<double>(NormalizeTargetValue);
-		return (tmp - 1.0) / (18446744073709551615.0 - 1.0);
-							 //↑ ULLONG_MAX
+		if(NowValue >= MaxValue)
+		{
+			return 0.0f;
+
+		}else if(NowValue <= 0)
+		{
+			return 1.0f;
+		};
+
+		return 1.0f - (NowValue / MaxValue);
 	};
 
-
-	//引数１の値を 引数2 ~ 引数3 の範囲に正規化します。
+	//引数１の値を 引数4 ~ 引数5 の範囲に正規化します。
 	// Y = ( (X - Xmin) / (Xmax - Xmin) ) * (Max - Min) + Min
-	float Normalize_Max_to_MinF(long NormalizeTargetValue, long TargetMax, long TargetMin)
+	inline float Normalize_Max_to_MinF(long NTV, long NTV_Max, long NTV_Min, long NormalizeMax, long NormalizeMin)
 	{
-		float tmp = static_cast<float>(NormalizeTargetValue);
-		float tmp_Max = static_cast<float>(TargetMax);
-		float tmp_Min = static_cast<float>(TargetMin);
+		if(NTV_Max <= NTV_Min)
+		{
+			return 0.0f;
+		};
 
-		return ( (tmp - 1.0f) / (2147483647.0f - 1.0f) ) * (tmp_Max - tmp_Min) + tmp_Min;
-	};							//↑LONG_MAX
+		if(NormalizeMax < NormalizeMin)
+		{
+			return 0.0f;
+		}
+
+		float value[5];
+		value[0] = static_cast<float>(NTV);
+		value[1] = static_cast<float>(NTV_Max);
+		value[2] = static_cast<float>(NTV_Min);
+		value[3] = static_cast<float>(NormalizeMax);
+		value[4] = static_cast<float>(NormalizeMin);
+
+		return ( (value[0] - value[2]) / (value[1] - value[2]) ) * (value[3] - value[4]) + value[4];
+	};
 
 	//double版
-	double Normalize_Max_to_Min(long long NormalizeTargetValue, long long TargetMax, long long TargetMin)
+	inline double Normalize_Max_to_Min(long long NTV, long long NTV_Max, long long NTV_Min, long long NormalizeMax, long long NormalizeMin)
 	{
-		double tmp = static_cast<double>(NormalizeTargetValue);
-		double tmp_Max = static_cast<double>(TargetMax);
-		double tmp_Min = static_cast<double>(TargetMin);
+		if(NTV_Max <= NTV_Min)
+		{
+			return 0.0f;
+		};
 
-		return ( (tmp - 1.0) / (9223372036854775807.0 - 1.0) ) * (tmp_Max - tmp_Min) + tmp_Min;
-								//LLONG_MAX
+		if(NormalizeMax < NormalizeMin)
+		{
+			return 0.0f;
+		}
+
+		float value[5];
+		value[0] = static_cast<double>(NTV);
+		value[1] = static_cast<double>(NTV_Max);
+		value[2] = static_cast<double>(NTV_Min);
+		value[3] = static_cast<double>(NormalizeMax);
+		value[4] = static_cast<double>(NormalizeMin);
+
+		return ( (value[0] - value[2]) / (value[1] - value[2]) ) * (value[3] - value[4]) + value[4];
 	};
 
 

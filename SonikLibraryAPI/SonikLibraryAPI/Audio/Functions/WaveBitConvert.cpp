@@ -55,7 +55,7 @@ namespace SonikAudioWAVEBitConvert
 		char* Dst = dstTop;
 		for(/*省略*/; SrcWaveSize != 0; SrcWaveSize -= BlockAlign)
 		{
-			(*Dst) = static_cast<char>(SonikMath::Normalize_Max_to_MinF((*Src), CHAR_MAX, CHAR_MIN) ); //8bitの範囲に正規化
+			(*Dst) = static_cast<char>(SonikMath::Normalize_Max_to_MinF((*Src), LONG_MAX, LONG_MIN, CHAR_MAX, CHAR_MIN) ); //8bitの範囲に正規化
 			++Dst;
 			++Src;
 		};
@@ -87,7 +87,7 @@ namespace SonikAudioWAVEBitConvert
 		char* Dst = dstTop;
 		for(/*省略*/; SrcWaveSize != 0; SrcWaveSize -= BlockAlign)
 		{
-			(*Dst) = static_cast<char>(SonikMath::Normalize_Max_to_MinF((*Src), CHAR_MAX, CHAR_MIN));
+			(*Dst) = static_cast<char>(SonikMath::Normalize_Max_to_MinF((*Src),LONG_MAX, LONG_MIN, CHAR_MAX, CHAR_MIN));
 			++Dst;
 			++Src;
 		};
@@ -101,7 +101,7 @@ namespace SonikAudioWAVEBitConvert
 		short* Dst = reinterpret_cast<short*>(dstTop);
 		for(/*省略*/; SrcWaveSize != 0; SrcWaveSize -= BlockAlign)
 		{
-			(*Dst) = static_cast<short>(SonikMath::Normalize_Max_to_MinF((*Src), SHRT_MAX, SHRT_MIN));
+			(*Dst) = static_cast<short>(SonikMath::Normalize_Max_to_MinF((*Src), LONG_MAX, LONG_MIN, SHRT_MAX, SHRT_MIN));
 			++Dst;
 			++Src;
 		};

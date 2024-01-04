@@ -1,0 +1,73 @@
+/*
+ * SonikNormalize.cpp
+ *
+ *  Created on: 2019/01/20
+ *      Author: SONIC
+ */
+
+namespace SonikMath
+{
+
+	//0.0 ~ 1.0へ正規化します。
+	//引数1：正規化1.0 として扱いたい値
+	//引数2：正規化0.0として扱いたい値
+	//引数3：現在値(最大を超えた場合は1.0として、最小を超えた場合は0.0として扱います。)
+	inline float Normalizer(const float& TargetMax, const float& TargetMin, const float& TargetNow)
+	{
+		if(TargetMax < TargetNow)
+		{
+			return 1.0f;
+		};
+
+		if(TargetMin > TargetNow)
+		{
+			return 1.0f;
+		};
+
+
+	};
+
+//	//引数の値を1.0 ~ 0.0 の範囲に正規化します。
+//	// Y = ( (X - 1) / (Xmax - Xmin) )
+//	float Normalize_Zero_to_OneF(unsigned long NormalizeTargetValue)
+//	{
+//		float tmp = static_cast<float>(NormalizeTargetValue);
+//		return tmp / 4294967295.0f;
+//							  	  	  	  	  //↑ ULONG_MAX
+//	};
+//
+//	//double版
+//	double Normalize_Zero_to_One(unsigned long long NormalizeTargetValue)
+//	{
+//		double tmp = static_cast<double>(NormalizeTargetValue);
+//		return tmp / 18446744073709551615.0;
+//							 	 	 	 	 	 //↑ ULLONG_MAX
+//	};
+//
+//
+//	//引数１の値を 引数2 ~ 引数3 の範囲に正規化します。
+//	// Y = ( (X - Xmin) / (Xmax - Xmin) ) * (Max - Min) + Min
+//	float Normalize_Max_to_MinF(long NormalizeTargetValue, long TargetMax, long TargetMin)
+//	{
+//		float tmp = static_cast<float>(NormalizeTargetValue);
+//		float tmp_Max = static_cast<float>(TargetMax);
+//		float tmp_Min = static_cast<float>(TargetMin);
+//
+//		return ( (tmp - 1.0f) / (2147483647.0f - 1.0f) ) * (tmp_Max - tmp_Min) + tmp_Min;
+//	};											//↑LONG_MAX
+//
+//	//double版
+//	double Normalize_Max_to_Min(long long NormalizeTargetValue, long long TargetMax, long long TargetMin)
+//	{
+//		double tmp = static_cast<double>(NormalizeTargetValue);
+//		double tmp_Max = static_cast<double>(TargetMax);
+//		double tmp_Min = static_cast<double>(TargetMin);
+//
+//		return ( (tmp - 1.0) / (9223372036854775807.0 - 1.0) ) * (tmp_Max - tmp_Min) + tmp_Min;
+//													//LLONG_MAX
+//	};
+
+
+};
+
+

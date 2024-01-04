@@ -39,6 +39,7 @@ namespace SonikAudio
 	class SonikAudioMixer;
 };
 
+
 //本体定義
 namespace SonikAudio
 {
@@ -49,7 +50,7 @@ namespace SonikAudio
 		SonikLib::SDllHandle m_platformHandle;
 
 		//SamlingRateタイプ
-		SonikAudio::SCVType SamlingType;
+		SonikAudio::SCVType SamplingType;
 		std::map<uint32_t, SonikAudio::SAudioFormat> audiomap;
 
 		//プレイヤーのオーディオデータを保持するmap
@@ -59,7 +60,9 @@ namespace SonikAudio
 		SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioPlayerTask::SonikAudioPlayerTaskManager> m_TaskMng;
 
 		//ミキサ
-		SonikAudio::SonikAudioMixer* mp_Mixer;
+		SonikAudioPointer::SonikAudioNormalSmtPtr<SonikAudio::SonikAudioMixer> mp_Mixer;
+		//リスナ(前方宣言はSAudioAccesserTypedef.hで宣言済)
+		SonikAudio::SAudioListener mp_Listener;
 
 	public:
 		//constructor
@@ -73,6 +76,8 @@ namespace SonikAudio
 		//ピュア関数の実装
 		//オーディオファイルをロードしてAudioPlayerを作成できるようにセットします。
 		bool LoadAudio(const char* AudioFilePath, uint32_t SetAudioID);
+		//オーディオリスナの取得
+		void GetListener(SAudioListener& _out_get_);
 		//オーディオプレイヤー(コントローラ)作成
 		bool CreateAudioPlayer(uint32_t AudioID, SonikAudio::SAudioPlayer& GetPlayer);
 		//ハードウェア情報を取得します。

@@ -19,6 +19,11 @@ namespace SonikAudioData
 	class SonikAudioControlData;
 };
 
+namespace SonikAudio
+{
+	class SonikAudioListener;
+};
+
 namespace SonikAudioPlatForm
 {
 	class SonikPlatformAudioInterface;
@@ -40,6 +45,8 @@ namespace SonikAudio
 		//この変数の破棄については本クラスではノンタッチ
 		SonikAudioPlatForm::SonikPlatformAudioInterface* mp_platform;
 
+		//リスナ
+		SonikAudioPointer::SonikAudioNormalSmtPtr<SonikAudio::SonikAudioListener> mp_Listener;
 
 		//送出用バッファ
 		int8_t* mp_buffer;
@@ -77,7 +84,7 @@ namespace SonikAudio
 		~SonikAudioMixer(void);
 
 		//イニシャライザ
-		bool Initialize(uint32_t SetAudioListMax, uint32_t FormatBit, uint16_t SetChannel, uint32_t SetSamplingRate, SonikAudioPlatForm::SonikPlatformAudioInterface* Set_PFI_Pointer);
+		bool Initialize(uint32_t SetAudioListMax, uint32_t FormatBit, uint16_t SetChannel, uint32_t SetSamplingRate, SonikAudioPlatForm::SonikPlatformAudioInterface* Set_PFI_Pointer, SonikAudioPointer::SonikAudioNormalSmtPtr<SonikAudio::SonikAudioListener> SetListener);
 
 		//オーディオの追加。
 		bool AddAudio(SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData> SetAudio);
