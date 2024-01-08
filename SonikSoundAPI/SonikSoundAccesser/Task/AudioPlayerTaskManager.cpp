@@ -23,7 +23,7 @@ namespace SonikAudioPlayerTask
 	{
 		if(mp_TaskThread != nullptr)
 		{
-			mp_TaskThread->SetFunctionDeleteFlagOn();
+			mp_TaskThread->SetFunctionloopEndFlagOn();
 			mp_TaskThread->SetThreadExitFlagOn();
 
 			delete mp_TaskThread;
@@ -49,7 +49,7 @@ namespace SonikAudioPlayerTask
 		//２回目以降よばれた時はデストラクタ処理をしてから再クリエイト
 		if(mp_TaskThread != nullptr)
 		{
-			mp_TaskThread->SetFunctionDeleteFlagOn();
+			mp_TaskThread->SetFunctionloopEndFlagOn();
 			mp_TaskThread->SetThreadExitFlagOn();
 
 			delete mp_TaskThread;

@@ -15,6 +15,12 @@ namespace SonikAudioPoint
 	class SonikAudio3DPoint : public SonikMath::Sonik3DPoint
 	{
 	public:
+		//基底クラスのprotectedをpublicにするよりこちらでアクセスを用意したほうがいいかなと..。
+		double& ref_m_x;
+		double& ref_m_y;
+		double& ref_m_z;
+
+		//参照変更用。(connectで切り替えられる可能性あり。
 		double* mp_x;
 		double* mp_y;
 		double* mp_z;

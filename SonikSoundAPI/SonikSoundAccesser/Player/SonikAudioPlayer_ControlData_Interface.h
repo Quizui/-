@@ -39,10 +39,10 @@ namespace SonikAudioDataInterface
 		};
 
 		//ポジションのゲット
-		virtual float GetPositionX(void) =0;
-		virtual float GetPositionY(void) =0;
-		virtual float GetPositionZ(void) =0;
-		virtual void GetPositionAll(float& x, float& y, float& z) =0;
+		virtual double GetPositionX(void) =0;
+		virtual double GetPositionY(void) =0;
+		virtual double GetPositionZ(void) =0;
+		virtual void GetPositionAll(double& x, double& y, double& z) =0;
 
 		//音量(ボリューム)のゲット
 		virtual const float* GetVolume(void) =0;

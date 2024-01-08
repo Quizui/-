@@ -23,7 +23,7 @@
 namespace SonikAudio
 {
 	SonikAudio_Implement::SonikAudio_Implement(void)
-	:SamlingType(SonikAudio::SCVType::B16_CH1_SR44100)
+	:SamplingType(SonikAudio::SCVType::B16_CH1_SR44100)
 	,mp_Mixer(nullptr)
 	{
 		//no_process;
@@ -60,7 +60,7 @@ namespace SonikAudio
 		};
 
 		//スマートポインタへセット
-		m_TaskMng.ResetPointer(l_mng);
+		mp_Listener.ResetPointer(lp_listener);
 
 		SonikAudioPlayerTask::SonikAudioPlayerTaskManager* l_mng = nullptr;
 		l_mng = new(std::nothrow) SonikAudioPlayerTask::SonikAudioPlayerTaskManager;
@@ -98,7 +98,7 @@ namespace SonikAudio
 		uint32_t _bit = ((Set_Sampletype & 0x00FF0000) >> 16);
 		uint16_t _ch = ((Set_Sampletype & 0x0000FF00) >> 8);
 
-		if( !l_mixer->Initialize(1000, _bit, _ch, _samplingrate, Set_PFI_Pointer))
+		if( !l_mixer->Initialize(1000, _bit, _ch, _samplingrate, Set_PFI_Pointer, mp_Listener))
 		{
 
 			SamplingType = SonikAudio::SCVType::B16_CH1_SR44100;
@@ -116,7 +116,7 @@ namespace SonikAudio
 	{
 		SonikAudio::SAudioFormat _audio;
 
-		if( !SonikAudioLoadFunction::Load_WaveFile(AudioFilePath, _audio, SamlingType, true) )
+		if( !SonikAudioLoadFunction::Load_WaveFile(AudioFilePath, _audio, SamplingType, true) )
 		{
 			return false;
 		};

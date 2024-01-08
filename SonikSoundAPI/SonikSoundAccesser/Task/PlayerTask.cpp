@@ -55,7 +55,7 @@ namespace SonikAudioPlayerTask
 
 	//APTask_StatusChange==============================================
 	//コンストラクタ
-	APTask_PositionChange::APTask_PositionChange(SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, float SetPosx, float SetPosy, float SetPosz)
+	APTask_PositionChange::APTask_PositionChange(SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetPosx, double SetPosy, double SetPosz)
 	:m_Posx(SetPosx)
 	,m_Posy(SetPosy)
 	,m_Posz(SetPosz)
@@ -65,7 +65,7 @@ namespace SonikAudioPlayerTask
 	};
 
 	//値のセット
-	void APTask_PositionChange::SetValue(float SetPosx, float SetPosy, float SetPosz)
+	void APTask_PositionChange::SetValue(double SetPosx, double SetPosy, double SetPosz)
 	{
 		m_Posx = SetPosx;
 		m_Posy = SetPosy;
@@ -81,7 +81,7 @@ namespace SonikAudioPlayerTask
 
 	//APTask_PositionConnectChange==============================================
 	//コンストラクタ
-	APTask_PositionConnectChange::APTask_PositionConnectChange(SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, float* SetPosx, float* SetPosy, float* SetPosz)
+	APTask_PositionConnectChange::APTask_PositionConnectChange(SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double* SetPosx, double* SetPosy, double* SetPosz)
 	:mp_Posx(SetPosx)
 	,mp_Posy(SetPosy)
 	,mp_Posz(SetPosz)
@@ -90,7 +90,7 @@ namespace SonikAudioPlayerTask
 	};
 
 	//値のセット
-	void APTask_PositionConnectChange::SetValue(float* SetPosx, float* SetPosy, float* SetPosz)
+	void APTask_PositionConnectChange::SetValue(double* SetPosx, double* SetPosy, double* SetPosz)
 	{
 		mp_Posx = SetPosx;
 		mp_Posy = SetPosy;

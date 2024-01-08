@@ -6,15 +6,17 @@
  */
 
 #include "SonikAudio3DPoint.h"
+#include "../../../MathBit/SonikMathStandard.h"
 
 
 namespace SonikAudioPoint
 {
 
 	SonikAudio3DPoint::SonikAudio3DPoint(double _x_, double _y_, double _z_)
-	:m_x(_x_)
-	,m_y(_y_)
-	,m_z(_z_)
+	:SonikMath::Sonik3DPoint(_x_, _y_, _z_)
+	,ref_m_x(m_x)
+	,ref_m_y(m_y)
+	,ref_m_z(m_z)
 	,mp_x(&m_x)
 	,mp_y(&m_y)
 	,mp_z(&m_z)

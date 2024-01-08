@@ -49,7 +49,7 @@ namespace SonikAudio
 	};
 
 	//ポジションのセットとゲット
-	bool SonikAudioPlayer::SetPosition(float x, float y, float z)
+	bool SonikAudioPlayer::SetPosition(double x, double y, double z)
 	{
 		SonikAudioPlayerTask::APTask_PositionChange* l_task = nullptr;
 
@@ -62,7 +62,7 @@ namespace SonikAudio
 		return mp_TskMng->AddTask(l_task);
 
 	};
-	void SonikAudioPlayer::GetPosition(float& x, float& y, float& z)
+	void SonikAudioPlayer::GetPosition(double& x, double& y, double& z)
 	{
 		mp_AudioData->GetPositionAll(x, y, z);
 
@@ -70,7 +70,7 @@ namespace SonikAudio
 
 	//ポジションコネクトのセット
 	//他のオブジェクトの座標と同期させたいときに使います。
-	bool SonikAudioPlayer::SetPositionConnect(float* x, float* y, float* z)
+	bool SonikAudioPlayer::SetPositionConnect(double* x, double* y, double* z)
 	{
 		SonikAudioPlayerTask::APTask_PositionConnectChange* l_task = nullptr;
 

@@ -12,14 +12,8 @@ namespace SonikAudio
 
 	//コンストラクタ
 	SonikAudioListener::SonikAudioListener(void)
-	:PosX(0.0)
-	,PosY(0.0)
-	,PosZ(0.0)
-	,p_PosX(&PosX)
-	,p_PosY(&PosY)
-	,p_PosZ(&PosZ)
 	{
-
+		//no process;
 	};
 
 	//デストラクタ
@@ -31,83 +25,74 @@ namespace SonikAudio
 	//ポジションのセット
 	void SonikAudioListener::SetPosition(double x, double y, double z)
 	{
-		(*p_PosX) = x;
-		(*p_PosY) = y;
-		(*p_PosZ) = z;
+		m_3dpos.ref_m_x = x;
+		m_3dpos.ref_m_y = y;
+		m_3dpos.ref_m_z = z;
 	};
 
 	void SonikAudioListener::SetPositionX(double x)
 	{
-		(*p_PosX) = x;
+		m_3dpos.ref_m_x = x;
 	};
 
 	void SonikAudioListener::SetPositionY(double y)
 	{
-		(*p_PosY) = y;
+		m_3dpos.ref_m_y = y;
 	};
 
 	void SonikAudioListener::SetPositionZ(double z)
 	{
-		(*p_PosZ) = z;
+		m_3dpos.ref_m_z = z;
 	};
 
 	//ポジションのゲット
 	void SonikAudioListener::GetPosition(double& x, double& y, double& z)
 	{
-		x = (*p_PosX);
-		y = (*p_PosY);
-		z = (*p_PosZ);
+		x = (*m_3dpos.mp_x);
+		y = (*m_3dpos.mp_y);
+		z = (*m_3dpos.mp_z);
 	};
 
 	void SonikAudioListener::GetPosition(double*& x, double*& y, double*& z)
 	{
-		x = p_PosX;
-		y = p_PosY;
-		z = p_PosZ;
+		x = m_3dpos.mp_x;
+		y = m_3dpos.mp_y;
+		z = m_3dpos.mp_z;
+	};
+
+	SonikAudioPoint::SonikAudio3DPoint& SonikAudioListener::GetPosition(void)
+	{
+		return m_3dpos;
 	};
 
 	double SonikAudioListener::GetPositionX(void)
 	{
-		return (*p_PosX);
+		return (*m_3dpos.mp_x);
 	};
 
-	const double* SonikAudioListener::GetPositionX(void)
+	void SonikAudioListener::GetPositionX(const double* _out_)
 	{
-		return p_PosX;
-	};
-
-	const double& SonikAudioListener::GetPositionX(void)
-	{
-		return (*p_PosX);
+		_out_ = m_3dpos.mp_x;
 	};
 
 	double SonikAudioListener::GetPositionY(void)
 	{
-		return (*p_PosY);
+		return (*m_3dpos.mp_y);
 	};
 
-	const double* SonikAudioListener::GetPositionY(void)
+	void SonikAudioListener::GetPositionY(const double* _out_)
 	{
-		return p_PosY;
-	};
-	const double& SonikAudioListener::GetPositionY(void)
-	{
-		return (*p_PosY);
+		_out_ = m_3dpos.mp_y;
 	};
 
 	double SonikAudioListener::GetPositionZ(void)
 	{
-		return (*p_PosZ);
+		return (*m_3dpos.mp_z);
 	};
 
-	const double* SonikAudioListener::GetPositionZ(void)
+	void SonikAudioListener::GetPositionZ(const double* _out_)
 	{
-		return p_PosZ;
-	};
-
-	const double& SonikAudioListener::GetPositionZ(void)
-	{
-		return (*p_PosZ);
+		_out_ = m_3dpos.mp_z;
 	};
 
 };

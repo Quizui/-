@@ -44,12 +44,12 @@ namespace SonikAudio
 		const float* GetVolume(void);
 
 		//ポジションのセットとゲット
-		bool SetPosition(float x, float y, float z);
-		void GetPosition(float& x, float& y, float& z);
+		bool SetPosition(double x, double y, double z);
+		void GetPosition(double& x, double& y, double& z);
 
 		//ポジションコネクトのセット
 		//他のオブジェクトの座標と同期させたいときに使います。
-		bool SetPositionConnect(float* x, float* y, float* z);
+		bool SetPositionConnect(double* x, double* y, double* z);
 
 		//オーディオステータス関連
 		bool Play(void);					//オーディステータスにPlayをセットします。
