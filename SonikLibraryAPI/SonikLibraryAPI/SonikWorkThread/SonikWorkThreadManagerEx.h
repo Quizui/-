@@ -76,7 +76,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M6FUNC_* tmpfunc = new(std::nothrow) M6FUNC_(arg1val, arg2val, arg3val, arg4val, arg5val, arg6val);
+			M6FUNC_* tmpfunc = M6FUNC_::New(arg1val, arg2val, arg3val, arg4val, arg5val, arg6val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -116,7 +116,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M6FUNC_* tmpfunc = new(std::nothrow) M6FUNC_(arg1val, arg2val, arg3val, arg4val, arg5val, arg6val);
+			M6FUNC_* tmpfunc = M6FUNC_::New(arg1val, arg2val, arg3val, arg4val, arg5val, arg6val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -161,7 +161,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M5FUNC_* tmpfunc = new(std::nothrow) M5FUNC_(arg1val, arg2val, arg3val, arg4val, arg5val);
+			M5FUNC_* tmpfunc = M5FUNC_::New(arg1val, arg2val, arg3val, arg4val, arg5val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -202,7 +202,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M5FUNC_* tmpfunc = new(std::nothrow) M5FUNC_(arg1val, arg2val, arg3val, arg4val, arg5val);
+			M5FUNC_* tmpfunc = M5FUNC_::New(arg1val, arg2val, arg3val, arg4val, arg5val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -249,7 +249,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M4FUNC_* tmpfunc = new(std::nothrow) M4FUNC_(arg1val, arg2val, arg3val, arg4val);
+			M4FUNC_* tmpfunc = M4FUNC_::New(arg1val, arg2val, arg3val, arg4val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -290,7 +290,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M4FUNC_* tmpfunc = new(std::nothrow) M4FUNC_(arg1val, arg2val, arg3val, arg4val);
+			M4FUNC_* tmpfunc = M4FUNC_::New(arg1val, arg2val, arg3val, arg4val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -335,7 +335,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M3FUNC_* tmpfunc = new(std::nothrow) M3FUNC_(arg1val, arg2val, arg3val);
+			M3FUNC_* tmpfunc = M3FUNC_::New(arg1val, arg2val, arg3val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -376,7 +376,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M3FUNC_* tmpfunc = new(std::nothrow) M3FUNC_(arg1val, arg2val, arg3val);
+			M3FUNC_* tmpfunc = M3FUNC_::New(arg1val, arg2val, arg3val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -421,7 +421,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M2FUNC_* tmpfunc = new(std::nothrow) M2FUNC_(arg1val, arg2val);
+			M2FUNC_* tmpfunc = M2FUNC_::New(arg1val, arg2val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -462,7 +462,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M2FUNC_* tmpfunc = new(std::nothrow) M2FUNC_(arg1val, arg2val);
+			M2FUNC_* tmpfunc = M2FUNC_::New(arg1val, arg2val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -507,7 +507,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M1FUNC_* tmpfunc = new(std::nothrow) M1FUNC_(arg1val);
+			M1FUNC_* tmpfunc = M1FUNC_::New(arg1val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -548,7 +548,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M1FUNC_* tmpfunc = new(std::nothrow) M1FUNC_(arg1val);
+			M1FUNC_* tmpfunc = M1FUNC_::New(arg1val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -591,7 +591,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M0FUNC_* tmpfunc = new(std::nothrow) M0FUNC_();
+			M0FUNC_* tmpfunc = M0FUNC_::New();
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -632,7 +632,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M0FUNC_* tmpfunc = new(std::nothrow) M0FUNC_();
+			M0FUNC_* tmpfunc = M0FUNC_::New();
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -676,7 +676,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M6FUNCG_* tmpfunc = new(std::nothrow) M6FUNCG_(arg1val, arg2val, arg3val, arg4val, arg5val, arg6val);
+			M6FUNCG_* tmpfunc = M6FUNCG_::New(arg1val, arg2val, arg3val, arg4val, arg5val, arg6val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -716,7 +716,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M6FUNCG_* tmpfunc = new(std::nothrow) M6FUNCG_(arg1val, arg2val, arg3val, arg4val, arg5val, arg6val);
+			M6FUNCG_* tmpfunc = M6FUNCG_::New(arg1val, arg2val, arg3val, arg4val, arg5val, arg6val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -760,7 +760,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M5FUNCG_* tmpfunc = new(std::nothrow) M5FUNCG_(arg1val, arg2val, arg3val, arg4val, arg5val);
+			M5FUNCG_* tmpfunc = M5FUNCG_::New(arg1val, arg2val, arg3val, arg4val, arg5val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -800,7 +800,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M5FUNCG_* tmpfunc = new(std::nothrow) M5FUNCG_(arg1val, arg2val, arg3val, arg4val, arg5val);
+			M5FUNCG_* tmpfunc = M5FUNCG_::New(arg1val, arg2val, arg3val, arg4val, arg5val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -844,7 +844,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M4FUNCG_* tmpfunc = new(std::nothrow) M4FUNCG_(arg1val, arg2val, arg3val, arg4val);
+			M4FUNCG_* tmpfunc = M4FUNCG_::New(arg1val, arg2val, arg3val, arg4val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -884,7 +884,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M4FUNCG_* tmpfunc = new(std::nothrow) M4FUNCG_(arg1val, arg2val, arg3val, arg4val);
+			M4FUNCG_* tmpfunc = M4FUNCG_::New(arg1val, arg2val, arg3val, arg4val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -928,7 +928,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M3FUNCG_* tmpfunc = new(std::nothrow) M3FUNCG_(arg1val, arg2val, arg3val);
+			M3FUNCG_* tmpfunc = M3FUNCG_::New(arg1val, arg2val, arg3val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -968,7 +968,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M3FUNCG_* tmpfunc = new(std::nothrow) M3FUNCG_(arg1val, arg2val, arg3val);
+			M3FUNCG_* tmpfunc = M3FUNCG_::New(arg1val, arg2val, arg3val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -1012,7 +1012,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M2FUNCG_* tmpfunc = new(std::nothrow) M2FUNCG_(arg1val, arg2val);
+			M2FUNCG_* tmpfunc = M2FUNCG_::New(arg1val, arg2val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -1052,7 +1052,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M2FUNCG_* tmpfunc = new(std::nothrow) M2FUNCG_(arg1val, arg2val);
+			M2FUNCG_* tmpfunc = M2FUNCG_::New(arg1val, arg2val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -1096,7 +1096,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M1FUNCG_* tmpfunc = new(std::nothrow) M1FUNCG_(arg1val);
+			M1FUNCG_* tmpfunc = M1FUNCG_::New(arg1val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -1136,7 +1136,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M1FUNCG_* tmpfunc = new(std::nothrow) M1FUNCG_(arg1val);
+			M1FUNCG_* tmpfunc = M1FUNCG_::New(arg1val);
 			if(tmpfunc == nullptr)
 			{
 				return false;
@@ -1179,7 +1179,7 @@ namespace SonikLib
 				return false;
 			};
 
-			M0FUNCG_* tmpfunc = new(std::nothrow) M0FUNCG_();
+			M0FUNCG_* tmpfunc = M0FUNCG_::New();
 			if(tmpfunc == nullptr)
 			{
 				return false;

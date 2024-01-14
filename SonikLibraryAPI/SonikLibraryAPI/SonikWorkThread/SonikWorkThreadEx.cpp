@@ -599,11 +599,13 @@ namespace SonikLib
 	//いずれの関数を使用しても内部ではスマートポインタで扱います。
 	bool WorkThreadEx::SetCallFunction(SonikLib::SonikFOSInterface* CallFunctionObject, bool _looped_)
 	{
-		return ImplObject->SetCallFunction(CallFunctionObject, (!_looped_));
+		bool l_looped_ = _looped_;
+		return ImplObject->SetCallFunction(CallFunctionObject, (!l_looped_));
 	};
 	bool WorkThreadEx::SetCallFunction(SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> CallFunctionObject, bool _looped_)
 	{
-		return ImplObject->SetCallFunction(CallFunctionObject, (!_looped_));
+		bool l_looped_ = _looped_;
+		return ImplObject->SetCallFunction(CallFunctionObject, (!l_looped_));
 	};
 
 	//外部のキューをセットします。
