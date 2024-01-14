@@ -11,37 +11,39 @@ namespace SonikMath
 {
 
 	//0.0 ~ 1.0へ正規化します。
-	inline float Normalize(const float& MaxValue, const float& NowValue)
+	double Normalize(double MaxValue, double NowValue)
 	{
 		if(NowValue >= MaxValue)
 		{
-			return 1.0f;
+			return 1.0;
 
 		}else if(NowValue <= 0)
 		{
-			return 0.0f;
+			return 0.0;
 		};
 
 		return NowValue / MaxValue;
 	};
 
+
 	//0.0 ~ 1.0へ正規化します。
 	//最大値を0.0
 	//最小値を1.0
 	//として扱います。
-	inline float NormalizeInverse(const float& MaxValue, const float& NowValue)
+	double NormalizeInverse(double MaxValue, double NowValue)
 	{
 		if(NowValue >= MaxValue)
 		{
-			return 0.0f;
+			return 0.0;
 
 		}else if(NowValue <= 0)
 		{
-			return 1.0f;
+			return 1.0;
 		};
 
-		return 1.0f - (NowValue / MaxValue);
+		return 1.0 - (NowValue / MaxValue);
 	};
+
 
 	//引数１の値を 引数4 ~ 引数5 の範囲に正規化します。
 	// Y = ( (X - Xmin) / (Xmax - Xmin) ) * (Max - Min) + Min
@@ -72,12 +74,12 @@ namespace SonikMath
 	{
 		if(NTV_Max <= NTV_Min)
 		{
-			return 0.0f;
+			return 0.0;
 		};
 
 		if(NormalizeMax < NormalizeMin)
 		{
-			return 0.0f;
+			return 0.0;
 		}
 
 		float value[5];

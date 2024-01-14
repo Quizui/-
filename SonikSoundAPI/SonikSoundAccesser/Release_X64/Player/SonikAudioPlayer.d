@@ -13,7 +13,6 @@ Player/SonikAudioPlayer.o: ../Player/SonikAudioPlayer.cpp \
   ../Player/../Task/PlayerTaskInterface.h \
   ../Player/../Task/../AudioSmartPointer.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/SonikWorkThreadEx.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/SonikThreadPack.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../Container/SonikAtomicQueue.hpp \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../Container/../SonikCAS/SonikAtomicLock.h \
@@ -34,7 +33,6 @@ D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././Format/SonikAudioFormat.
 ../Player/../Task/PlayerTaskInterface.h:
 ../Player/../Task/../AudioSmartPointer.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/SonikWorkThreadEx.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/SonikThreadPack.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../Container/SonikAtomicQueue.hpp:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../Container/../SonikCAS/SonikAtomicLock.h:

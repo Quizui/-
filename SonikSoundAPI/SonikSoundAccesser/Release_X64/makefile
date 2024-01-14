@@ -11,7 +11,9 @@ RM := rm -rf
 -include Task/subdir.mk
 -include Player/subdir.mk
 -include Mixer/subdir.mk
+-include Listener/subdir.mk
 -include Interface/subdir.mk
+-include AudioPosition/subdir.mk
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(strip $(C++M_DEPS)),)
 -include $(C++M_DEPS)

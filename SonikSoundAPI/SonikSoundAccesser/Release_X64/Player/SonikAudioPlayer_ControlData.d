@@ -9,7 +9,9 @@ Player/SonikAudioPlayer_ControlData.o: \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././Format/SonikAudioFormat.h \
   ../Player/../SAudioAccesserTypedef.h \
   ../Player/.././AudioSmartPointer.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Format/SonikAudioFormat.h
+  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Format/SonikAudioFormat.h \
+  ../Player/../AudioPosition/SonikAudio3DPoint.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../MathBit/SonikMathDistance.h
 ../Player/SonikAudioPlayer_ControlData.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikCAS/SonikAtomicLock.h:
 ../Player/SonikAudioPlayer_ControlData_Interface.h:
@@ -20,3 +22,5 @@ D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././Format/SonikAudioFormat.
 ../Player/../SAudioAccesserTypedef.h:
 ../Player/.././AudioSmartPointer.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Format/SonikAudioFormat.h:
+../Player/../AudioPosition/SonikAudio3DPoint.h:
+D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../MathBit/SonikMathDistance.h:

@@ -14,7 +14,12 @@
 #include "../PlayStateEnums.h"
 #include "../../AudioLoadTypedef.h"
 #include "../SAudioAccesserTypedef.h"
-#include "../AudioPosition/SonikAudio3DPoint.h"
+
+
+namespace SonikAudioPoint
+{
+	class SonikAudio3DPoint;
+};
 
 
 namespace SonikAudioData
@@ -26,9 +31,7 @@ namespace SonikAudioData
 	private:
 		SonikAudio::SAudioFormat m_AudioData;			//オーディオデータへのスマートポインタ
 		char* mp_ControlData;							//操作用ポインタ
-		float m_posx, m_posy, m_posz;					//プレイヤーの3D空間におけるポジション
-		float *mp_posx, *mp_posy, *mp_posz;				//ポインタ先の付け替えを行うので、実際に使うポジション変数はこっち。
-		SonikAudioPoint::SonikAudio3DPoint m_3dpos;	//3D座標ポジション
+		SonikAudioPoint::SonikAudio3DPoint* m_3dpos;	//3D座標ポジション
 		float m_volume;									//オーディオの音量
 		bool m_repeat;									//オーディオのリピートフラグ
 		SonikAudioEnum::PlayStateID m_AudioState;		//オーディオのステータス(プレイ、ストップ等)
@@ -57,16 +60,16 @@ namespace SonikAudioData
 		char** GetAudioControlPointer(void);
 
 		//ポジションのセット
-		void SetPositionX(float SetValue);
-		void SetPositionY(float SetValue);
-		void SetPositionZ(float SetValue);
-		void SetPositionAll(float x, float y, float z);
+		void SetPositionX(double SetValue);
+		void SetPositionY(double SetValue);
+		void SetPositionZ(double SetValue);
+		void SetPositionAll(double x, double y, double z);
 		//別のポジションへのポインタとつなぎ、位置を一緒に動かしたいときに使います。
 		//内部の個別ポジションに戻したい場合はnullptrを指定します。
-		void SetPositonConnectX(float* x);
-		void SetPositonConnectY(float* y);
-		void SetPositonConnectZ(float* z);
-		void SetPositionConnectAll(float* x, float* y, float* z);
+		void SetPositonConnectX(double* x = nullptr);
+		void SetPositonConnectY(double* y = nullptr);
+		void SetPositonConnectZ(double* z = nullptr);
+		void SetPositionConnectAll(double* x = nullptr, double* y = nullptr, double* z = nullptr);
 
 		//音量(ボリューム)のセット
 		void SetVolume(float SetValue);
@@ -79,11 +82,11 @@ namespace SonikAudioData
 
 		//継承元の純粋仮想関数の実装====================================
 		//ポジションのゲット
-		float GetPositionX(void);
-		float GetPositionY(void);
-		float GetPositionZ(void);
-		void GetPositionAll(float& x, float& y, float& z);
-
+		double GetPositionX(void);
+		double GetPositionY(void);
+		double GetPositionZ(void);
+		void GetPositionAll(double& x, double& y, double& z);
+		SonikAudioPoint::SonikAudio3DPoint& GetPositionAll(void);
 
 		//音量(ボリューム)のゲット
 		const float* GetVolume(void);

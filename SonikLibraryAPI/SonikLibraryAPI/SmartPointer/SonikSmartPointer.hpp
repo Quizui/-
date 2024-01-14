@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include <atomic>
 #include <new>
+#include <type_traits>
 
 namespace SonikLib
 {

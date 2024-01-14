@@ -9,6 +9,7 @@
 #include "SonikMathTrigonometric.h"
 #include "memory.h"
 #include <stdint.h>
+#include <stdexcept>
 
 //#include <fftw3.h>
 
@@ -49,22 +50,22 @@ namespace SonikMath
 	//負の数の対応した平方根を計算します。
 	double sqrt(double a)
 	{
-		double _E = 0.000001;
-
-	    a = a < 0 ? -a : a;
-	    double x = a / 2;
-    	double e = x * x - a;
-		double t = e < 0 ? -e : e;
-
-	    while (1)
+	    if (a < 0)
 	    {
-	    	if (t < _E)
-	    	{
-	    		return x;
-	    	};
+	        throw std::invalid_argument("sqrt received negative number");
+	    }
 
-	    	x -= e / (x * 2);
+	    double _E = 0.000001;
+	    double x = a * 0.5;
+	    double e = x * x - a;
+
+	    while (std::abs(e) >= _E)
+	    {
+	        x -= e / (x * 2);
+	        e = x * x - a;
 	    };
+
+	    return x;
 	};
 
 

@@ -1,4 +1,4 @@
-!SESSION 2023-12-23 21:28:33.403 -----------------------------------------------
+!SESSION 2024-01-14 02:56:14.321 -----------------------------------------------
 eclipse.buildId=4.30.0.20231201-1200
 java.version=17.0.9
 java.vendor=Eclipse Adoptium
@@ -6,120 +6,10 @@ BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ja_JP
 Framework arguments:  -product org.eclipse.epp.package.cpp.product
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.cpp.product -clean
 
-This is a continuation of log file D:\GithubRepo\SonikSoundAPI\.metadata\.bak_2.log
-Created Time: 2023-12-24 03:42:49.744
+This is a continuation of log file D:\GithubRepo\SonikSoundAPI\.metadata\.bak_9.log
+Created Time: 2024-01-14 07:21:48.023
 
-!ENTRY org.eclipse.cdt.core 4 0 2023-12-24 03:42:49.744
-!MESSAGE Error: Encountered an ambiguous node "_VSTD::forward<_Visitor>(__visitor)" at D:\Development\MSYS64\clang64\include\c++\v1\variant, line 724 while parsing D:\GithubRepo\SonikSoundAPI\SonikSoundAccesser\Mixer\SonikAudio_Mixer.h
-!STACK 0
-org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_VSTD::forward<_Visitor>(__visitor)" at D:\Development\MSYS64\clang64\include\c++\v1\variant, line 724 while parsing D:\GithubRepo\SonikSoundAPI\SonikSoundAccesser\Mixer\SonikAudio_Mixer.h
-	at org.eclipse.cdt.internal.core.dom.parser.ASTAmbiguousNode.logAmbiguousNodeError(ASTAmbiguousNode.java:191)
-	at org.eclipse.cdt.internal.core.dom.parser.ASTAmbiguousNode.getEvaluation(ASTAmbiguousNode.java:181)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalConstructor.evaluateArguments(EvalConstructor.java:294)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalConstructor.extractArguments(EvalConstructor.java:279)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTSimpleTypeConstructorExpression.getEvaluation(CPPASTSimpleTypeConstructorExpression.java:108)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor$ReturnTypeDeducer.onReturnStatement(CPPVisitor.java:2642)
-	at org.eclipse.cdt.core.dom.ast.util.ReturnStatementVisitor.visit(ReturnStatementVisitor.java:73)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTReturnStatement.accept(CPPASTReturnStatement.java:79)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:103)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.deduceReturnType(CPPVisitor.java:2695)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.createAutoFunctionType(CPPVisitor.java:2762)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.createAutoType(CPPVisitor.java:2505)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.createType(CPPVisitor.java:2322)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.createType(CPPVisitor.java:2290)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPFunctionTemplate.getType(CPPFunctionTemplate.java:191)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.selectByArgumentCount(CPPSemantics.java:3032)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveFunction(CPPSemantics.java:3102)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveAmbiguities(CPPSemantics.java:2800)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPSemantics.resolveBinding(CPPSemantics.java:393)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.resolveBinding(CPPVisitor.java:1526)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.createBinding(CPPVisitor.java:348)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPTemplates.createBinding(CPPTemplates.java:725)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTemplateId.createIntermediateBinding(CPPASTTemplateId.java:126)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTNameBase.resolveBinding(CPPASTNameBase.java:111)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.createBinding(CPPVisitor.java:343)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTName.createIntermediateBinding(CPPASTName.java:67)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTNameBase.resolvePreBinding(CPPASTNameBase.java:98)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTemplateIDAmbiguity.checkNames(CPPASTTemplateIDAmbiguity.java:124)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTemplateIDAmbiguity.doResolveAmbiguity(CPPASTTemplateIDAmbiguity.java:84)
-	at org.eclipse.cdt.internal.core.dom.parser.ASTAmbiguousNode.resolveAmbiguity(ASTAmbiguousNode.java:87)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTAmbiguityResolver.visit(CPPASTAmbiguityResolver.java:87)
-	at org.eclipse.cdt.internal.core.dom.parser.ASTAmbiguousNode.accept(ASTAmbiguousNode.java:70)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionCallExpression.accept(CPPASTFunctionCallExpression.java:227)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTReturnStatement.accept(CPPASTReturnStatement.java:91)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:103)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:225)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTAmbiguityResolver.visit(CPPASTAmbiguityResolver.java:181)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:191)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTAmbiguityResolver.leave(CPPASTAmbiguityResolver.java:143)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompositeTypeSpecifier.accept(CPPASTCompositeTypeSpecifier.java:205)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTSimpleDeclaration.accept(CPPASTSimpleDeclaration.java:112)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTNamespaceDefinition.accept(CPPASTNamespaceDefinition.java:144)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTNamespaceDefinition.accept(CPPASTNamespaceDefinition.java:144)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTNamespaceDefinition.accept(CPPASTNamespaceDefinition.java:144)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTNamespaceDefinition.accept(CPPASTNamespaceDefinition.java:144)
-	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTranslationUnit.resolveAmbiguities(CPPASTTranslationUnit.java:245)
-	at org.eclipse.cdt.internal.core.dom.parser.AbstractGNUSourceCodeParser.resolveAmbiguities(AbstractGNUSourceCodeParser.java:707)
-	at org.eclipse.cdt.internal.core.dom.parser.AbstractGNUSourceCodeParser.parse(AbstractGNUSourceCodeParser.java:690)
-	at org.eclipse.cdt.core.dom.parser.AbstractCLikeLanguage.getASTTranslationUnit(AbstractCLikeLanguage.java:171)
-	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.createAST(AbstractIndexerTask.java:1244)
-	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.parseFile(AbstractIndexerTask.java:1102)
-	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.parseLinkage(AbstractIndexerTask.java:944)
-	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:572)
-	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:164)
-	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMRebuildTask.run(PDOMRebuildTask.java:94)
-	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
-	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
-
-!ENTRY org.eclipse.cdt.core 4 0 2023-12-24 03:42:52.555
-!MESSAGE Error: operator () is not a member of __fn
-!STACK 0
-java.lang.IllegalArgumentException: operator () is not a member of __fn
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.ClassTypeHelper.invalidMember(ClassTypeHelper.java:1155)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.ClassTypeHelper.getVisibility(ClassTypeHelper.java:1081)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPClassType.getVisibility(CPPClassType.java:482)
-	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPLinkage.getVisibility(PDOMCPPLinkage.java:933)
-	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPLinkage.addChild(PDOMCPPLinkage.java:943)
-	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPLinkage.createBinding(PDOMCPPLinkage.java:895)
-	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPLinkage.addBinding(PDOMCPPLinkage.java:710)
-	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPLinkage.addTypeBinding(PDOMCPPLinkage.java:1626)
-	at org.eclipse.cdt.internal.core.pdom.dom.TypeMarshalBuffer.marshalBinding(TypeMarshalBuffer.java:92)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPDependentEvaluation.marshalTemplateDefinition(CPPDependentEvaluation.java:98)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalFunctionCall.marshal(EvalFunctionCall.java:221)
-	at org.eclipse.cdt.internal.core.pdom.dom.TypeMarshalBuffer.marshalEvaluation(TypeMarshalBuffer.java:169)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalBinary.marshal(EvalBinary.java:448)
-	at org.eclipse.cdt.internal.core.pdom.dom.TypeMarshalBuffer.marshalEvaluation(TypeMarshalBuffer.java:169)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalTypeId.marshal(EvalTypeId.java:392)
-	at org.eclipse.cdt.internal.core.pdom.dom.TypeMarshalBuffer.marshalEvaluation(TypeMarshalBuffer.java:169)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.EvalUnary.marshal(EvalUnary.java:387)
-	at org.eclipse.cdt.internal.core.pdom.dom.TypeMarshalBuffer.marshalEvaluation(TypeMarshalBuffer.java:169)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPFunctionType.marshal(CPPFunctionType.java:172)
-	at org.eclipse.cdt.internal.core.pdom.dom.TypeMarshalBuffer.marshalType(TypeMarshalBuffer.java:135)
-	at org.eclipse.cdt.internal.core.pdom.dom.PDOMLinkage.storeType(PDOMLinkage.java:468)
-	at org.eclipse.cdt.internal.core.pdom.dom.PDOMLinkage.storeType(PDOMLinkage.java:462)
-	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPFunction.setType(PDOMCPPFunction.java:218)
-	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPFunction.initData(PDOMCPPFunction.java:117)
-	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPLinkage$ConfigureFunctionTemplate.run(PDOMCPPLinkage.java:456)
-	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPLinkage.handlePostProcesses(PDOMCPPLinkage.java:1318)
-	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPLinkage.addBinding(PDOMCPPLinkage.java:638)
-	at org.eclipse.cdt.internal.core.pdom.dom.PDOMFile.createPDOMName(PDOMFile.java:524)
-	at org.eclipse.cdt.internal.core.pdom.dom.PDOMFile.addNames(PDOMFile.java:490)
-	at org.eclipse.cdt.internal.core.pdom.WritablePDOM.addFileContent(WritablePDOM.java:158)
-	at org.eclipse.cdt.internal.core.index.WritableCIndex.setFileContent(WritableCIndex.java:90)
-	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.storeFileInIndex(PDOMWriter.java:692)
-	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.storeSymbolsInIndex(PDOMWriter.java:330)
-	at org.eclipse.cdt.internal.core.pdom.PDOMWriter.addSymbols(PDOMWriter.java:287)
-	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.writeToIndex(AbstractIndexerTask.java:1295)
-	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.parseFile(AbstractIndexerTask.java:1107)
-	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.parseLinkage(AbstractIndexerTask.java:944)
-	at org.eclipse.cdt.internal.core.pdom.AbstractIndexerTask.runTask(AbstractIndexerTask.java:572)
-	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:164)
-	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMRebuildTask.run(PDOMRebuildTask.java:94)
-	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
-	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
-
-!ENTRY org.eclipse.cdt.core 4 0 2023-12-24 03:42:53.077
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-14 07:21:48.023
 !MESSAGE Error: __get_alt is not a member of __union
 !STACK 0
 java.lang.IllegalArgumentException: __get_alt is not a member of __union
@@ -167,7 +57,7 @@ java.lang.IllegalArgumentException: __get_alt is not a member of __union
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2023-12-24 03:42:53.080
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-14 07:21:48.025
 !MESSAGE Error: __at is not a member of __base
 !STACK 0
 java.lang.IllegalArgumentException: __at is not a member of __base
@@ -213,22 +103,22 @@ java.lang.IllegalArgumentException: __at is not a member of __base
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2023-12-24 03:42:53.546
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-14 07:21:48.413
 !MESSAGE Unexpected overload for binary operator 8: 'operator <'
 
-!ENTRY org.eclipse.cdt.core 4 0 2023-12-24 03:42:53.551
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-14 07:21:48.414
 !MESSAGE Unexpected overload for binary operator 8: 'operator <'
 
-!ENTRY org.eclipse.cdt.core 4 0 2023-12-24 03:42:53.602
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-14 07:21:48.433
 !MESSAGE Unexpected overload for binary operator 8: 'operator <'
 
-!ENTRY org.eclipse.cdt.core 4 0 2023-12-24 03:42:53.605
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-14 07:21:48.434
 !MESSAGE Unexpected overload for binary operator 8: 'operator <'
 
-!ENTRY org.eclipse.cdt.core 1 0 2023-12-24 03:42:53.715
-!MESSAGE Indexed 'SonikSoundAccesser' (4 sources, 704 headers) in 33.2 sec: 32,219 declarations; 103,160 references; 0 unresolved inclusions; 569 syntax errors; 2,766 unresolved names (2%)
+!ENTRY org.eclipse.cdt.core 1 0 2024-01-14 07:21:48.496
+!MESSAGE Indexed 'SonikSoundAccesser' (6 sources, 707 headers) in 23.9 sec: 32,918 declarations; 104,256 references; 0 unresolved inclusions; 569 syntax errors; 2,768 unresolved names (2%)
 
-!ENTRY org.eclipse.cdt.core 4 0 2023-12-24 03:54:21.274
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-14 07:23:32.805
 !MESSAGE Error: Encountered an ambiguous node "_VSTD::get<_Idx>(__bound_args_)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 67 while parsing D:\GithubRepo\SonikSoundAPI\SonikSoundAccesser\Mixer\SonikAudio_Mixer.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_VSTD::get<_Idx>(__bound_args_)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 67 while parsing D:\GithubRepo\SonikSoundAPI\SonikSoundAccesser\Mixer\SonikAudio_Mixer.cpp
@@ -304,7 +194,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2023-12-24 03:54:21.274
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-14 07:23:32.806
 !MESSAGE Error: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 67 while parsing D:\GithubRepo\SonikSoundAPI\SonikSoundAccesser\Mixer\SonikAudio_Mixer.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 67 while parsing D:\GithubRepo\SonikSoundAPI\SonikSoundAccesser\Mixer\SonikAudio_Mixer.cpp
@@ -380,7 +270,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2023-12-24 03:54:21.275
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-14 07:23:32.806
 !MESSAGE Error: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 66 while parsing D:\GithubRepo\SonikSoundAPI\SonikSoundAccesser\Mixer\SonikAudio_Mixer.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 66 while parsing D:\GithubRepo\SonikSoundAPI\SonikSoundAccesser\Mixer\SonikAudio_Mixer.cpp
@@ -451,7 +341,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2023-12-24 03:54:21.276
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-14 07:23:32.807
 !MESSAGE Error: Encountered an ambiguous node "_VSTD::get<_Idx>(_VSTD::move(__bound_args_))" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 76 while parsing D:\GithubRepo\SonikSoundAPI\SonikSoundAccesser\Mixer\SonikAudio_Mixer.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_VSTD::get<_Idx>(_VSTD::move(__bound_args_))" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 76 while parsing D:\GithubRepo\SonikSoundAPI\SonikSoundAccesser\Mixer\SonikAudio_Mixer.cpp
@@ -537,7 +427,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2023-12-24 03:54:21.276
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-14 07:23:32.807
 !MESSAGE Error: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 76 while parsing D:\GithubRepo\SonikSoundAPI\SonikSoundAccesser\Mixer\SonikAudio_Mixer.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 76 while parsing D:\GithubRepo\SonikSoundAPI\SonikSoundAccesser\Mixer\SonikAudio_Mixer.cpp
@@ -623,7 +513,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2023-12-24 03:54:21.277
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-14 07:23:32.808
 !MESSAGE Error: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 75 while parsing D:\GithubRepo\SonikSoundAPI\SonikSoundAccesser\Mixer\SonikAudio_Mixer.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 75 while parsing D:\GithubRepo\SonikSoundAPI\SonikSoundAccesser\Mixer\SonikAudio_Mixer.cpp
@@ -704,7 +594,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2023-12-24 03:54:21.278
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-14 07:23:32.809
 !MESSAGE Error: Encountered an ambiguous node "_VSTD::get<_Idx>(_VSTD::move(__bound_args_))" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 85 while parsing D:\GithubRepo\SonikSoundAPI\SonikSoundAccesser\Mixer\SonikAudio_Mixer.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_VSTD::get<_Idx>(_VSTD::move(__bound_args_))" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 85 while parsing D:\GithubRepo\SonikSoundAPI\SonikSoundAccesser\Mixer\SonikAudio_Mixer.cpp
@@ -790,7 +680,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2023-12-24 03:54:21.279
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-14 07:23:32.809
 !MESSAGE Error: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 85 while parsing D:\GithubRepo\SonikSoundAPI\SonikSoundAccesser\Mixer\SonikAudio_Mixer.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 85 while parsing D:\GithubRepo\SonikSoundAPI\SonikSoundAccesser\Mixer\SonikAudio_Mixer.cpp
@@ -876,7 +766,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2023-12-24 03:54:21.280
+!ENTRY org.eclipse.cdt.core 4 0 2024-01-14 07:23:32.809
 !MESSAGE Error: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 84 while parsing D:\GithubRepo\SonikSoundAPI\SonikSoundAccesser\Mixer\SonikAudio_Mixer.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 84 while parsing D:\GithubRepo\SonikSoundAPI\SonikSoundAccesser\Mixer\SonikAudio_Mixer.cpp
@@ -956,33 +846,8 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.indexer.PDOMIndexerTask.run(PDOMIndexerTask.java:164)
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
-!SESSION 2023-12-24 04:49:46.984 -----------------------------------------------
-eclipse.buildId=4.30.0.20231201-1200
-java.version=17.0.9
-java.vendor=Eclipse Adoptium
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ja_JP
 
-!ENTRY org.eclipse.osgi 4 0 2023-12-24 04:49:47.261
-!MESSAGE The -clean (osgi.clean) option was not successful. Unable to clean the storage area: D:\Development\Eclipse\configuration\org.eclipse.osgi
-!SESSION 2024-01-02 14:15:01.543 -----------------------------------------------
-eclipse.buildId=4.30.0.20231201-1200
-java.version=17.0.9
-java.vendor=Eclipse Adoptium
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ja_JP
-Framework arguments:  -product org.eclipse.epp.package.cpp.product
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.cpp.product -clean
-
-!ENTRY org.eclipse.core.resources 2 10035 2024-01-02 14:15:41.467
-!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
-!SESSION 2024-01-04 09:49:27.694 -----------------------------------------------
-eclipse.buildId=4.30.0.20231201-1200
-java.version=17.0.9
-java.vendor=Eclipse Adoptium
-BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ja_JP
-Framework arguments:  -product org.eclipse.epp.package.cpp.product
-Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.cpp.product -clean
-
-!ENTRY org.eclipse.ui 4 0 2024-01-04 11:40:40.299
+!ENTRY org.eclipse.ui 4 0 2024-01-14 09:23:59.045
 !MESSAGE Unhandled event loop exception
 !STACK 0
 java.lang.NullPointerException: Cannot invoke "org.eclipse.core.resources.IResource.getAdapter(java.lang.Class)" because "resource" is null
@@ -1019,7 +884,146 @@ java.lang.NullPointerException: Cannot invoke "org.eclipse.core.resources.IResou
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:588)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1459)
 
-!ENTRY org.eclipse.ui 4 0 2024-01-04 18:12:43.132
+!ENTRY org.eclipse.ui 4 0 2024-01-14 09:23:59.053
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "org.eclipse.core.resources.IResource.getAdapter(java.lang.Class)" because "resource" is null
+	at org.eclipse.linuxtools.internal.changelog.core.editors.GNUHyperlinkDetector.detectHyperlinks(GNUHyperlinkDetector.java:120)
+	at org.eclipse.ui.texteditor.HyperlinkDetectorRegistry$HyperlinkDetectorDelegate.detectHyperlinks(HyperlinkDetectorRegistry.java:81)
+	at org.eclipse.jface.text.hyperlink.HyperlinkManager.findHyperlinks(HyperlinkManager.java:289)
+	at org.eclipse.jface.text.hyperlink.HyperlinkManager.findHyperlinks(HyperlinkManager.java:262)
+	at org.eclipse.jface.text.hyperlink.HyperlinkManager.mouseMove(HyperlinkManager.java:457)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:216)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4273)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1066)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4071)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3659)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:342)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:648)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:342)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:555)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:173)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:208)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:136)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:402)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:651)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:588)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1459)
+
+!ENTRY org.eclipse.ui 4 0 2024-01-14 09:23:59.069
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "org.eclipse.core.resources.IResource.getAdapter(java.lang.Class)" because "resource" is null
+	at org.eclipse.linuxtools.internal.changelog.core.editors.GNUHyperlinkDetector.detectHyperlinks(GNUHyperlinkDetector.java:120)
+	at org.eclipse.ui.texteditor.HyperlinkDetectorRegistry$HyperlinkDetectorDelegate.detectHyperlinks(HyperlinkDetectorRegistry.java:81)
+	at org.eclipse.jface.text.hyperlink.HyperlinkManager.findHyperlinks(HyperlinkManager.java:289)
+	at org.eclipse.jface.text.hyperlink.HyperlinkManager.findHyperlinks(HyperlinkManager.java:262)
+	at org.eclipse.jface.text.hyperlink.HyperlinkManager.mouseMove(HyperlinkManager.java:457)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:216)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4273)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1066)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4071)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3659)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:342)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:648)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:342)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:555)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:173)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:208)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:136)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:402)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:651)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:588)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1459)
+
+!ENTRY org.eclipse.ui 4 0 2024-01-14 09:23:59.094
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException: Cannot invoke "org.eclipse.core.resources.IResource.getAdapter(java.lang.Class)" because "resource" is null
+	at org.eclipse.linuxtools.internal.changelog.core.editors.GNUHyperlinkDetector.detectHyperlinks(GNUHyperlinkDetector.java:120)
+	at org.eclipse.ui.texteditor.HyperlinkDetectorRegistry$HyperlinkDetectorDelegate.detectHyperlinks(HyperlinkDetectorRegistry.java:81)
+	at org.eclipse.jface.text.hyperlink.HyperlinkManager.findHyperlinks(HyperlinkManager.java:289)
+	at org.eclipse.jface.text.hyperlink.HyperlinkManager.findHyperlinks(HyperlinkManager.java:262)
+	at org.eclipse.jface.text.hyperlink.HyperlinkManager.mouseMove(HyperlinkManager.java:457)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:216)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4273)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1066)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4071)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3659)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1155)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:342)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1046)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:648)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:342)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:555)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:173)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:152)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:208)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:136)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:402)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:651)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:588)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1459)
+
+!ENTRY org.eclipse.ui 4 0 2024-01-14 09:45:13.777
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.ui 4 0 2024-01-14 09:45:13.923
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.ui 4 0 2024-01-14 09:45:13.930
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+
+!ENTRY org.eclipse.ui 4 0 2024-01-14 09:45:13.938
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.NullPointerException
+!SESSION 2024-01-14 10:09:28.577 -----------------------------------------------
+eclipse.buildId=4.30.0.20231201-1200
+java.version=17.0.9
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ja_JP
+
+!ENTRY org.eclipse.osgi 4 0 2024-01-14 10:09:28.817
+!MESSAGE The -clean (osgi.clean) option was not successful. Unable to clean the storage area: D:\Development\Eclipse\configuration\org.eclipse.osgi
+
+!ENTRY org.eclipse.ui 4 0 2024-01-14 10:17:00.246
 !MESSAGE Unhandled event loop exception
 !STACK 0
 java.lang.NullPointerException: Cannot invoke "org.eclipse.core.resources.IResource.getAdapter(java.lang.Class)" because "resource" is null

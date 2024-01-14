@@ -1,21 +1,101 @@
-04:04:46 **** Build of configuration Debug for project SAudioPlatForm_OpenALSoft ****
-mingw32-make all 
-Building file: ../OpenALSource/open_al_interface.cpp
-Invoking: GCC C++ Compiler
-clang++ -std=c++17 -D_DEBUG -D__SONIK_x86_64__ -D_WIN64 -DHAVE_FSEEKO -DFLAC__NO_DLL -I"D:\MyLibrary\include\Audio\SoundSystem" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"OpenALSource/open_al_interface.d" -MT"OpenALSource/open_al_interface.o" -o "OpenALSource/open_al_interface.o" "../OpenALSource/open_al_interface.cpp"
-../OpenALSource/open_al_interface.cpp:152:11: warning: variable 'err_' set but not used [-Wunused-but-set-variable]
-  152 |                 ALCenum err_;
-      |                         ^
+10:17:05 **** Rebuild of configuration Debug_x64 for project SonikSoundAccesser ****
+Info: Internal Builder is used for build
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "AudioPosition\\SonikAudio3DPoint.o" "..\\AudioPosition\\SonikAudio3DPoint.cpp" 
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+In file included from ..\AudioPosition\SonikAudio3DPoint.cpp:8:
+..\AudioPosition/SonikAudio3DPoint.h:33:10: warning: 'SonikAudioPoint::SonikAudio3DPoint::Distance' hides overloaded virtual function [-Woverloaded-virtual]
+   33 |                 double Distance(const SonikAudio3DPoint& _point_);
+      |                        ^
+D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../MathBit/SonikMathDistance.h:52:18: note: hidden overloaded virtual function 'SonikMath::Sonik3DPoint::Distance' declared here: type mismatch at 1st parameter ('const Sonik3DPoint &' vs 'const SonikAudio3DPoint &')
+   52 |                 virtual double Distance(const Sonik3DPoint& _point_);
+      |                                ^
+2 warnings generated.
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Player\\SonikAudioPlayer_ControlData.o" "..\\Player\\SonikAudioPlayer_ControlData.cpp" 
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+In file included from ..\Player\SonikAudioPlayer_ControlData.cpp:10:
+..\Player/../AudioPosition/SonikAudio3DPoint.h:33:10: warning: 'SonikAudioPoint::SonikAudio3DPoint::Distance' hides overloaded virtual function [-Woverloaded-virtual]
+   33 |                 double Distance(const SonikAudio3DPoint& _point_);
+      |                        ^
+D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../MathBit/SonikMathDistance.h:52:18: note: hidden overloaded virtual function 'SonikMath::Sonik3DPoint::Distance' declared here: type mismatch at 1st parameter ('const Sonik3DPoint &' vs 'const SonikAudio3DPoint &')
+   52 |                 virtual double Distance(const Sonik3DPoint& _point_);
+      |                                ^
+2 warnings generated.
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Mixer\\SonikAudio_Mixer.o" "..\\Mixer\\SonikAudio_Mixer.cpp" 
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+In file included from ..\Mixer\SonikAudio_Mixer.cpp:15:
+..\Mixer/../AudioPosition/SonikAudio3DPoint.h:33:10: warning: 'SonikAudioPoint::SonikAudio3DPoint::Distance' hides overloaded virtual function [-Woverloaded-virtual]
+   33 |                 double Distance(const SonikAudio3DPoint& _point_);
+      |                        ^
+D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../MathBit/SonikMathDistance.h:52:18: note: hidden overloaded virtual function 'SonikMath::Sonik3DPoint::Distance' declared here: type mismatch at 1st parameter ('const Sonik3DPoint &' vs 'const SonikAudio3DPoint &')
+   52 |                 virtual double Distance(const Sonik3DPoint& _point_);
+      |                                ^
+2 warnings generated.
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Interface\\SonikAudioCreator.o" "..\\Interface\\SonikAudioCreator.cpp" 
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
 1 warning generated.
-Finished building: ../OpenALSource/open_al_interface.cpp
- 
-Building file: ../DllFunction/DllMain.cpp
-Invoking: GCC C++ Compiler
-clang++ -std=c++17 -D_DEBUG -D__SONIK_x86_64__ -D_WIN64 -DHAVE_FSEEKO -DFLAC__NO_DLL -I"D:\MyLibrary\include\Audio\SoundSystem" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"DllFunction/DllMain.d" -MT"DllFunction/DllMain.o" -o "DllFunction/DllMain.o" "../DllFunction/DllMain.cpp"
-Finished building: ../DllFunction/DllMain.cpp
- 
-Building target: PlatFormSound_OpenAL.dll
-Invoking: MinGW C++ Linker
-g++ -L"D:\MyLibrary\lib\x64\Debug" -shared -o "PlatFormSound_OpenAL.dll" ./OpenALSource/open_al_interface.o  ./DllFunction/DllMain.o    -lDx64_SonikSoundAccesser -l_Dx64_SonikLibraryAPI -lfftw3
-Finished building target: PlatFormSound_OpenAL.dll
- 
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Task\\PlayerTask.o" "..\\Task\\PlayerTask.cpp" 
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+1 warning generated.
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Player\\SonikAudioPlayer.o" "..\\Player\\SonikAudioPlayer.cpp" 
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+1 warning generated.
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Task\\AudioPlayerTaskManager.o" "..\\Task\\AudioPlayerTaskManager.cpp" 
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+In file included from ..\Task\AudioPlayerTaskManager.cpp:8:
+In file included from ..\Task/AudioPlayerTaskManager.h:11:
+In file included from ..\Task/PlayerTaskInterface.h:11:
+..\Task/../AudioSmartPointer.h:52:5: warning: deleting pointer to incomplete type 'SonikAudioData::SonikAudioControlData' may cause undefined behavior [-Wdelete-incomplete]
+   52 |                                 delete m_Pointer;
+      |                                 ^      ~~~~~~~~~
+..\Task/../AudioSmartPointer.h:84:4: note: in instantiation of member function 'SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData>::Release' requested here
+   84 |                         Release();
+      |                         ^
+..\Task/PlayerTaskInterface.h:30:3: note: in instantiation of member function 'SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData>::~SonikAudioInterfaceSmtPtr' requested here
+   30 |                 PlayerTaskInterface(void)
+      |                 ^
+..\Task/PlayerTaskInterface.h:16:8: note: forward declaration of 'SonikAudioData::SonikAudioControlData'
+   16 |         class SonikAudioControlData;
+      |               ^
+2 warnings generated.
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Interface\\SonikAudio_Implement.o" "..\\Interface\\SonikAudio_Implement.cpp" 
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+1 warning generated.
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Listener\\SonikAudioListener.o" "..\\Listener\\SonikAudioListener.cpp" 
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+In file included from ..\Listener\SonikAudioListener.cpp:9:
+..\Listener/../AudioPosition/SonikAudio3DPoint.h:33:10: warning: 'SonikAudioPoint::SonikAudio3DPoint::Distance' hides overloaded virtual function [-Woverloaded-virtual]
+   33 |                 double Distance(const SonikAudio3DPoint& _point_);
+      |                        ^
+D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../MathBit/SonikMathDistance.h:52:18: note: hidden overloaded virtual function 'SonikMath::Sonik3DPoint::Distance' declared here: type mismatch at 1st parameter ('const Sonik3DPoint &' vs 'const SonikAudio3DPoint &')
+   52 |                 virtual double Distance(const Sonik3DPoint& _point_);
+      |                                ^
+2 warnings generated.
+ar -r libDx64_SonikSoundAccesser.a "AudioPosition\\SonikAudio3DPoint.o" "Interface\\SonikAudioCreator.o" "Interface\\SonikAudio_Implement.o" "Listener\\SonikAudioListener.o" "Mixer\\SonikAudio_Mixer.o" "Player\\SonikAudioPlayer.o" "Player\\SonikAudioPlayer_ControlData.o" "Task\\AudioPlayerTaskManager.o" "Task\\PlayerTask.o" 
+D:/Development/MSYS64/clang64/bin/ar.exe: warning: creating libDx64_SonikSoundAccesser.a

@@ -277,8 +277,6 @@ namespace SonikLib
 		//外部からコールする関数
 		//スレッド終了フラグのセット
 		void SetThreadExitFlag(bool Setflag);
-		//関数コールループフラグのセット。
-		void SetChangeFuntionCallLoopFlag(bool Setflag);
 		//セット関数の終了フラグ(途中でセット内容を変えたい場合に使用。)
 		void SetChangeSetFuncFlag(bool Setflag);
 		//キューアンセットフラグのセット
@@ -347,6 +345,8 @@ namespace SonikLib
 				{
 					break; //while(1) break;
 				};
+
+				continue;
 			};
 
 			//関数終了なら総合処理へ。
@@ -599,11 +599,13 @@ namespace SonikLib
 	//いずれの関数を使用しても内部ではスマートポインタで扱います。
 	bool WorkThreadEx::SetCallFunction(SonikLib::SonikFOSInterface* CallFunctionObject, bool _looped_)
 	{
-		return ImplObject->SetCallFunction(CallFunctionObject, (!_looped_));
+		bool l_looped_ = _looped_;
+		return ImplObject->SetCallFunction(CallFunctionObject, (!l_looped_));
 	};
 	bool WorkThreadEx::SetCallFunction(SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> CallFunctionObject, bool _looped_)
 	{
-		return ImplObject->SetCallFunction(CallFunctionObject, (!_looped_));
+		bool l_looped_ = _looped_;
+		return ImplObject->SetCallFunction(CallFunctionObject, (!l_looped_));
 	};
 
 	//外部のキューをセットします。
@@ -635,12 +637,13 @@ namespace SonikLib
 	//また、Queueをアンセットされる際にはOffの状態のままとなりますので、Onに戻したい場合はOnをコールしてください。
 	void WorkThreadEx::SetFunctionloopEndFlagOn(void)
 	{
-		//立ってると終了してしまうのでfalseを設定。
-		ImplObject->SetChangeFuntionCallLoopFlag(false);
+
+		ImplObject->SetChangeSetFuncFlag(true);
 	};
 	void WorkThreadEx::SetFunctionloopEndFlagOff(void)
 	{
-		ImplObject->SetChangeFuntionCallLoopFlag(true);
+		//立ってると終了。
+		ImplObject->SetChangeSetFuncFlag(false);
 	};
 
 

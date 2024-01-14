@@ -21,6 +21,8 @@
 
 //Typeがvoid型の特殊化引数については、グローバル関数用の実装となります。
 //ベースクラスは戻り値があるもの、無いもので上記二つと一緒です。
+//いずれのクラスもローカル変数として生成し、スレッドに渡されてほしくないため、
+//NEW関数を経由しての作成を強制しています。
 
 
 namespace SonikLib
@@ -45,7 +47,14 @@ namespace SonikLib
 		Type* object_;
 		Rtype (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val);
 
-	public:
+	private:
+		Members_10_FuncR(void)
+		:object_(nullptr)
+		,p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_10_FuncR(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -63,6 +72,7 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_10_FuncR(void)
 		{
 			if( object_ != nullptr && this->Destroy_)
@@ -72,7 +82,17 @@ namespace SonikLib
 
 		};
 
-		void SetFunc( Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) )
+		static  Members_10_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_) noexcept
+		{
+				return new(std::nothrow) Members_10_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_, Val9_, Val10_);
+		};
+
+		static  Members_10_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_10_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>[ArraySize];
+		};
+
+		void SetFunc( Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) ) noexcept
 		{
 			p_mfunc_ = set_func;
 
@@ -136,7 +156,14 @@ namespace SonikLib
 		Type* object_;
 		void (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val);
 
-	public:
+	private:
+		Members_10_Func(void)
+		:object_(nullptr)
+		,p_mfunc_(nullptr)
+		{
+			//member value initliaze only
+		};
+
 		Members_10_Func(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -154,6 +181,7 @@ namespace SonikLib
 			//member value initliaze only
 		};
 
+	public:
 		~Members_10_Func(void)
 		{
 			//継承元がTemplateクラスではないのでthis->は要らない。
@@ -163,6 +191,16 @@ namespace SonikLib
 				delete object_;
 			};
 
+		};
+
+		static  Members_10_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_) noexcept
+		{
+				return new(std::nothrow) Members_10_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_, Val9_, Val10_);
+		};
+
+		static  Members_10_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_10_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>[ArraySize];
 		};
 
 		void SetFunc( void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) )
@@ -191,7 +229,6 @@ namespace SonikLib
 			pTmp->SetObject(this->object_);
 
 		};
-
 
 		inline void Run(void)
 		{
@@ -223,7 +260,14 @@ namespace SonikLib
 		Arg10_Val Arg10Val;
 
 		Rtype (*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val);
-	public:
+
+	private:
+		Members_10_FuncRG(void)
+		:p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_10_FuncRG(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -240,9 +284,20 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_10_FuncRG(void)
 		{
 			//no process;
+		};
+
+		static  Members_10_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_) noexcept
+		{
+				return new(std::nothrow) Members_10_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_, Val9_, Val10_);
+		};
+
+		static  Members_10_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_10_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>[ArraySize];
 		};
 
 		void SetFunc( Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) )
@@ -295,7 +350,13 @@ namespace SonikLib
 
 		void (*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val);
 
-	public:
+	private:
+		Members_10_FuncG(void)
+		:p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_10_FuncG(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -312,9 +373,20 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_10_FuncG(void)
 		{
 			//no process;
+		};
+
+		static  Members_10_FuncG< Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_) noexcept
+		{
+				return new(std::nothrow) Members_10_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_, Val9_, Val10_);
+		};
+
+		static  Members_10_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_10_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>[ArraySize];
 		};
 
 		void SetFunc( void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) )
@@ -364,7 +436,14 @@ namespace SonikLib
 		Type* object_;
 		Rtype (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val);
 
-	public:
+	private:
+		Members_9_FuncR(void)
+		:object_(nullptr)
+		,p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_9_FuncR(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -381,12 +460,23 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_9_FuncR(void)
 		{
 			if( object_ != nullptr && this->Destroy_)
 			{
 				delete object_;
 			};
+		};
+
+		static  Members_9_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_) noexcept
+		{
+				return new(std::nothrow) Members_9_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_, Val9_);
+		};
+
+		static  Members_9_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_9_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>[ArraySize];
 		};
 
 		void SetFunc( Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) )
@@ -450,7 +540,14 @@ namespace SonikLib
 		Type* object_;
 		void (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val);
 
-	public:
+	private:
+		Members_9_Func(void)
+		:object_(nullptr)
+		,p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_9_Func(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -467,6 +564,7 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_9_Func(void)
 		{
 			if( object_ != nullptr && Destroy_)
@@ -474,6 +572,16 @@ namespace SonikLib
 				delete object_;
 			};
 
+		};
+
+		static  Members_9_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_) noexcept
+		{
+				return new(std::nothrow) Members_9_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_, Val9_);
+		};
+
+		static  Members_9_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_9_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>[ArraySize];
 		};
 
 		void SetFunc( void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) )
@@ -533,7 +641,13 @@ namespace SonikLib
 
 		Rtype (*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val);
 
-	public:
+	private:
+		Members_9_FuncRG(void)
+		:p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_9_FuncRG(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -549,10 +663,21 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_9_FuncRG(void)
 		{
 			//no process;
-		}
+		};
+
+		static  Members_9_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_) noexcept
+		{
+				return new(std::nothrow) Members_9_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_, Val9_);
+		};
+
+		static  Members_9_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_9_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>[ArraySize];
+		};
 
 		void SetFunc( Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) )
 		{
@@ -603,7 +728,13 @@ namespace SonikLib
 
 		void (*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val);
 
-	public:
+	private:
+		Members_9_FuncG(void)
+		:p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_9_FuncG(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val1_)
@@ -619,9 +750,20 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_9_FuncG(void)
 		{
 			//no process;
+		};
+
+		static  Members_9_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_) noexcept
+		{
+				return new(std::nothrow) Members_9_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_, Val9_);
+		};
+
+		static  Members_9_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_9_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>[ArraySize];
 		};
 
 		void SetFunc( void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) )
@@ -671,7 +813,14 @@ namespace SonikLib
 		Type* object_;
 		Rtype (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val);
 
-	public:
+	private:
+		Members_8_FuncR(void)
+		:object_(0)
+		,p_mfunc_(0)
+		{
+			//member value initialize only
+		};
+
 		Members_8_FuncR(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -687,6 +836,7 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_8_FuncR(void)
 		{
 			if( object_ != nullptr && this->Destroy_)
@@ -695,6 +845,15 @@ namespace SonikLib
 			};
 		};
 
+		static  Members_8_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_) noexcept
+		{
+				return new(std::nothrow) Members_8_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_);
+		};
+
+		static  Members_8_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_8_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>[ArraySize];
+		};
 
 		void SetFunc( Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) )
 		{
@@ -756,7 +915,14 @@ namespace SonikLib
 		Type* object_;
 		void (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val);
 
-	public:
+	private:
+		Members_8_Func(void)
+		:object_(nullptr)
+		,p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_8_Func(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -772,6 +938,7 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_8_Func(void)
 		{
 			if( object_ != nullptr && Destroy_)
@@ -779,6 +946,16 @@ namespace SonikLib
 				delete object_;
 			};
 
+		};
+
+		static  Members_8_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_) noexcept
+		{
+				return new(std::nothrow) Members_8_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_);
+		};
+
+		static  Members_8_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_8_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>[ArraySize];
 		};
 
 		void SetFunc( void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) )
@@ -837,7 +1014,13 @@ namespace SonikLib
 
 		Rtype (*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val);
 
-	public:
+	private:
+		Members_8_FuncRG(void)
+		:p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_8_FuncRG(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -852,9 +1035,20 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_8_FuncRG(void)
 		{
 			//no process;
+		};
+
+		static  Members_8_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_) noexcept
+		{
+				return new(std::nothrow) Members_8_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_);
+		};
+
+		static  Members_8_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_8_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>[ArraySize];
 		};
 
 		void SetFunc( Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) )
@@ -905,7 +1099,13 @@ namespace SonikLib
 
 		void (*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val);
 
-	public:
+	private:
+		Members_8_FuncG(void)
+		:p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_8_FuncG(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -920,9 +1120,20 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_8_FuncG(void)
 		{
 			//no process;
+		};
+
+		static  Members_8_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_) noexcept
+		{
+				return new(std::nothrow) Members_8_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_);
+		};
+
+		static  Members_8_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_8_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>[ArraySize];
 		};
 
 		void SetFunc( void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) )
@@ -970,7 +1181,14 @@ namespace SonikLib
 		Type* object_;
 		Rtype (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val);
 
-	public:
+	private:
+		Members_7_FuncR(void)
+		:object_(nullptr)
+		,p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_7_FuncR(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -985,6 +1203,7 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_7_FuncR(void)
 		{
 			if( object_ != nullptr && this->Destroy_)
@@ -992,6 +1211,16 @@ namespace SonikLib
 				delete object_;
 			};
 
+		};
+
+		static  Members_7_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_) noexcept
+		{
+				return new(std::nothrow) Members_7_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_);
+		};
+
+		static  Members_7_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_7_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>[ArraySize];
 		};
 
 		void SetFunc( Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) )
@@ -1053,7 +1282,14 @@ namespace SonikLib
 		Type* object_;
 		void (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val);
 
-	public:
+	private:
+		Members_7_Func(void)
+		:object_(nullptr)
+		,p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_7_Func(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -1068,12 +1304,23 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_7_Func(void)
 		{
 			if( object_ != nullptr && Destroy_)
 			{
 				delete object_;
 			};
+		};
+
+		static  Members_7_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_) noexcept
+		{
+				return new(std::nothrow) Members_7_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_);
+		};
+
+		static  Members_7_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_7_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>[ArraySize];
 		};
 
 		void SetFunc( void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) )
@@ -1130,7 +1377,13 @@ namespace SonikLib
 
 		Rtype (*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val);
 
-	public:
+	private:
+		Members_7_FuncRG(void)
+		:p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_7_FuncRG(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -1144,9 +1397,20 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_7_FuncRG(void)
 		{
 			//no process;
+		};
+
+		static  Members_7_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_) noexcept
+		{
+				return new(std::nothrow) Members_7_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_);
+		};
+
+		static  Members_7_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_7_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>[ArraySize];
 		};
 
 		void SetFunc( Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) )
@@ -1196,7 +1460,13 @@ namespace SonikLib
 
 		void (*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val);
 
-	public:
+	private:
+		Members_7_FuncG(void)
+		:p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_7_FuncG(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -1210,9 +1480,20 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_7_FuncG(void)
 		{
 			//no process;
+		};
+
+		static  Members_7_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_) noexcept
+		{
+				return new(std::nothrow) Members_7_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_);
+		};
+
+		static  Members_7_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_7_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>[ArraySize];
 		};
 
 		void SetFunc( void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) )
@@ -1259,7 +1540,14 @@ namespace SonikLib
 		Type* object_;
 		Rtype (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val);
 
-	public:
+	private:
+		Members_6_FuncR(void)
+		:object_(nullptr)
+		,p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_6_FuncR(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -1273,12 +1561,23 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_6_FuncR(void)
 		{
 			if( object_ != nullptr && this->Destroy_)
 			{
 				delete object_;
 			};
+		};
+
+		static  Members_6_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_) noexcept
+		{
+				return new(std::nothrow) Members_6_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_);
+		};
+
+		static  Members_6_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_6_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>[ArraySize];
 		};
 
 		void SetFunc( Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) )
@@ -1339,7 +1638,14 @@ namespace SonikLib
 		Type* object_;
 		void (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val);
 
-	public:
+	private:
+		Members_6_Func(void)
+		:object_(nullptr)
+		,p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_6_Func(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_)
 		:Arg1_Val(Val1_)
 		,Arg2_Val(Val1_)
@@ -1353,12 +1659,23 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_6_Func(void)
 		{
 			if( object_ != nullptr && Destroy_)
 			{
 				delete object_;
 			};
+		};
+
+		static  Members_6_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_) noexcept
+		{
+				return new(std::nothrow) Members_6_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_);
+		};
+
+		static  Members_6_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_6_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>[ArraySize];
 		};
 
 		void SetFunc( void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) )
@@ -1415,7 +1732,13 @@ namespace SonikLib
 
 		Rtype (*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val);
 
-	public:
+	private:
+		Members_6_FuncRG()
+		:p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_6_FuncRG(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -1428,9 +1751,20 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_6_FuncRG(void)
 		{
 			//no process;
+		};
+
+		static  Members_6_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_) noexcept
+		{
+				return new(std::nothrow) Members_6_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_);
+		};
+
+		static  Members_6_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_6_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>[ArraySize];
 		};
 
 		void SetFunc( Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) )
@@ -1479,7 +1813,13 @@ namespace SonikLib
 
 		void (*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val);
 
-	public:
+	private:
+		Members_6_FuncG(void)
+		:p_mfunc_(nullptr)
+		{
+			//member value initialzie only
+		};
+
 		Members_6_FuncG(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -1492,6 +1832,7 @@ namespace SonikLib
 			//member value initialzie only
 		};
 
+	public:
 		~Members_6_FuncG(void)
 		{
 			//no process;
@@ -1501,6 +1842,16 @@ namespace SonikLib
 		{
 			p_mfunc_ = set_func;
 
+		};
+
+		static  Members_6_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_) noexcept
+		{
+				return new(std::nothrow) Members_6_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_);
+		};
+
+		static  Members_6_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_6_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>[ArraySize];
 		};
 
 		unsigned int GetCreateSize(void)
@@ -1540,7 +1891,14 @@ namespace SonikLib
 		Type* object_;
 		Rtype (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val);
 
-	public:
+	private:
+		Members_5_FuncR(void)
+		:object_(nullptr)
+		,p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_5_FuncR(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -1553,6 +1911,7 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_5_FuncR(void)
 		{
 			if( object_ != nullptr && this->Destroy_)
@@ -1560,6 +1919,16 @@ namespace SonikLib
 				delete object_;
 			};
 
+		};
+
+		static  Members_5_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_) noexcept
+		{
+				return new(std::nothrow) Members_5_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>(Val1_, Val2_, Val3_, Val4_, Val5_);
+		};
+
+		static  Members_5_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_5_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>[ArraySize];
 		};
 
 		void SetFunc( Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val) )
@@ -1620,7 +1989,14 @@ namespace SonikLib
 		Type* object_;
 		void (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val);
 
-	public:
+	private:
+		Members_5_Func(void)
+		:object_(nullptr)
+		,p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_5_Func(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -1633,6 +2009,7 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_5_Func(void)
 		{
 			if( object_ != nullptr && Destroy_)
@@ -1640,6 +2017,16 @@ namespace SonikLib
 				delete object_;
 			};
 
+		};
+
+		static  Members_5_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_) noexcept
+		{
+				return new(std::nothrow) Members_5_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>(Val1_, Val2_, Val3_, Val4_, Val5_);
+		};
+
+		static  Members_5_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_5_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>[ArraySize];
 		};
 
 		void SetFunc( void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val) )
@@ -1695,7 +2082,13 @@ namespace SonikLib
 
 		Rtype (*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val);
 
-	public:
+	private:
+		Members_5_FuncRG(void)
+		:p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_5_FuncRG(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -1707,9 +2100,20 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_5_FuncRG(void)
 		{
 			//no process;
+		};
+
+		static  Members_5_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_) noexcept
+		{
+				return new(std::nothrow) Members_5_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>(Val1_, Val2_, Val3_, Val4_, Val5_);
+		};
+
+		static  Members_5_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_5_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>[ArraySize];
 		};
 
 		void SetFunc( Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val) )
@@ -1758,6 +2162,12 @@ namespace SonikLib
 		void (*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val);
 
 	public:
+		Members_5_FuncG(void)
+		:p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_5_FuncG(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -1772,6 +2182,16 @@ namespace SonikLib
 		~Members_5_FuncG(void)
 		{
 			//no process;
+		};
+
+		static  Members_5_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_) noexcept
+		{
+				return new(std::nothrow) Members_5_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>(Val1_, Val2_, Val3_, Val4_, Val5_);
+		};
+
+		static  Members_5_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_5_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>[ArraySize];
 		};
 
 		void SetFunc( void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val) )
@@ -1816,7 +2236,14 @@ namespace SonikLib
 		Type* object_;
 		Rtype (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val);
 
-	public:
+	private:
+		Members_4_FuncR(void)
+		:object_(nullptr)
+		,p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_4_FuncR(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -1828,12 +2255,23 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_4_FuncR(void)
 		{
 			if( object_ != nullptr && this->Destroy_)
 			{
 				delete object_;
 			};
+		};
+
+		static  Members_4_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_) noexcept
+		{
+				return new(std::nothrow) Members_4_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>(Val1_, Val2_, Val3_, Val4_);
+		};
+
+		static  Members_4_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_4_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>[ArraySize];
 		};
 
 		void SetFunc( Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val) )
@@ -1893,7 +2331,14 @@ namespace SonikLib
 		Type* object_;
 		void (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val);
 
-	public:
+	private:
+		Members_4_Func(void)
+		:object_(nullptr)
+		,p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_4_Func(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -1905,12 +2350,23 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_4_Func(void)
 		{
 			if( object_ != nullptr && Destroy_)
 			{
 				delete object_;
 			};
+		};
+
+		static  Members_4_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_) noexcept
+		{
+				return new(std::nothrow) Members_4_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>(Val1_, Val2_, Val3_, Val4_);
+		};
+
+		static  Members_4_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_4_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>[ArraySize];
 		};
 
 		void SetFunc( void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val) )
@@ -1965,7 +2421,13 @@ namespace SonikLib
 
 		Rtype (*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val);
 
-	public:
+	private:
+		Members_4_FuncRG(void)
+		:p_mfunc_(nullptr)
+		{
+			//member value initialzie only
+		};
+
 		Members_4_FuncRG(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -1976,9 +2438,20 @@ namespace SonikLib
 			//member value initialzie only
 		};
 
+	public:
 		~Members_4_FuncRG(void)
 		{
 			//no process;
+		};
+
+		static  Members_4_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_) noexcept
+		{
+				return new(std::nothrow) Members_4_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>(Val1_, Val2_, Val3_, Val4_);
+		};
+
+		static  Members_4_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_4_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>[ArraySize];
 		};
 
 		void SetFunc( Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val) )
@@ -2025,7 +2498,13 @@ namespace SonikLib
 
 		void (*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val);
 
-	public:
+	private:
+		Members_4_FuncG(void)
+		:p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_4_FuncG(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -2036,9 +2515,20 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_4_FuncG(void)
 		{
 			//no process;
+		};
+
+		static  Members_4_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_) noexcept
+		{
+				return new(std::nothrow) Members_4_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>(Val1_, Val2_, Val3_, Val4_);
+		};
+
+		static  Members_4_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_4_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>[ArraySize];
 		};
 
 		void SetFunc( void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val) )
@@ -2082,7 +2572,14 @@ namespace SonikLib
 		Type* object_;
 		Rtype (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val);
 
-	public:
+	private:
+		Members_3_FuncR(void)
+		:object_(nullptr)
+		,p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_3_FuncR(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -2093,6 +2590,7 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_3_FuncR(void)
 		{
 			if( object_ != nullptr && this->Destroy_)
@@ -2100,6 +2598,16 @@ namespace SonikLib
 
 				delete object_;
 			};
+		};
+
+		static  Members_3_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_) noexcept
+		{
+				return new(std::nothrow) Members_3_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val>(Val1_, Val2_, Val3_);
+		};
+
+		static  Members_3_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_3_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val>[ArraySize];
 		};
 
 		void SetFunc( Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val) )
@@ -2157,7 +2665,14 @@ namespace SonikLib
 		Type* object_;
 		void (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val);
 
-	public:
+	private:
+		Members_3_Func(void)
+		:object_(nullptr)
+		,p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_3_Func(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -2168,12 +2683,23 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_3_Func(void)
 		{
 			if( object_ != nullptr && Destroy_)
 			{
 				delete object_;
 			};
+		};
+
+		static  Members_3_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_) noexcept
+		{
+				return new(std::nothrow) Members_3_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val>(Val1_, Val2_, Val3_);
+		};
+
+		static  Members_3_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_3_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val>[ArraySize];
 		};
 
 		void SetFunc( void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val) )
@@ -2227,7 +2753,13 @@ namespace SonikLib
 
 		Rtype (*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val);
 
-	public:
+	private:
+		Members_3_FuncRG(void)
+		:p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_3_FuncRG(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -2237,10 +2769,21 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_3_FuncRG(void)
 		{
 			//no process;
 		}
+
+		static  Members_3_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_) noexcept
+		{
+				return new(std::nothrow) Members_3_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val>(Val1_, Val2_, Val3_);
+		};
+
+		static  Members_3_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_3_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val>[ArraySize];
+		};
 
 		void SetFunc( Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val) )
 		{
@@ -2285,7 +2828,13 @@ namespace SonikLib
 
 		void (*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val);
 
-	public:
+	private:
+		Members_3_FuncG(void)
+		:p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_3_FuncG(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -2295,9 +2844,20 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_3_FuncG(void)
 		{
 			//no process;
+		};
+
+		static  Members_3_FuncG<Arg1_Val, Arg2_Val, Arg3_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_) noexcept
+		{
+				return new(std::nothrow) Members_3_FuncG<Arg1_Val, Arg2_Val, Arg3_Val>(Val1_, Val2_, Val3_);
+		};
+
+		static  Members_3_FuncG<Arg1_Val, Arg2_Val, Arg3_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_3_FuncG<Arg1_Val, Arg2_Val, Arg3_Val>[ArraySize];
 		};
 
 		void SetFunc( void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val) )
@@ -2341,7 +2901,14 @@ namespace SonikLib
 		Type* object_;
 		Rtype (Type::*p_mfunc_)(Arg1_Val, Arg2_Val);
 
-	public:
+	private:
+		Members_2_FuncR(void)
+		:object_(nullptr)
+		,p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_2_FuncR(Arg1_Val Val1_, Arg2_Val Val2_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -2351,12 +2918,23 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_2_FuncR(void)
 		{
 			if( object_ != nullptr && this->Destroy_)
 			{
 				delete object_;
 			};
+		};
+
+		static  Members_2_FuncR<Rtype, Type, Arg1_Val, Arg2_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_) noexcept
+		{
+				return new(std::nothrow) Members_2_FuncR<Rtype, Type, Arg1_Val, Arg2_Val>(Val1_, Val2_);
+		};
+
+		static  Members_2_FuncR<Rtype, Type, Arg1_Val, Arg2_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_2_FuncR<Rtype, Type, Arg1_Val, Arg2_Val>[ArraySize];
 		};
 
 		void SetFunc( Rtype (Type::*set_func)(Arg1_Val, Arg2_Val) )
@@ -2414,7 +2992,14 @@ namespace SonikLib
 		Type* object_;
 		void (Type::*p_mfunc_)(Arg1_Val, Arg2_Val);
 
-	public:
+	private:
+		Members_2_Func(void)
+		:object_(nullptr)
+		,p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_2_Func(Arg1_Val Val1_, Arg2_Val Val2_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -2424,12 +3009,23 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_2_Func(void)
 		{
 			if( object_ != nullptr && Destroy_)
 			{
 				delete object_;
 			};
+		};
+
+		static  Members_2_Func<Type, Arg1_Val, Arg2_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_) noexcept
+		{
+				return new(std::nothrow) Members_2_Func<Type, Arg1_Val, Arg2_Val>(Val1_, Val2_);
+		};
+
+		static  Members_2_Func<Type, Arg1_Val, Arg2_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_2_Func<Type, Arg1_Val, Arg2_Val>[ArraySize];
 		};
 
 		void SetFunc( void (Type::*set_func)(Arg1_Val, Arg2_Val) )
@@ -2482,7 +3078,13 @@ namespace SonikLib
 
 		Rtype (*p_mfunc_)(Arg1_Val, Arg2_Val);
 
-	public:
+	private:
+		Members_2_FuncRG(void)
+		:p_mfunc_(nullptr)
+		{
+			//member value Initialize only
+		};
+
 		Members_2_FuncRG(Arg1_Val Val1_, Arg2_Val Val2_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -2491,9 +3093,20 @@ namespace SonikLib
 			//member value Initialize only
 		};
 
+	public:
 		~Members_2_FuncRG(void)
 		{
 			//no process;
+		};
+
+		static  Members_2_FuncRG<Rtype, Arg1_Val, Arg2_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_) noexcept
+		{
+				return new(std::nothrow) Members_2_FuncRG<Rtype, Arg1_Val, Arg2_Val>(Val1_, Val2_);
+		};
+
+		static  Members_2_FuncRG<Rtype, Arg1_Val, Arg2_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_2_FuncRG<Rtype, Arg1_Val, Arg2_Val>[ArraySize];
 		};
 
 		void SetFunc( Rtype (*set_func)(Arg1_Val, Arg2_Val) )
@@ -2538,7 +3151,13 @@ namespace SonikLib
 
 		void (*p_mfunc_)(Arg1_Val, Arg2_Val);
 
-	public:
+	private:
+		Members_2_FuncG(void)
+		:p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_2_FuncG(Arg1_Val Val1_, Arg2_Val Val2_)
 		:Arg1Val(Val1_)
 		,Arg2Val(Val2_)
@@ -2547,9 +3166,20 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_2_FuncG(void)
 		{
 			//no process;
+		};
+
+		static  Members_2_FuncG<Arg1_Val, Arg2_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_) noexcept
+		{
+				return new(std::nothrow) Members_2_FuncG<Arg1_Val, Arg2_Val>(Val1_, Val2_);
+		};
+
+		static  Members_2_FuncG<Arg1_Val, Arg2_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_2_FuncG<Arg1_Val, Arg2_Val>[ArraySize];
 		};
 
 		void SetFunc( void (*set_func)(Arg1_Val, Arg2_Val) )
@@ -2591,7 +3221,14 @@ namespace SonikLib
 		Type* object_;
 		Rtype (Type::*p_mfunc_)(Arg1_Val);
 
-	public:
+	private:
+		Members_1_FuncR(void)
+		:object_(nullptr)
+		,p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_1_FuncR(Arg1_Val Val1_)
 		:Arg1Val(Val1_)
 		,object_(nullptr)
@@ -2600,12 +3237,23 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_1_FuncR(void)
 		{
 			if( object_ != nullptr && this->Destroy_)
 			{
 				delete object_;
 			};
+		};
+
+		static  Members_1_FuncR<Rtype, Type, Arg1_Val>* New(Arg1_Val Val1_) noexcept
+		{
+				return new(std::nothrow) Members_1_FuncR<Rtype, Type, Arg1_Val>(Val1_);
+		};
+
+		static  Members_1_FuncR<Rtype, Type, Arg1_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_1_FuncR<Rtype, Type, Arg1_Val>[ArraySize];
 		};
 
 		void SetArgument(Arg1_Val SetArg1_)
@@ -2667,7 +3315,14 @@ namespace SonikLib
 		Type* object_;
 		void (Type::*p_mfunc_)(Arg1_Val);
 
-	public:
+	private:
+		Members_1_Func(void)
+		:object_(nullptr)
+		,p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_1_Func(Arg1_Val Val1_)
 		:Arg1Val(Val1_)
 		,object_(nullptr)
@@ -2676,12 +3331,23 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_1_Func(void)
 		{
 			if( object_ != nullptr && Destroy_)
 			{
 				delete object_;
 			};
+		};
+
+		static  Members_1_Func<Type, Arg1_Val>* New(Arg1_Val Val1_) noexcept
+		{
+				return new(std::nothrow) Members_1_Func<Type, Arg1_Val>(Val1_);
+		};
+
+		static  Members_1_Func<Type, Arg1_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_1_Func<Type, Arg1_Val>[ArraySize];
 		};
 
 		void SetArgument(Arg1_Val SetArg1_)
@@ -2739,7 +3405,13 @@ namespace SonikLib
 
 		Rtype (*p_mfunc_)(Arg1_Val);
 
-	public:
+	private:
+		Members_1_FuncRG(void)
+		:p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_1_FuncRG(Arg1_Val Val1_)
 		:Arg1Val(Val1_)
 		,p_mfunc_(nullptr)
@@ -2747,9 +3419,20 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_1_FuncRG(void)
 		{
 			//no process;
+		};
+
+		static  Members_1_FuncRG<Rtype, Arg1_Val>* New(Arg1_Val Val1_) noexcept
+		{
+				return new(std::nothrow) Members_1_FuncRG<Rtype, Arg1_Val>(Val1_);
+		};
+
+		static  Members_1_FuncRG<Rtype, Arg1_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_1_FuncRG<Rtype, Arg1_Val>[ArraySize];
 		};
 
 		void SetArgument(Arg1_Val SetArg1_)
@@ -2798,7 +3481,13 @@ namespace SonikLib
 
 		void (*p_mfunc_)(Arg1_Val);
 
-	public:
+	private:
+		Members_1_FuncG(void)
+		:p_mfunc_(nullptr)
+		{
+			//member value initialize only
+		};
+
 		Members_1_FuncG(Arg1_Val Val1_)
 		:Arg1Val(Val1_)
 		,p_mfunc_(nullptr)
@@ -2806,9 +3495,20 @@ namespace SonikLib
 			//member value initialize only
 		};
 
+	public:
 		~Members_1_FuncG(void)
 		{
 			//no process;
+		};
+
+		static  Members_1_FuncG<Arg1_Val>* New(Arg1_Val Val1_) noexcept
+		{
+				return new(std::nothrow) Members_1_FuncG<Arg1_Val>(Val1_);
+		};
+
+		static  Members_1_FuncG<Arg1_Val>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_1_FuncG<Arg1_Val>[ArraySize];
 		};
 
 		void SetArgument(Arg1_Val SetArg1_)
@@ -2849,11 +3549,10 @@ namespace SonikLib
 	class Members_0_FuncR : public SonikFOSTemplateInterface<Rtype>
 	{
 	private:
-
 		Type* object_;
 		Rtype(Type::*p_mfunc_)(void);
 
-	public:
+	private:
 		Members_0_FuncR(void)
 		:object_(nullptr)
 		,p_mfunc_(nullptr)
@@ -2861,12 +3560,23 @@ namespace SonikLib
 			//member initialize only
 		};
 
+	public:
 		~Members_0_FuncR(void)
 		{
 			if( object_ != nullptr && this->Destroy_)
 			{
 				delete object_;
 			};
+		};
+
+		static  Members_0_FuncR<Rtype, Type>* New(void) noexcept
+		{
+				return new(std::nothrow) Members_0_FuncR<Rtype, Type>();
+		};
+
+		static  Members_0_FuncR<Rtype, Type>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_0_FuncR<Rtype, Type>[ArraySize]();
 		};
 
 		void SetFunc( Rtype (Type::*set_func)(void) )
@@ -2922,7 +3632,7 @@ namespace SonikLib
 		Type* object_;
 		void (Type::*p_mfunc_)(void);
 
-	public:
+	private:
 		Members_0_Func(void)
 		:object_(nullptr)
 		,p_mfunc_(nullptr)
@@ -2930,12 +3640,23 @@ namespace SonikLib
 			//memer value initialize only
 		};
 
+	public:
 		~Members_0_Func(void)
 		{
 			if( object_ != nullptr && Destroy_)
 			{
 				delete object_;
 			};
+		};
+
+		static  Members_0_Func<Type>* New(void) noexcept
+		{
+				return new(std::nothrow) Members_0_Func<Type>();
+		};
+
+		static  Members_0_Func<Type>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_0_Func<Type>[ArraySize]();
 		};
 
 		void SetFunc( void (Type::*set_func)(void) )
@@ -2987,16 +3708,26 @@ namespace SonikLib
 
 		Rtype (*p_mfunc_)(void);
 
-	public:
-		Members_0_FuncRG(void)
+		Members_0_FuncRG()
 		:p_mfunc_(nullptr)
 		{
 			//member value initialize only
 		};
 
+	public:
 		~Members_0_FuncRG(void)
 		{
 			//no process;
+		};
+
+		static  Members_0_FuncRG<Rtype>* New(void) noexcept
+		{
+				return new(std::nothrow) Members_0_FuncRG<Rtype>();
+		};
+
+		static  Members_0_FuncRG<Rtype>* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_0_FuncRG<Rtype>[ArraySize]();
 		};
 
 		void SetFunc( Rtype (*set_func)(void) )
@@ -3033,16 +3764,28 @@ namespace SonikLib
 
 		void (*p_mfunc_)(void);
 
-	public:
+	private:
 		Members_0_FuncG(void)
 		:p_mfunc_(nullptr)
 		{
 			//member value initialize only
 		};
 
+	public:
 		~Members_0_FuncG(void)
 		{
 			//no process;
+		};
+
+		static  Members_0_FuncG* New(void) noexcept
+		{
+				return new(std::nothrow) Members_0_FuncG();
+		};
+
+		static  Members_0_FuncG* NewArray(uint64_t ArraySize) noexcept
+		{
+				return new(std::nothrow) Members_0_FuncG[ArraySize]();
+
 		};
 
 		void SetFunc( void (*set_func)(void) )
@@ -3074,7 +3817,6 @@ namespace SonikLib
 		};
 
 	};
-
 
 };
 

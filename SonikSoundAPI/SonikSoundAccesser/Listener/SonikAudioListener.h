@@ -8,6 +8,11 @@
 #ifndef LISTENER_SONIKAUDIOLISTENER_H_
 #define LISTENER_SONIKAUDIOLISTENER_H_
 
+namespace SonikAudioPoint
+{
+	class SonikAudio3DPoint;
+};
+
 namespace SonikAudio
 {
 	//オーディオリスナーさん
@@ -16,14 +21,17 @@ namespace SonikAudio
 	class SonikAudioListener
 	{
 	private:
-		double PosX, PosY, PosZ;
-		double* p_PosX, p_PosY, p_PosZ;
-
+		double max_listen_distance; //聞こえる範囲
+		SonikAudioPoint::SonikAudio3DPoint* m_3dpos;	//3D座標ポジション
 	public:
 		//コンストラクタ
 		SonikAudioListener(void);
 		//デストラクタ
 		~SonikAudioListener(void);
+
+		//最大聞こえる距離のセットゲット
+		void SetMaxListenDistance(double _setmaxdistance_);
+		double GetMaxListernDistance(void);
 
 		//ポジションのセット
 		void SetPosition(double x, double y, double z);
@@ -34,15 +42,13 @@ namespace SonikAudio
 		//ポジションのゲット
 		void GetPosition(double& x, double& y, double& z);
 		void GetPosition(double*& x, double*& y, double*& z);
+		SonikAudioPoint::SonikAudio3DPoint& GetPosition(void);
 		double GetPositionX(void);
-		const double* GetPositionX(void);
-		const double& GetPositionX(void);
+		void GetPositionX(const double* _out_);
 		double GetPositionY(void);
-		const double* GetPositionY(void);
-		const double& GetPositionY(void);
+		void GetPositionY(const double* _out_);
 		double GetPositionZ(void);
-		const double* GetPositionZ(void);
-		const double& GetPositionZ(void);
+		void GetPositionZ(const double* _out_);
 
 	};
 

@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="ASCII"?>
+<<<<<<< HEAD
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_SYYVUKrpEe67r9MriAyMAA" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_SYYVUarpEe67r9MriAyMAA" bindingContexts="_SYYVWqrpEe67r9MriAyMAA">
   <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikMathDistance.h&quot; tooltip=&quot;SonikLibraryAPI/MathBit/SonikMathDistance.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/MathBit/SonikMathDistance.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikMathDistance.cpp&quot; tooltip=&quot;SonikLibraryAPI/MathBit/SonikMathDistance.cpp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/MathBit/SonikMathDistance.cpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikKeyFrameMath.cpp&quot; tooltip=&quot;SonikLibraryAPI/MathBit/SonikKeyFrameMath.cpp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/MathBit/SonikKeyFrameMath.cpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
   <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
   <children xsi:type="basic:TrimmedWindow" xmi:id="_SYYVUarpEe67r9MriAyMAA" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_Ssdu8KrpEe67r9MriAyMAA" label="%trimmedwindow.label.eclipseSDK" x="52" y="52" width="1411" height="768">
+=======
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_odDDMKrlEe6gitCdscXUDw" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_odDDMarlEe6gitCdscXUDw" bindingContexts="_odEVparlEe6gitCdscXUDw">
+  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikMathDistance.h&quot; tooltip=&quot;SonikLibraryAPI/MathBit/SonikMathDistance.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/MathBit/SonikMathDistance.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikMathTrigonometric.h&quot; tooltip=&quot;SonikLibraryAPI/MathBit/SonikMathTrigonometric.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/MathBit/SonikMathTrigonometric.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikNormalize.cpp&quot; tooltip=&quot;SonikLibraryAPI/MathBit/SonikNormalize.cpp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/MathBit/SonikNormalize.cpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikNormalize.h&quot; tooltip=&quot;SonikLibraryAPI/MathBit/SonikNormalize.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/MathBit/SonikNormalize.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikMathStandard.h&quot; tooltip=&quot;SonikLibraryAPI/MathBit/SonikMathStandard.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/MathBit/SonikMathStandard.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikMathDistance.cpp&quot; tooltip=&quot;SonikLibraryAPI/MathBit/SonikMathDistance.cpp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/MathBit/SonikMathDistance.cpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikMathStandard.cpp&quot; tooltip=&quot;SonikLibraryAPI/MathBit/SonikMathStandard.cpp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/MathBit/SonikMathStandard.cpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikWorkThreadEx.cpp&quot; tooltip=&quot;SonikLibraryAPI/SonikWorkThread/SonikWorkThreadEx.cpp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/SonikWorkThread/SonikWorkThreadEx.cpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikWorkThreadEx.h&quot; tooltip=&quot;SonikLibraryAPI/SonikWorkThread/SonikWorkThreadEx.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/SonikWorkThread/SonikWorkThreadEx.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikWorkThreadManagerEx.h&quot; tooltip=&quot;SonikLibraryAPI/SonikWorkThread/SonikWorkThreadManagerEx.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/SonikWorkThread/SonikWorkThreadManagerEx.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikWorkThreadManagerEx.cpp&quot; tooltip=&quot;SonikLibraryAPI/SonikWorkThread/SonikWorkThreadManagerEx.cpp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/SonikWorkThread/SonikWorkThreadManagerEx.cpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;FunctionObjectSystemImpl.hpp&quot; tooltip=&quot;SonikLibraryAPI/FunctionObject/FunctionObjectSystemImpl.hpp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/FunctionObject/FunctionObjectSystemImpl.hpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;FunctionObjectSystemInterface.hpp&quot; tooltip=&quot;SonikLibraryAPI/FunctionObject/FunctionObjectSystemInterface.hpp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/FunctionObject/FunctionObjectSystemInterface.hpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikSmartPointer.hpp&quot; tooltip=&quot;SonikLibraryAPI/SmartPointer/SonikSmartPointer.hpp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/SmartPointer/SonikSmartPointer.hpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikMathTrigonometric.cpp&quot; tooltip=&quot;SonikLibraryAPI/MathBit/SonikMathTrigonometric.cpp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/MathBit/SonikMathTrigonometric.cpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikKeyFrameMath.cpp&quot; tooltip=&quot;SonikLibraryAPI/MathBit/SonikKeyFrameMath.cpp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/MathBit/SonikKeyFrameMath.cpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikKeyFrameMath.h&quot; tooltip=&quot;SonikLibraryAPI/MathBit/SonikKeyFrameMath.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/MathBit/SonikKeyFrameMath.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;MathBit.h&quot; tooltip=&quot;SonikLibraryAPI/MathBit/MathBit.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/MathBit/MathBit.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;WaveBitConvert.cpp&quot; tooltip=&quot;SonikLibraryAPI/Audio/Functions/WaveBitConvert.cpp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/Audio/Functions/WaveBitConvert.cpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;WaveBitConvert.h&quot; tooltip=&quot;SonikLibraryAPI/Audio/Functions/WaveBitConvert.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/Audio/Functions/WaveBitConvert.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;WriteFunction.h&quot; tooltip=&quot;SonikLibraryAPI/Audio/Functions/WriteFunction.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/Audio/Functions/WriteFunction.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.cdt.ui.ExternalEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;limits.h&quot; tooltip=&quot;D:\Development\MSYS64\clang64\lib\clang\17\include\limits.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;D:\Development\MSYS64\clang64\lib\clang\17\include\limits.h&quot; project=&quot;SonikLibraryAPI&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;MathBit.cpp&quot; tooltip=&quot;SonikLibraryAPI/MathBit/MathBit.cpp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/MathBit/MathBit.cpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikString.cpp&quot; tooltip=&quot;SonikLibraryAPI/SonikString/SonikString.cpp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/SonikString/SonikString.cpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.ide.FileStoreEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;FunctionObjectSystemImpl.hpp&quot; tooltip=&quot;D:\MyLibrary\include\FunctionObject\FunctionObjectSystemImpl.hpp&quot;>&#xD;&#xA;&lt;persistable uri=&quot;file:/D:/MyLibrary/include/FunctionObject/FunctionObjectSystemImpl.hpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;FunctionObjectSystemImpl.hpp&quot; tooltip=&quot;SonikLibraryAPI/Debug_x64/FunctionObjectSystemImpl.hpp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/Debug_x64/FunctionObjectSystemImpl.hpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikThreadPack.h&quot; tooltip=&quot;SonikLibraryAPI/SonikWorkThread/SonikThreadPack.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/SonikWorkThread/SonikThreadPack.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikAtomicQueue.hpp&quot; tooltip=&quot;SonikLibraryAPI/Container/SonikAtomicQueue.hpp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/Container/SonikAtomicQueue.hpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;RangedForContainer.hpp&quot; tooltip=&quot;SonikLibraryAPI/Container/RangedForContainer.hpp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/Container/RangedForContainer.hpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikString.h&quot; tooltip=&quot;SonikLibraryAPI/SonikString/SonikString.h&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/SonikString/SonikString.h&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikWindowsWaveFormat.cpp&quot; tooltip=&quot;SonikLibraryAPI/Audio/Format/SonikWindowsWaveFormat.cpp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/Audio/Format/SonikWindowsWaveFormat.cpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;LoadFunction.cpp&quot; tooltip=&quot;SonikLibraryAPI/Audio/Functions/LoadFunction.cpp&quot;>&#xD;&#xA;&lt;persistable path=&quot;/SonikLibraryAPI/Audio/Functions/LoadFunction.cpp&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
+  <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_odDDMarlEe6gitCdscXUDw" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_odDDMqrlEe6gitCdscXUDw" label="%trimmedwindow.label.eclipseSDK" x="646" y="284" width="1157" height="700">
+>>>>>>> b1_edit
     <persistedState key="coolBarVisible" value="true"/>
     <persistedState key="perspectiveBarVisible" value="true"/>
     <persistedState key="isRestored" value="true"/>
@@ -83,11 +90,19 @@
                 <tags>categoryTag:General</tags>
               </children>
             </children>
+<<<<<<< HEAD
             <children xsi:type="basic:PartSashContainer" xmi:id="_S0S1R6rpEe67r9MriAyMAA" containerData="7500" selectedElement="_S0S1SKrpEe67r9MriAyMAA">
               <children xsi:type="basic:PartSashContainer" xmi:id="_S0S1SKrpEe67r9MriAyMAA" containerData="7500" selectedElement="_S0S1SarpEe67r9MriAyMAA" horizontal="true">
                 <children xsi:type="advanced:Placeholder" xmi:id="_S0S1SarpEe67r9MriAyMAA" elementId="org.eclipse.ui.editorss" containerData="7500" ref="_S0Ey0KrpEe67r9MriAyMAA"/>
                 <children xsi:type="basic:PartStack" xmi:id="_S0S1SqrpEe67r9MriAyMAA" elementId="topRight" containerData="2500" selectedElement="_S0S1S6rpEe67r9MriAyMAA">
                   <children xsi:type="advanced:Placeholder" xmi:id="_S0S1S6rpEe67r9MriAyMAA" elementId="org.eclipse.ui.views.ContentOutline" ref="_S0KSY6rpEe67r9MriAyMAA" closeable="true">
+=======
+            <children xsi:type="basic:PartSashContainer" xmi:id="_odDDOqrlEe6gitCdscXUDw" containerData="8037" selectedElement="_odDDQqrlEe6gitCdscXUDw">
+              <children xsi:type="basic:PartSashContainer" xmi:id="_odDDO6rlEe6gitCdscXUDw" containerData="7612" selectedElement="_odDDPKrlEe6gitCdscXUDw" horizontal="true">
+                <children xsi:type="advanced:Placeholder" xmi:id="_odDDPKrlEe6gitCdscXUDw" elementId="org.eclipse.ui.editorss" containerData="8085" ref="_odESp6rlEe6gitCdscXUDw"/>
+                <children xsi:type="basic:PartStack" xmi:id="_odDDParlEe6gitCdscXUDw" elementId="topRight" containerData="1915" selectedElement="_odDDPqrlEe6gitCdscXUDw">
+                  <children xsi:type="advanced:Placeholder" xmi:id="_odDDPqrlEe6gitCdscXUDw" elementId="org.eclipse.ui.views.ContentOutline" ref="_odETNqrlEe6gitCdscXUDw" closeable="true">
+>>>>>>> b1_edit
                     <tags>View</tags>
                     <tags>categoryTag:General</tags>
                   </children>
@@ -105,8 +120,15 @@
                   </children>
                 </children>
               </children>
+<<<<<<< HEAD
               <children xsi:type="basic:PartStack" xmi:id="_S0S1T6rpEe67r9MriAyMAA" elementId="bottom" containerData="2500" selectedElement="_S0S1UqrpEe67r9MriAyMAA">
                 <children xsi:type="advanced:Placeholder" xmi:id="_S0S1UKrpEe67r9MriAyMAA" elementId="org.eclipse.ui.views.ProblemView" ref="_S0JrU6rpEe67r9MriAyMAA" closeable="true">
+=======
+              <children xsi:type="basic:PartStack" xmi:id="_odDDQqrlEe6gitCdscXUDw" elementId="bottom" containerData="2388" selectedElement="_odDDRarlEe6gitCdscXUDw">
+                <tags>active</tags>
+                <tags>noFocus</tags>
+                <children xsi:type="advanced:Placeholder" xmi:id="_odDDQ6rlEe6gitCdscXUDw" elementId="org.eclipse.ui.views.ProblemView" ref="_odETC6rlEe6gitCdscXUDw" closeable="true">
+>>>>>>> b1_edit
                   <tags>View</tags>
                   <tags>categoryTag:General</tags>
                 </children>
@@ -168,6 +190,7 @@
       <children xsi:type="basic:PartStack" xmi:id="_S0Ey0arpEe67r9MriAyMAA" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_VnWLsKrpEe67r9MriAyMAA">
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
+<<<<<<< HEAD
         <tags>active</tags>
         <children xsi:type="basic:Part" xmi:id="_VWXwcKrpEe67r9MriAyMAA" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="SonikKeyFrameMath.cpp" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
           <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikKeyFrameMath.cpp&quot; partName=&quot;SonikKeyFrameMath.cpp&quot; title=&quot;SonikKeyFrameMath.cpp&quot; tooltip=&quot;SonikLibraryAPI/MathBit/SonikKeyFrameMath.cpp&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/SonikLibraryAPI/MathBit/SonikKeyFrameMath.cpp&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;3827&quot; selectionTopPixel=&quot;1800&quot;/>&#xD;&#xA;&lt;/editor>"/>
@@ -185,6 +208,22 @@
         </children>
         <children xsi:type="basic:Part" xmi:id="_btuUEKrpEe67r9MriAyMAA" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="SonikMathDistance.cpp" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
           <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikMathDistance.cpp&quot; partName=&quot;SonikMathDistance.cpp&quot; title=&quot;SonikMathDistance.cpp&quot; tooltip=&quot;SonikLibraryAPI/MathBit/SonikMathDistance.cpp&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/SonikLibraryAPI/MathBit/SonikMathDistance.cpp&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;540&quot;/>&#xD;&#xA;&lt;/editor>"/>
+=======
+        <children xsi:type="basic:Part" xmi:id="_odESqarlEe6gitCdscXUDw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="SonikMathDistance.h" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikMathDistance.h&quot; partName=&quot;SonikMathDistance.h&quot; title=&quot;SonikMathDistance.h&quot; tooltip=&quot;SonikLibraryAPI/MathBit/SonikMathDistance.h&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/SonikLibraryAPI/MathBit/SonikMathDistance.h&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;254&quot; selectionTopPixel=&quot;510&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>removeOnHide</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_odESrarlEe6gitCdscXUDw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="SonikMathDistance.cpp" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikMathDistance.cpp&quot; partName=&quot;SonikMathDistance.cpp&quot; title=&quot;SonikMathDistance.cpp&quot; tooltip=&quot;SonikLibraryAPI/MathBit/SonikMathDistance.cpp&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/SonikLibraryAPI/MathBit/SonikMathDistance.cpp&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;2653&quot; selectionTopPixel=&quot;3550&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <tags>Editor</tags>
+          <tags>removeOnHide</tags>
+          <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
+        </children>
+        <children xsi:type="basic:Part" xmi:id="_AAjBkLJsEe6sq-RD8cAuGw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="SonikNormalize.cpp" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;SonikNormalize.cpp&quot; partName=&quot;SonikNormalize.cpp&quot; title=&quot;SonikNormalize.cpp&quot; tooltip=&quot;SonikLibraryAPI/MathBit/SonikNormalize.cpp&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/SonikLibraryAPI/MathBit/SonikNormalize.cpp&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;644&quot; selectionTopPixel=&quot;590&quot;/>&#xD;&#xA;&lt;/editor>"/>
+>>>>>>> b1_edit
           <tags>Editor</tags>
           <tags>removeOnHide</tags>
           <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
@@ -201,7 +240,11 @@
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
       </menus>
+<<<<<<< HEAD
       <toolbar xmi:id="_S5XigarpEe67r9MriAyMAA" elementId="org.eclipse.ui.navigator.ProjectExplorer" visible="false"/>
+=======
+      <toolbar xmi:id="_odETAqrlEe6gitCdscXUDw" elementId="org.eclipse.ui.navigator.ProjectExplorer" visible="false"/>
+>>>>>>> b1_edit
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_S0JrUarpEe67r9MriAyMAA" elementId="org.eclipse.cdt.ui.CView" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="C/C++ Projects" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/view16/cview.gif" tooltip="" closeable="true">
       <persistedState key="originalCompatibilityViewClass" value="org.eclipse.cdt.internal.ui.cview.CView"/>
@@ -218,7 +261,11 @@
     <sharedElements xsi:type="basic:Part" xmi:id="_S0JrU6rpEe67r9MriAyMAA" elementId="org.eclipse.ui.views.ProblemView" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Problems" iconURI="platform:/plugin/org.eclipse.ui.ide/icons/full/eview16/problems_view.png" tooltip="" closeable="true">
       <persistedState key="originalCompatibilityViewClass" value="org.eclipse.ui.internal.views.markers.ProblemsView"/>
       <persistedState key="originalCompatibilityViewBundle" value="org.eclipse.ui.ide"/>
+<<<<<<< HEAD
       <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view PRIMARY_SORT_FIELD=&quot;org.eclipse.ui.ide.severityAndDescriptionField&quot; categoryGroup=&quot;org.eclipse.ui.ide.severity&quot; markerContentGenerator=&quot;org.eclipse.ui.ide.problemsGenerator&quot;>&#xD;&#xA;&lt;expanded>&#xD;&#xA;&lt;category IMemento.internal.id=&quot;Warnings (18 items)&quot;/>&#xD;&#xA;&lt;/expanded>&#xD;&#xA;&lt;columnWidths org.eclipse.ui.ide.locationField=&quot;90&quot; org.eclipse.ui.ide.markerType=&quot;90&quot; org.eclipse.ui.ide.pathField=&quot;120&quot; org.eclipse.ui.ide.resourceField=&quot;90&quot; org.eclipse.ui.ide.severityAndDescriptionField=&quot;300&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.severityAndDescriptionField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.resourceField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.pathField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.locationField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.markerType&quot;/>&#xD;&#xA;&lt;/view>"/>
+=======
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view PRIMARY_SORT_FIELD=&quot;org.eclipse.ui.ide.severityAndDescriptionField&quot; categoryGroup=&quot;org.eclipse.ui.ide.severity&quot; markerContentGenerator=&quot;org.eclipse.ui.ide.problemsGenerator&quot;>&#xD;&#xA;&lt;expanded>&#xD;&#xA;&lt;category IMemento.internal.id=&quot;Errors&quot;/>&#xD;&#xA;&lt;category IMemento.internal.id=&quot;Warnings&quot;/>&#xD;&#xA;&lt;/expanded>&#xD;&#xA;&lt;columnWidths org.eclipse.ui.ide.locationField=&quot;90&quot; org.eclipse.ui.ide.markerType=&quot;90&quot; org.eclipse.ui.ide.pathField=&quot;120&quot; org.eclipse.ui.ide.resourceField=&quot;90&quot; org.eclipse.ui.ide.severityAndDescriptionField=&quot;300&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.severityAndDescriptionField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.resourceField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.pathField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.locationField&quot;/>&#xD;&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.markerType&quot;/>&#xD;&#xA;&lt;/view>"/>
+>>>>>>> b1_edit
       <tags>View</tags>
       <tags>categoryTag:General</tags>
       <menus xmi:id="_TAsSgKrpEe67r9MriAyMAA" elementId="org.eclipse.ui.views.ProblemView">
@@ -239,11 +286,21 @@
       <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view/>"/>
       <tags>View</tags>
       <tags>categoryTag:General</tags>
+<<<<<<< HEAD
       <menus xmi:id="_Zx9K8KrpEe67r9MriAyMAA" elementId="org.eclipse.ui.console.ConsoleView">
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
       </menus>
       <toolbar xmi:id="_Zx9K8arpEe67r9MriAyMAA" elementId="org.eclipse.ui.console.ConsoleView" visible="false"/>
+=======
+      <tags>active</tags>
+      <tags>activeOnClose</tags>
+      <menus xmi:id="_odETFarlEe6gitCdscXUDw" elementId="org.eclipse.ui.console.ConsoleView">
+        <tags>ViewMenu</tags>
+        <tags>menuContribution:menu</tags>
+      </menus>
+      <toolbar xmi:id="_odETGKrlEe6gitCdscXUDw" elementId="org.eclipse.ui.console.ConsoleView" visible="false"/>
+>>>>>>> b1_edit
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_S0KSYqrpEe67r9MriAyMAA" elementId="org.eclipse.ui.views.PropertySheet" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Properties" iconURI="platform:/plugin/org.eclipse.ui.views/icons/full/eview16/prop_ps.png" tooltip="" closeable="true">
       <persistedState key="originalCompatibilityViewClass" value="org.eclipse.ui.views.properties.PropertySheet"/>
@@ -261,7 +318,11 @@
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
       </menus>
+<<<<<<< HEAD
       <toolbar xmi:id="_S_YD4arpEe67r9MriAyMAA" elementId="org.eclipse.ui.views.ContentOutline" visible="false"/>
+=======
+      <toolbar xmi:id="_odETTarlEe6gitCdscXUDw" elementId="org.eclipse.ui.views.ContentOutline" visible="false"/>
+>>>>>>> b1_edit
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_S0RnIKrpEe67r9MriAyMAA" elementId="org.eclipse.ui.views.minimap.MinimapView" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Minimap" iconURI="platform:/plugin/org.eclipse.ui.workbench.texteditor/icons/full/eview16/minimap.png" tooltip="" closeable="true">
       <persistedState key="originalCompatibilityViewClass" value="org.eclipse.ui.internal.views.minimap.MinimapView"/>
@@ -295,7 +356,11 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_SuKYEKrpEe67r9MriAyMAA" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
+<<<<<<< HEAD
         <children xsi:type="menu:HandledToolItem" xmi:id="_SuRs0KrpEe67r9MriAyMAA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_SZAnzKrpEe67r9MriAyMAA"/>
+=======
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YhFl4LJxEe6CcfKUFJ5tDw" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_odGHFarlEe6gitCdscXUDw"/>
+>>>>>>> b1_edit
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_SuKYEarpEe67r9MriAyMAA" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -303,8 +368,13 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_SuKYE6rpEe67r9MriAyMAA" elementId="org.eclipse.ui.workbench.edit">
         <tags>Draggable</tags>
+<<<<<<< HEAD
         <children xsi:type="menu:HandledToolItem" xmi:id="_SuS68KrpEe67r9MriAyMAA" elementId="undo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/undo_edit.png" tooltip="Undo" command="_SY-ykarpEe67r9MriAyMAA"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_SuTiAKrpEe67r9MriAyMAA" elementId="redo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/redo_edit.png" tooltip="Redo" enabled="false" command="_SY_ZlarpEe67r9MriAyMAA"/>
+=======
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YhHbELJxEe6CcfKUFJ5tDw" elementId="undo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/undo_edit.png" tooltip="Undo" enabled="false" command="_odFjUarlEe6gitCdscXUDw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YhICILJxEe6CcfKUFJ5tDw" elementId="redo" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/redo_edit.png" tooltip="Redo" enabled="false" command="_odFjyqrlEe6gitCdscXUDw"/>
+>>>>>>> b1_edit
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_SuKYFKrpEe67r9MriAyMAA" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -328,9 +398,15 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_SuK_IKrpEe67r9MriAyMAA" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
+<<<<<<< HEAD
         <children xsi:type="menu:HandledToolItem" xmi:id="_SuUJEKrpEe67r9MriAyMAA" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_SZAne6rpEe67r9MriAyMAA"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_SuK_IarpEe67r9MriAyMAA" elementId="group.editor" toBeRendered="false">
+=======
+        <children xsi:type="menu:HandledToolItem" xmi:id="_YhIpMLJxEe6CcfKUFJ5tDw" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_odGGxKrlEe6gitCdscXUDw"/>
+      </children>
+      <children xsi:type="menu:ToolBar" xmi:id="_odET4arlEe6gitCdscXUDw" elementId="group.editor" toBeRendered="false">
+>>>>>>> b1_edit
         <tags>toolbarSeparator</tags>
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_SuK_IqrpEe67r9MriAyMAA" elementId="group.editor" toBeRendered="false"/>
       </children>
