@@ -7,6 +7,9 @@
 
 #include "SonikAudioPlayer_ControlData.h"
 #include "../../Format/SonikAudioFormat.h"
+#include "../AudioPosition/SonikAudio3DPoint.h"
+
+#include <new>
 
 namespace SonikAudioData
 {
@@ -15,12 +18,19 @@ namespace SonikAudioData
 	SonikAudioControlData::SonikAudioControlData(SonikAudio::SAudioFormat SetAudioPointer)
 	:m_AudioData(SetAudioPointer)
 	,mp_ControlData(const_cast<char*>(m_AudioData->Get_WaveData()))
-	,m_3dpos(0.0, 0.0, 0.0)
+	,m_3dpos(nullptr)
 	,m_volume(1.0f)
 	,m_repeat(false)
 	,m_AudioState(SonikAudioEnum::PlayStateID::PS_Stop)
 	,m_uniqueid((uintptr_t)this)
 	{
+		try
+		{
+			m_3dpos = new SonikAudioPoint::SonikAudio3DPoint();
+		}catch(std::bad_alloc& e)
+		{
+			throw std::bad_alloc(e);
+		};
 
 	};
 
@@ -58,24 +68,24 @@ namespace SonikAudioData
 	//ポジションのセット
 	void SonikAudioControlData::SetPositionX(double SetValue)
 	{
-		m_3dpos.ref_m_x = SetValue;
+		m_3dpos->ref_m_x = SetValue;
 	};
 
 	void SonikAudioControlData::SetPositionY(double SetValue)
 	{
-		m_3dpos.ref_m_y = SetValue;
+		m_3dpos->ref_m_y = SetValue;
 	};
 
 	void SonikAudioControlData::SetPositionZ(double SetValue)
 	{
-		m_3dpos.ref_m_z = SetValue;
+		m_3dpos->ref_m_z = SetValue;
 	};
 
 	void SonikAudioControlData::SetPositionAll(double x, double y, double z)
 	{
-		m_3dpos.ref_m_x = x;
-		m_3dpos.ref_m_y = y;
-		m_3dpos.ref_m_z = z;
+		m_3dpos->ref_m_x = x;
+		m_3dpos->ref_m_y = y;
+		m_3dpos->ref_m_z = z;
 	};
 
 
@@ -88,12 +98,12 @@ namespace SonikAudioData
 
 		if( x == nullptr )
 		{
-			m_3dpos.mp_x = &m_3dpos.ref_m_x;
+			m_3dpos->mp_x = &(m_3dpos->ref_m_x);
 			PositionLock[0].Unlock();
 			return;
 		};
 
-		m_3dpos.mp_x = x;
+		m_3dpos->mp_x = x;
 
 		PositionLock[0].Unlock();
 	};
@@ -104,12 +114,12 @@ namespace SonikAudioData
 
 		if( y == nullptr )
 		{
-			m_3dpos.mp_y = &m_3dpos.ref_m_y;
+			m_3dpos->mp_y = &(m_3dpos->ref_m_y);
 			PositionLock[1].Unlock();
 			return;
 		};
 
-		m_3dpos.mp_y = y;
+		m_3dpos->mp_y = y;
 		PositionLock[1].Unlock();
 
 	};
@@ -119,12 +129,12 @@ namespace SonikAudioData
 		PositionLock[2].lock();
 		if( z == nullptr )
 		{
-			m_3dpos.mp_z = &m_3dpos.ref_m_z;
+			m_3dpos->mp_z = &(m_3dpos->ref_m_z);
 			PositionLock[2].Unlock();
 			return;
 		};
 
-		m_3dpos.mp_z = z;
+		m_3dpos->mp_z = z;
 		PositionLock[2].Unlock();
 
 	};
@@ -171,7 +181,7 @@ namespace SonikAudioData
 
 		PositionLock[0].lock();
 
-		_ret = m_3dpos.mp_x;
+		_ret = m_3dpos->mp_x;
 
 		PositionLock[0].Unlock();
 
@@ -184,7 +194,7 @@ namespace SonikAudioData
 
 		PositionLock[1].lock();
 
-		_ret = m_3dpos.mp_y;
+		_ret = m_3dpos->mp_y;
 
 		PositionLock[1].Unlock();
 
@@ -197,7 +207,7 @@ namespace SonikAudioData
 
 		PositionLock[2].lock();
 
-		_ret = m_3dpos.mp_z;
+		_ret = m_3dpos->mp_z;
 
 		PositionLock[2].Unlock();
 
@@ -210,9 +220,9 @@ namespace SonikAudioData
 		PositionLock[1].lock();
 		PositionLock[2].lock();
 
-		x = (*m_3dpos.mp_x);
-		y = (*m_3dpos.mp_y);
-		z = (*m_3dpos.mp_z);
+		x = (*(m_3dpos->mp_x));
+		y = (*(m_3dpos->mp_y));
+		z = (*(m_3dpos->mp_z));
 
 		PositionLock[0].Unlock();
 		PositionLock[1].Unlock();
@@ -222,7 +232,7 @@ namespace SonikAudioData
 
 	SonikAudioPoint::SonikAudio3DPoint& SonikAudioControlData::GetPositionAll(void)
 	{
-		return m_3dpos;
+		return (*m_3dpos);
 	};
 
 

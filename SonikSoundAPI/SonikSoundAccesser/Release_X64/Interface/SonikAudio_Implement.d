@@ -16,7 +16,6 @@ Interface/SonikAudio_Implement.o: ../Interface/SonikAudio_Implement.cpp \
   ../Interface/../Task/PlayerTaskInterface.h \
   ../Interface/../Task/../AudioSmartPointer.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/SonikWorkThreadEx.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/SonikThreadPack.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../Container/SonikAtomicQueue.hpp \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../Container/../SonikCAS/SonikAtomicLock.h \
@@ -33,7 +32,8 @@ Interface/SonikAudio_Implement.o: ../Interface/SonikAudio_Implement.cpp \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikCAS/SonikAtomicLock.h \
   ../Interface/../Player/SonikAudioPlayer_ControlData_Interface.h \
   ../Interface/../Player/../PlayStateEnums.h \
-  ../Interface/../Player/../SAudioAccesserTypedef.h
+  ../Interface/../Player/../SAudioAccesserTypedef.h \
+  ../Interface/../Listener/SonikAudioListener.h
 ../Interface/SonikAudio_Implement.h:
 ../Interface/SonikAudio.h:
 ../Interface/../SAudioAccesserTypedef.h:
@@ -52,7 +52,6 @@ D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../AudioLoadTypedef.h:
 ../Interface/../Task/PlayerTaskInterface.h:
 ../Interface/../Task/../AudioSmartPointer.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/SonikWorkThreadEx.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/SonikThreadPack.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../Container/SonikAtomicQueue.hpp:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../Container/../SonikCAS/SonikAtomicLock.h:
@@ -70,3 +69,4 @@ D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikCAS/SonikAtomicLoc
 ../Interface/../Player/SonikAudioPlayer_ControlData_Interface.h:
 ../Interface/../Player/../PlayStateEnums.h:
 ../Interface/../Player/../SAudioAccesserTypedef.h:
+../Interface/../Listener/SonikAudioListener.h:

@@ -6,7 +6,6 @@ Mixer/SonikAudio_Mixer.o: ../Mixer/SonikAudio_Mixer.cpp \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../Container/SonikPriorityListNode.hpp \
   ../Mixer/../AudioSmartPointer.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/SonikWorkThreadEx.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/SonikThreadPack.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../Container/SonikAtomicQueue.hpp \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../Container/../SonikCAS/SonikAtomicLock.h \
@@ -25,7 +24,10 @@ Mixer/SonikAudio_Mixer.o: ../Mixer/SonikAudio_Mixer.cpp \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/../SonikString/../Container/RangedForContainer.hpp \
   ../Mixer/../PlatformInterface/PlatformAudioInterface.h \
   D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../FunctionObject/FunctionObjectSystemImpl.hpp \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../FunctionObject/FunctionObjectSystemInterface.hpp
+  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../FunctionObject/FunctionObjectSystemInterface.hpp \
+  ../Mixer/../AudioPosition/SonikAudio3DPoint.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../MathBit/SonikMathDistance.h \
+  ../Mixer/../Listener/SonikAudioListener.h
 ../Mixer/SonikAudio_Mixer.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../Container/SonikPriorityList.hpp:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../Container/../SonikCAS/SonikAtomicLock.h:
@@ -33,7 +35,6 @@ D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../Container/SonikPriority
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../Container/SonikPriorityListNode.hpp:
 ../Mixer/../AudioSmartPointer.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/SonikWorkThreadEx.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/SonikThreadPack.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../Container/SonikAtomicQueue.hpp:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../Container/../SonikCAS/SonikAtomicLock.h:
@@ -53,3 +54,6 @@ D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/../SonikStrin
 ../Mixer/../PlatformInterface/PlatformAudioInterface.h:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../FunctionObject/FunctionObjectSystemImpl.hpp:
 D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../FunctionObject/FunctionObjectSystemInterface.hpp:
+../Mixer/../AudioPosition/SonikAudio3DPoint.h:
+D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../MathBit/SonikMathDistance.h:
+../Mixer/../Listener/SonikAudioListener.h:

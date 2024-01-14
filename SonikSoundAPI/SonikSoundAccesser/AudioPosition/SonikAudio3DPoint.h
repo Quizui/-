@@ -30,8 +30,11 @@ namespace SonikAudioPoint
 		SonikAudio3DPoint(double _x_ = 0.0, double _y_ = 0.0, double _z_ =0.0);
 		~SonikAudio3DPoint(void);
 
-		double Distance(const SonikAudio3DPoint& _point_);
-		double Distance(const double _x_ = 0.0, const double _y_ = 0.0, const double _z_ = 0.0);
+		void Distance(const SonikAudio3DPoint& _point_, double& _outdis_);
+		void Distance(double _x_ = 0.0, double _y_ = 0.0, double _z_ = 0.0, double& _outdis_);
+
+		void Panning(const SonikAudio3DPoint& _direction_, double& _outpan_L_, double& _outpan_R_);
+		void Panning(double _x_, double _y_, double _z_, double& _outpan_L_, double& _outpan_R_);
 
 	};
 };

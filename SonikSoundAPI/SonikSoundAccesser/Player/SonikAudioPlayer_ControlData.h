@@ -14,7 +14,12 @@
 #include "../PlayStateEnums.h"
 #include "../../AudioLoadTypedef.h"
 #include "../SAudioAccesserTypedef.h"
-#include "../AudioPosition/SonikAudio3DPoint.h"
+
+
+namespace SonikAudioPoint
+{
+	class SonikAudio3DPoint;
+};
 
 
 namespace SonikAudioData
@@ -26,7 +31,7 @@ namespace SonikAudioData
 	private:
 		SonikAudio::SAudioFormat m_AudioData;			//オーディオデータへのスマートポインタ
 		char* mp_ControlData;							//操作用ポインタ
-		SonikAudioPoint::SonikAudio3DPoint m_3dpos;	//3D座標ポジション
+		SonikAudioPoint::SonikAudio3DPoint* m_3dpos;	//3D座標ポジション
 		float m_volume;									//オーディオの音量
 		bool m_repeat;									//オーディオのリピートフラグ
 		SonikAudioEnum::PlayStateID m_AudioState;		//オーディオのステータス(プレイ、ストップ等)

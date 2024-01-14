@@ -75,7 +75,7 @@ namespace SonikAudioPlayerTask
 		};
 
 		SonikLib::Members_0_Func<SonikAudioPlayerTaskManager>* l_cls_func_obj = nullptr;
-		l_cls_func_obj = new SonikLib::Members_0_Func<SonikAudioPlayerTaskManager>;
+		l_cls_func_obj = SonikLib::Members_0_Func<SonikAudioPlayerTaskManager>::New();
 		if(l_cls_func_obj == nullptr)
 		{
 			delete mp_TaskThread;
@@ -98,7 +98,7 @@ namespace SonikAudioPlayerTask
 		l_cls_func_obj->SetObject(this);
 		l_cls_func_obj->SetFunc(&SonikAudioPlayerTaskManager::ThreadProcFunc);
 
-		mp_TaskThread->SetCallFunction(l_cls_func_obj);
+		mp_TaskThread->SetCallFunction(l_cls_func_obj, true);
 
 		return true;
 	};

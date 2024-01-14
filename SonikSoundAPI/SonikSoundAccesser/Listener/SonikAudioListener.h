@@ -8,7 +8,10 @@
 #ifndef LISTENER_SONIKAUDIOLISTENER_H_
 #define LISTENER_SONIKAUDIOLISTENER_H_
 
-#include "../AudioPosition/SonikAudio3DPoint.h"
+namespace SonikAudioPoint
+{
+	class SonikAudio3DPoint;
+};
 
 namespace SonikAudio
 {
@@ -18,13 +21,17 @@ namespace SonikAudio
 	class SonikAudioListener
 	{
 	private:
-		SonikAudioPoint::SonikAudio3DPoint m_3dpos;	//3D座標ポジション
-
+		double max_listen_distance; //聞こえる範囲
+		SonikAudioPoint::SonikAudio3DPoint* m_3dpos;	//3D座標ポジション
 	public:
 		//コンストラクタ
 		SonikAudioListener(void);
 		//デストラクタ
 		~SonikAudioListener(void);
+
+		//最大聞こえる距離のセットゲット
+		void SetMaxListenDistance(double _setmaxdistance_);
+		double GetMaxListernDistance(void);
 
 		//ポジションのセット
 		void SetPosition(double x, double y, double z);

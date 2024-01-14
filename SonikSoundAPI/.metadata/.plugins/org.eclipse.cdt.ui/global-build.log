@@ -1,4 +1,4 @@
-05:41:21 **** Rebuild of configuration Debug_x64 for project SonikSoundAccesser ****
+10:17:05 **** Rebuild of configuration Debug_x64 for project SonikSoundAccesser ****
 Info: Internal Builder is used for build
 clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "AudioPosition\\SonikAudio3DPoint.o" "..\\AudioPosition\\SonikAudio3DPoint.cpp" 
 In file included from <built-in>:469:
@@ -13,27 +13,12 @@ D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../MathBit/SonikMathDistan
    52 |                 virtual double Distance(const Sonik3DPoint& _point_);
       |                                ^
 2 warnings generated.
-clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Interface\\SonikAudio_Implement.o" "..\\Interface\\SonikAudio_Implement.cpp" 
-In file included from <built-in>:469:
-<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
-    4 | #define __cplusplus 202002L
-      |         ^
-In file included from ..\Interface\SonikAudio_Implement.cpp:19:
-In file included from ..\Interface/../Player/SonikAudioPlayer_ControlData.h:17:
-..\Interface/../Player/../AudioPosition/SonikAudio3DPoint.h:33:10: warning: 'SonikAudioPoint::SonikAudio3DPoint::Distance' hides overloaded virtual function [-Woverloaded-virtual]
-   33 |                 double Distance(const SonikAudio3DPoint& _point_);
-      |                        ^
-D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../MathBit/SonikMathDistance.h:52:18: note: hidden overloaded virtual function 'SonikMath::Sonik3DPoint::Distance' declared here: type mismatch at 1st parameter ('const Sonik3DPoint &' vs 'const SonikAudio3DPoint &')
-   52 |                 virtual double Distance(const Sonik3DPoint& _point_);
-      |                                ^
-2 warnings generated.
 clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Player\\SonikAudioPlayer_ControlData.o" "..\\Player\\SonikAudioPlayer_ControlData.cpp" 
 In file included from <built-in>:469:
 <command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
     4 | #define __cplusplus 202002L
       |         ^
-In file included from ..\Player\SonikAudioPlayer_ControlData.cpp:8:
-In file included from ..\Player/SonikAudioPlayer_ControlData.h:17:
+In file included from ..\Player\SonikAudioPlayer_ControlData.cpp:10:
 ..\Player/../AudioPosition/SonikAudio3DPoint.h:33:10: warning: 'SonikAudioPoint::SonikAudio3DPoint::Distance' hides overloaded virtual function [-Woverloaded-virtual]
    33 |                 double Distance(const SonikAudio3DPoint& _point_);
       |                        ^
@@ -41,6 +26,37 @@ D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../MathBit/SonikMathDistan
    52 |                 virtual double Distance(const Sonik3DPoint& _point_);
       |                                ^
 2 warnings generated.
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Mixer\\SonikAudio_Mixer.o" "..\\Mixer\\SonikAudio_Mixer.cpp" 
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+In file included from ..\Mixer\SonikAudio_Mixer.cpp:15:
+..\Mixer/../AudioPosition/SonikAudio3DPoint.h:33:10: warning: 'SonikAudioPoint::SonikAudio3DPoint::Distance' hides overloaded virtual function [-Woverloaded-virtual]
+   33 |                 double Distance(const SonikAudio3DPoint& _point_);
+      |                        ^
+D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../MathBit/SonikMathDistance.h:52:18: note: hidden overloaded virtual function 'SonikMath::Sonik3DPoint::Distance' declared here: type mismatch at 1st parameter ('const Sonik3DPoint &' vs 'const SonikAudio3DPoint &')
+   52 |                 virtual double Distance(const Sonik3DPoint& _point_);
+      |                                ^
+2 warnings generated.
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Interface\\SonikAudioCreator.o" "..\\Interface\\SonikAudioCreator.cpp" 
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+1 warning generated.
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Task\\PlayerTask.o" "..\\Task\\PlayerTask.cpp" 
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+1 warning generated.
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Player\\SonikAudioPlayer.o" "..\\Player\\SonikAudioPlayer.cpp" 
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+1 warning generated.
 clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Task\\AudioPlayerTaskManager.o" "..\\Task\\AudioPlayerTaskManager.cpp" 
 In file included from <built-in>:469:
 <command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
@@ -62,13 +78,18 @@ In file included from ..\Task/PlayerTaskInterface.h:11:
    16 |         class SonikAudioControlData;
       |               ^
 2 warnings generated.
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Interface\\SonikAudio_Implement.o" "..\\Interface\\SonikAudio_Implement.cpp" 
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+1 warning generated.
 clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Listener\\SonikAudioListener.o" "..\\Listener\\SonikAudioListener.cpp" 
 In file included from <built-in>:469:
 <command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
     4 | #define __cplusplus 202002L
       |         ^
-In file included from ..\Listener\SonikAudioListener.cpp:8:
-In file included from ..\Listener/SonikAudioListener.h:11:
+In file included from ..\Listener\SonikAudioListener.cpp:9:
 ..\Listener/../AudioPosition/SonikAudio3DPoint.h:33:10: warning: 'SonikAudioPoint::SonikAudio3DPoint::Distance' hides overloaded virtual function [-Woverloaded-virtual]
    33 |                 double Distance(const SonikAudio3DPoint& _point_);
       |                        ^
@@ -76,135 +97,5 @@ D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../MathBit/SonikMathDistan
    52 |                 virtual double Distance(const Sonik3DPoint& _point_);
       |                                ^
 2 warnings generated.
-clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Player\\SonikAudioPlayer.o" "..\\Player\\SonikAudioPlayer.cpp" 
-In file included from <built-in>:469:
-<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
-    4 | #define __cplusplus 202002L
-      |         ^
-In file included from ..\Player\SonikAudioPlayer.cpp:11:
-In file included from ..\Player/SonikAudioPlayer_ControlData.h:17:
-..\Player/../AudioPosition/SonikAudio3DPoint.h:33:10: warning: 'SonikAudioPoint::SonikAudio3DPoint::Distance' hides overloaded virtual function [-Woverloaded-virtual]
-   33 |                 double Distance(const SonikAudio3DPoint& _point_);
-      |                        ^
-D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../MathBit/SonikMathDistance.h:52:18: note: hidden overloaded virtual function 'SonikMath::Sonik3DPoint::Distance' declared here: type mismatch at 1st parameter ('const Sonik3DPoint &' vs 'const SonikAudio3DPoint &')
-   52 |                 virtual double Distance(const Sonik3DPoint& _point_);
-      |                                ^
-2 warnings generated.
-clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Interface\\SonikAudioCreator.o" "..\\Interface\\SonikAudioCreator.cpp" 
-In file included from <built-in>:469:
-<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
-    4 | #define __cplusplus 202002L
-      |         ^
-1 warning generated.
-clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Task\\PlayerTask.o" "..\\Task\\PlayerTask.cpp" 
-In file included from <built-in>:469:
-<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
-    4 | #define __cplusplus 202002L
-      |         ^
-In file included from ..\Task\PlayerTask.cpp:9:
-In file included from ..\Task/../Player/SonikAudioPlayer_ControlData.h:17:
-..\Task/../Player/../AudioPosition/SonikAudio3DPoint.h:33:10: warning: 'SonikAudioPoint::SonikAudio3DPoint::Distance' hides overloaded virtual function [-Woverloaded-virtual]
-   33 |                 double Distance(const SonikAudio3DPoint& _point_);
-      |                        ^
-D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../MathBit/SonikMathDistance.h:52:18: note: hidden overloaded virtual function 'SonikMath::Sonik3DPoint::Distance' declared here: type mismatch at 1st parameter ('const Sonik3DPoint &' vs 'const SonikAudio3DPoint &')
-   52 |                 virtual double Distance(const Sonik3DPoint& _point_);
-      |                                ^
-2 warnings generated.
-clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Accesser" -O0 -g3 -Wall -c -fmessage-length=0 -o "Mixer\\SonikAudio_Mixer.o" "..\\Mixer\\SonikAudio_Mixer.cpp" 
-In file included from <built-in>:469:
-<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
-    4 | #define __cplusplus 202002L
-      |         ^
-In file included from ..\Mixer\SonikAudio_Mixer.cpp:11:
-In file included from ..\Mixer/../Player/SonikAudioPlayer_ControlData.h:17:
-..\Mixer/../Player/../AudioPosition/SonikAudio3DPoint.h:33:10: warning: 'SonikAudioPoint::SonikAudio3DPoint::Distance' hides overloaded virtual function [-Woverloaded-virtual]
-   33 |                 double Distance(const SonikAudio3DPoint& _point_);
-      |                        ^
-D:\MyLibrary\include\Audio\SoundSystem\Accesser/../../../MathBit/SonikMathDistance.h:52:18: note: hidden overloaded virtual function 'SonikMath::Sonik3DPoint::Distance' declared here: type mismatch at 1st parameter ('const Sonik3DPoint &' vs 'const SonikAudio3DPoint &')
-   52 |                 virtual double Distance(const Sonik3DPoint& _point_);
-      |                                ^
-..\Mixer\SonikAudio_Mixer.cpp:263:12: error: no matching member function for call to 'GetPositionAll'
-  263 |                 ref_itr->GetPositionAll(pl_x, pl_y, pl_z);
-      |                 ~~~~~~~~~^~~~~~~~~~~~~~
-..\Mixer/../Player/SonikAudioPlayer_ControlData.h:83:8: note: candidate function not viable: no known conversion from 'float' to 'double &' for 1st argument
-   83 |                 void GetPositionAll(double& x, double& y, double& z);
-      |                      ^              ~~~~~~~~~
-..\Mixer/../Player/SonikAudioPlayer_ControlData.h:84:39: note: candidate function not viable: requires 0 arguments, but 3 were provided
-   84 |                 SonikAudioPoint::SonikAudio3DPoint& GetPositionAll(void);
-      |                                                     ^
-..\Mixer\SonikAudio_Mixer.cpp:312:13: error: read-only variable is not assignable
-  312 |                 (*volume) *= l_dis;
-      |                 ~~~~~~~~~ ^
-..\Mixer\SonikAudio_Mixer.cpp:365:12: error: no matching member function for call to 'GetPositionAll'
-  365 |                 ref_itr->GetPositionAll(pl_x, pl_y, pl_z);
-      |                 ~~~~~~~~~^~~~~~~~~~~~~~
-..\Mixer/../Player/SonikAudioPlayer_ControlData.h:83:8: note: candidate function not viable: no known conversion from 'float' to 'double &' for 1st argument
-   83 |                 void GetPositionAll(double& x, double& y, double& z);
-      |                      ^              ~~~~~~~~~
-..\Mixer/../Player/SonikAudioPlayer_ControlData.h:84:39: note: candidate function not viable: requires 0 arguments, but 3 were provided
-   84 |                 SonikAudioPoint::SonikAudio3DPoint& GetPositionAll(void);
-      |                                                     ^
-..\Mixer\SonikAudio_Mixer.cpp:399:12: error: no matching member function for call to 'GetPositionAll'
-  399 |                 ref_itr->GetPositionAll(pl_x, pl_y, pl_z);
-      |                 ~~~~~~~~~^~~~~~~~~~~~~~
-..\Mixer/../Player/SonikAudioPlayer_ControlData.h:83:8: note: candidate function not viable: no known conversion from 'float' to 'double &' for 1st argument
-   83 |                 void GetPositionAll(double& x, double& y, double& z);
-      |                      ^              ~~~~~~~~~
-..\Mixer/../Player/SonikAudioPlayer_ControlData.h:84:39: note: candidate function not viable: requires 0 arguments, but 3 were provided
-   84 |                 SonikAudioPoint::SonikAudio3DPoint& GetPositionAll(void);
-      |                                                     ^
-..\Mixer\SonikAudio_Mixer.cpp:435:12: error: no matching member function for call to 'GetPositionAll'
-  435 |                 ref_itr->GetPositionAll(pl_x, pl_y, pl_z);
-      |                 ~~~~~~~~~^~~~~~~~~~~~~~
-..\Mixer/../Player/SonikAudioPlayer_ControlData.h:83:8: note: candidate function not viable: no known conversion from 'float' to 'double &' for 1st argument
-   83 |                 void GetPositionAll(double& x, double& y, double& z);
-      |                      ^              ~~~~~~~~~
-..\Mixer/../Player/SonikAudioPlayer_ControlData.h:84:39: note: candidate function not viable: requires 0 arguments, but 3 were provided
-   84 |                 SonikAudioPoint::SonikAudio3DPoint& GetPositionAll(void);
-      |                                                     ^
-..\Mixer\SonikAudio_Mixer.cpp:471:12: error: no matching member function for call to 'GetPositionAll'
-  471 |                 ref_itr->GetPositionAll(pl_x, pl_y, pl_z);
-      |                 ~~~~~~~~~^~~~~~~~~~~~~~
-..\Mixer/../Player/SonikAudioPlayer_ControlData.h:83:8: note: candidate function not viable: no known conversion from 'float' to 'double &' for 1st argument
-   83 |                 void GetPositionAll(double& x, double& y, double& z);
-      |                      ^              ~~~~~~~~~
-..\Mixer/../Player/SonikAudioPlayer_ControlData.h:84:39: note: candidate function not viable: requires 0 arguments, but 3 were provided
-   84 |                 SonikAudioPoint::SonikAudio3DPoint& GetPositionAll(void);
-      |                                                     ^
-..\Mixer\SonikAudio_Mixer.cpp:498:12: error: no matching member function for call to 'GetPositionAll'
-  498 |                 ref_itr->GetPositionAll(pl_x, pl_y, pl_z);
-      |                 ~~~~~~~~~^~~~~~~~~~~~~~
-..\Mixer/../Player/SonikAudioPlayer_ControlData.h:83:8: note: candidate function not viable: no known conversion from 'float' to 'double &' for 1st argument
-   83 |                 void GetPositionAll(double& x, double& y, double& z);
-      |                      ^              ~~~~~~~~~
-..\Mixer/../Player/SonikAudioPlayer_ControlData.h:84:39: note: candidate function not viable: requires 0 arguments, but 3 were provided
-   84 |                 SonikAudioPoint::SonikAudio3DPoint& GetPositionAll(void);
-      |                                                     ^
-..\Mixer\SonikAudio_Mixer.cpp:528:12: error: no matching member function for call to 'GetPositionAll'
-  528 |                 ref_itr->GetPositionAll(pl_x, pl_y, pl_z);
-      |                 ~~~~~~~~~^~~~~~~~~~~~~~
-..\Mixer/../Player/SonikAudioPlayer_ControlData.h:83:8: note: candidate function not viable: no known conversion from 'float' to 'double &' for 1st argument
-   83 |                 void GetPositionAll(double& x, double& y, double& z);
-      |                      ^              ~~~~~~~~~
-..\Mixer/../Player/SonikAudioPlayer_ControlData.h:84:39: note: candidate function not viable: requires 0 arguments, but 3 were provided
-   84 |                 SonikAudioPoint::SonikAudio3DPoint& GetPositionAll(void);
-      |                                                     ^
-..\Mixer\SonikAudio_Mixer.cpp:561:12: error: no matching member function for call to 'GetPositionAll'
-  561 |                 ref_itr->GetPositionAll(pl_x, pl_y, pl_z);
-      |                 ~~~~~~~~~^~~~~~~~~~~~~~
-..\Mixer/../Player/SonikAudioPlayer_ControlData.h:83:8: note: candidate function not viable: no known conversion from 'float' to 'double &' for 1st argument
-   83 |                 void GetPositionAll(double& x, double& y, double& z);
-      |                      ^              ~~~~~~~~~
-..\Mixer/../Player/SonikAudioPlayer_ControlData.h:84:39: note: candidate function not viable: requires 0 arguments, but 3 were provided
-   84 |                 SonikAudioPoint::SonikAudio3DPoint& GetPositionAll(void);
-      |                                                     ^
-..\Mixer\SonikAudio_Mixer.cpp:596:12: error: no matching member function for call to 'GetPositionAll'
-  596 |                 ref_itr->GetPositionAll(pl_x, pl_y, pl_z);
-      |                 ~~~~~~~~~^~~~~~~~~~~~~~
-..\Mixer/../Player/SonikAudioPlayer_ControlData.h:83:8: note: candidate function not viable: no known conversion from 'float' to 'double &' for 1st argument
-   83 |                 void GetPositionAll(double& x, double& y, double& z);
-      |                      ^              ~~~~~~~~~
-..\Mixer/../Player/SonikAudioPlayer_ControlData.h:84:39: note: candidate function not viable: requires 0 arguments, but 3 were provided
-   84 |                 SonikAudioPoint::SonikAudio3DPoint& GetPositionAll(void);
-      |                                                     ^
-2 warnings and 10 errors generated.
+ar -r libDx64_SonikSoundAccesser.a "AudioPosition\\SonikAudio3DPoint.o" "Interface\\SonikAudioCreator.o" "Interface\\SonikAudio_Implement.o" "Listener\\SonikAudioListener.o" "Mixer\\SonikAudio_Mixer.o" "Player\\SonikAudioPlayer.o" "Player\\SonikAudioPlayer_ControlData.o" "Task\\AudioPlayerTaskManager.o" "Task\\PlayerTask.o" 
+D:/Development/MSYS64/clang64/bin/ar.exe: warning: creating libDx64_SonikSoundAccesser.a
