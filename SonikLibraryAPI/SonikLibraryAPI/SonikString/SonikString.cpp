@@ -13,6 +13,7 @@
 #include "SonikString.h"
 #include "../SonikCAS/SonikAtomicLock.h"
 #include "../MathBit/MathBit.h"
+#include "SonikStringConvert.h"
 
 namespace SonikLib
 {
@@ -55,6 +56,8 @@ namespace SonikLib
 		SonikString_pImpl(const char16_t* SetStr);
 		//c:コンストラクタオーバーロード
 		SonikString_pImpl(const wchar_t* SetStr);
+		//コンストラクタオーバーロード
+		SonikString_pImpl(const uint8_t* SetStr);
 
 		//c:コピーコンストラクタ
 		SonikString_pImpl(const SonikString_pImpl& t_his);
@@ -109,6 +112,8 @@ namespace SonikLib
 		SonikString_pImpl& operator =(const char* Str);
 		SonikString_pImpl& operator =(const char16_t* w_Str);
 		SonikString_pImpl& operator =(const wchar_t* w_Str);
+		SonikString_pImpl& operator =(const uint8_t* utf8_Str);
+
 
 		//c: 各入力フォーマットから現在のバッファに変換して結合します。
 		//c: コピー元とコピー先が同じオブジェクトの場合、そのまま結合します。
@@ -116,6 +121,7 @@ namespace SonikLib
 		SonikString_pImpl& operator +=(const char* Str);
 		SonikString_pImpl& operator +=(const char16_t* w_Str);
 		SonikString_pImpl& operator +=(const wchar_t* w_Str);
+		SonikString_pImpl& operator +=(const uint8_t* utf8_Str);
 
 		//c: 現在のバッファと入力バッファを結合し、別のオブジェクトとして返却します。
 		//c: コピー元とコピー先が同じオブジェクトの場合、そのまま結合します。
@@ -123,6 +129,7 @@ namespace SonikLib
 		SonikString_pImpl operator +(const char* Str);
 		SonikString_pImpl operator +(const char16_t* w_Str);
 		SonikString_pImpl operator +(const wchar_t* w_Str);
+		SonikString_pImpl operator +(const uint8_t* utf8_Str);
 
 		//c: 文字列同士を比較します。(strcmp)
 		//c: 一致の場合true 不一致の場合 falseを返却します。
@@ -130,6 +137,7 @@ namespace SonikLib
 		bool operator ==(const char* Str);
 		bool operator ==(const char16_t* w_Str);
 		bool operator ==(const wchar_t* w_Str);
+		bool operator ==(const uint8_t* utf8_Str);
 
 		//c: 文字列同士を比較します。(strcmp)
 		//c: 不一致の場合true　一致の場合 falseを返却します。
@@ -137,6 +145,7 @@ namespace SonikLib
 		bool operator !=(const char* Str);
 		bool operator !=(const char16_t* w_Str);
 		bool operator !=(const wchar_t* w_Str);
+		bool operator !=(const uint8_t* utf8_Str);
 
 		//c:比較演算子
 		bool Greater(const char* CompareArg2val);
@@ -272,6 +281,40 @@ namespace SonikLib
 
 		memcpy(Stringval_, SetStr, SrcByte);
 		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char16_t*>(Stringval_));
+	};
+
+	SonikString::SonikString_pImpl::SonikString_pImpl(const uint8_t* SetStr)
+	{
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(reinterpret_cast<const char*>(SetStr));
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<const char*>(SetStr)) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			Stringval_ = new uint8_t[buffer_];
+		}catch(std::bad_alloc& e)
+		{
+			delete[] Stringval_;
+			throw std::bad_alloc(e);
+
+		}catch(std::bad_array_new_length& e)
+		{
+			delete[] Stringval_;
+			throw std::bad_array_new_length(e);
+		};
+
+		std::fill_n(Stringval_, buffer_, 0);
+
+		memcpy(Stringval_, SetStr, SrcByte);
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
 	};
 
 	SonikString::SonikString_pImpl::SonikString_pImpl(const SonikString_pImpl& t_his)
@@ -1158,6 +1201,44 @@ namespace SonikLib
 		return (*this);
 	};
 
+	SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator =(const uint8_t* utf8_Str)
+	{
+		if(utf8_Str == nullptr )
+		{
+			return (*this);
+		};
+
+		string_operator_lock.lock();
+
+		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<const char*>(utf8_Str));
+		if(buffer_ < (Size_ + 1))
+		{
+			//null終端分追加
+			if(!this->ReAlloc( Size_ +1 ))
+			{
+				string_operator_lock.Unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		std::fill_n(Stringval_, buffer_, 0);
+		if( strcmp(reinterpret_cast<const char*>(utf8_Str), "") == 0 )
+		{
+			CType = SCHTYPE_NULLTEXT;
+			string_operator_lock.Unlock();
+			return (*this);
+		};
+
+		CType = SonikLibStringConvert::CheckConvertType(reinterpret_cast<const char*>(utf8_Str));
+
+		memcpy_s(Stringval_, buffer_ , utf8_Str, Size_);
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.Unlock();
+		return (*this);
+	};
+
 	SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator +=(const SonikString_pImpl& t_his)
 	{
 		string_operator_lock.lock();
@@ -1272,9 +1353,6 @@ namespace SonikLib
 			};
 		};
 
-//		CopySize_ = SonikLibStringConvert::GetStringLengthByte(Str);
-//		bufuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
-
 		memcpy_s(&(reinterpret_cast<char*>(Stringval_)[bufuse_]), (CopySize_ + 1) , Str, CopySize_ );
 
 		//utf8の残骸が後ろに残っている可能性があるので、0を直接埋め込む
@@ -1382,6 +1460,56 @@ namespace SonikLib
 		return (*this);
 	};
 
+	SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator +=(const uint8_t* utf8_Str)
+	{
+		string_operator_lock.lock();
+
+		if(utf8_Str == nullptr)
+		{
+			string_operator_lock.Unlock();
+			return (*this);
+		}
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(reinterpret_cast<const char*>(utf8_Str));
+
+		if(tmpType == SCHTYPE_UTF16)
+		{
+			//reinterpret_castなどで変換して渡された場合に検出する可能性あり。
+			string_operator_lock.Unlock();
+			return (*this);
+		};
+
+		//コピー元とタイプが違えばコピー元に合わせて変換をかける。
+		if( CType != tmpType )
+		{
+			SetCharacterType(tmpType);
+		};
+
+		//カウントを行い、結合時にはみ出すようなら再確保
+		uint64_t CopySize_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<const char*>(utf8_Str));
+		uint64_t bufuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
+
+		if( (CopySize_ + bufuse_) + 1 > buffer_ )
+		{
+			if(!this->ReAlloc( (CopySize_ + bufuse_) + 1))
+			{
+				string_operator_lock.Unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		memcpy_s(&(reinterpret_cast<char*>(Stringval_)[bufuse_]), (CopySize_ + 1) , utf8_Str, CopySize_ );
+
+		//utf8の残骸が後ろに残っている可能性があるので、0を直接埋め込む
+		Stringval_[bufuse_ + CopySize_] = 0;
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.Unlock();
+		return (*this);
+
+	};
+
 	//現在のバッファと入力バッファを結合し、別のオブジェクトとして返却します。
 	//コピー元とコピー先が同じオブジェクトの場合、そのまま結合します。
 	SonikString::SonikString_pImpl SonikString::SonikString_pImpl::operator +(const SonikString_pImpl& t_his)
@@ -1412,6 +1540,23 @@ namespace SonikLib
 
 	};
 
+	SonikString::SonikString_pImpl SonikString::SonikString_pImpl::operator +(const wchar_t* w_Str)
+	{
+		SonikString_pImpl tmpStr = (*this);
+
+		tmpStr += w_Str;
+
+		return tmpStr;
+	};
+
+	SonikString::SonikString_pImpl SonikString::SonikString_pImpl::operator +(const uint8_t* utf8_Str)
+	{
+		SonikString_pImpl tmpStr = (*this);
+
+		tmpStr += utf8_Str;
+
+		return tmpStr;
+	};
 
 	//c: 文字列同士を比較します。(strcmp)
 	//c: 一致の場合true 不一致の場合 falseを返却します。
@@ -1459,16 +1604,6 @@ namespace SonikLib
 
 		//c: 全部越えたら一致と判定
 		return true;
-	};
-
-	SonikString::SonikString_pImpl SonikString::SonikString_pImpl::operator +(const wchar_t* w_Str)
-	{
-		SonikString_pImpl tmpStr = (*this);
-
-		tmpStr += w_Str;
-
-		return tmpStr;
-
 	};
 
 	bool SonikString::SonikString_pImpl::operator ==(const char* Str)
@@ -1568,6 +1703,43 @@ namespace SonikLib
 		for(uint64_t i=0; i < myuse_; ++i)
 		{
 			if( Stringval_[i] != w_Str[i] )
+			{
+				return false;
+			};
+
+		};
+
+		//c: 全部越えたら一致と判定
+		return true;
+	};
+
+	bool SonikString::SonikString_pImpl::operator ==(const uint8_t* utf8_Str)
+	{
+		SonikLibConvertType StrType = SonikLibStringConvert::CheckConvertType(reinterpret_cast<const char*>(utf8_Str));
+
+		//c: 文字タイプが違えば相手と同じ文字タイプに変換
+		if( CType != StrType )
+		{
+			if( !SetCharacterType(StrType) )
+			{
+				//c: 変換ミスが発生したら不一致として返却
+				return false;
+			};
+		};
+
+		//c: 文字数が違えば違う文字列として判定(不一致)
+		uint64_t myuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
+		uint64_t targetuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<const char*>(utf8_Str));
+
+		if( myuse_ != targetuse_ )
+		{
+			return false;
+		};
+
+		//c: 文字数も一緒であればByte精査
+		for(uint64_t i=0; i < myuse_; ++i)
+		{
+			if( Stringval_[i] != utf8_Str[i] )
 			{
 				return false;
 			};
@@ -1733,6 +1905,43 @@ namespace SonikLib
 		return false;
 	};
 
+	bool SonikString::SonikString_pImpl::operator !=(const uint8_t* utf8_Str)
+	{
+		SonikLibConvertType StrType = SonikLibStringConvert::CheckConvertType(reinterpret_cast<const char*>(utf8_Str));
+
+		//c: 文字タイプが違えば相手と同じ文字タイプに変換
+		if( CType != StrType )
+		{
+			if( !SetCharacterType(StrType) )
+			{
+				//c: 変換ミスが発生したら不一致として返却
+				return true;
+			};
+		};
+
+		//c: 文字数が違えば違う文字列として判定(不一致)
+		uint64_t myuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
+		uint64_t targetuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<const char*>(utf8_Str));
+
+		if( myuse_ != targetuse_ )
+		{
+			return true;
+		};
+
+		//c: 文字数も一緒であればByte精査
+		for(uint64_t i=0; i < myuse_; ++i)
+		{
+			if( Stringval_[i] != utf8_Str[i] )
+			{
+				return true;
+			};
+
+		};
+
+		//c: 全部越えたら一致と判定
+		return false;
+	};
+
 	//c:比較演算子
 	bool SonikString::SonikString_pImpl::Greater(const char* CompareArg2val)
 	{
@@ -1783,6 +1992,7 @@ namespace SonikLib
 			throw std::bad_array_new_length(e);
 		};
 	};
+
 	SonikString::SonikString(const SonikString& t_his)
 	{
 		pImpl = nullptr;
@@ -1866,6 +2076,27 @@ namespace SonikLib
 		};
 	};
 
+	SonikString::SonikString(const uint8_t* SetStr)
+	{
+		pImpl = 0;
+
+		try
+		{
+			pImpl = new SonikString_pImpl;
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc& e)
+		{
+			delete pImpl;
+			throw std::bad_alloc(e);
+
+		}catch(std::bad_array_new_length& e)
+		{
+
+			delete pImpl;
+			throw std::bad_array_new_length(e);
+		};
+	};
+
 	SonikString::SonikString(SonikString&& Move) noexcept
 	{
 		pImpl = 0;
@@ -1912,6 +2143,12 @@ namespace SonikLib
 	const uint8_t* SonikString::utf8_str(void)
 	{
 		return pImpl->utf8_str();
+	};
+
+	//define切り替えのstrゲット
+	const char* SonikString::definition_str(void)
+	{
+		return pImpl->c_str();
 	};
 
 	//SJIS形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
@@ -2020,6 +2257,13 @@ namespace SonikLib
 		return (*this);
 	};
 
+	SonikString& SonikString::operator =(const uint8_t* utf8_Str)
+	{
+		(*pImpl) = utf8_Str;
+
+		return (*this);
+	};
+
 	//各入力フォーマットから現在のバッファに変換して結合します。
 	//コピー元とコピー先が同じオブジェクトの場合、そのまま結合します。
 	SonikString& SonikString::operator +=(const SonikString& t_his)
@@ -2046,6 +2290,13 @@ namespace SonikLib
 	SonikString& SonikString::operator +=(const wchar_t* w_Str)
 	{
 		(*pImpl) += w_Str;
+
+		return (*this);
+	};
+
+	SonikString& SonikString::operator +=(const uint8_t* utf8_Str)
+	{
+		(*pImpl) += utf8_Str;
 
 		return (*this);
 	};
@@ -2088,6 +2339,15 @@ namespace SonikLib
 		return str_;
 	};
 
+	SonikString SonikString::operator +(const uint8_t* utf8_Str)
+	{
+		SonikString str_;
+
+		(*(str_.pImpl)) = (*pImpl) + utf8_Str;
+
+		return str_;
+	};
+
 	//c: 文字列同士を比較します。(strcmp)
 	//c: 一致の場合true 不一致の場合 falseを返却します。
 	bool SonikString::operator ==(const SonikString& t_his)
@@ -2108,6 +2368,11 @@ namespace SonikLib
 	bool SonikString::operator ==(const wchar_t* w_Str)
 	{
 		return (*pImpl) == w_Str;
+	};
+
+	bool SonikString::operator ==(const uint8_t* utf8_Str)
+	{
+		return (*pImpl) == utf8_Str;
 	};
 
 	//c: 文字列同士を比較します。(strcmp)
@@ -2132,6 +2397,10 @@ namespace SonikLib
 		return (*pImpl) != w_Str;
 	};
 
+	bool SonikString::operator !=(const uint8_t* utf8_Str)
+	{
+		return (*pImpl) != utf8_Str;
+	};
 
 	bool operator <(const SonikString& CompareArg1val, const SonikString& CompareArg2val)
 	{

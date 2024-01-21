@@ -10,6 +10,9 @@ RM := rm -rf
 -include sources.mk
 -include TimerClock/subdir.mk
 -include SonikWorkThread/subdir.mk
+-include SonikString/WIDE/subdir.mk
+-include SonikString/UTF8/subdir.mk
+-include SonikString/UTF16/subdir.mk
 -include SonikString/subdir.mk
 -include SonikFrameControl/subdir.mk
 -include SonikFileSystems/subdir.mk

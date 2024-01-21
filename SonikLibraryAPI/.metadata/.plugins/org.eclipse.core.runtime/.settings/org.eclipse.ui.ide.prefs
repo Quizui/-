@@ -6,10 +6,6 @@ IMPORT_FILES_AND_FOLDERS_TYPE=23,1\:7,1
 PROBLEMS_FILTERS_MIGRATE=true
 TASKS_FILTERS_MIGRATE=true
 eclipse.preferences.version=1
-<<<<<<< HEAD
-platformState=1704362853476
-=======
-platformState=1705191015851
->>>>>>> b1_edit
+platformState=1705761267129
 quickStart=false
 tipsAndTricks=true

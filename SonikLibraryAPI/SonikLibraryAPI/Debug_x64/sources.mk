@@ -39,6 +39,9 @@ SonikCAS \
 SonikFileSystems \
 SonikFrameControl \
 SonikString \
+SonikString/UTF16 \
+SonikString/UTF8 \
+SonikString/WIDE \
 SonikWorkThread \
 TimerClock \
 
