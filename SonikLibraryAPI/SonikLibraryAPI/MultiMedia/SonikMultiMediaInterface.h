@@ -31,9 +31,9 @@ namespace SonikLib
 		~SonikMultiMedia(void);
 
 		//OSから受け取る情報をそのまま返却します。
-		SonikLib::NormalSmtPtr<SonikLib::SonikMMAudioInfo> Get_Hard_AudioInfo_OSSetting(void);
+		SonikLib::SharedSmtPtr<SonikLib::SonikMMAudioInfo> Get_Hard_AudioInfo_OSSetting(void);
 		//OpenALが最大限使用できるフォーマットで返却します。
-		SonikLib::NormalSmtPtr<SonikLib::SonikMMAudioInfo> Get_Hard_AudioInfo_OpenALSetting(void);
+		SonikLib::SharedSmtPtr<SonikLib::SonikMMAudioInfo> Get_Hard_AudioInfo_OpenALSetting(void);
 
 	};
 

@@ -16,8 +16,8 @@ namespace SonikLib
 	//コンストラクタ
 	SonikThreadManagerEx::SonikThreadManagerEx(void)
 	:ManagedThreadNum(0)
-	 ,m_pThreads(nullptr)
 	,Init_(false)
+	,m_pThreads(nullptr)
 	,notifycount_(0)
 	,JobQueue(0)
 	{
@@ -27,8 +27,8 @@ namespace SonikLib
 	//コピーコンストラクタ
 	SonikThreadManagerEx::SonikThreadManagerEx(const SonikThreadManagerEx& t_his)
 	:ManagedThreadNum(0)
-	,m_pThreads(nullptr)
 	,Init_(false)
+	,m_pThreads(nullptr)
 	,notifycount_(0)
 	,JobQueue(0)
 	{
@@ -72,7 +72,7 @@ namespace SonikLib
 
 		try
 		{
-			JobQueue = new SonikLib::SonikAtomicQueue<SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>>(JobBufferSize);
+			JobQueue = new SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>(JobBufferSize);
 			m_pThreads = new SonikLib::WorkThreadEx[UseThreadNum];
 
 		}catch(...)

@@ -21,7 +21,7 @@ namespace SonikLibFileSystemsControllers
 
 namespace SonikLibFileSystems
 {
-	typedef SonikLib::NormalSmtPtr<SonikLibFileSystemsControllers::SonikFileStreamController> SonikFileController;
+	typedef SonikLib::SharedSmtPtr<SonikLibFileSystemsControllers::SonikFileStreamController> SonikFileController;
 
 	enum class FOTYPE
 	{

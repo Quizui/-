@@ -1,20 +1,4 @@
-03:15:49 **** Clean-only build of configuration Debug_x64 for project SonikLibraryAPI ****
-mingw32-make clean 
-rm -rf ./TimerClock/SonikElapsedTimer.d ./TimerClock/SonikElapsedTimer.o ./TimerClock/SonikElapsedTimer_x64.d ./TimerClock/SonikElapsedTimer_x64.o
-rm -rf ./SonikWorkThread/SonikWorkThreadEx.d ./SonikWorkThread/SonikWorkThreadEx.o ./SonikWorkThread/SonikWorkThreadManagerEx.d ./SonikWorkThread/SonikWorkThreadManagerEx.o
-rm -rf ./SonikString/SonikString.d ./SonikString/SonikString.o ./SonikString/SonikStringConvert.d ./SonikString/SonikStringConvert.o
-rm -rf ./SonikFrameControl/SonikFrameControl.d ./SonikFrameControl/SonikFrameControl.o ./SonikFrameControl/SonikFrameControl_x64.d ./SonikFrameControl/SonikFrameControl_x64.o
-rm -rf ./SonikFileSystems/SonikFileController_SJISx64.d ./SonikFileSystems/SonikFileController_SJISx64.o ./SonikFileSystems/SonikFileController_SJISx86.d ./SonikFileSystems/SonikFileController_SJISx86.o ./SonikFileSystems/SonikFileController_UTF16x64.d ./SonikFileSystems/SonikFileController_UTF16x64.o ./SonikFileSystems/SonikFileController_UTF16x86.d ./SonikFileSystems/SonikFileController_UTF16x86.o ./SonikFileSystems/SonikFileController_UTF8x64.d ./SonikFileSystems/SonikFileController_UTF8x64.o ./SonikFileSystems/SonikFileController_UTF8x86.d ./SonikFileSystems/SonikFileController_UTF8x86.o ./SonikFileSystems/SonikFileController_x64.d ./SonikFileSystems/SonikFileController_x64.o ./SonikFileSystems/SonikFileController_x86.d ./SonikFileSystems/SonikFileController_x86.o ./SonikFileSystems/SonikFileSystems.d ./SonikFileSystems/SonikFileSystems.o
-rm -rf ./SonikCAS/SonikAtomicLock.d ./SonikCAS/SonikAtomicLock.o
-rm -rf ./MultiMedia/SonikMM_AudioInfoImple.d ./MultiMedia/SonikMM_AudioInfoImple.o ./MultiMedia/SonikMultiMediaInterface.d ./MultiMedia/SonikMultiMediaInterface.o
-rm -rf ./MathBit/MathBit.d ./MathBit/MathBit.o ./MathBit/SonikKeyFrameMath.d ./MathBit/SonikKeyFrameMath.o ./MathBit/SonikMathDistance.d ./MathBit/SonikMathDistance.o ./MathBit/SonikMathStandard.d ./MathBit/SonikMathStandard.o ./MathBit/SonikMathTrigonometric.d ./MathBit/SonikMathTrigonometric.o ./MathBit/SonikNormalize.d ./MathBit/SonikNormalize.o
-rm -rf ./DllAccess/SonikDllAccessManager.d ./DllAccess/SonikDllAccessManager.o ./DllAccess/SonikDllAccessManager_x64.d ./DllAccess/SonikDllAccessManager_x64.o ./DllAccess/SonikDllLoader.d ./DllAccess/SonikDllLoader.o ./DllAccess/SonikDllLoader_x64.d ./DllAccess/SonikDllLoader_x64.o
-rm -rf ./Audio/Functions/LoadFunction.d ./Audio/Functions/LoadFunction.o ./Audio/Functions/WaveBitConvert.d ./Audio/Functions/WaveBitConvert.o ./Audio/Functions/WriteFunction.d ./Audio/Functions/WriteFunction.o
-rm -rf ./Audio/Format/SonikAppleAiffFormat.d ./Audio/Format/SonikAppleAiffFormat.o ./Audio/Format/SonikWindowsWaveFormat.d ./Audio/Format/SonikWindowsWaveFormat.o
-rm -rf ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.d ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o
-rm -rf lib_Dx64_SonikLibraryAPI.a
- 
-03:15:50 **** Build of configuration Debug_x64 for project SonikLibraryAPI ****
+05:17:28 **** Build of configuration Debug_x64 for project SonikLibraryAPI ****
 mingw32-make all 
 Building file: ../TimerClock/SonikElapsedTimer.cpp
 Invoking: GCC C++ Compiler
@@ -43,7 +27,13 @@ In file included from <built-in>:469:
 <command line>:3:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
     3 | #define __cplusplus 202002L
       |         ^
-1 warning generated.
+../SonikWorkThread/SonikWorkThreadEx.cpp:116:16: warning: lambda capture 'RefFuncObj' is not used [-Wunused-lambda-capture]
+  116 |                                                                                    [&RefFuncObj, &pRawFunc, &ClassObject, &RefFlag]
+      |                                                                                     ~^~~~~~~~~~~
+../SonikWorkThread/SonikWorkThreadEx.cpp:116:29: warning: lambda capture 'pRawFunc' is not used [-Wunused-lambda-capture]
+  116 |                                                                                    [&RefFuncObj, &pRawFunc, &ClassObject, &RefFlag]
+      |                                                                                                  ~^~~~~~~~~
+3 warnings generated.
 Finished building: ../SonikWorkThread/SonikWorkThreadEx.cpp
  
 Building file: ../SonikWorkThread/SonikWorkThreadManagerEx.cpp
@@ -53,22 +43,16 @@ In file included from <built-in>:469:
 <command line>:3:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
     3 | #define __cplusplus 202002L
       |         ^
-../SonikWorkThread/SonikWorkThreadManagerEx.cpp:19:4: warning: field 'm_pThreads' will be initialized after field 'Init_' [-Wreorder-ctor]
-   19 |          ,m_pThreads(nullptr)
-      |           ^~~~~~~~~~~~~~~~~~~
-      |           Init_(false)
-   20 |         ,Init_(false)
-      |          ~~~~~~~~~~~~
+../SonikWorkThread/SonikWorkThreadManagerEx.cpp:20:3: warning: field 'm_pThreads' will be initialized after field 'notifycount_' [-Wreorder-ctor]
+   20 |         ,m_pThreads(nullptr)
+      |          ^~~~~~~~~~~~~~~~~~~
       |          notifycount_(0)
    21 |         ,notifycount_(0)
       |          ~~~~~~~~~~~~~~~
       |          m_pThreads(nullptr)
-../SonikWorkThread/SonikWorkThreadManagerEx.cpp:30:3: warning: field 'm_pThreads' will be initialized after field 'Init_' [-Wreorder-ctor]
-   30 |         ,m_pThreads(nullptr)
+../SonikWorkThread/SonikWorkThreadManagerEx.cpp:31:3: warning: field 'm_pThreads' will be initialized after field 'notifycount_' [-Wreorder-ctor]
+   31 |         ,m_pThreads(nullptr)
       |          ^~~~~~~~~~~~~~~~~~~
-      |          Init_(false)
-   31 |         ,Init_(false)
-      |          ~~~~~~~~~~~~
       |          notifycount_(0)
    32 |         ,notifycount_(0)
       |          ~~~~~~~~~~~~~~~
@@ -520,14 +504,14 @@ In file included from <built-in>:469:
       |         ^
 1 warning generated.
 Finished building: ../SonikFileSystems/SonikFileController_UTF8x86.cpp
-In file included from <built-in>:469:
-<command line>:3:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
-    3 | #define __cplusplus 202002L
-      |         ^
  
 Building file: ../SonikFileSystems/SonikFileController_x64.cpp
 Invoking: GCC C++ Compiler
 clang++ -std=c++20 -D__SONIK_x86_64__=1 -D_DEBUG -D__cplusplus=202002L -D_WIN64 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SonikFileSystems/SonikFileController_x64.d" -MT"SonikFileSystems/SonikFileController_x64.o" -o "SonikFileSystems/SonikFileController_x64.o" "../SonikFileSystems/SonikFileController_x64.cpp"
+In file included from <built-in>:469:
+<command line>:3:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    3 | #define __cplusplus 202002L
+      |         ^
 1 warning generated.
 Finished building: ../SonikFileSystems/SonikFileController_x64.cpp
  

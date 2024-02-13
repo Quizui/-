@@ -14,204 +14,6 @@
 #include <new>
 #include <condition_variable>
 
-//限定特殊化=======================
-namespace SonikLib
-{
-	template<>
-	class NormalSmtPtr<SonikLib::SonikFOSInterface>
-	{
-	private:
-		SonikLib::SonikFOSInterface* m_Pointer;
-
-		std::atomic<unsigned int>* m_Count;
-
-	private:
-		void AddRef(void)
-		{
-			unsigned int TmpCnt = m_Count->load(std::memory_order_acquire);
-			while( !m_Count->compare_exchange_strong(TmpCnt, TmpCnt+1, std::memory_order_acq_rel) )
-			{
-				//no process
-			};
-
-		};
-
-		void Release(void)
-		{
-			unsigned int TmpCnt = m_Count->load(std::memory_order_acquire);
-			while( !m_Count->compare_exchange_strong(TmpCnt, TmpCnt-1, std::memory_order_acq_rel) )
-			{
-				//no process
-			};
-
-
-			if( (TmpCnt -1) == 0 )
-			{
-				delete m_Pointer;
-				delete m_Count;
-
-			};
-
-			m_Pointer = nullptr;
-			m_Count = nullptr;
-		};
-
-	public:
-
-		//constructor
-		explicit NormalSmtPtr(SonikLib::SonikFOSInterface* Pointer = nullptr)
-		:m_Pointer(nullptr)
-		,m_Count(nullptr)
-		{
-
-			try
-			{
-				m_Count = new std::atomic<unsigned int>;
-			}catch(std::bad_alloc& e)
-			{
-				throw std::bad_alloc(e);
-			}
-
-			m_Count->store(1);
-			m_Pointer = Pointer;
-
-		};
-
-		//コピーコンストラクタ
-		NormalSmtPtr(const NormalSmtPtr<SonikLib::SonikFOSInterface>& SmtPtr)
-		{
-			m_Pointer = SmtPtr.m_Pointer;
-			m_Count = SmtPtr.m_Count;
-
-			AddRef();
-
-		};
-
-		//Moveコンストラクタ
-		NormalSmtPtr(NormalSmtPtr<SonikLib::SonikFOSInterface>&& SmtPtr)
-		{
-			m_Pointer = SmtPtr.m_Pointer;
-			m_Count = SmtPtr.m_Count;
-
-			SmtPtr.m_Pointer = nullptr;
-			SmtPtr.m_Count = nullptr;
-
-		};
-
-		//Destructor
-		~NormalSmtPtr(void)
-		{
-			Release();
-		};
-
-        //MoveEqual
-		NormalSmtPtr& operator =(NormalSmtPtr<SonikLib::SonikFOSInterface>&& SmtPtr)
-		{
-			//自身への代入は意味が無いので行わない。
-			if( SmtPtr.m_Pointer == m_Pointer )
-			{
-				return (*this);
-			};
-
-			Release();
-
-			m_Pointer = SmtPtr.m_Pointer;
-			m_Count = SmtPtr.m_Count;
-
-			AddRef();
-
-			return (*this);
-
-		};
-
-
-		NormalSmtPtr& operator =(const NormalSmtPtr<SonikLib::SonikFOSInterface>& SmtPtr)
-		{
-			//自身への代入は意味が無いので行わない。
-			if( SmtPtr.m_Pointer == m_Pointer )
-			{
-				return (*this);
-			};
-
-			Release();
-
-			m_Count = SmtPtr.m_Count;
-			m_Pointer = SmtPtr.m_Pointer;
-
-			AddRef();
-
-			return (*this);
-		};
-
-		bool operator ==(const NormalSmtPtr<SonikLib::SonikFOSInterface>& SmtPtr)
-		{
-			if( m_Pointer == SmtPtr.m_Pointer )
-			{
-				return true;
-			};
-
-			return false;
-		};
-
-		bool operator ==(const uintptr_t PtrVal)
-		{
-			if( reinterpret_cast<uintptr_t>(m_Pointer) == PtrVal )
-			{
-				return true;
-			};
-
-			return false;
-		};
-
-		bool operator ==(const void* Ptrs)
-		{
-			if( m_Pointer == Ptrs )
-			{
-				return true;
-			};
-
-			return false;
-		};
-
-		void ResetPointer(SonikLib::SonikFOSInterface* SetPointer = nullptr)
-		{
-			Release();
-
-			//再初期化
-            m_Count = new std::atomic<unsigned int>;
-            m_Count->store(1);
-
-            m_Pointer = SetPointer;;
-		};
-
-		//nullptrならtrue返却
-		bool NullPtrCheck(void)
-		{
-			return (m_Pointer == nullptr) ? true : false;
-		}
-
-		//deleteしないこと。
-		SonikLib::SonikFOSInterface* GetRawPointer(void)
-		{
-			return m_Pointer;
-		};
-
-		SonikLib::SonikFOSInterface* operator ->(void)
-		{
-			return m_Pointer;
-
-		};
-
-		SonikLib::SonikFOSInterface& operator*(void) const noexcept
-		{
-			return (*m_Pointer);
-		};
-
-	};
-
-};
-
-
 namespace SonikLib
 {
 
@@ -224,11 +26,11 @@ namespace SonikLib
 		std::thread threads_;
 
 		//実際にコールする関数オブジェクト
-		SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> FuncObj_;
+		SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface> FuncObj_;
 
 
 		//関数パックのキューオブジェクトへのポインタ
-		SonikLib::SonikAtomicQueue<SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>>* FuncQueue_;
+		SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>* FuncQueue_;
 
 		//CASロックオブジェクト
 		SonikLib::S_CAS::SonikAtomicLock atmlock_;
@@ -259,10 +61,10 @@ namespace SonikLib
 
 		//コールする関数オブジェクトをセットします。
 		bool SetCallFunction(SonikLib::SonikFOSInterface* CallFunctionObject, bool _looped_ = false);
-		bool SetCallFunction(SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& CallFunctionObject, bool _looped_ = false);
+		bool SetCallFunction(SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>& CallFunctionObject, bool _looped_ = false);
 
 		//静的関数内で使用
-		SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& GetFunctionPointer(void);
+		SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>& GetFunctionPointer(void);
 		std::condition_variable_any& GetConditionVariable(void);
 		SonikLib::S_CAS::SonikAtomicLock& GetCASLockObject(void);
 		uint32_t& GetThreadFlag(void);
@@ -285,7 +87,7 @@ namespace SonikLib
 		void SetThreadStatus_Suspend(bool Setfalg);
 
 		//キューポインタをセットします。
-		void SetFunctionQueue(SonikLib::SonikAtomicQueue<SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>>* pSetQueue);
+		void SetFunctionQueue(SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>* pSetQueue);
 		//キューポインタをアンセットします。
 		void UnSetFunctionQueue(void);
 
@@ -298,8 +100,9 @@ namespace SonikLib
 		std::condition_variable_any& RefCond = ClassObject->GetConditionVariable();
 		SonikLib::S_CAS::SonikAtomicLock& RefLock = ClassObject->GetCASLockObject();
 		std::mutex localmtx;
-		SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& RefFuncObj = ClassObject->GetFunctionPointer();
-		SonikLib::SonikFOSInterface* pRawFunc = RefFuncObj.GetRawPointer();
+		SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>& RefFuncObj = ClassObject->GetFunctionPointer();
+		//SonikLib::SonikFOSInterface* pRawFunc = RefFuncObj.GetRawPointer();
+		SonikLib::SonikFOSInterface* pRawFunc = nullptr;
 
 		while(1)
 		{
@@ -323,12 +126,12 @@ namespace SonikLib
 												ClassObject->UpdateQueue();
 
 												//取れてたらサスペンド解除して後続処理へ。
-												if( !RefFuncObj.NullPtrCheck() )
-												{
-													pRawFunc = RefFuncObj.GetRawPointer();
-													ClassObject->SetThreadStatus_Suspend(false) ;
-													return true;
-												};
+//												if( !RefFuncObj.NullPtrCheck() )
+//												{
+//													pRawFunc = RefFuncObj.GetRawPointer();
+//													ClassObject->SetThreadStatus_Suspend(false) ;
+//													return true;
+//												};
 
 												//取れなければサスペンド状態にして再度最初からチェック。
 												ClassObject->SetThreadStatus_Suspend(true) ;
@@ -435,7 +238,7 @@ namespace SonikLib
 
 	};
 
-	bool WorkThreadEx::pImplEx::SetCallFunction(SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& CallFunctionObject, bool _looped_)
+	bool WorkThreadEx::pImplEx::SetCallFunction(SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>& CallFunctionObject, bool _looped_)
 	{
 		if( !atmlock_.TryLock() )
 		{
@@ -460,7 +263,7 @@ namespace SonikLib
 		return true;
 	};
 
-	SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>& WorkThreadEx::pImplEx::GetFunctionPointer(void)
+	SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>& WorkThreadEx::pImplEx::GetFunctionPointer(void)
 	{
 		return FuncObj_;
 	};
@@ -526,7 +329,7 @@ namespace SonikLib
 	};
 
 	//キューポインタをセットします。
-	void WorkThreadEx::pImplEx::SetFunctionQueue(SonikLib::SonikAtomicQueue<SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>>* pSetQueue)
+	void WorkThreadEx::pImplEx::SetFunctionQueue(SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>* pSetQueue)
 
 	{
 		atmlock_.lock();
@@ -602,7 +405,7 @@ namespace SonikLib
 		bool l_looped_ = _looped_;
 		return ImplObject->SetCallFunction(CallFunctionObject, (!l_looped_));
 	};
-	bool WorkThreadEx::SetCallFunction(SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> CallFunctionObject, bool _looped_)
+	bool WorkThreadEx::SetCallFunction(SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface> CallFunctionObject, bool _looped_)
 	{
 		bool l_looped_ = _looped_;
 		return ImplObject->SetCallFunction(CallFunctionObject, (!l_looped_));
@@ -612,7 +415,7 @@ namespace SonikLib
 	//本関数はSetCallFunctionと同時にコールされた場合で、SetCallFunctionが先に実行された場合、セットされた関数が終了するまで処理を返却しません。
 	//本関数によりキューがセットされた後は、SetCallFunctionは無効となり、常にfalseを返却します。
 	//本関数でセットしたキューにエンキューを行った場合、dispatchQueue関数をコールし、エンキューを行ったことを通知しなければデキュー処理を行いません。
-	void WorkThreadEx::Set_ExternalQueue(SonikLib::SonikAtomicQueue<SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>>* pSetQueue)
+	void WorkThreadEx::Set_ExternalQueue(SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>* pSetQueue)
 	{
 		ImplObject->SetFunctionQueue(pSetQueue);
 	};

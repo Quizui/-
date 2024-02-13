@@ -49,11 +49,11 @@ namespace SonikLib
 
 	};
 
-	SonikLib::NormalSmtPtr<SonikLib::SonikMMAudioInfo> SonikMultiMedia::Get_Hard_AudioInfo_OSSetting(void)
+	SonikLib::SharedSmtPtr<SonikLib::SonikMMAudioInfo> SonikMultiMedia::Get_Hard_AudioInfo_OSSetting(void)
 	{
 		m_lock.lock();
 
-		SonikLib::NormalSmtPtr<SonikLib::SonikMMAudioInfo> retval;
+		SonikLib::SharedSmtPtr<SonikLib::SonikMMAudioInfo> retval;
 
 		SonikLib::AudioInfoImple* imple_ = new(std::nothrow) SonikLib::AudioInfoImple;
 		retval.ResetPointer(imple_);
@@ -346,11 +346,11 @@ namespace SonikLib
 
 
 
-	SonikLib::NormalSmtPtr<SonikLib::SonikMMAudioInfo> SonikMultiMedia::Get_Hard_AudioInfo_OpenALSetting(void)
+	SonikLib::SharedSmtPtr<SonikLib::SonikMMAudioInfo> SonikMultiMedia::Get_Hard_AudioInfo_OpenALSetting(void)
 	{
 		m_lock.lock();
 
-		SonikLib::NormalSmtPtr<SonikLib::SonikMMAudioInfo> retval;
+		SonikLib::SharedSmtPtr<SonikLib::SonikMMAudioInfo> retval;
 
 		SonikLib::AudioInfoImple* imple_ = new(std::nothrow) SonikLib::AudioInfoImple;
 		retval.ResetPointer(imple_);

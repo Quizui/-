@@ -65,13 +65,13 @@ namespace SonikLib
 		//マルチスレッドにより、同時にキューセットと本関数が呼ばれた場合で、本関数が先にコールされた場合、本関数は、trueを返却します。
 		//いずれの関数を使用しても内部ではスマートポインタで扱います。
 		bool SetCallFunction(SonikLib::SonikFOSInterface* CallFunctionObject, bool _looped_ = false);
-		bool SetCallFunction(SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface> CallFunctionObject, bool _looped_ = false);
+		bool SetCallFunction(SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface> CallFunctionObject, bool _looped_ = false);
 
 		//外部のキューをセットします。
 		//本関数はSetCallFunctionと同時にコールされた場合で、SetCallFunctionが先に実行された場合、セットされた関数が終了するまで処理を返却しません。
 		//本関数によりキューがセットされた後は、SetCallFunctionは無効となり、常にfalseを返却します。
 		//本関数でセットしたキューにエンキューを行った場合、dispatchQueue関数をコールし、エンキューを行ったことを通知しなければデキュー処理を行いません。
-		void Set_ExternalQueue(SonikLib::SonikAtomicQueue<SonikLib::NormalSmtPtr<SonikLib::SonikFOSInterface>>* pSetQueue);
+		void Set_ExternalQueue(SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>* pSetQueue);
 
 		//外部のキューをアンセットします。
 		void UnSet_ExternalQueue(void);
