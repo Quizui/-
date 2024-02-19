@@ -1,6 +1,8 @@
 #ifndef WORKER_FUNCTOR_SONIKLIBRARY_
 #define WORKER_FUNCTOR_SONIKLIBRARY_
 
+#include "../SmartPointer/SonikSmartPointer.hpp"
+
 //前方宣言
 namespace SonikFunctionObjectDefines
 {
@@ -24,6 +26,9 @@ namespace SonikFunctionObjectDefines
 {
 	//関数ポインタを同じ型で扱うためのベースクラスです
 	//戻り値がある関数は指定できまてん。
+	//Weak 及び Strong のnext はSonikLibのWorkerThread内で意味を持ちます。
+	//それぞれ、Weak は次のタスク実行の前にスレッドをリスタートします。(関数と関数の間にスレッドの終了等の余地を設けます)
+	//Strong はスレッドをリスタートせず、その場でStrong_nextに設定されているrunをコールします。(関数と関数の間にスレッド終了等の余地を設けません)
 	class FunctionObjectSystemInterface
 	{
 	protected:
@@ -36,8 +41,10 @@ namespace SonikFunctionObjectDefines
 		//保持したオブジェクトを破棄するかどうかのフラグ
 		bool Destroy_;
 
-		FunctionObjectSystemInterface* next_;
-		FunctionObjectSystemInterface* prev_;
+		//弱い依存の単方向next
+		SonikLib::SharedSmtPtr<FunctionObjectSystemInterface> weak_next;
+		//強い依存の単方向next
+		SonikLib::SharedSmtPtr<FunctionObjectSystemInterface> strong_next;
 
 	public:
 		//コンストラクタ
@@ -45,8 +52,6 @@ namespace SonikFunctionObjectDefines
 		:MethodStatus(false)
 		,MethodPriority(0)
 		,Destroy_(false)
-		,next_(nullptr)
-		,prev_(nullptr)
 		{
 			//member value initialize only
 		};
@@ -55,28 +60,66 @@ namespace SonikFunctionObjectDefines
 		{
 		};
 
-		//自分の次へのポインタの設定と取得
-		FunctionObjectSystemInterface*& Get_NextBase(void)
+		//弱い依存でnextのタスクを設定します。
+		bool SetNext_Weak(FunctionObjectSystemInterface* _SetSmtPtr_)
 		{
-
-			return next_;
-		};
-		void Set_NextBase(FunctionObjectSystemInterface* SetPointer_)
-		{
-			next_ = SetPointer_;
-
+			return weak_next.ResetPointer(_SetSmtPtr_);
 		};
 
-		//自分の前へのポインタの設定と取得
-		FunctionObjectSystemInterface*& Get_PrevBase(void)
+		bool SetNext_Weak(SonikLib::SharedSmtPtr<FunctionObjectSystemInterface>& _SetSmtPtr_)
 		{
-
-			return prev_;
+			weak_next = _SetSmtPtr_;
+			return true;
 		};
-		void Set_PrevBase(FunctionObjectSystemInterface* SetPointer_)
-		{
 
-			prev_ = SetPointer_;
+		bool SetNext_Weak(SonikLib::SharedSmtPtr<FunctionObjectSystemInterface>&& _SetSmtPtr_)
+		{
+			weak_next = _SetSmtPtr_;
+			return true;
+		};
+
+		//強い依存でnextのタスクを設定します。
+		bool SetNext_Strong(FunctionObjectSystemInterface* _SetSmtPtr_)
+		{
+			return strong_next.ResetPointer(_SetSmtPtr_);
+		};
+
+		bool SetNext_Strong(SonikLib::SharedSmtPtr<FunctionObjectSystemInterface>& _SetSmtPtr_)
+		{
+			strong_next = _SetSmtPtr_;
+			return true;
+		};
+
+		bool SetNext_Strong(SonikLib::SharedSmtPtr<FunctionObjectSystemInterface>&& _SetSmtPtr_)
+		{
+			strong_next = _SetSmtPtr_;
+			return true;
+		};
+
+		//弱い依存のnextタスクを取得します。
+		//nextタスクがない場合、falseを返却します。
+		bool GetNext_weak(SonikLib::SharedSmtPtr<FunctionObjectSystemInterface>& _getSmtPtr_)
+		{
+			if(weak_next.IsNullptr())
+			{
+				return false;
+			};
+
+			_getSmtPtr_ = weak_next;
+			return true;
+		};
+
+		//強い依存のnextタスクを取得します。
+		//nextタスクがない場合、falseを返却します。
+		bool GetNext_strong(SonikLib::SharedSmtPtr<FunctionObjectSystemInterface>& _getSmtPtr_)
+		{
+			if(strong_next.IsNullptr())
+			{
+				return false;
+			};
+
+			_getSmtPtr_ = strong_next;
+			return true;
 		};
 
 		//メソッドステータスの取得
@@ -119,9 +162,6 @@ namespace SonikFunctionObjectDefines
 			return Destroy_;
 		}
 
-        virtual unsigned int GetCreateSize(void) =0;
-        virtual void CreateCopy(void* AllocateArea) =0;
-
 		virtual void Run(void) =0;
 	};
 
@@ -137,19 +177,19 @@ namespace SonikFunctionObjectDefines
 		//メソッドプライオリティ
 		unsigned long MethodPriority;
 
-		FunctionObjectSystemTemplateInterface<Rtype>* next_;
-		FunctionObjectSystemTemplateInterface<Rtype>* prev_;
-
 		//保持したオブジェクトを破棄するかどうかのフラグ
 		bool Destroy_;
+
+		//弱い依存の単方向next
+		SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>> weak_next;
+		//強い依存の単方向next
+		SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>> strong_next;
 
 	public:
 		//コンストラクタ
 		FunctionObjectSystemTemplateInterface(void)
 		:MethodStatus(false)
 		,MethodPriority(0)
-		,next_(nullptr)
-		,prev_(nullptr)
 		,Destroy_(false)
 		{
 			//member value initialize only
@@ -161,28 +201,66 @@ namespace SonikFunctionObjectDefines
 			//処理なし。
 		};
 
-		//自分の次へのポインタの設定と取得
-		FunctionObjectSystemTemplateInterface<Rtype>*& Get_NextBase(void)
+		//弱い依存でnextのタスクを設定します。
+		bool SetNext_Weak(FunctionObjectSystemTemplateInterface<Rtype>* _SetSmtPtr_)
 		{
-
-			return next_;
-		};
-		void Set_NextBase(FunctionObjectSystemTemplateInterface<Rtype>* SetPointer_)
-		{
-			next_ = SetPointer_;
-
+			return weak_next.ResetPointer(_SetSmtPtr_);
 		};
 
-		//自分の前へのポインタの設定と取得
-		FunctionObjectSystemTemplateInterface<Rtype>*& Get_PrevBase(void)
+		bool SetNext_Weak(SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>>& _SetSmtPtr_)
 		{
-
-			return prev_;
+			weak_next = _SetSmtPtr_;
+			return true;
 		};
-		void Set_PrevBase(FunctionObjectSystemTemplateInterface<Rtype>* SetPointer_)
-		{
 
-			prev_ = SetPointer_;
+		bool SetNext_Weak(SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>>&& _SetSmtPtr_)
+		{
+			weak_next = _SetSmtPtr_;
+			return true;
+		};
+
+		//強い依存でnextのタスクを設定します。
+		bool SetNext_Strong(FunctionObjectSystemTemplateInterface<Rtype>* _SetSmtPtr_)
+		{
+			return strong_next.ResetPointer(_SetSmtPtr_);
+		};
+
+		bool SetNext_Strong(SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>>& _SetSmtPtr_)
+		{
+			strong_next = _SetSmtPtr_;
+			return true;
+		};
+
+		bool SetNext_Strong(SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>>&& _SetSmtPtr_)
+		{
+			strong_next = _SetSmtPtr_;
+			return true;
+		};
+
+		//弱い依存のnextタスクを取得します。
+		//nextタスクがない場合、falseを返却します。
+		bool GetNext_weak(SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>>& _getSmtPtr_)
+		{
+			if(weak_next.IsNullptr())
+			{
+				return false;
+			};
+
+			_getSmtPtr_ = weak_next;
+			return true;
+		};
+
+		//強い依存のnextタスクを取得します。
+		//nextタスクがない場合、falseを返却します。
+		bool GetNext_strong(SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>>& _getSmtPtr_)
+		{
+			if(strong_next.IsNullptr())
+			{
+				return false;
+			};
+
+			_getSmtPtr_ = strong_next;
+			return true;
 		};
 
 		//メソッドステータスの取得

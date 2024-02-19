@@ -84,7 +84,7 @@ namespace SonikLib
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::UniqueSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
+		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
 		{
 			Members_10_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>* lp = nullptr;
 
@@ -100,23 +100,23 @@ namespace SonikLib
 			if(lp == nullptr)
 			{
 				//失敗時はnullptrとして返却
-				return SonikLib::UniqueSmtPtr<SonikFOSTemplateInterface<Rtype>>();
+				return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>();
 			};
 
 			lp->object_ = _SetObj_;
 			lp->p_mfunc_ = set_func;
 
-			return SonikLib::UniqueSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
+			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::UniqueSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
+		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
 		{
 			Members_10_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>* lp = nullptr;
 
 			if(_SetObj_ == nullptr)
 			{
 				//Global版ではないのにnullptrを指定されたらそのまま返却。
-				return SonikLib::UniqueSmtPtr<SonikFOSTemplateInterface<Rtype>>();
+				return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>();
 			};
 
 			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
@@ -131,13 +131,13 @@ namespace SonikLib
 			if(lp == nullptr)
 			{
 				//失敗時はnullptrとして返却
-				return SonikLib::UniqueSmtPtr<SonikFOSTemplateInterface<Rtype>>();
+				return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>();
 			};
 
 			lp->object_ = SonikLib::SharedSmtPtr<Type>(_SetObj_);
 			lp->p_mfunc_ = set_func;
 
-			return SonikLib::UniqueSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
+			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 
 		inline Rtype Run(void)
@@ -214,7 +214,7 @@ namespace SonikLib
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::UniqueSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
+		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
 		{
 			Members_10_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>* lp = nullptr;
 
@@ -230,23 +230,23 @@ namespace SonikLib
 			if(lp == nullptr)
 			{
 				//失敗時はnullptrとして返却
-				return SonikLib::UniqueSmtPtr<SonikFOSInterface>();
+				return SonikLib::SharedSmtPtr<SonikFOSInterface>();
 			};
 
 			lp->object_ = _SetObj_;
 			lp->p_mfunc_ = set_func;
 
-			return SonikLib::UniqueSmtPtr<SonikFOSInterface>(lp);
+			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::UniqueSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
+		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
 		{
 			Members_10_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>* lp = nullptr;
 
 			if(_SetObj_ == nullptr)
 			{
 				//Global版ではないのにnullptrを指定されたらそのまま返却。
-				return  SonikLib::UniqueSmtPtr<SonikFOSInterface>();
+				return  SonikLib::SharedSmtPtr<SonikFOSInterface>();
 			};
 
 			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
@@ -261,13 +261,13 @@ namespace SonikLib
 			if(lp == nullptr)
 			{
 				//失敗時はnullptrとして返却
-				return SonikLib::UniqueSmtPtr<SonikFOSInterface>();
+				return SonikLib::SharedSmtPtr<SonikFOSInterface>();
 			};
 
 			lp->object_ = SonikLib::SharedSmtPtr<Type>(_SetObj_);
 			lp->p_mfunc_ = set_func;
 
-			return SonikLib::UniqueSmtPtr<SonikFOSInterface>(lp);
+			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 
 		inline void Run(void)
@@ -331,7 +331,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::UniqueSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
+		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
 		{
 			Members_10_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>* lp = nullptr;
 
@@ -347,12 +347,12 @@ namespace SonikLib
 			if(lp == nullptr)
 			{
 				//失敗時はnullptrとして返却
-				return SonikLib::UniqueSmtPtr<SonikFOSTemplateInterface<Rtype>>();
+				return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>();
 			};
 
 			lp->p_mfunc_ = set_func;
 
-			return SonikLib::UniqueSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
+			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 
 		inline Rtype Run(void)
@@ -414,7 +414,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::UniqueSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
+		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
 		{
 			Members_10_FuncG< Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>* lp = nullptr;
 
@@ -430,12 +430,12 @@ namespace SonikLib
 			if(lp == nullptr)
 			{
 				//失敗時はnullptrとして返却
-				return SonikLib::UniqueSmtPtr<SonikFOSInterface>();
+				return SonikLib::SharedSmtPtr<SonikFOSInterface>();
 			};
 
 			lp->p_mfunc_ = set_func;
 
-			return SonikLib::UniqueSmtPtr<SonikFOSInterface>(lp);
+			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 
 		inline void Run(void)
@@ -498,7 +498,7 @@ namespace SonikLib
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::UniqueSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
+		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
 		{
 			Members_9_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>* lp = nullptr;
 
@@ -514,23 +514,23 @@ namespace SonikLib
 			if(lp == nullptr)
 			{
 				//失敗時はnullptrとして返却
-				return SonikLib::UniqueSmtPtr<SonikFOSTemplateInterface<Rtype>>();
+				return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>();
 			};
 
 			lp->object_ = _SetObj_;
 			lp->p_mfunc_ = set_func;
 
-			return SonikLib::UniqueSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
+			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::UniqueSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
+		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
 		{
 			Members_9_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>* lp = nullptr;
 
 			if(_SetObj_ == nullptr)
 			{
 				//Global版ではないのにnullptrを指定されたらそのまま返却。
-				return SonikLib::UniqueSmtPtr<SonikFOSTemplateInterface<Rtype>>();
+				return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>();
 			};
 
 			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
@@ -545,13 +545,13 @@ namespace SonikLib
 			if(lp == nullptr)
 			{
 				//失敗時はnullptrとして返却
-				return SonikLib::UniqueSmtPtr<SonikFOSTemplateInterface<Rtype>>();
+				return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>();
 			};
 
 			lp->object_ = SonikLib::SharedSmtPtr<Type>(_SetObj_);
 			lp->p_mfunc_ = set_func;
 
-			return SonikLib::UniqueSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
+			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 
 		inline Rtype Run(void)
@@ -623,7 +623,7 @@ namespace SonikLib
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::UniqueSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
+		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
 		{
 			Members_9_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>* lp = nullptr;
 
@@ -639,23 +639,23 @@ namespace SonikLib
 			if(lp == nullptr)
 			{
 				//失敗時はnullptrとして返却
-				return SonikLib::UniqueSmtPtr<SonikFOSInterface>();
+				return SonikLib::SharedSmtPtr<SonikFOSInterface>();
 			};
 
 			lp->object_ = _SetObj_;
 			lp->p_mfunc_ = set_func;
 
-			return SonikLib::UniqueSmtPtr<SonikFOSInterface>(lp);
+			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::UniqueSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
+		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
 		{
 			Members_9_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>* lp = nullptr;
 
 			if(_SetObj_ == nullptr)
 			{
 				//Global版ではないのにnullptrを指定されたらそのまま返却。
-				return  SonikLib::UniqueSmtPtr<SonikFOSInterface>();
+				return  SonikLib::SharedSmtPtr<SonikFOSInterface>();
 			};
 
 			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
@@ -670,15 +670,14 @@ namespace SonikLib
 			if(lp == nullptr)
 			{
 				//失敗時はnullptrとして返却
-				return SonikLib::UniqueSmtPtr<SonikFOSInterface>();
+				return SonikLib::SharedSmtPtr<SonikFOSInterface>();
 			};
 
 			lp->object_ = SonikLib::SharedSmtPtr<Type>(_SetObj_);
 			lp->p_mfunc_ = set_func;
 
-			return SonikLib::UniqueSmtPtr<SonikFOSInterface>(lp);
+			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
-
 
 		inline void Run(void)
 		{
@@ -739,7 +738,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::UniqueSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
+		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
 		{
 			Members_9_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>* lp = nullptr;
 
@@ -755,12 +754,12 @@ namespace SonikLib
 			if(lp == nullptr)
 			{
 				//失敗時はnullptrとして返却
-				return SonikLib::UniqueSmtPtr<SonikFOSTemplateInterface<Rtype>>();
+				return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>();
 			};
 
 			lp->p_mfunc_ = set_func;
 
-			return SonikLib::UniqueSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
+			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 
 		inline Rtype Run(void)
@@ -820,7 +819,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::UniqueSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
+		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
 		{
 			Members_9_FuncG< Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>* lp = nullptr;
 
@@ -836,12 +835,12 @@ namespace SonikLib
 			if(lp == nullptr)
 			{
 				//失敗時はnullptrとして返却
-				return SonikLib::UniqueSmtPtr<SonikFOSInterface>();
+				return SonikLib::SharedSmtPtr<SonikFOSInterface>();
 			};
 
 			lp->p_mfunc_ = set_func;
 
-			return SonikLib::UniqueSmtPtr<SonikFOSInterface>(lp);
+			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 
 		inline virtual void Run(void)
@@ -902,41 +901,61 @@ namespace SonikLib
 			};
 		};
 
-		static  Members_8_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr) noexcept
+		//SharedSmtPtr指定
+		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr)
 		{
-			if(_allocate_ != nullptr)
+			Members_8_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* lp = nullptr;
+
+			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
+			//長いので縦にしただけ。つまり下記。
+			//(条件)
+			//? 真の時の処理
+			//: 偽の時の処理
+			(_allocate_ != nullptr)
+			? lp = new(_allocate_) Members_8_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_)
+			: lp = new(std::nothrow) Members_8_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_);
+
+			if(lp == nullptr)
 			{
-				return new(_allocate_) Members_8_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_);
+				//失敗時はnullptrとして返却
+				return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>();
 			};
 
-			return new(std::nothrow) Members_8_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_);
+			lp->object_ = _SetObj_;
+			lp->p_mfunc_ = set_func;
+
+			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
-
-		void SetFunc( Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) )
+		//RawPointer指定
+		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr)
 		{
-			p_mfunc_ = set_func;
+			Members_8_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* lp = nullptr;
 
-		};
+			if(_SetObj_ == nullptr)
+			{
+				//Global版ではないのにnullptrを指定されたらそのまま返却。
+				return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>();
+			};
 
-		void SetObject( Type* SetObject )
-		{
-			object_ = SetObject;
-		};
+			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
+			//長いので縦にしただけ。つまり下記。
+			//(条件)
+			//? 真の時の処理
+			//: 偽の時の処理
+			(_allocate_ != nullptr)
+			? lp = new(_allocate_) Members_8_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_)
+			: lp = new(std::nothrow) Members_8_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_);
 
-		unsigned int GetCreateSize(void)
-		{
-			return sizeof((*this));
-		};
+			if(lp == nullptr)
+			{
+				//失敗時はnullptrとして返却
+				return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>();
+			};
 
-		void CreateCopy(void* AllocateArea)
-		{
-			Members_8_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* pTmp = nullptr;
+			lp->object_ = SonikLib::SharedSmtPtr<Type>(_SetObj_);
+			lp->p_mfunc_ = set_func;
 
-			pTmp = new(AllocateArea) Members_8_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(this->Arg1Val, this->Arg2Val, this->Arg3Val, this->Arg4Val, this->Arg5Val, this->Arg6Val, this->Arg7Val, this->Arg8Val);
-
-			pTmp->SetFunc(this->p_mfunc_);
-			pTmp->SetObject(this->object_);
-
+			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 
 		inline Rtype Run(void)
@@ -1005,41 +1024,61 @@ namespace SonikLib
 
 		};
 
-		static  Members_8_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr) noexcept
+		//SharedSmtPtr指定
+		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr)
 		{
-			if(_allocate_ != nullptr)
+			Members_8_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* lp = nullptr;
+
+			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
+			//長いので縦にしただけ。つまり下記。
+			//(条件)
+			//? 真の時の処理
+			//: 偽の時の処理
+			(_allocate_ != nullptr)
+			? lp = new(_allocate_) Members_8_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_)
+			: lp = new(std::nothrow) Members_8_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_);
+
+			if(lp == nullptr)
 			{
-				return new(_allocate_) Members_8_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_);
+				//失敗時はnullptrとして返却
+				return SonikLib::SharedSmtPtr<SonikFOSInterface>();
 			};
 
-			return new(std::nothrow) Members_8_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_);
+			lp->object_ = _SetObj_;
+			lp->p_mfunc_ = set_func;
+
+			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
-
-		void SetFunc( void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) )
+		//RawPointer指定
+		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr)
 		{
-			p_mfunc_ = set_func;
+			Members_8_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* lp = nullptr;
 
-		};
+			if(_SetObj_ == nullptr)
+			{
+				//Global版ではないのにnullptrを指定されたらそのまま返却。
+				return  SonikLib::SharedSmtPtr<SonikFOSInterface>();
+			};
 
-		void SetObject( Type* SetObject )
-		{
-			object_ = SetObject;
-		};
+			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
+			//長いので縦にしただけ。つまり下記。
+			//(条件)
+			//? 真の時の処理
+			//: 偽の時の処理
+			(_allocate_ != nullptr)
+			? lp = new(_allocate_) Members_8_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_)
+			: lp = new(std::nothrow) Members_8_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_);
 
-		unsigned int GetCreateSize(void)
-		{
-			return sizeof((*this));
-		};
+			if(lp == nullptr)
+			{
+				//失敗時はnullptrとして返却
+				return SonikLib::SharedSmtPtr<SonikFOSInterface>();
+			};
 
-		void CreateCopy(void* AllocateArea)
-		{
-			Members_8_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* pTmp = nullptr;
+			lp->object_ = SonikLib::SharedSmtPtr<Type>(_SetObj_);
+			lp->p_mfunc_ = set_func;
 
-			pTmp = new(AllocateArea) Members_8_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(this->Arg1Val, this->Arg2Val, this->Arg3Val, this->Arg4Val, this->Arg5Val, this->Arg6Val, this->Arg7Val, this->Arg8Val);
-
-			pTmp->SetFunc(this->p_mfunc_);
-			pTmp->SetObject(this->object_);
-
+			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 
 		inline void Run(void)
@@ -1098,35 +1137,29 @@ namespace SonikLib
 			//no process;
 		};
 
-		static  Members_8_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr) noexcept
+		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
+		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr)
 		{
-			if(_allocate_ != nullptr)
+			Members_8_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* lp = nullptr;
+
+			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
+			//長いので縦にしただけ。つまり下記。
+			//(条件)
+			//? 真の時の処理
+			//: 偽の時の処理
+			(_allocate_ != nullptr)
+			? lp = new(_allocate_) Members_8_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_)
+			: lp = new(std::nothrow) Members_8_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_);
+
+			if(lp == nullptr)
 			{
-				return new(_allocate_) Members_8_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_);
+				//失敗時はnullptrとして返却
+				return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>();
 			};
 
-			return new(std::nothrow) Members_8_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_);
-		};
+			lp->p_mfunc_ = set_func;
 
-		void SetFunc( Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) )
-		{
-			p_mfunc_ = set_func;
-
-		};
-
-		unsigned int GetCreateSize(void)
-		{
-			return sizeof((*this));
-		};
-
-		void CreateCopy(void* AllocateArea)
-		{
-			Members_8_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* pTmp = nullptr;
-
-			pTmp = new(AllocateArea) Members_8_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(this->Arg1Val, this->Arg2Val, this->Arg3Val, this->Arg4Val, this->Arg5Val, this->Arg6Val, this->Arg7Val, this->Arg8Val);
-
-			pTmp->SetFunc(this->p_mfunc_);
-
+			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 
 		inline Rtype Run(void)
@@ -1183,35 +1216,29 @@ namespace SonikLib
 			//no process;
 		};
 
-		static  Members_8_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr) noexcept
+		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
+		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr)
 		{
-			if(_allocate_ != nullptr)
+			Members_8_FuncG< Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* lp = nullptr;
+
+			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
+			//長いので縦にしただけ。つまり下記。
+			//(条件)
+			//? 真の時の処理
+			//: 偽の時の処理
+			(_allocate_ != nullptr)
+			? lp = new(_allocate_) Members_8_FuncG< Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_)
+			: lp = new(std::nothrow) Members_8_FuncG< Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_);
+
+			if(lp == nullptr)
 			{
-				return new(_allocate_) Members_8_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_);
+				//失敗時はnullptrとして返却
+				return SonikLib::SharedSmtPtr<SonikFOSInterface>();
 			};
 
-			return new(std::nothrow) Members_8_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_, Val8_);
-		};
+			lp->p_mfunc_ = set_func;
 
-		void SetFunc( void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) )
-		{
-			p_mfunc_ = set_func;
-
-		};
-
-		unsigned int GetCreateSize(void)
-		{
-			return sizeof((*this));
-		};
-
-		void CreateCopy(void* AllocateArea)
-		{
-			Members_8_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* pTmp = nullptr;
-
-			pTmp = new(AllocateArea) Members_8_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>(this->Arg1Val, this->Arg2Val, this->Arg3Val, this->Arg4Val, this->Arg5Val, this->Arg6Val, this->Arg7Val, this->Arg8Val);
-
-			pTmp->SetFunc(this->p_mfunc_);
-
+			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 
 		inline void Run(void)
@@ -1270,41 +1297,61 @@ namespace SonikLib
 
 		};
 
-		static  Members_7_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr) noexcept
+		//SharedSmtPtr指定
+		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr)
 		{
-			if(_allocate_ != nullptr)
+			Members_7_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* lp = nullptr;
+
+			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
+			//長いので縦にしただけ。つまり下記。
+			//(条件)
+			//? 真の時の処理
+			//: 偽の時の処理
+			(_allocate_ != nullptr)
+			? lp = new(_allocate_) Members_7_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_)
+			: lp = new(std::nothrow) Members_7_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_);
+
+			if(lp == nullptr)
 			{
-				return new(_allocate_) Members_7_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_);
+				//失敗時はnullptrとして返却
+				return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>();
 			};
 
-			return new(std::nothrow) Members_7_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_);
+			lp->object_ = _SetObj_;
+			lp->p_mfunc_ = set_func;
+
+			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
-
-		void SetFunc( Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) )
+		//RawPointer指定
+		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr)
 		{
-			p_mfunc_ = set_func;
+			Members_7_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* lp = nullptr;
 
-		};
+			if(_SetObj_ == nullptr)
+			{
+				//Global版ではないのにnullptrを指定されたらそのまま返却。
+				return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>();
+			};
 
-		void SetObject( Type* SetObject )
-		{
-			object_ = SetObject;
-		};
+			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
+			//長いので縦にしただけ。つまり下記。
+			//(条件)
+			//? 真の時の処理
+			//: 偽の時の処理
+			(_allocate_ != nullptr)
+			? lp = new(_allocate_) Members_7_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_)
+			: lp = new(std::nothrow) Members_7_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_);
 
-		unsigned int GetCreateSize(void)
-		{
-			return sizeof((*this));
-		};
+			if(lp == nullptr)
+			{
+				//失敗時はnullptrとして返却
+				return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>();
+			};
 
-		void CreateCopy(void* AllocateArea)
-		{
-			Members_7_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* pTmp = nullptr;
+			lp->object_ = SonikLib::SharedSmtPtr<Type>(_SetObj_);
+			lp->p_mfunc_ = set_func;
 
-			pTmp = new(AllocateArea) Members_7_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(this->Arg1Val, this->Arg2Val, this->Arg3Val, this->Arg4Val, this->Arg5Val, this->Arg6Val, this->Arg7Val);
-
-			pTmp->SetFunc(this->p_mfunc_);
-			pTmp->SetObject(this->object_);
-
+			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 
 		inline Rtype Run(void)
@@ -1370,41 +1417,61 @@ namespace SonikLib
 			};
 		};
 
-		static  Members_7_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr) noexcept
+		//SharedSmtPtr指定
+		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr)
 		{
-			if(_allocate_ != nullptr)
+			Members_7_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* lp = nullptr;
+
+			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
+			//長いので縦にしただけ。つまり下記。
+			//(条件)
+			//? 真の時の処理
+			//: 偽の時の処理
+			(_allocate_ != nullptr)
+			? lp = new(_allocate_) Members_7_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_)
+			: lp = new(std::nothrow) Members_7_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_);
+
+			if(lp == nullptr)
 			{
-				return new(_allocate_) Members_7_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_);
+				//失敗時はnullptrとして返却
+				return SonikLib::SharedSmtPtr<SonikFOSInterface>();
 			};
 
-			return new(std::nothrow) Members_7_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_);
+			lp->object_ = _SetObj_;
+			lp->p_mfunc_ = set_func;
+
+			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
-
-		void SetFunc( void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) )
+		//RawPointer指定
+		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr)
 		{
-			p_mfunc_ = set_func;
+			Members_7_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* lp = nullptr;
 
-		};
+			if(_SetObj_ == nullptr)
+			{
+				//Global版ではないのにnullptrを指定されたらそのまま返却。
+				return  SonikLib::SharedSmtPtr<SonikFOSInterface>();
+			};
 
-		void SetObject( Type* SetObject )
-		{
-			object_ = SetObject;
-		};
+			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
+			//長いので縦にしただけ。つまり下記。
+			//(条件)
+			//? 真の時の処理
+			//: 偽の時の処理
+			(_allocate_ != nullptr)
+			? lp = new(_allocate_) Members_7_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_)
+			: lp = new(std::nothrow) Members_7_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_);
 
-		unsigned int GetCreateSize(void)
-		{
-			return sizeof((*this));
-		};
+			if(lp == nullptr)
+			{
+				//失敗時はnullptrとして返却
+				return SonikLib::SharedSmtPtr<SonikFOSInterface>();
+			};
 
-		void CreateCopy(void* AllocateArea)
-		{
-			Members_7_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* pTmp = nullptr;
+			lp->object_ = SonikLib::SharedSmtPtr<Type>(_SetObj_);
+			lp->p_mfunc_ = set_func;
 
-			pTmp = new(AllocateArea) Members_7_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(this->Arg1Val, this->Arg2Val, this->Arg3Val, this->Arg4Val, this->Arg5Val, this->Arg6Val, this->Arg7Val);
-
-			pTmp->SetFunc(this->p_mfunc_);
-			pTmp->SetObject(this->object_);
-
+			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 
 		inline void Run(void)
@@ -1460,35 +1527,29 @@ namespace SonikLib
 			//no process;
 		};
 
-		static  Members_7_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr) noexcept
+		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
+		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr)
 		{
-			if(_allocate_ != nullptr)
+			Members_7_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* lp = nullptr;
+
+			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
+			//長いので縦にしただけ。つまり下記。
+			//(条件)
+			//? 真の時の処理
+			//: 偽の時の処理
+			(_allocate_ != nullptr)
+			? lp = new(_allocate_) Members_7_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_)
+			: lp = new(std::nothrow) Members_7_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_);
+
+			if(lp == nullptr)
 			{
-				return new(_allocate_) Members_7_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_);
+				//失敗時はnullptrとして返却
+				return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>();
 			};
 
-			return new(std::nothrow) Members_7_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_);
-		};
+			lp->p_mfunc_ = set_func;
 
-		void SetFunc( Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) )
-		{
-			p_mfunc_ = set_func;
-
-		};
-
-		unsigned int GetCreateSize(void)
-		{
-			return sizeof((*this));
-		};
-
-		void CreateCopy(void* AllocateArea)
-		{
-			Members_7_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* pTmp = nullptr;
-
-			pTmp = new(AllocateArea) Members_7_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(this->Arg1Val, this->Arg2Val, this->Arg3Val, this->Arg4Val, this->Arg5Val, this->Arg6Val, this->Arg7Val);
-
-			pTmp->SetFunc(this->p_mfunc_);
-
+			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 
 		inline Rtype Run(void)
@@ -1543,35 +1604,29 @@ namespace SonikLib
 			//no process;
 		};
 
-		static  Members_7_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr) noexcept
+		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
+		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr)
 		{
-			if(_allocate_ != nullptr)
+			Members_7_FuncG< Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* lp = nullptr;
+
+			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
+			//長いので縦にしただけ。つまり下記。
+			//(条件)
+			//? 真の時の処理
+			//: 偽の時の処理
+			(_allocate_ != nullptr)
+			? lp = new(_allocate_) Members_7_FuncG< Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_)
+			: lp = new(std::nothrow) Members_7_FuncG< Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_);
+
+			if(lp == nullptr)
 			{
-				return new(_allocate_) Members_7_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_);
+				//失敗時はnullptrとして返却
+				return SonikLib::SharedSmtPtr<SonikFOSInterface>();
 			};
 
-			return new(std::nothrow) Members_7_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_, Val7_);
-		};
+			lp->p_mfunc_ = set_func;
 
-		void SetFunc( void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) )
-		{
-			p_mfunc_ = set_func;
-
-		};
-
-		unsigned int GetCreateSize(void)
-		{
-			return sizeof((*this));
-		};
-
-		void CreateCopy(void* AllocateArea)
-		{
-			Members_7_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* pTmp = nullptr;
-
-			pTmp = new(AllocateArea) Members_7_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>(this->Arg1Val, this->Arg2Val, this->Arg3Val, this->Arg4Val, this->Arg5Val, this->Arg6Val, this->Arg7Val);
-
-			pTmp->SetFunc(this->p_mfunc_);
-
+			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 
 		inline void Run(void)
@@ -1627,41 +1682,61 @@ namespace SonikLib
 			};
 		};
 
-		static  Members_6_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr) noexcept
+		//SharedSmtPtr指定
+		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr)
 		{
-			if(_allocate_ != nullptr)
+			Members_6_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* lp = nullptr;
+
+			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
+			//長いので縦にしただけ。つまり下記。
+			//(条件)
+			//? 真の時の処理
+			//: 偽の時の処理
+			(_allocate_ != nullptr)
+			? lp = new(_allocate_) Members_6_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_)
+			: lp = new(std::nothrow) Members_6_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_);
+
+			if(lp == nullptr)
 			{
-				return new(_allocate_) Members_6_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_);
+				//失敗時はnullptrとして返却
+				return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>();
 			};
 
-			return new(std::nothrow) Members_6_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_);
+			lp->object_ = _SetObj_;
+			lp->p_mfunc_ = set_func;
+
+			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
-
-		void SetFunc( Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) )
+		//RawPointer指定
+		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr)
 		{
-			p_mfunc_ = set_func;
+			Members_6_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* lp = nullptr;
 
-		};
+			if(_SetObj_ == nullptr)
+			{
+				//Global版ではないのにnullptrを指定されたらそのまま返却。
+				return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>();
+			};
 
-		void SetObject( Type* SetObject )
-		{
-			object_ = SetObject;
-		};
+			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
+			//長いので縦にしただけ。つまり下記。
+			//(条件)
+			//? 真の時の処理
+			//: 偽の時の処理
+			(_allocate_ != nullptr)
+			? lp = new(_allocate_) Members_6_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_)
+			: lp = new(std::nothrow) Members_6_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_);
 
-		unsigned int GetCreateSize(void)
-		{
-			return sizeof((*this));
-		};
+			if(lp == nullptr)
+			{
+				//失敗時はnullptrとして返却
+				return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>();
+			};
 
-		void CreateCopy(void* AllocateArea)
-		{
-			Members_6_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* pTmp = nullptr;
+			lp->object_ = SonikLib::SharedSmtPtr<Type>(_SetObj_);
+			lp->p_mfunc_ = set_func;
 
-			pTmp = new(AllocateArea) Members_6_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(this->Arg1Val, this->Arg2Val, this->Arg3Val, this->Arg4Val, this->Arg5Val, this->Arg6Val);
-
-			pTmp->SetFunc(this->p_mfunc_);
-			pTmp->SetObject(this->object_);
-
+			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 
 		inline Rtype Run(void)
@@ -1725,41 +1800,61 @@ namespace SonikLib
 			};
 		};
 
-		static  Members_6_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr) noexcept
+		//SharedSmtPtr指定
+		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr)
 		{
-			if(_allocate_ != nullptr)
+			Members_6_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* lp = nullptr;
+
+			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
+			//長いので縦にしただけ。つまり下記。
+			//(条件)
+			//? 真の時の処理
+			//: 偽の時の処理
+			(_allocate_ != nullptr)
+			? lp = new(_allocate_) Members_6_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_)
+			: lp = new(std::nothrow) Members_6_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_);
+
+			if(lp == nullptr)
 			{
-				return new(_allocate_) Members_6_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_);
+				//失敗時はnullptrとして返却
+				return SonikLib::SharedSmtPtr<SonikFOSInterface>();
 			};
 
-			return new(std::nothrow) Members_6_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_);
+			lp->object_ = _SetObj_;
+			lp->p_mfunc_ = set_func;
+
+			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
-
-		void SetFunc( void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) )
+		//RawPointer指定
+		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr)
 		{
-			p_mfunc_ = set_func;
+			Members_6_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* lp = nullptr;
 
-		};
+			if(_SetObj_ == nullptr)
+			{
+				//Global版ではないのにnullptrを指定されたらそのまま返却。
+				return  SonikLib::SharedSmtPtr<SonikFOSInterface>();
+			};
 
-		void SetObject( Type* SetObject )
-		{
-			object_ = SetObject;
-		};
+			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
+			//長いので縦にしただけ。つまり下記。
+			//(条件)
+			//? 真の時の処理
+			//: 偽の時の処理
+			(_allocate_ != nullptr)
+			? lp = new(_allocate_) Members_6_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_)
+			: lp = new(std::nothrow) Members_6_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_);
 
-		unsigned int GetCreateSize(void)
-		{
-			return sizeof((*this));
-		};
+			if(lp == nullptr)
+			{
+				//失敗時はnullptrとして返却
+				return SonikLib::SharedSmtPtr<SonikFOSInterface>();
+			};
 
-		void CreateCopy(void* AllocateArea)
-		{
-			Members_6_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* pTmp = nullptr;
+			lp->object_ = SonikLib::SharedSmtPtr<Type>(_SetObj_);
+			lp->p_mfunc_ = set_func;
 
-			pTmp = new(AllocateArea) Members_6_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(this->Arg1Val, this->Arg2Val, this->Arg3Val, this->Arg4Val, this->Arg5Val, this->Arg6Val);
-
-			pTmp->SetFunc(this->p_mfunc_);
-			pTmp->SetObject(this->object_);
-
+			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 
 		inline void Run(void)
@@ -1814,35 +1909,29 @@ namespace SonikLib
 			//no process;
 		};
 
-		static  Members_6_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr) noexcept
+		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
+		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr)
 		{
-			if(_allocate_ != nullptr)
+			Members_6_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* lp = nullptr;
+
+			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
+			//長いので縦にしただけ。つまり下記。
+			//(条件)
+			//? 真の時の処理
+			//: 偽の時の処理
+			(_allocate_ != nullptr)
+			? lp = new(_allocate_) Members_6_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_)
+			: lp = new(std::nothrow) Members_6_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_);
+
+			if(lp == nullptr)
 			{
-				return new(_allocate_) Members_6_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_);
+				//失敗時はnullptrとして返却
+				return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>();
 			};
 
-			return new(std::nothrow) Members_6_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_);
-		};
+			lp->p_mfunc_ = set_func;
 
-		void SetFunc( Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) )
-		{
-			p_mfunc_ = set_func;
-
-		};
-
-		unsigned int GetCreateSize(void)
-		{
-			return sizeof((*this));
-		};
-
-		void CreateCopy(void* AllocateArea)
-		{
-			Members_6_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* pTmp = nullptr;
-
-			pTmp = new(AllocateArea) Members_6_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(this->Arg1Val, this->Arg2Val, this->Arg3Val, this->Arg4Val, this->Arg5Val, this->Arg6Val);
-
-			pTmp->SetFunc(this->p_mfunc_);
-
+			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 
 		inline Rtype Run(void)
@@ -1895,35 +1984,29 @@ namespace SonikLib
 			//no process;
 		};
 
-		void SetFunc( void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) )
+		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
+		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr)
 		{
-			p_mfunc_ = set_func;
+			Members_6_FuncG< Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* lp = nullptr;
 
-		};
+			//三項演算子 　(条件) ? 真の時の処理 : 偽の時の処理
+			//長いので縦にしただけ。つまり下記。
+			//(条件)
+			//? 真の時の処理
+			//: 偽の時の処理
+			(_allocate_ != nullptr)
+			? lp = new(_allocate_) Members_6_FuncG< Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_)
+			: lp = new(std::nothrow) Members_6_FuncG< Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_);
 
-		static  Members_6_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* New(Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr) noexcept
-		{
-			if(_allocate_ != nullptr)
+			if(lp == nullptr)
 			{
-				return new(_allocate_) Members_6_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_);
+				//失敗時はnullptrとして返却
+				return SonikLib::SharedSmtPtr<SonikFOSInterface>();
 			};
 
-			return new(std::nothrow) Members_6_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(Val1_, Val2_, Val3_, Val4_, Val5_, Val6_);
-		};
+			lp->p_mfunc_ = set_func;
 
-		unsigned int GetCreateSize(void)
-		{
-			return sizeof((*this));
-		};
-
-		void CreateCopy(void* AllocateArea)
-		{
-			Members_6_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* pTmp = nullptr;
-
-			pTmp = new(AllocateArea) Members_6_FuncG<Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>(this->Arg1Val, this->Arg2Val, this->Arg3Val, this->Arg4Val, this->Arg5Val, this->Arg6Val);
-
-			pTmp->SetFunc(this->p_mfunc_);
-
+			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 
 		inline void Run(void)

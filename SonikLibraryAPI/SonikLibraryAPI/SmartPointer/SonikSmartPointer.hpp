@@ -73,9 +73,9 @@ namespace SonikLib
 		static_assert(!std::is_pointer_v<pType>, "Please Used NoPointerType");
 
 		template <class before, class after>
-		friend bool SharedCast_Dynamic(SharedSmtPtr<before>& _src_, SharedSmtPtr<after>& _dst_);
+		friend bool SharedCast_Dynamic<>(SharedSmtPtr<before>& _src_, SharedSmtPtr<after>& _dst_);
 		template <class before, class after>
-		friend void SharedCast_Reinterpret(SharedSmtPtr<before>& _src_, SharedSmtPtr<after>& _dst_);
+		friend void SharedCast_Reinterpret<>(SharedSmtPtr<before>& _src_, SharedSmtPtr<after>& _dst_);
 
 	private:
 		pType* m_Pointer;
@@ -111,7 +111,7 @@ namespace SonikLib
 			};
 
 
-			if( (TmpCnt -1) == 0 )
+			if( TmpCnt == 1 )
 			{
 				delete m_Pointer;
 				delete m_Count;
@@ -129,6 +129,12 @@ namespace SonikLib
 		:m_Pointer(_pointer_)
 		,m_Count(nullptr)
 		{
+
+			if(_pointer_ == nullptr)
+			{
+				//何もしない。
+				return;
+			};
 
 			try
 			{
@@ -153,16 +159,6 @@ namespace SonikLib
 
 		};
 
-		//Moveコンストラクタ
-		//コンストラクタ時はnullptrのため、Releaseを呼ぶ必要はない。
-		SharedSmtPtr(SharedSmtPtr<pType>&& _SmtPtr_) noexcept
-		:m_Pointer(_SmtPtr_.m_Pointer)
-		,m_Count(_SmtPtr_.m_Count)
-		{
-			_SmtPtr_.m_Pointer = nullptr;
-			_SmtPtr_.m_Count = nullptr;
-		};
-
 		//Destructor
 		~SharedSmtPtr(void) noexcept
 		{
@@ -171,18 +167,18 @@ namespace SonikLib
 
 		inline SharedSmtPtr& operator =(const SharedSmtPtr<pType>& _SmtPtr_) noexcept
 		{
-			//自身への代入は意味が無いので行わない。
-			if( _SmtPtr_.m_Pointer == m_Pointer )
+			//自己代入を解決する実装。
+			if(m_Pointer != _SmtPtr_.m_Pointer)
 			{
-				return (*this);
+				SharedSmtPtr<pType> lsp;
+				lsp.m_Pointer = m_Pointer;
+				lsp.m_Count = m_Count;
+
+				m_Pointer = _SmtPtr_.m_Pointer;
+				m_Count = _SmtPtr_.m_Count;
+
+				AddRef();
 			};
-
-			Release();
-
-			m_Count = _SmtPtr_.m_Count;
-			m_Pointer = _SmtPtr_.m_Pointer;
-
-			AddRef();
 
 			return (*this);
 		};
@@ -190,22 +186,20 @@ namespace SonikLib
         //MoveEqual
 		SharedSmtPtr& operator =(SharedSmtPtr<pType>&& _SmtPtr_) noexcept
 		{
-			//自身への代入は意味が無いので行わない。
-			if( _SmtPtr_.m_Pointer == m_Pointer )
+			//自己代入を解決する実装。
+			if(m_Pointer != _SmtPtr_.m_Pointer)
 			{
-				return (*this);
+				SharedSmtPtr<pType> lsp;
+				lsp.m_Pointer = m_Pointer;
+				lsp.m_Count = m_Count;
+
+				m_Pointer = _SmtPtr_.m_Pointer;
+				m_Count = _SmtPtr_.m_Count;
+
+				//moveなのでAddref()をコールする必要はない。
 			};
 
-			Release();
-
-			m_Pointer = _SmtPtr_.m_Pointer;
-			m_Count = _SmtPtr_.m_Count;
-			AddRef();
-
-			_SmtPtr_.Release();
-
 			return (*this);
-
 		};
 
 		bool operator ==(const SharedSmtPtr<pType>& _SmtPtr_) noexcept
@@ -243,6 +237,7 @@ namespace SonikLib
 			m_Count = new(std::nothrow) std::atomic<unsigned int>;
 			if(m_Count == nullptr)
 			{
+				delete _SetPointer_; //new A など直接new で渡された時の対策。
 				return false;
 			};
 
@@ -277,8 +272,7 @@ namespace SonikLib
 					//no process
 				};
 
-				--TmpCnt;
-				if( TmpCnt == 0 )
+				if( TmpCnt == 1 )
 				{
 					delete m_Count;
 				};
@@ -316,12 +310,13 @@ namespace SonikLib
 		static_assert(!std::is_pointer_v<pType>, "Please Used NoPointerType");
 
 		template <class before, class after>
-		friend bool SharedCast_Dynamic(SharedSmtPtr<before[]>& _src_, SharedSmtPtr<after[]>& _dst_);
+		friend bool SharedCast_Dynamic<>(SharedSmtPtr<before[]>& _src_, SharedSmtPtr<after[]>& _dst_);
 		template <class before, class after>
-		friend void SharedCast_Reinterpret(SharedSmtPtr<before[]>& _src_, SharedSmtPtr<after[]>& _dst_);
+		friend void SharedCast_Reinterpret<>(SharedSmtPtr<before[]>& _src_, SharedSmtPtr<after[]>& _dst_);
+
 	private:
 		pType* m_Pointer;
-		std::atomic<unsigned int>* m_Count;
+		std::atomic<unsigned int>* m_Count; //もったいないがm_Pointerがnullptrのときもカウント1として領域をnewする。
 
 	private:
 		inline void AddRef(void) noexcept
@@ -353,9 +348,9 @@ namespace SonikLib
 			};
 
 
-			if( (TmpCnt -1) == 0 )
+			if( TmpCnt == 1 )
 			{
-				delete[] m_Pointer;
+				delete m_Pointer;
 				delete m_Count;
 
 			};
@@ -365,18 +360,25 @@ namespace SonikLib
 		};
 
 	public:
+
 		//constructor
 		explicit SharedSmtPtr(pType* _pointer_ = nullptr)
 		:m_Pointer(_pointer_)
 		,m_Count(nullptr)
 		{
 
+			if(_pointer_ == nullptr)
+			{
+				//何もしない。
+				return;
+			};
+
 			try
 			{
 				m_Count = new std::atomic<unsigned int>;
 			}catch(std::bad_alloc&)
 			{
-				delete[] m_Pointer; // コンストラクタでの例外処理はそのオブジェクトの作成が無効となるので再度nullptrを入れる必要なし。
+				delete m_Pointer; // コンストラクタでの例外処理はそのオブジェクトの作成が無効となるので再度nullptrを入れる必要なし。
 				//m_Countのときに失敗した場合はm_Countは作成されていない状態=nullptrなので何もせず終了。
 				throw;
 			};
@@ -394,16 +396,6 @@ namespace SonikLib
 
 		};
 
-		//Moveコンストラクタ
-		//コンストラクタ時はnullptrのため、Releaseを呼ぶ必要はない。
-		SharedSmtPtr(SharedSmtPtr<pType[]>&& _SmtPtr_) noexcept
-		:m_Pointer(_SmtPtr_.m_Pointer)
-		,m_Count(_SmtPtr_.m_Count)
-		{
-			_SmtPtr_.m_Pointer = nullptr;
-			_SmtPtr_.m_Count = nullptr;
-		};
-
 		//Destructor
 		~SharedSmtPtr(void) noexcept
 		{
@@ -412,18 +404,18 @@ namespace SonikLib
 
 		inline SharedSmtPtr& operator =(const SharedSmtPtr<pType[]>& _SmtPtr_) noexcept
 		{
-			//自身への代入は意味が無いので行わない。
-			if( _SmtPtr_.m_Pointer == m_Pointer )
+			//自己代入を解決する実装。
+			if(m_Pointer != _SmtPtr_.m_Pointer)
 			{
-				return (*this);
+				SharedSmtPtr<pType> lsp;
+				lsp.m_Pointer = m_Pointer;
+				lsp.m_Count = m_Count;
+
+				m_Pointer = _SmtPtr_.m_Pointer;
+				m_Count = _SmtPtr_.m_Count;
+
+				AddRef();
 			};
-
-			Release();
-
-			m_Count = _SmtPtr_.m_Count;
-			m_Pointer = _SmtPtr_.m_Pointer;
-
-			AddRef();
 
 			return (*this);
 		};
@@ -431,22 +423,20 @@ namespace SonikLib
         //MoveEqual
 		SharedSmtPtr& operator =(SharedSmtPtr<pType[]>&& _SmtPtr_) noexcept
 		{
-			//自身への代入は意味が無いので行わない。
-			if( _SmtPtr_.m_Pointer == m_Pointer )
+			//自己代入を解決する実装。
+			if(m_Pointer != _SmtPtr_.m_Pointer)
 			{
-				return (*this);
+				SharedSmtPtr<pType> lsp;
+				lsp.m_Pointer = m_Pointer;
+				lsp.m_Count = m_Count;
+
+				m_Pointer = _SmtPtr_.m_Pointer;
+				m_Count = _SmtPtr_.m_Count;
+
+				//moveなのでAddref()をコールする必要はない。
 			};
 
-			Release();
-
-			m_Pointer = _SmtPtr_.m_Pointer;
-			m_Count = _SmtPtr_.m_Count;
-			AddRef();
-
-			_SmtPtr_.Release();
-
 			return (*this);
-
 		};
 
 		bool operator ==(const SharedSmtPtr<pType[]>& _SmtPtr_) noexcept
@@ -484,6 +474,7 @@ namespace SonikLib
 			m_Count = new(std::nothrow) std::atomic<unsigned int>;
 			if(m_Count == nullptr)
 			{
+				delete _SetPointer_; //new A など直接new で渡された時の対策。
 				return false;
 			};
 
@@ -518,8 +509,7 @@ namespace SonikLib
 					//no process
 				};
 
-				--TmpCnt;
-				if( TmpCnt == 0 )
+				if( TmpCnt == 1 )
 				{
 					delete m_Count;
 				};
@@ -528,12 +518,6 @@ namespace SonikLib
 			};
 
 			return TmpCnt;
-		};
-
-		//NullptrならTrue
-		bool IsNullptr(void) noexcept
-		{
-			return (m_Pointer == nullptr) ? true : false;
 		};
 
 		const pType& operator[](uint64_t index) const
@@ -546,9 +530,16 @@ namespace SonikLib
 			return m_Pointer[index];
 		};
 
+		//NullptrならTrue
+		bool IsNullptr(void) noexcept
+		{
+			return (m_Pointer == nullptr) ? true : false;
+		};
+
 		pType* operator ->(void)
 		{
 			return m_Pointer;
+
 		};
 
 		pType& operator*(void) const
@@ -558,6 +549,7 @@ namespace SonikLib
 
 	};
 
+
 	//UniquePtr=========================================================
 	//基本的に唯一性が担保出来ないため、生ポ代入系はあえて実装しない。
 	template <class pType>
@@ -566,9 +558,9 @@ namespace SonikLib
 		static_assert(!std::is_pointer_v<pType>, "Please Used NoPointerType");
 
 		template <class before, class after>
-		friend bool UniqueCast_Dynamic(UniqueSmtPtr<before>& _src_, UniqueSmtPtr<after>& _dst_);
+		friend bool UniqueCast_Dynamic<>(UniqueSmtPtr<before>& _src_, UniqueSmtPtr<after>& _dst_);
 		template <class before, class after>
-		friend void UniqueCast_Reinterpret(UniqueSmtPtr<before>& _src_, UniqueSmtPtr<after>& _dst_);
+		friend void UniqueCast_Reinterpret<>(UniqueSmtPtr<before>& _src_, UniqueSmtPtr<after>& _dst_);
 
 	private:
 		pType* m_pointer;
