@@ -17,8 +17,8 @@ namespace SonikLib
 	SonikThreadManagerEx::SonikThreadManagerEx(void)
 	:ManagedThreadNum(0)
 	,Init_(false)
-	,m_pThreads(nullptr)
 	,notifycount_(0)
+	,m_pThreads(nullptr)
 	,JobQueue(0)
 	{
 
@@ -28,8 +28,8 @@ namespace SonikLib
 	SonikThreadManagerEx::SonikThreadManagerEx(const SonikThreadManagerEx& t_his)
 	:ManagedThreadNum(0)
 	,Init_(false)
-	,m_pThreads(nullptr)
 	,notifycount_(0)
+	,m_pThreads(nullptr)
 	,JobQueue(0)
 	{
 	//処理無し。本クラスはコピーを許可しない。

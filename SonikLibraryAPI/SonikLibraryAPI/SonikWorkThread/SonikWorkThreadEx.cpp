@@ -101,19 +101,19 @@ namespace SonikLib
 		SonikLib::S_CAS::SonikAtomicLock& RefLock = ClassObject->GetCASLockObject();
 		std::mutex localmtx;
 		SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>& RefFuncObj = ClassObject->GetFunctionPointer();
-		//SonikLib::SonikFOSInterface* pRawFunc = RefFuncObj.GetRawPointer();
-		SonikLib::SonikFOSInterface* pRawFunc = nullptr;
+		SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface> RunTask;
+		SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface> StrongTask;
 
 		while(1)
 		{
-			if(pRawFunc == nullptr)
+			if( RunTask.IsNullptr())
 			{
 					//condition_variable_anyのwaitで使用。
 					std::unique_lock<std::mutex> lock(localmtx);
 					//RefFuncが0以外になればロック解除。
 					//ラムダ式使用。
 					RefCond.wait(lock,
-										   [&RefFuncObj, &pRawFunc, &ClassObject, &RefFlag]
+										   [&RefFuncObj, &RunTask, &ClassObject, &RefFlag]
 										   {
 												//ThreadMainEx関数終了フラグか、デキュー停止フラグが立っていればサスペンド解除し、後続の処理へ。。
 												if( ((RefFlag & 0x08) != 0) || ((RefFlag & 0x01) != 0) )
@@ -126,12 +126,12 @@ namespace SonikLib
 												ClassObject->UpdateQueue();
 
 												//取れてたらサスペンド解除して後続処理へ。
-//												if( !RefFuncObj.NullPtrCheck() )
-//												{
-//													pRawFunc = RefFuncObj.GetRawPointer();
-//													ClassObject->SetThreadStatus_Suspend(false) ;
-//													return true;
-//												};
+												if( !RefFuncObj.IsNullptr() )
+												{
+													RunTask = RefFuncObj;
+													ClassObject->SetThreadStatus_Suspend(false) ;
+													return true;
+												};
 
 												//取れなければサスペンド状態にして再度最初からチェック。
 												ClassObject->SetThreadStatus_Suspend(true) ;
@@ -148,7 +148,6 @@ namespace SonikLib
 				{
 					break; //while(1) break;
 				};
-
 				continue;
 			};
 
@@ -159,16 +158,34 @@ namespace SonikLib
 			};
 
 			//指定された関数コール。
-			pRawFunc->Run();
+			RunTask->Run();
+
+			//stribg_next loop でRunを実施
+			StrongTask = RunTask->GetNext_strong();
+			while(!StrongTask.IsNullptr())
+			{
+				StrongTask->Run();
+				StrongTask = StrongTask->GetNext_strong();
+			};
+
+			//weak_nextポインタをセットして次のタスクへ
+			RunTask = RunTask->GetNext_weak();
+			if(!RunTask.IsNullptr())
+			{
+				continue;
+			};
 
 			/*ファンクションの変更フラグが立っていれば、再生終了後、保持してるポインタ値を破棄*/
 			//Queue固定時の特殊フラグが立っていてもポインタ値を破棄。
 			if((RefFlag & 0x04) != 0 || (RefFlag & 0x02) != 0 )
 			{
-				pRawFunc = nullptr;
 				RefFuncObj.ResetPointer(nullptr);
 				RefFlag &= (~0x04);
 			};
+
+			//変更フラグが立っていなければ、RefFuncを再度代入して最初からスタート
+			//もし変更フラグが立っていればif文にて、nullptrのRefFuncがセットされる。
+			RunTask = RefFuncObj;
 
 			RefLock.Unlock();
 
@@ -250,7 +267,7 @@ namespace SonikLib
 			return false;
 		};
 
-		if( CallFunctionObject.NullPtrCheck() )
+		if( CallFunctionObject.IsNullptr() )
 		{
 			return false;
 		};

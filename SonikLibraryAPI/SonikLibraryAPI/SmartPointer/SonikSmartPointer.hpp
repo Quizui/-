@@ -73,9 +73,9 @@ namespace SonikLib
 		static_assert(!std::is_pointer_v<pType>, "Please Used NoPointerType");
 
 		template <class before, class after>
-		friend bool SharedCast_Dynamic<>(SharedSmtPtr<before>& _src_, SharedSmtPtr<after>& _dst_);
+		friend bool SharedCast_Dynamic(SharedSmtPtr<before>& _src_, SharedSmtPtr<after>& _dst_);
 		template <class before, class after>
-		friend void SharedCast_Reinterpret<>(SharedSmtPtr<before>& _src_, SharedSmtPtr<after>& _dst_);
+		friend void SharedCast_Reinterpret(SharedSmtPtr<before>& _src_, SharedSmtPtr<after>& _dst_);
 
 	private:
 		pType* m_Pointer;
@@ -310,9 +310,9 @@ namespace SonikLib
 		static_assert(!std::is_pointer_v<pType>, "Please Used NoPointerType");
 
 		template <class before, class after>
-		friend bool SharedCast_Dynamic<>(SharedSmtPtr<before[]>& _src_, SharedSmtPtr<after[]>& _dst_);
+		friend bool SharedCast_Dynamic(SharedSmtPtr<before[]>& _src_, SharedSmtPtr<after[]>& _dst_);
 		template <class before, class after>
-		friend void SharedCast_Reinterpret<>(SharedSmtPtr<before[]>& _src_, SharedSmtPtr<after[]>& _dst_);
+		friend void SharedCast_Reinterpret(SharedSmtPtr<before[]>& _src_, SharedSmtPtr<after[]>& _dst_);
 
 	private:
 		pType* m_Pointer;
@@ -558,9 +558,9 @@ namespace SonikLib
 		static_assert(!std::is_pointer_v<pType>, "Please Used NoPointerType");
 
 		template <class before, class after>
-		friend bool UniqueCast_Dynamic<>(UniqueSmtPtr<before>& _src_, UniqueSmtPtr<after>& _dst_);
+		friend bool UniqueCast_Dynamic(UniqueSmtPtr<before>& _src_, UniqueSmtPtr<after>& _dst_);
 		template <class before, class after>
-		friend void UniqueCast_Reinterpret<>(UniqueSmtPtr<before>& _src_, UniqueSmtPtr<after>& _dst_);
+		friend void UniqueCast_Reinterpret(UniqueSmtPtr<before>& _src_, UniqueSmtPtr<after>& _dst_);
 
 	private:
 		pType* m_pointer;

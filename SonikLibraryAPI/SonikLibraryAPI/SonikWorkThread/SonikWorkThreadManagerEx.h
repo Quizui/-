@@ -76,15 +76,12 @@ namespace SonikLib
 				return false;
 			};
 
-			M6FUNC_* tmpfunc = M6FUNC_::New(arg1val, arg2val, arg3val, arg4val, arg5val, arg6val);
-			if(tmpfunc == nullptr)
+			tmp = M6FUNC_::New(pcls, pFunc, arg1val, arg2val, arg3val, arg4val, arg5val, arg6val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
 
-			tmpfunc->SetObject(pcls);
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 			JobQueue->EnQueue(tmp);
 
 			for(uint32_t i=0; i < ManagedThreadNum; ++i)
@@ -116,15 +113,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M6FUNC_* tmpfunc = M6FUNC_::New(arg1val, arg2val, arg3val, arg4val, arg5val, arg6val);
-			if(tmpfunc == nullptr)
+			tmp = M6FUNC_::New(pcls, pFunc, arg1val, arg2val, arg3val, arg4val, arg5val, arg6val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetObject(pcls);
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			GetSmtPtr = tmp;
 
@@ -161,15 +154,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M5FUNC_* tmpfunc = M5FUNC_::New(arg1val, arg2val, arg3val, arg4val, arg5val);
-			if(tmpfunc == nullptr)
+			tmp = M5FUNC_::New(pcls, pFunc, arg1val, arg2val, arg3val, arg4val, arg5val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetObject(pcls);
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			JobQueue->EnQueue(tmp);
 
@@ -202,15 +191,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M5FUNC_* tmpfunc = M5FUNC_::New(arg1val, arg2val, arg3val, arg4val, arg5val);
-			if(tmpfunc == nullptr)
+			tmp = M5FUNC_::New(pcls, pFunc, arg1val, arg2val, arg3val, arg4val, arg5val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetObject(pcls);
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			GetSmtPtr = tmp;
 
@@ -249,15 +234,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M4FUNC_* tmpfunc = M4FUNC_::New(arg1val, arg2val, arg3val, arg4val);
-			if(tmpfunc == nullptr)
+			tmp = M4FUNC_::New(pcls, pFunc, arg1val, arg2val, arg3val, arg4val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetObject(pcls);
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			JobQueue->EnQueue(tmp);
 
@@ -290,15 +271,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M4FUNC_* tmpfunc = M4FUNC_::New(arg1val, arg2val, arg3val, arg4val);
-			if(tmpfunc == nullptr)
+			tmp = M4FUNC_::New(pcls, pFunc, arg1val, arg2val, arg3val, arg4val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetObject(pcls);
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			GetSmtPtr = tmp;
 
@@ -335,15 +312,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M3FUNC_* tmpfunc = M3FUNC_::New(arg1val, arg2val, arg3val);
-			if(tmpfunc == nullptr)
+			tmp = M3FUNC_::New(pcls, pFunc, arg1val, arg2val, arg3val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetObject(pcls);
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			JobQueue->EnQueue(tmp);
 
@@ -376,15 +349,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M3FUNC_* tmpfunc = M3FUNC_::New(arg1val, arg2val, arg3val);
-			if(tmpfunc == nullptr)
+			tmp = M3FUNC_::New(pcls, pFunc, arg1val, arg2val, arg3val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetObject(pcls);
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			GetSmtPtr = tmp;
 
@@ -421,15 +390,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M2FUNC_* tmpfunc = M2FUNC_::New(arg1val, arg2val);
-			if(tmpfunc == nullptr)
+			tmp = M2FUNC_::New(pcls, pFunc, arg1val, arg2val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetObject(pcls);
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			JobQueue->EnQueue(tmp);
 
@@ -462,15 +427,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M2FUNC_* tmpfunc = M2FUNC_::New(arg1val, arg2val);
-			if(tmpfunc == nullptr)
+			tmp = M2FUNC_::New(pcls, pFunc, arg1val, arg2val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetObject(pcls);
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			GetSmtPtr = tmp;
 
@@ -507,15 +468,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M1FUNC_* tmpfunc = M1FUNC_::New(arg1val);
-			if(tmpfunc == nullptr)
+			tmp = M1FUNC_::New(pcls, pFunc, arg1val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetObject(pcls);
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			JobQueue->EnQueue(tmp);
 
@@ -548,15 +505,13 @@ namespace SonikLib
 				return false;
 			};
 
-			M1FUNC_* tmpfunc = M1FUNC_::New(arg1val);
-			if(tmpfunc == nullptr)
+			tmp = M1FUNC_::New(pcls, pFunc, arg1val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
 
-			tmpfunc->SetObject(pcls);
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
+			GetSmtPtr = tmp;
 
 			JobQueue->EnQueue(tmp);
 
@@ -591,15 +546,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M0FUNC_* tmpfunc = M0FUNC_::New();
-			if(tmpfunc == nullptr)
+			tmp = M0FUNC_::New(pcls, pFunc);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetObject(pcls);
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			JobQueue->EnQueue(tmp);
 
@@ -632,15 +583,13 @@ namespace SonikLib
 				return false;
 			};
 
-			M0FUNC_* tmpfunc = M0FUNC_::New();
-			if(tmpfunc == nullptr)
+			tmp = M0FUNC_::New(pcls, pFunc);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
 
-			tmpfunc->SetObject(pcls);
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
+			GetSmtPtr = tmp;
 
 			JobQueue->EnQueue(tmp);
 
@@ -676,14 +625,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M6FUNCG_* tmpfunc = M6FUNCG_::New(arg1val, arg2val, arg3val, arg4val, arg5val, arg6val);
-			if(tmpfunc == nullptr)
+			tmp = M6FUNCG_::New(pFunc, arg1val, arg2val, arg3val, arg4val, arg5val, arg6val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			JobQueue->EnQueue(tmp);
 
@@ -716,14 +662,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M6FUNCG_* tmpfunc = M6FUNCG_::New(arg1val, arg2val, arg3val, arg4val, arg5val, arg6val);
-			if(tmpfunc == nullptr)
+			tmp = M6FUNCG_::New(pFunc, arg1val, arg2val, arg3val, arg4val, arg5val, arg6val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			GetSmtPtr = tmp;
 
@@ -760,14 +703,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M5FUNCG_* tmpfunc = M5FUNCG_::New(arg1val, arg2val, arg3val, arg4val, arg5val);
-			if(tmpfunc == nullptr)
+			tmp = M5FUNCG_::New(pFunc, arg1val, arg2val, arg3val, arg4val, arg5val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			JobQueue->EnQueue(tmp);
 
@@ -800,14 +740,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M5FUNCG_* tmpfunc = M5FUNCG_::New(arg1val, arg2val, arg3val, arg4val, arg5val);
-			if(tmpfunc == nullptr)
+			tmp = M5FUNCG_::New(pFunc, arg1val, arg2val, arg3val, arg4val, arg5val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			GetSmtPtr = tmp;
 
@@ -844,14 +781,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M4FUNCG_* tmpfunc = M4FUNCG_::New(arg1val, arg2val, arg3val, arg4val);
-			if(tmpfunc == nullptr)
+			tmp = M4FUNCG_::New(pFunc, arg1val, arg2val, arg3val, arg4val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			JobQueue->EnQueue(tmp);
 
@@ -884,14 +818,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M4FUNCG_* tmpfunc = M4FUNCG_::New(arg1val, arg2val, arg3val, arg4val);
-			if(tmpfunc == nullptr)
+			tmp = M4FUNCG_::New(pFunc, arg1val, arg2val, arg3val, arg4val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			GetSmtPtr = tmp;
 
@@ -928,14 +859,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M3FUNCG_* tmpfunc = M3FUNCG_::New(arg1val, arg2val, arg3val);
-			if(tmpfunc == nullptr)
+			tmp = M3FUNCG_::New(pFunc, arg1val, arg2val, arg3val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			JobQueue->EnQueue(tmp);
 
@@ -968,14 +896,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M3FUNCG_* tmpfunc = M3FUNCG_::New(arg1val, arg2val, arg3val);
-			if(tmpfunc == nullptr)
+			tmp = M3FUNCG_::New(pFunc, arg1val, arg2val, arg3val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			GetSmtPtr = tmp;
 
@@ -1012,14 +937,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M2FUNCG_* tmpfunc = M2FUNCG_::New(arg1val, arg2val);
-			if(tmpfunc == nullptr)
+			tmp = M2FUNCG_::New(pFunc, arg1val, arg2val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			JobQueue->EnQueue(tmp);
 
@@ -1052,14 +974,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M2FUNCG_* tmpfunc = M2FUNCG_::New(arg1val, arg2val);
-			if(tmpfunc == nullptr)
+			tmp = M2FUNCG_::New(pFunc, arg1val, arg2val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			GetSmtPtr = tmp;
 
@@ -1096,14 +1015,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M1FUNCG_* tmpfunc = M1FUNCG_::New(arg1val);
-			if(tmpfunc == nullptr)
+			tmp = M1FUNCG_::New(pFunc, arg1val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			JobQueue->EnQueue(tmp);
 
@@ -1136,14 +1052,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M1FUNCG_* tmpfunc = M1FUNCG_::New(arg1val);
-			if(tmpfunc == nullptr)
+			tmp = M1FUNCG_::New(pFunc, arg1val);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			GetSmtPtr = tmp;
 
@@ -1179,14 +1092,11 @@ namespace SonikLib
 				return false;
 			};
 
-			M0FUNCG_* tmpfunc = M0FUNCG_::New();
-			if(tmpfunc == nullptr)
+			tmp = M0FUNCG_::New(pFunc);
+			if(tmp.IsNullptr())
 			{
 				return false;
 			};
-
-			tmpfunc->SetFunc(pFunc);
-			tmp.ResetPointer( tmpfunc );
 
 			JobQueue->EnQueue(tmp);
 

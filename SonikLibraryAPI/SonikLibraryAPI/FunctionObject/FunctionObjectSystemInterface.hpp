@@ -98,28 +98,16 @@ namespace SonikFunctionObjectDefines
 
 		//弱い依存のnextタスクを取得します。
 		//nextタスクがない場合、falseを返却します。
-		bool GetNext_weak(SonikLib::SharedSmtPtr<FunctionObjectSystemInterface>& _getSmtPtr_)
+		SonikLib::SharedSmtPtr<FunctionObjectSystemInterface> GetNext_weak(void)
 		{
-			if(weak_next.IsNullptr())
-			{
-				return false;
-			};
-
-			_getSmtPtr_ = weak_next;
-			return true;
+			return weak_next;
 		};
 
 		//強い依存のnextタスクを取得します。
 		//nextタスクがない場合、falseを返却します。
-		bool GetNext_strong(SonikLib::SharedSmtPtr<FunctionObjectSystemInterface>& _getSmtPtr_)
+		SonikLib::SharedSmtPtr<FunctionObjectSystemInterface> GetNext_strong(void)
 		{
-			if(strong_next.IsNullptr())
-			{
-				return false;
-			};
-
-			_getSmtPtr_ = strong_next;
-			return true;
+			return strong_next;
 		};
 
 		//メソッドステータスの取得

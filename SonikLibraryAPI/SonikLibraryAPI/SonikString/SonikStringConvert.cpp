@@ -52,10 +52,9 @@ SonikLibConvertType SonikLibStringConvert::CheckConvertType(const char* pCheckSr
 	uint32_t lop = 0;
 	unsigned char val;
 
-	if(Len < 3 )
+	if(Len >= 3)
 	{
-		const uint32_t* p_src = reinterpret_cast<const uint32_t*>(pCheckSrc);
-		if( (*p_src) >= 0xEFBBBF00 )
+		if( pCheckSrc[0] == 0xEF && pCheckSrc[1] == 0xBB && pCheckSrc[2] == 0xBF )
 		{
 			return SCHTYPE_BOMUTF8;
 		};
