@@ -300,6 +300,34 @@ namespace SonikLib
 			return (*m_Pointer);
 		};
 
+		//C++11 以降 ->*演算子オーバーロード(メンバ関数ポインタ用)
+	    // メンバ関数ポインタを使用するためのオーバーロード演算子=========================
+	    template <class RetType, class ... Args>
+	    class MemberFunctionCaller
+		{
+	        pType* object;
+	        RetType (pType::*func)(Args...);
+	    public:
+	        MemberFunctionCaller(pType* obj, RetType (pType::*f)(Args...))
+	        : object(obj)
+	        , func(f)
+	        {
+	        	//no process;
+	        };
+
+	        RetType operator()(Args... args) const
+	        {
+	            return (object->*func)(std::forward<Args>(args)...);
+	        }
+	    };
+
+	    template <class RetType, class ... Args>
+	    MemberFunctionCaller<RetType, Args...> operator->*(RetType(pType::*func)(Args...))
+		{
+	    	return MemberFunctionCaller<RetType, Args...>(m_Pointer, func);
+	    };
+	    //==================================================
+
 	};
 
 	//配列特殊化==================================
@@ -691,6 +719,34 @@ namespace SonikLib
 		{
 			return (*m_pointer);
 		};
+
+		//C++11 以降 ->*演算子オーバーロード(メンバ関数ポインタ用)
+	    // メンバ関数ポインタを使用するためのオーバーロード演算子=========================
+	    template <class RetType, class ... Args>
+	    class MemberFunctionCaller
+		{
+	        pType* object;
+	        RetType (pType::*func)(Args...);
+	    public:
+	        MemberFunctionCaller(pType* obj, RetType (pType::*f)(Args...))
+	        : object(obj)
+	        , func(f)
+	        {
+	        	//no process;
+	        };
+
+	        RetType operator()(Args... args) const
+	        {
+	            return (object->*func)(std::forward<Args>(args)...);
+	        }
+	    };
+
+	    template <class RetType, class ... Args>
+	    MemberFunctionCaller<RetType, Args...> operator->*(RetType(pType::*func)(Args...))
+		{
+	    	return MemberFunctionCaller<RetType, Args...>(m_pointer, func);
+	    };
+	    //==================================================
 
 	};
 

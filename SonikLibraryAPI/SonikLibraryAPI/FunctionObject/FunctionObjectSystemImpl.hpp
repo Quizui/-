@@ -76,11 +76,7 @@ namespace SonikLib
 	public:
 		~Members_10_FuncR(void)
 		{
-			if( object_ != nullptr && this->Destroy_)
-			{
-				delete object_;
-			};
-
+			//object_ はスマートポインタなので自動開放
 		};
 
 		//SharedSmtPtr指定
@@ -144,7 +140,7 @@ namespace SonikLib
 		{
 			Rtype ret;
 
-			if( object_ == nullptr )
+			if( object_.IsNullptr() )
 			{
 
 				return 0;
@@ -173,7 +169,7 @@ namespace SonikLib
 		Arg9_Val  Arg9Val;
 		Arg10_Val Arg10Val;
 
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		void (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val);
 
 	private:
@@ -204,13 +200,7 @@ namespace SonikLib
 	public:
 		~Members_10_Func(void)
 		{
-			//継承元がTemplateクラスではないのでthis->は要らない。
-			if( object_ != nullptr && Destroy_)
-			{
-
-				delete object_;
-			};
-
+			//object_ はスマートポインタなので自動開放
 		};
 
 		//SharedSmtPtr指定
@@ -272,7 +262,7 @@ namespace SonikLib
 
 		inline void Run(void)
 		{
-			if( object_ == nullptr )
+			if( object_.IsNullptr() )
 			{
 				return;
 			};
@@ -461,7 +451,7 @@ namespace SonikLib
 		Arg8_Val  Arg8Val;
 		Arg9_Val  Arg9Val;
 
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		Rtype (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val);
 
 	private:
@@ -491,10 +481,7 @@ namespace SonikLib
 	public:
 		~Members_9_FuncR(void)
 		{
-			if( object_ != nullptr && this->Destroy_)
-			{
-				delete object_;
-			};
+			//no process;
 		};
 
 		//SharedSmtPtr指定
@@ -558,12 +545,12 @@ namespace SonikLib
 		{
 			Rtype ret;
 
-			if( *object_ == nullptr )
+			if( object_.IsNullptr())
 			{
 				return 0;
 			};
 
-			ret = ((*object_)->*p_mfunc_)(Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val, Arg6Val, Arg7Val, Arg8Val, Arg9Val);
+			ret = (object_->*p_mfunc_)(Arg1Val, Arg2Val, Arg3Val, Arg4Val, Arg5Val, Arg6Val, Arg7Val, Arg8Val, Arg9Val);
 			this->MethodStatus = true;
 
 			return ret;
@@ -585,7 +572,7 @@ namespace SonikLib
 		Arg8_Val  Arg8Val;
 		Arg9_Val  Arg9Val;
 
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		void (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val);
 
 	private:
@@ -615,11 +602,7 @@ namespace SonikLib
 	public:
 		~Members_9_Func(void)
 		{
-			if( object_ != nullptr && Destroy_)
-			{
-				delete object_;
-			};
-
+			//no process;
 		};
 
 		//SharedSmtPtr指定
@@ -681,7 +664,7 @@ namespace SonikLib
 
 		inline void Run(void)
 		{
-			if( object_ == nullptr )
+			if( object_.IsNullptr())
 			{
 				return;
 			};
@@ -866,7 +849,7 @@ namespace SonikLib
 		Arg7_Val  Arg7Val;
 		Arg8_Val  Arg8Val;
 
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		Rtype (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val);
 
 	private:
@@ -895,10 +878,7 @@ namespace SonikLib
 	public:
 		~Members_8_FuncR(void)
 		{
-			if( object_ != nullptr && this->Destroy_)
-			{
-				delete object_;
-			};
+			//no process;
 		};
 
 		//SharedSmtPtr指定
@@ -962,7 +942,7 @@ namespace SonikLib
 		{
 			Rtype ret;
 
-			if( object_ == nullptr )
+			if( object_.IsNullptr() )
 			{
 				return 0;
 			};
@@ -988,7 +968,7 @@ namespace SonikLib
 		Arg7_Val  Arg7Val;
 		Arg8_Val  Arg8Val;
 
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		void (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val);
 
 	private:
@@ -1017,11 +997,7 @@ namespace SonikLib
 	public:
 		~Members_8_Func(void)
 		{
-			if( object_ != nullptr && Destroy_)
-			{
-				delete object_;
-			};
-
+			//no process;
 		};
 
 		//SharedSmtPtr指定
@@ -1083,9 +1059,8 @@ namespace SonikLib
 
 		inline void Run(void)
 		{
-			if( object_ == nullptr )
+			if( object_.IsNullptr() )
 			{
-
 				return;
 			};
 
@@ -1262,7 +1237,7 @@ namespace SonikLib
 		Arg6_Val  Arg6Val;
 		Arg7_Val  Arg7Val;
 
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		Rtype (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val);
 
 	private:
@@ -1290,11 +1265,7 @@ namespace SonikLib
 	public:
 		~Members_7_FuncR(void)
 		{
-			if( object_ != nullptr && this->Destroy_)
-			{
-				delete object_;
-			};
-
+			//no process;
 		};
 
 		//SharedSmtPtr指定
@@ -1358,7 +1329,7 @@ namespace SonikLib
 		{
 			Rtype ret;
 
-			if( object_ == nullptr )
+			if( object_.IsNullptr() )
 			{
 				return 0;
 			};
@@ -1383,7 +1354,7 @@ namespace SonikLib
 		Arg6_Val  Arg6Val;
 		Arg7_Val  Arg7Val;
 
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		void (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val);
 
 	private:
@@ -1411,10 +1382,7 @@ namespace SonikLib
 	public:
 		~Members_7_Func(void)
 		{
-			if( object_ != nullptr && Destroy_)
-			{
-				delete object_;
-			};
+			//no process;
 		};
 
 		//SharedSmtPtr指定
@@ -1476,7 +1444,7 @@ namespace SonikLib
 
 		inline void Run(void)
 		{
-			if( object_ == nullptr )
+			if( object_.IsNullptr() )
 			{
 				return;
 			};
@@ -1649,7 +1617,7 @@ namespace SonikLib
 		Arg5_Val  Arg5Val;
 		Arg6_Val  Arg6Val;
 
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		Rtype (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val);
 
 	private:
@@ -1743,7 +1711,7 @@ namespace SonikLib
 		{
 			Rtype ret;
 
-			if( object_ == nullptr )
+			if( object_.IsNullptr() )
 			{
 				return 0;
 			};
@@ -1767,7 +1735,7 @@ namespace SonikLib
 		Arg5_Val  Arg5Val;
 		Arg6_Val  Arg6Val;
 
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		void (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val);
 
 	private:
@@ -1859,9 +1827,8 @@ namespace SonikLib
 
 		inline void Run(void)
 		{
-			if( object_ == nullptr )
+			if( object_.IsNullptr() )
 			{
-
 				return;
 			};
 
@@ -2028,7 +1995,7 @@ namespace SonikLib
 		Arg4_Val  Arg4Val;
 		Arg5_Val  Arg5Val;
 
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		Rtype (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val);
 
 	private:
@@ -2054,11 +2021,7 @@ namespace SonikLib
 	public:
 		~Members_5_FuncR(void)
 		{
-			if( object_ != nullptr && this->Destroy_)
-			{
-				delete object_;
-			};
-
+			//no process;
 		};
 
 		//SharedSmtPtr指定
@@ -2122,9 +2085,8 @@ namespace SonikLib
 		{
 			Rtype ret;
 
-			if( object_ == nullptr )
+			if( object_.IsNullptr() )
 			{
-
 				return 0;
 			};
 
@@ -2146,7 +2108,7 @@ namespace SonikLib
 		Arg4_Val  Arg4Val;
 		Arg5_Val  Arg5Val;
 
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		void (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val);
 
 	private:
@@ -2172,11 +2134,7 @@ namespace SonikLib
 	public:
 		~Members_5_Func(void)
 		{
-			if( object_ != nullptr && Destroy_)
-			{
-				delete object_;
-			};
-
+			//no process;
 		};
 
 		//SharedSmtPtr指定
@@ -2238,9 +2196,8 @@ namespace SonikLib
 
 		inline void Run(void)
 		{
-			if( object_ == nullptr )
+			if( object_.IsNullptr() )
 			{
-
 				return;
 			};
 
@@ -2401,7 +2358,7 @@ namespace SonikLib
 		Arg3_Val  Arg3Val;
 		Arg4_Val  Arg4Val;
 
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		Rtype (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val);
 
 	private:
@@ -2426,10 +2383,7 @@ namespace SonikLib
 	public:
 		~Members_4_FuncR(void)
 		{
-			if( object_ != nullptr && this->Destroy_)
-			{
-				delete object_;
-			};
+			//no process;
 		};
 
 		//SharedSmtPtr指定
@@ -2493,9 +2447,8 @@ namespace SonikLib
 		{
 			Rtype ret;
 
-			if( object_ == nullptr )
+			if( object_.IsNullptr() )
 			{
-
 				return 0;
 			};
 
@@ -2516,7 +2469,7 @@ namespace SonikLib
 		Arg3_Val  Arg3Val;
 		Arg4_Val  Arg4Val;
 
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		void (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val);
 
 	private:
@@ -2541,10 +2494,7 @@ namespace SonikLib
 	public:
 		~Members_4_Func(void)
 		{
-			if( object_ != nullptr && Destroy_)
-			{
-				delete object_;
-			};
+			//no process;
 		};
 
 		//SharedSmtPtr指定
@@ -2606,9 +2556,8 @@ namespace SonikLib
 
 		inline void Run(void)
 		{
-			if( object_ == nullptr )
+			if( object_.IsNullptr())
 			{
-
 				return;
 			};
 
@@ -2765,7 +2714,7 @@ namespace SonikLib
 		Arg2_Val  Arg2Val;
 		Arg3_Val  Arg3Val;
 
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		Rtype (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val);
 
 	private:
@@ -2789,11 +2738,7 @@ namespace SonikLib
 	public:
 		~Members_3_FuncR(void)
 		{
-			if( object_ != nullptr && this->Destroy_)
-			{
-
-				delete object_;
-			};
+			//no process;
 		};
 
 		//SharedSmtPtr指定
@@ -2857,7 +2802,7 @@ namespace SonikLib
 		{
 			Rtype ret;
 
-			if( object_ == nullptr )
+			if( object_.IsNullptr())
 			{
 				return 0;
 			};
@@ -2878,7 +2823,7 @@ namespace SonikLib
 		Arg2_Val  Arg2Val;
 		Arg3_Val  Arg3Val;
 
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		void (Type::*p_mfunc_)(Arg1_Val, Arg2_Val, Arg3_Val);
 
 	private:
@@ -2902,10 +2847,7 @@ namespace SonikLib
 	public:
 		~Members_3_Func(void)
 		{
-			if( object_ != nullptr && Destroy_)
-			{
-				delete object_;
-			};
+			//no process;
 		};
 
 		//SharedSmtPtr指定
@@ -2967,9 +2909,8 @@ namespace SonikLib
 
 		inline void Run(void)
 		{
-			if( object_ == nullptr )
+			if( object_.IsNullptr() )
 			{
-
 				return;
 			};
 
@@ -3122,7 +3063,7 @@ namespace SonikLib
 		Arg1_Val  Arg1Val;
 		Arg2_Val  Arg2Val;
 
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		Rtype (Type::*p_mfunc_)(Arg1_Val, Arg2_Val);
 
 	private:
@@ -3145,10 +3086,7 @@ namespace SonikLib
 	public:
 		~Members_2_FuncR(void)
 		{
-			if( object_ != nullptr && this->Destroy_)
-			{
-				delete object_;
-			};
+			//no process;
 		};
 
 		//SharedSmtPtr指定
@@ -3212,9 +3150,8 @@ namespace SonikLib
 		{
 			Rtype ret;
 
-			if( object_ == nullptr )
+			if( object_.IsNullptr() )
 			{
-
 				return 0;
 			};
 
@@ -3233,7 +3170,7 @@ namespace SonikLib
 		Arg1_Val  Arg1Val;
 		Arg2_Val  Arg2Val;
 
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		void (Type::*p_mfunc_)(Arg1_Val, Arg2_Val);
 
 	private:
@@ -3256,10 +3193,7 @@ namespace SonikLib
 	public:
 		~Members_2_Func(void)
 		{
-			if( object_ != nullptr && Destroy_)
-			{
-				delete object_;
-			};
+			//no process;
 		};
 
 		//SharedSmtPtr指定
@@ -3321,9 +3255,8 @@ namespace SonikLib
 
 		inline void Run(void)
 		{
-			if( object_ == nullptr )
+			if( object_.IsNullptr())
 			{
-
 				return;
 			};
 
@@ -3470,7 +3403,7 @@ namespace SonikLib
 	private:
 		Arg1_Val  Arg1Val;
 
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		Rtype (Type::*p_mfunc_)(Arg1_Val);
 
 	private:
@@ -3492,10 +3425,7 @@ namespace SonikLib
 	public:
 		~Members_1_FuncR(void)
 		{
-			if( object_ != nullptr && this->Destroy_)
-			{
-				delete object_;
-			};
+			//no process;
 		};
 
 		//SharedSmtPtr指定
@@ -3559,9 +3489,8 @@ namespace SonikLib
 		{
 			Rtype ret;
 
-			if( object_ == nullptr )
+			if( object_.IsNullptr() )
 			{
-
 				return 0;
 			};
 
@@ -3579,7 +3508,7 @@ namespace SonikLib
 	private:
 		Arg1_Val  Arg1Val;
 
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		void (Type::*p_mfunc_)(Arg1_Val);
 
 	private:
@@ -3601,10 +3530,7 @@ namespace SonikLib
 	public:
 		~Members_1_Func(void)
 		{
-			if( object_ != nullptr && Destroy_)
-			{
-				delete object_;
-			};
+			//no process;
 		};
 
 		//SharedSmtPtr指定
@@ -3666,7 +3592,7 @@ namespace SonikLib
 
 		inline void Run(void)
 		{
-			if( object_ == nullptr )
+			if( object_.IsNullptr())
 			{
 				return;
 
@@ -3810,7 +3736,7 @@ namespace SonikLib
 	class Members_0_FuncR : public SonikFOSTemplateInterface<Rtype>
 	{
 	private:
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		Rtype(Type::*p_mfunc_)(void);
 
 	private:
@@ -3824,10 +3750,7 @@ namespace SonikLib
 	public:
 		~Members_0_FuncR(void)
 		{
-			if( object_ != nullptr && this->Destroy_)
-			{
-				delete object_;
-			};
+			//no process;
 		};
 
 		//SharedSmtPtr指定
@@ -3891,9 +3814,8 @@ namespace SonikLib
 		{
 			Rtype ret;
 
-			if( object_ == nullptr )
+			if( object_.IsNullptr() )
 			{
-
 				return 0;
 			};
 
@@ -3910,7 +3832,7 @@ namespace SonikLib
 	{
 	private:
 
-		Type* object_;
+		SonikLib::SharedSmtPtr<Type> object_;
 		void (Type::*p_mfunc_)(void);
 
 	private:
@@ -3924,10 +3846,7 @@ namespace SonikLib
 	public:
 		~Members_0_Func(void)
 		{
-			if( object_ != nullptr && Destroy_)
-			{
-				delete object_;
-			};
+			//no process;
 		};
 
 		//SharedSmtPtr指定
@@ -3990,9 +3909,8 @@ namespace SonikLib
 		inline void Run(void)
 		{
 
-			if( object_ == nullptr )
+			if( object_.IsNullptr() )
 			{
-
 				return;
 			};
 

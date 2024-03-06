@@ -311,14 +311,14 @@ namespace SonikMath
 		{
 			std::ofstream ofs("Debug_Sin_Cos_Value.txt");
 			std::ofstream mofs("Debug_Sin_Cos_MinusValue.txt");
-			std::string str ="";
+			std::string _str = "";
 			float digree = 0.0f;
 			float ret = 0.0f;
 			float ret_c = 0.0f;
 			int8_t buffer[300];
 
 			sprintf(reinterpret_cast<char*>(buffer), "Sin値　Cos値 表 ============================\n\n");
-			str += reinterpret_cast<char*>(buffer);
+			_str += reinterpret_cast<char*>(buffer);
 			memset(buffer, 0, 300);
 
 			while(digree < 360.0)
@@ -327,34 +327,34 @@ namespace SonikMath
 				ret_c = sin(digree * __SONIK_MATH_M_PI_D / 180.0);
 
 				sprintf(reinterpret_cast<char*>(buffer), "Value:[SinF] = [sin] %-7.5f = %-7.5f   \n", ret, ret_c);
-				str += reinterpret_cast<char*>(buffer);
+				_str += reinterpret_cast<char*>(buffer);
 				memset(buffer, 0, 300);
 
 				ret = CosF(digree);
 				ret_c = cos(digree * __SONIK_MATH_M_PI_D / 180.0);
 
 				sprintf(reinterpret_cast<char*>(buffer), "Value:[CosF] = [cos] %-7.5f = %-7.5f   \n", ret, ret_c);
-				str += reinterpret_cast<char*>(buffer);
+				_str += reinterpret_cast<char*>(buffer);
 				memset(buffer, 0, 300);
 
 				ret = TanF(digree);
 				ret_c = tan(digree * __SONIK_MATH_M_PI_D / 180.0);
 
 				sprintf(reinterpret_cast<char*>(buffer), "Value:[TanF] = [tan] %-7.5f = %-7.5f   \n", ret, ret_c);
-				str += reinterpret_cast<char*>(buffer);
+				_str += reinterpret_cast<char*>(buffer);
 				memset(buffer, 0, 300);
 
 
 				digree += 0.1f;
 			};
 
-			ofs << str.c_str() << std::endl;
+			ofs << _str.c_str() << std::endl;
 
-			str = "";
+			_str = "";
 			digree = 0.0f;
 
 			sprintf(reinterpret_cast<char*>(buffer), "負のSin値　負のCos値 表 ============================\n\n");
-			str += reinterpret_cast<char*>(buffer);
+			_str += reinterpret_cast<char*>(buffer);
 			memset(buffer, 0, 300);
 
 			while( digree > (-360.0) )
@@ -363,26 +363,26 @@ namespace SonikMath
 				ret_c = sin(digree * __SONIK_MATH_M_PI_D / 180.0);
 
 				sprintf(reinterpret_cast<char*>(buffer), "Value:[SinF] = [sin] %-7.5f = %-7.5f   \n", ret, ret_c);
-				str += reinterpret_cast<char*>(buffer);
+				_str += reinterpret_cast<char*>(buffer);
 				memset(buffer, 0, 300);
 
 				ret = CosF(digree);
 				ret_c = cos(digree * __SONIK_MATH_M_PI_D / 180.0);
 
 				sprintf(reinterpret_cast<char*>(buffer), "Value:[CosF] = [cos] %-7.5f = %-7.5f   \n", ret, ret_c);
-				str += reinterpret_cast<char*>(buffer);
+				_str += reinterpret_cast<char*>(buffer);
 				memset(buffer, 0, 300);
 
 				ret = TanF(digree);
 				ret_c = tan(digree * __SONIK_MATH_M_PI_D / 180.0);
 
 				sprintf(reinterpret_cast<char*>(buffer), "Value:[TanF] = [tan] %-7.5f = %-7.5f   \n", ret, ret_c);
-				str += reinterpret_cast<char*>(buffer);
+				_str += reinterpret_cast<char*>(buffer);
 				memset(buffer, 0, 300);
 
 				digree -= 0.1f;
 			};
-			mofs << str.c_str() << std::endl;
+			mofs << _str.c_str() << std::endl;
 		};
 
 #endif

@@ -11,7 +11,7 @@
 #include <stdint.h>
 #include <new>
 
-namespace SonikMath
+namespace SonikMathDataBox
 {
 	//=====================================
 	//					Sonik3DPoint Implement
@@ -151,33 +151,6 @@ namespace SonikMath
 		(*_z_) = m_z;
 	};
 
-
-	//本クラスと引数で指定されたオブジェクト或いは座標との距離を算出します。
-	double Sonik3DPoint::Distance(const Sonik3DPoint& _point_)
-	{
-		double _distance[3];
-
-		_distance[0] = _point_.m_x - m_x;
-		_distance[1] = _point_.m_y - m_y;
-		_distance[2] = _point_.m_z - m_z;
-
-		return SonikMath::sqrt( _distance[0] * _distance[0] + _distance[1] * _distance[1] + _distance[2] * _distance[2]);
-
-	};
-
-	double Sonik3DPoint::Distance(const double _x_, const double _y_, const double _z_)
-	{
-
-		double _distance[3];
-
-		_distance[0] = _x_ - m_x;
-		_distance[1] = _y_ - m_y;
-		_distance[2] = _z_ - m_z;
-
-		return SonikMath::sqrt( _distance[0] * _distance[0] + _distance[1] * _distance[1] + _distance[2] * _distance[2]);
-	};
-
-
 	//=====================================
 	//					SonikBazierBox Implement
 	//=====================================
@@ -298,6 +271,136 @@ namespace SonikMath
 		GetY = ((1.0 - time) * (1.0 - time) * StartY) + (2 * (1.0 - time) * time * PivotY) + (time * time * EndY);
 	};
 
+};
+
+
+namespace SonikMath
+{
+	//指定した3DPointのベクトルの長さを計算します。
+	double VectorLength(const SonikMathDataBox::Sonik3DPoint& _point_)
+	{
+		return SonikMath::sqrt(_point_.m_x * _point_.m_x + _point_.m_y * _point_.m_y + _point_.m_z * _point_.m_z);
+	};
+
+	//二点間の差を表すベクトルを取得します。
+	void diffVec(const SonikMathDataBox::Sonik3DPoint& _f_pos_, const SonikMathDataBox::Sonik3DPoint& _s_pos_, SonikMathDataBox::Sonik3DPoint& _outpoint_)
+	{
+	    _outpoint_.m_x = _s_pos_.m_x - _f_pos_.m_x;
+	    _outpoint_.m_y = _s_pos_.m_y - _f_pos_.m_y;
+	    _outpoint_.m_z = _s_pos_.m_z - _f_pos_.m_z;
+	    return;
+	};
+
+	//二点間のドット積を計算します。
+	double DotProductVec(const SonikMathDataBox::Sonik3DPoint& _f_pos_, const SonikMathDataBox::Sonik3DPoint& _s_pos_)
+	{
+		return _f_pos_.m_x * _s_pos_.m_x + _f_pos_.m_y * _s_pos_.m_y + _f_pos_.m_z * _s_pos_.m_z;
+	};
+
+
+	//本クラスと引数で指定されたオブジェクト或いは座標との距離を算出します。
+	double Distance(const SonikMathDataBox::Sonik3DPoint& _f_point_, const SonikMathDataBox::Sonik3DPoint& _s_point_)
+	{
+		double _distance[3];
+
+		_distance[0] = _f_point_.m_x - _s_point_.m_x;
+		_distance[1] = _f_point_.m_y - _s_point_.m_y;
+		_distance[2] = _f_point_.m_z - _s_point_.m_z;
+
+		return SonikMath::sqrt( _distance[0] * _distance[0] + _distance[1] * _distance[1] + _distance[2] * _distance[2]);
+
+	};
+
+	double Distance(const double _fx_, const double _fy_, const double _fz_, const double _sx_, const double _sy_, const double _sz_)
+	{
+
+		double _distance[3];
+
+		_distance[0] = _fx_ - _sx_;
+		_distance[1] = _fy_ - _sy_;
+		_distance[2] = _fz_ - _sz_;
+
+		return SonikMath::sqrt( _distance[0] * _distance[0] + _distance[1] * _distance[1] + _distance[2] * _distance[2]);
+	};
+
+	//位置を表す3DPointと方向を表す3DPointからパンニングを計算します。
+	//0.0~1.0の範囲で返却します。3DAudioにおいて、ステレオチャンネルなどでL側への計算に使う場合は(1.0 - 返却値)を掛けるようにしてください。
+	//3DPointのみの指定の場合は内部で全て計算するため、「使い回せる値もすべて計算しなおします。」でも指定が楽です。
+	//diff, veclenを指定する場合は、それぞれ、diffVec, VectorLengthで事前計算した値を指定することを想定しています。
+	//LisVec は リスナの方向ベクトルをVectorLengthで計算した結果を指定します。
+	//PlyVecは リスナーの位置ベクトルと、音源(Player）の位置ベクトルをdiffVecで計算した結果の値をVectorLengthで計算した結果を指定します。
+	double Panning(const SonikMathDataBox::Sonik3DPoint& _lispos_, const SonikMathDataBox::Sonik3DPoint& _plypos_, const SonikMathDataBox::Sonik3DPoint& _lisdir_, const SonikMathDataBox::Sonik3DPoint& _plydir_, const double _atten_max_, const double _attenuate_)
+	{
+	    // リスナーから音源へのベクトルを計算
+		SonikMathDataBox::Sonik3DPoint l_point;
+		diffVec(_plypos_, _lispos_, l_point);
+
+	    // リスナーの向きと音源のベクトルの内積を計算
+	    double dotProduct = DotProductVec(_lisdir_, l_point);
+
+	    // リスナーの向きと音源のベクトルの長さを計算
+	    double listenerDirLength = VectorLength(_lisdir_);
+	    double sourceVecLength = VectorLength(l_point);
+
+	    // 長さの逆数を計算
+	    double invListenerDirLength = 1.0 / listenerDirLength;
+	    double invSourceVecLength = 1.0 / sourceVecLength;
+
+	    // パンニング角度を計算（-1.0から1.0の範囲）
+	    double panning = dotProduct * invListenerDirLength * invSourceVecLength;
+
+	    // パンニングの値を0.0から1.0の範囲にマッピング
+	    panning = (panning + 1.0) * 0.5;
+
+	    // リスナーの向きと音源の向きの内積を計算
+	    double dotProductDir = DotProductVec(_lisdir_, _plydir_);
+
+	    // リスナーの向きと音源の向きの長さを計算
+	    double sourceDirLength = VectorLength(_plydir_);
+
+	    // 長さの逆数を計算
+	    double invSourceDirLength = 1.0 / sourceDirLength;
+
+	    // 音源の向きとリスナーの向きの間の角度を計算（-1.0から1.0の範囲）
+	    double directionality = dotProductDir * invListenerDirLength * invSourceDirLength;
+
+	    // 音の強さを調整
+	    double adjustedVolume = _attenuate_ + (_atten_max_ - _attenuate_) * ((directionality + 1.0) * 0.5);
+
+	    // パンニングと音の強さを考慮した最終的な音量を計算
+	    return panning * adjustedVolume;
+	};
+	double Panning(const double _dotproduct_, const double _lisdirveclen_, const double _diffveclen_, const double _dotproductdir_, const double _plydirveclen_, const double _atten_max_, const double _attenuate_)
+	{
+	    // 長さの逆数を計算
+	    double invListenerDirLength = 1.0 / _lisdirveclen_;
+	    double invSourceVecLength = 1.0 / _diffveclen_;
+
+	    // パンニング角度を計算（-1.0から1.0の範囲）
+	    double panning = _dotproduct_ * invListenerDirLength * invSourceVecLength;
+
+	    // パンニングの値を0.0から1.0の範囲にマッピング
+	    panning = (panning + 1.0) * 0.5;
+
+	    // リスナーの向きと音源の向きの内積を計算
+	    double dotProductDir = _dotproductdir_;
+
+	    // リスナーの向きと音源の向きの長さを計算
+	    double sourceDirLength = _plydirveclen_;
+
+	    // 長さの逆数を計算
+	    double invSourceDirLength = 1.0 / sourceDirLength;
+
+	    // 音源の向きとリスナーの向きの間の角度を計算（-1.0から1.0の範囲）
+	    double directionality = dotProductDir * invListenerDirLength * invSourceDirLength;
+
+	    // 音の強さを調整
+	    double adjustedVolume = _attenuate_ + (_atten_max_ - _attenuate_) * ((directionality + 1.0) * 0.5);
+
+	    // パンニングと音の強さを考慮した最終的な音量を計算
+	    return panning * adjustedVolume;
+
+	};
 
 };
 
