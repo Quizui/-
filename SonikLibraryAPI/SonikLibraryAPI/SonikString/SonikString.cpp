@@ -165,15 +165,11 @@ namespace SonikLib
 		try
 		{
 			Stringval_ = new uint8_t[buffer_];
-		}catch(std::bad_alloc& e)
+		}catch(std::bad_alloc&)
 		{
 			delete[] Stringval_;
-			throw std::bad_alloc(e);
+			throw;
 
-		}catch(std::bad_array_new_length& e)
-		{
-			delete[] Stringval_;
-			throw std::bad_array_new_length(e);
 		};
 
 		std::fill_n(Stringval_, buffer_, 0);
@@ -201,12 +197,8 @@ namespace SonikLib
 		}catch(std::bad_alloc& e)
 		{
 			delete[] Stringval_;
-			throw std::bad_alloc(e);
+			throw;
 
-		}catch(std::bad_array_new_length& e)
-		{
-			delete[] Stringval_;
-			throw std::bad_array_new_length(e);
 		};
 
 		std::fill_n(Stringval_, buffer_, 0);
@@ -233,15 +225,10 @@ namespace SonikLib
 		try
 		{
 			Stringval_ = new uint8_t[buffer_];
-		}catch(std::bad_alloc& e)
+		}catch(std::bad_alloc&)
 		{
 			delete[] Stringval_;
-			throw std::bad_alloc(e);
-
-		}catch(std::bad_array_new_length& e)
-		{
-			delete[] Stringval_;
-			throw std::bad_array_new_length(e);
+			throw;
 		};
 
 		std::fill_n(Stringval_, buffer_, 0);
@@ -266,15 +253,10 @@ namespace SonikLib
 		try
 		{
 			Stringval_ = new uint8_t[buffer_];
-		}catch(std::bad_alloc& e)
+		}catch(std::bad_alloc&)
 		{
 			delete[] Stringval_;
-			throw std::bad_alloc(e);
-
-		}catch(std::bad_array_new_length& e)
-		{
-			delete[] Stringval_;
-			throw std::bad_array_new_length(e);
+			throw;
 		};
 
 		std::fill_n(Stringval_, buffer_, 0);
@@ -298,15 +280,10 @@ namespace SonikLib
 		try
 		{
 			Stringval_ = new uint8_t[buffer_];
-		}catch(std::bad_alloc& e)
+		}catch(std::bad_alloc&)
 		{
 			delete[] Stringval_;
-			throw std::bad_alloc(e);
-
-		}catch(std::bad_array_new_length& e)
-		{
-			delete[] Stringval_;
-			throw std::bad_array_new_length(e);
+			throw;
 		};
 
 		std::fill_n(Stringval_, buffer_, 0);
@@ -1035,13 +1012,9 @@ namespace SonikLib
 		{
 			tmpbuffer = new uint8_t[ t_his.buffer_];
 
-		}catch(std::bad_alloc& e)
+		}catch(std::bad_alloc&)
 		{
-			throw std::bad_alloc(e);
-
-		}catch(std::bad_array_new_length& e)
-		{
-			throw std::bad_array_new_length(e);
+			throw;
 		};
 
 		if( Stringval_ != 0 )
@@ -1981,15 +1954,10 @@ namespace SonikLib
 		try
 		{
 			pImpl = new SonikString_pImpl;
-		}catch(std::bad_alloc& e)
+		}catch(std::bad_alloc&)
 		{
 			delete pImpl;
-			throw std::bad_alloc(e);
-
-		}catch(std::bad_array_new_length& e)
-		{
-			delete pImpl;
-			throw std::bad_array_new_length(e);
+			throw;
 		};
 	};
 
@@ -2001,15 +1969,10 @@ namespace SonikLib
 		{
 			pImpl = new SonikString_pImpl;
 			(*pImpl) = (*(t_his.pImpl));
-		}catch(std::bad_alloc& e)
+		}catch(std::bad_alloc&)
 		{
 			delete pImpl;
-			throw std::bad_alloc(e);
-
-		}catch(std::bad_array_new_length& e)
-		{
-			delete pImpl;
-			throw std::bad_array_new_length(e);
+			throw;
 		};
 	};
 
@@ -2021,15 +1984,10 @@ namespace SonikLib
 		{
 			pImpl = new SonikString_pImpl;
 			(*pImpl) = SetStr;
-		}catch(std::bad_alloc& e)
+		}catch(std::bad_alloc&)
 		{
 			delete pImpl;
-			throw std::bad_alloc(e);
-
-		}catch(std::bad_array_new_length& e)
-		{
-			delete pImpl;
-			throw std::bad_array_new_length(e);
+			throw;
 		};
 
 	};
@@ -2042,16 +2000,10 @@ namespace SonikLib
 		{
 			pImpl = new SonikString_pImpl;
 			(*pImpl) = SetStr;
-		}catch(std::bad_alloc& e)
+		}catch(std::bad_alloc&)
 		{
 			delete pImpl;
-			throw std::bad_alloc(e);
-
-		}catch(std::bad_array_new_length& e)
-		{
-
-			delete pImpl;
-			throw std::bad_array_new_length(e);
+			throw;
 		};
 	};
 
@@ -2063,16 +2015,10 @@ namespace SonikLib
 		{
 			pImpl = new SonikString_pImpl;
 			(*pImpl) = SetStr;
-		}catch(std::bad_alloc& e)
+		}catch(std::bad_alloc&)
 		{
 			delete pImpl;
-			throw std::bad_alloc(e);
-
-		}catch(std::bad_array_new_length& e)
-		{
-
-			delete pImpl;
-			throw std::bad_array_new_length(e);
+			throw;
 		};
 	};
 
@@ -2084,16 +2030,10 @@ namespace SonikLib
 		{
 			pImpl = new SonikString_pImpl;
 			(*pImpl) = SetStr;
-		}catch(std::bad_alloc& e)
+		}catch(std::bad_alloc&)
 		{
 			delete pImpl;
-			throw std::bad_alloc(e);
-
-		}catch(std::bad_array_new_length& e)
-		{
-
-			delete pImpl;
-			throw std::bad_array_new_length(e);
+			throw;
 		};
 	};
 
@@ -2105,16 +2045,10 @@ namespace SonikLib
 		{
 			pImpl = new SonikString_pImpl;
 			(*pImpl) = std::move( (*(Move.pImpl)) );
-		}catch(std::bad_alloc& e)
+		}catch(std::bad_alloc&)
 		{
 			delete pImpl;
-			throw std::bad_alloc(e);
-
-		}catch(std::bad_array_new_length& e)
-		{
-
-			delete pImpl;
-			throw std::bad_array_new_length(e);
+			throw;
 		};
 
 	};

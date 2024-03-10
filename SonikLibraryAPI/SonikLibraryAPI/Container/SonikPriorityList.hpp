@@ -42,7 +42,7 @@ namespace SonikLib
 	private:
 		//プライベートソート関数 StartとEndを含む範囲内を挿入ソートします。
 		//引数1及び、2の位置は置き換わります。
-		void __InsertSort__(ListNode** pStart, ListNode** pEnd)
+		inline void __InsertSort__(ListNode** pStart, ListNode** pEnd)
 		{
 			if( pStart == 0 || pEnd == 0 )
 			{
@@ -189,7 +189,7 @@ namespace SonikLib
 		//プライベートソート関数 StartとEndを含む範囲内をマージソートします。
 		//引数1及び、2の位置は置き換わります。
 		//引数３には要素数を指定します。
-		void __MargeSort__(ListNode** pStart, ListNode** pEnd, uint32_t NodeListSize)
+		inline void __MargeSort__(ListNode** pStart, ListNode** pEnd, uint32_t NodeListSize)
 		{
 			if( pStart == 0 || pEnd == 0 )
 			{
@@ -488,7 +488,7 @@ namespace SonikLib
 			delete[] InsartSortArray;
 		};
 
-		bool __pivselect__(ListNode* pStart, ListNode* pEnd, uint32_t& _Get_)
+		inline bool __pivselect__(ListNode* pStart, ListNode* pEnd, uint32_t& _Get_)
 		{
 			ListNode* pLeft = pStart;
 			ListNode* pRight = pLeft->Next;
@@ -518,7 +518,7 @@ namespace SonikLib
 			return false;
 		};
 
-		void __QuickSort__(void)
+		inline void __QuickSort__(void)
 		{
 			if( (ItemCount -1) < 2 )
 			{
@@ -1247,7 +1247,7 @@ namespace SonikLib
 			delete[] PointArray;
 		};
 
-		void __HybridSort__(void)
+		inline void __HybridSort__(void)
 		{
 			lock_.lock();
 
@@ -1346,7 +1346,7 @@ namespace SonikLib
 		};
 
 		//Add
-		bool AddPush(ListType& SetItem, unsigned long ItemPriority = 0)
+		inline bool AddPush(ListType& SetItem, unsigned long ItemPriority = 0)
 		{
 			if(ItemPriority == 0xFFFFFFFF)
 			{
@@ -1400,7 +1400,7 @@ namespace SonikLib
 			return true;
 		};
 
-		SonikLinerOperator_PriorityList<ListType> GetOperator(void)
+		inline SonikLinerOperator_PriorityList<ListType> GetOperator(void)
 		{
 			SonikLinerOperator_PriorityList<ListType> ope_;
 
@@ -1415,7 +1415,7 @@ namespace SonikLib
 			return ope_;
 		};
 
-		bool RemoeveItem(ListType FindItem)
+		inline bool RemoeveItem(ListType FindItem)
 		{
 			lock_.lock();
 
@@ -1452,7 +1452,7 @@ namespace SonikLib
 			return false;
 		};
 
-		bool RemoeveItem(SonikLinerOperator_PriorityList<ListType>& RmvTargetItr)
+		inline bool RemoeveItem(SonikLinerOperator_PriorityList<ListType>& RmvTargetItr)
 		{
 			lock_.lock();
 

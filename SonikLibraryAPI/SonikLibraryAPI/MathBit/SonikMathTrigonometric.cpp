@@ -311,7 +311,7 @@ namespace SonikMath
 		{
 			std::ofstream ofs("Debug_Sin_Cos_Value.txt");
 			std::ofstream mofs("Debug_Sin_Cos_MinusValue.txt");
-			std::string _str = "";
+			std::string _str;
 			float digree = 0.0f;
 			float ret = 0.0f;
 			float ret_c = 0.0f;

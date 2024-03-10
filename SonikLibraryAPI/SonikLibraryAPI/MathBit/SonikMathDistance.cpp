@@ -17,43 +17,71 @@ namespace SonikMathDataBox
 	//					Sonik3DPoint Implement
 	//=====================================
 	Sonik3DPoint::Sonik3DPoint(double _x_, double _y_, double _z_)
-	:m_x(_x_)
-	,m_y(_y_)
-	,m_z(_z_)
 	{
+		try
+		{
+			x.ResetPointer(new double);
+			y.ResetPointer(new double);
+			z.ResetPointer(new double);
+			(*x) = _x_;
+			(*y) = _y_;
+			(*z) = _z_;
+		}catch(std::bad_alloc&)
+		{
+			x.ResetPointer(nullptr);
+			y.ResetPointer(nullptr);
+			z.ResetPointer(nullptr);
+			throw;
+		};
 
 	};
 
 	Sonik3DPoint::~Sonik3DPoint(void)
 	{
-
+		//no process;
 	};
 
 	void Sonik3DPoint::Set3Point(double _x_, double _y_, double _z_)
 	{
-		m_x = _x_;
-		m_y = _y_;
-		m_z = _z_;
+		(*x) = _x_;
+		(*y) = _y_;
+		(*z) = _z_;
+	};
+
+	void Sonik3DPoint::SetXY(double _x_, double _y_)
+	{
+		(*x) = _x_;
+		(*y) = _y_;
+	};
+	void Sonik3DPoint::SetXZ(double _x_, double _z_)
+	{
+		(*x) = _x_;
+		(*z) = _z_;
+	};
+	void Sonik3DPoint::SetYZ(double _y_, double _z_)
+	{
+		(*y) = _y_;
+		(*z) = _z_;
 	};
 
 	void Sonik3DPoint::SetX(double _x_)
 	{
-		m_x = _x_;
+		(*x) = _x_;
 	};
 	void Sonik3DPoint::SetY(double _y_)
 	{
-		m_y = _y_;
+		(*y) = _y_;
 	};
 	void Sonik3DPoint::SetZ(double _z_)
 	{
-		m_z = _z_;
+		(*z) = _z_;
 	};
 
 	void Sonik3DPoint::Get3Point(double& _x_, double& _y_, double& _z_)
 	{
-		_x_ = m_x;
-		_y_ = m_y;
-		_y_ = m_z;
+		_x_ = (*x);
+		_y_ = (*y);
+		_z_ = (*z);
 	};
 
 	void Sonik3DPoint::Get3Point(double* _x_, double* _y_, double* _z_)
@@ -63,92 +91,555 @@ namespace SonikMathDataBox
 			return;
 		};
 
-		(*_x_) = m_x;
-		(*_y_) = m_y;
-		(*_z_) = m_z;
+		(*_x_) = (*x);
+		(*_y_) = (*y);
+		(*_z_) = (*z);
 	};
 
-	void Sonik3DPoint::Get3Point(double** _x_, double** _y_, double** _z_)
+	void Sonik3DPoint::GetXY(double& _x_, double& _y_)
 	{
-		(*_x_) = &m_x;
-		(*_y_) = &m_y;
-		(*_z_) = &m_z;
+		_x_ = (*x);
+		_y_ = (*y);
+	};
+
+	void Sonik3DPoint::GetXY(double* _x_, double* _y_)
+	{
+		if( _x_ == nullptr || _y_ == nullptr)
+		{
+			return;
+		};
+
+		(*_x_) = (*x);
+		(*_y_) = (*y);
+	};
+
+	void Sonik3DPoint::GetXZ(double& _x_, double& _z_)
+	{
+		_x_ = (*x);
+		_z_ = (*z);
+	};
+
+	void Sonik3DPoint::GetXZ(double* _x_, double* _z_)
+	{
+		if( _x_ == nullptr || _z_ == nullptr )
+		{
+			return;
+		};
+
+		(*_x_) = (*x);
+		(*_z_) = (*z);
+	};
+
+	void Sonik3DPoint::GetYZ(double& _y_, double& _z_)
+	{
+		_y_ = (*y);
+		_z_ = (*z);
+	};
+	void Sonik3DPoint::GetYZ(double* _y_, double* _z_)
+	{
+		if( _y_ == nullptr || _z_ == nullptr )
+		{
+			return;
+		};
+
+		(*_y_) = (*y);
+		(*_z_) = (*z);
 	};
 
 	double Sonik3DPoint::GetX(void)
 	{
-		return m_x;
-	};
-
-	double* Sonik3DPoint::GetpX(void)
-	{
-		return &m_x;
-	};
-
-	void Sonik3DPoint::GetX(double& _x_)
-	{
-		_x_ = m_x;
-	};
-
-	void Sonik3DPoint::GetX(double* _x_)
-	{
-		if( _x_ == nullptr)
-		{
-			return;
-		};
-
-		(*_x_) = m_x;
+		return (*x);
 	};
 
 	double Sonik3DPoint::GetY(void)
 	{
-		return m_y;
-	};
-
-	double* Sonik3DPoint::GetpY(void)
-	{
-		return &m_y;
-	};
-
-	void Sonik3DPoint::GetY(double& _y_)
-	{
-		_y_ = m_y;
-
-	};
-
-	void Sonik3DPoint::GetY(double* _y_)
-	{
-		if(_y_ == nullptr)
-		{
-			return;
-		};
-
-		(*_y_) = m_y;
+		return (*y);
 	};
 
 	double Sonik3DPoint::GetZ(void)
 	{
-		return m_z;
+		return (*z);
 	};
 
-	double* Sonik3DPoint::GetpZ(void)
+	void Sonik3DPoint::LinkPointAll(Sonik3DPoint& _linked_)
 	{
-		return &m_z;
+		_linked_.x = x;
+		_linked_.y = y;
+		_linked_.z = z;
 	};
 
-	void Sonik3DPoint::GetZ(double& _z_)
+	void Sonik3DPoint::LinkPointAll(Sonik3DPoint* _linked_)
 	{
-		_z_ = m_z;
-	};
-
-	void Sonik3DPoint::GetZ(double* _z_)
-	{
-		if( _z_ == nullptr )
+		if(_linked_ == nullptr)
 		{
 			return;
 		};
 
-		(*_z_) = m_z;
+		_linked_->x = x;
+		_linked_->y = y;
+		_linked_->z = z;
+	};
+
+	void Sonik3DPoint::LinkPointAll(SonikLib::SharedSmtPtr<Sonik3DPoint>& _linked_)
+	{
+		if(_linked_.IsNullptr())
+		{
+			return;
+		};
+
+		_linked_->x = x;
+		_linked_->y = y;
+		_linked_->z = z;
+	};
+
+	void Sonik3DPoint::LinkPointXY(Sonik3DPoint& _linked_)
+	{
+		_linked_.x = x;
+		_linked_.y = y;
+	};
+	void Sonik3DPoint::LinkPointXY(Sonik3DPoint* _linked_)
+	{
+		if(_linked_ == nullptr)
+		{
+			return;
+		};
+
+		_linked_->x = x;
+		_linked_->y = y;
+	};
+	void Sonik3DPoint::LinkPointXY(SonikLib::SharedSmtPtr<Sonik3DPoint>& _linked_)
+	{
+		if(_linked_.IsNullptr())
+		{
+			return;
+		};
+
+		_linked_->x = x;
+		_linked_->y = y;
+	};
+	void Sonik3DPoint::LinkPointXZ(Sonik3DPoint& _linked_)
+	{
+		_linked_.x = x;
+		_linked_.z = z;
+	};
+	void Sonik3DPoint::LinkPointXZ(Sonik3DPoint* _linked_)
+	{
+		if(_linked_ == nullptr)
+		{
+			return;
+		};
+
+		_linked_->x = x;
+		_linked_->z = z;
+	};
+	void Sonik3DPoint::LinkPointXZ(SonikLib::SharedSmtPtr<Sonik3DPoint>& _linked_)
+	{
+		if(_linked_.IsNullptr())
+		{
+			return;
+		};
+
+		_linked_->x = x;
+		_linked_->z = z;
+	};
+	void Sonik3DPoint::LinkPointYZ(Sonik3DPoint& _linked_)
+	{
+		_linked_.y = y;
+		_linked_.z = z;
+	};
+	void Sonik3DPoint::LinkPointYZ(Sonik3DPoint* _linked_)
+	{
+		if(_linked_ == nullptr)
+		{
+			return;
+		};
+
+		_linked_->y = y;
+		_linked_->z = z;
+	};
+	void Sonik3DPoint::LinkPointYZ(SonikLib::SharedSmtPtr<Sonik3DPoint>& _linked_)
+	{
+		if(_linked_.IsNullptr())
+		{
+			return;
+		};
+
+		_linked_->y = y;
+		_linked_->z = z;
+	};
+	void Sonik3DPoint::LinkPointX(Sonik3DPoint& _linked_)
+	{
+		_linked_.x = x;
+	};
+	void Sonik3DPoint::LinkPointX(Sonik3DPoint* _linked_)
+	{
+		if(_linked_ == nullptr)
+		{
+			return;
+		};
+
+		_linked_->x = x;
+	};
+	void Sonik3DPoint::LinkPointX(SonikLib::SharedSmtPtr<Sonik3DPoint>& _linked_)
+	{
+		if(_linked_.IsNullptr())
+		{
+			return;
+		};
+
+		_linked_->x = x;
+	};
+	void Sonik3DPoint::LinkPointY(Sonik3DPoint& _linked_)
+	{
+		_linked_.y = y;
+	};
+	void Sonik3DPoint::LinkPointY(Sonik3DPoint* _linked_)
+	{
+		if(_linked_ == nullptr)
+		{
+			return;
+		};
+
+		_linked_->y = y;
+	};
+	void Sonik3DPoint::LinkPointY(SonikLib::SharedSmtPtr<Sonik3DPoint>& _linked_)
+	{
+		if(_linked_.IsNullptr())
+		{
+			return;
+		};
+
+		_linked_->y = y;
+	};
+	void Sonik3DPoint::LinkPointZ(Sonik3DPoint& _linked_)
+	{
+		_linked_.z = z;
+	};
+	void Sonik3DPoint::LinkPointZ(Sonik3DPoint* _linked_)
+	{
+		if(_linked_ == nullptr)
+		{
+			return;
+		};
+
+		_linked_->z = z;
+	};
+	void Sonik3DPoint::LinkPointZ(SonikLib::SharedSmtPtr<Sonik3DPoint>& _linked_)
+	{
+		if(_linked_.IsNullptr())
+		{
+			return;
+		};
+
+		_linked_->z = z;
+	};
+
+	//LinkPoint状態を解除します。
+	//内部で新しい座標をnewするので、そこに失敗したらfalseが帰ります。
+	//※戻り値はnewの成功/失敗を表すもので、UnLinkedの成功/失敗を表すものではありません。
+	//※基本的にShared_ptrをReleaseするだけなので成功/失敗の概念はほぼありません。
+	bool Sonik3DPoint::UnLinkPointAll(void)
+	{
+		double* l_newvec[3] = {nullptr, nullptr, nullptr};
+		if( x.GetRefCount() != 1 )
+		{
+			//カウント1以外なら自身用のを作成。
+			l_newvec[0] = new(std::nothrow) double;
+			if(l_newvec[0] == nullptr)
+			{
+				return false;
+			};
+
+			(*l_newvec[0]) = 0.0;
+		};
+
+		if(y.GetRefCount() != 1)
+		{
+			//カウント1以外なら自身用のを作成。
+			l_newvec[1] = new(std::nothrow) double;
+			if(l_newvec[1] == nullptr)
+			{
+				delete l_newvec[0];
+				return false;
+			};
+
+			(*l_newvec[1]) = 0.0;
+		};
+
+		if(z.GetRefCount() != 1)
+		{
+			//カウント1以外なら自身用のを作成。
+			l_newvec[2] = new(std::nothrow) double;
+			if(l_newvec[2] == nullptr)
+			{
+				delete l_newvec[0];
+				delete l_newvec[1];
+				return false;
+			};
+
+			(*l_newvec[2]) = 0.0;
+		};
+
+		//値バックアップ
+		(*l_newvec[0]) = (*(this->x));
+		(*l_newvec[1]) = (*(this->y));
+		(*l_newvec[2]) = (*(this->z));
+
+		//現在の値を使用した自分の座標を新しく持つ。
+		if(!x.ResetPointer(l_newvec[0]))
+		{
+			delete l_newvec[0];
+			delete l_newvec[1];
+			delete l_newvec[2];
+			return false;
+		};
+
+		if( !y.ResetPointer(l_newvec[1]) )
+		{
+			x.ResetPointer(nullptr);
+			delete l_newvec[1];
+			delete l_newvec[2];
+
+			return false;
+		};
+
+		if( !z.ResetPointer(l_newvec[2]) )
+		{
+			x.ResetPointer(nullptr);
+			y.ResetPointer(nullptr);
+			delete l_newvec[2];
+
+			return false;
+		};
+
+		return true;
+	};
+
+	bool Sonik3DPoint::UnLinkPointXY(void)
+	{
+		double* l_newvec[2] = {nullptr, nullptr};
+		if( x.GetRefCount() != 1 )
+		{
+			//カウント1以外なら自身用のを作成。
+			l_newvec[0] = new(std::nothrow) double;
+			if(l_newvec[0] == nullptr)
+			{
+				return false;
+			};
+
+			(*l_newvec[0]) = 0.0;
+		};
+
+		if(y.GetRefCount() != 1)
+		{
+			//カウント1以外なら自身用のを作成。
+			l_newvec[1] = new(std::nothrow) double;
+			if(l_newvec[1] == nullptr)
+			{
+				delete l_newvec[0];
+				return false;
+			};
+
+			(*l_newvec[1]) = 0.0;
+		};
+
+		//値バックアップ
+		(*l_newvec[0]) = (*(this->x));
+		(*l_newvec[1]) = (*(this->y));
+
+		//現在の値を使用した自分の座標を新しく持つ。
+		if(!x.ResetPointer(l_newvec[0]))
+		{
+			delete l_newvec[0];
+			delete l_newvec[1];
+			return false;
+		};
+
+		if( !y.ResetPointer(l_newvec[1]) )
+		{
+			x.ResetPointer(nullptr);
+			delete l_newvec[1];
+			return false;
+		};
+
+		return true;
+	};
+	bool Sonik3DPoint::UnLinkPointXZ(void)
+	{
+		double* l_newvec[2] = {nullptr, nullptr};
+		if( x.GetRefCount() != 1 )
+		{
+			//カウント1以外なら自身用のを作成。
+			l_newvec[0] = new(std::nothrow) double;
+			if(l_newvec[0] == nullptr)
+			{
+				return false;
+			};
+
+			(*l_newvec[0]) = 0.0;
+		};
+
+		if(z.GetRefCount() != 1)
+		{
+			//カウント1以外なら自身用のを作成。
+			l_newvec[1] = new(std::nothrow) double;
+			if(l_newvec[1] == nullptr)
+			{
+				delete l_newvec[0];
+				delete l_newvec[1];
+				return false;
+			};
+
+			(*l_newvec[1]) = 0.0;
+		};
+
+		//値バックアップ
+		(*l_newvec[0]) = (*(this->x));
+		(*l_newvec[1]) = (*(this->z));
+
+		//現在の値を使用した自分の座標を新しく持つ。
+		if(!x.ResetPointer(l_newvec[0]))
+		{
+			delete l_newvec[0];
+			delete l_newvec[1];
+			return false;
+		};
+
+		if( !z.ResetPointer(l_newvec[1]) )
+		{
+			x.ResetPointer(nullptr);
+			return false;
+		};
+
+		return true;
+	};
+	bool Sonik3DPoint::UnLinkPointYZ(void)
+	{
+		double* l_newvec[2] = {nullptr, nullptr};
+		if(y.GetRefCount() != 1)
+		{
+			//カウント1以外なら自身用のを作成。
+			l_newvec[0] = new(std::nothrow) double;
+			if(l_newvec[0] == nullptr)
+			{
+				delete l_newvec[0];
+				return false;
+			};
+
+			(*l_newvec[0]) = 0.0;
+		};
+
+		if(z.GetRefCount() != 1)
+		{
+			//カウント1以外なら自身用のを作成。
+			l_newvec[1] = new(std::nothrow) double;
+			if(l_newvec[1] == nullptr)
+			{
+				delete l_newvec[0];
+				delete l_newvec[1];
+				return false;
+			};
+
+			(*l_newvec[1]) = 0.0;
+		};
+
+		//値バックアップ
+		(*l_newvec[0]) = (*(this->y));
+		(*l_newvec[1]) = (*(this->z));
+
+		//現在の値を使用した自分の座標を新しく持つ。
+		if( !y.ResetPointer(l_newvec[0]) )
+		{
+			delete l_newvec[0];
+			delete l_newvec[1];
+
+			return false;
+		};
+
+		if( !z.ResetPointer(l_newvec[1]) )
+		{
+			y.ResetPointer(nullptr);
+			delete l_newvec[1];
+
+			return false;
+		};
+
+		return true;
+	};
+	bool Sonik3DPoint::UnLinkPointX(void)
+	{
+		if( x.GetRefCount() == 1 )
+		{
+			//カウント1なら自身のものにしちゃう。
+		};
+
+		double* l_newvec = new(std::nothrow) double;
+		if(l_newvec == nullptr)
+		{
+			return false;
+		};
+
+		//値バックアップ
+		(*l_newvec) = (*(this->x));
+
+		//現在の値を使用した自分の座標を新しく持つ。
+		if(!x.ResetPointer(l_newvec))
+		{
+			delete l_newvec;
+			return false;
+		};
+
+		return true;
+	};
+	bool Sonik3DPoint::UnLinkPointY(void)
+	{
+		if( y.GetRefCount() == 1 )
+		{
+			//カウント1なら自身のものにしちゃう。
+		};
+
+		double* l_newvec = new(std::nothrow) double;
+		if(l_newvec == nullptr)
+		{
+			return false;
+		};
+
+		//値バックアップ
+		(*l_newvec) = (*(this->y));
+
+		//現在の値を使用した自分の座標を新しく持つ。
+		if(!y.ResetPointer(l_newvec))
+		{
+			delete l_newvec;
+			return false;
+		};
+
+		return true;
+	};
+	bool Sonik3DPoint::UnLinkPointZ(void)
+	{
+		if( z.GetRefCount() == 1 )
+		{
+			//カウント1なら自身のものにしちゃう。
+		};
+
+		double* l_newvec = new(std::nothrow) double;
+		if(l_newvec == nullptr)
+		{
+			return false;
+		};
+
+		//値バックアップ
+		(*l_newvec) = (*(this->z));
+
+		//現在の値を使用した自分の座標を新しく持つ。
+		if(!z.ResetPointer(l_newvec))
+		{
+			delete l_newvec;
+			return false;
+		};
+
+		return true;
 	};
 
 	//=====================================
@@ -277,41 +768,41 @@ namespace SonikMathDataBox
 namespace SonikMath
 {
 	//指定した3DPointのベクトルの長さを計算します。
-	double VectorLength(const SonikMathDataBox::Sonik3DPoint& _point_)
+	double VectorLength(SonikMathDataBox::Sonik3DPoint& _point_) noexcept
 	{
-		return SonikMath::sqrt(_point_.m_x * _point_.m_x + _point_.m_y * _point_.m_y + _point_.m_z * _point_.m_z);
+		return SonikMath::sqrt( (*(_point_.x)) * (*(_point_.x)) + (*(_point_.x)) * (*(_point_.x)) + (*(_point_.x)) * (*(_point_.x)));
 	};
 
 	//二点間の差を表すベクトルを取得します。
-	void diffVec(const SonikMathDataBox::Sonik3DPoint& _f_pos_, const SonikMathDataBox::Sonik3DPoint& _s_pos_, SonikMathDataBox::Sonik3DPoint& _outpoint_)
+	void diffVec(SonikMathDataBox::Sonik3DPoint& _f_pos_, SonikMathDataBox::Sonik3DPoint& _s_pos_, SonikMathDataBox::Sonik3DPoint& _outpoint_) noexcept
 	{
-	    _outpoint_.m_x = _s_pos_.m_x - _f_pos_.m_x;
-	    _outpoint_.m_y = _s_pos_.m_y - _f_pos_.m_y;
-	    _outpoint_.m_z = _s_pos_.m_z - _f_pos_.m_z;
+	   (*( _outpoint_.x)) = (*(_s_pos_.x)) - (*(_f_pos_.x));
+	   (*( _outpoint_.y)) = (*(_s_pos_.y)) - (*(_f_pos_.y));
+	   (*( _outpoint_.z)) = (*(_s_pos_.z)) - (*(_f_pos_.z));
 	    return;
 	};
 
 	//二点間のドット積を計算します。
-	double DotProductVec(const SonikMathDataBox::Sonik3DPoint& _f_pos_, const SonikMathDataBox::Sonik3DPoint& _s_pos_)
+	double DotProductVec(SonikMathDataBox::Sonik3DPoint& _f_pos_, SonikMathDataBox::Sonik3DPoint& _s_pos_) noexcept
 	{
-		return _f_pos_.m_x * _s_pos_.m_x + _f_pos_.m_y * _s_pos_.m_y + _f_pos_.m_z * _s_pos_.m_z;
+		return (*(_f_pos_.x)) * (*(_s_pos_.x)) + (*(_f_pos_.y)) * (*(_s_pos_.y)) + (*(_f_pos_.z)) * (*(_s_pos_.z));
 	};
 
 
 	//本クラスと引数で指定されたオブジェクト或いは座標との距離を算出します。
-	double Distance(const SonikMathDataBox::Sonik3DPoint& _f_point_, const SonikMathDataBox::Sonik3DPoint& _s_point_)
+	double Distance(SonikMathDataBox::Sonik3DPoint& _f_point_, SonikMathDataBox::Sonik3DPoint& _s_point_) noexcept
 	{
 		double _distance[3];
 
-		_distance[0] = _f_point_.m_x - _s_point_.m_x;
-		_distance[1] = _f_point_.m_y - _s_point_.m_y;
-		_distance[2] = _f_point_.m_z - _s_point_.m_z;
+		_distance[0] = (*(_f_point_.x)) - (*(_s_point_.x));
+		_distance[1] = (*(_f_point_.y)) - (*(_s_point_.y));
+		_distance[2] = (*(_f_point_.z)) - (*(_s_point_.z));
 
 		return SonikMath::sqrt( _distance[0] * _distance[0] + _distance[1] * _distance[1] + _distance[2] * _distance[2]);
 
 	};
 
-	double Distance(const double _fx_, const double _fy_, const double _fz_, const double _sx_, const double _sy_, const double _sz_)
+	double Distance(double _fx_, double _fy_, double _fz_, double _sx_, double _sy_, double _sz_) noexcept
 	{
 
 		double _distance[3];
@@ -329,7 +820,7 @@ namespace SonikMath
 	//diff, veclenを指定する場合は、それぞれ、diffVec, VectorLengthで事前計算した値を指定することを想定しています。
 	//LisVec は リスナの方向ベクトルをVectorLengthで計算した結果を指定します。
 	//PlyVecは リスナーの位置ベクトルと、音源(Player）の位置ベクトルをdiffVecで計算した結果の値をVectorLengthで計算した結果を指定します。
-	double Panning(const SonikMathDataBox::Sonik3DPoint& _lispos_, const SonikMathDataBox::Sonik3DPoint& _plypos_, const SonikMathDataBox::Sonik3DPoint& _lisdir_, const SonikMathDataBox::Sonik3DPoint& _plydir_, const double _atten_max_, const double _attenuate_)
+	double Panning(SonikMathDataBox::Sonik3DPoint& _lispos_, SonikMathDataBox::Sonik3DPoint& _plypos_, SonikMathDataBox::Sonik3DPoint& _lisdir_, SonikMathDataBox::Sonik3DPoint& _plydir_, double _atten_max_, double _attenuate_) noexcept
 	{
 	    // リスナーから音源へのベクトルを計算
 		SonikMathDataBox::Sonik3DPoint l_point;
@@ -370,7 +861,7 @@ namespace SonikMath
 	    // パンニングと音の強さを考慮した最終的な音量を計算
 	    return panning * adjustedVolume;
 	};
-	double Panning(const double _dotproduct_, const double _lisdirveclen_, const double _diffveclen_, const double _dotproductdir_, const double _plydirveclen_, const double _atten_max_, const double _attenuate_)
+	double Panning(double _dotproduct_, double _lisdirveclen_, double _diffveclen_, double _dotproductdir_, double _plydirveclen_, double _atten_max_, double _attenuate_) noexcept
 	{
 	    // 長さの逆数を計算
 	    double invListenerDirLength = 1.0 / _lisdirveclen_;

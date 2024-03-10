@@ -76,7 +76,7 @@ namespace SonikLib
 				//オブジェクトをカウント分ヒープからnewして再利用しまくる。
 				m_QueueAllocArea = new TypeNode[QueueItemNum];
 
-			}catch(std::bad_alloc& e)
+			}catch(std::bad_alloc&)
 			{
 				delete[] m_QueueAllocArea;
 			};
@@ -101,7 +101,7 @@ namespace SonikLib
 
 		};
 
-		bool Initialize(uint32_t QueueItemMax)
+		inline bool Initialize(uint32_t QueueItemMax)
 		{
 			if(QueueItemMax >= UINT32_MAX)
 			{
@@ -127,7 +127,7 @@ namespace SonikLib
 		};
 
 		//書き込み(エンキュー)
-		bool EnQueue(QueueType SetData)
+		inline bool EnQueue(QueueType SetData)
 		{
 			TypeNode* lp_ptr;
 
@@ -172,7 +172,7 @@ namespace SonikLib
 
 		//取得（デキュー)
 		//TryLock版(ロックが取れなければすぐに処理が返ります。
-		bool TryDeQueue(QueueType& GetValue)
+		inline bool TryDeQueue(QueueType& GetValue)
 		{
 
 			if( !shortblock.TryLock() )
@@ -219,7 +219,7 @@ namespace SonikLib
 
 		//取得（デキュー)
 		//通常ロック版(ビジーループでロックが取れるまで待ちます。)
-		bool DeQueue(QueueType& GetValue)
+		inline bool DeQueue(QueueType& GetValue)
 		{
 
 			shortblock.lock();

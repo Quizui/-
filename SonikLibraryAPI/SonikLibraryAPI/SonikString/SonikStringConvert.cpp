@@ -961,8 +961,6 @@ bool SonikLibStringConvert::ConvertMBSToUTF8(char* pSrc, char* pDest, uint64_t* 
 		return false;
 	};
 
-	uint64_t SrcLen = SonikLibStringConvert::GetStringCount(pSrc);
-
 	setlocale(LC_CTYPE, "jpn");
 
 	uint64_t utf16Len = 0;

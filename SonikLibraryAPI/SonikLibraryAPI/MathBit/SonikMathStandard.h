@@ -34,19 +34,19 @@ namespace SonikMath
 	uint64_t mod(uint64_t _num_, uint64_t _denom);
 
 	//絶対値を計算します。
-	inline int64_t abs(int64_t _abs_) noexcept;
-	inline double abs(double _abs_) noexcept;
+	int64_t abs(int64_t _abs_) noexcept;
+	double abs(double _abs_) noexcept;
 
 	//負の数の対応した平方根を計算します。
 	//第2引数：精度を指定することが可能です。
-	inline double sqrt(double _sqrtval_, double _threshold_ = 1e-6) noexcept;
+	double sqrt(double _sqrtval_, double _threshold_ = 1e-6) noexcept;
 
 	//精度を犠牲にして高速に平方根を計算します。
-	inline double sqrt_Quick(double _srtval_) noexcept;
-	inline float sqrtF_Quick(float _srtval_) noexcept;
+	double sqrt_Quick(double _srtval_) noexcept;
+	float sqrtF_Quick(float _srtval_) noexcept;
 	//精度を犠牲にして高速に逆平方根を計算します。
-	inline double rsqrt_Quick(double _srtval_) noexcept;
-	inline float rsqrtF_Quick(float _srtval_) noexcept;
+	double rsqrt_Quick(double _srtval_) noexcept;
+	float rsqrtF_Quick(float _srtval_) noexcept;
 
 	//FFT(高速フーリエ変換)を行います。
 	//void FFT_1d(SonikComplex* p_complex, int TargetSampling);

@@ -76,11 +76,17 @@ namespace SonikLib
 	public:
 		~Members_10_FuncR(void)
 		{
-			//object_ はスマートポインタなので自動開放
+			if(this->Destroy_ == false)
+			{
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
+			};
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
 		{
 			Members_10_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>* lp = nullptr;
 
@@ -105,7 +111,7 @@ namespace SonikLib
 			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
 		{
 			Members_10_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>* lp = nullptr;
 
@@ -200,11 +206,18 @@ namespace SonikLib
 	public:
 		~Members_10_Func(void)
 		{
-			//object_ はスマートポインタなので自動開放
+			if(this->Destroy_ == false)
+			{
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
+			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
 		{
 			Members_10_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>* lp = nullptr;
 
@@ -229,7 +242,7 @@ namespace SonikLib
 			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
 		{
 			Members_10_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>* lp = nullptr;
 
@@ -321,7 +334,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
 		{
 			Members_10_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>* lp = nullptr;
 
@@ -404,7 +417,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, Arg10_Val Val10_, void* _allocate_ = nullptr)
 		{
 			Members_10_FuncG< Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val, Arg10_Val>* lp = nullptr;
 
@@ -481,11 +494,18 @@ namespace SonikLib
 	public:
 		~Members_9_FuncR(void)
 		{
-			//no process;
+			if(this->Destroy_ == false)
+			{
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
+			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
 		{
 			Members_9_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>* lp = nullptr;
 
@@ -510,7 +530,7 @@ namespace SonikLib
 			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
 		{
 			Members_9_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>* lp = nullptr;
 
@@ -602,11 +622,18 @@ namespace SonikLib
 	public:
 		~Members_9_Func(void)
 		{
-			//no process;
+			if(this->Destroy_ == false)
+			{
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
+			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
 		{
 			Members_9_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>* lp = nullptr;
 
@@ -631,7 +658,7 @@ namespace SonikLib
 			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
 		{
 			Members_9_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>* lp = nullptr;
 
@@ -721,7 +748,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
 		{
 			Members_9_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>* lp = nullptr;
 
@@ -802,7 +829,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, Arg9_Val Val9_, void* _allocate_ = nullptr)
 		{
 			Members_9_FuncG< Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val, Arg9_Val>* lp = nullptr;
 
@@ -878,11 +905,18 @@ namespace SonikLib
 	public:
 		~Members_8_FuncR(void)
 		{
-			//no process;
+			if(this->Destroy_ == false)
+			{
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
+			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr)
 		{
 			Members_8_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* lp = nullptr;
 
@@ -907,7 +941,7 @@ namespace SonikLib
 			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr)
 		{
 			Members_8_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* lp = nullptr;
 
@@ -997,11 +1031,18 @@ namespace SonikLib
 	public:
 		~Members_8_Func(void)
 		{
-			//no process;
+			if(this->Destroy_ == false)
+			{
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
+			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr)
 		{
 			Members_8_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* lp = nullptr;
 
@@ -1026,7 +1067,7 @@ namespace SonikLib
 			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr)
 		{
 			Members_8_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* lp = nullptr;
 
@@ -1113,7 +1154,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr)
 		{
 			Members_8_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* lp = nullptr;
 
@@ -1192,7 +1233,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, Arg8_Val Val8_, void* _allocate_ = nullptr)
 		{
 			Members_8_FuncG< Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val, Arg8_Val>* lp = nullptr;
 
@@ -1265,11 +1306,18 @@ namespace SonikLib
 	public:
 		~Members_7_FuncR(void)
 		{
-			//no process;
+			if(this->Destroy_ == false)
+			{
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
+			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr)
 		{
 			Members_7_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* lp = nullptr;
 
@@ -1294,7 +1342,7 @@ namespace SonikLib
 			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr)
 		{
 			Members_7_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* lp = nullptr;
 
@@ -1382,11 +1430,18 @@ namespace SonikLib
 	public:
 		~Members_7_Func(void)
 		{
-			//no process;
+			if(this->Destroy_ == false)
+			{
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
+			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr)
 		{
 			Members_7_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* lp = nullptr;
 
@@ -1411,7 +1466,7 @@ namespace SonikLib
 			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr)
 		{
 			Members_7_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* lp = nullptr;
 
@@ -1496,7 +1551,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr)
 		{
 			Members_7_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* lp = nullptr;
 
@@ -1573,7 +1628,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, Arg7_Val Val7_, void* _allocate_ = nullptr)
 		{
 			Members_7_FuncG< Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val, Arg7_Val>* lp = nullptr;
 
@@ -1644,14 +1699,18 @@ namespace SonikLib
 	public:
 		~Members_6_FuncR(void)
 		{
-			if( object_ != nullptr && this->Destroy_)
+			if(this->Destroy_ == false)
 			{
-				delete object_;
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
 			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr)
 		{
 			Members_6_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* lp = nullptr;
 
@@ -1676,7 +1735,7 @@ namespace SonikLib
 			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr)
 		{
 			Members_6_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* lp = nullptr;
 
@@ -1762,14 +1821,18 @@ namespace SonikLib
 	public:
 		~Members_6_Func(void)
 		{
-			if( object_ != nullptr && Destroy_)
+			if(this->Destroy_ == false)
 			{
-				delete object_;
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
 			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr)
 		{
 			Members_6_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* lp = nullptr;
 
@@ -1794,7 +1857,7 @@ namespace SonikLib
 			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr)
 		{
 			Members_6_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* lp = nullptr;
 
@@ -1877,7 +1940,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr)
 		{
 			Members_6_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* lp = nullptr;
 
@@ -1952,7 +2015,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, Arg6_Val Val6_, void* _allocate_ = nullptr)
 		{
 			Members_6_FuncG< Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val, Arg6_Val>* lp = nullptr;
 
@@ -2021,11 +2084,18 @@ namespace SonikLib
 	public:
 		~Members_5_FuncR(void)
 		{
-			//no process;
+			if(this->Destroy_ == false)
+			{
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
+			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, void* _allocate_ = nullptr)
 		{
 			Members_5_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>* lp = nullptr;
 
@@ -2050,7 +2120,7 @@ namespace SonikLib
 			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, void* _allocate_ = nullptr)
 		{
 			Members_5_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>* lp = nullptr;
 
@@ -2134,11 +2204,18 @@ namespace SonikLib
 	public:
 		~Members_5_Func(void)
 		{
-			//no process;
+			if(this->Destroy_ == false)
+			{
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
+			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, void* _allocate_ = nullptr)
 		{
 			Members_5_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>* lp = nullptr;
 
@@ -2163,7 +2240,7 @@ namespace SonikLib
 			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, void* _allocate_ = nullptr)
 		{
 			Members_5_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>* lp = nullptr;
 
@@ -2244,7 +2321,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, void* _allocate_ = nullptr)
 		{
 			Members_5_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>* lp = nullptr;
 
@@ -2316,7 +2393,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, Arg5_Val Val5_, void* _allocate_ = nullptr)
 		{
 			Members_5_FuncG< Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val, Arg5_Val>* lp = nullptr;
 
@@ -2383,11 +2460,18 @@ namespace SonikLib
 	public:
 		~Members_4_FuncR(void)
 		{
-			//no process;
+			if(this->Destroy_ == false)
+			{
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
+			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, void* _allocate_ = nullptr)
 		{
 			Members_4_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>* lp = nullptr;
 
@@ -2412,7 +2496,7 @@ namespace SonikLib
 			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, void* _allocate_ = nullptr)
 		{
 			Members_4_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>* lp = nullptr;
 
@@ -2494,11 +2578,18 @@ namespace SonikLib
 	public:
 		~Members_4_Func(void)
 		{
-			//no process;
+			if(this->Destroy_ == false)
+			{
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
+			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, void* _allocate_ = nullptr)
 		{
 			Members_4_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>* lp = nullptr;
 
@@ -2523,7 +2614,7 @@ namespace SonikLib
 			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, void* _allocate_ = nullptr)
 		{
 			Members_4_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>* lp = nullptr;
 
@@ -2602,7 +2693,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, void* _allocate_ = nullptr)
 		{
 			Members_4_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>* lp = nullptr;
 
@@ -2673,7 +2764,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, Arg4_Val Val4_, void* _allocate_ = nullptr)
 		{
 			Members_4_FuncG< Arg1_Val, Arg2_Val, Arg3_Val, Arg4_Val>* lp = nullptr;
 
@@ -2738,11 +2829,18 @@ namespace SonikLib
 	public:
 		~Members_3_FuncR(void)
 		{
-			//no process;
+			if(this->Destroy_ == false)
+			{
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
+			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, void* _allocate_ = nullptr)
 		{
 			Members_3_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val>* lp = nullptr;
 
@@ -2767,7 +2865,7 @@ namespace SonikLib
 			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, void* _allocate_ = nullptr)
 		{
 			Members_3_FuncR<Rtype, Type, Arg1_Val, Arg2_Val, Arg3_Val>* lp = nullptr;
 
@@ -2847,11 +2945,18 @@ namespace SonikLib
 	public:
 		~Members_3_Func(void)
 		{
-			//no process;
+			if(this->Destroy_ == false)
+			{
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
+			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, void* _allocate_ = nullptr)
 		{
 			Members_3_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val>* lp = nullptr;
 
@@ -2876,7 +2981,7 @@ namespace SonikLib
 			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val, Arg3_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, void* _allocate_ = nullptr)
 		{
 			Members_3_Func<Type, Arg1_Val, Arg2_Val, Arg3_Val>* lp = nullptr;
 
@@ -2953,7 +3058,7 @@ namespace SonikLib
 		}
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, void* _allocate_ = nullptr)
 		{
 			Members_3_FuncRG<Rtype, Arg1_Val, Arg2_Val, Arg3_Val>* lp = nullptr;
 
@@ -3022,7 +3127,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val, Arg3_Val) , Arg1_Val Val1_, Arg2_Val Val2_, Arg3_Val Val3_, void* _allocate_ = nullptr)
 		{
 			Members_3_FuncG< Arg1_Val, Arg2_Val, Arg3_Val>* lp = nullptr;
 
@@ -3086,11 +3191,18 @@ namespace SonikLib
 	public:
 		~Members_2_FuncR(void)
 		{
-			//no process;
+			if(this->Destroy_ == false)
+			{
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
+			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val) , Arg1_Val Val1_, Arg2_Val Val2_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val, Arg2_Val) , Arg1_Val Val1_, Arg2_Val Val2_, void* _allocate_ = nullptr)
 		{
 			Members_2_FuncR<Rtype, Type, Arg1_Val, Arg2_Val>* lp = nullptr;
 
@@ -3193,11 +3305,18 @@ namespace SonikLib
 	public:
 		~Members_2_Func(void)
 		{
-			//no process;
+			if(this->Destroy_ == false)
+			{
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
+			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val) , Arg1_Val Val1_, Arg2_Val Val2_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val, Arg2_Val) , Arg1_Val Val1_, Arg2_Val Val2_, void* _allocate_ = nullptr)
 		{
 			Members_2_Func<Type, Arg1_Val, Arg2_Val>* lp = nullptr;
 
@@ -3297,7 +3416,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val) , Arg1_Val Val1_, Arg2_Val Val2_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val, Arg2_Val) , Arg1_Val Val1_, Arg2_Val Val2_, void* _allocate_ = nullptr)
 		{
 			Members_2_FuncRG<Rtype, Arg1_Val, Arg2_Val>* lp = nullptr;
 
@@ -3364,7 +3483,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val) , Arg1_Val Val1_, Arg2_Val Val2_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val, Arg2_Val) , Arg1_Val Val1_, Arg2_Val Val2_, void* _allocate_ = nullptr)
 		{
 			Members_2_FuncG< Arg1_Val, Arg2_Val>* lp = nullptr;
 
@@ -3425,11 +3544,18 @@ namespace SonikLib
 	public:
 		~Members_1_FuncR(void)
 		{
-			//no process;
+			if(this->Destroy_ == false)
+			{
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
+			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val) , Arg1_Val Val1_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(Arg1_Val) , Arg1_Val Val1_, void* _allocate_ = nullptr)
 		{
 			Members_1_FuncR<Rtype, Type, Arg1_Val>* lp = nullptr;
 
@@ -3454,7 +3580,7 @@ namespace SonikLib
 			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val) , Arg1_Val Val1_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(Arg1_Val) , Arg1_Val Val1_, void* _allocate_ = nullptr)
 		{
 			Members_1_FuncR<Rtype, Type, Arg1_Val>* lp = nullptr;
 
@@ -3530,11 +3656,18 @@ namespace SonikLib
 	public:
 		~Members_1_Func(void)
 		{
-			//no process;
+			if(this->Destroy_ == false)
+			{
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
+			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val) , Arg1_Val Val1_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(Arg1_Val) , Arg1_Val Val1_, void* _allocate_ = nullptr)
 		{
 			Members_1_Func<Type, Arg1_Val>* lp = nullptr;
 
@@ -3559,7 +3692,7 @@ namespace SonikLib
 			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val) , Arg1_Val Val1_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(Arg1_Val) , Arg1_Val Val1_, void* _allocate_ = nullptr)
 		{
 			Members_1_Func<Type, Arg1_Val>* lp = nullptr;
 
@@ -3634,7 +3767,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val) , Arg1_Val Val1_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(Arg1_Val) , Arg1_Val Val1_, void* _allocate_ = nullptr)
 		{
 			Members_1_FuncRG<Rtype, Arg1_Val>* lp = nullptr;
 
@@ -3699,7 +3832,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val) , Arg1_Val Val1_, void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(Arg1_Val) , Arg1_Val Val1_, void* _allocate_ = nullptr)
 		{
 			Members_1_FuncG< Arg1_Val>* lp = nullptr;
 
@@ -3750,11 +3883,18 @@ namespace SonikLib
 	public:
 		~Members_0_FuncR(void)
 		{
-			//no process;
+			if(this->Destroy_ == false)
+			{
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
+			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(void) , void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(SonikLib::SharedSmtPtr<Type> _SetObj_, Rtype (Type::*set_func)(void) , void* _allocate_ = nullptr)
 		{
 			Members_0_FuncR<Rtype, Type>* lp = nullptr;
 
@@ -3779,7 +3919,7 @@ namespace SonikLib
 			return SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(void) , void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Type* _SetObj_, Rtype (Type::*set_func)(void) , void* _allocate_ = nullptr)
 		{
 			Members_0_FuncR<Rtype, Type>* lp = nullptr;
 
@@ -3846,11 +3986,18 @@ namespace SonikLib
 	public:
 		~Members_0_Func(void)
 		{
-			//no process;
+			if(this->Destroy_ == false)
+			{
+				//オブジェクト削除フラグがfalseなら勝手にdeleteしてはいけないので
+				//ダミーを使ってスマートポインタからオーナー権限を除去し、dummyのdeleteを呼ばない。
+				Type* _dymmy = nullptr;
+				object_.GetOwnerPointer(_dymmy);
+			};
+
 		};
 
 		//SharedSmtPtr指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(void), void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(SonikLib::SharedSmtPtr<Type> _SetObj_, void (Type::*set_func)(void), void* _allocate_ = nullptr)
 		{
 			Members_0_Func<Type>* lp = nullptr;
 
@@ -3875,7 +4022,7 @@ namespace SonikLib
 			return SonikLib::SharedSmtPtr<SonikFOSInterface>(lp);
 		};
 		//RawPointer指定
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(void), void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(Type* _SetObj_, void (Type::*set_func)(void), void* _allocate_ = nullptr)
 		{
 			Members_0_Func<Type>* lp = nullptr;
 
@@ -3940,7 +4087,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(void), void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSTemplateInterface<Rtype>> New(Rtype (*set_func)(void), void* _allocate_ = nullptr)
 		{
 			Members_0_FuncRG<Rtype>* lp = nullptr;
 
@@ -3992,7 +4139,7 @@ namespace SonikLib
 		};
 
 		//グローバル関数指定なので、クラス指定のようにshared版とか無い。
-		static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(void), void* _allocate_ = nullptr)
+		inline static  SonikLib::SharedSmtPtr<SonikFOSInterface> New(void (*set_func)(void), void* _allocate_ = nullptr)
 		{
 			Members_0_FuncG* lp = nullptr;
 

@@ -51,7 +51,7 @@ namespace SonikFunctionObjectDefines
 		FunctionObjectSystemInterface(void)
 		:MethodStatus(false)
 		,MethodPriority(0)
-		,Destroy_(false)
+		,Destroy_(true)
 		{
 			//member value initialize only
 		};
@@ -61,36 +61,36 @@ namespace SonikFunctionObjectDefines
 		};
 
 		//弱い依存でnextのタスクを設定します。
-		bool SetNext_Weak(FunctionObjectSystemInterface* _SetSmtPtr_)
+		inline bool SetNext_Weak(FunctionObjectSystemInterface* _SetSmtPtr_)
 		{
 			return weak_next.ResetPointer(_SetSmtPtr_);
 		};
 
-		bool SetNext_Weak(SonikLib::SharedSmtPtr<FunctionObjectSystemInterface>& _SetSmtPtr_)
+		inline bool SetNext_Weak(SonikLib::SharedSmtPtr<FunctionObjectSystemInterface>& _SetSmtPtr_)
 		{
 			weak_next = _SetSmtPtr_;
 			return true;
 		};
 
-		bool SetNext_Weak(SonikLib::SharedSmtPtr<FunctionObjectSystemInterface>&& _SetSmtPtr_)
+		inline bool SetNext_Weak(SonikLib::SharedSmtPtr<FunctionObjectSystemInterface>&& _SetSmtPtr_)
 		{
 			weak_next = _SetSmtPtr_;
 			return true;
 		};
 
 		//強い依存でnextのタスクを設定します。
-		bool SetNext_Strong(FunctionObjectSystemInterface* _SetSmtPtr_)
+		inline bool SetNext_Strong(FunctionObjectSystemInterface* _SetSmtPtr_)
 		{
 			return strong_next.ResetPointer(_SetSmtPtr_);
 		};
 
-		bool SetNext_Strong(SonikLib::SharedSmtPtr<FunctionObjectSystemInterface>& _SetSmtPtr_)
+		inline bool SetNext_Strong(SonikLib::SharedSmtPtr<FunctionObjectSystemInterface>& _SetSmtPtr_)
 		{
 			strong_next = _SetSmtPtr_;
 			return true;
 		};
 
-		bool SetNext_Strong(SonikLib::SharedSmtPtr<FunctionObjectSystemInterface>&& _SetSmtPtr_)
+		inline bool SetNext_Strong(SonikLib::SharedSmtPtr<FunctionObjectSystemInterface>&& _SetSmtPtr_)
 		{
 			strong_next = _SetSmtPtr_;
 			return true;
@@ -98,54 +98,54 @@ namespace SonikFunctionObjectDefines
 
 		//弱い依存のnextタスクを取得します。
 		//nextタスクがない場合、falseを返却します。
-		SonikLib::SharedSmtPtr<FunctionObjectSystemInterface> GetNext_weak(void)
+		inline SonikLib::SharedSmtPtr<FunctionObjectSystemInterface> GetNext_weak(void)
 		{
 			return weak_next;
 		};
 
 		//強い依存のnextタスクを取得します。
 		//nextタスクがない場合、falseを返却します。
-		SonikLib::SharedSmtPtr<FunctionObjectSystemInterface> GetNext_strong(void)
+		inline SonikLib::SharedSmtPtr<FunctionObjectSystemInterface> GetNext_strong(void)
 		{
 			return strong_next;
 		};
 
 		//メソッドステータスの取得
-		const bool& Get_MethodStatus(void)
+		inline const bool& Get_MethodStatus(void)
 		{
 
 			return MethodStatus;
 		};
 
 		//メソッドステータスの状態をオフにします。
-		void Set_MethodStatusOff(void)
+		inline void Set_MethodStatusOff(void)
 		{
 			MethodStatus = false;
 		};
 
 
 		//メソッドプライオリティの取得
-		const unsigned long& Get_MethodPriority(void)
+		inline const unsigned long& Get_MethodPriority(void)
 		{
 			return MethodPriority;
 
 		};
 
 		//メソッドプライオリティの変更
-		void Set_MethodPriority(unsigned long SetPriority)
+		inline void Set_MethodPriority(unsigned long SetPriority)
 		{
 
 			MethodPriority = SetPriority;
 		};
 
 		//保持オブジェクトの破棄フラグ
-		void Set_DestroyObjectFlag(bool SetValue)
+		inline void Set_DestroyObjectFlag(bool SetValue)
 		{
 			Destroy_ = SetValue;
 
 		};
 
-		const bool& Get_DestroyObjectFlag(void)
+		inline const bool& Get_DestroyObjectFlag(void)
 		{
 			return Destroy_;
 		}
@@ -178,7 +178,7 @@ namespace SonikFunctionObjectDefines
 		FunctionObjectSystemTemplateInterface(void)
 		:MethodStatus(false)
 		,MethodPriority(0)
-		,Destroy_(false)
+		,Destroy_(true)
 		{
 			//member value initialize only
 		};
@@ -190,36 +190,36 @@ namespace SonikFunctionObjectDefines
 		};
 
 		//弱い依存でnextのタスクを設定します。
-		bool SetNext_Weak(FunctionObjectSystemTemplateInterface<Rtype>* _SetSmtPtr_)
+		inline bool SetNext_Weak(FunctionObjectSystemTemplateInterface<Rtype>* _SetSmtPtr_)
 		{
 			return weak_next.ResetPointer(_SetSmtPtr_);
 		};
 
-		bool SetNext_Weak(SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>>& _SetSmtPtr_)
+		inline bool SetNext_Weak(SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>>& _SetSmtPtr_)
 		{
 			weak_next = _SetSmtPtr_;
 			return true;
 		};
 
-		bool SetNext_Weak(SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>>&& _SetSmtPtr_)
+		inline bool SetNext_Weak(SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>>&& _SetSmtPtr_)
 		{
 			weak_next = _SetSmtPtr_;
 			return true;
 		};
 
 		//強い依存でnextのタスクを設定します。
-		bool SetNext_Strong(FunctionObjectSystemTemplateInterface<Rtype>* _SetSmtPtr_)
+		inline bool SetNext_Strong(FunctionObjectSystemTemplateInterface<Rtype>* _SetSmtPtr_)
 		{
 			return strong_next.ResetPointer(_SetSmtPtr_);
 		};
 
-		bool SetNext_Strong(SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>>& _SetSmtPtr_)
+		inline bool SetNext_Strong(SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>>& _SetSmtPtr_)
 		{
 			strong_next = _SetSmtPtr_;
 			return true;
 		};
 
-		bool SetNext_Strong(SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>>&& _SetSmtPtr_)
+		inline bool SetNext_Strong(SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>>&& _SetSmtPtr_)
 		{
 			strong_next = _SetSmtPtr_;
 			return true;
@@ -227,7 +227,7 @@ namespace SonikFunctionObjectDefines
 
 		//弱い依存のnextタスクを取得します。
 		//nextタスクがない場合、falseを返却します。
-		bool GetNext_weak(SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>>& _getSmtPtr_)
+		inline bool GetNext_weak(SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>>& _getSmtPtr_)
 		{
 			if(weak_next.IsNullptr())
 			{
@@ -240,7 +240,7 @@ namespace SonikFunctionObjectDefines
 
 		//強い依存のnextタスクを取得します。
 		//nextタスクがない場合、falseを返却します。
-		bool GetNext_strong(SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>>& _getSmtPtr_)
+		inline bool GetNext_strong(SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>>& _getSmtPtr_)
 		{
 			if(strong_next.IsNullptr())
 			{
@@ -252,14 +252,14 @@ namespace SonikFunctionObjectDefines
 		};
 
 		//メソッドステータスの取得
-		const bool& Get_MethodStatus(void)
+		inline const bool& Get_MethodStatus(void)
 		{
 
 			return MethodStatus;
 		};
 
 		//メソッドステータスの変更
-		void Set_MethodStatus(bool SetFlag)
+		inline void Set_MethodStatus(bool SetFlag)
 		{
 
 			MethodStatus = SetFlag;
@@ -267,28 +267,25 @@ namespace SonikFunctionObjectDefines
 
 
 		//メソッドプライオリティの取得
-		const unsigned long& Get_MethodPriority(void)
+		inline const unsigned long& Get_MethodPriority(void)
 		{
 			return MethodPriority;
 
 		};
 
 		//メソッドプライオリティの変更
-		void Set_MethodPriority(unsigned long SetPriority)
+		inline void Set_MethodPriority(unsigned long SetPriority)
 		{
 
 			MethodPriority = SetPriority;
 		};
 
 		//保持オブジェクトの破棄フラグ
-		void Set_DestriyObjectFlag(const bool& SetValue)
+		inline void Set_DestriyObjectFlag(const bool& SetValue)
 		{
 			Destroy_ = SetValue;
 
 		};
-
-        virtual unsigned int GetCreateSize(void) =0;
-        virtual void CreateCopy(void* AllocateArea) =0;
 
 		virtual Rtype Run(void) =0;
 	};

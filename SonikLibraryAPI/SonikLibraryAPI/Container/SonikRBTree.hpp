@@ -46,7 +46,7 @@ namespace SonikLib
 
 	private:
 		//回転基準軸を指定し、そこを基準に木を右回転させます。
-		NodesBase* RightRotateTree(NodesBase* Node_)
+		inline NodesBase* RightRotateTree(NodesBase* Node_)
 		{
 			NodesBase* LeftNode_;
 			NodesBase* TopParentNode_;
@@ -90,7 +90,7 @@ namespace SonikLib
 		};
 
 		//回転基準軸を指定し、そこを基準に木を左回転させます。
-		NodesBase* LeftRotateTree(NodesBase* Node_)
+		inline NodesBase* LeftRotateTree(NodesBase* Node_)
 		{
 			NodesBase* RightNode_;
 			NodesBase* TopParentNode_;
@@ -135,7 +135,7 @@ namespace SonikLib
 			return RightNode_;
 		};
 
-		void IsBarancedProcess(NodesBase*& Node_)
+		inline void IsBarancedProcess(NodesBase*& Node_)
 		{
 			//ファーストパターンチェック
 			if( Node_->Parent->right_ == 0 )
@@ -226,7 +226,7 @@ namespace SonikLib
 		};//end method;
 
 		//内部検索用関数です。
-		bool __INFIND__(unsigned long SearchVal, NodesBase*& GetObject)
+		inline bool __INFIND__(unsigned long SearchVal, NodesBase*& GetObject)
 		{
 			NodesBase* tmpNode = RootNode;
 
@@ -304,7 +304,7 @@ namespace SonikLib
 		};
 
 		//ノードに子を追加します。
-		bool Insert(SetDataType SetData, uint32_t SetPriority)
+		inline bool Insert(SetDataType SetData, uint32_t SetPriority)
 		{
 			atmlock_.lock();
 			Nodes* tmpPtr;
@@ -453,7 +453,7 @@ namespace SonikLib
 		};
 
 		//ノードに子を追加します。
-		bool Insert(SetDataType* SetData, unsigned long SetPriority)
+		inline bool Insert(SetDataType* SetData, unsigned long SetPriority)
 		{
 			atmlock_.lock();
 			Nodes* tmpPtr;
@@ -609,7 +609,7 @@ namespace SonikLib
 
 
 		//ノードの最後尾に子を追加します。
-		bool Insert(SetDataType SetData)
+		inline bool Insert(SetDataType SetData)
 		{
 			atmlock_.lock();
 			Nodes* tmpPtr;
@@ -785,7 +785,7 @@ namespace SonikLib
 		};
 
 		//ノードの最後尾に子を追加します。
-		bool Insert(SetDataType* SetData)
+		inline bool Insert(SetDataType* SetData)
 		{
 			atmlock_.lock();
 			Nodes* tmpPtr;
@@ -960,7 +960,7 @@ namespace SonikLib
 
 		};
 
-		bool TreeFind(unsigned long SearchValue, SetDataType& GetData)
+		inline bool TreeFind(unsigned long SearchValue, SetDataType& GetData)
 		{
 			NodesBase* Get_;
 			Nodes* UpcastObj_;
@@ -976,7 +976,7 @@ namespace SonikLib
 			return true;
 		};
 
-		void Erase(unsigned long EraseValue)
+		inline void Erase(unsigned long EraseValue)
 		{
 			NodesBase* Get_;
 			NodesBase* tmp_;
@@ -1572,7 +1572,7 @@ namespace SonikLib
 			};//end else if;
 		};//end faunction;
 
-		void Erase(unsigned long EraseValue, SonikLib::SonikLinerOperator_RBTree<SetDataType>* EraseOperator)
+		inline void Erase(unsigned long EraseValue, SonikLib::SonikLinerOperator_RBTree<SetDataType>* EraseOperator)
 		{
 			NodesBase* Get_;
 			NodesBase* tmp_;
@@ -2186,7 +2186,7 @@ namespace SonikLib
 			};//end else if;
 		};//end faunction;
 
-		void Erase(SonikLib::SonikLinerOperator_RBTree<SetDataType>* EraseOperator)
+		inline void Erase(SonikLib::SonikLinerOperator_RBTree<SetDataType>* EraseOperator)
 		{
 			NodesBase* Get_;
 			NodesBase* tmp_;
@@ -2799,7 +2799,7 @@ namespace SonikLib
 
 
 		//リニアサーチ用のオブジェクトを取得します。
-		SonikLib::SonikLinerOperator_RBTree<SetDataType> GetOpe_LinerBegin(void)
+		inline SonikLib::SonikLinerOperator_RBTree<SetDataType> GetOpe_LinerBegin(void)
 		{
 			SonikLib::SonikLinerOperator_RBTree<SetDataType> ope_;
 
@@ -2809,7 +2809,7 @@ namespace SonikLib
 		};
 
 		//リニアサーチ用のオブジェクトを取得します。
-		SonikLib::SonikLinerOperator_RBTree<SetDataType> GetOpe_LinerEnd(void)
+		inline SonikLib::SonikLinerOperator_RBTree<SetDataType> GetOpe_LinerEnd(void)
 		{
 			SonikLib::SonikLinerOperator_RBTree<SetDataType> ope_;
 

@@ -60,22 +60,22 @@ namespace SonikLib
 			delete[] AllocAreaPtr;
 		};
 
-		T* begin(void)
+		inline T* begin(void)
 		{
 			return &reinterpret_cast<T*>(AllocAreaPtr)[0];
 		};
 
-		T* end(void)
+		inline T* end(void)
 		{
 			return &reinterpret_cast<T*>(AllocAreaPtr)[AllocCount];
 		};
 
-		T& operator [](uint32_t ArrayPoint)
+		inline T& operator [](uint32_t ArrayPoint)
 		{
 			return reinterpret_cast<T*>(AllocAreaPtr)[ArrayPoint];
 		};
 
-		bool PushBack(T& PushItem)
+		inline bool PushBack(T& PushItem)
 		{
 			if( MaxCnt < AllocCount )
 			{
@@ -115,7 +115,7 @@ namespace SonikLib
 			return true;
 		};
 
-		bool PopBack(void)
+		inline bool PopBack(void)
 		{
 			if( AllocCount == 0 )
 			{
@@ -128,7 +128,7 @@ namespace SonikLib
 			return true;
 		};
 
-		void Clear(void)
+		inline void Clear(void)
 		{
 			if( AllocCount == 0 )
 			{

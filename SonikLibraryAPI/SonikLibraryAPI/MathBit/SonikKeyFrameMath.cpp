@@ -197,16 +197,16 @@ namespace SonikMath
 	//補足: sqrtを使用して現在の位置から中心点までの半径を計算し、回転を行います。
 	void SinglePointRotationSinglePointRotation(double CriteriaX, double CriteriaY, double ObjectPosX, double ObjectPosY, double digree, double& GetX, double& GetY)
 	{
-		SonikMath::Sonik3DPoint _point(ObjectPosX);
+		SonikMathDataBox::Sonik3DPoint f_point(ObjectPosX);
+		SonikMathDataBox::Sonik3DPoint s_point(CriteriaX);
 		//底辺
-		double distant_Base = _point.Distance(CriteriaX);//SonikMath::TwoPointDistance(ObjectPosX, CriteriaX);
+		double distant_Base = Distance(f_point, s_point);//SonikMath::TwoPointDistance(ObjectPosX, CriteriaX);
 		//高さ
-		_point.Set3Point(0.0, ObjectPosY, 0.0);
-		double distant_Top = _point.Distance(CriteriaY);//SonikMath::TwoPointDistance(ObjectPosY, CriteriaY);
+		f_point.SetXY(0.0, ObjectPosY);
+		s_point.SetXY(0.0, CriteriaY);
+		double distant_Top = Distance(f_point, s_point);//SonikMath::TwoPointDistance(ObjectPosY, CriteriaY);
 		//半径
 		double Radius = sqrt( ((distant_Base * distant_Base) + (distant_Top * distant_Top)) );
-
-
 
 		GetX = Radius * SonikMath::Cos(digree);
 		GetY = Radius * SonikMath::Sin(digree);
@@ -224,16 +224,16 @@ namespace SonikMath
 	//補足: sqrtを使用して現在の位置から中心点までの半径を計算し、回転を行います。
 	void SinglePointRotation_F(float CriteriaX, float CriteriaY, float ObjectPosX, float ObjectPosY, float digree, float& GetX, float& GetY)
 	{
-		SonikMath::Sonik3DPoint _point(ObjectPosX);
+		SonikMathDataBox::Sonik3DPoint f_point(ObjectPosX);
+		SonikMathDataBox::Sonik3DPoint s_point(CriteriaX);
 		//底辺
-		float distant_Base = static_cast<float>( _point.Distance(CriteriaX) );//SonikMath::TwoPointDistance(ObjectPosX, CriteriaX) );
+		float distant_Base = static_cast<float>(Distance(f_point, s_point));//SonikMath::TwoPointDistance(ObjectPosX, CriteriaX);
 		//高さ
-		_point.Set3Point(0.0, ObjectPosY, 0.0);
-		float distant_Top = static_cast<float>( _point.Distance(CriteriaY) );//SonikMath::TwoPointDistance(ObjectPosY, CriteriaY) );
+		f_point.SetXY(0.0, ObjectPosY);
+		s_point.SetXY(0.0, CriteriaY);
+		float distant_Top = static_cast<float>(Distance(f_point, s_point));//SonikMath::TwoPointDistance(ObjectPosY, CriteriaY);
 		//半径
 		float Radius = sqrtf( ((distant_Base * distant_Base) + (distant_Top * distant_Top)) );
-
-
 
 		GetX = Radius * SonikMath::CosF(digree);
 		GetY = Radius * SonikMath::SinF(digree);
