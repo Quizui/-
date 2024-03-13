@@ -8,6 +8,8 @@
 #ifndef SONIKDLLLOADER_H_
 #define SONIKDLLLOADER_H_
 
+#include <stdint.h>
+
 #if defined(_WIN32) || defined(_WIN64)
 	#include <windows.h>
 	#define SONIKDEF_WINDOWS
@@ -15,7 +17,7 @@
 	#define SonikLibLoder SonikDllLoader::WINDOWS_LoadLibrary
 	#define SonikLibLoderFree SonikDllLoader::WINDOWS_FreeLibrary
 	#define SonikLibLoderProcAddress SonikDllLoader::WINDOWS_GetProcAddress
-	#elif defined(__linux__)
+#elif defined(__linux__)
 	#define SONIKDEF_LINUX
 	//#include LinuxFile
 
@@ -25,20 +27,12 @@ namespace SonikDllLoader
 {
 
 #if defined(_WIN32) || defined(_WIN64)
-	#ifdef __SONIK_I686__
-	HINSTANCE WINDOWS_LoadLibrary(const char* LibFileName, DWORD dwFlags);
-	HINSTANCE WINDOWS_LoadLibrary(const char16_t* LibFileName, DWORD dwFlags);
-	BOOL WINDOWS_FreeLibrary(HMODULE hModule);
-	FARPROC WINDOWS_GetProcAddress(HMODULE hModule, LPCSTR lpProcName);
-
-	#elif defined(__SONIK_x86_64__)
 
 	HINSTANCE WINDOWS_LoadLibrary(const char* LibFileName, DWORD dwFlags);
 	HINSTANCE WINDOWS_LoadLibrary(const char16_t* LibFileName, DWORD dwFlags);
+	HINSTANCE WINDOWS_LoadLibrary(const wchar_t* LibFileName, DWORD dwFlags);
 	BOOL WINDOWS_FreeLibrary(HMODULE hModule);
 	FARPROC WINDOWS_GetProcAddress(HMODULE hModule, LPCSTR lpProcName);
-
-	#endif //__SONIK_I686__ or __SONIK_x86_64__
 
 #elif defined(__linux__)
 

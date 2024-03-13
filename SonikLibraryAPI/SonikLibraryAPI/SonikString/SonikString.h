@@ -30,8 +30,7 @@ namespace SonikLib
 		SonikString(const char* SetStr);
 		SonikString(const char16_t* SetStr);
 		SonikString(const wchar_t* SetPtr);
-		SonikString(const uint8_t* SetStr);
-		SonikString(SonikString&& Move) noexcept;
+		SonikString(const int8_t* SetStr);
 
 		~SonikString(void);
 
@@ -40,7 +39,7 @@ namespace SonikLib
 		//UTF16形式に変換して取得します。(バッファタイプも書き換わります。)
 		const char16_t* c_wcstr(void);
 		//UTF8形式に変換して取得します。(バッファタイプも書き換わります。)
-		const uint8_t* utf8_str(void);
+		const int8_t* utf8_str(void);
 
 		//define切り替えのstrゲット
 		const char* definition_str(void);
@@ -82,7 +81,7 @@ namespace SonikLib
 		SonikString& operator =(const char* Str);
 		SonikString& operator =(const char16_t* w_Str);
 		SonikString& operator =(const wchar_t* w_Str);
-		SonikString& operator =(const uint8_t* utf8_Str);
+		SonikString& operator =(const int8_t* utf8_Str);
 
 		//各入力フォーマットから現在のバッファに変換して結合します。
 		//コピー元とコピー先が同じオブジェクトの場合、そのまま結合します。
@@ -90,7 +89,7 @@ namespace SonikLib
 		SonikString& operator +=(const char* Str);
 		SonikString& operator +=(const char16_t* w_Str);
 		SonikString& operator +=(const wchar_t* w_Str);
-		SonikString& operator +=(const uint8_t* utf8_Str);
+		SonikString& operator +=(const int8_t* utf8_Str);
 
 		//現在のバッファと入力バッファを結合し、別のオブジェクトとして返却します。
 		//コピー元とコピー先が同じオブジェクトの場合、そのまま結合します。
@@ -98,7 +97,7 @@ namespace SonikLib
 		SonikString operator +(const char* Str);
 		SonikString operator +(const char16_t* w_Str);
 		SonikString operator +(const wchar_t* w_Str);
-		SonikString operator +(const uint8_t* utf8_Str);
+		SonikString operator +(const int8_t* utf8_Str);
 
 		//c: 文字列同士を比較します。(strcmp)
 		//c: 一致の場合true 不一致の場合 falseを返却します。
@@ -106,7 +105,7 @@ namespace SonikLib
 		bool operator ==(const char* Str);
 		bool operator ==(const char16_t* w_Str);
 		bool operator ==(const wchar_t* w_Str);
-		bool operator ==(const uint8_t* utf8_Str);
+		bool operator ==(const int8_t* utf8_Str);
 
 		//c: 文字列同士を比較します。(strcmp)
 		//c: 不一致の場合true　一致の場合 falseを返却します。
@@ -114,7 +113,7 @@ namespace SonikLib
 		bool operator !=(const char* Str);
 		bool operator !=(const char16_t* w_Str);
 		bool operator !=(const wchar_t* w_Str);
-		bool operator !=(const uint8_t* utf8_Str);
+		bool operator !=(const int8_t* utf8_Str);
 
 	};
 

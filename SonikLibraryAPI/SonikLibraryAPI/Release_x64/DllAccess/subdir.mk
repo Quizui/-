@@ -5,21 +5,15 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../DllAccess/SonikDllAccessManager.cpp \
-../DllAccess/SonikDllAccessManager_x64.cpp \
-../DllAccess/SonikDllLoader.cpp \
-../DllAccess/SonikDllLoader_x64.cpp 
+../DllAccess/SonikDllLoader.cpp 
 
 CPP_DEPS += \
 ./DllAccess/SonikDllAccessManager.d \
-./DllAccess/SonikDllAccessManager_x64.d \
-./DllAccess/SonikDllLoader.d \
-./DllAccess/SonikDllLoader_x64.d 
+./DllAccess/SonikDllLoader.d 
 
 OBJS += \
 ./DllAccess/SonikDllAccessManager.o \
-./DllAccess/SonikDllAccessManager_x64.o \
-./DllAccess/SonikDllLoader.o \
-./DllAccess/SonikDllLoader_x64.o 
+./DllAccess/SonikDllLoader.o 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -34,7 +28,7 @@ DllAccess/%.o: ../DllAccess/%.cpp DllAccess/subdir.mk
 clean: clean-DllAccess
 
 clean-DllAccess:
-	-$(RM) ./DllAccess/SonikDllAccessManager.d ./DllAccess/SonikDllAccessManager.o ./DllAccess/SonikDllAccessManager_x64.d ./DllAccess/SonikDllAccessManager_x64.o ./DllAccess/SonikDllLoader.d ./DllAccess/SonikDllLoader.o ./DllAccess/SonikDllLoader_x64.d ./DllAccess/SonikDllLoader_x64.o
+	-$(RM) ./DllAccess/SonikDllAccessManager.d ./DllAccess/SonikDllAccessManager.o ./DllAccess/SonikDllLoader.d ./DllAccess/SonikDllLoader.o
 
 .PHONY: clean-DllAccess
 

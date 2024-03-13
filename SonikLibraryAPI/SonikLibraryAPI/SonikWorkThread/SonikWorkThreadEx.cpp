@@ -45,6 +45,7 @@ namespace SonikLib
 		//4ビット目(0x08): デキュー停止フラグ。キューのアンセットに使用します。
 		//5ビット目(0x10): スレッドが処理するジョブがなくて休止状態であるかどうか。
 		//6ビット目(0x20): 各フラグのセット通知(一括変更通知でないと特定タイミングでフラグが無視されるため)
+		//31ビット目(0x80000000): 静的関数完了フラグ(静的関数がreturnするときのフラグ。完全終了告知)
 		uint32_t ThreadFlag;
 
 		bool DetachFlag;
@@ -194,7 +195,7 @@ namespace SonikLib
 		//総合終了===================
 		RefFuncObj.ResetPointer(nullptr);
 		RefLock.Unlock();
-
+		RefFlag = 0x80000000; //31ビット目のみ立てる。
 	};
 
 	//クラス実装=============================================
@@ -203,7 +204,6 @@ namespace SonikLib
 	,FuncQueue_(0)
 	,ThreadFlag(0)
 	,DetachFlag(DetachThread)
-
 	{
 		if( DetachThread )
 		{
@@ -217,7 +217,12 @@ namespace SonikLib
 	WorkThreadEx::pImplEx::~pImplEx(void)
 	{
 		SetThreadExitFlag(true);
-		cond_.notify_one();
+
+		//完全終了フラグが立つまでひたすら起こしまくる。(たまにデッドロックするときの処置)
+		while( ((ThreadFlag & 0x80000000) == 0) )
+		{
+			cond_.notify_one();
+		};
 
 		if( !DetachFlag )
 		{
