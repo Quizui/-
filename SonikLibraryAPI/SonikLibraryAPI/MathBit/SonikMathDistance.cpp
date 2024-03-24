@@ -770,7 +770,7 @@ namespace SonikMath
 	//指定した3DPointのベクトルの長さを計算します。
 	double VectorLength(SonikMathDataBox::Sonik3DPoint& _point_) noexcept
 	{
-		return SonikMath::sqrt( (*(_point_.x)) * (*(_point_.x)) + (*(_point_.x)) * (*(_point_.x)) + (*(_point_.x)) * (*(_point_.x)));
+		return SonikMath::sqrt( (*(_point_.x)) * (*(_point_.x)) + (*(_point_.y)) * (*(_point_.y)) + (*(_point_.z)) * (*(_point_.z)));
 	};
 
 	//二点間の差を表すベクトルを取得します。

@@ -1,4 +1,4 @@
-22:56:57 **** Clean-only build of configuration Release_x64 for project SonikLibraryAPI ****
+15:25:37 **** クリーンのみのビルド of configuration Release_x64 for project SonikLibraryAPI ****
 mingw32-make clean 
 rm -rf ./TimerClock/SonikElapsedTimer.d ./TimerClock/SonikElapsedTimer.o ./TimerClock/SonikElapsedTimer_x64.d ./TimerClock/SonikElapsedTimer_x64.o
 rm -rf ./SonikWorkThread/SonikWorkThreadEx.d ./SonikWorkThread/SonikWorkThreadEx.o ./SonikWorkThread/SonikWorkThreadManagerEx.d ./SonikWorkThread/SonikWorkThreadManagerEx.o
@@ -11,13 +11,13 @@ rm -rf ./SonikFileSystems/SonikFileController_SJISx64.d ./SonikFileSystems/Sonik
 rm -rf ./SonikCAS/SonikAtomicLock.d ./SonikCAS/SonikAtomicLock.o
 rm -rf ./MultiMedia/SonikMM_AudioInfoImple.d ./MultiMedia/SonikMM_AudioInfoImple.o ./MultiMedia/SonikMultiMediaInterface.d ./MultiMedia/SonikMultiMediaInterface.o
 rm -rf ./MathBit/MathBit.d ./MathBit/MathBit.o ./MathBit/SonikKeyFrameMath.d ./MathBit/SonikKeyFrameMath.o ./MathBit/SonikMathDistance.d ./MathBit/SonikMathDistance.o ./MathBit/SonikMathStandard.d ./MathBit/SonikMathStandard.o ./MathBit/SonikMathTrigonometric.d ./MathBit/SonikMathTrigonometric.o ./MathBit/SonikNormalize.d ./MathBit/SonikNormalize.o
-rm -rf ./DllAccess/SonikDllAccessManager.d ./DllAccess/SonikDllAccessManager.o ./DllAccess/SonikDllAccessManager_x64.d ./DllAccess/SonikDllAccessManager_x64.o ./DllAccess/SonikDllLoader.d ./DllAccess/SonikDllLoader.o ./DllAccess/SonikDllLoader_x64.d ./DllAccess/SonikDllLoader_x64.o
+rm -rf ./DllAccess/SonikDllAccessManager.d ./DllAccess/SonikDllAccessManager.o ./DllAccess/SonikDllLoader.d ./DllAccess/SonikDllLoader.o
 rm -rf ./Audio/Functions/LoadFunction.d ./Audio/Functions/LoadFunction.o ./Audio/Functions/WaveBitConvert.d ./Audio/Functions/WaveBitConvert.o ./Audio/Functions/WriteFunction.d ./Audio/Functions/WriteFunction.o
 rm -rf ./Audio/Format/SonikAppleAiffFormat.d ./Audio/Format/SonikAppleAiffFormat.o ./Audio/Format/SonikWindowsWaveFormat.d ./Audio/Format/SonikWindowsWaveFormat.o
 rm -rf ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.d ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o
 rm -rf lib_Rx64_SonikLibraryAPI.a
  
-22:56:57 **** Build of configuration Release_x64 for project SonikLibraryAPI ****
+15:25:37 **** ビルド of configuration Release_x64 for project SonikLibraryAPI ****
 mingw32-make all 
 Building file: ../TimerClock/SonikElapsedTimer.cpp
 Invoking: GCC C++ Compiler
@@ -100,12 +100,12 @@ In file included from <built-in>:469:
 Finished building: ../SonikString/SonikString.cpp
  
 Building file: ../SonikString/SonikStringConvert.cpp
+Invoking: GCC C++ Compiler
+clang++ -std=c++20 -D__SONIK_x86_64__=1 -D_RELEASE -D__cplusplus=202002L -D_WIN64 -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SonikString/SonikStringConvert.d" -MT"SonikString/SonikStringConvert.o" -o "SonikString/SonikStringConvert.o" "../SonikString/SonikStringConvert.cpp"
 In file included from <built-in>:469:
 <command line>:3:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
-Invoking: GCC C++ Compiler
     3 | #define __cplusplus 202002L
       |         ^
-clang++ -std=c++20 -D__SONIK_x86_64__=1 -D_RELEASE -D__cplusplus=202002L -D_WIN64 -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SonikString/SonikStringConvert.d" -MT"SonikString/SonikStringConvert.o" -o "SonikString/SonikStringConvert.o" "../SonikString/SonikStringConvert.cpp"
 ../SonikString/SonikStringConvert.cpp:57:68: warning: result of comparison of constant 191 with expression of type 'const char' is always false [-Wtautological-constant-out-of-range-compare]
    57 |                 if( pCheckSrc[0] == 0xEF && pCheckSrc[1] == 0xBB && pCheckSrc[2] == 0xBF )
       |                                                                     ~~~~~~~~~~~~ ^  ~~~~

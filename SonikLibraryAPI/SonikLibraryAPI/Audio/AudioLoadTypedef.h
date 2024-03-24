@@ -8,7 +8,7 @@
 #ifndef SAUDIO_LOAD_FUNCTION_TYPEDEF_H_
 #define SAUDIO_LOAD_FUNCTION_TYPEDEF_H_
 
-#include "./FormatSmtPtr/AudioSmartPointer.h"
+#include "../SmartPointer/SonikSmartPointer.hpp"
 #include "./Format/SonikAudioFormat.h"
 
 namespace SonikAudio
@@ -62,7 +62,7 @@ namespace SonikAudio
 
 	};
 
-	typedef SonikAudioFormatPointer::SonikAudioFormatSmtPtr<SonikAudioFormat::SonikAudioFormat> SAudioFormat;
+	using SAudioFormat =  SonikLib::SharedSmtPtr<SonikAudioFormat::SonikAudioFormat>;
 
 };
 

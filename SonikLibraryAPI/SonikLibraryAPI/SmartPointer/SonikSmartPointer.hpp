@@ -196,6 +196,9 @@ namespace SonikLib
 				m_Pointer = _SmtPtr_.m_Pointer;
 				m_Count = _SmtPtr_.m_Count;
 
+				_SmtPtr_.m_Pointer = nullptr;
+				_SmtPtr_.m_Count = nullptr;
+
 				//moveなのでAddref()をコールする必要はない。
 			};
 

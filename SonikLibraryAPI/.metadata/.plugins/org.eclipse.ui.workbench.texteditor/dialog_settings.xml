@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="int8_t"/>
+		<item key="selection" value="WINDOWS_FreeLibrary"/>
 		<item key="casesensitive" value="true"/>
 		<item key="incremental" value="true"/>
 		<item key="wrap" value="true"/>
 		<item key="wholeword" value="false"/>
 		<list key="findhistory">
+			<item value="WINDOWS_FreeLibrary"/>
 			<item value="uint8_t"/>
 			<item value="SonikString"/>
 			<item value="SetChangeFuntionCallLoopFlag"/>
@@ -22,7 +23,6 @@
 			<item value="SonikAtomicLock"/>
 			<item value="ThreadPoolArray"/>
 			<item value="Inserted_"/>
-			<item value="LinearTop"/>
 		</list>
 		<list key="replacehistory">
 			<item value="int8_t"/>

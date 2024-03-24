@@ -1,7 +1,7 @@
 Audio/Functions/LoadFunction.o: ../Audio/Functions/LoadFunction.cpp \
   ../Audio/Functions/./LoadFunction.h \
   ../Audio/Functions/./../AudioLoadTypedef.h \
-  ../Audio/Functions/./.././FormatSmtPtr/AudioSmartPointer.h \
+  ../Audio/Functions/./../../SmartPointer/SonikSmartPointer.hpp \
   ../Audio/Functions/./.././Format/SonikAudioFormat.h \
   ../Audio/Functions/../../SonikString/SonikString.h \
   ../Audio/Functions/../../SonikString/../Container/RangedForContainer.hpp \
@@ -12,7 +12,7 @@ Audio/Functions/LoadFunction.o: ../Audio/Functions/LoadFunction.cpp \
   ../Audio/Functions/..//Functions/../AudioLoadTypedef.h
 ../Audio/Functions/./LoadFunction.h:
 ../Audio/Functions/./../AudioLoadTypedef.h:
-../Audio/Functions/./.././FormatSmtPtr/AudioSmartPointer.h:
+../Audio/Functions/./../../SmartPointer/SonikSmartPointer.hpp:
 ../Audio/Functions/./.././Format/SonikAudioFormat.h:
 ../Audio/Functions/../../SonikString/SonikString.h:
 ../Audio/Functions/../../SonikString/../Container/RangedForContainer.hpp:

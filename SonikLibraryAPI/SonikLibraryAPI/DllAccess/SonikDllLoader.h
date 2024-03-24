@@ -43,4 +43,4 @@ namespace SonikDllLoader
 
 
 
-#endif /* RCYDLLLOADER_H_ */
+#endif /* SONIKDLLLOADER_H_ */

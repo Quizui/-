@@ -1,7 +1,7 @@
 Audio/Functions/WaveBitConvert.o: ../Audio/Functions/WaveBitConvert.cpp \
   ../Audio/Functions/../Functions/WaveBitConvert.h \
   ../Audio/Functions/../Functions/../AudioLoadTypedef.h \
-  ../Audio/Functions/../Functions/.././FormatSmtPtr/AudioSmartPointer.h \
+  ../Audio/Functions/../Functions/../../SmartPointer/SonikSmartPointer.hpp \
   ../Audio/Functions/../Functions/.././Format/SonikAudioFormat.h \
   ../Audio/Functions/../../MathBit/SonikNormalize.h \
   ../Audio/Functions/../Format/SonikAudioFormat.h \
@@ -10,7 +10,7 @@ Audio/Functions/WaveBitConvert.o: ../Audio/Functions/WaveBitConvert.cpp \
   ../Audio/Functions/fftw3.h
 ../Audio/Functions/../Functions/WaveBitConvert.h:
 ../Audio/Functions/../Functions/../AudioLoadTypedef.h:
-../Audio/Functions/../Functions/.././FormatSmtPtr/AudioSmartPointer.h:
+../Audio/Functions/../Functions/../../SmartPointer/SonikSmartPointer.hpp:
 ../Audio/Functions/../Functions/.././Format/SonikAudioFormat.h:
 ../Audio/Functions/../../MathBit/SonikNormalize.h:
 ../Audio/Functions/../Format/SonikAudioFormat.h:

@@ -368,7 +368,10 @@ namespace SonikLib
 	{
 		ThreadFlag |= 0x08;
 
-		while( (ThreadFlag & 0x08) != 0 );
+		while( (ThreadFlag & 0x08) != 0 )
+		{
+			cond_.notify_one();
+		};
 
 	};
 

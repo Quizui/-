@@ -56,7 +56,7 @@ namespace SonikAudioWriteFunction
 		uint32_t fmt_ = 24;
 		uint32_t dat_ = 8;
 
-		const SonikAudioFormatPlatForm::WindowsWaveFormat* winformat = WriteAudioData.CastAccess<SonikAudioFormatPlatForm::WindowsWaveFormat>();
+		const SonikAudioFormatPlatForm::WindowsWaveFormat* winformat = reinterpret_cast<SonikAudioFormatPlatForm::WindowsWaveFormat*>(WriteAudioData.GetPointer());
 
 
 		char* Data = new char[ rif_ + fmt_ + dat_ + winformat->Get_WaveDataSize() ];
