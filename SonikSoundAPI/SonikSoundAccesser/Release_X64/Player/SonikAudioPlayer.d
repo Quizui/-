@@ -1,41 +1,39 @@
 Player/SonikAudioPlayer.o: ../Player/SonikAudioPlayer.cpp \
-  ../Player/SonikAudioPlayer.h ../Player/../AudioSmartPointer.h \
+  ../Player/SonikAudioPlayer.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../../../SmartPointer/SonikSmartPointer.hpp \
   ../Player/SonikAudioPlayer_ControlData.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikCAS/SonikAtomicLock.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../../../SonikCAS/SonikAtomicLock.h \
   ../Player/SonikAudioPlayer_ControlData_Interface.h \
-  ../Player/../PlayStateEnums.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../AudioLoadTypedef.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././FormatSmtPtr/AudioSmartPointer.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././Format/SonikAudioFormat.h \
-  ../Player/../SAudioAccesserTypedef.h \
-  ../Player/.././AudioSmartPointer.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../PlayStateEnums.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../../AudioLoadTypedef.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../.././Format/SonikAudioFormat.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../SAudioAccesserTypedef.h \
   ../Player/../Task/AudioPlayerTaskManager.h \
   ../Player/../Task/PlayerTaskInterface.h \
-  ../Player/../Task/../AudioSmartPointer.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/SonikWorkThreadEx.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../Container/SonikAtomicQueue.hpp \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../Container/../SonikCAS/SonikAtomicLock.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../Container/SonikAtomicQueue.hpp \
-  ../Player/../Task/PlayerTask.h ../Player/../Task/../PlayStateEnums.h
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../../../SonikWorkThread/SonikWorkThreadEx.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../../../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp \
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../../../SonikWorkThread/../Container/SonikAtomicQueue.hpp \
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../../../SonikWorkThread/../Container/../SonikCAS/SonikAtomicLock.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../../../Container/SonikAtomicQueue.hpp \
+  ../Player/../Task/PlayerTask.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../../../MathBit/SonikMathDistance.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../../../MathBit/../SmartPointer/SonikSmartPointer.hpp
 ../Player/SonikAudioPlayer.h:
-../Player/../AudioSmartPointer.h:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../../../SmartPointer/SonikSmartPointer.hpp:
 ../Player/SonikAudioPlayer_ControlData.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikCAS/SonikAtomicLock.h:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../../../SonikCAS/SonikAtomicLock.h:
 ../Player/SonikAudioPlayer_ControlData_Interface.h:
-../Player/../PlayStateEnums.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../AudioLoadTypedef.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././FormatSmtPtr/AudioSmartPointer.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././Format/SonikAudioFormat.h:
-../Player/../SAudioAccesserTypedef.h:
-../Player/.././AudioSmartPointer.h:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../PlayStateEnums.h:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../../AudioLoadTypedef.h:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../.././Format/SonikAudioFormat.h:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../SAudioAccesserTypedef.h:
 ../Player/../Task/AudioPlayerTaskManager.h:
 ../Player/../Task/PlayerTaskInterface.h:
-../Player/../Task/../AudioSmartPointer.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/SonikWorkThreadEx.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../Container/SonikAtomicQueue.hpp:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../Container/../SonikCAS/SonikAtomicLock.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../Container/SonikAtomicQueue.hpp:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../../../SonikWorkThread/SonikWorkThreadEx.h:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../../../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../../../SonikWorkThread/../Container/SonikAtomicQueue.hpp:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../../../SonikWorkThread/../Container/../SonikCAS/SonikAtomicLock.h:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../../../Container/SonikAtomicQueue.hpp:
 ../Player/../Task/PlayerTask.h:
-../Player/../Task/../PlayStateEnums.h:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../../../MathBit/SonikMathDistance.h:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../../../MathBit/../SmartPointer/SonikSmartPointer.hpp:

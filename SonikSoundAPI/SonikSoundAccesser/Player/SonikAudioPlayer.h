@@ -9,7 +9,7 @@
 #define PLAYER_SONIKAUDIOPLAYER_H_
 
 #include <stdint.h>
-#include "../AudioSmartPointer.h"
+#include "../../../SmartPointer/SonikSmartPointer.hpp"
 
 //前方宣言
 namespace SonikAudioDataInterface
@@ -24,18 +24,23 @@ namespace SonikAudioTaskInterface
 	class SonikAudioPlayerTaskManagerInterface;
 };
 
+namespace SonikMathDataBox
+{
+	class Sonik3DPoint;
+};
+
 namespace SonikAudio
 {
 	//いわゆるオーディオコントローラーさん。
 	class SonikAudioPlayer
 	{
 	private:
-		SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> mp_AudioData;
-		SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface> mp_TskMng;
+		SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> mp_AudioData;
+		SonikLib::SharedSmtPtr<SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface> mp_TskMng;
 
 	public:
 		//コンストラクタ
-		SonikAudioPlayer(SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetAudioData, SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface> SetTskMng);
+		SonikAudioPlayer(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetAudioData, SonikLib::SharedSmtPtr<SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface> SetTskMng);
 		//デストラクタ
 		~SonikAudioPlayer(void);
 
@@ -49,7 +54,7 @@ namespace SonikAudio
 
 		//ポジションコネクトのセット
 		//他のオブジェクトの座標と同期させたいときに使います。
-		bool SetPositionConnect(double* x, double* y, double* z);
+		bool SetPositionConnect(SonikMathDataBox::Sonik3DPoint* _3dpos_);
 
 		//オーディオステータス関連
 		bool Play(void);					//オーディステータスにPlayをセットします。

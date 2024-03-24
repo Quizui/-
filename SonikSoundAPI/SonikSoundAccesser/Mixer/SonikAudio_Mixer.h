@@ -11,7 +11,7 @@
 //Audioファイルを加工するミキサーさんです。
 #include <stdint.h>
 #include "../../../Container/SonikPriorityList.hpp"
-#include "../AudioSmartPointer.h"
+#include "../../../SmartPointer/SonikSmartPointer.hpp"
 #include "../../../SonikWorkThread/SonikWorkThreadEx.h"
 
 namespace SonikAudioData
@@ -35,7 +35,7 @@ namespace SonikAudio
 	{
 	private:
 		//ミキサで逐次処理していくオーディオのリスト。
-		SonikLib::SonikPriorityList<SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData>>* mp_AudioList;
+		SonikLib::SonikPriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>* mp_AudioList;
 		//処理用スレッド
 		SonikLib::WorkThreadEx* mp_thread;
 
@@ -46,7 +46,7 @@ namespace SonikAudio
 		SonikAudioPlatForm::SonikPlatformAudioInterface* mp_platform;
 
 		//リスナ
-		SonikAudioPointer::SonikAudioNormalSmtPtr<SonikAudio::SonikAudioListener> mp_Listener;
+		SonikLib::SharedSmtPtr<SonikAudio::SonikAudioListener> mp_Listener;
 
 		//送出用バッファ
 		int8_t* mp_buffer;
@@ -57,7 +57,7 @@ namespace SonikAudio
 		unsigned long m_samplingRate;
 
 		//関数ポインタ
-		void (SonikAudioMixer::*p_mfunc_)(SonikLib::SonikLinerOperator_PriorityList<SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr);
+		void (SonikAudioMixer::*p_mfunc_)(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr);
 
 	private:
 		//スレッドで駆動させる関数。
@@ -65,17 +65,17 @@ namespace SonikAudio
 
 		//各チャンネル数で処理が微妙に異なるので....。
 		//それぞれ作るのちょーめんどくさいけどループ内の配列をチャンネル数で展開できるので処理が気持ち重くならないかも。
-		void Mixing_16bit_1ch(SonikLib::SonikLinerOperator_PriorityList<SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr);
-		void Mixing_16bit_2ch(SonikLib::SonikLinerOperator_PriorityList<SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr);
-		void Mixing_16bit_4ch(SonikLib::SonikLinerOperator_PriorityList<SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr);
-		void Mixing_16bit_6ch(SonikLib::SonikLinerOperator_PriorityList<SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr); // 5.1ch (低音専用が0.1chあるが1chとしてカウントされるため。
-		void Mixing_16bit_8ch(SonikLib::SonikLinerOperator_PriorityList<SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr); // 7.1ch (低音専用が0.1chあるが1chとしてカウントされるため。
+		void Mixing_16bit_1ch(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr);
+		void Mixing_16bit_2ch(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr);
+		void Mixing_16bit_4ch(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr);
+		void Mixing_16bit_6ch(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr); // 5.1ch (低音専用が0.1chあるが1chとしてカウントされるため。
+		void Mixing_16bit_8ch(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr); // 7.1ch (低音専用が0.1chあるが1chとしてカウントされるため。
 
-		void Mixing_32bit_1ch(SonikLib::SonikLinerOperator_PriorityList<SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr);
-		void Mixing_32bit_2ch(SonikLib::SonikLinerOperator_PriorityList<SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr);
-		void Mixing_32bit_4ch(SonikLib::SonikLinerOperator_PriorityList<SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr);
-		void Mixing_32bit_6ch(SonikLib::SonikLinerOperator_PriorityList<SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr); // 5.1ch (低音専用が0.1chあるが1chとしてカウントされるため。
-		void Mixing_32bit_8ch(SonikLib::SonikLinerOperator_PriorityList<SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr); // 7.1ch (低音専用が0.1chあるが1chとしてカウントされるため。
+		void Mixing_32bit_1ch(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr);
+		void Mixing_32bit_2ch(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr);
+		void Mixing_32bit_4ch(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr);
+		void Mixing_32bit_6ch(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr); // 5.1ch (低音専用が0.1chあるが1chとしてカウントされるため。
+		void Mixing_32bit_8ch(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr); // 7.1ch (低音専用が0.1chあるが1chとしてカウントされるため。
 
 	public:
 		//コンストラクタ
@@ -84,10 +84,10 @@ namespace SonikAudio
 		~SonikAudioMixer(void);
 
 		//イニシャライザ
-		bool Initialize(uint32_t SetAudioListMax, uint32_t FormatBit, uint16_t SetChannel, uint32_t SetSamplingRate, SonikAudioPlatForm::SonikPlatformAudioInterface* Set_PFI_Pointer, SonikAudioPointer::SonikAudioNormalSmtPtr<SonikAudio::SonikAudioListener> SetListener);
+		bool Initialize(uint32_t SetAudioListMax, uint32_t FormatBit, uint16_t SetChannel, uint32_t SetSamplingRate, SonikAudioPlatForm::SonikPlatformAudioInterface* Set_PFI_Pointer, SonikLib::SharedSmtPtr<SonikAudio::SonikAudioListener> SetListener);
 
 		//オーディオの追加。
-		bool AddAudio(SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData> SetAudio);
+		bool AddAudio(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> SetAudio);
 
 	};
 

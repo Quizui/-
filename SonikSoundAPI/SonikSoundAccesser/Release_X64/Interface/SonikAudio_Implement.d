@@ -1,72 +1,66 @@
 Interface/SonikAudio_Implement.o: ../Interface/SonikAudio_Implement.cpp \
   ../Interface/SonikAudio_Implement.h ../Interface/SonikAudio.h \
-  ../Interface/../SAudioAccesserTypedef.h \
-  ../Interface/.././AudioSmartPointer.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/LoadFunction.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/../AudioLoadTypedef.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/.././FormatSmtPtr/AudioSmartPointer.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/.././Format/SonikAudioFormat.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Format/SonikAudioFormat.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/SonikDllAccessManager.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/../SonikString/SonikString.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/../SonikString/SonikStringConvert.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/../SonikString/../Container/RangedForContainer.hpp \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../AudioLoadTypedef.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../SAudioAccesserTypedef.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../SmartPointer/SonikSmartPointer.hpp \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../Functions/LoadFunction.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../Functions/../AudioLoadTypedef.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../Functions/../../SmartPointer/SonikSmartPointer.hpp \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../Functions/.././Format/SonikAudioFormat.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../Format/SonikAudioFormat.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../DllAccess/SonikDllAccessManager.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../DllAccess/../SonikString/SonikString.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../DllAccess/../SonikString/../Container/RangedForContainer.hpp \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../DllAccess/../SmartPointer/SonikSmartPointer.hpp \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../DllAccess/../SonikCAS/SonikAtomicLock.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../AudioLoadTypedef.h \
   ../Interface/../Task/AudioPlayerTaskManager.h \
   ../Interface/../Task/PlayerTaskInterface.h \
-  ../Interface/../Task/../AudioSmartPointer.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/SonikWorkThreadEx.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../Container/SonikAtomicQueue.hpp \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../Container/../SonikCAS/SonikAtomicLock.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../Container/SonikAtomicQueue.hpp \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../SonikWorkThread/SonikWorkThreadEx.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../SonikWorkThread/../Container/SonikAtomicQueue.hpp \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../SonikWorkThread/../Container/../SonikCAS/SonikAtomicLock.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../Container/SonikAtomicQueue.hpp \
   ../Interface/../Mixer/SonikAudio_Mixer.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../Container/SonikPriorityList.hpp \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../Container/../SonikCAS/SonikAtomicLock.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../Container/SonikPriorityListLinearSearch.hpp \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../Container/SonikPriorityListNode.hpp \
-  ../Interface/../Mixer/../AudioSmartPointer.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../Container/SonikPriorityList.hpp \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../Container/../SonikCAS/SonikAtomicLock.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../Container/SonikPriorityListLinearSearch.hpp \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../Container/SonikPriorityListNode.hpp \
   ../Interface/../Player/SonikAudioPlayer.h \
-  ../Interface/../Player/../AudioSmartPointer.h \
   ../Interface/../Player/SonikAudioPlayer_ControlData.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikCAS/SonikAtomicLock.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../SonikCAS/SonikAtomicLock.h \
   ../Interface/../Player/SonikAudioPlayer_ControlData_Interface.h \
-  ../Interface/../Player/../PlayStateEnums.h \
-  ../Interface/../Player/../SAudioAccesserTypedef.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Interface/../PlayStateEnums.h \
   ../Interface/../Listener/SonikAudioListener.h
 ../Interface/SonikAudio_Implement.h:
 ../Interface/SonikAudio.h:
-../Interface/../SAudioAccesserTypedef.h:
-../Interface/.././AudioSmartPointer.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/LoadFunction.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/../AudioLoadTypedef.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/.././FormatSmtPtr/AudioSmartPointer.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Functions/.././Format/SonikAudioFormat.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Format/SonikAudioFormat.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/SonikDllAccessManager.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/../SonikString/SonikString.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/../SonikString/SonikStringConvert.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../DllAccess/../SonikString/../Container/RangedForContainer.hpp:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../AudioLoadTypedef.h:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../SAudioAccesserTypedef.h:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../SmartPointer/SonikSmartPointer.hpp:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../Functions/LoadFunction.h:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../Functions/../AudioLoadTypedef.h:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../Functions/../../SmartPointer/SonikSmartPointer.hpp:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../Functions/.././Format/SonikAudioFormat.h:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../Format/SonikAudioFormat.h:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../DllAccess/SonikDllAccessManager.h:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../DllAccess/../SonikString/SonikString.h:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../DllAccess/../SonikString/../Container/RangedForContainer.hpp:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../DllAccess/../SmartPointer/SonikSmartPointer.hpp:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../DllAccess/../SonikCAS/SonikAtomicLock.h:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../AudioLoadTypedef.h:
 ../Interface/../Task/AudioPlayerTaskManager.h:
 ../Interface/../Task/PlayerTaskInterface.h:
-../Interface/../Task/../AudioSmartPointer.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/SonikWorkThreadEx.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../Container/SonikAtomicQueue.hpp:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikWorkThread/../Container/../SonikCAS/SonikAtomicLock.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../Container/SonikAtomicQueue.hpp:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../SonikWorkThread/SonikWorkThreadEx.h:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../SonikWorkThread/../Container/SonikAtomicQueue.hpp:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../SonikWorkThread/../Container/../SonikCAS/SonikAtomicLock.h:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../Container/SonikAtomicQueue.hpp:
 ../Interface/../Mixer/SonikAudio_Mixer.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../Container/SonikPriorityList.hpp:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../Container/../SonikCAS/SonikAtomicLock.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../Container/SonikPriorityListLinearSearch.hpp:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../Container/SonikPriorityListNode.hpp:
-../Interface/../Mixer/../AudioSmartPointer.h:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../Container/SonikPriorityList.hpp:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../Container/../SonikCAS/SonikAtomicLock.h:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../Container/SonikPriorityListLinearSearch.hpp:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../Container/SonikPriorityListNode.hpp:
 ../Interface/../Player/SonikAudioPlayer.h:
-../Interface/../Player/../AudioSmartPointer.h:
 ../Interface/../Player/SonikAudioPlayer_ControlData.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikCAS/SonikAtomicLock.h:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../../../SonikCAS/SonikAtomicLock.h:
 ../Interface/../Player/SonikAudioPlayer_ControlData_Interface.h:
-../Interface/../Player/../PlayStateEnums.h:
-../Interface/../Player/../SAudioAccesserTypedef.h:
+D:/MyLibrary/include/Audio/SoundSystem/Interface/../PlayStateEnums.h:
 ../Interface/../Listener/SonikAudioListener.h:

@@ -12,11 +12,12 @@
 #include "../Task/AudioPlayerTaskManager.h"
 #include "../Task/PlayerTask.h"
 #include "../PlayStateEnums.h"
+#include "../../../MathBit/SonikMathDistance.h"
 
 namespace SonikAudio
 {
 	//コンストラクタ
-	SonikAudioPlayer::SonikAudioPlayer(SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetAudioData, SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface> SetTskMng)
+	SonikAudioPlayer::SonikAudioPlayer(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetAudioData, SonikLib::SharedSmtPtr<SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface> SetTskMng)
 	:mp_AudioData(SetAudioData)
 	,mp_TskMng(SetTskMng)
 	{
@@ -70,11 +71,11 @@ namespace SonikAudio
 
 	//ポジションコネクトのセット
 	//他のオブジェクトの座標と同期させたいときに使います。
-	bool SonikAudioPlayer::SetPositionConnect(double* x, double* y, double* z)
+	bool SonikAudioPlayer::SetPositionConnect(SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	{
 		SonikAudioPlayerTask::APTask_PositionConnectChange* l_task = nullptr;
 
-		l_task = new(std::nothrow) SonikAudioPlayerTask::APTask_PositionConnectChange(mp_AudioData, x, y, z);
+		l_task = new(std::nothrow) SonikAudioPlayerTask::APTask_PositionConnectChange(mp_AudioData, _3dpos_);
 		if(l_task == nullptr)
 		{
 			return false;

@@ -17,6 +17,7 @@
 #include "../../../DllAccess/SonikDllAccessManager.h"
 #include "../SAudioAccesserTypedef.h"
 #include "../../AudioLoadTypedef.h"
+#include "../../../SmartPointer/SonikSmartPointer.hpp"
 
 //各プラットフォームのインターフェースクラスポインタを使うため前方宣言
 namespace SonikAudioPlatForm
@@ -54,13 +55,13 @@ namespace SonikAudio
 		std::map<uint32_t, SonikAudio::SAudioFormat> audiomap;
 
 		//プレイヤーのオーディオデータを保持するmap
-		std::map<uint64_t, SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData>> ap_Data;
+		std::map<uint64_t, SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>> ap_Data;
 
 		//プレイヤーとミキサの仲介を担うタスクマネージャー
-		SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioPlayerTask::SonikAudioPlayerTaskManager> m_TaskMng;
+		SonikLib::SharedSmtPtr<SonikAudioPlayerTask::SonikAudioPlayerTaskManager> m_TaskMng;
 
 		//ミキサ
-		SonikAudioPointer::SonikAudioNormalSmtPtr<SonikAudio::SonikAudioMixer> mp_Mixer;
+		SonikLib::SharedSmtPtr<SonikAudio::SonikAudioMixer> mp_Mixer;
 		//リスナ(前方宣言はSAudioAccesserTypedef.hで宣言済)
 		SonikAudio::SAudioListener mp_Listener;
 

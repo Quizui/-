@@ -10,7 +10,7 @@
 
 #include "../../../SonikCAS/SonikAtomicLock.h"
 #include "../SAudioAccesserTypedef.h"
-#include "../AudioSmartPointer.h"
+#include "../../../SmartPointer/SonikSmartPointer.hpp"
 
 //Singleton Class
 namespace SonikAudio
@@ -19,7 +19,7 @@ namespace SonikAudio
 	{
 	private:
 		SonikLib::S_CAS::SonikAtomicLock _lock;
-		SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudio::SonikAudioInterface> _interface;
+		SonikLib::SharedSmtPtr<SonikAudio::SonikAudioInterface> _interface;
 
 	private:
 		//Constructor

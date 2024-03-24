@@ -56,7 +56,7 @@ namespace SonikAudio
 	{
 		_lock.lock();
 
-		if( !(_interface == reinterpret_cast<uint64_t>(nullptr)) ) //!=演算子オーバーライドまだしてないので否定演算子 ! で代用。
+		if( !_interface.IsNullptr() ) //!=演算子オーバーライドまだしてないので否定演算子 ! で代用。
 		{
 			RefGetInterface = _interface;
 			_lock.Unlock();
@@ -69,7 +69,8 @@ namespace SonikAudio
 
 		//Dllロード
 		SonikLib::SDllHandle l_handle;
-		if( !SonikLib::SonikDllHandleManager::Instance().DllGetLoad(dllstr.c_str(), l_handle) )
+		SonikLib::SonikDllHandleManager l_dllmng;
+		if( !l_dllmng.DllGetLoad(dllstr.c_str(), l_handle) )
 		{
 			_lock.Unlock();
 			return false;

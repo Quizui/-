@@ -74,9 +74,9 @@ namespace SonikAudioPlayerTask
 			return false;
 		};
 
-		SonikLib::Members_0_Func<SonikAudioPlayerTaskManager>* l_cls_func_obj = nullptr;
-		l_cls_func_obj = SonikLib::Members_0_Func<SonikAudioPlayerTaskManager>::New();
-		if(l_cls_func_obj == nullptr)
+		SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface> l_cls_func_obj;;
+		l_cls_func_obj = SonikLib::Members_0_Func<SonikAudioPlayerTaskManager>::New(this, static_cast<void (SonikAudioPlayerTaskManager::*)(void)>(&SonikAudioPlayerTaskManager::ThreadProcFunc));
+		if(l_cls_func_obj.IsNullptr())
 		{
 			delete mp_TaskThread;
 
@@ -84,10 +84,12 @@ namespace SonikAudioPlayerTask
 			return false;
 		};
 
+		l_cls_func_obj->Set_DestroyObjectFlag(false);
+
 		mp_TaskQueue = new(std::nothrow) SonikLib::SonikAtomicQueue<SonikAudioTaskInterface::PlayerTaskInterface*>(QueueItemNum);
 		if(mp_TaskQueue == nullptr)
 		{
-			delete l_cls_func_obj;
+			l_cls_func_obj.ResetPointer(nullptr);
 			delete mp_TaskThread;
 
 			mp_TaskThread = nullptr;
@@ -95,9 +97,6 @@ namespace SonikAudioPlayerTask
 		}
 
 		//スレッド関数駆動開始。
-		l_cls_func_obj->SetObject(this);
-		l_cls_func_obj->SetFunc(&SonikAudioPlayerTaskManager::ThreadProcFunc);
-
 		mp_TaskThread->SetCallFunction(l_cls_func_obj, true);
 
 		return true;

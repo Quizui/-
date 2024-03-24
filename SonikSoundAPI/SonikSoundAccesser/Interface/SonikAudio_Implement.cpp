@@ -141,7 +141,7 @@ namespace SonikAudio
 	{
 		SonikAudio::SonikAudioPlayer* l_player = nullptr;
 		SonikAudioData::SonikAudioControlData* l_apdata = nullptr;
-		SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData> apdata_smtptr;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> apdata_smtptr;
 		decltype(audiomap)::iterator _it;
 
 
@@ -160,11 +160,11 @@ namespace SonikAudio
 
 		apdata_smtptr.ResetPointer(l_apdata);
 
-		SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> _player_arg_f;
-		SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface> _player_arg_s;
+		SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> _player_arg_f;
+		SonikLib::SharedSmtPtr<SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface> _player_arg_s;
 
-		SonikAudioPointer::SmtPtrUpCast(apdata_smtptr, _player_arg_f);
-		SonikAudioPointer::SmtPtrUpCast(m_TaskMng, _player_arg_s);
+		SonikLib::SharedCast_Dynamic<SonikAudioData::SonikAudioControlData, SonikAudioDataInterface::SADInterface_PlayerSide>(apdata_smtptr, _player_arg_f);
+		SonikLib::SharedCast_Dynamic<SonikAudioPlayerTask::SonikAudioPlayerTaskManager, SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface>(m_TaskMng, _player_arg_s);
 
 		l_player = new(std::nothrow) SonikAudio::SonikAudioPlayer(_player_arg_f, _player_arg_s);
 		if( l_player == nullptr )
@@ -175,7 +175,7 @@ namespace SonikAudio
 		}
 
 		//ControlDataを登録
-		if( !ap_Data.insert( std::map<uint64_t, SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData>>::value_type(apdata_smtptr->Get_UniqueID(), apdata_smtptr) ).second )
+		if( !ap_Data.insert( std::map<uint64_t, SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>::value_type(apdata_smtptr->Get_UniqueID(), apdata_smtptr) ).second )
 		{
 			//Key重複
 

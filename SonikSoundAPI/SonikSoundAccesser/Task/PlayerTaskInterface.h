@@ -8,7 +8,7 @@
 #ifndef TASK_PLAYERTASKINTERFACE_H_
 #define TASK_PLAYERTASKINTERFACE_H_
 
-#include "../AudioSmartPointer.h"
+#include "../SAudioAccesserTypedef.h"
 
 //前方宣言
 namespace SonikAudioData
@@ -23,7 +23,7 @@ namespace SonikAudioTaskInterface
 	class PlayerTaskInterface
 	{
 	protected:
-		SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioData::SonikAudioControlData> ControlData;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> ControlData;
 
 	public:
 		//コンストラクタ

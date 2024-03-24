@@ -9,7 +9,7 @@
 #define SAUDIO_ACCESSER_TYPEDEF_H_
 
 //#include "AudioFormat/AudioLoadTypedef.h"
-#include "./AudioSmartPointer.h"
+#include "../../SmartPointer/SonikSmartPointer.hpp"
 
 namespace SonikAudio
 {
@@ -26,14 +26,15 @@ namespace SonikAudio
 	class SonikAudioListener;
 };
 
+
 namespace SonikAudio
 {
 
-	using SAudioInterface = SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudio::SonikAudioInterface>;
+	using SAudioInterface = SonikLib::SharedSmtPtr<SonikAudio::SonikAudioInterface>;
 
-	using SAudioPlayer = SonikAudioPointer::SonikAudioPlayerSmtPtr<SonikAudio::SonikAudioPlayer>;
+	using SAudioPlayer = SonikLib::SharedSmtPtr<SonikAudio::SonikAudioPlayer>;
 
-	using SAudioListener = SonikAudioPointer::SonikAudioNormalSmtPtr<SonikAudio::SonikAudioListener>;
+	using SAudioListener = SonikLib::SharedSmtPtr<SonikAudio::SonikAudioListener>;
 
 };
 

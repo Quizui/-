@@ -17,6 +17,10 @@ namespace SonikAudioDataInterface
 	class SADInterface_PlayerSide;
 };
 
+namespace SonikMathDataBox
+{
+	class Sonik3DPoint;
+};
 
 //Playerから発行されるタスクを定義、実装。
 namespace SonikAudioPlayerTask
@@ -29,7 +33,7 @@ namespace SonikAudioPlayerTask
 
 	public:
 		//コンストラクタ
-		APTask_VolumeChange(SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, float VolumeArg = 1.0f);
+		APTask_VolumeChange(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, float VolumeArg = 1.0f);
 
 		//値のセット
 		void SetValue(float VolumeArg);
@@ -46,7 +50,7 @@ namespace SonikAudioPlayerTask
 
 	public:
 		//コンストラクタ
-		APTask_StatusChange(SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikAudioEnum::PlayStateID SetValue = SonikAudioEnum::PlayStateID::PS_Stop);
+		APTask_StatusChange(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikAudioEnum::PlayStateID SetValue = SonikAudioEnum::PlayStateID::PS_Stop);
 
 		//値のセット
 		void SetValue(SonikAudioEnum::PlayStateID SetValue);
@@ -66,7 +70,7 @@ namespace SonikAudioPlayerTask
 
 	public:
 		//コンストラクタ
-		APTask_PositionChange(SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetPosx = 0.0, double SetPosy = 0.0, double SetPosz = 0.0);
+		APTask_PositionChange(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetPosx = 0.0, double SetPosy = 0.0, double SetPosz = 0.0);
 
 		//値のセット
 		void SetValue(double SetPosx, double SetPosy, double SetPosz);
@@ -77,21 +81,18 @@ namespace SonikAudioPlayerTask
 	};
 
 	//ポジションのコネクトを設定します。
-	//設定したポインタはDeleteがよばれません。
 	//コネクトを解除したい場合は各引数にnullptrを指定します。
 	class APTask_PositionConnectChange : public SonikAudioTaskInterface::PlayerTaskInterface
 	{
 	private:
-		double* mp_Posx;
-		double* mp_Posy;
-		double* mp_Posz;
+		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
 
 	public:
 		//コンストラクタ
-		APTask_PositionConnectChange(SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double* SetPosx = nullptr, double* SetPosy = nullptr, double* SetPosz = nullptr);
+		APTask_PositionConnectChange(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
 
 		//値のセット
-		void SetValue(double* SetPosx, double* SetPosy, double* SetPosz);
+		void SetValue(SonikMathDataBox::Sonik3DPoint* _3dpos_);
 
 		//タスクRUN
 		void TaskRun(void);
@@ -106,7 +107,7 @@ namespace SonikAudioPlayerTask
 
 	public:
 		//コンストラクタ
-		APTask_RepeatFlgChange(SonikAudioPointer::SonikAudioInterfaceSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, bool SetValue);
+		APTask_RepeatFlgChange(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, bool SetValue);
 
 		//値のセット
 		void SetValue(bool SetValue);

@@ -6,7 +6,7 @@
  */
 
 #include "SonikAudioListener.h"
-#include "../AudioPosition/SonikAudio3DPoint.h"
+#include "../../../MathBit/SonikMathDistance.h"
 
 #include <new>
 
@@ -16,16 +16,23 @@ namespace SonikAudio
 	//コンストラクタ
 	SonikAudioListener::SonikAudioListener(void)
 	:max_listen_distance(1000.0)
+	,listen_volume(1.0)
 	,m_3dpos(nullptr)
+	,m_3ddir(nullptr)
 	{
 		try
 		{
 
-			m_3dpos = new SonikAudioPoint::SonikAudio3DPoint();
-
-		}catch(std::bad_alloc& e)
+			m_3dpos = new SonikMathDataBox::Sonik3DPoint;
+			m_3ddir = new SonikMathDataBox::Sonik3DPoint(0.0, 0.0, 1.0);
+		}catch(std::bad_alloc&)
 		{
-			throw std::bad_alloc(e);
+			if(m_3dpos != nullptr)
+			{
+				delete m_3dpos;
+			};
+
+			throw;
 		};
 
 	};
@@ -36,6 +43,11 @@ namespace SonikAudio
 		if(m_3dpos != nullptr)
 		{
 			delete m_3dpos;
+		};
+
+		if(m_3ddir != nullptr)
+		{
+			delete m_3ddir;
 		};
 	};
 
@@ -50,79 +62,114 @@ namespace SonikAudio
 		return max_listen_distance;
 	};
 
+	//聞こえる音量(マスターボリューム)のセットゲット
+	void SonikAudioListener::SetListenVolume(double setvolume)
+	{
+		if(setvolume > 1.0)
+		{
+			listen_volume = 1.0;
+			return;
+		};
+
+		listen_volume = setvolume;
+		return;
+	};
+	double SonikAudioListener::GetListenVolume(void)
+	{
+		return listen_volume;
+	};
+
 
 	//ポジションのセット
 	void SonikAudioListener::SetPosition(double x, double y, double z)
 	{
-		m_3dpos->ref_m_x = x;
-		m_3dpos->ref_m_y = y;
-		m_3dpos->ref_m_z = z;
+		m_3dpos->Set3Point(x, y, z);
 	};
 
 	void SonikAudioListener::SetPositionX(double x)
 	{
-		m_3dpos->ref_m_x = x;
+		m_3dpos->SetX(x);
 	};
 
 	void SonikAudioListener::SetPositionY(double y)
 	{
-		m_3dpos->ref_m_y = y;
+		m_3dpos->SetY(y);
 	};
 
 	void SonikAudioListener::SetPositionZ(double z)
 	{
-		m_3dpos->ref_m_z = z;
+		m_3dpos->SetZ(z);
+
 	};
 
 	//ポジションのゲット
 	void SonikAudioListener::GetPosition(double& x, double& y, double& z)
 	{
-		x = (*(m_3dpos->mp_x));
-		y = (*(m_3dpos->mp_y));
-		z = (*(m_3dpos->mp_z));
+		m_3dpos->Get3Point(x ,y ,z);
+
 	};
 
-	void SonikAudioListener::GetPosition(double*& x, double*& y, double*& z)
-	{
-		x = m_3dpos->mp_x;
-		y = m_3dpos->mp_y;
-		z = m_3dpos->mp_z;
-	};
-
-	SonikAudioPoint::SonikAudio3DPoint& SonikAudioListener::GetPosition(void)
+	SonikMathDataBox::Sonik3DPoint& SonikAudioListener::GetPosition(void)
 	{
 		return (*m_3dpos);
 	};
 
 	double SonikAudioListener::GetPositionX(void)
 	{
-		return (*(m_3dpos->mp_x));
-	};
-
-	void SonikAudioListener::GetPositionX(const double* _out_)
-	{
-		_out_ = m_3dpos->mp_x;
+		return m_3dpos->GetX();
 	};
 
 	double SonikAudioListener::GetPositionY(void)
 	{
-		return (*(m_3dpos->mp_y));
-	};
-
-	void SonikAudioListener::GetPositionY(const double* _out_)
-	{
-		_out_ = m_3dpos->mp_y;
+		return m_3dpos->GetY();
 	};
 
 	double SonikAudioListener::GetPositionZ(void)
 	{
-		return (*(m_3dpos->mp_z));
+		return m_3dpos->GetZ();
 	};
 
-	void SonikAudioListener::GetPositionZ(const double* _out_)
+
+	//方向のセット
+	void SonikAudioListener::SetDirection(double x, double y, double z)
 	{
-		_out_ = m_3dpos->mp_z;
+		m_3ddir->Set3Point(x, y, z);
 	};
+	void SonikAudioListener::SetDirectionX(double x)
+	{
+		m_3ddir->SetX(x);
+	};
+	void SonikAudioListener::SetDirectionY(double y)
+	{
+		m_3ddir->SetY(y);
+	};
+	void SonikAudioListener::SetDirectionZ(double z)
+	{
+		m_3ddir->SetZ(z);
+	};
+
+	//方向のゲット
+	void SonikAudioListener::GetDirection(double& x, double& y, double& z)
+	{
+		m_3ddir->Get3Point(x, y, z);
+	};
+	SonikMathDataBox::Sonik3DPoint& SonikAudioListener::GetDirection(void)
+	{
+		return (*m_3ddir);
+	};
+	double SonikAudioListener::GetDirectionX(void)
+	{
+		return m_3ddir->GetX();
+	};
+	double SonikAudioListener::GetDirectionY(void)
+	{
+		return m_3ddir->GetY();
+	};
+	double SonikAudioListener::GetDirectionZ(void)
+	{
+		return m_3ddir->GetZ();
+	};
+
 
 };
 

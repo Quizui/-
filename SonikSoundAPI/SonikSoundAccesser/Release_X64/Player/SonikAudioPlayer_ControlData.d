@@ -1,26 +1,24 @@
 Player/SonikAudioPlayer_ControlData.o: \
   ../Player/SonikAudioPlayer_ControlData.cpp \
   ../Player/SonikAudioPlayer_ControlData.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikCAS/SonikAtomicLock.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../../../SonikCAS/SonikAtomicLock.h \
   ../Player/SonikAudioPlayer_ControlData_Interface.h \
-  ../Player/../PlayStateEnums.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../AudioLoadTypedef.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././FormatSmtPtr/AudioSmartPointer.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././Format/SonikAudioFormat.h \
-  ../Player/../SAudioAccesserTypedef.h \
-  ../Player/.././AudioSmartPointer.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Format/SonikAudioFormat.h \
-  ../Player/../AudioPosition/SonikAudio3DPoint.h \
-  D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../MathBit/SonikMathDistance.h
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../PlayStateEnums.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../../AudioLoadTypedef.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../../../SmartPointer/SonikSmartPointer.hpp \
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../.././Format/SonikAudioFormat.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../SAudioAccesserTypedef.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../../Format/SonikAudioFormat.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../../../MathBit/SonikMathDistance.h \
+  D:/MyLibrary/include/Audio/SoundSystem/Player/../../../MathBit/../SmartPointer/SonikSmartPointer.hpp
 ../Player/SonikAudioPlayer_ControlData.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../SonikCAS/SonikAtomicLock.h:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../../../SonikCAS/SonikAtomicLock.h:
 ../Player/SonikAudioPlayer_ControlData_Interface.h:
-../Player/../PlayStateEnums.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../AudioLoadTypedef.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././FormatSmtPtr/AudioSmartPointer.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../.././Format/SonikAudioFormat.h:
-../Player/../SAudioAccesserTypedef.h:
-../Player/.././AudioSmartPointer.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../Format/SonikAudioFormat.h:
-../Player/../AudioPosition/SonikAudio3DPoint.h:
-D:/MyLibrary/include/Audio/SoundSystem/Accesser/../../../MathBit/SonikMathDistance.h:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../PlayStateEnums.h:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../../AudioLoadTypedef.h:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../../../SmartPointer/SonikSmartPointer.hpp:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../.././Format/SonikAudioFormat.h:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../SAudioAccesserTypedef.h:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../../Format/SonikAudioFormat.h:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../../../MathBit/SonikMathDistance.h:
+D:/MyLibrary/include/Audio/SoundSystem/Player/../../../MathBit/../SmartPointer/SonikSmartPointer.hpp:

@@ -44,7 +44,7 @@ namespace AudioPlatformInterface
 		//SONIK_DLL_ACCESS_MANAGER_POINTER l_handle;
 
 		//l_handle = SonikLib::SonikDllHandleManager::Instance().GetHandle("openal");
-		if( !m_openal.isPointerNull() )
+		if( !m_openal.IsNullptr() )
 		{
 			uintptr_t FuncPointer = 0;
 
@@ -129,7 +129,8 @@ namespace AudioPlatformInterface
 		_dllpath = DllPath;
 		_dllpath += "/soft_oal";
 
-		if( !SonikLib::SonikDllHandleManager::Instance().DllGetLoad(_dllpath.c_str(), m_openal) )
+		SonikLib::SonikDllHandleManager l_dllmng;
+		if( !l_dllmng.DllGetLoad(_dllpath.c_str(), m_openal) )
 		{
 			m_OneBufferDataSize = 0;
 			m_SamplingRate = 0;

@@ -7,7 +7,7 @@
 
 #include "SonikAudioPlayer_ControlData.h"
 #include "../../Format/SonikAudioFormat.h"
-#include "../AudioPosition/SonikAudio3DPoint.h"
+#include "../../../MathBit/SonikMathDistance.h"
 
 #include <new>
 
@@ -26,10 +26,11 @@ namespace SonikAudioData
 	{
 		try
 		{
-			m_3dpos = new SonikAudioPoint::SonikAudio3DPoint();
-		}catch(std::bad_alloc& e)
+			m_3dpos = new SonikMathDataBox::Sonik3DPoint;
+			m_3ddir = new SonikMathDataBox::Sonik3DPoint(0.0, 0.0, -1.0);
+		}catch(std::bad_alloc&)
 		{
-			throw std::bad_alloc(e);
+			throw;
 		};
 
 	};
@@ -38,6 +39,15 @@ namespace SonikAudioData
 	SonikAudioControlData::~SonikAudioControlData(void)
 	{
 		//あくまでポインタを使うだけなので何もしない。(音量調整等で値は変更しちゃうかもなので非const)
+		if(m_3dpos != nullptr)
+		{
+			delete m_3dpos;
+		};
+
+		if(m_3ddir != nullptr)
+		{
+			delete m_3ddir;
+		};
 
 	};
 
@@ -68,83 +78,140 @@ namespace SonikAudioData
 	//ポジションのセット
 	void SonikAudioControlData::SetPositionX(double SetValue)
 	{
-		m_3dpos->ref_m_x = SetValue;
+		m_3dpos->SetX(SetValue);
 	};
 
 	void SonikAudioControlData::SetPositionY(double SetValue)
 	{
-		m_3dpos->ref_m_y = SetValue;
+		m_3dpos->SetY(SetValue);
 	};
 
 	void SonikAudioControlData::SetPositionZ(double SetValue)
 	{
-		m_3dpos->ref_m_z = SetValue;
+		m_3dpos->SetZ(SetValue);
 	};
 
 	void SonikAudioControlData::SetPositionAll(double x, double y, double z)
 	{
-		m_3dpos->ref_m_x = x;
-		m_3dpos->ref_m_y = y;
-		m_3dpos->ref_m_z = z;
+		m_3dpos->Set3Point(x, y, z);
+	};
+
+	void SonikAudioControlData::SetPositionXY(double x, double y)
+	{
+		m_3dpos->SetXY(x, y);
+	};
+	void SonikAudioControlData::SetPositionXZ(double x, double z)
+	{
+		m_3dpos->SetXZ(x, z);
+	};
+	void SonikAudioControlData::SetPositionYZ(double y, double z)
+	{
+		m_3dpos->SetYZ(y, z);
 	};
 
 
 	//ポジションのポインタ先をセット。
 	//別のポジションへのポインタとつなぎ、位置を一緒に動かしたいときに使います。
 	//内部の個別ポジションに戻したい場合はnullptrを指定します。
-	void SonikAudioControlData::SetPositonConnectX(double* x)
+	void SonikAudioControlData::SetPositonConnectX(SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	{
-		PositionLock[0].lock();
-
-		if( x == nullptr )
-		{
-			m_3dpos->mp_x = &(m_3dpos->ref_m_x);
-			PositionLock[0].Unlock();
-			return;
-		};
-
-		m_3dpos->mp_x = x;
-
-		PositionLock[0].Unlock();
+		m_3dpos->LinkPointX(_3dpos_);
 	};
 
-	void SonikAudioControlData::SetPositonConnectY(double* y)
+	void SonikAudioControlData::SetPositonConnectY(SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	{
-		PositionLock[1].lock();
-
-		if( y == nullptr )
-		{
-			m_3dpos->mp_y = &(m_3dpos->ref_m_y);
-			PositionLock[1].Unlock();
-			return;
-		};
-
-		m_3dpos->mp_y = y;
-		PositionLock[1].Unlock();
+		m_3dpos->LinkPointY(_3dpos_);
 
 	};
 
-	void SonikAudioControlData::SetPositonConnectZ(double* z)
+	void SonikAudioControlData::SetPositonConnectZ(SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	{
-		PositionLock[2].lock();
-		if( z == nullptr )
-		{
-			m_3dpos->mp_z = &(m_3dpos->ref_m_z);
-			PositionLock[2].Unlock();
-			return;
-		};
-
-		m_3dpos->mp_z = z;
-		PositionLock[2].Unlock();
-
+		m_3dpos->LinkPointZ(_3dpos_);
 	};
 
-	void SonikAudioControlData::SetPositionConnectAll(double* x, double* y, double* z)
+	void SonikAudioControlData::SetPositionConnectAll(SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	{
-		SetPositonConnectX(x);
-		SetPositonConnectY(y);
-		SetPositonConnectZ(z);
+		m_3dpos->LinkPointAll(_3dpos_);
 	};
+
+	void SonikAudioControlData::SetPositonConnectXY(SonikMathDataBox::Sonik3DPoint* _3dpos_)
+	{
+		m_3dpos->LinkPointXY(_3dpos_);
+	};
+	void SonikAudioControlData::SetPositonConnectXZ(SonikMathDataBox::Sonik3DPoint* _3dpos_)
+	{
+		m_3dpos->LinkPointXZ(_3dpos_);
+	};
+	void SonikAudioControlData::SetPositonConnectYZ(SonikMathDataBox::Sonik3DPoint* _3dpos_)
+	{
+		m_3dpos->LinkPointYZ(_3dpos_);
+	};
+
+	//方向のセット
+	void SonikAudioControlData::SetDirectionX(double SetValue)
+	{
+		m_3ddir->SetX(SetValue);
+	};
+
+	void SonikAudioControlData::SetDirectionY(double SetValue)
+	{
+		m_3ddir->SetY(SetValue);
+	};
+
+	void SonikAudioControlData::SetDirectionZ(double SetValue)
+	{
+		m_3ddir->SetZ(SetValue);
+	};
+
+	void SonikAudioControlData::SetDirectionAll(double x, double y, double z)
+	{
+		m_3ddir->Set3Point(x, y, z);
+	};
+
+	void SonikAudioControlData::SetDirectionXY(double x, double y)
+	{
+		m_3ddir->SetXY(x, y);
+	};
+	void SonikAudioControlData::SetDirectionXZ(double x, double z)
+	{
+		m_3ddir->SetXZ(x, z);
+	};
+	void SonikAudioControlData::SetDirectionYZ(double y, double z)
+	{
+		m_3ddir->SetYZ(y, z);
+	};
+
+	//別の方向へのポインタとつなぎ、位置を一緒に動かしたいときに使います。
+	//内部の個別ポジションに戻したい場合はnullptrを指定します。
+	void SonikAudioControlData::SetDirectionConnectX(SonikMathDataBox::Sonik3DPoint* _3ddir_)
+	{
+		m_3ddir->LinkPointX(_3ddir_);
+	};
+	void SonikAudioControlData::SetDirectionConnectY(SonikMathDataBox::Sonik3DPoint* _3ddir_)
+	{
+		m_3ddir->LinkPointY(_3ddir_);
+	};
+	void SonikAudioControlData::SetDirectionConnectZ(SonikMathDataBox::Sonik3DPoint* _3ddir_)
+	{
+		m_3ddir->LinkPointZ(_3ddir_);
+	};
+	void SonikAudioControlData::SetDirectionConnectAll(SonikMathDataBox::Sonik3DPoint* _3ddir_)
+	{
+		m_3ddir->LinkPointAll(_3ddir_);
+	};
+	void SonikAudioControlData::SetDirectionConnectXY(SonikMathDataBox::Sonik3DPoint* _3ddir_)
+	{
+		m_3ddir->LinkPointXY(_3ddir_);
+	};
+	void SonikAudioControlData::SetDirectionConnectXZ(SonikMathDataBox::Sonik3DPoint* _3ddir_)
+	{
+		m_3ddir->LinkPointXZ(_3ddir_);
+	};
+	void SonikAudioControlData::SetDirectionConnectYZ(SonikMathDataBox::Sonik3DPoint* _3ddir_)
+	{
+		m_3ddir->LinkPointYZ(_3ddir_);
+	};
+
 
 	//音量(ボリューム)のセット
 	void SonikAudioControlData::SetVolume(float SetValue)
@@ -177,62 +244,74 @@ namespace SonikAudioData
 	//ポジションのゲット
 	double SonikAudioControlData::GetPositionX(void)
 	{
-		double* _ret;
-
-		PositionLock[0].lock();
-
-		_ret = m_3dpos->mp_x;
-
-		PositionLock[0].Unlock();
-
-		return *_ret;
+		m_3dpos->GetX();
 	};
 
 	double SonikAudioControlData::GetPositionY(void)
 	{
-		double* _ret;
-
-		PositionLock[1].lock();
-
-		_ret = m_3dpos->mp_y;
-
-		PositionLock[1].Unlock();
-
-		return *_ret;
+		m_3dpos->GetY();
 	};
 
 	double SonikAudioControlData::GetPositionZ(void)
 	{
-		double* _ret;
-
-		PositionLock[2].lock();
-
-		_ret = m_3dpos->mp_z;
-
-		PositionLock[2].Unlock();
-
-		return *_ret;
+		m_3dpos->GetZ();
 	};
 
 	void SonikAudioControlData::GetPositionAll(double& x, double& y, double& z)
 	{
-		PositionLock[0].lock();
-		PositionLock[1].lock();
-		PositionLock[2].lock();
-
-		x = (*(m_3dpos->mp_x));
-		y = (*(m_3dpos->mp_y));
-		z = (*(m_3dpos->mp_z));
-
-		PositionLock[0].Unlock();
-		PositionLock[1].Unlock();
-		PositionLock[2].Unlock();
-
+		m_3dpos->Get3Point(x, y, z);
 	};
 
-	SonikAudioPoint::SonikAudio3DPoint& SonikAudioControlData::GetPositionAll(void)
+	SonikMathDataBox::Sonik3DPoint& SonikAudioControlData::GetPositionAll(void)
 	{
 		return (*m_3dpos);
+	};
+	void SonikAudioControlData::GetPositionXY(double& x, double& y)
+	{
+		m_3dpos->GetXY(x, y);
+	};
+	void SonikAudioControlData::GetPositionXZ(double& x, double& z)
+	{
+		m_3dpos->GetXZ(x, z);
+	};
+	void SonikAudioControlData::GetPositionYZ(double& y, double& z)
+	{
+		m_3dpos->GetYZ(y, z);
+	};
+
+	//方向(Directionのゲット
+	double SonikAudioControlData::GetDirectionX(void)
+	{
+		m_3ddir->GetX();
+	};
+	double SonikAudioControlData::GetDirectionY(void)
+	{
+		m_3ddir->GetY();
+	};
+	double SonikAudioControlData::GetDirectionZ(void)
+	{
+		m_3ddir->GetZ();
+	};
+	void SonikAudioControlData::GetDirectionAll(double& x, double& y, double& z)
+	{
+		m_3ddir->Get3Point(x, y, z);
+	};
+	SonikMathDataBox::Sonik3DPoint& SonikAudioControlData::GetDirectionAll(void)
+	{
+		return (*m_3ddir);
+	};
+	void SonikAudioControlData::GetDirectionXY(double& x, double& y)
+	{
+		m_3ddir->GetXY(x, y);
+	};
+	void SonikAudioControlData::GetDirectionXZ(double& x, double& z)
+	{
+		m_3ddir->GetXZ(x, z);
+	};
+	void SonikAudioControlData::GetDirectionYZ(double& y, double& z)
+	{
+		m_3ddir->GetXY(y, z);
+
 	};
 
 
