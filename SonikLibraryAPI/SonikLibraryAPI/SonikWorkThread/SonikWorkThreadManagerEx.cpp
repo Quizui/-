@@ -5,95 +5,94 @@
  *      Author: SONIK
  */
 
-#include <new>
-
-//#define private public
 #include "SonikWorkThreadManagerEx.h"
-//#undef private
+#include "SonikWorkThreadEx.h"
+#include "../Container/SonikAtomicQueue.hpp"
+
+#include <new>
+#include <condition_variable>
 
 namespace SonikLib
 {
 	//コンストラクタ
 	SonikThreadManagerEx::SonikThreadManagerEx(void)
 	:ManagedThreadNum(0)
-	,Init_(false)
-	,notifycount_(0)
 	,m_pThreads(nullptr)
-	,JobQueue(0)
 	{
 
-	};
-
-	//コピーコンストラクタ
-	SonikThreadManagerEx::SonikThreadManagerEx(const SonikThreadManagerEx& t_his)
-	:ManagedThreadNum(0)
-	,Init_(false)
-	,notifycount_(0)
-	,m_pThreads(nullptr)
-	,JobQueue(0)
-	{
-	//処理無し。本クラスはコピーを許可しない。
-	};
-
-	//代入演算子
-	SonikThreadManagerEx& SonikThreadManagerEx::operator =(const SonikThreadManagerEx& t_his)
-	{
-		//処理無し。本クラスは代入を許可しない。
-		return (*this);
 	};
 
 	//デストラクタ
 	SonikThreadManagerEx::~SonikThreadManagerEx(void)
 	{
 		//スレッド始末。
-		if( m_pThreads != nullptr)
+		if( m_pThreads != nullptr )
 		{
-			delete[] m_pThreads;
-		};
+			for(uint32_t i=0; i < ManagedThreadNum; ++i)
+			{
+				delete m_pThreads[i];
+			};
 
-		//JobQueue始末
-		if( JobQueue != nullptr )
-		{
-			delete JobQueue;
 		};
 
 	};
 
-	//イニシャライザ
-	bool SonikThreadManagerEx::Initialize(uint32_t UseThreadNum, uint32_t JobBufferSize)
+	//クリエイタ
+	bool SonikThreadManagerEx::CreateThraedManager(SonikLib::SharedSmtPtr<SonikThreadManagerEx> _out_mng_, uint32_t UseThreadNum, uint32_t JobBufferSize)
 	{
-		atmlock_.lock();
-
-		if( Init_ )
+		SonikThreadManagerEx* lp_mngobj = new(std::nothrow) SonikThreadManagerEx;
+		if(lp_mngobj == nullptr)
 		{
-			atmlock_.Unlock();
-			return true;
-		};
-
-		try
-		{
-			JobQueue = new SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>(JobBufferSize);
-			m_pThreads = new SonikLib::WorkThreadEx[UseThreadNum];
-
-		}catch(...)
-		{
-			delete[] m_pThreads;
-			delete JobQueue;
-
-			atmlock_.Unlock();
 			return false;
 		};
 
-		for(unsigned long looped_=0; looped_ < UseThreadNum; ++looped_)
+		lp_mngobj->ManagedThreadNum = UseThreadNum;
+
+		if(!lp_mngobj->m_cond.ResetPointer(new(std::nothrow) std::condition_variable_any))
 		{
-			m_pThreads[looped_].Set_ExternalQueue(JobQueue);
+			delete lp_mngobj;
+			return false;
+		};
+		if(lp_mngobj->m_cond.IsNullptr())
+		{
+			delete lp_mngobj;
+			return false;
 		};
 
-		ManagedThreadNum = UseThreadNum;
+		if( !lp_mngobj->JobQueue.ResetPointer(new(std::nothrow) SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>(JobBufferSize)) )
+		{
+			return false;
+		};
+		if( lp_mngobj->JobQueue.IsNullptr() )
+		{
+			return false;
+		};
 
-		Init_ = true;
+		lp_mngobj->m_pThreads = new(std::nothrow)  SonikLib::WorkThreadEx*[UseThreadNum]{};
+		if( lp_mngobj->m_pThreads == nullptr )
+		{
+			delete lp_mngobj;
+			return false;
+		};
 
-		atmlock_.Unlock();
+		for(uint32_t i=0; i < UseThreadNum; ++i)
+		{
+			lp_mngobj->m_pThreads[i] = new(std::nothrow) SonikLib::WorkThreadEx(lp_mngobj->m_cond);
+			if( lp_mngobj->m_pThreads[i] == nullptr)
+			{
+				delete lp_mngobj;
+				return false;
+			};
+
+			lp_mngobj->m_pThreads[i]->Set_ExternalQueue(lp_mngobj->JobQueue);
+		};
+
+		if( !_out_mng_.ResetPointer(lp_mngobj) )
+		{
+			delete lp_mngobj;
+			return false;
+		};
+
 		return true;
 	};
 
@@ -101,6 +100,17 @@ namespace SonikLib
 	uint32_t SonikThreadManagerEx::Get_ManagedThreadNum(void)
 	{
 		return ManagedThreadNum;
+	};
+
+	//タスクセット
+	bool SonikThreadManagerEx::EnqueueJob(SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>& _in_task_)
+	{
+		return  JobQueue->EnQueue(_in_task_);
+	};
+	//タスクゲット（余り時間処理参加用)
+	bool SonikThreadManagerEx::DequeueJob(SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>& _out_task_)
+	{
+		return JobQueue->DeQueue(_out_task_);
 	};
 
 };//end namespace;

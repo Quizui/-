@@ -9,6 +9,7 @@
 #define SONIKSTRING_UTF16_SONIKSTRING_UTF16_H_
 
 #include "../../Container/RangedForContainer.hpp"
+#include "../SonikStringLocaleEnmus.h"
 
 namespace SonikLib
 {
@@ -24,14 +25,21 @@ namespace SonikLib
 		SonikString_UTF16_pImpl* pImpl;
 
 	public:
-		SonikString_UTF16(void);
+		SonikString_UTF16(SonikLibStringConvert::SonikLibConvertLocale _setlocale_ = SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
 		SonikString_UTF16(const SonikString_UTF16& t_his);
 		SonikString_UTF16(const char* SetStr);
+		SonikString_UTF16(const char* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
 		SonikString_UTF16(const char16_t* SetStr);
-		SonikString_UTF16(const wchar_t* SetPtr);
+		SonikString_UTF16(const char16_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+		SonikString_UTF16(const wchar_t* SetStr);
+		SonikString_UTF16(const wchar_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
 		SonikString_UTF16(const int8_t* SetStr);
+		SonikString_UTF16(const int8_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
 
 		~SonikString_UTF16(void);
+
+		//ロケールを設定します。
+		bool SetStringLocale(SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
 
 		//SJIS形式に変換して取得します。(バッファタイプも書き換わります。)
 		const char* c_str(void);
@@ -41,14 +49,14 @@ namespace SonikLib
 		const int8_t* utf8_str(void);
 
 		//define切り替えのstrゲット
-		const char16_t* definition_str(void);
+		const char* definition_str(void);
 
 		//SJIS形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
 		//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
 		uint64_t GetCpy_c_str(char* dstBuffer = nullptr);
 		//UTF16形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
 		//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
-		uint64_t GetCpy_c_wcstr(char16_t* dstBuffer = nullptr);
+		uint64_t GetCpy_utf16_str(char16_t* dstBuffer = nullptr);
 		//UTF16形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
 		//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
 		uint64_t GetCpy_c_wcstr(wchar_t* dstBuffer = nullptr);

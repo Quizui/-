@@ -7,6 +7,7 @@
 
 #include <cstring>
 #include <cstdlib>
+#include <clocale>
 #include <new>
 #include <algorithm>
 #include "locale.h"
@@ -34,6 +35,90 @@ namespace SonikConvStaticTable
 											0xE383AE00, 0xEFBE9C00, 0xE383B000, 0xE383B100, 0xEFBDA600, 0xEFBE9D00,
 											0xEFB9F39F, 0xE383B500, 0xE383B600, 0xEFBE9C9F, 0xE383B800, 0xE383B900, 0xEFBDA69F,
 										   };
+
+};
+
+//ロケール定数からロケール名を取得します。
+void SonikLibStringConvert::ConvertLocaleCharacter(uint32_t& _out_size_, char* _buffer_, SonikLibStringConvert::SonikLibConvertLocale _locale_)
+{
+	switch(_locale_)
+	{
+	case SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C:
+		_out_size_ = strlen("C");
+		if(_buffer_ == nullptr)
+		{
+			return;
+		};
+
+		memcpy_s(_buffer_, _out_size_,  "C", _out_size_);
+		return;
+		break;
+	case SonikLibStringConvert::SonikLibConvertLocale::LC_JPN:
+		_out_size_ = strlen("ja_JP");
+		if(_buffer_ == nullptr)
+		{
+			return;
+		};
+
+		memcpy_s(_buffer_, _out_size_,  "ja_JP", _out_size_);
+		return;
+		break;
+	case SonikLibStringConvert::SonikLibConvertLocale::LC_JPNUTF8:
+		_out_size_ = strlen("jp_JP.UTF-8");
+		if(_buffer_ == nullptr)
+		{
+			return;
+		};
+
+		memcpy_s(_buffer_, _out_size_,  "jp_JP.UTF-8", _out_size_);
+		return;
+		break;
+	case SonikLibStringConvert::SonikLibConvertLocale::LC_ENGUS:
+		_out_size_ = strlen("en_US");
+		if(_buffer_ == nullptr)
+		{
+			return;
+		};
+
+		memcpy_s(_buffer_, _out_size_,  "en_US", _out_size_);
+		return;
+		break;
+	case SonikLibStringConvert::SonikLibConvertLocale::LC_ENGGB:
+		_out_size_ = strlen("en_GB");
+		if(_buffer_ == nullptr)
+		{
+			return;
+		};
+
+		memcpy_s(_buffer_, _out_size_,  "en_GB", _out_size_);
+		return;
+		break;
+	case SonikLibStringConvert::SonikLibConvertLocale::LC_FRNCE:
+		_out_size_ = strlen("fr_FR");
+		if(_buffer_ == nullptr)
+		{
+			return;
+		};
+
+		memcpy_s(_buffer_, _out_size_,  "fr_FR", _out_size_);
+		return;
+		break;
+	case SonikLibStringConvert::SonikLibConvertLocale::LC_GERMANY:
+		_out_size_ = strlen("de_DE");
+		if(_buffer_ == nullptr)
+		{
+			return;
+		};
+
+		memcpy_s(_buffer_, _out_size_,  "de_DE", _out_size_);
+		return;
+		break;
+
+	default:
+		_out_size_ = 0;
+		return;
+		break;
+	};
 
 };
 
@@ -949,7 +1034,7 @@ bool SonikLibStringConvert::ConvertUTF8ToUTF16(char* pSrc, char16_t* pDest, uint
 
 //マルチバイト文字列をUTF8文字列に変換します。
 //第１引数の文字列は、可能性の判定として、SJIS判定であれば処理を行います。
-bool SonikLibStringConvert::ConvertMBSToUTF8(char* pSrc, char* pDest, uint64_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertMBSToUTF8(char* pSrc, char* pDest, uint64_t* DestBufferSize, const char* locale)
 {
 	if( pSrc == nullptr)
 	{
@@ -961,30 +1046,36 @@ bool SonikLibStringConvert::ConvertMBSToUTF8(char* pSrc, char* pDest, uint64_t* 
 		return false;
 	};
 
-	setlocale(LC_CTYPE, "jpn");
+	std::setlocale(LC_CTYPE, locale);
 
 	uint64_t utf16Len = 0;
-	mbstowcs_s(&utf16Len, nullptr, 0, pSrc, _TRUNCATE);
+	errno_t err = 0;
+	err = mbstowcs_s(&utf16Len, nullptr, 0, pSrc, _TRUNCATE);
+	if(err != 0)
+	{
+		//セットしてあるロケールで失敗したのデフォルトのCTypeでやってみる。
+		std::setlocale(LC_CTYPE, "C");
+		err = mbstowcs_s(&utf16Len, nullptr, 0, pSrc, _TRUNCATE);
+		if(err != 0)
+		{
+			return false;
+		};
+	};
 
 	char16_t* unicode_buf = new(std::nothrow) char16_t[utf16Len + 1];
 	if(unicode_buf == nullptr)
 	{
-		setlocale(LC_CTYPE, "");
+		std::setlocale(LC_CTYPE, "C"); //デフォルトに戻して終了
 		return false;
 	};
 
 	std::fill_n(unicode_buf, (utf16Len + 1), 0);
 
 	//sjis -> utf16
-	errno_t err = mbstowcs_s(nullptr, reinterpret_cast<wchar_t*>(unicode_buf), utf16Len+1, pSrc, _TRUNCATE);
-	if( err != 0 )
-	{
-		delete[] unicode_buf;
-		setlocale(LC_CTYPE, "");
-		return false;
-	};
-
-	setlocale(LC_CTYPE, "");
+	//上のサイズ取得で失敗してなければここで失敗しようはずがない。
+	mbstowcs_s(nullptr, reinterpret_cast<wchar_t*>(unicode_buf), utf16Len+1, pSrc, _TRUNCATE);
+	//デフォルトにロケールを戻す。
+	std::setlocale(LC_CTYPE, "C");
 
 	uint64_t sizecheck = 0;
 	SonikLibStringConvert::ConvertUTF16ToUTF8(unicode_buf, nullptr, &sizecheck); // すでに計算済みのバイト数で帰ってくる。
@@ -1010,7 +1101,7 @@ bool SonikLibStringConvert::ConvertMBSToUTF8(char* pSrc, char* pDest, uint64_t* 
 //UTF8文字列をマルチバイト文字列に変換します。
 //第１引数の文字列は、可能性の判定として、SJIS判定であれば処理を行います。
 //第１引数の文字列に対して、Null終端がない場合の動作は、strlenと同様にバッファオーバーランを起こします。
-bool SonikLibStringConvert::ConvertUTF8ToMBS(char* pSrc, char* pDest, uint64_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertUTF8ToMBS(char* pSrc, char* pDest, uint64_t* DestBufferSize, const char* locale)
 {
 	if( pSrc == nullptr)
 	{
@@ -1041,36 +1132,44 @@ bool SonikLibStringConvert::ConvertUTF8ToMBS(char* pSrc, char* pDest, uint64_t* 
 		return false;
 	};
 
-	setlocale(LC_CTYPE, "jpn");
+	std::setlocale(LC_CTYPE, locale);
 
 	uint64_t retsize = 0;
-	wcstombs_s(&retsize, nullptr, 0, reinterpret_cast<wchar_t*>(unicode_buf), _TRUNCATE);
+	errno_t err = 0;
+	err = wcstombs_s(&retsize, nullptr, 0, reinterpret_cast<wchar_t*>(unicode_buf), _TRUNCATE);
+	if(err != 0)
+	{
+		//セットしてあるロケールで失敗したのデフォルトのCTypeでやってみる。
+		std::setlocale(LC_CTYPE, "C");
+		err = wcstombs_s(&retsize, nullptr, 0, reinterpret_cast<wchar_t*>(unicode_buf), _TRUNCATE);
+		if(err != 0)
+		{
+			delete[] unicode_buf;
+			return false;
+		};
+	};
+
 	if(pDest == nullptr && DestBufferSize != nullptr)
 	{
 		//utf16->SJIS サイズチェック
 		(*DestBufferSize) = ((retsize + 1) << 1); //SJISは 1~2Byteのため、すべて2Byteとして計算。
-		setlocale(LC_CTYPE, "");
+		std::setlocale(LC_CTYPE, "C");
 		delete[] unicode_buf;
 		return false;
 	};
 
 	//utf16->SJIS 本番
-	errno_t err  = wcstombs_s(nullptr, pDest, retsize, reinterpret_cast<wchar_t*>(unicode_buf), _TRUNCATE);
-	if(  err != 0 )
-	{
-		delete[] unicode_buf;
-		setlocale(LC_CTYPE, "");
-		return false;
-	};
+	//サイズチェックで失敗していないので変換自体には失敗しようがない。
+	wcstombs_s(nullptr, pDest, retsize, reinterpret_cast<wchar_t*>(unicode_buf), _TRUNCATE);
 
 	delete[] unicode_buf;
-	setlocale(LC_CTYPE, "");
+	std::setlocale(LC_CTYPE, "C");
 	return true;
 };
 
 //マルチバイト文字列をUTF16文字列に変換します。
 //内部ではmbstowcs_s関数を使用しますが、一時領域を確保し、コピーして処理を行うため、コピー元領域、コピー先領域が重なっていても正常にコピーされます。
-bool SonikLibStringConvert::ConvertMBStoUTF16(char* pSrc, char16_t* pDest, uint64_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertMBStoUTF16(char* pSrc, char16_t* pDest, uint64_t* DestBufferSize, const char* locale)
 {
 	if( pSrc == nullptr)
 	{
@@ -1082,14 +1181,26 @@ bool SonikLibStringConvert::ConvertMBStoUTF16(char* pSrc, char16_t* pDest, uint6
 		return false;
 	};
 
-	setlocale(LC_CTYPE, "jpn");
+	setlocale(LC_CTYPE, locale);
 
 	uint64_t size_ = 0;
-	mbstowcs_s(&size_, nullptr, 0, pSrc, _TRUNCATE);
+	errno_t err = 0;
+	err = mbstowcs_s(&size_, nullptr, 0, pSrc, _TRUNCATE);
+	if(err != 0)
+	{
+		//セットしてあるロケールで失敗したのデフォルトのCTypeでやってみる。
+		std::setlocale(LC_CTYPE, "C");
+		err = mbstowcs_s(&size_, nullptr, 0, pSrc, _TRUNCATE);
+		if(err != 0)
+		{
+			return false;
+		};
+	};
 
 	char16_t* tmpBuf = new(std::nothrow) char16_t[(size_ + 1) ]; // NULL終端追加;
 	if(tmpBuf == nullptr)
 	{
+		std::setlocale(LC_CTYPE, "C");
 		return false;
 	};
 
@@ -1098,20 +1209,15 @@ bool SonikLibStringConvert::ConvertMBStoUTF16(char* pSrc, char16_t* pDest, uint6
 	if( pDest == nullptr && DestBufferSize != nullptr)
 	{
 		(*DestBufferSize) = (size_ + 1) << 1;
-		setlocale(LC_CTYPE, "");
+		std::setlocale(LC_CTYPE, "C");
 		delete[] tmpBuf;
 		return false;
 	};
 
-	errno_t err  = mbstowcs_s(nullptr, reinterpret_cast<wchar_t*>(tmpBuf), (size_ + 1), pSrc, _TRUNCATE);
-	if( err != 0 )
-	{
-		setlocale(LC_CTYPE, "");
-		delete[] tmpBuf;
-		return false;
-	};
-
-	setlocale(LC_CTYPE, "");
+	//サイズチェック時に成功しているので変換失敗はしないはず。
+	 mbstowcs_s(nullptr, reinterpret_cast<wchar_t*>(tmpBuf), (size_ + 1), pSrc, _TRUNCATE);
+	 //ロケールをデフォルトに戻す。
+	setlocale(LC_CTYPE, "C");
 
 	if( memcpy_s(pDest, ((size_ + 1) << 1), tmpBuf, ((size_ + 1) << 1)) != 0 ) // x * 2 = x << 1
 	{
@@ -1125,22 +1231,34 @@ bool SonikLibStringConvert::ConvertMBStoUTF16(char* pSrc, char16_t* pDest, uint6
 
 //UTF16文字列をマルチバイト文字列に変換します。
 //内部ではmbstowcs_s関数を使用しますが、一時領域を確保し、コピーして処理を行うため、コピー元領域、コピー先領域が重なっていても正常にコピーされます。
-bool SonikLibStringConvert::ConvertUTF16toMBS(char16_t* pSrc, char* pDest, uint64_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertUTF16toMBS(char16_t* pSrc, char* pDest, uint64_t* DestBufferSize, const char* locale)
 {
 	if( pSrc == nullptr)
 	{
 		return false;
 	};
 
-	setlocale(LC_CTYPE, "jpn");
+	std::setlocale(LC_CTYPE, locale);
 
 	uint64_t size_ = 0;
-	wcstombs_s(&size_, nullptr, 0, reinterpret_cast<wchar_t*>(pSrc), _TRUNCATE);
+	errno_t err = 0;
+	err = wcstombs_s(&size_, nullptr, 0, reinterpret_cast<wchar_t*>(pSrc), _TRUNCATE);
+	if(err != 0)
+	{
+		//セットしてあるロケールで失敗したのデフォルトのCTypeでやってみる。
+		std::setlocale(LC_CTYPE, "C");
+		err = wcstombs_s(&size_, nullptr, 0, reinterpret_cast<wchar_t*>(pSrc), _TRUNCATE);
+		if(err != 0)
+		{
+			return false;
+		};
+	};
 
 	size_ = (size_ + 1) << 1;//1文字あたりのバイト数に変換。
 	char* tmpBuf = new(std::nothrow) char[size_]; //1~2Byteで構成されるためすべて１文字あたり2Byteとして扱う。;
 	if(tmpBuf == nullptr)
 	{
+		std::setlocale(LC_CTYPE, "C");
 		return false;
 	};
 
@@ -1149,20 +1267,16 @@ bool SonikLibStringConvert::ConvertUTF16toMBS(char16_t* pSrc, char* pDest, uint6
 	if( pDest == nullptr && DestBufferSize != nullptr)
 	{
 		(*DestBufferSize) = size_;
-		setlocale(LC_CTYPE, "");
+		std::setlocale(LC_CTYPE, "C");
 		delete[] tmpBuf;
 		return false;
 	};
 
-	errno_t err = wcstombs_s(nullptr, tmpBuf, size_, reinterpret_cast<wchar_t*>(pSrc), _TRUNCATE);
-	if( err != 0 )
-	{
-		setlocale(LC_CTYPE, "");
-		delete[] tmpBuf;
-		return false;
-	};
+	//サイズチェック時に失敗していないのでここでは少なくとも変換には失敗しないはず。
+	wcstombs_s(nullptr, tmpBuf, size_, reinterpret_cast<wchar_t*>(pSrc), _TRUNCATE);
 
-	setlocale(LC_CTYPE, "");
+	//ロケールをデフォルトに戻しておく。
+	setlocale(LC_CTYPE, "C");
 
 	if( memcpy_s(pDest, size_, tmpBuf, size_) != 0 )
 	{

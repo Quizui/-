@@ -1,0 +1,67 @@
+/*
+ * SonikWorkThreadManagerEx.h
+ *
+ *  Created on: 2015/09/24
+ *      Author: SONIK
+ */
+
+#ifndef SONIKWORKTHREADMANAGEREX_H_
+#define SONIKWORKTHREADMANAGEREX_H_
+
+#include "../SmartPointer/SonikSmartPointer.hpp"
+#include "../FunctionObject/FunctionObjectSystemImpl.hpp"
+#include "../Container/SonikAtomicQueue.hpp"
+#include "../SonikCAS/SonikAtomicLock.h"
+#include "SonikWorkThreadEx.h"
+
+namespace SonikLib
+{
+	class SonikThreadManagerEx
+	{
+	private:
+		//管理スレッド数
+		uint32_t ManagedThreadNum;
+
+		bool Init_;
+
+		std::atomic<uint32_t> notifycount_;
+
+		//スレッドプール
+		SonikLib::WorkThreadEx* m_pThreads;
+
+		S_CAS::SonikAtomicLock atmlock_;
+
+		//ジョブキュー(MTロックフリー)
+		SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>* JobQueue;
+
+
+	private:
+		//コンストラクタ
+		///SonikThreadManagerEx(void);
+		//コピーコンストラクタ
+		SonikThreadManagerEx(const SonikThreadManagerEx& t_his);
+		//代入演算子
+		//スレッドコピーとかしだすと管理もめっちゃめんどくさくなるので...。
+		SonikThreadManagerEx& operator =(const SonikThreadManagerEx& t_his);
+
+
+	public:
+		//コンストラクタ
+		SonikThreadManagerEx(void);
+		//デストラクタ
+		~SonikThreadManagerEx(void);
+
+		//イニシャライザ
+		bool Initialize(uint32_t UseThreadNum =2, uint32_t JobBufferSize =1200);
+
+		//スレッド数の取得
+		uint32_t Get_ManagedThreadNum(void);
+
+	}; //end class
+
+
+};
+
+
+
+#endif /* SONIKWORKTHREADMANAGEREX_H_ */

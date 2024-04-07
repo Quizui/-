@@ -1,0 +1,104 @@
+/*
+ * SonikWorkThreadManagerEx.cpp
+ *
+ *  Created on: 2015/09/24
+ *      Author: SONIK
+ */
+
+#include "SonikWorkThreadManagerEx.h"
+
+#include <new>
+#include <condition_variable>
+
+namespace SonikLib
+{
+	//コンストラクタ
+	SonikThreadManagerEx::SonikThreadManagerEx(void)
+	:ManagedThreadNum(0)
+	,m_pThreads(nullptr)
+	{
+
+	};
+
+	//デストラクタ
+	SonikThreadManagerEx::~SonikThreadManagerEx(void)
+	{
+		//スレッド始末。
+
+	};
+
+	//クリエイタ
+	bool SonikThreadManagerEx::CreateThraedManager(SonikLib::SharedSmtPtr<SonikThreadManagerEx> _out_mng_, uint32_t UseThreadNum, uint32_t JobBufferSize)
+	{
+		SonikThreadManagerEx* lp_mngobj = new(std::nothrow) SonikThreadManagerEx;
+		if(lp_mngobj == nullptr)
+		{
+			return false;
+		};
+
+
+
+		if( !lp_mngobj->JobQueue.ResetPointer(new(std::nothrow) SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>(JobBufferSize)) )
+		{
+			return false;
+		};
+		if( lp_mngobj->JobQueue.IsNullptr() )
+		{
+			return false;
+		};
+
+		lp_mngobj->m_pThreads = new(std::nothrow)  SonikLib::WorkThreadEx*[UseThreadNum];
+		if( lp_mngobj->m_pThreads == nullptr )
+		{
+			delete lp_mngobj;
+			return false;
+		};
+
+		for(uint32_t i=0; i < UseThreadNum; ++i)
+		{
+
+		};
+
+		return true;
+	};
+
+	//イニシャライザ
+	bool SonikThreadManagerEx::Initialize(uint32_t UseThreadNum, uint32_t JobBufferSize)
+	{
+
+
+
+		try
+		{
+			//JobQueue = new SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>(JobBufferSize);
+			m_pThreads = new SonikLib::WorkThreadEx[UseThreadNum];
+
+		}catch(...)
+		{
+			delete[] m_pThreads;
+			delete JobQueue;
+
+			atmlock_.Unlock();
+			return false;
+		};
+
+		for(unsigned long looped_=0; looped_ < UseThreadNum; ++looped_)
+		{
+			m_pThreads[looped_].Set_ExternalQueue(JobQueue);
+		};
+
+		ManagedThreadNum = UseThreadNum;
+
+		Init_ = true;
+
+		atmlock_.Unlock();
+		return true;
+	};
+
+	//スレッド数の取得
+	uint32_t SonikThreadManagerEx::Get_ManagedThreadNum(void)
+	{
+		return ManagedThreadNum;
+	};
+
+};//end namespace;

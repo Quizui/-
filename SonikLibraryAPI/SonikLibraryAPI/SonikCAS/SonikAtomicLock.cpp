@@ -10,18 +10,6 @@ namespace SonikLib
 {
 	namespace S_CAS
 	{
-		//コピーコンストラクタ
-		SonikAtomicLock::SonikAtomicLock(const SonikAtomicLock& t_his)
-			:_lock(false)
-			 {
-			 };
-
-		//代入演算子
-		SonikAtomicLock& SonikAtomicLock::operator =(const SonikAtomicLock& t_his)
-		{
-			return (*this);
-		};
-
 		//コンストラクタ
 		SonikAtomicLock::SonikAtomicLock(void)
 		:_lock(false)

@@ -5,6 +5,7 @@ Audio/Functions/LoadFunction.o: ../Audio/Functions/LoadFunction.cpp \
   ../Audio/Functions/./.././Format/SonikAudioFormat.h \
   ../Audio/Functions/../../SonikString/SonikString.h \
   ../Audio/Functions/../../SonikString/../Container/RangedForContainer.hpp \
+  ../Audio/Functions/../../SonikString/./SonikStringLocaleEnmus.h \
   ../Audio/Functions/../Format/SonikWindowsWaveFormat.h \
   ../Audio/Functions/../Format/./SonikAudioFormat_InnerUse.h \
   ../Audio/Functions/../Format/././SonikAudioFormat.h \
@@ -16,6 +17,7 @@ Audio/Functions/LoadFunction.o: ../Audio/Functions/LoadFunction.cpp \
 ../Audio/Functions/./.././Format/SonikAudioFormat.h:
 ../Audio/Functions/../../SonikString/SonikString.h:
 ../Audio/Functions/../../SonikString/../Container/RangedForContainer.hpp:
+../Audio/Functions/../../SonikString/./SonikStringLocaleEnmus.h:
 ../Audio/Functions/../Format/SonikWindowsWaveFormat.h:
 ../Audio/Functions/../Format/./SonikAudioFormat_InnerUse.h:
 ../Audio/Functions/../Format/././SonikAudioFormat.h:

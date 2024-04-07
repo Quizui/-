@@ -6,6 +6,7 @@ SonikFileSystems/SonikFileSystems.o: \
   ../SonikFileSystems/../SmartPointer/SonikSmartPointer.hpp \
   ../SonikFileSystems/../SonikString/SonikString.h \
   ../SonikFileSystems/../SonikString/../Container/RangedForContainer.hpp \
+  ../SonikFileSystems/../SonikString/./SonikStringLocaleEnmus.h \
   ../SonikFileSystems/SonikFileController.h \
   ../SonikFileSystems/../SonikCAS/SonikAtomicLock.h \
   ../SonikFileSystems/SonikFileController_SJIS.h \
@@ -17,6 +18,7 @@ SonikFileSystems/SonikFileSystems.o: \
 ../SonikFileSystems/../SmartPointer/SonikSmartPointer.hpp:
 ../SonikFileSystems/../SonikString/SonikString.h:
 ../SonikFileSystems/../SonikString/../Container/RangedForContainer.hpp:
+../SonikFileSystems/../SonikString/./SonikStringLocaleEnmus.h:
 ../SonikFileSystems/SonikFileController.h:
 ../SonikFileSystems/../SonikCAS/SonikAtomicLock.h:
 ../SonikFileSystems/SonikFileController_SJIS.h:

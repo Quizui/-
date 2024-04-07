@@ -2,19 +2,11 @@ SonikWorkThread/SonikWorkThreadManagerEx.o: \
   ../SonikWorkThread/SonikWorkThreadManagerEx.cpp \
   ../SonikWorkThread/SonikWorkThreadManagerEx.h \
   ../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp \
-  ../SonikWorkThread/../FunctionObject/FunctionObjectSystemImpl.hpp \
-  ../SonikWorkThread/../FunctionObject/FunctionObjectSystemInterface.hpp \
-  ../SonikWorkThread/../FunctionObject/../SmartPointer/SonikSmartPointer.hpp \
+  ../SonikWorkThread/SonikWorkThreadEx.h \
   ../SonikWorkThread/../Container/SonikAtomicQueue.hpp \
-  ../SonikWorkThread/../Container/../SonikCAS/SonikAtomicLock.h \
-  ../SonikWorkThread/../SonikCAS/SonikAtomicLock.h \
-  ../SonikWorkThread/SonikWorkThreadEx.h
+  ../SonikWorkThread/../Container/../SonikCAS/SonikAtomicLock.h
 ../SonikWorkThread/SonikWorkThreadManagerEx.h:
 ../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp:
-../SonikWorkThread/../FunctionObject/FunctionObjectSystemImpl.hpp:
-../SonikWorkThread/../FunctionObject/FunctionObjectSystemInterface.hpp:
-../SonikWorkThread/../FunctionObject/../SmartPointer/SonikSmartPointer.hpp:
+../SonikWorkThread/SonikWorkThreadEx.h:
 ../SonikWorkThread/../Container/SonikAtomicQueue.hpp:
 ../SonikWorkThread/../Container/../SonikCAS/SonikAtomicLock.h:
-../SonikWorkThread/../SonikCAS/SonikAtomicLock.h:
-../SonikWorkThread/SonikWorkThreadEx.h:

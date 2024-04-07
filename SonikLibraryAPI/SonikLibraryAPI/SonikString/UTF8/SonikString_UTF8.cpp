@@ -2,13 +2,6 @@
  * SonikString_UTF8.cpp
  *
  *  Created on: 2024/01/21
- *      Author: SONIC
- */
-
-/*
- * SonikString_x64.cpp
- *
- *  Created on: 2019/02/10
  *      Author: SONIK
  */
 
@@ -31,6 +24,9 @@ namespace SonikLib
 	private:
 		//c:文字列領域
 		int8_t* Stringval_;
+
+		//文字コンバートに使う基準ロケール
+		char* m_locale;
 
 		//c:格納している最大文字数
 		uint64_t MaxLength_;
@@ -56,15 +52,19 @@ namespace SonikLib
 
 	public:
 		//c:コンストラクタ
-		SonikString_UTF8_pImpl(void);
+		SonikString_UTF8_pImpl(SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
 		//c:コンストラクタオーバーロード
 		SonikString_UTF8_pImpl(const char* SetStr);
+		SonikString_UTF8_pImpl(const char* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
 		//c:コンストラクタオーバーロード
 		SonikString_UTF8_pImpl(const char16_t* SetStr);
+		SonikString_UTF8_pImpl(const char16_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
 		//c:コンストラクタオーバーロード
 		SonikString_UTF8_pImpl(const wchar_t* SetStr);
+		SonikString_UTF8_pImpl(const wchar_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
 		//コンストラクタオーバーロード
 		SonikString_UTF8_pImpl(const int8_t* SetStr);
+		SonikString_UTF8_pImpl(const int8_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
 
 		//c:コピーコンストラクタ
 		SonikString_UTF8_pImpl(const SonikString_UTF8_pImpl& t_his);
@@ -72,6 +72,8 @@ namespace SonikLib
 		//c:デストラクタ
 		~SonikString_UTF8_pImpl(void);
 
+		//ロケールを設定します。
+		bool SetStringLocale(SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
 
 		//SJIS形式に変換して取得します。(バッファタイプも書き換わります。)
 		const char* c_str(void);
@@ -161,19 +163,32 @@ namespace SonikLib
 	};
 
 
-	SonikString_UTF8::SonikString_UTF8_pImpl::SonikString_UTF8_pImpl(void)
+	SonikString_UTF8::SonikString_UTF8_pImpl::SonikString_UTF8_pImpl(SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
 	:Stringval_(nullptr)
+	,m_locale(nullptr)
 	,MaxLength_(0)
 	,CType(SCHTYPE_NULLTEXT)
 	,buffer_(100)
 	{
 		try
 		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, _setlocale_);
+			if(  l_size == 0)
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size];
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, _setlocale_);
+
 			Stringval_ = new int8_t[buffer_];
 		}catch(std::bad_alloc&)
 		{
+			delete[] m_locale;
 			delete[] Stringval_;
 			throw;
+
 		};
 
 		std::fill_n(Stringval_, buffer_, 0);
@@ -181,6 +196,7 @@ namespace SonikLib
 
 	SonikString_UTF8::SonikString_UTF8_pImpl::SonikString_UTF8_pImpl(const char* SetStr)
 	:Stringval_(nullptr)
+	,m_locale(nullptr)
 	,MaxLength_(0)
 	,CType(SCHTYPE_NULLTEXT)
 	,buffer_(100)
@@ -197,11 +213,68 @@ namespace SonikLib
 
 		try
 		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+			if(  l_size == 0 )
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size];
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+
 			Stringval_ = new int8_t[buffer_];
-		}catch(std::bad_alloc&)
+		}catch(std::bad_alloc& e)
 		{
+			delete[] m_locale;
 			delete[] Stringval_;
 			throw;
+
+		};
+
+		std::fill_n(Stringval_, buffer_, 0);
+
+		memcpy(Stringval_, SetStr, SrcByte);
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+	SonikString_UTF8::SonikString_UTF8_pImpl::SonikString_UTF8_pImpl(const char* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+	:Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, _setlocale_);
+			if(  l_size == 0)
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size];
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, _setlocale_);
+
+			Stringval_ = new int8_t[buffer_];
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
 		};
 
 		std::fill_n(Stringval_, buffer_, 0);
@@ -214,6 +287,7 @@ namespace SonikLib
 
 	SonikString_UTF8::SonikString_UTF8_pImpl::SonikString_UTF8_pImpl(const char16_t* SetStr)
 	:Stringval_(nullptr)
+	,m_locale(nullptr)
 	,MaxLength_(0)
 	,CType(SCHTYPE_UTF16)
 	,buffer_(100)
@@ -227,9 +301,59 @@ namespace SonikLib
 
 		try
 		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+			if(  l_size == 0 )
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size];
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+
 			Stringval_ = new int8_t[buffer_];
 		}catch(std::bad_alloc&)
 		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		std::fill_n(Stringval_, buffer_, 0);
+
+		memcpy(Stringval_, SetStr, SrcByte);
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char16_t*>(Stringval_));
+	};
+	SonikString_UTF8::SonikString_UTF8_pImpl::SonikString_UTF8_pImpl(const char16_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+	:Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_UTF16)
+	,buffer_(100)
+	{
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 2; //Null文字分 shortサイズ分追加。
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, _setlocale_);
+			if(  l_size == 0)
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size];
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, _setlocale_);
+
+			Stringval_ = new int8_t[buffer_];
+		}catch(std::bad_alloc&)
+		{
+			delete[] m_locale;
 			delete[] Stringval_;
 			throw;
 		};
@@ -242,6 +366,7 @@ namespace SonikLib
 
 	SonikString_UTF8::SonikString_UTF8_pImpl::SonikString_UTF8_pImpl(const wchar_t* SetStr)
 	:Stringval_(nullptr)
+	,m_locale(nullptr)
 	,MaxLength_(0)
 	,CType(SCHTYPE_UTF16)
 	,buffer_(100)
@@ -255,9 +380,59 @@ namespace SonikLib
 
 		try
 		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+			if(  l_size == 0 )
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size];
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+
 			Stringval_ = new int8_t[buffer_];
 		}catch(std::bad_alloc&)
 		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		std::fill_n(Stringval_, buffer_, 0);
+
+		memcpy(Stringval_, SetStr, SrcByte);
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char16_t*>(Stringval_));
+	};
+	SonikString_UTF8::SonikString_UTF8_pImpl::SonikString_UTF8_pImpl(const wchar_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+	:Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_UTF16)
+	,buffer_(100)
+	{
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<const char16_t*>(SetStr)) + 2; //Null文字分 shortサイズ分追加。
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, _setlocale_);
+			if(  l_size == 0)
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size];
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, _setlocale_);
+
+			Stringval_ = new int8_t[buffer_];
+		}catch(std::bad_alloc&)
+		{
+			delete[] m_locale;
 			delete[] Stringval_;
 			throw;
 		};
@@ -269,6 +444,11 @@ namespace SonikLib
 	};
 
 	SonikString_UTF8::SonikString_UTF8_pImpl::SonikString_UTF8_pImpl(const int8_t* SetStr)
+	:Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_UTF16)
+	,buffer_(100)
 	{
 		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(reinterpret_cast<const char*>(SetStr));
 
@@ -282,9 +462,64 @@ namespace SonikLib
 
 		try
 		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+			if(  l_size == 0 )
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size];
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+
 			Stringval_ = new int8_t[buffer_];
 		}catch(std::bad_alloc&)
 		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		std::fill_n(Stringval_, buffer_, 0);
+
+		memcpy(Stringval_, SetStr, SrcByte);
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+	SonikString_UTF8::SonikString_UTF8_pImpl::SonikString_UTF8_pImpl(const int8_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+	:Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_UTF16)
+	,buffer_(100)
+	{
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(reinterpret_cast<const char*>(SetStr));
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<const char*>(SetStr)) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, _setlocale_);
+			if(  l_size == 0)
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size];
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, _setlocale_);
+
+			Stringval_ = new int8_t[buffer_];
+		}catch(std::bad_alloc&)
+		{
+			delete[] m_locale;
 			delete[] Stringval_;
 			throw;
 		};
@@ -299,8 +534,10 @@ namespace SonikLib
 
 	SonikString_UTF8::SonikString_UTF8_pImpl::SonikString_UTF8_pImpl(const SonikString_UTF8_pImpl& t_his)
 	{
+		uint32_t localesize = strlen(t_his.m_locale);
 		try
 		{
+			m_locale = new char[localesize];
 			Stringval_ = new int8_t[t_his.buffer_];
 		}catch(std::bad_alloc& e)
 		{
@@ -312,11 +549,16 @@ namespace SonikLib
 		CType = t_his.CType;
 		MaxLength_ = t_his.MaxLength_;
 
-		memcpy(Stringval_, t_his.Stringval_, buffer_);
+		memcpy_s(m_locale, localesize, t_his.m_locale, localesize);
+		memcpy_s(Stringval_, buffer_, t_his.Stringval_, buffer_);
 	};
 
 	SonikString_UTF8::SonikString_UTF8_pImpl::~SonikString_UTF8_pImpl(void)
 	{
+		if(m_locale != 0)
+		{
+			delete[] m_locale;
+		};
 		if(Stringval_ != 0)
 		{
 			delete[] Stringval_;
@@ -347,7 +589,7 @@ namespace SonikLib
 
 			case SCHTYPE_UTF16:
 				//UTF16への変換
-				SonikLibStringConvert::ConvertMBStoUTF16(reinterpret_cast<char*>(Stringval_), nullptr, &convSize_);
+				SonikLibStringConvert::ConvertMBStoUTF16(reinterpret_cast<char*>(Stringval_), nullptr, &convSize_, m_locale);
 
 				if( convSize_ > buffer_ )
 				{
@@ -359,7 +601,7 @@ namespace SonikLib
 
 				};
 
-				if( !SonikLibStringConvert::ConvertMBStoUTF16(reinterpret_cast<char*>(Stringval_), reinterpret_cast<char16_t*>(Stringval_), nullptr) )
+				if( !SonikLibStringConvert::ConvertMBStoUTF16(reinterpret_cast<char*>(Stringval_), reinterpret_cast<char16_t*>(Stringval_), nullptr, m_locale) )
 				{
 					string_atm_lock.Unlock();
 					return false;
@@ -372,7 +614,7 @@ namespace SonikLib
 
 			case SCHTYPE_UTF8:
 				//SJISからUTF8への変換を行う。
-				SonikLibStringConvert::ConvertMBSToUTF8(reinterpret_cast<char*>(Stringval_), nullptr, &convSize_);
+				SonikLibStringConvert::ConvertMBSToUTF8(reinterpret_cast<char*>(Stringval_), nullptr, &convSize_, m_locale);
 
 				if( convSize_ > buffer_ )
 				{
@@ -384,7 +626,7 @@ namespace SonikLib
 
 				};
 
-				if( !SonikLibStringConvert::ConvertMBSToUTF8(reinterpret_cast<char*>(Stringval_), reinterpret_cast<char*>(Stringval_), nullptr) )
+				if( !SonikLibStringConvert::ConvertMBSToUTF8(reinterpret_cast<char*>(Stringval_), reinterpret_cast<char*>(Stringval_), nullptr, m_locale) )
 				{
 					string_atm_lock.Unlock();
 					return false;
@@ -414,7 +656,7 @@ namespace SonikLib
 			{
 			case SCHTYPE_SJIS:
 				//UTF16からSJISへの変換
-				SonikLibStringConvert::ConvertUTF16toMBS(reinterpret_cast<char16_t*>(Stringval_), nullptr, &convSize_);
+				SonikLibStringConvert::ConvertUTF16toMBS(reinterpret_cast<char16_t*>(Stringval_), nullptr, &convSize_, m_locale);
 
 //				if( (convSize_ & 0x01) == 1 )
 //				{
@@ -432,7 +674,7 @@ namespace SonikLib
 				};
 
 				//convSize_ = buffer_ << 1; // x * 2 = x << 1
-				if( !SonikLibStringConvert::ConvertUTF16toMBS(reinterpret_cast<char16_t*>(Stringval_), reinterpret_cast<char*>(Stringval_), nullptr) )
+				if( !SonikLibStringConvert::ConvertUTF16toMBS(reinterpret_cast<char16_t*>(Stringval_), reinterpret_cast<char*>(Stringval_), nullptr, m_locale) )
 				{
 					string_atm_lock.Unlock();
 					return false;
@@ -503,7 +745,7 @@ namespace SonikLib
 			{
 			case SCHTYPE_SJIS:
 				//UTF8からSJISへの変換
-				SonikLibStringConvert::ConvertUTF8ToMBS(reinterpret_cast<char*>(Stringval_), nullptr, &convSize_);
+				SonikLibStringConvert::ConvertUTF8ToMBS(reinterpret_cast<char*>(Stringval_), nullptr, &convSize_, m_locale);
 
 //				if( (convSize_ & 0x01) == 1 )
 //				{
@@ -520,7 +762,7 @@ namespace SonikLib
 
 				};
 
-				if( !SonikLibStringConvert::ConvertUTF8ToMBS(reinterpret_cast<char*>(Stringval_), reinterpret_cast<char*>(Stringval_), nullptr) )
+				if( !SonikLibStringConvert::ConvertUTF8ToMBS(reinterpret_cast<char*>(Stringval_), reinterpret_cast<char*>(Stringval_), nullptr, m_locale) )
 				{
 					string_atm_lock.Unlock();
 					return false;
@@ -613,6 +855,40 @@ namespace SonikLib
 		Stringval_ = pTmp;
 		buffer_ = ReArraySize;
 
+		return true;
+	};
+
+	//ロケールを設定します。
+	bool SonikString_UTF8::SonikString_UTF8_pImpl::SetStringLocale(SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+	{
+
+		string_atm_lock.lock();
+
+		uint32_t  l_size = 0;
+		SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, _setlocale_);
+		if( l_size == 0 )
+		{
+			string_atm_lock.Unlock();
+			return false;
+		};
+
+		char* tmpbuffer = nullptr;
+		try
+		{
+			tmpbuffer = new char[l_size];
+
+		}catch(std::bad_alloc&)
+		{
+			string_atm_lock.Unlock();
+			return false;
+		};
+
+		 SonikLibStringConvert::ConvertLocaleCharacter(l_size, tmpbuffer, _setlocale_);
+
+		 delete[] m_locale;
+		 m_locale = tmpbuffer;
+
+		string_atm_lock.Unlock();
 		return true;
 	};
 
@@ -1937,13 +2213,13 @@ namespace SonikLib
 //
 //===========================================================
 
-	SonikString_UTF8::SonikString_UTF8(void)
+	SonikString_UTF8::SonikString_UTF8(SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
 	{
 		pImpl = nullptr;
 
 		try
 		{
-			pImpl = new SonikString_UTF8_pImpl;
+			pImpl = new SonikString_UTF8_pImpl(_setlocale_);
 		}catch(std::bad_alloc&)
 		{
 			delete pImpl;
@@ -1957,7 +2233,7 @@ namespace SonikLib
 
 		try
 		{
-			pImpl = new SonikString_UTF8_pImpl;
+			pImpl = new SonikString_UTF8_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
 			(*pImpl) = (*(t_his.pImpl));
 		}catch(std::bad_alloc&)
 		{
@@ -1972,7 +2248,22 @@ namespace SonikLib
 
 		try
 		{
-			pImpl = new SonikString_UTF8_pImpl;
+			pImpl = new SonikString_UTF8_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+
+	};
+	SonikString_UTF8::SonikString_UTF8(const char* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+	{
+		pImpl = nullptr;
+
+		try
+		{
+			pImpl = new SonikString_UTF8_pImpl(_setlocale_);
 			(*pImpl) = SetStr;
 		}catch(std::bad_alloc&)
 		{
@@ -1988,13 +2279,28 @@ namespace SonikLib
 
 		try
 		{
-			pImpl = new SonikString_UTF8_pImpl;
+			pImpl = new SonikString_UTF8_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
 			(*pImpl) = SetStr;
 		}catch(std::bad_alloc&)
 		{
 			delete pImpl;
 			throw;
 		};
+	};
+	SonikString_UTF8::SonikString_UTF8(const char16_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+	{
+		pImpl = nullptr;
+
+		try
+		{
+			pImpl = new SonikString_UTF8_pImpl(_setlocale_);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+
 	};
 
 	SonikString_UTF8::SonikString_UTF8(const wchar_t* SetStr)
@@ -2003,13 +2309,28 @@ namespace SonikLib
 
 		try
 		{
-			pImpl = new SonikString_UTF8_pImpl;
+			pImpl = new SonikString_UTF8_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
 			(*pImpl) = SetStr;
 		}catch(std::bad_alloc&)
 		{
 			delete pImpl;
 			throw;
 		};
+	};
+	SonikString_UTF8::SonikString_UTF8(const wchar_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+	{
+		pImpl = nullptr;
+
+		try
+		{
+			pImpl = new SonikString_UTF8_pImpl(_setlocale_);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+
 	};
 
 	SonikString_UTF8::SonikString_UTF8(const int8_t* SetStr)
@@ -2018,13 +2339,28 @@ namespace SonikLib
 
 		try
 		{
-			pImpl = new SonikString_UTF8_pImpl;
+			pImpl = new SonikString_UTF8_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
 			(*pImpl) = SetStr;
 		}catch(std::bad_alloc&)
 		{
 			delete pImpl;
 			throw;
 		};
+	};
+	SonikString_UTF8::SonikString_UTF8(const int8_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+	{
+		pImpl = nullptr;
+
+		try
+		{
+			pImpl = new SonikString_UTF8_pImpl(_setlocale_);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+
 	};
 
 	SonikString_UTF8::~SonikString_UTF8(void)
@@ -2033,6 +2369,12 @@ namespace SonikLib
 		{
 			delete pImpl;
 		};
+	};
+
+	//ロケールを設定します。
+	bool SonikString_UTF8::SetStringLocale(SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+	{
+		return pImpl->SetStringLocale(_setlocale_);
 	};
 
 	//SJIS形式に変換して取得します。(バッファタイプも書き換わります。)
@@ -2054,9 +2396,9 @@ namespace SonikLib
 	};
 
 	//define切り替えのstrゲット
-	const int8_t* SonikString_UTF8::definition_str(void)
+	const char* SonikString_UTF8::definition_str(void)
 	{
-		return pImpl->utf8_str();
+		return pImpl->c_str();
 	};
 
 	//SJIS形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
@@ -2068,7 +2410,7 @@ namespace SonikLib
 
 	//UTF16形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
 	//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
-	uint64_t SonikString_UTF8::GetCpy_c_wcstr(char16_t* dstBuffer)
+	uint64_t SonikString_UTF8::GetCpy_utf16_str(char16_t* dstBuffer)
 	{
 		return pImpl->GetCpy_c_wcstr(dstBuffer);
 	};

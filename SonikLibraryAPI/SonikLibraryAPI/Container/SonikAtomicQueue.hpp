@@ -59,6 +59,12 @@ namespace SonikLib
 		//アトミックブロッククラス。マルチスレッド対応にするための排他制御クラスです。
 		SonikLib::S_CAS::SonikAtomicLock shortblock;
 
+	private:
+		SonikAtomicQueue(const SonikAtomicQueue& _copy_) =delete;
+		SonikAtomicQueue(SonikAtomicQueue&& _move_) = delete;
+		SonikAtomicQueue& operator =(const SonikAtomicQueue& _copy_) = delete;
+		SonikAtomicQueue& operator =(SonikAtomicQueue&& _move_) = delete;
+
 	public:
 		SonikAtomicQueue(uint32_t QueueItemNum = 100)
 		:_first(nullptr)

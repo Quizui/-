@@ -10,6 +10,7 @@
 #define SONIKLIBSTRING_H_
 
 #include "../Container/RangedForContainer.hpp"
+#include "./SonikStringLocaleEnmus.h"
 
 namespace SonikLib
 {
@@ -25,14 +26,21 @@ namespace SonikLib
 		SonikString_pImpl* pImpl;
 
 	public:
-		SonikString(void);
+		SonikString(SonikLibStringConvert::SonikLibConvertLocale _setlocale_ = SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
 		SonikString(const SonikString& t_his);
 		SonikString(const char* SetStr);
+		SonikString(const char* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
 		SonikString(const char16_t* SetStr);
-		SonikString(const wchar_t* SetPtr);
+		SonikString(const char16_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+		SonikString(const wchar_t* SetStr);
+		SonikString(const wchar_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
 		SonikString(const int8_t* SetStr);
+		SonikString(const int8_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
 
 		~SonikString(void);
+
+		//ロケールを設定します。
+		bool SetStringLocale(SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
 
 		//SJIS形式に変換して取得します。(バッファタイプも書き換わります。)
 		const char* c_str(void);
@@ -49,7 +57,7 @@ namespace SonikLib
 		uint64_t GetCpy_c_str(char* dstBuffer = nullptr);
 		//UTF16形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
 		//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
-		uint64_t GetCpy_c_wcstr(char16_t* dstBuffer = nullptr);
+		uint64_t GetCpy_utf16_str(char16_t* dstBuffer = nullptr);
 		//UTF16形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
 		//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
 		uint64_t GetCpy_c_wcstr(wchar_t* dstBuffer = nullptr);

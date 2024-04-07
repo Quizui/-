@@ -40,6 +40,11 @@ namespace SonikLib
 		SonikLib::S_CAS::SonikAtomicLock lock_;
 
 	private:
+		SonikPriorityList(const SonikPriorityList<ListType>& _copy_) = delete;
+		SonikPriorityList(SonikPriorityList&& _move_) =delete;
+		SonikPriorityList& operator =(SonikPriorityList<ListType>& _copy_) = delete;
+		SonikPriorityList& operator =(SonikPriorityList&& _move_) =delete;
+
 		//プライベートソート関数 StartとEndを含む範囲内を挿入ソートします。
 		//引数1及び、2の位置は置き換わります。
 		inline void __InsertSort__(ListNode** pStart, ListNode** pEnd)

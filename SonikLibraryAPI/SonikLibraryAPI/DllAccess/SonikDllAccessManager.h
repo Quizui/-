@@ -64,10 +64,11 @@ namespace SonikLib
 
 	private:
 		//copy constructor
-		SonikDllHandleManager(const SonikDllHandleManager& t_his);
-
+		SonikDllHandleManager(const SonikDllHandleManager& _copy_) = delete;
+		SonikDllHandleManager(SonikDllHandleManager&& _move_) = delete;
 		//override operator equal
-		SonikDllHandleManager& operator =(const SonikDllHandleManager& t_his);
+		SonikDllHandleManager& operator =(const SonikDllHandleManager& _copy_) = delete;
+		SonikDllHandleManager& operator =(SonikDllHandleManager&& _move_) = delete;
 
 	public:
 		//constructor

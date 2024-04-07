@@ -6,6 +6,7 @@ SonikFileSystems/SonikFileController_x64.o: \
   ../SonikFileSystems/../Container/../SonikCAS/SonikAtomicLock.h \
   ../SonikFileSystems/../SonikString/SonikString.h \
   ../SonikFileSystems/../SonikString/../Container/RangedForContainer.hpp \
+  ../SonikFileSystems/../SonikString/./SonikStringLocaleEnmus.h \
   ../SonikFileSystems/../MathBit/MathBit.h
 ../SonikFileSystems/SonikFileController.h:
 ../SonikFileSystems/../SonikCAS/SonikAtomicLock.h:
@@ -13,4 +14,5 @@ SonikFileSystems/SonikFileController_x64.o: \
 ../SonikFileSystems/../Container/../SonikCAS/SonikAtomicLock.h:
 ../SonikFileSystems/../SonikString/SonikString.h:
 ../SonikFileSystems/../SonikString/../Container/RangedForContainer.hpp:
+../SonikFileSystems/../SonikString/./SonikStringLocaleEnmus.h:
 ../SonikFileSystems/../MathBit/MathBit.h:

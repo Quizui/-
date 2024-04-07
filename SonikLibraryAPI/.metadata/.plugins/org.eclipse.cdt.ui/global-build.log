@@ -1,4 +1,4 @@
-15:25:37 **** クリーンのみのビルド of configuration Release_x64 for project SonikLibraryAPI ****
+15:46:00 **** クリーンのみのビルド of configuration Release_x64 for project SonikLibraryAPI ****
 mingw32-make clean 
 rm -rf ./TimerClock/SonikElapsedTimer.d ./TimerClock/SonikElapsedTimer.o ./TimerClock/SonikElapsedTimer_x64.d ./TimerClock/SonikElapsedTimer_x64.o
 rm -rf ./SonikWorkThread/SonikWorkThreadEx.d ./SonikWorkThread/SonikWorkThreadEx.o ./SonikWorkThread/SonikWorkThreadManagerEx.d ./SonikWorkThread/SonikWorkThreadManagerEx.o
@@ -17,7 +17,7 @@ rm -rf ./Audio/Format/SonikAppleAiffFormat.d ./Audio/Format/SonikAppleAiffFormat
 rm -rf ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.d ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o
 rm -rf lib_Rx64_SonikLibraryAPI.a
  
-15:25:37 **** ビルド of configuration Release_x64 for project SonikLibraryAPI ****
+15:46:01 **** ビルド of configuration Release_x64 for project SonikLibraryAPI ****
 mingw32-make all 
 Building file: ../TimerClock/SonikElapsedTimer.cpp
 Invoking: GCC C++ Compiler
@@ -46,7 +46,21 @@ In file included from <built-in>:469:
 <command line>:3:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
     3 | #define __cplusplus 202002L
       |         ^
-1 warning generated.
+In file included from ../SonikWorkThread/SonikWorkThreadEx.cpp:8:
+../SonikWorkThread/SonikWorkThreadEx.h:29:12: warning: inline namespace reopened as a non-inline namespace [-Winline-namespace-reopened-noninline]
+   29 |         namespace __1
+      |                   ^
+      |         inline 
+D:/Development/MSYS64/clang64/include/c++/v1/__config:849:1: note: previous definition is here
+  849 | _LIBCPP_BEGIN_NAMESPACE_STD _LIBCPP_END_NAMESPACE_STD
+      | ^
+D:/Development/MSYS64/clang64/include/c++/v1/__config:845:72: note: expanded from macro '_LIBCPP_BEGIN_NAMESPACE_STD'
+  845 | #  define _LIBCPP_BEGIN_NAMESPACE_STD namespace std { inline namespace _LIBCPP_ABI_NAMESPACE {
+      |                                                                        ^
+D:/Development/MSYS64/clang64/include/c++/v1/__config_site:13:31: note: expanded from macro '_LIBCPP_ABI_NAMESPACE'
+   13 | #define _LIBCPP_ABI_NAMESPACE __1
+      |                               ^
+2 warnings generated.
 Finished building: ../SonikWorkThread/SonikWorkThreadEx.cpp
  
 Building file: ../SonikWorkThread/SonikWorkThreadManagerEx.cpp
@@ -56,7 +70,66 @@ In file included from <built-in>:469:
 <command line>:3:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
     3 | #define __cplusplus 202002L
       |         ^
-1 warning generated.
+In file included from ../SonikWorkThread/SonikWorkThreadManagerEx.cpp:8:
+../SonikWorkThread/SonikWorkThreadManagerEx.h:31:12: warning: inline namespace reopened as a non-inline namespace [-Winline-namespace-reopened-noninline]
+   31 |         namespace __1
+      |                   ^
+      |         inline 
+D:/Development/MSYS64/clang64/include/c++/v1/__config:849:1: note: previous definition is here
+  849 | _LIBCPP_BEGIN_NAMESPACE_STD _LIBCPP_END_NAMESPACE_STD
+      | ^
+D:/Development/MSYS64/clang64/include/c++/v1/__config:845:72: note: expanded from macro '_LIBCPP_BEGIN_NAMESPACE_STD'
+  845 | #  define _LIBCPP_BEGIN_NAMESPACE_STD namespace std { inline namespace _LIBCPP_ABI_NAMESPACE {
+      |                                                                        ^
+D:/Development/MSYS64/clang64/include/c++/v1/__config_site:13:31: note: expanded from macro '_LIBCPP_ABI_NAMESPACE'
+   13 | #define _LIBCPP_ABI_NAMESPACE __1
+      |                               ^
+In file included from ../SonikWorkThread/SonikWorkThreadManagerEx.cpp:9:
+../SonikWorkThread/SonikWorkThreadEx.h:29:12: warning: inline namespace reopened as a non-inline namespace [-Winline-namespace-reopened-noninline]
+   29 |         namespace __1
+      |                   ^
+      |         inline 
+D:/Development/MSYS64/clang64/include/c++/v1/__config:849:1: note: previous definition is here
+  849 | _LIBCPP_BEGIN_NAMESPACE_STD _LIBCPP_END_NAMESPACE_STD
+      | ^
+D:/Development/MSYS64/clang64/include/c++/v1/__config:845:72: note: expanded from macro '_LIBCPP_BEGIN_NAMESPACE_STD'
+  845 | #  define _LIBCPP_BEGIN_NAMESPACE_STD namespace std { inline namespace _LIBCPP_ABI_NAMESPACE {
+      |                                                                        ^
+D:/Development/MSYS64/clang64/include/c++/v1/__config_site:13:31: note: expanded from macro '_LIBCPP_ABI_NAMESPACE'
+   13 | #define _LIBCPP_ABI_NAMESPACE __1
+      |                               ^
+In file included from ../SonikWorkThread/SonikWorkThreadManagerEx.cpp:8:
+In file included from ../SonikWorkThread/SonikWorkThreadManagerEx.h:11:
+../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp:144:5: warning: deleting pointer to incomplete type 'SonikFunctionObjectDefines::FunctionObjectSystemInterface' may cause undefined behavior [-Wdelete-incomplete]
+  144 |                                 delete m_Pointer; // 繧ｳ繝ｳ繧ｹ繝医Λ繧ｯ繧ｿ縺ｧ縺ｮ萓句､門?ｦ逅?縺ｯ縺昴?ｮ繧ｪ繝悶ず繧ｧ繧ｯ繝医?ｮ菴懈?舌′辟｡蜉ｹ縺ｨ縺ｪ繧九?ｮ縺ｧ蜀榊ｺｦnullptr繧貞?･繧後ｋ蠢?隕√↑縺励??
+      |                                 ^      ~~~~~~~~~
+../SonikWorkThread/../Container/SonikAtomicQueue.hpp:34:4: note: in instantiation of member function 'SonikLib::SharedSmtPtr<SonikFunctionObjectDefines::FunctionObjectSystemInterface>::SharedSmtPtr' requested here
+   34 |                         QueueNode(void)
+      |                         ^
+../SonikWorkThread/../Container/SonikAtomicQueue.hpp:83:28: note: in instantiation of member function 'SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikFunctionObjectDefines::FunctionObjectSystemInterface>>::QueueNode<SonikLib::SharedSmtPtr<SonikFunctionObjectDefines::FunctionObjectSystemInterface>>::QueueNode' requested here
+   83 |                                 m_QueueAllocArea = new TypeNode[QueueItemNum];
+      |                                                        ^
+../SonikWorkThread/SonikWorkThreadManagerEx.cpp:62:59: note: in instantiation of member function 'SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikFunctionObjectDefines::FunctionObjectSystemInterface>>::SonikAtomicQueue' requested here
+   62 |                 if( !lp_mngobj->JobQueue.ResetPointer(new(std::nothrow) SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>(JobBufferSize)) )
+      |                                                                         ^
+../SonikWorkThread/SonikWorkThreadManagerEx.h:16:8: note: forward declaration of 'SonikFunctionObjectDefines::FunctionObjectSystemInterface'
+   16 |         class FunctionObjectSystemInterface;
+      |               ^
+In file included from ../SonikWorkThread/SonikWorkThreadManagerEx.cpp:8:
+In file included from ../SonikWorkThread/SonikWorkThreadManagerEx.h:11:
+../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp:116:5: warning: deleting pointer to incomplete type 'SonikFunctionObjectDefines::FunctionObjectSystemInterface' may cause undefined behavior [-Wdelete-incomplete]
+  116 |                                 delete m_Pointer;
+      |                                 ^      ~~~~~~~~~
+../SonikWorkThread/../SmartPointer/SonikSmartPointer.hpp:165:4: note: in instantiation of member function 'SonikLib::SharedSmtPtr<SonikFunctionObjectDefines::FunctionObjectSystemInterface>::Release' requested here
+  165 |                         Release();
+      |                         ^
+../SonikWorkThread/SonikWorkThreadManagerEx.cpp:108:29: note: in instantiation of member function 'SonikLib::SharedSmtPtr<SonikFunctionObjectDefines::FunctionObjectSystemInterface>::~SharedSmtPtr' requested here
+  108 |                 return  JobQueue->EnQueue(_in_task_);
+      |                                           ^
+../SonikWorkThread/SonikWorkThreadManagerEx.h:16:8: note: forward declaration of 'SonikFunctionObjectDefines::FunctionObjectSystemInterface'
+   16 |         class FunctionObjectSystemInterface;
+      |               ^
+5 warnings generated.
 Finished building: ../SonikWorkThread/SonikWorkThreadManagerEx.cpp
  
 Building file: ../SonikString/WIDE/SonikString_WIDE.cpp
@@ -106,14 +179,14 @@ In file included from <built-in>:469:
 <command line>:3:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
     3 | #define __cplusplus 202002L
       |         ^
-../SonikString/SonikStringConvert.cpp:57:68: warning: result of comparison of constant 191 with expression of type 'const char' is always false [-Wtautological-constant-out-of-range-compare]
-   57 |                 if( pCheckSrc[0] == 0xEF && pCheckSrc[1] == 0xBB && pCheckSrc[2] == 0xBF )
+../SonikString/SonikStringConvert.cpp:142:68: warning: result of comparison of constant 191 with expression of type 'const char' is always false [-Wtautological-constant-out-of-range-compare]
+  142 |                 if( pCheckSrc[0] == 0xEF && pCheckSrc[1] == 0xBB && pCheckSrc[2] == 0xBF )
       |                                                                     ~~~~~~~~~~~~ ^  ~~~~
-../SonikString/SonikStringConvert.cpp:57:44: warning: result of comparison of constant 187 with expression of type 'const char' is always false [-Wtautological-constant-out-of-range-compare]
-   57 |                 if( pCheckSrc[0] == 0xEF && pCheckSrc[1] == 0xBB && pCheckSrc[2] == 0xBF )
+../SonikString/SonikStringConvert.cpp:142:44: warning: result of comparison of constant 187 with expression of type 'const char' is always false [-Wtautological-constant-out-of-range-compare]
+  142 |                 if( pCheckSrc[0] == 0xEF && pCheckSrc[1] == 0xBB && pCheckSrc[2] == 0xBF )
       |                                             ~~~~~~~~~~~~ ^  ~~~~
-../SonikString/SonikStringConvert.cpp:57:20: warning: result of comparison of constant 239 with expression of type 'const char' is always false [-Wtautological-constant-out-of-range-compare]
-   57 |                 if( pCheckSrc[0] == 0xEF && pCheckSrc[1] == 0xBB && pCheckSrc[2] == 0xBF )
+../SonikString/SonikStringConvert.cpp:142:20: warning: result of comparison of constant 239 with expression of type 'const char' is always false [-Wtautological-constant-out-of-range-compare]
+  142 |                 if( pCheckSrc[0] == 0xEF && pCheckSrc[1] == 0xBB && pCheckSrc[2] == 0xBF )
       |                     ~~~~~~~~~~~~ ^  ~~~~
 4 warnings generated.
 Finished building: ../SonikString/SonikStringConvert.cpp

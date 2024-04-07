@@ -26,6 +26,12 @@ namespace SonikLib
 		uint32_t AllocCount;
 		uint32_t MaxCnt;
 
+	private:
+		SonikVariableArrayContainer(const SonikVariableArrayContainer& _copy_) =delete;
+		SonikVariableArrayContainer(SonikVariableArrayContainer&& _move_) =delete;
+		SonikVariableArrayContainer& operator =(const SonikVariableArrayContainer& _copy_) =delete;
+		SonikVariableArrayContainer& operator =(SonikVariableArrayContainer&& _move_) =delete;
+
 	public:
 		SonikVariableArrayContainer(uint32_t ElemCnt = 100)
 		:AllocCount(0)

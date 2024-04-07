@@ -1,0 +1,93 @@
+/*
+ * SonikWorkThreadManagerEx.cpp
+ *
+ *  Created on: 2015/09/24
+ *      Author: SONIK
+ */
+
+#include <new>
+
+//#define private public
+#include "SonikWorkThreadManagerEx.h"
+//#undef private
+
+namespace SonikLib
+{
+	//コンストラクタ
+	SonikThreadManagerEx::SonikThreadManagerEx(void)
+	:ManagedThreadNum(0)
+	,m_pThreads(nullptr)
+	{
+
+	};
+
+	//デストラクタ
+	SonikThreadManagerEx::~SonikThreadManagerEx(void)
+	{
+		//スレッド始末。
+
+	};
+
+	//クリエイタ
+	bool SonikThreadManagerEx::CreateThraedManager(uint32_t UseThreadNum, uint32_t JobBufferSize)
+	{
+
+
+		if( !JobQueue.ResetPointer(new(std::nothrow) SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>(JobBufferSize)) )
+		{
+			return false;
+		};
+		if( JobQueue.IsNullptr() )
+		{
+			return false;
+		};
+
+		m_pThreads = new(std::nothrow)  SonikLib::WorkThreadEx*[UseThreadNum];
+		if( m_pThreads == nullptr )
+		{
+			JobQueue.ResetPointer(nullptr);
+			return false;
+		};
+		return true;
+	};
+
+	//イニシャライザ
+	bool SonikThreadManagerEx::Initialize(uint32_t UseThreadNum, uint32_t JobBufferSize)
+	{
+
+
+
+		try
+		{
+			//JobQueue = new SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>(JobBufferSize);
+			m_pThreads = new SonikLib::WorkThreadEx[UseThreadNum];
+
+		}catch(...)
+		{
+			delete[] m_pThreads;
+			delete JobQueue;
+
+			atmlock_.Unlock();
+			return false;
+		};
+
+		for(unsigned long looped_=0; looped_ < UseThreadNum; ++looped_)
+		{
+			m_pThreads[looped_].Set_ExternalQueue(JobQueue);
+		};
+
+		ManagedThreadNum = UseThreadNum;
+
+		Init_ = true;
+
+		atmlock_.Unlock();
+		return true;
+	};
+
+	//スレッド数の取得
+	uint32_t SonikThreadManagerEx::Get_ManagedThreadNum(void)
+	{
+		return ManagedThreadNum;
+	};
+
+};//end namespace;

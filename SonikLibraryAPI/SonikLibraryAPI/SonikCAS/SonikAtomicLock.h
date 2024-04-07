@@ -27,11 +27,11 @@ namespace SonikLib
 
 		private:
 			//コピーコンストラクタ
-			SonikAtomicLock(const SonikAtomicLock& t_his);
-
+			SonikAtomicLock(const SonikAtomicLock& _copy_) = delete;
+			SonikAtomicLock(SonikAtomicLock&& _move_) = delete;
 			//代入演算子
-			SonikAtomicLock& operator =(const SonikAtomicLock& t_his);
-
+			SonikAtomicLock& operator =(const SonikAtomicLock& _copy_) = delete;
+			SonikAtomicLock& operator =(SonikAtomicLock&& _move_) = delete;
 		public:
 			//コンストラクタ
 			SonikAtomicLock(void);

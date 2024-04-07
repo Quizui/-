@@ -65,24 +65,6 @@ namespace SonikLib
 
 	};
 
-	//constructor
-	SonikDllHandleManager::SonikDllHandleManager(void)
-	{
-		//no process
-	};
-
-	//copy constructor
-	SonikDllHandleManager::SonikDllHandleManager(const SonikDllHandleManager& t_his)
-	{
-		//no process
-	};
-
-	//override operator equal
-	SonikDllHandleManager& SonikDllHandleManager::operator =(const SonikDllHandleManager& t_his)
-	{
-		return (*this);
-	};
-
 	//Destructor
 	SonikDllHandleManager::~SonikDllHandleManager(void)
 	{

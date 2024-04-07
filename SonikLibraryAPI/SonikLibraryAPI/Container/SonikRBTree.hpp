@@ -29,6 +29,11 @@ namespace SonikLib
 		typedef SonikLib_Node::SonikRBTreeNode<SetDataType> Nodes;
 
 	private:
+		SonikRBTree(const SonikRBTree<SetDataType>& _copy_) =delete;
+		SonikRBTree(SonikRBTree<SetDataType>&& _move_) = delete;
+		SonikRBTree& operator =(const SonikRBTree<SetDataType>& _copy_) = delete;
+		SonikRBTree& operator =(SonikRBTree<SetDataType>&& _move_) = delete;
+
 		//アロケータへのスマートポインタ
 		//SonikLib::SonikRawAllocObjectPtr AllocSmtPtr_;
 

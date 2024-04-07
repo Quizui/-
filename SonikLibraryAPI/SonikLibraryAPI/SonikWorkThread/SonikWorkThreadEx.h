@@ -26,8 +26,11 @@
 
 namespace std
 {
-	class condition_variable;
-}
+	namespace __1
+	{
+		class condition_variable_any;
+	};
+};
 
 namespace SonikFunctionObjectDefines
 {
@@ -46,10 +49,20 @@ namespace SonikLib
 		class pImplEx;
 		pImplEx* ImplObject;
 
+	private:
+		//コピーとムーヴの禁止
+		WorkThreadEx(const WorkThreadEx& _copy_) = delete;
+		WorkThreadEx(WorkThreadEx&& _move_) = delete;
+		WorkThreadEx& operator =(const WorkThreadEx& _copy_) = delete;
+		WorkThreadEx& operator =(WorkThreadEx&& _move_) = delete;
+
 	public:
 
 		//本クラスのコンストラクタです。
 		WorkThreadEx(bool DetachThread = false);
+		//外部のcondition_variable_anyオブジェクトを使用します。
+		//外部のcondition_variable_anyオブジェクトが複数のスレッドに渡されていた場合、内部のスレッド起床関数コールが対象はすべてのスレッド対象になります。
+		WorkThreadEx(SonikLib::SharedSmtPtr<std::condition_variable_any>& _cond_, bool DetachThread = false);
 
 		//本クラスのデストラクタです。
 		~WorkThreadEx(void);
@@ -71,7 +84,7 @@ namespace SonikLib
 		//本関数はSetCallFunctionと同時にコールされた場合で、SetCallFunctionが先に実行された場合、セットされた関数が終了するまで処理を返却しません。
 		//本関数によりキューがセットされた後は、SetCallFunctionは無効となり、常にfalseを返却します。
 		//本関数でセットしたキューにエンキューを行った場合、dispatchQueue関数をコールし、エンキューを行ったことを通知しなければデキュー処理を行いません。
-		void Set_ExternalQueue(SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>* pSetQueue);
+		void Set_ExternalQueue(SonikLib::SharedSmtPtr<SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>>& pSetQueue);
 
 		//外部のキューをアンセットします。
 		void UnSet_ExternalQueue(void);

@@ -2,15 +2,19 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="WINDOWS_FreeLibrary"/>
+		<item key="selection" value="SonikString_UTF16"/>
 		<item key="casesensitive" value="true"/>
 		<item key="incremental" value="true"/>
 		<item key="wrap" value="true"/>
 		<item key="wholeword" value="false"/>
 		<list key="findhistory">
+			<item value="SonikString"/>
+			<item value="SonikString_WIDE"/>
+			<item value="namespace SonikLib"/>
+			<item value="ConvertMBSToUTF8"/>
+			<item value="mbsto"/>
 			<item value="WINDOWS_FreeLibrary"/>
 			<item value="uint8_t"/>
-			<item value="SonikString"/>
 			<item value="SetChangeFuntionCallLoopFlag"/>
 			<item value="SetChangeSetFuncFlag"/>
 			<item value="SonikString::SonikString"/>
@@ -19,27 +23,23 @@
 			<item value="MaxLength_"/>
 			<item value="Realloc"/>
 			<item value="Greater"/>
-			<item value="SonikLib::NormalSmtPtr&lt;SonikLib::FunctionSystem_Base&gt; tmp;"/>
-			<item value="SonikAtomicLock"/>
-			<item value="ThreadPoolArray"/>
-			<item value="Inserted_"/>
 		</list>
 		<list key="replacehistory">
-			<item value="int8_t"/>
-			<item value="SonikString_WIDE"/>
 			<item value="SonikString_UTF16"/>
 			<item value="SonikString_UTF8"/>
+			<item value="SonikString_WIDE"/>
+			<item value=""/>
+			<item value="SonikStiring_UTF16"/>
+			<item value="int8_t"/>
 			<item value="SonikStringUTF16"/>
 			<item value="SonikStringUTF16::SonikStringUTF16_pImpl"/>
 			<item value="SonikStringUTF16_pImpl"/>
-			<item value=""/>
 			<item value="m_pThreads"/>
 			<item value="SONIK_DLL"/>
 			<item value="SONIK"/>
 			<item value="Sonik"/>
 			<item value="/ 1000.0"/>
 			<item value="object_ == 0"/>
-			<item value="SonikString_pImpl"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
