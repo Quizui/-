@@ -1046,6 +1046,8 @@ bool SonikLibStringConvert::ConvertMBSToUTF8(char* pSrc, char* pDest, uint64_t* 
 		return false;
 	};
 
+	const char* _default_ = std::setlocale(LC_CTYPE, ""); //セット前の値を取得(他で何もしてなければOS初期値
+
 	std::setlocale(LC_CTYPE, locale);
 
 	uint64_t utf16Len = 0;
@@ -1053,8 +1055,8 @@ bool SonikLibStringConvert::ConvertMBSToUTF8(char* pSrc, char* pDest, uint64_t* 
 	err = mbstowcs_s(&utf16Len, nullptr, 0, pSrc, _TRUNCATE);
 	if(err != 0)
 	{
-		//セットしてあるロケールで失敗したのデフォルトのCTypeでやってみる。
-		std::setlocale(LC_CTYPE, "C");
+		//セットしてあるロケールで失敗したのデフォルトでやってみる。
+		std::setlocale(LC_CTYPE, _default_);
 		err = mbstowcs_s(&utf16Len, nullptr, 0, pSrc, _TRUNCATE);
 		if(err != 0)
 		{
@@ -1065,7 +1067,7 @@ bool SonikLibStringConvert::ConvertMBSToUTF8(char* pSrc, char* pDest, uint64_t* 
 	char16_t* unicode_buf = new(std::nothrow) char16_t[utf16Len + 1];
 	if(unicode_buf == nullptr)
 	{
-		std::setlocale(LC_CTYPE, "C"); //デフォルトに戻して終了
+		std::setlocale(LC_CTYPE, _default_); //デフォルトに戻して終了
 		return false;
 	};
 
@@ -1075,7 +1077,7 @@ bool SonikLibStringConvert::ConvertMBSToUTF8(char* pSrc, char* pDest, uint64_t* 
 	//上のサイズ取得で失敗してなければここで失敗しようはずがない。
 	mbstowcs_s(nullptr, reinterpret_cast<wchar_t*>(unicode_buf), utf16Len+1, pSrc, _TRUNCATE);
 	//デフォルトにロケールを戻す。
-	std::setlocale(LC_CTYPE, "C");
+	std::setlocale(LC_CTYPE, _default_);
 
 	uint64_t sizecheck = 0;
 	SonikLibStringConvert::ConvertUTF16ToUTF8(unicode_buf, nullptr, &sizecheck); // すでに計算済みのバイト数で帰ってくる。
@@ -1132,6 +1134,8 @@ bool SonikLibStringConvert::ConvertUTF8ToMBS(char* pSrc, char* pDest, uint64_t* 
 		return false;
 	};
 
+	const char* _default_ = std::setlocale(LC_CTYPE, ""); //セット前の値を取得(他で何もしてなければOS初期値
+
 	std::setlocale(LC_CTYPE, locale);
 
 	uint64_t retsize = 0;
@@ -1139,8 +1143,8 @@ bool SonikLibStringConvert::ConvertUTF8ToMBS(char* pSrc, char* pDest, uint64_t* 
 	err = wcstombs_s(&retsize, nullptr, 0, reinterpret_cast<wchar_t*>(unicode_buf), _TRUNCATE);
 	if(err != 0)
 	{
-		//セットしてあるロケールで失敗したのデフォルトのCTypeでやってみる。
-		std::setlocale(LC_CTYPE, "C");
+		//セットしてあるロケールで失敗したのデフォルトでやってみる。
+		std::setlocale(LC_CTYPE, _default_);
 		err = wcstombs_s(&retsize, nullptr, 0, reinterpret_cast<wchar_t*>(unicode_buf), _TRUNCATE);
 		if(err != 0)
 		{
@@ -1153,7 +1157,7 @@ bool SonikLibStringConvert::ConvertUTF8ToMBS(char* pSrc, char* pDest, uint64_t* 
 	{
 		//utf16->SJIS サイズチェック
 		(*DestBufferSize) = ((retsize + 1) << 1); //SJISは 1~2Byteのため、すべて2Byteとして計算。
-		std::setlocale(LC_CTYPE, "C");
+		std::setlocale(LC_CTYPE, _default_);
 		delete[] unicode_buf;
 		return false;
 	};
@@ -1163,7 +1167,7 @@ bool SonikLibStringConvert::ConvertUTF8ToMBS(char* pSrc, char* pDest, uint64_t* 
 	wcstombs_s(nullptr, pDest, retsize, reinterpret_cast<wchar_t*>(unicode_buf), _TRUNCATE);
 
 	delete[] unicode_buf;
-	std::setlocale(LC_CTYPE, "C");
+	std::setlocale(LC_CTYPE, _default_);
 	return true;
 };
 
@@ -1181,6 +1185,8 @@ bool SonikLibStringConvert::ConvertMBStoUTF16(char* pSrc, char16_t* pDest, uint6
 		return false;
 	};
 
+	const char* _default_ = std::setlocale(LC_CTYPE, ""); //セット前の値を取得(他で何もしてなければOS初期値
+
 	setlocale(LC_CTYPE, locale);
 
 	uint64_t size_ = 0;
@@ -1188,8 +1194,8 @@ bool SonikLibStringConvert::ConvertMBStoUTF16(char* pSrc, char16_t* pDest, uint6
 	err = mbstowcs_s(&size_, nullptr, 0, pSrc, _TRUNCATE);
 	if(err != 0)
 	{
-		//セットしてあるロケールで失敗したのデフォルトのCTypeでやってみる。
-		std::setlocale(LC_CTYPE, "C");
+		//セットしてあるロケールで失敗したのデフォルトでやってみる。
+		std::setlocale(LC_CTYPE, _default_);
 		err = mbstowcs_s(&size_, nullptr, 0, pSrc, _TRUNCATE);
 		if(err != 0)
 		{
@@ -1200,7 +1206,7 @@ bool SonikLibStringConvert::ConvertMBStoUTF16(char* pSrc, char16_t* pDest, uint6
 	char16_t* tmpBuf = new(std::nothrow) char16_t[(size_ + 1) ]; // NULL終端追加;
 	if(tmpBuf == nullptr)
 	{
-		std::setlocale(LC_CTYPE, "C");
+		std::setlocale(LC_CTYPE, _default_);
 		return false;
 	};
 
@@ -1209,7 +1215,7 @@ bool SonikLibStringConvert::ConvertMBStoUTF16(char* pSrc, char16_t* pDest, uint6
 	if( pDest == nullptr && DestBufferSize != nullptr)
 	{
 		(*DestBufferSize) = (size_ + 1) << 1;
-		std::setlocale(LC_CTYPE, "C");
+		std::setlocale(LC_CTYPE, _default_);
 		delete[] tmpBuf;
 		return false;
 	};
@@ -1217,7 +1223,7 @@ bool SonikLibStringConvert::ConvertMBStoUTF16(char* pSrc, char16_t* pDest, uint6
 	//サイズチェック時に成功しているので変換失敗はしないはず。
 	 mbstowcs_s(nullptr, reinterpret_cast<wchar_t*>(tmpBuf), (size_ + 1), pSrc, _TRUNCATE);
 	 //ロケールをデフォルトに戻す。
-	setlocale(LC_CTYPE, "C");
+	 std::setlocale(LC_CTYPE, _default_);
 
 	if( memcpy_s(pDest, ((size_ + 1) << 1), tmpBuf, ((size_ + 1) << 1)) != 0 ) // x * 2 = x << 1
 	{
@@ -1238,6 +1244,8 @@ bool SonikLibStringConvert::ConvertUTF16toMBS(char16_t* pSrc, char* pDest, uint6
 		return false;
 	};
 
+	const char* _default_ = std::setlocale(LC_CTYPE, ""); //セット前の値を取得(他で何もしてなければOS初期値
+
 	std::setlocale(LC_CTYPE, locale);
 
 	uint64_t size_ = 0;
@@ -1245,8 +1253,8 @@ bool SonikLibStringConvert::ConvertUTF16toMBS(char16_t* pSrc, char* pDest, uint6
 	err = wcstombs_s(&size_, nullptr, 0, reinterpret_cast<wchar_t*>(pSrc), _TRUNCATE);
 	if(err != 0)
 	{
-		//セットしてあるロケールで失敗したのデフォルトのCTypeでやってみる。
-		std::setlocale(LC_CTYPE, "C");
+		//セットしてあるロケールで失敗したのデフォルトでやってみる。
+		std::setlocale(LC_CTYPE, _default_);
 		err = wcstombs_s(&size_, nullptr, 0, reinterpret_cast<wchar_t*>(pSrc), _TRUNCATE);
 		if(err != 0)
 		{
@@ -1258,7 +1266,7 @@ bool SonikLibStringConvert::ConvertUTF16toMBS(char16_t* pSrc, char* pDest, uint6
 	char* tmpBuf = new(std::nothrow) char[size_]; //1~2Byteで構成されるためすべて１文字あたり2Byteとして扱う。;
 	if(tmpBuf == nullptr)
 	{
-		std::setlocale(LC_CTYPE, "C");
+		std::setlocale(LC_CTYPE, _default_);
 		return false;
 	};
 
@@ -1267,7 +1275,7 @@ bool SonikLibStringConvert::ConvertUTF16toMBS(char16_t* pSrc, char* pDest, uint6
 	if( pDest == nullptr && DestBufferSize != nullptr)
 	{
 		(*DestBufferSize) = size_;
-		std::setlocale(LC_CTYPE, "C");
+		std::setlocale(LC_CTYPE, _default_);
 		delete[] tmpBuf;
 		return false;
 	};
@@ -1276,7 +1284,7 @@ bool SonikLibStringConvert::ConvertUTF16toMBS(char16_t* pSrc, char* pDest, uint6
 	wcstombs_s(nullptr, tmpBuf, size_, reinterpret_cast<wchar_t*>(pSrc), _TRUNCATE);
 
 	//ロケールをデフォルトに戻しておく。
-	setlocale(LC_CTYPE, "C");
+	std::setlocale(LC_CTYPE, _default_);
 
 	if( memcpy_s(pDest, size_, tmpBuf, size_) != 0 )
 	{

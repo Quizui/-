@@ -214,14 +214,14 @@ namespace SonikLib
 		try
 		{
 			uint32_t l_size = 0;
-			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
 			if(  l_size == 0 )
 			{
 				throw std::bad_alloc();
 			};
 
 			m_locale = new char[l_size];
-			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
 
 			Stringval_ = new int8_t[buffer_];
 		}catch(std::bad_alloc& e)
@@ -302,14 +302,14 @@ namespace SonikLib
 		try
 		{
 			uint32_t l_size = 0;
-			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
 			if(  l_size == 0 )
 			{
 				throw std::bad_alloc();
 			};
 
 			m_locale = new char[l_size];
-			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
 
 			Stringval_ = new int8_t[buffer_];
 		}catch(std::bad_alloc&)
@@ -381,14 +381,14 @@ namespace SonikLib
 		try
 		{
 			uint32_t l_size = 0;
-			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
 			if(  l_size == 0 )
 			{
 				throw std::bad_alloc();
 			};
 
 			m_locale = new char[l_size];
-			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
 
 			Stringval_ = new int8_t[buffer_];
 		}catch(std::bad_alloc&)
@@ -463,14 +463,14 @@ namespace SonikLib
 		try
 		{
 			uint32_t l_size = 0;
-			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
 			if(  l_size == 0 )
 			{
 				throw std::bad_alloc();
 			};
 
 			m_locale = new char[l_size];
-			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
 
 			Stringval_ = new int8_t[buffer_];
 		}catch(std::bad_alloc&)
@@ -533,7 +533,12 @@ namespace SonikLib
 	};
 
 	SonikString::SonikString_pImpl::SonikString_pImpl(const SonikString_pImpl& t_his)
-	{
+	:Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_UTF16)
+	,buffer_(100)
+{
 		uint32_t localesize = strlen(t_his.m_locale);
 		try
 		{
@@ -541,6 +546,7 @@ namespace SonikLib
 			Stringval_ = new int8_t[t_his.buffer_];
 		}catch(std::bad_alloc& e)
 		{
+			delete m_locale;
 			delete[] Stringval_;
 			throw std::bad_alloc(e);
 		};
@@ -2233,7 +2239,7 @@ namespace SonikLib
 
 		try
 		{
-			pImpl = new SonikString_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+			pImpl = new SonikString_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
 			(*pImpl) = (*(t_his.pImpl));
 		}catch(std::bad_alloc&)
 		{
@@ -2248,7 +2254,7 @@ namespace SonikLib
 
 		try
 		{
-			pImpl = new SonikString_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+			pImpl = new SonikString_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
 			(*pImpl) = SetStr;
 		}catch(std::bad_alloc&)
 		{
@@ -2279,7 +2285,7 @@ namespace SonikLib
 
 		try
 		{
-			pImpl = new SonikString_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+			pImpl = new SonikString_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
 			(*pImpl) = SetStr;
 		}catch(std::bad_alloc&)
 		{
@@ -2309,7 +2315,7 @@ namespace SonikLib
 
 		try
 		{
-			pImpl = new SonikString_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+			pImpl = new SonikString_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
 			(*pImpl) = SetStr;
 		}catch(std::bad_alloc&)
 		{
@@ -2339,7 +2345,7 @@ namespace SonikLib
 
 		try
 		{
-			pImpl = new SonikString_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
+			pImpl = new SonikString_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
 			(*pImpl) = SetStr;
 		}catch(std::bad_alloc&)
 		{

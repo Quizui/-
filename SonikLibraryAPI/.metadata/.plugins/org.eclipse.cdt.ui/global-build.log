@@ -1,4 +1,4 @@
-15:46:00 **** クリーンのみのビルド of configuration Release_x64 for project SonikLibraryAPI ****
+23:13:13 **** クリーンのみのビルド of configuration Release_x64 for project SonikLibraryAPI ****
 mingw32-make clean 
 rm -rf ./TimerClock/SonikElapsedTimer.d ./TimerClock/SonikElapsedTimer.o ./TimerClock/SonikElapsedTimer_x64.d ./TimerClock/SonikElapsedTimer_x64.o
 rm -rf ./SonikWorkThread/SonikWorkThreadEx.d ./SonikWorkThread/SonikWorkThreadEx.o ./SonikWorkThread/SonikWorkThreadManagerEx.d ./SonikWorkThread/SonikWorkThreadManagerEx.o
@@ -17,7 +17,7 @@ rm -rf ./Audio/Format/SonikAppleAiffFormat.d ./Audio/Format/SonikAppleAiffFormat
 rm -rf ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.d ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o
 rm -rf lib_Rx64_SonikLibraryAPI.a
  
-15:46:01 **** ビルド of configuration Release_x64 for project SonikLibraryAPI ****
+23:13:14 **** ビルド of configuration Release_x64 for project SonikLibraryAPI ****
 mingw32-make all 
 Building file: ../TimerClock/SonikElapsedTimer.cpp
 Invoking: GCC C++ Compiler
@@ -71,8 +71,8 @@ In file included from <built-in>:469:
     3 | #define __cplusplus 202002L
       |         ^
 In file included from ../SonikWorkThread/SonikWorkThreadManagerEx.cpp:8:
-../SonikWorkThread/SonikWorkThreadManagerEx.h:31:12: warning: inline namespace reopened as a non-inline namespace [-Winline-namespace-reopened-noninline]
-   31 |         namespace __1
+../SonikWorkThread/SonikWorkThreadManagerEx.h:35:12: warning: inline namespace reopened as a non-inline namespace [-Winline-namespace-reopened-noninline]
+   35 |         namespace __1
       |                   ^
       |         inline 
 D:/Development/MSYS64/clang64/include/c++/v1/__config:849:1: note: previous definition is here

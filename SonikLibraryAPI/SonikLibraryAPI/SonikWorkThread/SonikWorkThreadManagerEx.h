@@ -28,10 +28,19 @@ namespace SonikLib
 
 namespace std
 {
+#if defined(_MSC_VER)
+	class condition_variable_any;
+
+#elif defined(__GNUC__) || defined(__GNUG__) || defined(__clang__)
 	namespace __1
 	{
 		class condition_variable_any;
 	};
+
+#else
+	class condition_variable_any;
+
+#endif
 };
 
 //========================================

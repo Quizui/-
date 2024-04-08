@@ -49,7 +49,7 @@ namespace SonikLib
 		const int8_t* utf8_str(void);
 
 		//define切り替えのstrゲット
-		const char* definition_str(void);
+		const wchar_t* definition_str(void);
 
 		//SJIS形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
 		//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
