@@ -45,10 +45,10 @@ namespace SonikLib
 
 			//ロックが取得出来た場合はtrue
 			//できなかった場合はfalseを返却します。
-			bool TryLock(void);
+			bool try_lock(void);
 
 			//ロックの終了
-			void Unlock(void);
+			void unlock(void);
 		};
 
 	}; // end namespace S_CAS

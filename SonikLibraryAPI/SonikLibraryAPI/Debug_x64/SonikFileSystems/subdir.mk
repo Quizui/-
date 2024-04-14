@@ -4,36 +4,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../SonikFileSystems/SonikFileController_SJISx64.cpp \
-../SonikFileSystems/SonikFileController_SJISx86.cpp \
-../SonikFileSystems/SonikFileController_UTF16x64.cpp \
-../SonikFileSystems/SonikFileController_UTF16x86.cpp \
-../SonikFileSystems/SonikFileController_UTF8x64.cpp \
-../SonikFileSystems/SonikFileController_UTF8x86.cpp \
-../SonikFileSystems/SonikFileController_x64.cpp \
-../SonikFileSystems/SonikFileController_x86.cpp \
+../SonikFileSystems/SonikFileController.cpp \
 ../SonikFileSystems/SonikFileSystems.cpp 
 
 CPP_DEPS += \
-./SonikFileSystems/SonikFileController_SJISx64.d \
-./SonikFileSystems/SonikFileController_SJISx86.d \
-./SonikFileSystems/SonikFileController_UTF16x64.d \
-./SonikFileSystems/SonikFileController_UTF16x86.d \
-./SonikFileSystems/SonikFileController_UTF8x64.d \
-./SonikFileSystems/SonikFileController_UTF8x86.d \
-./SonikFileSystems/SonikFileController_x64.d \
-./SonikFileSystems/SonikFileController_x86.d \
+./SonikFileSystems/SonikFileController.d \
 ./SonikFileSystems/SonikFileSystems.d 
 
 OBJS += \
-./SonikFileSystems/SonikFileController_SJISx64.o \
-./SonikFileSystems/SonikFileController_SJISx86.o \
-./SonikFileSystems/SonikFileController_UTF16x64.o \
-./SonikFileSystems/SonikFileController_UTF16x86.o \
-./SonikFileSystems/SonikFileController_UTF8x64.o \
-./SonikFileSystems/SonikFileController_UTF8x86.o \
-./SonikFileSystems/SonikFileController_x64.o \
-./SonikFileSystems/SonikFileController_x86.o \
+./SonikFileSystems/SonikFileController.o \
 ./SonikFileSystems/SonikFileSystems.o 
 
 
@@ -49,7 +28,7 @@ SonikFileSystems/%.o: ../SonikFileSystems/%.cpp SonikFileSystems/subdir.mk
 clean: clean-SonikFileSystems
 
 clean-SonikFileSystems:
-	-$(RM) ./SonikFileSystems/SonikFileController_SJISx64.d ./SonikFileSystems/SonikFileController_SJISx64.o ./SonikFileSystems/SonikFileController_SJISx86.d ./SonikFileSystems/SonikFileController_SJISx86.o ./SonikFileSystems/SonikFileController_UTF16x64.d ./SonikFileSystems/SonikFileController_UTF16x64.o ./SonikFileSystems/SonikFileController_UTF16x86.d ./SonikFileSystems/SonikFileController_UTF16x86.o ./SonikFileSystems/SonikFileController_UTF8x64.d ./SonikFileSystems/SonikFileController_UTF8x64.o ./SonikFileSystems/SonikFileController_UTF8x86.d ./SonikFileSystems/SonikFileController_UTF8x86.o ./SonikFileSystems/SonikFileController_x64.d ./SonikFileSystems/SonikFileController_x64.o ./SonikFileSystems/SonikFileController_x86.d ./SonikFileSystems/SonikFileController_x86.o ./SonikFileSystems/SonikFileSystems.d ./SonikFileSystems/SonikFileSystems.o
+	-$(RM) ./SonikFileSystems/SonikFileController.d ./SonikFileSystems/SonikFileController.o ./SonikFileSystems/SonikFileSystems.d ./SonikFileSystems/SonikFileSystems.o
 
 .PHONY: clean-SonikFileSystems
 

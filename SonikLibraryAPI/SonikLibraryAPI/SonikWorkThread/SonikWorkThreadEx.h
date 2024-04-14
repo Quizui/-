@@ -22,14 +22,22 @@
  */
 
 #include "../SmartPointer/SonikSmartPointer.hpp"
-#include "../Container/SonikAtomicQueue.hpp"
 
 namespace std
 {
-	namespace __1
+#if defined(_MSC_VER)
+	class condition_variable_any;
+
+#elif defined(__GNUC__) || defined(__GNUG__) || defined(__clang__)
+	namespace _LIBCPP_ABI_NAMESPACE
 	{
 		class condition_variable_any;
 	};
+
+#else
+	class condition_variable_any;
+
+#endif
 };
 
 namespace SonikFunctionObjectDefines
@@ -38,7 +46,13 @@ namespace SonikFunctionObjectDefines
 };
 namespace SonikLib
 {
-using SonikFOSInterface = SonikFunctionObjectDefines::FunctionObjectSystemInterface;
+	using SonikFOSInterface = SonikFunctionObjectDefines::FunctionObjectSystemInterface;
+
+	namespace Container
+	{
+		template<class QueueType>
+		class SonikAtomicQueue;
+	};
 };
 
 namespace SonikLib
@@ -84,7 +98,7 @@ namespace SonikLib
 		//本関数はSetCallFunctionと同時にコールされた場合で、SetCallFunctionが先に実行された場合、セットされた関数が終了するまで処理を返却しません。
 		//本関数によりキューがセットされた後は、SetCallFunctionは無効となり、常にfalseを返却します。
 		//本関数でセットしたキューにエンキューを行った場合、dispatchQueue関数をコールし、エンキューを行ったことを通知しなければデキュー処理を行いません。
-		void Set_ExternalQueue(SonikLib::SharedSmtPtr<SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>>& pSetQueue);
+		void Set_ExternalQueue(SonikLib::SharedSmtPtr<SonikLib::Container::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>>& pSetQueue);
 
 		//外部のキューをアンセットします。
 		void UnSet_ExternalQueue(void);

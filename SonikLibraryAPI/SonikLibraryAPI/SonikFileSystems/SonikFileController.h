@@ -8,150 +8,124 @@
 #ifndef SONIKFILECONTROLLER_H_
 #define SONIKFILECONTROLLER_H_
 
-#include "stdio.h"
-#include "stdlib.h"
-#include <cstdint>
-
-#include "../SonikCAS/SonikAtomicLock.h"
-#include "../Container/SonikAtomicQueue.hpp"
 #include "../SonikString/SonikString.h"
+#include "../SonikCAS/SonikAtomicLock.h"
+#include "../SmartPointer/SonikSmartPointer.hpp"
 
-namespace SonikLibFileSystems
+#include <stdint.h>
+
+//前方宣言============================
+namespace SonikLib
 {
-	enum class OpenMode : uint32_t
+	template<class QueueType>
+	class SonikAtomicQueue;
+
+	namespace FileSystemControllers
 	{
-		//UNKNOWN
-		OPEN_UNKNOWN			= 0x00,
-		//TEXT OPEN
-		OPNE_TXT_READ			= 0x72,		//"r" 読み込み専用(Read Only) エラー + 新規作成不可
-		OPEN_TXT_WRITE			= 0x77,		//"w" 書き込み専用(Write Only)	 内容を消去 + 新規作成可
-		OPEN_TXT_WRITEADD		= 0x61,		//"a" 追加書き込み専用(AddWrite Only) 内容の最後に追記 + 新規作成可
-		OPEN_TXT_READWRITE		= 0x2B72,	//"r+" 読み書き(Read And Write) エラー + 新規作成不可
-		OPEN_TXT_WRITEREAD		= 0x2B77,	//"w+" 書き読み(Write And Read) 内容を消去 + 新規作成可
-		OPEN_TXT_READADDWRITE	= 0x2B61,	//"a+" 読み込みと追加書き込み(Read And AddWrite) 内容の最後に追記 + 新規作成可
-		//Binary OPEN
-		OPNE_BIN_READ			= 0x6272,	//"rb" 読み込み専用(Read Only) エラー + 新規作成不可
-		OPEN_BIN_WRITE			= 0x6277,	//"wb" 書き込み専用(Write Only)	 内容を消去 + 新規作成可
-		OPEN_BIN_WRITEADD		= 0x6261,	//"ab" 追加書き込み専用(AddWrite Only) 内容の最後に追記 + 新規作成可
-		OPEN_BIN_READWRITE		= 0x2B6272,	//"rb+" 読み書き(Read And Write) エラー + 新規作成不可
-		OPEN_BIN_WRITEREAD		= 0x2B6277,	//"wb+" 書き読み(Write And Read) 内容を消去 + 新規作成可
-		OPEN_BIN_READADDWRITE	= 0x2B6261	//"ab+" 読み込みと追加書き込み(Read And AddWrite) 内容の最後に追記 + 新規作成可
-
-//		OPEN_INQUIRY	= 0x00,
-//		OPEN_READ		= 0x01,
-//		OPEN_WRITE		= 0x02,
-
+		class SonikFileStreamController;
 	};
-
-//	enum class ShareMode : unsigned long
-//	{
-//		SHARE_DEFAULT	= 0x00,
-//		SHARE_DELETE	= 0x01,
-//		SHARE_READ		= 0x02,
-//		SHARE_WRITE		= 0x04
-//	};
-
-//	enum class CreateType : unsigned long
-//	{
-//		CT_NEW = 1,
-//		CT_ALWAYS,
-//		CTO_EXISTING,
-//		CTO_ALWAYS,
-//		CTT_EXISTING
-//	};
-
 };
 
-namespace SonikLibFileSystemsControllers
+struct _iobuf;
+typedef _iobuf FILE;
+
+//====================================
+
+namespace SonikLib
 {
+	using SFileSystemController = SonikLib::SharedSmtPtr<SonikLib::FileSystemControllers::SonikFileStreamController>;
 
-#ifdef __SONIK_I686__
-	class SonikFileStreamController
+	namespace FileSystem
 	{
-	protected:
-		FILE* m_pFile;
-		uint32_t FileSize;
-		SonikLibFileSystems::OpenMode m_opmode;
+		//エンディアン対策で16進数から実数値に変更。コメントに16進数記載
+		enum class OpenMode : uint32_t
+		{
+			//UNKNOWN
+			OPEN_UNKNOWN					= 0,	//0x00000000 -> unknow 特殊。不定の証
 
-		SonikLib::SonikAtomicLock atmlock;
-		bool Opend;
+			//TEXT OPEN
+			OPEN_TXT_READ					= 114,			//0x00000072 -> "r" 読み込み専用(Read Only) エラー + 新規作成不可
+			OPEN_TXT_WRITE					= 119,			//0x00000077 -> "w" 書き込み専用(Write Only)	 内容を消去 + 新規作成可
+			OPEN_TXT_WRITEADD			= 97,			//0x00000061 -> "a" 追加書き込み専用(AddWrite Only) 内容の最後に追記 + 新規作成可
+			OPEN_TXT_READWRITE			= 11122,		//0x00002B72 -> "r+" 読み書き(Read And Write) エラー + 新規作成不可
+			OPEN_TXT_WRITEREAD			= 11127,		//0x00002B77 -> "w+" 書き読み(Write And Read) 内容を消去 + 新規作成可
+			OPEN_TXT_READADDWRITE	= 11105,		//0x00002B61 -> "a+" 読み込みと追加書き込み(Read And AddWrite) 内容の最後に追記 + 新規作成可
 
-	public:
-		//constructor
-		SonikFileStreamController(void);
-		//destructor
-		virtual ~SonikFileStreamController(void);
+			//Binary OPEN
+			OPEN_BIN_READ					= 25202,		//0x00006272 -> "rb" 読み込み専用(Read Only) エラー + 新規作成不可
+			OPEN_BIN_WRITE					= 25207,		//0x00006277 -> "wb" 書き込み専用(Write Only)	 内容を消去 + 新規作成可
+			OPEN_BIN_WRITEADD			= 25185,		//0x00006261 -> "ab" 追加書き込み専用(AddWrite Only) 内容の最後に追記 + 新規作成可
+			OPEN_BIN_READWRITE			= 2843250,	//0x002B6272 -> "rb+" 読み書き(Read And Write) エラー + 新規作成不可
+			OPEN_BIN_WRITEREAD			= 2843255,	//0x002B6277 -> "wb+" 書き読み(Write And Read) 内容を消去 + 新規作成可
+			OPEN_BIN_READADDWRITE	= 2843233,	//0x002B6261 -> "ab+" 読み込みと追加書き込み(Read And AddWrite) 内容の最後に追記 + 新規作成可
 
-		//FileOpen
-		virtual bool OpenFile(const char* OpenFilePathStr, SonikLibFileSystems::OpenMode mode);
-		//FileClose
-		bool CloseFile(void);
+		}; // end enum class
 
-		//読み込み位置を一番最初に移動します。
-		void ReadSeekPointSet_Top(void);
-		//読み込み位置を一番最後に移動します。
-		void ReadSeekPointSet_End(void);
-		//現在の読み込み位置を取得します。
-		uint32_t ReadSeekPointGet(void);
-		//現在の読み込み位置から指定文字数分或いは、指定サイズ分移動します。
-		void ReadSeekPointSet_Point(uint32_t offset);
+	}; //end namespace FileSystem
 
-		//(バイナリモード専用)指定したサイズ分読み込みます。
-		bool ReadBinary(int8_t* buffer, uint32_t size);
+    namespace FileSystemControllers
+    {
+    	class SonikFileSystemController
+		{
+			private:
+    			FILE* m_file;
+    			FileSystem::OpenMode m_openmode;
+    			SonikLib::SonikString m_filepath;
+    			SonikLib::S_CAS::SonikAtomicLock m_lock;
 
-		//(テキストモード専用)指定した文字数分TEXTを読み込みます。
-		virtual bool ReadText_CHR(int8_t* buffer, uint32_t ReadSize) =0;
-		//(テキストモード専用)指定された行数分TEXTを読み込みます。(改行は削除されます。)
-		virtual bool ReadText_Line(SonikLib::SonikString& LineStr, uint32_t GetRowCnt =1) =0;
-		//指定された行数分TEXTを読み込みます。改行は削除され、改行で分割されたQueueとして取得します。
-		virtual bool ReadText_LineQueue(SonikQueue::SonikAtomicQueue<SonikLib::SonikString>& LineStrQueue, uint32_t GetRowCnt =1) =0;
+			private:
+    			//コピー禁止&ムーブ禁止
+    			SonikFileSystemController(const SonikFileSystemController _copy_) = delete;
+    			SonikFileSystemController(SonikFileSystemController&& _move_) = delete;
+    			SonikFileSystemController& operator =(const SonikFileSystemController& _copy_) = delete;
+    			SonikFileSystemController& operator =(SonikFileSystemController& _move_) = delete;
 
-	};
+    			//コンストラクタ
+    			SonikFileSystemController(void);
 
-#elif defined(__SONIK_x86_64__)
-	class SonikFileStreamController
-	{
-	protected:
-		FILE* m_pFile;
-		uint64_t FileSize;
-		SonikLibFileSystems::OpenMode m_opmode;
+			public:
+    			//デストラクタ
+    			~SonikFileSystemController(void);
+    			//クリエイタ
+    			static bool CreateFileController(SFileSystemController& _out_);
 
-		SonikLib::S_CAS::SonikAtomicLock atmlock;
-		bool Opend;
+    			//FileOpen
+    			bool OpenFile(SonikLib::SonikString _filepath_, FileSystem::OpenMode _mode_);
+    			//FileClose
+    			void CloseFile(void);
 
-	public:
-		//constructor
-		SonikFileStreamController(void);
-		//destructor
-		virtual ~SonikFileStreamController(void);
+    			//現在のファイルサイズの取得
+    			uint64_t GetFileSize(void);
 
-		//FileOpen
-		virtual bool OpenFile(const char* OpenFilePathStr, SonikLibFileSystems::OpenMode mode);
-		//FileClose
-		bool CloseFile(void);
+    			//シーク位置を最初に移動します。
+    			void SeekPointSet_Top(void);
+    			//シーク位置を最後に移動します。
+    			void SeekPointSet_End(void);
+    			//現在ンお読み込みシーク位置から指定バイト数分移動します。
+    			void SeekPointSet_Point(uint64_t _offset_);
+    			//現在のシーク位置を取得します。
+    			uint64_t SeekPointGet(void);
 
-		//読み込み位置を一番最初に移動します。
-		void ReadSeekPointSet_Top(void);
-		//読み込み位置を一番最後に移動します。
-		void ReadSeekPointSet_End(void);
-		//現在の読み込み位置を取得します。
-		uint64_t ReadSeekPointGet(void);
-		//現在の読み込み位置から指定文字数分或いは、指定サイズ分移動します。
-		void ReadSeekPointSet_Point(uint64_t offset);
+    			//指定したサイズ文読み込みます。
+    			void Read(char* _buffer_, uint64_t _size_);
+    			//バイナリデータ書き込み用 4バイト配列をreinterpretで渡している場合はblocksizeはsizeof(uint32_t)等...。
+    			void Write(char* _writevalue_, uint32_t _writesize_, uint32_t _writeblocksize_);
 
-		//(バイナリモード専用)指定したサイズ分読み込みます。
-		bool ReadBinary(int8_t* buffer, uint64_t size);
+    			//SonikStringの吐き出し方法で分けています。
+    			//テキストモードでオープンした状態だとファイル内の文字のエンコーディングがUTF-8に代わるといったことはありません。
+    			//バイナリで、追記以外...つまりすべての文字を再出力..となった場合は変換されるかもしれません。
+    			void Write_char(SonikLib::SonikString& _writevalue_);
+    			void Write_UTF8(SonikLib::SonikString& _writevalue_);
+    			void Write_UTF16(SonikLib::SonikString& _writevalue_);
 
-		//(テキストモード専用)指定した文字数分TEXTを読み込みます。
-		virtual bool ReadText_CHR(int8_t* buffer, uint64_t ReadSize) =0;
-		//(テキストモード専用)指定された行数分TEXTを読み込みます。(改行は削除されます。)
-		virtual bool ReadText_Line(SonikLib::SonikString& LineStr, uint64_t GetRowCnt =1) =0;
-		//指定された行数分TEXTを読み込みます。改行は削除され、改行で分割されたQueueとして取得します。
-		virtual bool ReadText_LineQueue(SonikLib::SonikAtomicQueue<SonikLib::SonikString>& LineStrQueue, uint64_t GetRowCnt =1) =0;
+    			//テキストモード専用　指定された行数文TEXTを読み込みます。
+    			void ReadText_Line(SonikLib::SonikString& _str_, uint64_t GetRowCnt =1);
+    			//テキストモード専用　指定された行数文TEXTを読み込ます。改行は削除され、改行で分割されたQueueとして取得します。
+    			void ReadText_LineQueue(SonikLib::SonikAtomicQueue<SonikString>& _GetLineQueue_, uint64_t GetRowCnt =1);
+		};
 
-	};
-#endif
+    }; //end namespace FileSystemController
 
-};
+}; //end namespace SonikLib
 
 #endif /* SONIKFILECONTROLLER_H_ */

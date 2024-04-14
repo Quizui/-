@@ -1,135 +1,129 @@
 /*
- * SonikString.h
+ * SonikDefinitionString.h
  *
- *  Created on: 2016/01/10
- *      Author: SONIK
- *  TEXTFORMAT: UTF-8
+ *  Created on: 2024/01/21
+ *      Author: SONIC
  */
 
-#ifndef SONIKLIBSTRING_H_
-#define SONIKLIBSTRING_H_
+//一つのstring型で取得する文字列の型を変更したいときに使います。
+//それぞれのstringを直接同時にincludeしても型が違うので競合はしません。
+//そのため、例えばUTF-8を基準にしたいが、一部ではsjisで取りたい等あっても普通に別々include可能ですし、
+//それぞれのクラスはdefinition_str()関数以外は「まったく機能が一緒」です。
+//そのため普通にMultiString型として使えもしますが、静的ライブラリ等ではリンカ時にエラーの元になるので
+//静的ライブラリとしてコンパイルするソースコードは基本型のSonikString型を直接使用するほうが良いです。
 
-#include "../Container/RangedForContainer.hpp"
-#include "./SonikStringLocaleEnmus.h"
+#ifndef __SONIKSTRING_SONIKSTRING_DEFINITION_H__
+#define __SONIKSTRING_SONIKSTRING_DEFINITION_H__
 
-namespace SonikLib
-{
-	class SonikString
-	{
-		friend bool operator<(const SonikString& CompareArg1val, const SonikString& CompareArg2val);
-		friend bool operator>(const SonikString& CompareArg1val, const SonikString& CompareArg2val);
-		friend bool operator<=(const SonikString& CompareArg1val, const SonikString& CompareArg2val);
-		friend bool operator>=(const SonikString& CompareArg1val, const SonikString& CompareArg2val);
+#if WCHAR_MAX > 0xffffU
+//wchar_t = ４byteとして扱う
+	#if defined(SONIKSTRING_USED_UTF8)
+		#if defined(SONIKSTRING_USED_UTF16) || defined(SONIKSTRING_USED_WIDE)
+			//default
+			#include "./Neutral/SonikString_CHR32.h"
+			namespace SonikLib
+			{
+				using SonikString = SonikLib::SonikString_CHR32;
+			};
 
-	private:
-		class SonikString_pImpl;
-		SonikString_pImpl* pImpl;
 
-	public:
-		SonikString(SonikLibStringConvert::SonikLibConvertLocale _setlocale_ = SonikLibStringConvert::SonikLibConvertLocale::LC_DEFAULT_C);
-		SonikString(const SonikString& t_his);
-		SonikString(const char* SetStr);
-		SonikString(const char* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
-		SonikString(const char16_t* SetStr);
-		SonikString(const char16_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
-		SonikString(const wchar_t* SetStr);
-		SonikString(const wchar_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
-		SonikString(const int8_t* SetStr);
-		SonikString(const int8_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+		#else
+			#include "./UTF8/SonikStringUTF8_CHR32.h"
+			namespace SonikLib
+			{
+				using SonikString = SonikLib::SonikStringUTF8_CHR32;
+			};
 
-		~SonikString(void);
+		#endif
 
-		//ロケールを設定します。
-		bool SetStringLocale(SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+	#elif defined(SONIKSTRING_USED_UTF16)
+		#if defined(SONIKSTRING_USED_UTF8) || defined(SONIKSTRING_USED_WIDE)
+			#include "./Neutral/SonikString_CHR32.h"
+			namespace SonikLib
+			{
+				using SonikString = SonikLib::SonikString_CHR32;
+			};
 
-		//SJIS形式に変換して取得します。(バッファタイプも書き換わります。)
-		const char* c_str(void);
-		//UTF16形式に変換して取得します。(バッファタイプも書き換わります。)
-		const char16_t* c_wcstr(void);
-		//UTF8形式に変換して取得します。(バッファタイプも書き換わります。)
-		const int8_t* utf8_str(void);
+		#else
+			#include "./UTF16/SonikStringUTF16_CHR32.h"
+			namespace SonikLib
+			{
+				using SonikString = SonikLib::SonikStringUTF16_CHR32;
+			};
 
-		//define切り替えのstrゲット
-		const char* definition_str(void);
+		#endif
 
-		//SJIS形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
-		//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
-		uint64_t GetCpy_c_str(char* dstBuffer = nullptr);
-		//UTF16形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
-		//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
-		uint64_t GetCpy_utf16_str(char16_t* dstBuffer = nullptr);
-		//UTF16形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
-		//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
-		uint64_t GetCpy_c_wcstr(wchar_t* dstBuffer = nullptr);
-		//UTF8形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
-		//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
-		uint64_t GetCpy_utf8_str(char* dstBuffer = nullptr);
+	#elif defined(SONIKSTRING_USED_WIDE)
+			#include "./WIDE/SonikStringWIDE_CHR32.h"
+			namespace SonikLib
+			{
+				using SonikString = SonikLib::SonikStringWIDE_CHR32;
+			};
 
-		//c:文字列のByte数を取得します。（Null終端文字をカウントに含まない)
-		uint64_t Count_Byte_NotNull(void);
-		//c:文字列数を取得します。（Null終端文字をカウントに含まない)
-		uint64_t Count_Str_NotNull(void);
+	#else
+		#include "./Neutral/SonikString_CHR32.h"
+			namespace SonikLib
+			{
+				using SonikString = SonikLib::SonikString_CHR32;
+			};
 
-		//文字列中の全角英数字を半角英数字に変換します。
-		bool ConvertFWANtoHWAN(void);
-		//文字列中の全角カナを半角カナに変換します。
-		bool ConvertFWKNtoHWKN(void);
+	#endif
 
-		//c: 指定位置の文字を削除します。
-		void EraseChar(uint64_t ChrPoint);
-		//c: 指定の開始位置から指定された文字数を削除します。
-		void EraseStr(uint64_t ChrStartPoint, uint64_t ChrEndPoint);
+#else
+//それ以外は2Byte============================================
+	#if defined(SONIKSTRING_USED_UTF8)
+		#if defined(SONIKSTRING_USED_UTF16) || defined(SONIKSTRING_USED_WIDE)
+			//default
+			#include "./Neutral/SonikString_CHR16.h"
+			namespace SonikLib
+			{
+				using SonikString = SonikLib::SonikString_CHR16;
+			};
 
-		//指定したAsciiコードをデリミタとしてSplitを行います。
-		bool SplitForUTF8(uint8_t delim, SonikLib::SonikVariableArrayContainer<SonikLib::SonikString>& Container);
 
-		//各入力フォーマットから現在のバッファに変換して代入します。
-		SonikString& operator =(const SonikString& t_his);
-		SonikString& operator =(SonikString&& Move) noexcept;
-		SonikString& operator =(const char* Str);
-		SonikString& operator =(const char16_t* w_Str);
-		SonikString& operator =(const wchar_t* w_Str);
-		SonikString& operator =(const int8_t* utf8_Str);
+		#else
+			#include "./UTF8/SonikStringUTF8_CHR16.h"
+			namespace SonikLib
+			{
+				using SonikString = SonikLib::SonikStringUTF8_CHR16;
+			};
 
-		//各入力フォーマットから現在のバッファに変換して結合します。
-		//コピー元とコピー先が同じオブジェクトの場合、そのまま結合します。
-		SonikString& operator +=(const SonikString& t_his);
-		SonikString& operator +=(const char* Str);
-		SonikString& operator +=(const char16_t* w_Str);
-		SonikString& operator +=(const wchar_t* w_Str);
-		SonikString& operator +=(const int8_t* utf8_Str);
+		#endif
 
-		//現在のバッファと入力バッファを結合し、別のオブジェクトとして返却します。
-		//コピー元とコピー先が同じオブジェクトの場合、そのまま結合します。
-		SonikString operator +(const SonikString& t_his);
-		SonikString operator +(const char* Str);
-		SonikString operator +(const char16_t* w_Str);
-		SonikString operator +(const wchar_t* w_Str);
-		SonikString operator +(const int8_t* utf8_Str);
+	#elif defined(SONIKSTRING_USED_UTF16)
+		#if defined(SONIKSTRING_USED_UTF8) || defined(SONIKSTRING_USED_WIDE)
+			#include "./Neutral/SonikString_CHR16.h"
+			namespace SonikLib
+			{
+				using SonikString = SonikLib::SonikString_CHR16;
+			};
 
-		//c: 文字列同士を比較します。(strcmp)
-		//c: 一致の場合true 不一致の場合 falseを返却します。
-		bool operator ==(const SonikString& t_his);
-		bool operator ==(const char* Str);
-		bool operator ==(const char16_t* w_Str);
-		bool operator ==(const wchar_t* w_Str);
-		bool operator ==(const int8_t* utf8_Str);
+		#else
+			#include "./UTF16/SonikStringUTF16_CHR16.h"
+			namespace SonikLib
+			{
+				using SonikString = SonikLib::SonikStringUTF16_CHR16;
+			};
 
-		//c: 文字列同士を比較します。(strcmp)
-		//c: 不一致の場合true　一致の場合 falseを返却します。
-		bool operator !=(const SonikString& t_his);
-		bool operator !=(const char* Str);
-		bool operator !=(const char16_t* w_Str);
-		bool operator !=(const wchar_t* w_Str);
-		bool operator !=(const int8_t* utf8_Str);
+		#endif
 
-	};
+	#elif defined(SONIKSTRING_USED_WIDE)
+			#include "./WIDE/SonikStringWIDE_CHR16.h"
+			namespace SonikLib
+			{
+				using SonikString = SonikLib::SonikStringWIDE_CHR16;
+			};
 
-	//c:比較演算子
-	bool operator<(const SonikString& CompareArg1val, const SonikString& CompareArg2val);
-	bool operator>(const SonikString& CompareArg1val, const SonikString& CompareArg2val);
-	bool operator<=(const SonikString& CompareArg1val, const SonikString& CompareArg2val);
-	bool operator>=(const SonikString& CompareArg1val, const SonikString& CompareArg2val);
-};
+	#else
+		#include "./Neutral/SonikString_CHR16.h"
+			namespace SonikLib
+			{
+			using SonikString = SonikLib::SonikString_CHR16;
+			};
 
-#endif /* SONIKLIBSTRING_H_ */
+	#endif
+
+#endif
+
+
+#endif /* __SONIKSTRING_SONIKSTRING_DEFINITION_H__ */

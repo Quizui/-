@@ -1,4 +1,4 @@
-                                               /*
+ /*
  * SonikFileSystems.cpp
  *
  *  Created on: 2018/11/14
@@ -6,189 +6,110 @@
  */
 
 #include "SonikFileSystems.h"
-#include "SonikFileController.h"
-#include "SonikFileController_SJIS.h"
-#include "SonikFileController_UTF16.h"
-#include "SonikFileController_UTF8.h"
+#include "../Container/SonikAtomicQueue.hpp"
 
-#include "../SonikString/SonikString.h"
-
-#if (WINVER >= 0x0600)
-		//Windows処理
-#include <windows.h>
-
+#if defined(_WIN64)
+	//WindowsAPIFunction
+	#include <Windows.h>
 
 #elif defined(__linux__)
+	//LinuxAPIFunction
 
 #endif
-
-
 
 namespace SonikLibFileSystems
 {
-
-	//指定したフォーマットでファイルを操作オブジェクトを生成します。
-	bool CreateFileObject(SonikFileController& getfo_, const char* FilePath, FOTYPE CreateType)
+	namespace FileSystemGlobal
 	{
-		SonikLibFileSystemsControllers::SonikFileStreamController* ptmp;
-
-		switch(CreateType)
+		//指定したフォルダにあるファイル数を取得します。(サブディレクトリ及び、サブディレクトリ内のファイルはカウントに含まれません。
+		uint64_t GetDirectoryInFileCount(SonikLib::SonikString  _directoryPath_)
 		{
-		case FOTYPE::SONIKFO_SJIS:
-			ptmp = new(std::nothrow) SonikLibFileSystemsControllers::SonikFileStreamController_SJISMODE;
-			if(ptmp == nullptr || ptmp == 0)
-			{
-				return false;
-			};
+			//環境依存していない共通カウント変数
+			uint64_t l_cnt = 0;
 
-			getfo_.ResetPointer(ptmp);
+			#if defined(_WIN64)
+				//WindowsAPIFunction
+				WIN32_FIND_DATAW l_data;
+				HANDLE l_handle;
 
-			break;
+				_directoryPath_ += "/*";
 
-		case FOTYPE::SONIKFO_UTF16:
-			ptmp = new(std::nothrow) SonikLibFileSystemsControllers::SonikFileStreamController_UTF16MODE;
-			if(ptmp == nullptr || ptmp == 0)
-			{
-				return false;
-			};
+				l_handle = FindFirstFileW(reinterpret_cast<LPCWSTR>(_directoryPath_.c_wcstr()), &l_data);
 
-			getfo_.ResetPointer(ptmp);
+				if(l_handle == INVALID_HANDLE_VALUE)
+				{
+					//Error
+					return 0xFFFFFFFFFFFFFFFF;
+				};
 
-			break;
+				while(FindNextFileW(l_handle, &l_data))
+				{
+					//ディレクトリ属性ならカウントしない。
+					if( (l_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) )
+					{
+						continue;
+					};
+					++l_cnt;
+				};
 
-		case FOTYPE::SONIKFO_UTF8:
-			ptmp = new(std::nothrow) SonikLibFileSystemsControllers::SonikFileStreamController_UTF8MODE;
-			if(ptmp == nullptr || ptmp == 0)
-			{
-				return false;
-			};
+			//Close
+			FindClose(l_handle);
 
-			getfo_.ResetPointer(ptmp);
+			#elif defined(__linux__)
+				//LinuxAPIFunction
 
-			break;
+			#endif
 
-		default:
-
-			return false;
+			//返却
+			return l_cnt;
 		};
 
-		return true;
+		//指定したフォルダにあるファイル名を列挙します。
+		bool GetDirectoryInFileNameEnumeration(SonikLib::SonikString  _directoryPath_, SonikLib::SonikAtomicQueue<SonikLib::SonikString>& retEnums)
+		{
+			#if defined(_WIN64)
+				//WindowsAPIFunction
+				WIN32_FIND_DATAW l_data;
+				HANDLE l_handle;
+
+				_directoryPath_ += "/*";
+
+				l_handle = FindFirstFileW(reinterpret_cast<LPCWSTR>(_directoryPath_.c_wcstr()), &l_data);
+				if( l_handle == INVALID_HANDLE_VALUE )
+				{
+					//Error
+					return false;
+				};
+
+				SonikLib::SonikString l_filename;
+				l_filename = l_data.cFileName;
+
+				retEnums.EnQueue(l_filename);
+
+				while(FindNextFileW(l_handle, &l_data))
+				{
+					//ディレクトリ属性ならカウントしない。
+					if( (l_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) )
+					{
+						continue;
+					};
+
+					l_filename = l_data.cFileName;
+					retEnums.EnQueue(l_filename);
+				};
+
+				//Close
+				FindClose(l_handle);
+
+			#elif defined(__linux__)
+              //LinuxAPIFunction
+
+			#endif
+
+				return true;
+		};
+
 	};
-
-
-	//c:指定したフォルダにあるファイル数を取得します。
-	unsigned long GetDirectoryInFileCount(const char* Dir_Path, const char* FileName)
-	{
-		unsigned long cnt = 0;
-
-#if (WINVER >= 0x0600)
-		//Windows処理
-#ifdef _WIN64
-		bool redirections_ = false;
-		void* oldval = nullptr;
-		redirections_ = Wow64DisableWow64FsRedirection(&oldval);
-
-#endif
-
-		HANDLE handle_;
-		WIN32_FIND_DATA fdata;
-		SonikLib::SonikString Path_;
-
-		Path_ = Dir_Path;
-		Path_ += "/";
-		Path_ += FileName;
-
-		handle_ = FindFirstFile(Path_.c_str(), &fdata);
-		if(handle_ == INVALID_HANDLE_VALUE)
-		{
-			return 0xFFFFFFFF;
-		};
-
-		if( FileName != nullptr )
-		{
-			++cnt;
-		};
-
-		while( FindNextFile(handle_, &fdata) )
-		{
-			++cnt;
-		};
-
-		FindClose(handle_);
-
-#ifdef _WIN64
-		if(redirections_)
-		{
-			Wow64RevertWow64FsRedirection(oldval);
-		};
-
-#endif
-
-
-#elif defined(__linux__)
-
-#endif
-
-		return cnt;
-	};
-
-	//c:指定したフォルダにあるファイル名を列挙します。
-	bool GetDirectoryInFileNameEnumeration(const char* Dir_Path, const char* SearchFileName, SonikLib::SonikAtomicQueue<SonikLib::SonikString>& retEnums)
-	{
-		SonikLib::SonikString namestr;
-#if (WINVER >= 0x0600)
-		//Windows処理
-#ifdef _WIN64
-		bool redirections_ = false;
-		void* oldval = nullptr;
-		redirections_ = Wow64DisableWow64FsRedirection(&oldval);
-
-#endif
-
-		HANDLE handle_;
-		WIN32_FIND_DATA fdata;
-
-		namestr = Dir_Path;
-		namestr += "/";
-		namestr += SearchFileName;
-
-		handle_ = FindFirstFile(namestr.c_str(), &fdata);
-		if(handle_ == INVALID_HANDLE_VALUE)
-		{
-			return false;
-		};
-
-		namestr = fdata.cFileName;
-		retEnums.EnQueue(namestr);
-
-		while( FindNextFile(handle_, &fdata) )
-		{
-			namestr = fdata.cFileName;
-			retEnums.EnQueue(namestr);
-
-		};
-
-		FindClose(handle_);
-
-
-#ifdef _WIN64
-//		if(redirections_)
-//		{
-//			Wow64RevertWow64FsRedirection(oldval);
-//		};
-
-#endif
-
-
-#elif defined(__linux__)
-
-#endif
-
-
-		return true;
-	};
-
-
 };
 
 

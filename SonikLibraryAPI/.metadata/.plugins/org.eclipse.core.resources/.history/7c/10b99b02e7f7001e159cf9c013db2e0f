@@ -1,0 +1,159 @@
+/*
+ * SonikFileController.h
+ *
+ *  Created on: 2018/11/16
+ *      Author: SONIK
+ */
+
+#ifndef SONIKFILECONTROLLER_H_
+#define SONIKFILECONTROLLER_H_
+
+#include "../SonikString/SonikString.h"
+#include "../SonikCAS/SonikAtomicLock.h"
+#include "../SmartPointer/SonikSmartPointer.hpp"
+
+#include <stdint.h>
+
+//前方宣言============================
+namespace SonikLib
+{
+	template<class QueueType>
+	class SonikAtomicQueue;
+
+	namespace FileSystemControllers
+	{
+		class SonikFileStreamController;
+	};
+};
+
+struct _iobuf;
+typedef _iobuf FILE;
+
+//====================================
+
+
+namespace SonikLib
+{
+	using SFileSystemController = SonikLib::SharedSmtPtr<SonikLib::FileSystemControllers::SonikFileStreamController>;
+
+	namespace FileSystem
+	{
+		enum class OpenMode : uint32_t
+		{
+			//UNKNOWN
+			OPEN_UNKNOWN					= 0x00000000,
+
+			//TEXT OPEN
+			OPEN_TXT_READ					= 0x00000072,
+			OPEN_TXT_WRITE					= 0x00000077,
+			OPEN_TXT_WRITEADD			= 0x00000061,
+			OPEN_TXT_READWRITE			= 0x00002B72,
+			OPEN_TXT_WRITEREAD			= 0x00002B77,
+			OPEN_TXT_READADDWRITE	= 0x00002B61,
+
+			//Binary OPEN
+			OPEN_BIN_READ					= 0x00006272,
+			OPEN_BIN_WRITE					= 0x00006277,
+			OPEN_BIN_WRITEADD			= 0x00006261,
+			OPEN_BIN_READWRITE			= 0x002B6272,
+			OPEN_BIN_WRITEREAD			= 0x002B6277,
+			OPEN_BIN_READADDWRITE	= 0x002B6261,
+
+		};
+	}; //end namespace FileSystem
+
+}; //end namespace SonikLib
+
+namespace SonikLibFileSystemsControllers
+{
+
+#ifdef __SONIK_I686__
+	class SonikFileStreamController
+	{
+	protected:
+		FILE* m_pFile;
+		uint32_t FileSize;
+		SonikLibFileSystems::OpenMode m_opmode;
+
+		SonikLib::SonikAtomicLock atmlock;
+		bool Opend;
+
+	public:
+		//constructor
+		SonikFileStreamController(void);
+		//destructor
+		virtual ~SonikFileStreamController(void);
+
+		//FileOpen
+		virtual bool OpenFile(const char* OpenFilePathStr, SonikLibFileSystems::OpenMode mode);
+		//FileClose
+		bool CloseFile(void);
+
+		//読み込み位置を一番最初に移動します。
+		void ReadSeekPointSet_Top(void);
+		//読み込み位置を一番最後に移動します。
+		void ReadSeekPointSet_End(void);
+		//現在の読み込み位置を取得します。
+		uint32_t ReadSeekPointGet(void);
+		//現在の読み込み位置から指定文字数分或いは、指定サイズ分移動します。
+		void ReadSeekPointSet_Point(uint32_t offset);
+
+		//(バイナリモード専用)指定したサイズ分読み込みます。
+		bool ReadBinary(int8_t* buffer, uint32_t size);
+
+		//(テキストモード専用)指定した文字数分TEXTを読み込みます。
+		virtual bool ReadText_CHR(int8_t* buffer, uint32_t ReadSize) =0;
+		//(テキストモード専用)指定された行数分TEXTを読み込みます。(改行は削除されます。)
+		virtual bool ReadText_Line(SonikLib::SonikString& LineStr, uint32_t GetRowCnt =1) =0;
+		//指定された行数分TEXTを読み込みます。改行は削除され、改行で分割されたQueueとして取得します。
+		virtual bool ReadText_LineQueue(SonikQueue::SonikAtomicQueue<SonikLib::SonikString>& LineStrQueue, uint32_t GetRowCnt =1) =0;
+
+	};
+
+#elif defined(__SONIK_x86_64__)
+	class SonikFileStreamController
+	{
+	protected:
+		FILE* m_pFile;
+		uint64_t FileSize;
+		SonikLibFileSystems::OpenMode m_opmode;
+
+		SonikLib::S_CAS::SonikAtomicLock atmlock;
+		bool Opend;
+
+	public:
+		//constructor
+		SonikFileStreamController(void);
+		//destructor
+		virtual ~SonikFileStreamController(void);
+
+		//FileOpen
+		virtual bool OpenFile(const char* OpenFilePathStr, SonikLibFileSystems::OpenMode mode);
+		//FileClose
+		bool CloseFile(void);
+
+		//読み込み位置を一番最初に移動します。
+		void ReadSeekPointSet_Top(void);
+		//読み込み位置を一番最後に移動します。
+		void ReadSeekPointSet_End(void);
+		//現在の読み込み位置を取得します。
+		uint64_t ReadSeekPointGet(void);
+		//現在の読み込み位置から指定文字数分或いは、指定サイズ分移動します。
+		void ReadSeekPointSet_Point(uint64_t offset);
+
+		//(バイナリモード専用)指定したサイズ分読み込みます。
+		bool ReadBinary(int8_t* buffer, uint64_t size);
+
+		//(テキストモード専用)指定した文字数分TEXTを読み込みます。
+		virtual bool ReadText_CHR(int8_t* buffer, uint64_t ReadSize) =0;
+		//(テキストモード専用)指定された行数分TEXTを読み込みます。(改行は削除されます。)
+		virtual bool ReadText_Line(SonikLib::SonikString& LineStr, uint64_t GetRowCnt =1) =0;
+		//指定された行数分TEXTを読み込みます。改行は削除され、改行で分割されたQueueとして取得します。
+		virtual bool ReadText_LineQueue(SonikLib::SonikAtomicQueue<SonikLib::SonikString>& LineStrQueue, uint64_t GetRowCnt =1) =0;
+
+	};
+#endif
+
+};
+
+#endif /* SONIKFILECONTROLLER_H_ */

@@ -8,37 +8,30 @@
 #ifndef SONIKFILESYSTEMS_H_
 #define SONIKFILESYSTEMS_H_
 
-#include "../Container/SonikAtomicQueue.hpp"
 #include "../SmartPointer/SonikSmartPointer.hpp"
 #include "../SonikString/SonikString.h"
 
-namespace SonikLibFileSystemsControllers
-{
+#include <stdint.h>
 
-	class SonikFileStreamController;
+//前方宣言
+namespace SonikLib
+{
+	template<class QueueType>
+	class SonikAtomicQueue;
 };
 
-
-namespace SonikLibFileSystems
+namespace SonikLib
 {
-	typedef SonikLib::SharedSmtPtr<SonikLibFileSystemsControllers::SonikFileStreamController> SonikFileController;
 
-	enum class FOTYPE
+	namespace FileSystemGlobal
 	{
-		SONIKFO_SJIS = 0x01,
-		SONIKFO_UTF16,
-		SONIKFO_UTF8
+		//指定したフォルダにあるファイル数を取得します。(サブディレクトリ及び、サブディレクトリ内のファイルはカウントに含まれません。
+		uint64_t GetDirectoryInFileCount(SonikLib::SonikString  _directoryPath_);
+
+		//指定したフォルダにあるファイル名を列挙します。
+		bool GetDirectoryInFileNameEnumeration(SonikLib::SonikString  _directoryPath_, SonikLib::SonikAtomicQueue<SonikLib::SonikString>& retEnums);
+
 	};
-
-	//指定したフォーマットでファイルを操作オブジェクトを生成します。
-	bool CreateFileObject(SonikFileController& getfo_, const char* FilePath, FOTYPE CreateType);
-
-	//c:指定したフォルダにあるファイル数を取得します。
-	unsigned long GetDirectoryInFileCount(const char* Dir_Path, const char* FileName = nullptr);
-
-	//c:指定したフォルダにあるファイル名を列挙します。
-	bool GetDirectoryInFileNameEnumeration(const char* Dir_Path, const char* SearchFileName, SonikLib::SonikAtomicQueue<SonikLib::SonikString>& retEnums);
-
 };
 
 

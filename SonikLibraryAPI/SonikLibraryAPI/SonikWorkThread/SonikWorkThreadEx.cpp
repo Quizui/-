@@ -9,6 +9,7 @@
 
 #include "../FunctionObject/FunctionObjectSystemInterface.hpp"
 #include "../SonikCAS/SonikAtomicLock.h"
+#include "../Container/SonikAtomicQueue.hpp"
 
 #include <thread>
 #include <new>
@@ -30,7 +31,7 @@ namespace SonikLib
 
 
 		//関数パックのキューオブジェクトへのポインタ
-		SonikLib::SharedSmtPtr<SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>> FuncQueue_;
+		SonikLib::SharedSmtPtr<SonikLib::Container::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>> FuncQueue_;
 
 		//CASロックオブジェクト
 		SonikLib::S_CAS::SonikAtomicLock atmlock_;
@@ -88,7 +89,7 @@ namespace SonikLib
 		void SetThreadStatus_Suspend(bool Setfalg);
 
 		//キューポインタをセットします。
-		void SetFunctionQueue(SonikLib::SharedSmtPtr<SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>>& pSetQueue);
+		void SetFunctionQueue(SonikLib::SharedSmtPtr<SonikLib::Container::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>>& pSetQueue);
 		//キューポインタをアンセットします。
 		void UnSetFunctionQueue(void);
 
@@ -188,13 +189,13 @@ namespace SonikLib
 			//もし変更フラグが立っていればif文にて、nullptrのRefFuncがセットされる。
 			RunTask = RefFuncObj;
 
-			RefLock.Unlock();
+			RefLock.unlock();
 
 		};
 
 		//総合終了===================
 		RefFuncObj.ResetPointer(nullptr);
-		RefLock.Unlock();
+		RefLock.unlock();
 		RefFlag = 0x80000000; //31ビット目のみ立てる。
 	};
 
@@ -234,7 +235,7 @@ namespace SonikLib
 	//本関数は成功した場合、スレッドにセットされた関数が終了するまで、再セットは行いません。
 	bool WorkThreadEx::pImplEx::SetCallFunction(SonikLib::SonikFOSInterface* CallFunctionObject, bool _looped_)
 	{
-		if( !atmlock_.TryLock() )
+		if( !atmlock_.try_lock() )
 		{
 			return false;
 		};
@@ -261,7 +262,7 @@ namespace SonikLib
 
 	bool WorkThreadEx::pImplEx::SetCallFunction(SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>& CallFunctionObject, bool _looped_)
 	{
-		if( !atmlock_.TryLock() )
+		if( !atmlock_.try_lock() )
 		{
 			return false;
 		};
@@ -350,7 +351,7 @@ namespace SonikLib
 	};
 
 	//キューポインタをセットします。
-	void WorkThreadEx::pImplEx::SetFunctionQueue(SonikLib::SharedSmtPtr<SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>>& pSetQueue)
+	void WorkThreadEx::pImplEx::SetFunctionQueue(SonikLib::SharedSmtPtr<SonikLib::Container::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>>& pSetQueue)
 	{
 		atmlock_.lock();
 
@@ -358,7 +359,7 @@ namespace SonikLib
 		SetChangeSetFuncFlag(false);
 		ThreadFlag |= 0x02;
 
-		atmlock_.Unlock();
+		atmlock_.unlock();
 	};
 
 	//キューポインタをアンセットします。
@@ -466,7 +467,7 @@ namespace SonikLib
 	//本関数はSetCallFunctionと同時にコールされた場合で、SetCallFunctionが先に実行された場合、セットされた関数が終了するまで処理を返却しません。
 	//本関数によりキューがセットされた後は、SetCallFunctionは無効となり、常にfalseを返却します。
 	//本関数でセットしたキューにエンキューを行った場合、dispatchQueue関数をコールし、エンキューを行ったことを通知しなければデキュー処理を行いません。
-	void WorkThreadEx::Set_ExternalQueue(SonikLib::SharedSmtPtr<SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>>& pSetQueue)
+	void WorkThreadEx::Set_ExternalQueue(SonikLib::SharedSmtPtr<SonikLib::Container::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>>& pSetQueue)
 	{
 		ImplObject->SetFunctionQueue(pSetQueue);
 	};

@@ -46,7 +46,7 @@ namespace SonikLib
 
 		//ロックが取得出来た場合はtrue
 		//できなかった場合はfalseを返却します。
-		bool SonikAtomicLock::TryLock(void)
+		bool SonikAtomicLock::try_lock(void)
 		{
 			bool a_right = false;
 
@@ -61,7 +61,7 @@ namespace SonikLib
 		};
 
 		//ロックの終了
-		void SonikAtomicLock::Unlock(void)
+		void SonikAtomicLock::unlock(void)
 		{
 #ifdef _DEBUG
 			//デバッグログ

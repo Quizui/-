@@ -1,0 +1,40 @@
+                                               /*
+ * SonikFileSystems.cpp
+ *
+ *  Created on: 2018/11/14
+ *      Author: SONIK
+ */
+
+#include "SonikFileSystems.h"
+#include "../Container/SonikAtomicQueue.hpp"
+
+
+
+#if defined(_WIN64)
+	//WindowsAPIFunction
+	#include <Windows.h>
+
+#elif defined(__linux__)
+	//LinuxAPIFunction
+
+#endif
+
+
+
+namespace SonikLibFileSystems
+{
+
+	namespace FileSystemGlobal
+	{
+		//指定したフォルダにあるファイル数を取得します。(サブディレクトリ及び、サブディレクトリ内のファイルはカウントに含まれません。
+		uint64_t GetDirectoryInFileCount(SonikLib::SonikString  _directoryPath_)
+		{
+		};
+
+
+	};
+
+
+};
+
+

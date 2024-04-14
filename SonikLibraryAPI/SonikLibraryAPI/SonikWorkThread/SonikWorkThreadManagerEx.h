@@ -20,8 +20,11 @@ namespace SonikLib
 {
 	using SonikFOSInterface = SonikFunctionObjectDefines::FunctionObjectSystemInterface;
 
-	template<class QueueType>
-	class SonikAtomicQueue;
+	namespace Container
+	{
+		template<class QueueType>
+		class SonikAtomicQueue;
+	};
 
 	class WorkThreadEx;
 };
@@ -32,7 +35,7 @@ namespace std
 	class condition_variable_any;
 
 #elif defined(__GNUC__) || defined(__GNUG__) || defined(__clang__)
-	namespace __1
+	namespace _LIBCPP_ABI_NAMESPACE
 	{
 		class condition_variable_any;
 	};
@@ -55,7 +58,7 @@ namespace SonikLib
 		//スレッドプール
 		SonikLib::WorkThreadEx** m_pThreads;
 		//ジョブキュー(MTロックフリー)
-		SonikLib::SharedSmtPtr<SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>> JobQueue;
+		SonikLib::SharedSmtPtr<SonikLib::Container::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>> JobQueue;
 		//スレッドに与えるcondition_variable_any
 		SonikLib::SharedSmtPtr<std::condition_variable_any> m_cond;
 

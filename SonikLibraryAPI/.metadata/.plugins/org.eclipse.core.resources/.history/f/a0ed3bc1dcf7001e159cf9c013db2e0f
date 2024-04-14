@@ -1,0 +1,37 @@
+/*
+ * SonikFileSystems.h
+ *
+ *  Created on: 2018/11/14
+ *      Author: SONIK
+ */
+
+#ifndef SONIKFILESYSTEMS_H_
+#define SONIKFILESYSTEMS_H_
+
+#include "../SmartPointer/SonikSmartPointer.hpp"
+#include "../SonikString/SonikString.h"
+
+//前方宣言
+namespace SonikLib
+{
+	template<class QueueType>
+	class SonikAtomicQueue;
+};
+
+namespace SonikLib
+{
+
+	namespace FileSystemGlobal
+	{
+		//指定したフォルダにあるファイル数を取得します。(サブディレクトリ及び、サブディレクトリ内のファイルはカウントに含まれません。
+		unsigned long GetDirectoryInFileCount(SonikLib::SonikString  _directoryPath_);
+
+		//指定したフォルダにあるファイル名を列挙します。
+		bool GetDirectoryInFileNameEnumeration(const char* Dir_Path, const char* SearchFileName, SonikLib::SonikAtomicQueue<SonikLib::SonikString>& retEnums);
+
+	};
+};
+
+
+
+#endif /* SONIKFILESYSTEMS_H_ */

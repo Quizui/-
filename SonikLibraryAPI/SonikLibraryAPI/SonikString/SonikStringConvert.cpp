@@ -5,16 +5,16 @@
  *      Author: SONIK
  */
 
-#include <cstring>
+//#include <cstring>
 #include <cstdlib>
-#include <clocale>
 #include <new>
 #include <algorithm>
-#include "locale.h"
-#include "stdint.h"
-#include "wchar.h"
+#include <stdint.h>
+#include <clocale>
 #include "SonikStringConvert.h"
 #include "../MathBit/MathBit.h"
+#include "../sonikCAS/SonikAtomicLock.h"
+#include "../FunctionObject/FunctionObjectSystemImpl.hpp"
 
 namespace SonikConvStaticTable
 {
@@ -38,6 +38,84 @@ namespace SonikConvStaticTable
 
 };
 
+namespace SonikConvStaticLocale
+{
+	class LocaleManagerSingleton
+	{
+	private:
+		char* m_locale;
+		SonikLib::S_CAS::SonikAtomicLock m_lock;
+
+	private:
+		//コンストラクタ
+		LocaleManagerSingleton(void)
+		:m_locale(nullptr)
+		{
+			uint64_t l_size = strlen(std::setlocale(LC_CTYPE, "")) + 1;//null文字分
+
+			try
+			{
+				m_locale = new char[l_size];
+				std::fill_n(m_locale, l_size, 0);
+
+				memcpy(m_locale, std::setlocale(LC_CTYPE, ""), l_size);
+
+			}catch(std::bad_alloc&)
+			{
+				//確保失敗。
+				throw;
+			};
+
+		};
+
+		//コピー、ムーヴ禁止
+		LocaleManagerSingleton(const LocaleManagerSingleton& _copy_) = delete;
+		LocaleManagerSingleton(LocaleManagerSingleton&& _move_) = delete;
+		LocaleManagerSingleton& operator =(const LocaleManagerSingleton& _copy_) = delete;
+		LocaleManagerSingleton& operator = (LocaleManagerSingleton&& _move_) = delete;
+
+	public:
+		//デストラクタ
+		~LocaleManagerSingleton(void)
+		{
+			if(m_locale != nullptr)
+			{
+				delete[] m_locale;
+			};
+		};
+
+		//singleton accesser
+		static LocaleManagerSingleton& instance(void)
+		{
+			static LocaleManagerSingleton __lms_obj__;
+
+			return __lms_obj__;
+		};
+
+		const char* get_initialize_locale(void)
+		{
+			return m_locale;
+		};
+
+		void Lock_LocaleControl(void)
+		{
+			m_lock.lock();
+		};
+
+		void UnLock_LocaleControl(void)
+		{
+			m_lock.unlock();
+		};
+
+	};// end class LocaleManagerSingleton
+
+	//グローバルでコールすることで初期化をする。
+	LocaleManagerSingleton& _global_ = LocaleManagerSingleton::instance();
+
+};// end namespace SonikConvStaticLocale
+
+
+
 //ロケール定数からロケール名を取得します。
 void SonikLibStringConvert::ConvertLocaleCharacter(uint32_t& _out_size_, char* _buffer_, SonikLibStringConvert::SonikLibConvertLocale _locale_)
 {
@@ -50,27 +128,27 @@ void SonikLibStringConvert::ConvertLocaleCharacter(uint32_t& _out_size_, char* _
 			return;
 		};
 
-		memcpy_s(_buffer_, _out_size_,  "C", _out_size_);
+		memcpy(_buffer_,  "C", _out_size_);
 		return;
 		break;
 	case SonikLibStringConvert::SonikLibConvertLocale::LC_JPN:
-		_out_size_ = strlen("ja_JP");
+		_out_size_ = strlen("japanese_Japan.932");
 		if(_buffer_ == nullptr)
 		{
 			return;
 		};
 
-		memcpy_s(_buffer_, _out_size_,  "ja_JP", _out_size_);
+		memcpy(_buffer_,  "japanese_Japan.932", _out_size_);
 		return;
 		break;
 	case SonikLibStringConvert::SonikLibConvertLocale::LC_JPNUTF8:
-		_out_size_ = strlen("jp_JP.UTF-8");
+		_out_size_ = strlen("japanese_Japan.UTF-8");
 		if(_buffer_ == nullptr)
 		{
 			return;
 		};
 
-		memcpy_s(_buffer_, _out_size_,  "jp_JP.UTF-8", _out_size_);
+		memcpy(_buffer_,  "japanese_Japan.UTF-8", _out_size_);
 		return;
 		break;
 	case SonikLibStringConvert::SonikLibConvertLocale::LC_ENGUS:
@@ -80,7 +158,7 @@ void SonikLibStringConvert::ConvertLocaleCharacter(uint32_t& _out_size_, char* _
 			return;
 		};
 
-		memcpy_s(_buffer_, _out_size_,  "en_US", _out_size_);
+		memcpy(_buffer_,  "en_US", _out_size_);
 		return;
 		break;
 	case SonikLibStringConvert::SonikLibConvertLocale::LC_ENGGB:
@@ -90,7 +168,7 @@ void SonikLibStringConvert::ConvertLocaleCharacter(uint32_t& _out_size_, char* _
 			return;
 		};
 
-		memcpy_s(_buffer_, _out_size_,  "en_GB", _out_size_);
+		memcpy(_buffer_,  "en_GB", _out_size_);
 		return;
 		break;
 	case SonikLibStringConvert::SonikLibConvertLocale::LC_FRNCE:
@@ -100,7 +178,7 @@ void SonikLibStringConvert::ConvertLocaleCharacter(uint32_t& _out_size_, char* _
 			return;
 		};
 
-		memcpy_s(_buffer_, _out_size_,  "fr_FR", _out_size_);
+		memcpy(_buffer_,  "fr_FR", _out_size_);
 		return;
 		break;
 	case SonikLibStringConvert::SonikLibConvertLocale::LC_GERMANY:
@@ -110,7 +188,7 @@ void SonikLibStringConvert::ConvertLocaleCharacter(uint32_t& _out_size_, char* _
 			return;
 		};
 
-		memcpy_s(_buffer_, _out_size_,  "de_DE", _out_size_);
+		memcpy(_buffer_,  "de_DE", _out_size_);
 		return;
 		break;
 
@@ -305,7 +383,7 @@ uint64_t SonikLibStringConvert::GetStringLengthByte(const char16_t* pCheckSrc)
 
 //unicode(UTF-32)文字の文字列バイト数を返却します。
 //ただのループ。
-uint64_t SonikLibStringConvert::GetStringLengthByte(const int32_t* pCheckSrc)
+uint64_t SonikLibStringConvert::GetStringLengthByte(const char32_t* pCheckSrc)
 {
 	if(pCheckSrc == nullptr)
 	{
@@ -484,16 +562,20 @@ uint64_t SonikLibStringConvert::GetStringCount(const char16_t* pCheckSrc)
 
 	while( (*pCheckSrc) != 0 )
 	{
+		if( (*pCheckSrc & 0xFC00) == 0xD800) //サロゲートペアチェック
+		{
+			//１文字分読み飛ばし。
+			++pCheckSrc;
+		};
 		++cnt;
 		++pCheckSrc;
 	};
 
 	return cnt;
-
 };
 
 //unicode(UTF-32)文字の文字数を返却します。
-uint64_t SonikLibStringConvert::GetStringCount(const int32_t* pCheckSrc)
+uint64_t SonikLibStringConvert::GetStringCount(const char32_t* pCheckSrc)
 {
 	if(pCheckSrc == nullptr)
 	{
@@ -514,30 +596,30 @@ uint64_t SonikLibStringConvert::GetStringCount(const int32_t* pCheckSrc)
 
 
 //UTF-8をUNICODE(UTF-32)に変換します。
-bool SonikLibStringConvert::ConvertUTF8ToUTF32(char* pSrc, int32_t* pDest, uint64_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertUTF8ToUTF32(char* pSrc, char32_t* pDest, uint64_t* DestBufferSize)
 {
 	if( pSrc == nullptr)
 	{
 		return false;
 	};
 
-	uint64_t SrcLen = GetStringCount(pSrc);
+	uint64_t SrcLen = GetStringCount(pSrc) + 1;
 
 
 	if(pDest == nullptr && DestBufferSize != nullptr)
 	{
-		(*DestBufferSize) = (SrcLen +1 ) << 2;
+		(*DestBufferSize) = SrcLen;
 		return false;
 	};
 
-	uint32_t* pUtf32_ = 0;
+	char32_t* pUtf32_ = 0;
 
-	pUtf32_ = new(std::nothrow) uint32_t[(SrcLen + 1)];
+	pUtf32_ = new(std::nothrow) char32_t[SrcLen];
 	if(pUtf32_ == nullptr)
 	{
 		return false;
 	}
-	std::fill_n(pUtf32_, (SrcLen+1), 0);
+	std::fill_n(pUtf32_, SrcLen, 0);
 
 
 	uint64_t utf8_i = 0;
@@ -643,8 +725,7 @@ bool SonikLibStringConvert::ConvertUTF8ToUTF32(char* pSrc, int32_t* pDest, uint6
 	pUtf32_[utf32_i] = 0;
 	++utf32_i;
 
-	SrcLen  = (SrcLen + 1) << 2; //32bitバッファから32ビットバッファへのコピーでサイズは一緒なのでここで計算しておく。
-	errno_t a = memcpy_s(pDest, SrcLen, pUtf32_, SrcLen); //32bit 4Byteのサイズ想定なので >> 2で対処。
+	errno_t a = memcpy(pDest, pUtf32_, SrcLen);
 	if(  a != 0 )
 	{
 		delete[] pUtf32_;
@@ -656,38 +737,43 @@ bool SonikLibStringConvert::ConvertUTF8ToUTF32(char* pSrc, int32_t* pDest, uint6
 };
 
 //UNICODE(UTF-32)をUTF-8に変換します。
-bool SonikLibStringConvert::ConvertUTF32ToUTF8(int32_t* pSrc, char* pDest, uint64_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertUTF32ToUTF8(char32_t* pSrc, char* pDest, uint64_t* DestBufferSize)
 {
 	if( pSrc == nullptr)
 	{
 		return false;
 	};
 
-	uint64_t strcnt_ = 0;
-	uint32_t* tmpsrc = reinterpret_cast<uint32_t*>(pSrc);
+	uint64_t utf32_strcnt_ = 0;
+	uint64_t utf8_strcnt_ = 0;
+	//文字数カウント
+	char32_t* tmpsrc = pSrc;
 	while( (*tmpsrc) != 0 )
 	{
 		++tmpsrc;
-		++strcnt_;
+		++utf32_strcnt_;
 	};
+
+	 // x * 4 = x << 2; 終端文字は１Byteでいいので +1 Byte
+	utf8_strcnt_ = (utf32_strcnt_ << 2) + 1;
 
 	if(pDest == nullptr && DestBufferSize != nullptr)
 	{
-		(*DestBufferSize) = (strcnt_ << 2) + 1; // x * 4 = x << 2; 終端文字は１Byteでいいので...。
+		(*DestBufferSize) = utf8_strcnt_;
 		return false;
 	}
 
-	uint8_t* utf8buffer = new(std::nothrow) uint8_t[(strcnt_ << 2) +1]; // x * 4 = x << 2
+	uint8_t* utf8buffer = new(std::nothrow) uint8_t[utf8_strcnt_];
 	if(utf8buffer == nullptr)
 	{
 		return false;
 	};
-	std::fill_n(utf8buffer, ((strcnt_ << 2) +1), 0); // x * 4 = x << 2
+	std::fill_n(utf8buffer, utf8_strcnt_, 0);
 
 	unsigned char* p_utf8offset = reinterpret_cast<unsigned char*>(utf8buffer);
 
-	tmpsrc = reinterpret_cast<uint32_t*>(pSrc);
-	for(uint32_t i=0; i < strcnt_; ++i)
+	tmpsrc = pSrc;
+	for(uint32_t i=0; i < utf32_strcnt_; ++i)
 	{
 		if( (*tmpsrc) < 0 || (*tmpsrc) > 0x10FFFF)
 		{
@@ -732,8 +818,7 @@ bool SonikLibStringConvert::ConvertUTF32ToUTF8(int32_t* pSrc, char* pDest, uint6
 		++tmpsrc;
 	};
 
-	strcnt_ = (strcnt_ << 2) + 1;
-	errno_t a = memcpy_s(pDest, strcnt_, utf8buffer, strcnt_);
+	errno_t a = memcpy(pDest, utf8buffer, utf8_strcnt_);
 	if(  a != 0 )
 	{
 		delete[] utf8buffer;
@@ -745,17 +830,18 @@ bool SonikLibStringConvert::ConvertUTF32ToUTF8(int32_t* pSrc, char* pDest, uint6
 };
 
 //UNICODE(UTF-32)をUNICODE(UTF-16)に変換します。
-bool SonikLibStringConvert::ConvertUTF32ToUTF16(int32_t* pSrc, char16_t* pDest, uint64_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertUTF32ToUTF16(char32_t* pSrc, char16_t* pDest, uint64_t* DestBufferSize)
 {
 	if( pSrc == nullptr)
 	{
 		return false;
 	};
 
+	//文字数カウント
 	uint64_t srclen_ = SonikLibStringConvert::GetStringCount(pSrc);
 
-	//最大21bitだが事前に確保する設定上1文字=4Byte必要で計算する。
-	uint64_t wsrclen_ = (srclen_ + 1)  <<  2;  // x * 4 = x << 2 + NULL終端。
+	//事前に確保する設定上1文字=4Byte必要で計算する。
+	uint64_t wsrclen_ = (srclen_ + 1)  <<  1;  // ( x + null文字 ) * 2
 
 	if(pDest == nullptr && DestBufferSize != nullptr)
 	{
@@ -763,22 +849,19 @@ bool SonikLibStringConvert::ConvertUTF32ToUTF16(int32_t* pSrc, char16_t* pDest, 
 		return false;
 	}
 
-	uint16_t* utf16buffer = new(std::nothrow) uint16_t[ (wsrclen_  >> 1) ]; //配列の個数として使用するなら short = 2Byteなので /2 = >>1
+	char16_t* utf16buffer = new(std::nothrow) char16_t[srclen_];
 	if(utf16buffer == nullptr)
 	{
 		return false;
 	};
 
-	std::fill_n(utf16buffer, (wsrclen_ >> 1), 0 );
+	std::fill_n(utf16buffer, srclen_, 0 );
 
-	uint32_t* utf32_Src = reinterpret_cast<uint32_t*>(pSrc);
-	uint16_t* pSrc_shortbyte = nullptr;
+	char32_t* utf32_Src = pSrc;
 	uint16_t* p_cont_utf16buffer = utf16buffer;
 	for(uint64_t i=0; i < srclen_; ++i)
 	{
-		utf32_Src += i;
-
-		if((*utf32_Src) < 0 || (*utf32_Src) > 0x10FFFF)
+		if( utf32_Src[i] == 0 || utf32_Src[i] > 0x10FFFF)
 		{
 			delete[] utf16buffer;
 			return false;
@@ -786,24 +869,21 @@ bool SonikLibStringConvert::ConvertUTF32ToUTF16(int32_t* pSrc, char16_t* pDest, 
 
 		if((*utf32_Src) < 0x10000)
 		{
-			pSrc_shortbyte = reinterpret_cast<uint16_t*>(utf32_Src);
-			(*p_cont_utf16buffer) = (*pSrc_shortbyte);
+			(*p_cont_utf16buffer) = utf32_Src[i];
 			++p_cont_utf16buffer;
-			++pSrc_shortbyte;
 
 		}else
 		{
 
-			(*p_cont_utf16buffer) = static_cast<uint16_t>( (((*utf32_Src) - 0x10000) >> 10) + 0xD800 ); // x / 0x400 = x / 1024 = x >> 10
+			(*p_cont_utf16buffer) = static_cast<uint16_t>( ((utf32_Src[i] - 0x10000) >> 10) + 0xD800 ); // x / 0x400 = x / 1024 = x >> 10
 			++p_cont_utf16buffer;
-			(*p_cont_utf16buffer) = static_cast<uint16_t>( (((*utf32_Src) - 0x10000) & 0x3FF) + 0xD800 ); // x % 0x400 = x % 1024 = x & 1023 = x & (0x400 - 1) = x & 0x3FF
+			(*p_cont_utf16buffer) = static_cast<uint16_t>( ((utf32_Src[i] - 0x10000) & 0x3FF) + 0xDC00 ); // x % 0x400 = x % 1024 = x & 1023 = x & (0x400 - 1) = x & 0x3FF
 			++p_cont_utf16buffer;
 		};
 
-		utf32_Src -= i;
 	};
 
-	errno_t a = memcpy_s(pDest, wsrclen_, utf16buffer, wsrclen_);
+	errno_t a = memcpy(pDest, utf16buffer, wsrclen_);
 	if(  a != 0 )
 	{
 		delete[] utf16buffer;
@@ -815,29 +895,30 @@ bool SonikLibStringConvert::ConvertUTF32ToUTF16(int32_t* pSrc, char16_t* pDest, 
 };
 
 //UNICODE(UTF-16)をUNICODE(UTF-32)に変換します。
-bool SonikLibStringConvert::ConvertUTF16ToUTF32(char16_t* pSrc, int32_t* pDest, uint64_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertUTF16ToUTF32(char16_t* pSrc, char32_t* pDest, uint64_t* DestBufferSize)
 {
 	if( pSrc == nullptr)
 	{
 		return false;
 	};
 
-	uint64_t srclen_ = SonikLibStringConvert::GetStringCount(pSrc);
+	//文字数カウント
+	uint64_t srclen_ = SonikLibStringConvert::GetStringCount(pSrc) + 1; //NULL文字分追加
 
 	if( pDest ==nullptr && DestBufferSize != nullptr)
 	{
-		(*DestBufferSize) = (srclen_ + 1) << 2;
+		(*DestBufferSize) = srclen_;
 		return false;
 	}
 
 
-	uint32_t* utf32buffer = new(std::nothrow) uint32_t[ srclen_ + 1 ]; //NULL文字分追加
+	uint32_t* utf32buffer = new(std::nothrow) uint32_t[srclen_];
 	if(utf32buffer == nullptr)
 	{
 		return false;
 	};
 
-	std::fill_n(utf32buffer, (srclen_ + 1), 0 );
+	std::fill_n(utf32buffer, srclen_, 0 );
 
 
 	//配列組み換え
@@ -847,7 +928,6 @@ bool SonikLibStringConvert::ConvertUTF16ToUTF32(char16_t* pSrc, int32_t* pDest, 
 	{
 		if( 0xD800 <= (*utf16buffer) && (*utf16buffer) < 0xDC00  )
 		{
-//			if( 0xDC00 <= utf16buffer[1] && utf16buffer[1] < 0xDC00 )
 			if( 0xDC00 <= (*(utf16buffer +1)))
 			{
 				utf32buffer[i] = 0x10000 + ( (*utf16buffer) - 0xD800 ) * 0x400 + ( (*(utf16buffer +1)) - 0xDC00 );
@@ -888,11 +968,9 @@ bool SonikLibStringConvert::ConvertUTF16ToUTF32(char16_t* pSrc, int32_t* pDest, 
 
 		};
 
-
 	};
 
-	srclen_ = (srclen_ + 1) << 2;
-	errno_t a = memcpy_s(pDest, srclen_, utf32buffer, srclen_);
+	errno_t a = memcpy(pDest, utf32buffer, srclen_);
 	if(  a != 0 )
 	{
 		delete[] utf32buffer;
@@ -913,14 +991,16 @@ bool SonikLibStringConvert::ConvertUTF16ToUTF8(char16_t* pSrc, char* pDest, uint
 	};
 
 	uint64_t buffersize = 0;
+
+	 //null文字を含めた配列数返ってくる。
 	SonikLibStringConvert::ConvertUTF16ToUTF32(pSrc, nullptr, &buffersize);
 
-	int32_t* utf32buffer = new(std::nothrow) int32_t[(buffersize >> 2)]; // バイト数で入れられるので、>> 2 (/4) して要素数にする。
+	char32_t* utf32buffer = new(std::nothrow) char32_t[buffersize];
 	if(utf32buffer == nullptr)
 	{
 		return false;
 	};
-	std::fill_n(utf32buffer, (buffersize >> 2), 0);
+	std::fill_n(utf32buffer, buffersize, 0);
 
 	if( !SonikLibStringConvert::ConvertUTF16ToUTF32(pSrc, utf32buffer, nullptr) )
 	{
@@ -928,6 +1008,7 @@ bool SonikLibStringConvert::ConvertUTF16ToUTF8(char16_t* pSrc, char* pDest, uint
 		return false;
 	};
 
+	//null文字を含めた配列数返ってくる。
 	SonikLibStringConvert::ConvertUTF32ToUTF8(utf32buffer, nullptr, &buffersize);
 
 	if(pDest == nullptr && DestBufferSize != nullptr)
@@ -937,7 +1018,7 @@ bool SonikLibStringConvert::ConvertUTF16ToUTF8(char16_t* pSrc, char* pDest, uint
 		return false;
 	};
 
-	char* utf8buffer = new(std::nothrow) char[buffersize]; //バイト数で帰ってくるが1バイト配列なのでそのまま使用。
+	char* utf8buffer = new(std::nothrow) char[buffersize]; //配列数なのでそのまま使用。
 	if(utf8buffer == nullptr)
 	{
 		delete[] utf32buffer;
@@ -953,7 +1034,7 @@ bool SonikLibStringConvert::ConvertUTF16ToUTF8(char16_t* pSrc, char* pDest, uint
 		return false;
 	};
 
-	errno_t a = memcpy_s(pDest, buffersize, utf8buffer, buffersize);
+	errno_t a = memcpy(pDest, utf8buffer, buffersize);
 	if(  a != 0 )
 	{
 		delete[] utf8buffer;
@@ -976,15 +1057,17 @@ bool SonikLibStringConvert::ConvertUTF8ToUTF16(char* pSrc, char16_t* pDest, uint
 	};
 
 	uint64_t buffersize = 0;
+
+	//null文字を含めた配列数返ってくる。
 	SonikLibStringConvert::ConvertUTF8ToUTF32(pSrc, nullptr, &buffersize);
 
-	int32_t* utf32buffer = new(std::nothrow) int32_t[(buffersize >> 2)];
+	char32_t* utf32buffer = new(std::nothrow) char32_t[buffersize];
 	if(utf32buffer == nullptr)
 	{
 		return false;
 	};
 
-	std::fill_n(utf32buffer, (buffersize >> 2), 0);
+	std::fill_n(utf32buffer, buffersize, 0);
 
 	if( !SonikLibStringConvert::ConvertUTF8ToUTF32(pSrc, utf32buffer, nullptr) )
 	{
@@ -992,23 +1075,24 @@ bool SonikLibStringConvert::ConvertUTF8ToUTF16(char* pSrc, char16_t* pDest, uint
 		return false;
 	};
 
+	//null文字を含めた配列数返ってくる。
 	SonikLibStringConvert::ConvertUTF32ToUTF16(utf32buffer, nullptr, &buffersize);
 
 	if(pDest == nullptr && DestBufferSize != nullptr)
 	{
-		(*DestBufferSize) = buffersize; //すでにバイト数で計算されたものが帰ってきているので、何もせずスルー返却。
+		(*DestBufferSize) = buffersize; //配列数でサイズを返却
 		delete[] utf32buffer;
 		return false;
 	}
 
-	char16_t* utf16buffer = new(std::nothrow) char16_t[(buffersize >> 1)];
+	char16_t* utf16buffer = new(std::nothrow) char16_t[buffersize];
 	if(utf16buffer == nullptr)
 	{
 		delete[] utf32buffer;
 		return false;
 	};
 
-	std::fill_n(utf16buffer, (buffersize >> 1), 0);
+	std::fill_n(utf16buffer, buffersize, 0);
 
 	if( !SonikLibStringConvert::ConvertUTF32ToUTF16(utf32buffer, utf16buffer, nullptr) )
 	{
@@ -1018,7 +1102,7 @@ bool SonikLibStringConvert::ConvertUTF8ToUTF16(char* pSrc, char16_t* pDest, uint
 	};
 
 	//すでにバイト数で計算済みのbuffersizeなため、そのまま流用でOK。
-	errno_t a = memcpy_s(pDest, buffersize, utf16buffer, buffersize);
+	errno_t a = memcpy(pDest, utf16buffer, buffersize);
 	if(  a != 0 )
 	{
 		delete[] utf16buffer;
@@ -1046,57 +1130,84 @@ bool SonikLibStringConvert::ConvertMBSToUTF8(char* pSrc, char* pDest, uint64_t* 
 		return false;
 	};
 
-	const char* _default_ = std::setlocale(LC_CTYPE, ""); //セット前の値を取得(他で何もしてなければOS初期値
+	//ロケール操作ロック
+	SonikConvStaticLocale::LocaleManagerSingleton::instance().Lock_LocaleControl();
+	const char* _default_ = SonikConvStaticLocale::LocaleManagerSingleton::instance().get_initialize_locale();
 
 	std::setlocale(LC_CTYPE, locale);
 
-	uint64_t utf16Len = 0;
-	errno_t err = 0;
-	err = mbstowcs_s(&utf16Len, nullptr, 0, pSrc, _TRUNCATE);
-	if(err != 0)
+	uint64_t wcsLen = GetStringCount(pSrc) + 1; //null文字分で+1文字追加
+	size_t err = 0;
+
+	//utf16でも32でもサロゲートペアを考慮した場合4Byteの領域で取らないと十分な量とならないので、
+	//char32_tで領域確保し、wchar_tのサイズに応じて処理を変更する。
+	char32_t* l_buffer = new(std::nothrow) char32_t[wcsLen];
+	if(l_buffer == nullptr)
+	{
+		SonikConvStaticLocale::LocaleManagerSingleton::instance().UnLock_LocaleControl();
+		return false;
+	};
+
+	std::fill_n(l_buffer, wcsLen, 0);
+
+	err = std::mbstowcs(reinterpret_cast<wchar_t*>(l_buffer), pSrc, wcsLen);
+	if(err == (-1) )
 	{
 		//セットしてあるロケールで失敗したのデフォルトでやってみる。
 		std::setlocale(LC_CTYPE, _default_);
-		err = mbstowcs_s(&utf16Len, nullptr, 0, pSrc, _TRUNCATE);
-		if(err != 0)
+		err = std::mbstowcs(reinterpret_cast<wchar_t*>(l_buffer), pSrc, wcsLen);
+		if(err != (-1))
 		{
+			SonikConvStaticLocale::LocaleManagerSingleton::instance().UnLock_LocaleControl();
 			return false;
 		};
 	};
 
-	char16_t* unicode_buf = new(std::nothrow) char16_t[utf16Len + 1];
-	if(unicode_buf == nullptr)
-	{
-		std::setlocale(LC_CTYPE, _default_); //デフォルトに戻して終了
-		return false;
-	};
-
-	std::fill_n(unicode_buf, (utf16Len + 1), 0);
-
-	//sjis -> utf16
-	//上のサイズ取得で失敗してなければここで失敗しようはずがない。
-	mbstowcs_s(nullptr, reinterpret_cast<wchar_t*>(unicode_buf), utf16Len+1, pSrc, _TRUNCATE);
-	//デフォルトにロケールを戻す。
-	std::setlocale(LC_CTYPE, _default_);
+	SonikConvStaticLocale::LocaleManagerSingleton::instance().UnLock_LocaleControl();
 
 	uint64_t sizecheck = 0;
-	SonikLibStringConvert::ConvertUTF16ToUTF8(unicode_buf, nullptr, &sizecheck); // すでに計算済みのバイト数で帰ってくる。
+
+	//wchar_tのサイズによって変換経路を変える。
+#if WCHAR_MAX <= 0xffffU
+	//2Byte
+	//2ByteならUTF16
+	SonikLibStringConvert::ConvertUTF16ToUTF8(reinterpret_cast<char16_t*>(l_buffer), nullptr, &sizecheck); // すでに計算済みのバイト数で帰ってくる。
 	if(pDest == nullptr && DestBufferSize != nullptr)
 	{
 		//utf16->utf8 サイズチェック
 		(*DestBufferSize) = sizecheck; // 特にシフト計算で合わせなくても良いのでそのまま返却。
-		delete[] unicode_buf;
+		delete[] l_buffer;
 		return false;
 	};
 
 	//utf16->utf8 本番
-	if( !SonikLibStringConvert::ConvertUTF16ToUTF8(unicode_buf, pDest, nullptr) )
+	if( !SonikLibStringConvert::ConvertUTF16ToUTF8(reinterpret_cast<char16_t*>(l_buffer), pDest, nullptr) )
 	{
-		delete[] unicode_buf;
+		delete[] l_buffer;
 		return false;
 	};
 
-	delete[] unicode_buf;
+#else
+	//4ByteならUTF32経由
+	SonikLibStringConvert::ConvertUTF32ToUTF8(l_buffer, nullptr, &sizecheck);
+	if(pDest == nullptr && DestBufferSize != nullptr)
+	{
+		//utf16->utf8 サイズチェック
+		(*DestBufferSize) = sizecheck; // 特にシフト計算で合わせなくても良いのでそのまま返却。
+		delete[] l_buffer;
+		return false;
+	};
+
+	//utf32->utf8本番
+	if(!SonikLibStringConvert::ConvertUTF32ToUTF8(l_buffer, nullptr, &sizecheck))
+	{
+		delete[] l_buffer;
+		return false;
+	};
+
+#endif
+
+	delete[] l_buffer;
 	return true;
 };
 
@@ -1115,59 +1226,87 @@ bool SonikLibStringConvert::ConvertUTF8ToMBS(char* pSrc, char* pDest, uint64_t* 
 		return false;
 	};
 
-	uint64_t utf16Len = 0;
+	uint64_t wcsLen = 0;
+	wchar_t* wc_buffer = nullptr;
 
-	SonikLibStringConvert::ConvertUTF8ToUTF16(pSrc, nullptr, &utf16Len); //計算済みのバイト数が返却される。
+//wchar_tのサイズによって変換経路を変える。
+//#define WCHAR_MAX 0xFFFFFF
+#if WCHAR_MAX <= 0xffffU
+	//wchar_t = 2byte
+	//計算済みのバイト数が返却される。
+	SonikLibStringConvert::ConvertUTF8ToUTF16(pSrc, nullptr, &wcsLen);
 
-	char16_t* unicode_buf = new(std::nothrow) char16_t[(utf16Len >> 1)];;
-	if(unicode_buf == nullptr)
+#else
+	//wchar_t = 4byte
+	//計算済みのバイト数が返却される。
+	SonikLibStringConvert::ConvertUTF8ToUTF32(pSrc, nullptr, &wcsLen);
+
+#endif
+
+	wc_buffer = new(std::nothrow) wchar_t[wcsLen];
+	if(wc_buffer == nullptr)
 	{
 		return false;
 	};
 
-	std::fill_n(unicode_buf, (utf16Len >> 1), 0);
+	std::fill_n(wc_buffer, wcsLen, 0);
 
-	//UTF8 -> UTF16
-	if( !SonikLibStringConvert::ConvertUTF8ToUTF16(pSrc, unicode_buf, nullptr) )
+#if WCHAR_MAX <= 0xffffU
+	//wchar_t = 2byte
+	//計算済みのバイト数が返却される。
+	if(!SonikLibStringConvert::ConvertUTF8ToUTF16(pSrc, reinterpret_cast<char16_t*>(wc_buffer), &wcsLen))
 	{
-		delete[] unicode_buf;
+		delete[] wc_buffer;
 		return false;
-	};
+	}
 
-	const char* _default_ = std::setlocale(LC_CTYPE, ""); //セット前の値を取得(他で何もしてなければOS初期値
-
-	std::setlocale(LC_CTYPE, locale);
-
-	uint64_t retsize = 0;
-	errno_t err = 0;
-	err = wcstombs_s(&retsize, nullptr, 0, reinterpret_cast<wchar_t*>(unicode_buf), _TRUNCATE);
-	if(err != 0)
+	uint64_t retsize = SonikLibStringConvert::GetStringCount(reinterpret_cast<char16_t*>(wc_buffer)) + 1;
+#else
+	//wchar_t = 4byte
+	//計算済みのバイト数が返却される。
+	if(!SonikLibStringConvert::ConvertUTF8ToUTF32(pSrc, reinterpret_cast<char32_t*>(wc_buffer), &wcsLen))
 	{
-		//セットしてあるロケールで失敗したのデフォルトでやってみる。
-		std::setlocale(LC_CTYPE, _default_);
-		err = wcstombs_s(&retsize, nullptr, 0, reinterpret_cast<wchar_t*>(unicode_buf), _TRUNCATE);
-		if(err != 0)
-		{
-			delete[] unicode_buf;
-			return false;
-		};
-	};
+		delete[] wc_buffer;
+		return false;
+	}
+
+	uint64_t retsize = SonikLibStringConvert::GetStringCount(reinterpret_cast<char32_t*>(wc_buffer)) + 1;
+#endif
+
+	//MultiByteString は最大2Byteなので、文字数 *2
+	retsize <<= 1;
 
 	if(pDest == nullptr && DestBufferSize != nullptr)
 	{
 		//utf16->SJIS サイズチェック
-		(*DestBufferSize) = ((retsize + 1) << 1); //SJISは 1~2Byteのため、すべて2Byteとして計算。
-		std::setlocale(LC_CTYPE, _default_);
-		delete[] unicode_buf;
+		(*DestBufferSize) = retsize;
+		delete[] wc_buffer;
 		return false;
 	};
 
-	//utf16->SJIS 本番
-	//サイズチェックで失敗していないので変換自体には失敗しようがない。
-	wcstombs_s(nullptr, pDest, retsize, reinterpret_cast<wchar_t*>(unicode_buf), _TRUNCATE);
+	SonikConvStaticLocale::LocaleManagerSingleton::instance().Lock_LocaleControl();
+	const char* _default_ = SonikConvStaticLocale::LocaleManagerSingleton::instance().get_initialize_locale();
+	std::setlocale(LC_CTYPE, locale);
 
-	delete[] unicode_buf;
+	size_t err = 0;
+	err = std::wcstombs(pDest, wc_buffer, retsize);
+	if(err != (-1))
+	{
+		//セットしてあるロケールで失敗したのデフォルトでやってみる。
+		std::setlocale(LC_CTYPE, _default_);
+		err = std::wcstombs(pDest, wc_buffer, retsize);
+		if(err != (-1))
+		{
+			SonikConvStaticLocale::LocaleManagerSingleton::instance().UnLock_LocaleControl();
+			delete[] wc_buffer;
+			return false;
+		};
+	};
+
+	delete[] wc_buffer;
 	std::setlocale(LC_CTYPE, _default_);
+
+	SonikConvStaticLocale::LocaleManagerSingleton::instance().UnLock_LocaleControl();
 	return true;
 };
 
@@ -1185,53 +1324,62 @@ bool SonikLibStringConvert::ConvertMBStoUTF16(char* pSrc, char16_t* pDest, uint6
 		return false;
 	};
 
-	const char* _default_ = std::setlocale(LC_CTYPE, ""); //セット前の値を取得(他で何もしてなければOS初期値
+	uint64_t size_ = SonikLibStringConvert::GetStringCount(pSrc) +1; //null文字分
+	if( pDest == nullptr && DestBufferSize != nullptr)
+	{
+		(*DestBufferSize) = (size_) << 1; //最終的に２Byteで返すので * 2がサイズになる。
+		return false;
+	};
 
+	char32_t* l_buffer = new(std::nothrow) char32_t[size_]; //2ByteUTF16でも最大サロゲートペアで4Byte使うので4Byte領域で文字数分配列確保
+	if(l_buffer == nullptr)
+	{
+		return false;
+	};
+
+	std::fill_n(l_buffer, size_, 0);
+
+	//ロケール操作ロック
+	SonikConvStaticLocale::LocaleManagerSingleton::instance().Lock_LocaleControl();
+	const char* _default_ = SonikConvStaticLocale::LocaleManagerSingleton::instance().get_initialize_locale();
+
+	//使用ロケールでまず変換試行
 	setlocale(LC_CTYPE, locale);
 
-	uint64_t size_ = 0;
-	errno_t err = 0;
-	err = mbstowcs_s(&size_, nullptr, 0, pSrc, _TRUNCATE);
-	if(err != 0)
+	size_t err = 0;
+	err = std::mbstowcs(reinterpret_cast<wchar_t*>(l_buffer), pSrc, size_);
+	if(err != (-1))
 	{
-		//セットしてあるロケールで失敗したのデフォルトでやってみる。
+		//セットしてあるロケールで失敗したのプログラム開始時の初期化値でやってみる。
 		std::setlocale(LC_CTYPE, _default_);
-		err = mbstowcs_s(&size_, nullptr, 0, pSrc, _TRUNCATE);
-		if(err != 0)
+		err = std::mbstowcs(reinterpret_cast<wchar_t*>(l_buffer), pSrc, size_);
+		if(err != (-1))
 		{
+			//だめだったのでエラー
+			SonikConvStaticLocale::LocaleManagerSingleton::instance().UnLock_LocaleControl();
 			return false;
 		};
 	};
 
-	char16_t* tmpBuf = new(std::nothrow) char16_t[(size_ + 1) ]; // NULL終端追加;
-	if(tmpBuf == nullptr)
+	SonikConvStaticLocale::LocaleManagerSingleton::instance().UnLock_LocaleControl();
+
+#if WCHAR_MAX <= 0xffffU
+	//wchar_t = 2ByteならUTF16でmbstowcsされてるのでそのままmemcpyして終了
+	std::memcpy(pDest,  l_buffer, (size_ << 1));
+
+#else
+	//wchar_t = 4ByteならUTF32toUTF16で変換して終了
+	if( !SonikLibStringConvert::ConvertUTF32ToUTF16(l_buffer, reinterpret_cast<char16_t*>(l_buffer), nullptr) )
 	{
-		std::setlocale(LC_CTYPE, _default_);
+		delete[] l_buffer;
 		return false;
 	};
 
-	std::fill_n(tmpBuf, (size_ + 1), 0);
+	std::memcpy(pDest,  l_buffer, (size_ << 1));
 
-	if( pDest == nullptr && DestBufferSize != nullptr)
-	{
-		(*DestBufferSize) = (size_ + 1) << 1;
-		std::setlocale(LC_CTYPE, _default_);
-		delete[] tmpBuf;
-		return false;
-	};
+#endif
 
-	//サイズチェック時に成功しているので変換失敗はしないはず。
-	 mbstowcs_s(nullptr, reinterpret_cast<wchar_t*>(tmpBuf), (size_ + 1), pSrc, _TRUNCATE);
-	 //ロケールをデフォルトに戻す。
-	 std::setlocale(LC_CTYPE, _default_);
-
-	if( memcpy_s(pDest, ((size_ + 1) << 1), tmpBuf, ((size_ + 1) << 1)) != 0 ) // x * 2 = x << 1
-	{
-		delete[] tmpBuf;
-		return false;
-	};
-
-	delete[] tmpBuf;
+	delete[] l_buffer;
 	return true;
 };
 
@@ -1244,58 +1392,96 @@ bool SonikLibStringConvert::ConvertUTF16toMBS(char16_t* pSrc, char* pDest, uint6
 		return false;
 	};
 
-	const char* _default_ = std::setlocale(LC_CTYPE, ""); //セット前の値を取得(他で何もしてなければOS初期値
+	wchar_t* wc_buffer = nullptr;
+	uint64_t size_ = SonikLibStringConvert::GetStringCount(pSrc) + 1;
+
+#if WCHAR_MAX <= 0xffffU
+	wc_buffer = pSrc;
+
+#else
+	//wchar_t = 4Byte ならwcstombs が受け付けないので、UTF32へ変換する。
+	SonikLibStringConvert::ConvertUTF16ToUTF32(pSrc, nullptr, &size_);
+
+	char32_t* u32buffer;
+	u32buffer = new(std::nothrow) char32_t[size_];
+	if(u32buffer == nullptr)
+	{
+		return false;
+	};
+
+	if(!SonikLibStringConvert::ConvertUTF16ToUTF32(pSrc, u32buffer, nullptr))
+	{
+		delete [] u32buffer;
+		return false;
+	};
+
+	wc_buffer = u32buffer;
+
+#endif
+
+	if( pDest == nullptr && DestBufferSize != nullptr)
+	{
+		(*DestBufferSize) = (size_ << 1); //1文字当たり最大２Byte必要で１Byteブロックで取るので、＊２した配列数を返す。
+#if WCHAR_MAX > 0xffffU
+		delete[] wc_buffer;
+#endif
+		return false;
+	};
+
+	SonikConvStaticLocale::LocaleManagerSingleton::instance().Lock_LocaleControl();
+	const char* _default_ = SonikConvStaticLocale::LocaleManagerSingleton::instance().get_initialize_locale();
 
 	std::setlocale(LC_CTYPE, locale);
 
-	uint64_t size_ = 0;
-	errno_t err = 0;
-	err = wcstombs_s(&size_, nullptr, 0, reinterpret_cast<wchar_t*>(pSrc), _TRUNCATE);
-	if(err != 0)
+	size_t err = 0;
+	err = std::wcstombs(pDest, wc_buffer, (size_ << 1));
+	if(err != (-1))
 	{
 		//セットしてあるロケールで失敗したのデフォルトでやってみる。
 		std::setlocale(LC_CTYPE, _default_);
-		err = wcstombs_s(&size_, nullptr, 0, reinterpret_cast<wchar_t*>(pSrc), _TRUNCATE);
-		if(err != 0)
+		err = std::wcstombs(pDest, wc_buffer, (size_ << 1));
+		if(err != (-1))
 		{
+			SonikConvStaticLocale::LocaleManagerSingleton::instance().UnLock_LocaleControl();
+#if WCHAR_MAX > 0xffffU
+		delete[] wc_buffer;
+#endif
 			return false;
 		};
 	};
 
-	size_ = (size_ + 1) << 1;//1文字あたりのバイト数に変換。
-	char* tmpBuf = new(std::nothrow) char[size_]; //1~2Byteで構成されるためすべて１文字あたり2Byteとして扱う。;
-	if(tmpBuf == nullptr)
-	{
-		std::setlocale(LC_CTYPE, _default_);
-		return false;
-	};
-
-	std::fill_n(tmpBuf, size_, 0);
-
-	if( pDest == nullptr && DestBufferSize != nullptr)
-	{
-		(*DestBufferSize) = size_;
-		std::setlocale(LC_CTYPE, _default_);
-		delete[] tmpBuf;
-		return false;
-	};
-
-	//サイズチェック時に失敗していないのでここでは少なくとも変換には失敗しないはず。
-	wcstombs_s(nullptr, tmpBuf, size_, reinterpret_cast<wchar_t*>(pSrc), _TRUNCATE);
-
-	//ロケールをデフォルトに戻しておく。
-	std::setlocale(LC_CTYPE, _default_);
-
-	if( memcpy_s(pDest, size_, tmpBuf, size_) != 0 )
-	{
-		delete[] tmpBuf;
-		return false;
-	};
-
-	delete[] tmpBuf;
+#if WCHAR_MAX > 0xffffU
+		delete[] wc_buffer;
+#endif
 	return true;
 };
 
+//マルチバイト文字列をUTF32文字列に変換します。
+//内部ではmbstowcs_s関数を使用しますが、一時領域を確保し、コピーして処理を行うため、コピー元領域、コピー先領域が重なっていても正常にコピーされます。
+bool SonikLibStringConvert::ConvertMBStoUTF32(char* pSrc, char32_t* pDest, uint64_t* DestBufferSize, const char* locale)
+{
+	if( pSrc == nullptr)
+	{
+		return false;
+	};
+
+
+
+	return true;
+};
+
+//UTF32文字列をマルチバイト文字列に変換します。
+//内部ではmbstowcs_s関数を使用しますが、一時領域を確保し、コピーして処理を行うため、コピー元領域、コピー先領域が重なっていても正常にコピーされます。
+bool SonikLibStringConvert::ConvertUTF32toMBS(char32_t* pSrc, char* pDest, uint64_t* DestBufferSize, const char* locale)
+{
+	if( pSrc == nullptr)
+	{
+		return false;
+	};
+
+
+	return true;
+};
 
 bool SonikLibStringConvert::ConvertUTF8FWCToHWCForAN(const char* ConvertStr, char* dst, uint64_t& UsedSize)
 {
@@ -1542,7 +1728,7 @@ bool SonikLibStringConvert::ConvertUTF8FWCToHWCForKANA(const char* ConvertStr, c
 
 		};
 
-		memcpy_s(InsertPoint, bitcnt, l_convstr, bitcnt);
+		memcpy(InsertPoint, bitcnt, l_convstr, bitcnt);
 
 		InsertPoint += bitcnt;
 		l_convstr += bitcnt;

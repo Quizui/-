@@ -1,0 +1,818 @@
+/*
+ * RangedForContainer.hpp
+ *
+ *  Created on: 2019/02/25
+ *      Author: SONIK
+ */
+
+#ifndef SONIKSTRING_RANGEDFORCONTAINER_HPP_
+#define SONIKSTRING_RANGEDFORCONTAINER_HPP_
+
+//拡張式配列の機能を提供します。
+//配列サイズは拡張方向のみで、縮小はしません。
+//つまりpushbackにより１つ拡張された場合は拡張されたままになります。
+#include "../SmartPointer/SonikSmartPointer.hpp"
+#include "../SonikCAS/"
+
+#include <stdint.h>
+#include <new>
+#include <algorithm>
+
+namespace SonikLib
+
+{
+
+              namespace Container
+
+              {
+
+                            template <class T>
+
+                            class SonikVariableArrayContainer
+
+                            {
+
+                            public:
+
+                                          //コンテナオブジェクト操作用のイテレータ
+
+                                          //ローカルでの使用を想定。イテレータ取得後にオブジェクトの配列がreserveされたり操作が入ると無効(たんぐリング)が発生します。
+
+                                          //これは一般的にあstdと同様の条件です。
+
+                                          class VACIterator
+
+                                          {
+
+                                          private:
+
+                                                        T* TopPointer;
+
+                                                        T* ControlPointer;
+
+
+
+                                          public: //inline は全部 と noexcept は * -> [] 以外つけます。
+
+                                                        inline VACIterator(T* _pointer_ = nullptr) noexcept
+
+                                                        :TopPointer(_pointer_)
+
+                                                        ,ControlPointer(_pointer_)
+
+                                                        {
+
+                                                        };
+
+
+
+                                                        VACIterator(const VACIterator& _copy_)
+
+                                                        :TopPointer(_pointer_)
+
+                                                        ,ControlPointer(_pointer_)
+
+                                                        {
+
+                                                        };
+
+
+
+                                                        VACIterator(VACIterator&& _move_)
+
+                                                        {
+
+                                                                      TopPointer = std::move(_move_.TopPointer);
+
+                                                                      ControlPointer = std::move(_move_.ControlPointer);
+
+
+
+                                                                      _move_.TopPointer = nullptr;
+
+                                                                      _move_.ControlPointer = nullptr;
+
+                                                        };
+
+
+
+                                                        VACIterator& operator ++(void)
+
+                                                        {
+
+                                                                      ++ControlPointer;
+
+                                                                      return (*this);
+
+                                                        };
+
+
+
+                                                        VACIterator& operator ++(int)
+
+                                                        {
+
+                                                                      VACIterator tmp = (*this);
+
+
+
+                                                                      ++ControlPointer;
+
+                                                                      return tmp;
+
+                                                        };
+
+
+
+                                                        VACIterator& operator --(void)
+
+                                                        {
+
+                                                                      --ControlPointer;
+
+                                                                      return (*this);
+
+                                                        };
+
+
+
+                                                        VACIterator& operator --(int)
+
+                                                        {
+
+                                                                      VACIterator tmp = (*this);
+
+
+
+                                                                      --ControlPointer;
+
+                                                                      return tmp;
+
+                                                        };
+
+
+
+                                                        bool operator ==(const VACIterator& _compare_) const
+
+                                                        {
+
+                                                                      return ControlPointer == _compare_.ControlPointer;
+
+                                                        };
+
+
+
+                                                        bool operator !=(const VACIterator& _compare_) const
+
+                                                        {
+
+                                                                      return ControlPointer != _compare_.ControlPointer;
+
+                                                        };
+
+
+
+                                                        const T& operator[](uint64_t _index_) const
+
+                                                        {
+
+                                                                      return TopPointer[_index_];
+
+                                                        };
+
+
+
+                                                        T& operator[](uint64_t _index_)
+
+                                                        {
+
+                                                                      return TopPointer[_index_];
+
+                                                        };
+
+
+
+                                                        const T& operator*(void) const
+
+                                                        {
+
+                                                                      return (*ControlPointer);
+
+                                                        };
+
+
+
+                                                        T& operator*(void)
+
+                                                        {
+
+                                                                      return (*ControlPointer);
+
+                                                        };
+
+
+
+                                                        const T* operator ->(void) const noexcept
+
+                                                        {
+
+                                                                      return ControlPointer;
+
+                                                        };
+
+
+
+                                                        T* operator ->(void) noexcept
+
+                                                        {
+
+                                                                      return ControlPointer;
+
+                                                        };
+
+
+
+                                          };
+
+
+
+                            private:
+
+                                          T* AllocAreaPtr;
+
+                                          uint32_t AllocCount;
+
+                                          uint32_t MaxCnt;
+
+
+
+                                          SonikLib::AtomicLock m_lock;
+
+
+
+                            private:
+
+                                          SonikVariableArrayContainer(void)
+
+                                          :AllocAreaPtr(nullptr)
+
+                                          ,AllocCount(0)
+
+                                          ,MaxCnt(0)
+
+                                          {
+
+                                          };
+
+
+
+                                          //コピーとムーヴ禁止
+
+                                          SonikVariableArrayContainer(const SonikVariableArrayContainer& _copy_) = delete;
+
+                                     SonikVariableArrayContainer(SonikVariableArrayContainer&& _move_) = delete;
+
+                                          SonikVariableArrayContainer& operator =(const SonikVariableArrayContainer& _copy_) = delete;
+
+                                          SonikVariableArrayContainer& operator =(SonikVariableArrayContainer&& _move_) = delete;
+
+
+
+                                          //リザーブ
+
+                                          bool __RESERVE__(uint64_t _size_)
+
+                                          {
+
+                                                        int8_t* l_tmparea = new(std::nothrow) int8_t[ sizeof(T) * _size_) ]{};
+
+                                                        if( l_tmparea == nullptr )
+
+                                                        {
+
+                                                                      return false;
+
+                                                        };
+
+
+
+                                                        T* l_new_area = reinterpret_cast<T*>(l_tmparea);
+
+                                                        T* old_area = AllocAreaPtr;
+
+
+
+                                                        for(uint64_t i=0; i < AllocCount; ++i
+
+                                                        {
+
+                                                                      new(&l_new_area[i]) T(old_area[i]);
+
+                                                        };
+
+
+
+                                                        delete[] reinterpret_cast<int8_t*>(AllocAreaPtr);
+
+                                                        AllocAreaPtr = reinterpret_cast<T*>(l_tmparea);
+
+                                                        MaxCnt = _size_;
+
+
+
+                                                        return true;
+
+                                          };
+
+
+
+                            public:
+
+                                          static bool CreateContainer(SmtPtr<SonikVariableArrayContainer<T>>& _out_smtptr_, int32_t _ElemCount_ = 300)
+
+                                          {
+
+                                                        if(_ElemCount_ == 0 )
+
+                                                        {
+
+                                                                      return false;
+
+                                                        };
+
+
+
+                                                        SonikVariableArrayContainer<T>* lvacobj = nullptr;
+
+
+
+                                                        try
+
+                                                        {
+
+                                                                      lvacobj = new SonikVariableArrayContainer<T>;
+
+
+
+                                                                      int8_t* l_tmp = new int8_t[ sizeof(T) * _ElemCount_) ] {};
+
+                                                                      l_vacobj->AllocAreaPtr = reinterpret_cast<T*>(l_tmp);
+
+                                                                      l_vacobj->MaxCnt = _ElemCount_;
+
+
+
+                                                                      if(!_out_smtptr_.ResetPointer(l_vacobj))
+
+                                                                      {
+
+                                                                                    throw std::bad_alloc();
+
+                                                                      };
+
+
+
+
+
+
+
+                                                        }catch(std::bad_alloc&)
+
+                                                        {
+
+                                                                      if(l_vacobj != nullptr)
+
+                                                                      {
+
+                                                                                    delete l_vacobj;
+
+                                                                      };
+
+
+
+                                                                      return false;
+
+
+
+                                                        };
+
+
+
+                                                        return true;
+
+                                          };
+
+
+
+                                          ~SonikVariableArrayContainer(void)
+
+                                          {
+
+                                                        if(AllocAreaPtr != nullptr)
+
+                                                        {
+
+                                                                      for(uint64_t i=0; i < AllocCount; ++i)
+
+                                                                      {
+
+                                                                                    AllocAreaPtr[i].~T();
+
+                                                                      };
+
+
+
+                                                                      delete[] reinterpret_cast<int8_t*>(AllocAreaPtr);
+
+                                                        };
+
+
+
+                                          };
+
+
+
+                                          VACIterator begin(void)
+
+                                          {
+
+                                                        return VACIterator(AllocAreaPtr);
+
+                                          };
+
+
+
+                                          VACIterator back(void)
+
+                                          {
+
+                                                        return (AllocCount > 0) ? VACIterator(&AllocAreaPtr[AcllocCount -1])
+
+                                                                                                  : VACIterator(AllocAreaPtr);
+
+
+
+                                          };
+
+
+
+                                          VACIterator end(void)
+
+                                          {
+
+                                                        return VACIterator(&AllocAreaPtr[AllocCount]);
+
+                                          };
+
+
+
+                                          VACIterator rend(void)
+
+                                          {
+
+                                                        return VACIterator(&(AllocAreaPtr -1));
+
+                                          };
+
+
+
+                                          uint32_t GetAllocCount(void)
+
+                                          {
+
+                                                        return AllocCount;
+
+                                          };
+
+
+
+                                          bool PushBack(const T& PushItem)
+
+                                          {
+
+                                                        m_lock.lock();
+
+
+
+                                                        ++AllocCount;
+
+
+
+                                                        if(MaxCnt < AllocCount)
+
+                                                        {
+
+                                                                      if(!__RESERVE__(AllocCount))
+
+                                                                      {
+
+                                                                                    --AllocCount;
+
+                                                                                    m_lock.unlock();
+
+                                                                                    return false;
+
+                                                                      };
+
+                                                        };
+
+
+
+                                                        T* lp_placement = &AllocAreaPtr[AllocCount -1];
+
+                                                        new(lp_placement) T(PushItem);
+
+
+
+                                                        m_lock.unlock();
+
+                                                        return true;
+
+                                          };
+
+
+
+                                          bool PopBack(void)
+
+                                          {
+
+                                                        m_lock.lock();
+
+
+
+                                                        if(AllocCount == 0)
+
+                                                        {
+
+                                                                      m_lock.unlock();
+
+                                                                      return true;
+
+                                                        };
+
+
+
+                                                        AllocAreaPtr[AllocCount -1].~T();
+
+                                                        --AllocCount;
+
+                                                        m_lock.unlock();
+
+
+
+                                                        return true;
+
+                                          };
+
+
+
+                                          bool Reserve(uint64_t _reserve_size_)
+
+                                          {
+
+                                                        m_lock.lock();
+
+                                                        bool ret = false;
+
+
+
+                                                        ret = __RESERVE__(_reserve_size_);
+
+
+
+                                                        m_lock.unlock();
+
+
+
+                                                        return ret;
+
+                                          };
+
+
+
+                                          void Clear(void)
+
+                                          {
+
+                                                        m_lock.lock();
+
+
+
+                                                        if(AllocCount == 0)
+
+                                                        {
+
+                                                                      m_lock.unlock();
+
+                                                                      return ;
+
+                                                        };
+
+
+
+                                                        for(uint64_t i=0; i < AllocCOunt; ++i)
+
+                                                        {
+
+                                                                      AllocAreaPtr[i].~T();
+
+                                                        };
+
+
+
+                                                        std::fill_n(reinterpret_cast<int8_t*>(AllocAreaPtr), sizeof(T) * AllocCount), 0);
+
+
+
+                                                        AllocCount = 0;
+
+                                                        m_lock.unlock();
+
+                                                        return;
+
+                                          };
+
+
+
+                                          const T& operator[](uint64_t _index_) const
+
+                                          {
+
+                                                        return AllocAreaPtr[_index_];
+
+                                          };
+
+
+
+                                          T& operator[](uint64_t _index_)
+
+                                          {
+
+                                                        return AllocAreaPtr[_index_];
+
+                                          };
+
+
+
+                            };
+
+
+
+
+
+              };
+
+
+
+
+
+};
+
+
+
+/*
+#include <stdint.h>
+#include <new>
+#include <string>
+
+namespace SonikLib
+{
+	template <class T>
+	class SonikVariableArrayContainer
+	{
+	private:
+		uint8_t* AllocAreaPtr;
+		uint32_t AllocCount;
+		uint32_t MaxCnt;
+
+	private:
+		SonikVariableArrayContainer(const SonikVariableArrayContainer& _copy_) =delete;
+		SonikVariableArrayContainer(SonikVariableArrayContainer&& _move_) =delete;
+		SonikVariableArrayContainer& operator =(const SonikVariableArrayContainer& _copy_) =delete;
+		SonikVariableArrayContainer& operator =(SonikVariableArrayContainer&& _move_) =delete;
+
+	public:
+		SonikVariableArrayContainer(uint32_t ElemCnt = 100)
+		:AllocCount(0)
+		,MaxCnt(ElemCnt)
+		{
+			if(MaxCnt >= UINT32_MAX)
+			{
+				--MaxCnt;
+			};
+
+			try
+			{
+				AllocAreaPtr = new uint8_t[ sizeof(T) * ElemCnt ];
+
+			}catch(std::bad_alloc& e)
+			{
+				//メモリの確保に失敗。
+				delete[] AllocAreaPtr;
+				throw std::bad_alloc(e);
+			};
+
+		};
+
+		~SonikVariableArrayContainer(void)
+		{
+			T* item = reinterpret_cast<T*>(AllocAreaPtr);
+			for(uint32_t i=0; i < AllocCount; ++i)
+			{
+				item[i].~T();
+			};
+
+			delete[] AllocAreaPtr;
+		};
+
+		inline T* begin(void)
+		{
+			return &reinterpret_cast<T*>(AllocAreaPtr)[0];
+		};
+
+		inline T* end(void)
+		{
+			return &reinterpret_cast<T*>(AllocAreaPtr)[AllocCount];
+		};
+
+		inline T& operator [](uint32_t ArrayPoint)
+		{
+			return reinterpret_cast<T*>(AllocAreaPtr)[ArrayPoint];
+		};
+
+		inline bool PushBack(T& PushItem)
+		{
+			if( MaxCnt < AllocCount )
+			{
+				uint8_t* pTmpArea = nullptr;
+				uint8_t TmpCount  = AllocCount << 1;
+				uint8_t* TmpControl = 0;
+				T* tmpItem = nullptr;
+
+				pTmpArea = new(std::nothrow) uint8_t[ (sizeof(T) * AllocCount ) ];
+				if( pTmpArea == nullptr )
+				{
+					return false;
+				};
+
+				TmpControl = pTmpArea;
+
+				uint32_t pTmpIndex = AllocCount;
+				T* alp = reinterpret_cast<T*>(AllocAreaPtr);
+				for( uint32_t i=0; i < pTmpIndex; ++i)
+				{
+					tmpItem = new(TmpControl) T;
+					(*tmpItem) = alp[i];
+
+					TmpControl += sizeof(T);
+				};
+
+				delete[] AllocAreaPtr;
+				AllocAreaPtr = pTmpArea;
+				MaxCnt = TmpCount;
+			};
+
+			T* pTmpObj = new(&reinterpret_cast<T*>(AllocAreaPtr)[AllocCount]) T;
+
+			(*pTmpObj) = PushItem;
+
+			++AllocCount;
+			return true;
+		};
+
+		inline bool PopBack(void)
+		{
+			if( AllocCount == 0 )
+			{
+				return true;
+			};
+
+			reinterpret_cast<T*>(AllocAreaPtr)[ (AllocCount -1) ].~T();
+
+			--AllocCount;
+			return true;
+		};
+
+		inline void Clear(void)
+		{
+			if( AllocCount == 0 )
+			{
+				return;
+			};
+
+			for( T& item : (*this) )
+			{
+				item.~T();
+			};
+
+			memset(AllocAreaPtr, 0, (sizeof(T) * MaxCnt));
+			AllocCount = 0;
+			return;
+		};
+	};
+
+}; //end namespace SonikLib
+*/
+
+
+#endif /* SONIKSTRING_RANGEDFORCONTAINER_HPP_ */

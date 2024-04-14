@@ -59,7 +59,7 @@ namespace SonikLib
 			return false;
 		};
 
-		if( !lp_mngobj->JobQueue.ResetPointer(new(std::nothrow) SonikLib::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>(JobBufferSize)) )
+		if( !lp_mngobj->JobQueue.ResetPointer(new(std::nothrow) SonikLib::Container::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>(JobBufferSize)) )
 		{
 			return false;
 		};
