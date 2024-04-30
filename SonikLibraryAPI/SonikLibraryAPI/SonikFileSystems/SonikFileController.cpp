@@ -46,9 +46,8 @@ namespace SonikLib
 
 		bool SonikFileSystemController::CreateFileController(SFileSystemController& _out_)
 		{
-			SonikFileStreamController* ptmp;
-			ptmp = new(std::nothrow) SonikFileStreamController;
-
+			SonikFileSystemController* ptmp;
+			ptmp = new(std::nothrow) SonikFileSystemController;
 			if(ptmp == nullptr)
 			{
 				return false;
@@ -83,7 +82,7 @@ namespace SonikLib
 			};
 
 			//ファイルよみこみ
-			if(fopen_s(&m_file, _filepath_.c_str(), reinterpret_cast<char*>(&_mode_)) != 0)
+			if(fopen_s(&m_file, _filepath_.str_c(), reinterpret_cast<char*>(&_mode_)) != 0)
 			{
 				//読み込み失敗。
 				m_lock.unlock();
@@ -110,7 +109,7 @@ namespace SonikLib
 		{
 			#if ___cplusplus <= 201703L
 				//C++17 以降
-				return STDFSYS::file_size(m_filepath.c_str());
+				return STDFSYS::file_size(m_filepath.str_c());
 
 			#else
 				//C++17以前
@@ -187,26 +186,26 @@ namespace SonikLib
 		//バイナリで、追記以外...つまりすべての文字を再出力..となった場合は変換されるかもしれません。
 		void SonikFileSystemController::Write_char(SonikLib::SonikString& _writevalue_)
 		{
-			_writevalue_.c_str();
+			_writevalue_.str_c();
 			uint64_t l_writesize = _writevalue_.Count_Byte_NotNull();
 
-			fwrite(_writevalue_.c_str(), l_writesize, 1, m_file);
+			fwrite(_writevalue_.str_c(), l_writesize, 1, m_file);
 		};
 
 		void SonikFileSystemController::Write_UTF8(SonikLib::SonikString& _writevalue_)
 		{
-			_writevalue_.utf8_str();
+			_writevalue_.str_utf8();
 			uint64_t l_writesize = _writevalue_.Count_Byte_NotNull();
 
-			fwrite(_writevalue_.utf8_str(), l_writesize, 1, m_file);
+			fwrite(_writevalue_.str_utf8(), l_writesize, 1, m_file);
 		};
 
 		void SonikFileSystemController::Write_UTF16(SonikLib::SonikString& _writevalue_)
 		{
-			_writevalue_.c_wcstr();
+			_writevalue_.str_utf16();
 			uint64_t l_writesize = _writevalue_.Count_Byte_NotNull();
 
-			fwrite(_writevalue_.c_wcstr(), l_writesize, 1, m_file);
+			fwrite(_writevalue_.str_utf16(), l_writesize, 1, m_file);
 		};
 
 		//テキストモード専用　指定された行数文TEXTを読み込みます。
@@ -244,7 +243,7 @@ namespace SonikLib
 		};
 
 		//テキストモード専用　指定された行数文TEXTを読み込ます。改行は削除され、改行で分割されたQueueとして取得します。
-		void SonikFileSystemController::ReadText_LineQueue(SonikLib::SonikAtomicQueue<SonikString>& _GetLineQueue_, uint64_t GetRowCnt)
+		void SonikFileSystemController::ReadText_LineQueue(SonikLib::Container::SonikAtomicQueue<SonikString>& _GetLineQueue_, uint64_t GetRowCnt)
 		{
 			if( ( (static_cast<uint32_t>(m_openmode) & 0x620000) >> 16) == 0x62)
 			{

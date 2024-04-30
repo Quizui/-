@@ -13,6 +13,12 @@
 
 #include <stdint.h>
 
+//C++20 以前はchar8_t が無いので。
+#if __cplusplus < 202002L
+              //C++20 以前であれば　char8_t は uint8_t
+              using char8_t = uint8_t;
+#endif
+
 enum SonikLibConvertType
 {
 	SCHTYPE_SJIS = 0,
@@ -63,49 +69,49 @@ namespace SonikLibStringConvert
 	uint64_t GetStringCount(const char32_t* pCheckSrc);
 
 	//UTF-8をUNICODE(UTF-32)に変換します。
-	bool ConvertUTF8ToUTF32(char* pSrc, char32_t* pDest, uint64_t* DestBufferSize);
+	bool ConvertUTF8ToUTF32(const char8_t* pSrc, char32_t* pDest, uint64_t* DestBufferSize);
 
 	//UNICODE(UTF-32)をUTF-8に変換します。
-	bool ConvertUTF32ToUTF8(char32_t* pSrc, char* pDest, uint64_t* DestBufferSize);
+	bool ConvertUTF32ToUTF8(const char32_t* pSrc, char8_t* pDest, uint64_t* DestBufferSize);
 
 	//UNICODE(UTF-32)をUNICODE(UTF-16)に変換します。
-	bool ConvertUTF32ToUTF16(char32_t* pSrc, char16_t* pDest, uint64_t* DestBufferSize);
+	bool ConvertUTF32ToUTF16(const char32_t* pSrc, char16_t* pDest, uint64_t* DestBufferSize);
 
 	//UNICODE(UTF16)をUNICODE(UTF-32)に変換します。
-	bool ConvertUTF16ToUTF32(char16_t* pSrc, char32_t* pDest, uint64_t* DestBufferSize);
+	bool ConvertUTF16ToUTF32(const char16_t* pSrc, char32_t* pDest, uint64_t* DestBufferSize);
 
 	//UTF8をUNICODE(UTF-16)に変換します。
-	bool ConvertUTF8ToUTF16(char* pSrc, char16_t* pDest, uint64_t* DestBufferSize);
+	bool ConvertUTF8ToUTF16(const char8_t* pSrc, char16_t* pDest, uint64_t* DestBufferSize);
 
 	//UNICODE(UTF-16)をUTF8に変換します。
-	bool ConvertUTF16ToUTF8(char16_t* pSrc, char* pDest, uint64_t* DestBufferSize);
+	bool ConvertUTF16ToUTF8(const char16_t* pSrc, char8_t* pDest, uint64_t* DestBufferSize);
 
 
 	//マルチバイト文字列をUTF8文字列に変換します。
 	//第１引数の文字列は、可能性の判定として、SJIS判定であれば処理を行います。
 	//第１引数の文字列に対して、Null終端がない場合の動作は、strlenと同様にバッファオーバーランを起こします。
-	bool ConvertMBSToUTF8(char* pSrc, char* pDest, uint64_t* DestBufferSize, const char* locale);
+	bool ConvertMBSToUTF8(const char* pSrc, char8_t* pDest, uint64_t* DestBufferSize, const char* locale);
 
 	//UTF8文字列をマルチバイト文字列に変換します。
 	//第１引数の文字列は、可能性の判定として、UTF8判定であれば処理を行います。
 	//第１引数の文字列に対して、Null終端がない場合の動作は、strlenと同様にバッファオーバーランを起こします。
-	bool ConvertUTF8ToMBS(char* pSrc, char* pDest, uint64_t* DestBufferSize, const char* locale);
+	bool ConvertUTF8ToMBS(const char8_t* pSrc, char* pDest, uint64_t* DestBufferSize, const char* locale);
 
 	//マルチバイト文字列をUTF16文字列に変換します。
 	//内部ではmbstowcs_s関数を使用しますが、一時領域を確保し、コピーして処理を行うため、コピー元領域、コピー先領域が重なっていても正常にコピーされます。
-	bool ConvertMBStoUTF16(char* pSrc, char16_t* pDest, uint64_t* DestBufferSize, const char* locale);
+	bool ConvertMBStoUTF16(const char* pSrc, char16_t* pDest, uint64_t* DestBufferSize, const char* locale);
 
 	//UTF16文字列をマルチバイト文字列に変換します。
 	//内部ではmbstowcs_s関数を使用しますが、一時領域を確保し、コピーして処理を行うため、コピー元領域、コピー先領域が重なっていても正常にコピーされます。
-	bool ConvertUTF16toMBS(char16_t* pSrc, char* pDest, uint64_t* DestBufferSize, const char* locale);
+	bool ConvertUTF16toMBS(const char16_t* pSrc, char* pDest, uint64_t* DestBufferSize, const char* locale);
 
 	//マルチバイト文字列をUTF32文字列に変換します。
 	//内部ではmbstowcs_s関数を使用しますが、一時領域を確保し、コピーして処理を行うため、コピー元領域、コピー先領域が重なっていても正常にコピーされます。
-	bool ConvertMBStoUTF32(char* pSrc, char32_t* pDest, uint64_t* DestBufferSize, const char* locale);
+	bool ConvertMBStoUTF32(const char* pSrc, char32_t* pDest, uint64_t* DestBufferSize, const char* locale);
 
 	//UTF32文字列をマルチバイト文字列に変換します。
 	//内部ではmbstowcs_s関数を使用しますが、一時領域を確保し、コピーして処理を行うため、コピー元領域、コピー先領域が重なっていても正常にコピーされます。
-	bool ConvertUTF32toMBS(char32_t* pSrc, char* pDest, uint64_t* DestBufferSize, const char* locale);
+	bool ConvertUTF32toMBS(const char32_t* pSrc, char* pDest, uint64_t* DestBufferSize, const char* locale);
 
 	//UTF8文字列における、全角英数字及び、感嘆符(！(エクスクラメーションマーク))等の記号を半角英数字に変換します。
 	//UTF-8における全角から半角変換において、領域オーバーをすることがないはずなのでそのまま領域を変換し、終端コードを最後に付与します。

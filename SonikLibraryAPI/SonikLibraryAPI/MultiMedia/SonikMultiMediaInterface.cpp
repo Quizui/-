@@ -69,7 +69,7 @@ namespace SonikLib
 		if( FAILED(ComState) )
 		{
 			//COM初期化失敗。(アパートメント属性設定に失敗)
-			m_lock.Unlock();
+			m_lock.unlock();
 			return retval;
 		};
 
@@ -82,7 +82,7 @@ namespace SonikLib
 		{
 			//c マルチメディアデバイスの列挙に失敗。
 			CoUninitialize();
-			m_lock.Unlock();
+			m_lock.unlock();
 			return retval;
 		};
 
@@ -94,7 +94,7 @@ namespace SonikLib
 			//c デフォルトデバイスの選択に失敗。
 			pDeviceEnumerator->Release();
 			CoUninitialize();
-			m_lock.Unlock();
+			m_lock.unlock();
 			return retval;
 		};
 
@@ -107,7 +107,7 @@ namespace SonikLib
 			pDevice->Release();
 			pDeviceEnumerator->Release();
 			CoUninitialize();
-			m_lock.Unlock();
+			m_lock.unlock();
 			return retval;
 		};
 
@@ -118,7 +118,7 @@ namespace SonikLib
 			pDevice->Release();
 			pDeviceEnumerator->Release();
 			CoUninitialize();
-			m_lock.Unlock();
+			m_lock.unlock();
 			return retval;
 		};
 
@@ -132,7 +132,7 @@ namespace SonikLib
 			pDevice->Release();
 			pDeviceEnumerator->Release();
 			CoUninitialize();
-			m_lock.Unlock();
+			m_lock.unlock();
 			return retval;
 		};
 
@@ -175,7 +175,7 @@ namespace SonikLib
 			pDevice->Release();
 			pDeviceEnumerator->Release();
 			CoUninitialize();
-			m_lock.Unlock();
+			m_lock.unlock();
 
 			return retval;
 		};
@@ -324,7 +324,7 @@ namespace SonikLib
 			pDevice->Release();
 			pDeviceEnumerator->Release();
 			CoUninitialize();
-			m_lock.Unlock();
+			m_lock.unlock();
 			return retval;
 		};
 
@@ -338,7 +338,7 @@ namespace SonikLib
 		pDevice->Release();
 		pDeviceEnumerator->Release();
 		CoUninitialize();
-		m_lock.Unlock();
+		m_lock.unlock();
 
 		return retval;
 	};
@@ -366,7 +366,7 @@ namespace SonikLib
 		if( FAILED(ComState) )
 		{
 			//COM初期化失敗。(アパートメント属性設定に失敗)
-			m_lock.Unlock();
+			m_lock.unlock();
 			return retval;
 		};
 
@@ -379,7 +379,7 @@ namespace SonikLib
 		{
 			//c マルチメディアデバイスの列挙に失敗。
 			CoUninitialize();
-			m_lock.Unlock();
+			m_lock.unlock();
 			return retval;
 		};
 
@@ -391,7 +391,7 @@ namespace SonikLib
 			//c デフォルトデバイスの選択に失敗。
 			pDeviceEnumerator->Release();
 			CoUninitialize();
-			m_lock.Unlock();
+			m_lock.unlock();
 			return retval;
 		};
 
@@ -404,7 +404,7 @@ namespace SonikLib
 			pDevice->Release();
 			pDeviceEnumerator->Release();
 			CoUninitialize();
-			m_lock.Unlock();
+			m_lock.unlock();
 			return retval;
 		};
 
@@ -415,7 +415,7 @@ namespace SonikLib
 			pDevice->Release();
 			pDeviceEnumerator->Release();
 			CoUninitialize();
-			m_lock.Unlock();
+			m_lock.unlock();
 			return retval;
 		};
 
@@ -429,7 +429,7 @@ namespace SonikLib
 			pDevice->Release();
 			pDeviceEnumerator->Release();
 			CoUninitialize();
-			m_lock.Unlock();
+			m_lock.unlock();
 			return retval;
 		};
 
@@ -473,7 +473,7 @@ namespace SonikLib
 			pDevice->Release();
 			pDeviceEnumerator->Release();
 			CoUninitialize();
-			m_lock.Unlock();
+			m_lock.unlock();
 
 			return retval;
 		};
@@ -622,7 +622,7 @@ namespace SonikLib
 			pDevice->Release();
 			pDeviceEnumerator->Release();
 			CoUninitialize();
-			m_lock.Unlock();
+			m_lock.unlock();
 			return retval;
 		};
 
@@ -636,7 +636,7 @@ namespace SonikLib
 		pDevice->Release();
 		pDeviceEnumerator->Release();
 		CoUninitialize();
-		m_lock.Unlock();
+		m_lock.unlock();
 
 		return retval;
 	};

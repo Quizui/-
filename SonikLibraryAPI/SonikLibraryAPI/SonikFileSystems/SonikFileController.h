@@ -17,12 +17,15 @@
 //前方宣言============================
 namespace SonikLib
 {
-	template<class QueueType>
-	class SonikAtomicQueue;
+	namespace Container
+	{
+		template<class QueueType>
+		class SonikAtomicQueue;
+	};
 
 	namespace FileSystemControllers
 	{
-		class SonikFileStreamController;
+		class SonikFileSystemController;
 	};
 };
 
@@ -33,7 +36,7 @@ typedef _iobuf FILE;
 
 namespace SonikLib
 {
-	using SFileSystemController = SonikLib::SharedSmtPtr<SonikLib::FileSystemControllers::SonikFileStreamController>;
+	using SFileSystemController = SonikLib::SharedSmtPtr<SonikLib::FileSystemControllers::SonikFileSystemController>;
 
 	namespace FileSystem
 	{
@@ -75,7 +78,7 @@ namespace SonikLib
 
 			private:
     			//コピー禁止&ムーブ禁止
-    			SonikFileSystemController(const SonikFileSystemController _copy_) = delete;
+    			SonikFileSystemController(const SonikFileSystemController& _copy_) = delete;
     			SonikFileSystemController(SonikFileSystemController&& _move_) = delete;
     			SonikFileSystemController& operator =(const SonikFileSystemController& _copy_) = delete;
     			SonikFileSystemController& operator =(SonikFileSystemController& _move_) = delete;
@@ -121,7 +124,7 @@ namespace SonikLib
     			//テキストモード専用　指定された行数文TEXTを読み込みます。
     			void ReadText_Line(SonikLib::SonikString& _str_, uint64_t GetRowCnt =1);
     			//テキストモード専用　指定された行数文TEXTを読み込ます。改行は削除され、改行で分割されたQueueとして取得します。
-    			void ReadText_LineQueue(SonikLib::SonikAtomicQueue<SonikString>& _GetLineQueue_, uint64_t GetRowCnt =1);
+    			void ReadText_LineQueue(SonikLib::Container::SonikAtomicQueue<SonikString>& _GetLineQueue_, uint64_t GetRowCnt =1);
 		};
 
     }; //end namespace FileSystemController

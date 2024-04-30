@@ -4,13 +4,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../SonikString/UTF16/SonikString_UTF16.cpp 
+../SonikString/UTF16/SonikStringUTF16.cpp 
 
 CPP_DEPS += \
-./SonikString/UTF16/SonikString_UTF16.d 
+./SonikString/UTF16/SonikStringUTF16.d 
 
 OBJS += \
-./SonikString/UTF16/SonikString_UTF16.o 
+./SonikString/UTF16/SonikStringUTF16.o 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -25,7 +25,7 @@ SonikString/UTF16/%.o: ../SonikString/UTF16/%.cpp SonikString/UTF16/subdir.mk
 clean: clean-SonikString-2f-UTF16
 
 clean-SonikString-2f-UTF16:
-	-$(RM) ./SonikString/UTF16/SonikString_UTF16.d ./SonikString/UTF16/SonikString_UTF16.o
+	-$(RM) ./SonikString/UTF16/SonikStringUTF16.d ./SonikString/UTF16/SonikStringUTF16.o
 
 .PHONY: clean-SonikString-2f-UTF16
 

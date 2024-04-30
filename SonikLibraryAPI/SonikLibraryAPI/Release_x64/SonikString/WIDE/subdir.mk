@@ -4,13 +4,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../SonikString/WIDE/SonikString_WIDE.cpp 
+../SonikString/WIDE/SonikStringWIDE.cpp 
 
 CPP_DEPS += \
-./SonikString/WIDE/SonikString_WIDE.d 
+./SonikString/WIDE/SonikStringWIDE.d 
 
 OBJS += \
-./SonikString/WIDE/SonikString_WIDE.o 
+./SonikString/WIDE/SonikStringWIDE.o 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -25,7 +25,7 @@ SonikString/WIDE/%.o: ../SonikString/WIDE/%.cpp SonikString/WIDE/subdir.mk
 clean: clean-SonikString-2f-WIDE
 
 clean-SonikString-2f-WIDE:
-	-$(RM) ./SonikString/WIDE/SonikString_WIDE.d ./SonikString/WIDE/SonikString_WIDE.o
+	-$(RM) ./SonikString/WIDE/SonikStringWIDE.d ./SonikString/WIDE/SonikStringWIDE.o
 
 .PHONY: clean-SonikString-2f-WIDE
 

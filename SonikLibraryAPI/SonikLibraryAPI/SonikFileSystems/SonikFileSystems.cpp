@@ -34,7 +34,7 @@ namespace SonikLibFileSystems
 
 				_directoryPath_ += "/*";
 
-				l_handle = FindFirstFileW(reinterpret_cast<LPCWSTR>(_directoryPath_.c_wcstr()), &l_data);
+				l_handle = FindFirstFileW(reinterpret_cast<LPCWSTR>(_directoryPath_.str_wchar()), &l_data);
 
 				if(l_handle == INVALID_HANDLE_VALUE)
 				{
@@ -65,7 +65,7 @@ namespace SonikLibFileSystems
 		};
 
 		//指定したフォルダにあるファイル名を列挙します。
-		bool GetDirectoryInFileNameEnumeration(SonikLib::SonikString  _directoryPath_, SonikLib::SonikAtomicQueue<SonikLib::SonikString>& retEnums)
+		bool GetDirectoryInFileNameEnumeration(SonikLib::SonikString  _directoryPath_, SonikLib::Container::SonikAtomicQueue<SonikLib::SonikString>& retEnums)
 		{
 			#if defined(_WIN64)
 				//WindowsAPIFunction
@@ -74,7 +74,7 @@ namespace SonikLibFileSystems
 
 				_directoryPath_ += "/*";
 
-				l_handle = FindFirstFileW(reinterpret_cast<LPCWSTR>(_directoryPath_.c_wcstr()), &l_data);
+				l_handle = FindFirstFileW(reinterpret_cast<LPCWSTR>(_directoryPath_.str_wchar()), &l_data);
 				if( l_handle == INVALID_HANDLE_VALUE )
 				{
 					//Error

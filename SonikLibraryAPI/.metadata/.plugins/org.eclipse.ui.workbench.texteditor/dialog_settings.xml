@@ -2,51 +2,51 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="memcpy"/>
+		<item key="selection" value="SonikStringWIDE"/>
 		<item key="casesensitive" value="true"/>
 		<item key="incremental" value="true"/>
 		<item key="wrap" value="true"/>
 		<item key="wholeword" value="false"/>
 		<list key="findhistory">
-			<item value="memcpy_s"/>
-			<item value="definition_str"/>
-			<item value="SonikString_CHR32"/>
+			<item value="SonikString"/>
+			<item value=".Unlock();"/>
+			<item value=".c_str()"/>
+			<item value=".str_c()"/>
+			<item value="m_lock.Unlock();"/>
+			<item value="std::copy_n(mbsbuffer, mbsLen, pDest);std::copy_n(mbsbuffer, mbsLen, pDest);"/>
+			<item value="SonikSTringUTF16"/>
+			<item value="SonikStringUTF8"/>
 			<item value="SonikString_CHR16"/>
-			<item value="operator +(const wchar_t* w_Str)"/>
-			<item value="operator +=(const wchar_t* w_Str)"/>
-			<item value="operator =(const wchar_t* w_Str)"/>
-			<item value="GetCpy_str_wcstr(wchar_t* dstBuffer"/>
-			<item value="str_wchar(void"/>
-			<item value="str_wchar(void)"/>
-			<item value="SonikString_CHR32_pImpl(const wchar_t* SetStr)"/>
 			<item value="namespace SonikLib"/>
-			<item value="GetCpy_c_wcstr(wchar_t* dstBuffer"/>
-			<item value="SonikString_CHR32_pImpl&amp; operator =(const wchar_t* w_Str)"/>
-			<item value="SonikString_CHR16_pImpl(const char* SetStr)"/>
+			<item value="memcpy"/>
+			<item value="operator +=(const wchar_t*"/>
+			<item value="operator +(const wchar_t"/>
+			<item value="operator +=(const wchar_t"/>
+			<item value="operator =(const wchar_t"/>
 		</list>
 		<list key="replacehistory">
+			<item value="SonikStringWIDE"/>
+			<item value="SonikStringUTF8"/>
+			<item value="SonikStringUTF16"/>
+			<item value=".unlock();"/>
+			<item value=".str_c()"/>
+			<item value=""/>
+			<item value="m_lock.unlock();"/>
+			<item value="SonikSTringUTF16"/>
+			<item value="SonikString"/>
 			<item value="memcpy"/>
 			<item value="SonikStringUTF16_CHR32"/>
 			<item value="SonikStringUTF16_CHR16"/>
 			<item value="SonikSTringUTF16_CHR16"/>
 			<item value="SonikStringUTF8_CHR32"/>
 			<item value="SonikStringUTF8_CHR16"/>
-			<item value="SonikStringWIDE_CHR32"/>
-			<item value="SonikStringWIDE_CHR16"/>
-			<item value="SonikString_CHR32"/>
-			<item value="SonikString_CHR16"/>
-			<item value="SonikString_UTF16"/>
-			<item value="SonikString_UTF8"/>
-			<item value="SonikString_WIDE"/>
-			<item value=""/>
-			<item value="SonikStiring_UTF16"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item key="DIALOG_WIDTH" value="304"/>
 		<item key="DIALOG_FONT_NAME" value="1|Yu Gothic UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Yu Gothic UI"/>
 		<item key="DIALOG_HEIGHT" value="385"/>
-		<item key="DIALOG_X_ORIGIN" value="723"/>
-		<item key="DIALOG_Y_ORIGIN" value="171"/>
+		<item key="DIALOG_X_ORIGIN" value="862"/>
+		<item key="DIALOG_Y_ORIGIN" value="254"/>
 	</section>
 </section>

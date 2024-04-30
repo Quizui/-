@@ -38,7 +38,7 @@ namespace SonikMath
 
 		if(SONIK_MATH_INIT_FLAG__)
 		{
-			global_initblock.Unlock();
+			global_initblock.unlock();
 			return 0;
 		};
 
@@ -61,7 +61,7 @@ namespace SonikMath
 			digree += 0.1f;
 		};
 
-		global_initblock.Unlock();
+		global_initblock.unlock();
 		return 0;
 	};
 

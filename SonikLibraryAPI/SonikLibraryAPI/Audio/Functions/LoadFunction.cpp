@@ -472,7 +472,7 @@ namespace SonikAudioLoadFunction
 
 		sonikstr_ = LoadFilePass;
 
-		ifs_.open(sonikstr_.c_str(), std::ios::binary);
+		ifs_.open(sonikstr_.str_c(), std::ios::binary);
 		if( !ifs_.is_open() )
 		{
 			return false;

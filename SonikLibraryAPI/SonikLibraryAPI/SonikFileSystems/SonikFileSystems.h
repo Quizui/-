@@ -16,8 +16,11 @@
 //前方宣言
 namespace SonikLib
 {
-	template<class QueueType>
-	class SonikAtomicQueue;
+	namespace Container
+	{
+		template<class QueueType>
+		class SonikAtomicQueue;
+	};
 };
 
 namespace SonikLib
@@ -29,7 +32,7 @@ namespace SonikLib
 		uint64_t GetDirectoryInFileCount(SonikLib::SonikString  _directoryPath_);
 
 		//指定したフォルダにあるファイル名を列挙します。
-		bool GetDirectoryInFileNameEnumeration(SonikLib::SonikString  _directoryPath_, SonikLib::SonikAtomicQueue<SonikLib::SonikString>& retEnums);
+		bool GetDirectoryInFileNameEnumeration(SonikLib::SonikString  _directoryPath_, SonikLib::Container::SonikAtomicQueue<SonikLib::SonikString>& retEnums);
 
 	};
 };
