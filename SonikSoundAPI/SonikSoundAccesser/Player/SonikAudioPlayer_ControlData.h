@@ -10,11 +10,9 @@
 
 #include <stdint.h>
 #include "../../../SonikCAS/SonikAtomicLock.h"
-#include "SonikAudioPlayer_ControlData_Interface.h"
 #include "../PlayStateEnums.h"
 #include "../../AudioLoadTypedef.h"
 #include "../SAudioAccesserTypedef.h"
-
 
 namespace SonikMathDataBox
 {
@@ -22,18 +20,15 @@ namespace SonikMathDataBox
 };
 
 
-
 namespace SonikAudioData
 {
 
 	//大本のクラス。
-	class SonikAudioControlData : public SonikAudioDataInterface::SADInterface_PlayerSide
+	class SonikAudioControlData
 	{
-	private:
+	protected:
 		SonikAudio::SAudioFormat m_AudioData;			//オーディオデータへのスマートポインタ
 		char* mp_ControlData;							//操作用ポインタ
-		SonikMathDataBox::Sonik3DPoint* m_3dpos;		//3D座標
-		SonikMathDataBox::Sonik3DPoint* m_3ddir;		//3D方向
 		float m_volume;									//オーディオの音量
 		bool m_repeat;									//オーディオのリピートフラグ
 		SonikAudioEnum::PlayStateID m_AudioState;		//オーディオのステータス(プレイ、ストップ等)
@@ -48,7 +43,7 @@ namespace SonikAudioData
 		//コンストラクタ
 		SonikAudioControlData(SonikAudio::SAudioFormat SetAudioPointer);
 		//デストラクタ
-		~SonikAudioControlData(void);
+		virtual ~SonikAudioControlData(void);
 		//その他デフォルト(コピーコンストラクタ等)
 
 		//コントロールオーディオのポインタを先頭ポインタへ移動します。
@@ -60,45 +55,6 @@ namespace SonikAudioData
 		//コントロールオーディオポインタのゲット
 		char** GetAudioControlPointer(void);
 
-		//ポジションのセット
-		void SetPositionX(double SetValue);
-		void SetPositionY(double SetValue);
-		void SetPositionZ(double SetValue);
-		void SetPositionAll(double x, double y, double z);
-		void SetPositionXY(double x, double y);
-		void SetPositionXZ(double x, double z);
-		void SetPositionYZ(double y, double z);
-
-		//別のポジションへのポインタとつなぎ、位置を一緒に動かしたいときに使います。
-		//内部の個別ポジションに戻したい場合はnullptrを指定します。
-		void SetPositonConnectX(SonikMathDataBox::Sonik3DPoint* _3dpos_);
-		void SetPositonConnectY(SonikMathDataBox::Sonik3DPoint* _3dpos_);
-		void SetPositonConnectZ(SonikMathDataBox::Sonik3DPoint* _3dpos_);
-		void SetPositionConnectAll(SonikMathDataBox::Sonik3DPoint* _3dpos_);
-		void SetPositonConnectXY(SonikMathDataBox::Sonik3DPoint* _3dpos_);
-		void SetPositonConnectXZ(SonikMathDataBox::Sonik3DPoint* _3dpos_);
-		void SetPositonConnectYZ(SonikMathDataBox::Sonik3DPoint* _3dpos_);
-
-		//方向のセット
-		void SetDirectionX(double SetValue);
-		void SetDirectionY(double SetValue);
-		void SetDirectionZ(double SetValue);
-		void SetDirectionAll(double x, double y, double z);
-		void SetDirectionXY(double x, double y);
-		void SetDirectionXZ(double x, double z);
-		void SetDirectionYZ(double y, double z);
-
-		//別の方向へのポインタとつなぎ、位置を一緒に動かしたいときに使います。
-		//内部の個別ポジションに戻したい場合はnullptrを指定します。
-		void SetDirectionConnectX(SonikMathDataBox::Sonik3DPoint* _3ddir_);
-		void SetDirectionConnectY(SonikMathDataBox::Sonik3DPoint* _3ddir_);
-		void SetDirectionConnectZ(SonikMathDataBox::Sonik3DPoint* _3ddir_);
-		void SetDirectionConnectAll(SonikMathDataBox::Sonik3DPoint* _3ddir_);
-		void SetDirectionConnectXY(SonikMathDataBox::Sonik3DPoint* _3ddir_);
-		void SetDirectionConnectXZ(SonikMathDataBox::Sonik3DPoint* _3ddir_);
-		void SetDirectionConnectYZ(SonikMathDataBox::Sonik3DPoint* _3ddir_);
-
-
 		//音量(ボリューム)のセット
 		void SetVolume(float SetValue);
 
@@ -108,29 +64,7 @@ namespace SonikAudioData
 		//オーディオステータスのセット
 		void SetAudioState(SonikAudioEnum::PlayStateID SetValue);
 
-		//継承元の純粋仮想関数の実装====================================
-		//ポジションのゲット
-		double GetPositionX(void);
-		double GetPositionY(void);
-		double GetPositionZ(void);
-		void GetPositionAll(double& x, double& y, double& z);
-		SonikMathDataBox::Sonik3DPoint& GetPositionAll(void);
-		void GetPositionXY(double& x, double& y);
-		void GetPositionXZ(double& x, double& z);
-		void GetPositionYZ(double& y, double& z);
-
-		//方向(Directionのゲット
-		double GetDirectionX(void);
-		double GetDirectionY(void);
-		double GetDirectionZ(void);
-		void GetDirectionAll(double& x, double& y, double& z);
-		SonikMathDataBox::Sonik3DPoint& GetDirectionAll(void);
-		void GetDirectionXY(double& x, double& y);
-		void GetDirectionXZ(double& x, double& z);
-		void GetDirectionYZ(double& y, double& z);
-
-
-		//音量(ボリューム)のゲット
+		//データ自身のマスター音量(ボリューム)のゲット
 		const float* GetVolume(void);
 
 		//繰り返し(リピート)フラグのゲット
@@ -144,6 +78,9 @@ namespace SonikAudioData
 
 		//Unique IDの取得(マップに登録する時や登録したものを検索するのに使います。
 		uint64_t Get_UniqueID(void);
+
+		//データが最終的にミキシングしてほしいボリューム値を取得
+		virtual float GetMixingVolume(void) = 0;
 
 	};
 

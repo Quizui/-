@@ -326,10 +326,10 @@ namespace SonikAudio
 		for(uint32_t i = 0; i < m_samplingRate; ++i)
 		{
 			//2chなので2ポインタ進めて１回分。
-			(*_buffer) += (*(*p_wave)) * master_vol * _dis; //* L_pan; // L
+			(*_buffer) += (*(*p_wave)) * master_vol * _dis * L_pan; // L
 			++_buffer;
 			++(*p_wave);
-			(*_buffer) += (*(*p_wave)) * master_vol * _dis; //* R_pan; // R
+			(*_buffer) += (*(*p_wave)) * master_vol * _dis * R_pan; // R
 			++_buffer;
 			++(*p_wave);
 

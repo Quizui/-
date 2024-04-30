@@ -25,6 +25,7 @@ namespace SonikMathDataBox
 //Playerから発行されるタスクを定義、実装。
 namespace SonikAudioPlayerTask
 {
+
 	//音量を設定します。
 	class APTask_VolumeChange : public SonikAudioTaskInterface::PlayerTaskInterface
 	{
@@ -79,6 +80,243 @@ namespace SonikAudioPlayerTask
 		void TaskRun(void);
 
 	};
+	//X軸のみのポジションを設定します。
+	class APTask_PositionChangeX : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		double m_value;
+
+	public:
+		//コンストラクタ
+		APTask_PositionChangeX(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetValue = 0.0);
+
+		//値のセット
+		void SetValue(double SetValue);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+	//Y軸のみのポジションを設定します。
+	class APTask_PositionChangeY : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		double m_value;
+
+	public:
+		//コンストラクタ
+		APTask_PositionChangeY(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetValue = 0.0);
+
+		//値のセット
+		void SetValue(double SetValue);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+	//Z軸のみのポジションを設定します。
+	class APTask_PositionChangeZ : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		double m_value;
+
+	public:
+		//コンストラクタ
+		APTask_PositionChangeZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetValue = 0.0);
+
+		//値のセット
+		void SetValue(double SetValue);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+	//XY軸のみのポジションを設定します。
+	class APTask_PositionChangeXY : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		double m_PosX;
+		double m_PosY;
+
+	public:
+		//コンストラクタ
+		APTask_PositionChangeXY(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetPosX = 0.0, double SetPosY = 0.0);
+
+		//値のセット
+		void SetValue(double SetPosX, double SetPosY);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+	//XZ軸のみのポジションを設定します。
+	class APTask_PositionChangeXZ : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		double m_PosX;
+		double m_PosZ;
+
+	public:
+		//コンストラクタ
+		APTask_PositionChangeXZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetPosX = 0.0, double SetPosZ = 0.0);
+
+		//値のセット
+		void SetValue(double SetPosX, double SetPosZ);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+	//YZ軸のみのポジションを設定します。
+	class APTask_PositionChangeYZ : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		double m_PosY;
+		double m_PosZ;
+
+	public:
+		//コンストラクタ
+		APTask_PositionChangeYZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetPosY = 0.0, double SetPosZ = 0.0);
+
+		//値のセット
+		void SetValue(double SetPosY, double SetPosZ);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
+	//方向を設定します。
+	class APTask_DirectionChange : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		double m_Dirx;
+		double m_Diry;
+		double m_Dirz;
+
+	public:
+		//コンストラクタ
+		APTask_DirectionChange(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetDirx = 0.0, double SetDiry = 0.0, double SetDirz = 0.0);
+
+		//値のセット
+		void SetValue(double SetDirx, double SetDiry, double SetDirz);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
+	//X軸の方向を設定します。
+	class APTask_DirectionChangeX : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		double m_value;
+
+	public:
+		//コンストラクタ
+		APTask_DirectionChangeX(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetValue = 0.0);
+
+		//値のセット
+		void SetValue(double SetValue);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
+	//Y軸の方向を設定します。
+	class APTask_DirectionChangeY : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		double m_value;
+
+	public:
+		//コンストラクタ
+		APTask_DirectionChangeY(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetValue = 0.0);
+
+		//値のセット
+		void SetValue(double SetValue);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
+	//Z軸の方向を設定します。
+	class APTask_DirectionChangeZ : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		double m_value;
+
+	public:
+		//コンストラクタ
+		APTask_DirectionChangeZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetValue = 0.0);
+
+		//値のセット
+		void SetValue(double SetValue);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
+	//XY軸の方向を設定します。
+	class APTask_DirectionChangeXY : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		double m_DirX;
+		double m_DirY;
+
+	public:
+		//コンストラクタ
+		APTask_DirectionChangeXY(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetDirX = 0.0, double SetDirY = 0.0);
+
+		//値のセット
+		void SetValue(double SetDirX, double SetDirY);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
+	//XZ軸の方向を設定します。
+	class APTask_DirectionChangeXZ : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		double m_DirX;
+		double m_DirZ;
+
+	public:
+		//コンストラクタ
+		APTask_DirectionChangeXZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetDirX = 0.0, double SetDirZ = 0.0);
+
+		//値のセット
+		void SetValue(double SetDirX, double SetDirZ);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
+	//YZ軸の方向を設定します。
+	class APTask_DirectionChangeYZ : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		double m_DirY;
+		double m_DirZ;
+
+	public:
+		//コンストラクタ
+		APTask_DirectionChangeYZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetDirY = 0.0, double SetDirZ = 0.0);
+
+		//値のセット
+		void SetValue(double SetDirY, double SetDirZ);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
 
 	//ポジションのコネクトを設定します。
 	//コネクトを解除したい場合は各引数にnullptrを指定します。
@@ -93,6 +331,253 @@ namespace SonikAudioPlayerTask
 
 		//値のセット
 		void SetValue(SonikMathDataBox::Sonik3DPoint* _3dpos_);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
+	//X軸のみのポジションのコネクトを設定します。
+	//コネクトを解除したい場合は各引数にnullptrを指定します。
+	class APTask_PositionConnectChangeX : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+
+	public:
+		//コンストラクタ
+		APTask_PositionConnectChangeX(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
+
+		//値のセット
+		void SetValue(SonikMathDataBox::Sonik3DPoint* _3dpos_);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
+	//Y軸のみのポジションのコネクトを設定します。
+	//コネクトを解除したい場合は各引数にnullptrを指定します。
+	class APTask_PositionConnectChangeY : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+
+	public:
+		//コンストラクタ
+		APTask_PositionConnectChangeY(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
+
+		//値のセット
+		void SetValue(SonikMathDataBox::Sonik3DPoint* _3dpos_);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
+	//Z軸のみのポジションのコネクトを設定します。
+	//コネクトを解除したい場合は各引数にnullptrを指定します。
+	class APTask_PositionConnectChangeZ : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+
+	public:
+		//コンストラクタ
+		APTask_PositionConnectChangeZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
+
+		//値のセット
+		void SetValue(SonikMathDataBox::Sonik3DPoint* _3dpos_);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
+	//XY軸のみのポジションのコネクトを設定します。
+	//コネクトを解除したい場合は各引数にnullptrを指定します。
+	class APTask_PositionConnectChangeXY : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+
+	public:
+		//コンストラクタ
+		APTask_PositionConnectChangeXY(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
+
+		//値のセット
+		void SetValue(SonikMathDataBox::Sonik3DPoint* _3dpos_);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
+	//XZ軸のみのポジションのコネクトを設定します。
+	//コネクトを解除したい場合は各引数にnullptrを指定します。
+	class APTask_PositionConnectChangeXZ : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+
+	public:
+		//コンストラクタ
+		APTask_PositionConnectChangeXZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
+
+		//値のセット
+		void SetValue(SonikMathDataBox::Sonik3DPoint* _3dpos_);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
+	//YZ軸のみのポジションのコネクトを設定します。
+	//コネクトを解除したい場合は各引数にnullptrを指定します。
+	class APTask_PositionConnectChangeYZ : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+
+	public:
+		//コンストラクタ
+		APTask_PositionConnectChangeYZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
+
+		//値のセット
+		void SetValue(SonikMathDataBox::Sonik3DPoint* _3dpos_);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
+	//方向のコネクトを設定します。
+	//コネクトを解除したい場合は各引数にnullptrを指定します。
+	class APTask_DirectionConnectChange : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+
+	public:
+		//コンストラクタ
+		APTask_DirectionConnectChange(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
+
+		//値のセット
+		void SetValue(SonikMathDataBox::Sonik3DPoint* _3ddir_);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
+	//X軸のみの方向のコネクトを設定します。
+	//コネクトを解除したい場合は各引数にnullptrを指定します。
+	class APTask_DirectionConnectChangeX : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+
+	public:
+		//コンストラクタ
+		APTask_DirectionConnectChangeX(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
+
+		//値のセット
+		void SetValue(SonikMathDataBox::Sonik3DPoint* _3ddir_);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
+	//Y軸のみの方向のコネクトを設定します。
+	//コネクトを解除したい場合は各引数にnullptrを指定します。
+	class APTask_DirectionConnectChangeY : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+
+	public:
+		//コンストラクタ
+		APTask_DirectionConnectChangeY(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
+
+		//値のセット
+		void SetValue(SonikMathDataBox::Sonik3DPoint* _3ddir_);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
+	//Z軸のみの方向のコネクトを設定します。
+	//コネクトを解除したい場合は各引数にnullptrを指定します。
+	class APTask_DirectionConnectChangeZ : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+
+	public:
+		//コンストラクタ
+		APTask_DirectionConnectChangeZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
+
+		//値のセット
+		void SetValue(SonikMathDataBox::Sonik3DPoint* _3ddir_);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
+	//XY軸のみの方向のコネクトを設定します。
+	//コネクトを解除したい場合は各引数にnullptrを指定します。
+	class APTask_DirectionConnectChangeXY : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+
+	public:
+		//コンストラクタ
+		APTask_DirectionConnectChangeXY(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
+
+		//値のセット
+		void SetValue(SonikMathDataBox::Sonik3DPoint* _3ddir_);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
+	//XZ軸のみの方向のコネクトを設定します。
+	//コネクトを解除したい場合は各引数にnullptrを指定します。
+	class APTask_DirectionConnectChangeXZ : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+
+	public:
+		//コンストラクタ
+		APTask_DirectionConnectChangeXZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
+
+		//値のセット
+		void SetValue(SonikMathDataBox::Sonik3DPoint* _3ddir_);
+
+		//タスクRUN
+		void TaskRun(void);
+
+	};
+
+	//YZ軸のみの方向のコネクトを設定します。
+	//コネクトを解除したい場合は各引数にnullptrを指定します。
+	class APTask_DirectionConnectChangeYZ : public SonikAudioTaskInterface::PlayerTaskInterface
+	{
+	private:
+		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+
+	public:
+		//コンストラクタ
+		APTask_DirectionConnectChangeYZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
+
+		//値のセット
+		void SetValue(SonikMathDataBox::Sonik3DPoint* _3ddir_);
 
 		//タスクRUN
 		void TaskRun(void);

@@ -1,4 +1,4 @@
-01:31:23 **** ビルド of configuration Debug for project SAudioPlatForm_OpenALSoft ****
+02:01:21 **** ビルド of configuration Debug for project SAudioPlatForm_OpenALSoft ****
 mingw32-make all 
 Building file: ../OpenALSource/open_al_interface.cpp
 Invoking: GCC C++ Compiler

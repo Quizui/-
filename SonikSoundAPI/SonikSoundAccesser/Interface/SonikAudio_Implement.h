@@ -79,8 +79,10 @@ namespace SonikAudio
 		bool LoadAudio(const char* AudioFilePath, uint32_t SetAudioID);
 		//オーディオリスナの取得
 		void GetListener(SAudioListener& _out_get_);
-		//オーディオプレイヤー(コントローラ)作成
-		bool CreateAudioPlayer(uint32_t AudioID, SonikAudio::SAudioPlayer& GetPlayer);
+		//BGMとしてオーディオプレイヤーを作成します。
+		bool Create_BGM_AudioPlayer(uint32_t AudioID, SonikAudio::SAudioPlayer& GetPlayer);
+		//SEとしてオーディオプレイヤーを作成します。
+		bool Create_SE_AudioPlayer(uint32_t AudioID, SonikAudio::SAudioPlayer& GetPlayer);
 		//ハードウェア情報を取得します。
 		bool GetAudioHardwareInfo(void);
 	};

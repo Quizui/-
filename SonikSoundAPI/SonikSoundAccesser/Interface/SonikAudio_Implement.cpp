@@ -16,7 +16,8 @@
 #include "../Task/AudioPlayerTaskManager.h"
 #include "../Mixer/SonikAudio_Mixer.h"
 #include "../Player/SonikAudioPlayer.h"
-#include "../Player/SonikAudioPlayer_ControlData.h"
+#include "../Player/SonikAudioPlayer_CD_BGM.h"
+#include "../Player/SonikAudioPlayer_CD_SE.h"
 #include "../Listener/SonikAudioListener.h"
 
 
@@ -189,6 +190,41 @@ namespace SonikAudio
 		GetPlayer.ResetPointer(l_player);
 
 		return true;
+	};
+
+	//BGMとしてオーディオプレイヤーを作成します。
+	bool SonikAudio_Implement::Create_BGM_AudioPlayer(uint32_t AudioID, SonikAudio::SAudioPlayer& GetPlayer)
+	{
+		SonikAudio::SonikAudioPlayer* l_player = nullptr;
+		SonikAudioData::SonikAudioControlDataSetForBGM* l_apdata = nullptr;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> apdata_smtptr;
+		decltype(audiomap)::iterator _it;
+
+
+		_it = audiomap.find(AudioID);
+		if( _it == audiomap.end() )
+		{
+			//ID無し。
+			return false;
+		};
+
+		l_apdata = new(std::nothrow) SonikAudioData::SonikAudioControlDataSetForBGM(_it->second);
+		if( l_apdata == nullptr )
+		{
+			return false;
+		};
+
+		apdata_smtptr.ResetPointer(l_apdata);
+
+
+
+
+	};
+
+	//SEとしてオーディオプレイヤーを作成します。
+	bool SonikAudio_Implement::Create_SE_AudioPlayer(uint32_t AudioID, SonikAudio::SAudioPlayer& GetPlayer)
+	{
+
 	};
 
 	//ハードウェア情報を取得します。

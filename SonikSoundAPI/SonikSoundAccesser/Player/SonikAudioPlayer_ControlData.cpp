@@ -113,18 +113,18 @@ namespace SonikAudioData
 	//ポジションのポインタ先をセット。
 	//別のポジションへのポインタとつなぎ、位置を一緒に動かしたいときに使います。
 	//内部の個別ポジションに戻したい場合はnullptrを指定します。
-	void SonikAudioControlData::SetPositonConnectX(SonikMathDataBox::Sonik3DPoint* _3dpos_)
+	void SonikAudioControlData::SetPositionConnectX(SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	{
 		m_3dpos->LinkPointX(_3dpos_);
 	};
 
-	void SonikAudioControlData::SetPositonConnectY(SonikMathDataBox::Sonik3DPoint* _3dpos_)
+	void SonikAudioControlData::SetPositionConnectY(SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	{
 		m_3dpos->LinkPointY(_3dpos_);
 
 	};
 
-	void SonikAudioControlData::SetPositonConnectZ(SonikMathDataBox::Sonik3DPoint* _3dpos_)
+	void SonikAudioControlData::SetPositionConnectZ(SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	{
 		m_3dpos->LinkPointZ(_3dpos_);
 	};
@@ -134,15 +134,15 @@ namespace SonikAudioData
 		m_3dpos->LinkPointAll(_3dpos_);
 	};
 
-	void SonikAudioControlData::SetPositonConnectXY(SonikMathDataBox::Sonik3DPoint* _3dpos_)
+	void SonikAudioControlData::SetPositionConnectXY(SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	{
 		m_3dpos->LinkPointXY(_3dpos_);
 	};
-	void SonikAudioControlData::SetPositonConnectXZ(SonikMathDataBox::Sonik3DPoint* _3dpos_)
+	void SonikAudioControlData::SetPositionConnectXZ(SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	{
 		m_3dpos->LinkPointXZ(_3dpos_);
 	};
-	void SonikAudioControlData::SetPositonConnectYZ(SonikMathDataBox::Sonik3DPoint* _3dpos_)
+	void SonikAudioControlData::SetPositionConnectYZ(SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	{
 		m_3dpos->LinkPointYZ(_3dpos_);
 	};

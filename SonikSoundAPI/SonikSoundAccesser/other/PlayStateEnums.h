@@ -18,9 +18,13 @@ namespace SonikAudioEnum
 		PS_Stop = 0x01,
 		PS_SUSPEND = 0x02,
 
-
 	};
 
+	enum class PlayEffectID
+	{
+		EF_DISTANCE = 1, //Distanceによる減衰を適用します。0x01(1bit目)
+		EF_PANNING	= 2, //Panningによる減衰を適用します。 0x02(2bit目)
+	};
 
 }
 
