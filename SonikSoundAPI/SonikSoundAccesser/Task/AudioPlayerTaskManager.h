@@ -19,7 +19,7 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		//タスクを受け取るQueue
-		SonikLib::SonikAtomicQueue<SonikAudioTaskInterface::PlayerTaskInterface*>* mp_TaskQueue;
+		SonikLib::Container::SonikAtomicQueue<SonikAudioTaskInterface::PlayerTaskInterface*>* mp_TaskQueue;
 		//タスクを実行するThread
 		SonikLib::WorkThreadEx* mp_TaskThread;
 

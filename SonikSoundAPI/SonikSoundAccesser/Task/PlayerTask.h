@@ -12,9 +12,10 @@
 #include "../PlayStateEnums.h"
 
 //前方宣言
-namespace SonikAudioDataInterface
+namespace SonikAudioData
 {
-	class SADInterface_PlayerSide;
+	class SonikAudioControlData;
+	class SonikAudioControlDataSetForSE;
 };
 
 namespace SonikMathDataBox
@@ -31,10 +32,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		float m_Volume; //ボリューム
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_VolumeChange(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, float VolumeArg = 1.0f);
+		APTask_VolumeChange(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> SetData, float VolumeArg = 1.0f);
 
 		//値のセット
 		void SetValue(float VolumeArg);
@@ -48,10 +50,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		SonikAudioEnum::PlayStateID m_State;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_StatusChange(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikAudioEnum::PlayStateID SetValue = SonikAudioEnum::PlayStateID::PS_Stop);
+		APTask_StatusChange(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> SetData, SonikAudioEnum::PlayStateID SetValue = SonikAudioEnum::PlayStateID::PS_Stop);
 
 		//値のセット
 		void SetValue(SonikAudioEnum::PlayStateID SetValue);
@@ -69,9 +72,11 @@ namespace SonikAudioPlayerTask
 		double m_Posy;
 		double m_Posz;
 
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
+
 	public:
 		//コンストラクタ
-		APTask_PositionChange(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetPosx = 0.0, double SetPosy = 0.0, double SetPosz = 0.0);
+		APTask_PositionChange(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetPosx = 0.0, double SetPosy = 0.0, double SetPosz = 0.0);
 
 		//値のセット
 		void SetValue(double SetPosx, double SetPosy, double SetPosz);
@@ -85,10 +90,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		double m_value;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_PositionChangeX(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetValue = 0.0);
+		APTask_PositionChangeX(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetValue = 0.0);
 
 		//値のセット
 		void SetValue(double SetValue);
@@ -102,10 +108,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		double m_value;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_PositionChangeY(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetValue = 0.0);
+		APTask_PositionChangeY(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetValue = 0.0);
 
 		//値のセット
 		void SetValue(double SetValue);
@@ -119,10 +126,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		double m_value;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_PositionChangeZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetValue = 0.0);
+		APTask_PositionChangeZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetValue = 0.0);
 
 		//値のセット
 		void SetValue(double SetValue);
@@ -137,10 +145,11 @@ namespace SonikAudioPlayerTask
 	private:
 		double m_PosX;
 		double m_PosY;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_PositionChangeXY(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetPosX = 0.0, double SetPosY = 0.0);
+		APTask_PositionChangeXY(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetPosX = 0.0, double SetPosY = 0.0);
 
 		//値のセット
 		void SetValue(double SetPosX, double SetPosY);
@@ -155,10 +164,11 @@ namespace SonikAudioPlayerTask
 	private:
 		double m_PosX;
 		double m_PosZ;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_PositionChangeXZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetPosX = 0.0, double SetPosZ = 0.0);
+		APTask_PositionChangeXZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetPosX = 0.0, double SetPosZ = 0.0);
 
 		//値のセット
 		void SetValue(double SetPosX, double SetPosZ);
@@ -173,10 +183,11 @@ namespace SonikAudioPlayerTask
 	private:
 		double m_PosY;
 		double m_PosZ;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_PositionChangeYZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetPosY = 0.0, double SetPosZ = 0.0);
+		APTask_PositionChangeYZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetPosY = 0.0, double SetPosZ = 0.0);
 
 		//値のセット
 		void SetValue(double SetPosY, double SetPosZ);
@@ -193,10 +204,11 @@ namespace SonikAudioPlayerTask
 		double m_Dirx;
 		double m_Diry;
 		double m_Dirz;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_DirectionChange(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetDirx = 0.0, double SetDiry = 0.0, double SetDirz = 0.0);
+		APTask_DirectionChange(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetDirx = 0.0, double SetDiry = 0.0, double SetDirz = 0.0);
 
 		//値のセット
 		void SetValue(double SetDirx, double SetDiry, double SetDirz);
@@ -211,10 +223,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		double m_value;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_DirectionChangeX(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetValue = 0.0);
+		APTask_DirectionChangeX(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetValue = 0.0);
 
 		//値のセット
 		void SetValue(double SetValue);
@@ -229,10 +242,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		double m_value;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_DirectionChangeY(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetValue = 0.0);
+		APTask_DirectionChangeY(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetValue = 0.0);
 
 		//値のセット
 		void SetValue(double SetValue);
@@ -247,10 +261,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		double m_value;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_DirectionChangeZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetValue = 0.0);
+		APTask_DirectionChangeZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetValue = 0.0);
 
 		//値のセット
 		void SetValue(double SetValue);
@@ -266,10 +281,11 @@ namespace SonikAudioPlayerTask
 	private:
 		double m_DirX;
 		double m_DirY;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_DirectionChangeXY(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetDirX = 0.0, double SetDirY = 0.0);
+		APTask_DirectionChangeXY(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetDirX = 0.0, double SetDirY = 0.0);
 
 		//値のセット
 		void SetValue(double SetDirX, double SetDirY);
@@ -285,10 +301,11 @@ namespace SonikAudioPlayerTask
 	private:
 		double m_DirX;
 		double m_DirZ;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_DirectionChangeXZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetDirX = 0.0, double SetDirZ = 0.0);
+		APTask_DirectionChangeXZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetDirX = 0.0, double SetDirZ = 0.0);
 
 		//値のセット
 		void SetValue(double SetDirX, double SetDirZ);
@@ -304,10 +321,11 @@ namespace SonikAudioPlayerTask
 	private:
 		double m_DirY;
 		double m_DirZ;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_DirectionChangeYZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, double SetDirY = 0.0, double SetDirZ = 0.0);
+		APTask_DirectionChangeYZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetDirY = 0.0, double SetDirZ = 0.0);
 
 		//値のセット
 		void SetValue(double SetDirY, double SetDirZ);
@@ -324,10 +342,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_PositionConnectChange(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
+		APTask_PositionConnectChange(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
 
 		//値のセット
 		void SetValue(SonikMathDataBox::Sonik3DPoint* _3dpos_);
@@ -343,10 +362,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_PositionConnectChangeX(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
+		APTask_PositionConnectChangeX(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
 
 		//値のセット
 		void SetValue(SonikMathDataBox::Sonik3DPoint* _3dpos_);
@@ -362,10 +382,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_PositionConnectChangeY(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
+		APTask_PositionConnectChangeY(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
 
 		//値のセット
 		void SetValue(SonikMathDataBox::Sonik3DPoint* _3dpos_);
@@ -381,10 +402,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_PositionConnectChangeZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
+		APTask_PositionConnectChangeZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
 
 		//値のセット
 		void SetValue(SonikMathDataBox::Sonik3DPoint* _3dpos_);
@@ -400,10 +422,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_PositionConnectChangeXY(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
+		APTask_PositionConnectChangeXY(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
 
 		//値のセット
 		void SetValue(SonikMathDataBox::Sonik3DPoint* _3dpos_);
@@ -419,10 +442,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_PositionConnectChangeXZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
+		APTask_PositionConnectChangeXZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
 
 		//値のセット
 		void SetValue(SonikMathDataBox::Sonik3DPoint* _3dpos_);
@@ -438,10 +462,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_PositionConnectChangeYZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
+		APTask_PositionConnectChangeYZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_ = nullptr);
 
 		//値のセット
 		void SetValue(SonikMathDataBox::Sonik3DPoint* _3dpos_);
@@ -457,10 +482,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_DirectionConnectChange(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
+		APTask_DirectionConnectChange(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
 
 		//値のセット
 		void SetValue(SonikMathDataBox::Sonik3DPoint* _3ddir_);
@@ -476,10 +502,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_DirectionConnectChangeX(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
+		APTask_DirectionConnectChangeX(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
 
 		//値のセット
 		void SetValue(SonikMathDataBox::Sonik3DPoint* _3ddir_);
@@ -495,10 +522,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_DirectionConnectChangeY(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
+		APTask_DirectionConnectChangeY(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
 
 		//値のセット
 		void SetValue(SonikMathDataBox::Sonik3DPoint* _3ddir_);
@@ -514,10 +542,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_DirectionConnectChangeZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
+		APTask_DirectionConnectChangeZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
 
 		//値のセット
 		void SetValue(SonikMathDataBox::Sonik3DPoint* _3ddir_);
@@ -533,10 +562,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_DirectionConnectChangeXY(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
+		APTask_DirectionConnectChangeXY(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
 
 		//値のセット
 		void SetValue(SonikMathDataBox::Sonik3DPoint* _3ddir_);
@@ -552,10 +582,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_DirectionConnectChangeXZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
+		APTask_DirectionConnectChangeXZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
 
 		//値のセット
 		void SetValue(SonikMathDataBox::Sonik3DPoint* _3ddir_);
@@ -571,10 +602,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		SonikMathDataBox::Sonik3DPoint* mp_ConnectPoint;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_DirectionConnectChangeYZ(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
+		APTask_DirectionConnectChangeYZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_ = nullptr);
 
 		//値のセット
 		void SetValue(SonikMathDataBox::Sonik3DPoint* _3ddir_);
@@ -589,10 +621,11 @@ namespace SonikAudioPlayerTask
 	{
 	private:
 		bool m_repeat;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> ControlData;
 
 	public:
 		//コンストラクタ
-		APTask_RepeatFlgChange(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, bool SetValue);
+		APTask_RepeatFlgChange(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> SetData, bool SetValue);
 
 		//値のセット
 		void SetValue(bool SetValue);

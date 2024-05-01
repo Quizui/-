@@ -8,10 +8,14 @@
 #ifndef LISTENER_SONIKAUDIOLISTENER_H_
 #define LISTENER_SONIKAUDIOLISTENER_H_
 
+#include "../../../SmartPointer/SonikSmartPointer.hpp"
+
+//前方宣言==================================
 namespace SonikMathDataBox
 {
 	class Sonik3DPoint;
 };
+//=========================================
 
 namespace SonikAudio
 {
@@ -25,6 +29,15 @@ namespace SonikAudio
 		double listen_volume; //聞こえるボリューム
 		SonikMathDataBox::Sonik3DPoint* m_3dpos;	//3D座標
 		SonikMathDataBox::Sonik3DPoint* m_3ddir;  //3D方向
+
+		//マスターボリューム/カテゴリボリューム
+		//全体マスターボリューム
+		SonikLib::SharedSmtPtr<double> m_Vol_Master;
+		//カテゴリボリューム：SE 専用ボリューム
+		SonikLib::SharedSmtPtr<double> m_Vol_SE;
+		//カテゴリボリューム：BGM 専用ボリューム
+		SonikLib::SharedSmtPtr<double> m_Vol_BGM;
+
 	public:
 		//コンストラクタ
 		SonikAudioListener(void);
@@ -35,9 +48,19 @@ namespace SonikAudio
 		void SetMaxListenDistance(double _setmaxdistance_);
 		double GetMaxListernDistance(void);
 
-		//聞こえる音量(マスターボリューム)のセットゲット
-		void SetListenVolume(double setvolume);
-		double GetListenVolume(void);
+		//全体のマスターボリュームのセットゲット
+		void SetMasterVolume(double _setvolume_);
+		double GetMasterVolume(void);
+		const SonikLib::SharedSmtPtr<double> GetMasterVolumeRef(void);
+		//カテゴリボリューム SEのセットゲット
+		void SetCategoryVolumeSE(double _setvolume_);
+		double GetCategoryVolumeSE(void);
+		const SonikLib::SharedSmtPtr<double> GetCategoryVolumeSERef(void);
+		//カテゴリボリューム SEのセットゲット
+		void SetCategoryVolumeBGM(double _setvolume_);
+		double GetCategoryVolumeBGM(void);
+		const SonikLib::SharedSmtPtr<double> GetCategoryBGMVolumeRef(void);
+
 
 		//ポジションのセット
 		void SetPosition(double x, double y, double z);

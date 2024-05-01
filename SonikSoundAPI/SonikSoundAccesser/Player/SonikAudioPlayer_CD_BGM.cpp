@@ -10,9 +10,9 @@
 namespace SonikAudioData
 {
 	//コンストラクタ
-	SonikAudioControlDataSetForBGM::SonikAudioControlDataSetForBGM(SonikLib::SharedSmtPtr<float> _bgm_mastervolume_, SonikAudio::SAudioFormat SetAudioPointer)
+	SonikAudioControlDataSetForBGM::SonikAudioControlDataSetForBGM(const SonikLib::SharedSmtPtr<double> _bgm_mastervolume_, SonikAudio::SAudioFormat SetAudioPointer)
 	:SonikAudioControlData(SetAudioPointer)
-	,m_mastervolume_bgm(_mastervolue_)
+	,m_CategoryBGMVol(_bgm_mastervolume_)
 	{
 		//no process;
 	};

@@ -1,21 +1,72 @@
-02:01:21 **** ƒrƒ‹ƒh of configuration Debug for project SAudioPlatForm_OpenALSoft ****
-mingw32-make all 
-Building file: ../OpenALSource/open_al_interface.cpp
-Invoking: GCC C++ Compiler
-clang++ -std=c++17 -D_DEBUG -D__SONIK_x86_64__ -D_WIN64 -DHAVE_FSEEKO -DFLAC__NO_DLL -I"D:\MyLibrary\include\Audio\SoundSystem" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"OpenALSource/open_al_interface.d" -MT"OpenALSource/open_al_interface.o" -o "OpenALSource/open_al_interface.o" "../OpenALSource/open_al_interface.cpp"
-../OpenALSource/open_al_interface.cpp:153:11: warning: variable 'err_' set but not used [-Wunused-but-set-variable]
-  153 |                 ALCenum err_;
-      |                         ^
+18:01:33 **** Rebuild of configuration Debug_x64 for project SonikSoundAccesser ****
+Info: Internal Builder is used for build
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Player" -O0 -g3 -Wall -c -fmessage-length=0 -o "Player\\SonikAudioPlayer_ControlData.o" "..\\Player\\SonikAudioPlayer_ControlData.cpp" 
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
 1 warning generated.
-Finished building: ../OpenALSource/open_al_interface.cpp
- 
-Building file: ../DllFunction/DllMain.cpp
-Invoking: GCC C++ Compiler
-clang++ -std=c++17 -D_DEBUG -D__SONIK_x86_64__ -D_WIN64 -DHAVE_FSEEKO -DFLAC__NO_DLL -I"D:\MyLibrary\include\Audio\SoundSystem" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"DllFunction/DllMain.d" -MT"DllFunction/DllMain.o" -o "DllFunction/DllMain.o" "../DllFunction/DllMain.cpp"
-Finished building: ../DllFunction/DllMain.cpp
- 
-Building target: PlatFormSound_OpenAL.dll
-Invoking: MinGW C++ Linker
-g++ -L"D:\MyLibrary\lib\x64\Debug" -shared -o "PlatFormSound_OpenAL.dll" ./OpenALSource/open_al_interface.o  ./DllFunction/DllMain.o    -lDx64_SonikSoundAccesser -l_Dx64_SonikLibraryAPI -lfftw3
-Finished building target: PlatFormSound_OpenAL.dll
- 
+clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Task" -O0 -g3 -Wall -c -fmessage-length=0 -o "Task\\PlayerTask.o" "..\\Task\\PlayerTask.cpp" 
+In file included from <built-in>:469:
+<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
+    4 | #define __cplusplus 202002L
+      |         ^
+..\Task\PlayerTask.cpp:79:16: error: no member named 'SetPositionAll' in 'SonikAudioData::SonikAudioControlData'
+   79 |                 ControlData->SetPositionAll(m_Posx, m_Posy, m_Posz);
+      |                 ~~~~~~~~~~~~~^
+..\Task\PlayerTask.cpp:101:16: error: no member named 'SetPositionX' in 'SonikAudioData::SonikAudioControlData'
+  101 |                 ControlData->SetPositionX(m_value);
+      |                 ~~~~~~~~~~~~~^
+..\Task\PlayerTask.cpp:123:16: error: no member named 'SetPositionY' in 'SonikAudioData::SonikAudioControlData'
+  123 |                 ControlData->SetPositionY(m_value);
+      |                 ~~~~~~~~~~~~~^
+..\Task\PlayerTask.cpp:145:16: error: no member named 'SetPositionZ' in 'SonikAudioData::SonikAudioControlData'
+  145 |                 ControlData->SetPositionZ(m_value);
+      |                 ~~~~~~~~~~~~~^
+..\Task\PlayerTask.cpp:169:16: error: no member named 'SetPositionXY' in 'SonikAudioData::SonikAudioControlData'
+  169 |                 ControlData->SetPositionXY(m_PosX, m_PosY);
+      |                 ~~~~~~~~~~~~~^
+..\Task\PlayerTask.cpp:193:16: error: no member named 'SetPositionXZ' in 'SonikAudioData::SonikAudioControlData'
+  193 |                 ControlData->SetPositionXZ(m_PosX, m_PosZ);
+      |                 ~~~~~~~~~~~~~^
+..\Task\PlayerTask.cpp:217:16: error: no member named 'SetPositionYZ' in 'SonikAudioData::SonikAudioControlData'
+  217 |                 ControlData->SetPositionYZ(m_PosY, m_PosZ);
+      |                 ~~~~~~~~~~~~~^
+..\Task\PlayerTask.cpp:243:16: error: no member named 'SetDirectionAll' in 'SonikAudioData::SonikAudioControlData'
+  243 |                 ControlData->SetDirectionAll(m_Dirx, m_Diry, m_Dirz);
+      |                 ~~~~~~~~~~~~~^
+..\Task\PlayerTask.cpp:264:16: error: no member named 'SetDirectionX' in 'SonikAudioData::SonikAudioControlData'
+  264 |                 ControlData->SetDirectionX(m_value);
+      |                 ~~~~~~~~~~~~~^
+..\Task\PlayerTask.cpp:285:16: error: no member named 'SetDirectionY' in 'SonikAudioData::SonikAudioControlData'
+  285 |                 ControlData->SetDirectionY(m_value);
+      |                 ~~~~~~~~~~~~~^
+..\Task\PlayerTask.cpp:306:16: error: no member named 'SetDirectionZ' in 'SonikAudioData::SonikAudioControlData'
+  306 |                 ControlData->SetDirectionZ(m_value);
+      |                 ~~~~~~~~~~~~~^
+..\Task\PlayerTask.cpp:329:16: error: no member named 'SetDirectionXY' in 'SonikAudioData::SonikAudioControlData'
+  329 |                 ControlData->SetDirectionXY(m_DirX, m_DirY);
+      |                 ~~~~~~~~~~~~~^
+..\Task\PlayerTask.cpp:352:16: error: no member named 'SetDirectionXZ' in 'SonikAudioData::SonikAudioControlData'
+  352 |                 ControlData->SetDirectionXZ(m_DirX, m_DirZ);
+      |                 ~~~~~~~~~~~~~^
+..\Task\PlayerTask.cpp:375:16: error: no member named 'SetDirectionYZ' in 'SonikAudioData::SonikAudioControlData'
+  375 |                 ControlData->SetDirectionYZ(m_DirY, m_DirZ);
+      |                 ~~~~~~~~~~~~~^
+..\Task\PlayerTask.cpp:397:16: error: no member named 'SetPositionConnectAll' in 'SonikAudioData::SonikAudioControlData'
+  397 |                 ControlData->SetPositionConnectAll(mp_ConnectPoint);
+      |                 ~~~~~~~~~~~~~^
+..\Task\PlayerTask.cpp:419:16: error: no member named 'SetPositionConnectX' in 'SonikAudioData::SonikAudioControlData'
+  419 |                 ControlData->SetPositionConnectX(mp_ConnectPoint);
+      |                 ~~~~~~~~~~~~~^
+..\Task\PlayerTask.cpp:441:16: error: no member named 'SetPositionConnectY' in 'SonikAudioData::SonikAudioControlData'
+  441 |                 ControlData->SetPositionConnectY(mp_ConnectPoint);
+      |                 ~~~~~~~~~~~~~^
+..\Task\PlayerTask.cpp:463:16: error: no member named 'SetPositionConnectZ' in 'SonikAudioData::SonikAudioControlData'
+  463 |                 ControlData->SetPositionConnectZ(mp_ConnectPoint);
+      |                 ~~~~~~~~~~~~~^
+..\Task\PlayerTask.cpp:485:16: error: no member named 'SetPositionConnectXY' in 'SonikAudioData::SonikAudioControlData'
+  485 |                 ControlData->SetPositionConnectXY(mp_ConnectPoint);
+      |                 ~~~~~~~~~~~~~^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+1 warning and 20 errors generated.

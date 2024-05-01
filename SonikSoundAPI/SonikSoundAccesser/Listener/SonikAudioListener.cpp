@@ -7,6 +7,7 @@
 
 #include "SonikAudioListener.h"
 #include "../../../MathBit/SonikMathDistance.h"
+#include "../../../SmartPointer/SonikSmartPointer.hpp"
 
 #include <new>
 
@@ -25,9 +26,34 @@ namespace SonikAudio
 
 			m_3dpos = new SonikMathDataBox::Sonik3DPoint;
 			m_3ddir = new SonikMathDataBox::Sonik3DPoint(0.0, 0.0, 1.0);
+
+			if(!m_Vol_Master.ResetPointer(new double))
+			{
+				throw std::bad_alloc();
+			};
+
+			if(!m_Vol_SE.ResetPointer(new double))
+			{
+				throw std::bad_alloc();
+			};
+
+			if(!m_Vol_BGM.ResetPointer(new double))
+			{
+				throw std::bad_alloc();
+			};
+
+
+			(*m_Vol_Master) = 1.0;
+			(*m_Vol_SE) = 1.0;
+
 		}catch(std::bad_alloc&)
 		{
 			if(m_3dpos != nullptr)
+			{
+				delete m_3dpos;
+			};
+
+			if(m_3ddir != nullptr)
 			{
 				delete m_3dpos;
 			};
@@ -62,23 +88,71 @@ namespace SonikAudio
 		return max_listen_distance;
 	};
 
-	//聞こえる音量(マスターボリューム)のセットゲット
-	void SonikAudioListener::SetListenVolume(double setvolume)
+	//全体のマスターボリュームのセットゲット
+	void SonikAudioListener::SetMasterVolume(double _setvolume_)
 	{
-		if(setvolume > 1.0)
+		if(_setvolume_ > 1.0)
 		{
-			listen_volume = 1.0;
+			(*m_Vol_Master) = 1.0;
 			return;
 		};
 
-		listen_volume = setvolume;
+		(*m_Vol_Master) = _setvolume_;
+
 		return;
 	};
-	double SonikAudioListener::GetListenVolume(void)
+	double SonikAudioListener::GetMasterVolume(void)
 	{
-		return listen_volume;
+		return (*m_Vol_Master);
+	};
+	const SonikLib::SharedSmtPtr<double> SonikAudioListener::GetMasterVolumeRef(void)
+	{
+		return m_Vol_Master;
 	};
 
+	//カテゴリボリューム SEのセットゲット
+	void SonikAudioListener::SetCategoryVolumeSE(double _setvolume_)
+	{
+		if(_setvolume_ > 1.0)
+		{
+			(*m_Vol_SE) = 1.0;
+			return;
+		};
+
+		(*m_Vol_SE) = _setvolume_;
+
+		return;
+	};
+	double SonikAudioListener::GetCategoryVolumeSE(void)
+	{
+		return (*m_Vol_SE);
+	};
+	const SonikLib::SharedSmtPtr<double> SonikAudioListener::GetCategoryVolumeSERef(void)
+	{
+		return m_Vol_SE;
+	};
+
+	//カテゴリボリューム SEのセットゲット
+	void SonikAudioListener::SetCategoryVolumeBGM(double _setvolume_)
+	{
+		if(_setvolume_ > 1.0)
+		{
+			(*m_Vol_BGM) = 1.0;
+			return;
+		};
+
+		(*m_Vol_BGM) = _setvolume_;
+
+		return;
+	};
+	double SonikAudioListener::GetCategoryVolumeBGM(void)
+	{
+		return (*m_Vol_BGM);
+	};
+	const SonikLib::SharedSmtPtr<double> SonikAudioListener::GetCategoryBGMVolumeRef(void)
+	{
+		return m_Vol_BGM;
+	};
 
 	//ポジションのセット
 	void SonikAudioListener::SetPosition(double x, double y, double z)

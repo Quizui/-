@@ -17,7 +17,7 @@ namespace SonikAudioData
 	class SonikAudioControlDataSetForBGM : public SonikAudioData::SonikAudioControlData
 	{
 	private:
-		SonikLib::SharedSmtPtr<float> m_mastervolume_bgm;
+		const SonikLib::SharedSmtPtr<double> m_CategoryBGMVol;
 
 	private:
 		//コピー禁止
@@ -26,7 +26,7 @@ namespace SonikAudioData
 
 	public:
 		//コンストラクタ
-		SonikAudioControlDataSetForBGM(SonikLib::SharedSmtPtr<float> _bgm_mastervolume_, SonikAudio::SAudioFormat SetAudioPointer);
+		SonikAudioControlDataSetForBGM(const SonikLib::SharedSmtPtr<double> _bgm_mastervolume_, SonikAudio::SAudioFormat SetAudioPointer);
 		//デストラクタ
 		~SonikAudioControlDataSetForBGM(void);
 

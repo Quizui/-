@@ -59,7 +59,7 @@ namespace SonikAudio
 		if( !_interface.IsNullptr() ) //!=演算子オーバーライドまだしてないので否定演算子 ! で代用。
 		{
 			RefGetInterface = _interface;
-			_lock.Unlock();
+			_lock.unlock();
 			return true;
 		}
 
@@ -70,9 +70,9 @@ namespace SonikAudio
 		//Dllロード
 		SonikLib::SDllHandle l_handle;
 		SonikLib::SonikDllHandleManager l_dllmng;
-		if( !l_dllmng.DllGetLoad(dllstr.c_str(), l_handle) )
+		if( !l_dllmng.DllGetLoad(dllstr.str_c(), l_handle) )
 		{
-			_lock.Unlock();
+			_lock.unlock();
 			return false;
 		};
 
@@ -83,7 +83,7 @@ namespace SonikAudio
 		if( FuncPointer == 0 )
 		{
 			l_handle.ResetPointer(nullptr);
-			_lock.Unlock();
+			_lock.unlock();
 			return false;
 		};
 
@@ -92,7 +92,7 @@ namespace SonikAudio
 		if( !(*reinterpret_cast<bool(*)(char*,unsigned long,unsigned long,unsigned long,SonikAudioPlatForm::SonikPlatformAudioInterface*&)>(FuncPointer))(DllPath, SetBit, SetSampling, SetCh, l_pltInterfacePointer) )
 		{
 			l_handle.ResetPointer(nullptr);
-			_lock.Unlock();
+			_lock.unlock();
 			return false;
 		};
 
@@ -104,7 +104,7 @@ namespace SonikAudio
 		if( l_interface == nullptr )
 		{
 			l_handle.ResetPointer(nullptr);
-			_lock.Unlock();
+			_lock.unlock();
 			return false;
 		};
 
@@ -120,14 +120,14 @@ namespace SonikAudio
 		{
 			delete l_interface;
 			l_handle.ResetPointer(nullptr);
-			_lock.Unlock();
+			_lock.unlock();
 			return false;
 		};
 
 
 		_interface.ResetPointer(l_interface);
 		RefGetInterface = _interface;
-		_lock.Unlock();
+		_lock.unlock();
 
 		return true;
 	};
@@ -139,7 +139,7 @@ namespace SonikAudio
 		_interface.ResetPointer(nullptr);
 //		_interface = nullptr;
 
-		_lock.Unlock();
+		_lock.unlock();
 
 	};
 

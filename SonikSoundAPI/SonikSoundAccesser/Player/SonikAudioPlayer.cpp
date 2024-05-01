@@ -17,7 +17,7 @@
 namespace SonikAudio
 {
 	//コンストラクタ
-	SonikAudioPlayer::SonikAudioPlayer(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetAudioData, SonikLib::SharedSmtPtr<SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface> SetTskMng)
+	SonikAudioPlayer::SonikAudioPlayer(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> SetAudioData, SonikLib::SharedSmtPtr<SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface> SetTskMng)
 	:mp_AudioData(SetAudioData)
 	,mp_TskMng(SetTskMng)
 	{

@@ -137,61 +137,6 @@ namespace SonikAudio
 		_out_get_ = mp_Listener;
 	};
 
-	//オーディオプレイヤー(コントローラ)作成
-	bool SonikAudio_Implement::CreateAudioPlayer(uint32_t AudioID, SonikAudio::SAudioPlayer& GetPlayer)
-	{
-		SonikAudio::SonikAudioPlayer* l_player = nullptr;
-		SonikAudioData::SonikAudioControlData* l_apdata = nullptr;
-		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> apdata_smtptr;
-		decltype(audiomap)::iterator _it;
-
-
-		_it = audiomap.find(AudioID);
-		if( _it == audiomap.end() )
-		{
-			//ID無し。
-			return false;
-		};
-
-		l_apdata = new(std::nothrow) SonikAudioData::SonikAudioControlData(_it->second);
-		if( l_apdata == nullptr )
-		{
-			return false;
-		};
-
-		apdata_smtptr.ResetPointer(l_apdata);
-
-		SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> _player_arg_f;
-		SonikLib::SharedSmtPtr<SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface> _player_arg_s;
-
-		SonikLib::SharedCast_Dynamic<SonikAudioData::SonikAudioControlData, SonikAudioDataInterface::SADInterface_PlayerSide>(apdata_smtptr, _player_arg_f);
-		SonikLib::SharedCast_Dynamic<SonikAudioPlayerTask::SonikAudioPlayerTaskManager, SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface>(m_TaskMng, _player_arg_s);
-
-		l_player = new(std::nothrow) SonikAudio::SonikAudioPlayer(_player_arg_f, _player_arg_s);
-		if( l_player == nullptr )
-		{
-			//l_apdataはスマートポインタに格納されているためdelete省略。
-
-			return false;
-		}
-
-		//ControlDataを登録
-		if( !ap_Data.insert( std::map<uint64_t, SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>::value_type(apdata_smtptr->Get_UniqueID(), apdata_smtptr) ).second )
-		{
-			//Key重複
-
-			delete l_player;
-			return false;
-		};
-
-		mp_Mixer->AddAudio(apdata_smtptr);
-
-		//すべて完了したので返却。
-		GetPlayer.ResetPointer(l_player);
-
-		return true;
-	};
-
 	//BGMとしてオーディオプレイヤーを作成します。
 	bool SonikAudio_Implement::Create_BGM_AudioPlayer(uint32_t AudioID, SonikAudio::SAudioPlayer& GetPlayer)
 	{
@@ -208,22 +153,91 @@ namespace SonikAudio
 			return false;
 		};
 
-		l_apdata = new(std::nothrow) SonikAudioData::SonikAudioControlDataSetForBGM(_it->second);
+		l_apdata = new(std::nothrow) SonikAudioData::SonikAudioControlDataSetForBGM(mp_Listener->GetMasterVolumeRef(), _it->second);
 		if( l_apdata == nullptr )
 		{
 			return false;
 		};
 
-		apdata_smtptr.ResetPointer(l_apdata);
+		apdata_smtptr.ResetPointer(reinterpret_cast<SonikAudioData::SonikAudioControlData*>(l_apdata));
 
+		SonikLib::SharedSmtPtr<SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface> _player_arg_s;
+		SonikLib::SharedCast_Dynamic<SonikAudioPlayerTask::SonikAudioPlayerTaskManager, SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface>(m_TaskMng, _player_arg_s);
 
+		l_player = new(std::nothrow) SonikAudio::SonikAudioPlayer(apdata_smtptr, _player_arg_s);
+		if( l_player == nullptr )
+		{
+			//l_apdataはスマートポインタに格納されているためdelete省略。
+			return false;
+		};
 
+		//ControlDataを登録
+		if( !ap_Data.insert( std::map<uint64_t, SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>::value_type(apdata_smtptr->Get_UniqueID(), apdata_smtptr) ).second )
+		{
+			//Key重複
+
+			delete l_player;
+			return false;
+		};
+
+		mp_Mixer->AddAudio(apdata_smtptr);
+
+		//すべて完了したので返却。
+		GetPlayer.ResetPointer(l_player);
+
+		return true;
 
 	};
 
 	//SEとしてオーディオプレイヤーを作成します。
 	bool SonikAudio_Implement::Create_SE_AudioPlayer(uint32_t AudioID, SonikAudio::SAudioPlayer& GetPlayer)
 	{
+		SonikAudio::SonikAudioPlayer* l_player = nullptr;
+		SonikAudioData::SonikAudioControlDataSetForSE* l_apdata = nullptr;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> apdata_smtptr;
+		decltype(audiomap)::iterator _it;
+
+
+		_it = audiomap.find(AudioID);
+		if( _it == audiomap.end() )
+		{
+			//ID無し。
+			return false;
+		};
+
+		l_apdata = new(std::nothrow) SonikAudioData::SonikAudioControlDataSetForSE(mp_Listener->GetCategoryVolumeSERef(), mp_Listener->GetPosition(), mp_Listener->GetDirection(), _it->second);
+		if( l_apdata == nullptr )
+		{
+			return false;
+		};
+
+		apdata_smtptr.ResetPointer(reinterpret_cast<SonikAudioData::SonikAudioControlData*>(l_apdata));
+
+		SonikLib::SharedSmtPtr<SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface> _player_arg_s;
+		SonikLib::SharedCast_Dynamic<SonikAudioPlayerTask::SonikAudioPlayerTaskManager, SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface>(m_TaskMng, _player_arg_s);
+
+		l_player = new(std::nothrow) SonikAudio::SonikAudioPlayer(apdata_smtptr, _player_arg_s);
+		if( l_player == nullptr )
+		{
+			//l_apdataはスマートポインタに格納されているためdelete省略。
+			return false;
+		};
+
+		//ControlDataを登録
+		if( !ap_Data.insert( std::map<uint64_t, SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>::value_type(apdata_smtptr->Get_UniqueID(), apdata_smtptr) ).second )
+		{
+			//Key重複
+
+			delete l_player;
+			return false;
+		};
+
+		mp_Mixer->AddAudio(apdata_smtptr);
+
+		//すべて完了したので返却。
+		GetPlayer.ResetPointer(l_player);
+
+		return true;
 
 	};
 

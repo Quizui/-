@@ -13,11 +13,11 @@
 namespace SonikAudioData
 {
 
-	SonikAudioControlDataSetForSE::SonikAudioControlDataSetForSE(SonikLib::SharedSmtPtr<float> _se_mastervolume_, SonikMathDataBox::Sonik3DPoint& _listner_pos_, SonikMathDataBox::Sonik3DPoint& _listner_dir_, SonikAudio::SAudioFormat SetAudioPointer)
+	SonikAudioControlDataSetForSE::SonikAudioControlDataSetForSE(SonikLib::SharedSmtPtr<double> _se_mastervolume_, SonikMathDataBox::Sonik3DPoint& _listner_pos_, SonikMathDataBox::Sonik3DPoint& _listner_dir_, SonikAudio::SAudioFormat SetAudioPointer)
 	:SonikAudioControlData(SetAudioPointer)
 	,flgbit_effect(0)
 	,RA_effect{}
-	,m_mastervolume_se(_se_mastervolume_)
+	,m_CategorySEVol(_se_mastervolume_)
 	{
 		try
 		{
@@ -188,10 +188,79 @@ namespace SonikAudioData
 		tmp_RA_effect->SetNext_Strong(l_effectobj);
 
 		//エフェクト二セット
-		RA_effect[l_effected_flpoint];
+		RA_effect[l_effected_flpoint] = l_effectobj;
 		flgbit_effect |= static_cast<uint32_t>(_effected_);
-		return;
 
+		return;
+	};
+
+	//エフェクトの無効化
+	void SonikAudioControlDataSetForSE::DisableEffect(SonikAudioEnum::PlayEffectID _disable_effect_)
+	{
+		if( (flgbit_effect & _disable_effect_) == 0 )
+		{
+			//すでにビットが降りている。無効化済。
+			return;
+		};
+
+
+		//フラグがONなら、対象を外す。
+		//LSBでもMSBでもどっちでもええ
+		uint32_t l_effected_flpoint = SonikMathBit::GetMSBFor32bit(static_cast<uint32_t>(_disable_effect_));
+
+		//自分よりひとつ下のビットが立っているかをチェック。
+		//一番最初のビット(0x01) の場合はそれ以下はないので省く。
+		if(_disable_effect_ == 0x01)
+		{
+			SonikLib::SharedSmtPtr<SonikLib::SonikFOSTemplateInterface<double>> tmp_RA_effect;
+
+			//まずは配列から除去
+			tmp_RA_effect = RA_effect[l_effected_flpoint];
+			RA_effect[l_effected_flpoint]->ResetPointer(nullptr);
+			//次にフラグリストからフラグを下ろす。
+			flgbit_effect &= ~(static_cast<uint32_t>(_disable_effect_));
+			//最後に自身が先頭or自身の身だった場合は先頭の付替。(というか0x01の場合常に先頭のはず)
+			tmp_RA_effect->GetNext_strong(effect);
+
+			return;
+		};
+
+		//0x01 以外なら該当ビットより下がないか、先頭エフェクトではないかを確認する。
+		uint32_t tmpflg = flgbit_effect;
+		SonikLib::SharedSmtPtr<SonikLib::SonikFOSTemplateInterface<double>> now = RA_effect[l_effected_flpoint];
+
+		//自分より上位のビットをマスク
+		tmpflg &= (~((_disable_effect_ - 1) | _disable_effect_));
+
+		//自分より下位のビットフラグが立っていないなら、自分が一番最初
+		if( tmpflg == 0 )
+		{
+			//自分最初であれば先頭ポインタを入れ替えて配列とかから外れる。
+			now->GetNext_strong(effect); //先頭ポインタを自分の次のエフェクトへ切り替え。
+			//配列から抜ける。
+			RA_effect[l_effected_flpoint]->ResetPointer(nullptr); //配列のスマポを空に
+			//フラグを下ろす。
+			flgbit_effect &= ~(static_cast<uint32_t>(_disable_effect_));
+			//終わり。
+			return;
+		};
+
+		//自分が最初ではない場合は一つ前のオブジェクトを取得し、nextを自身のnextに更新する。
+		SonikLib::SharedSmtPtr<SonikLib::SonikFOSTemplateInterface<double>> prev = RA_effect[SonikMathBit::GetMSBFor32bit(tmpflg)];
+		SonikLib::SharedSmtPtr<SonikLib::SonikFOSTemplateInterface<double>> tmpget;
+
+		//付け替え
+		now->GetNext_strong(tmpget);
+		prev->SetNext_Strong(tmpget);
+
+		//配列から抜ける
+		RA_effect[l_effected_flpoint]->ResetPointer(nullptr); //配列のスマポを空に
+
+		//フラグを下ろす。
+		flgbit_effect &= ~(static_cast<uint32_t>(_disable_effect_));
+
+		//終わり。
+		return;
 	};
 
 	void SonikAudioControlDataSetForSE::SetPositionALL(SonikMathDataBox::Sonik3DPoint& _3dpos_)

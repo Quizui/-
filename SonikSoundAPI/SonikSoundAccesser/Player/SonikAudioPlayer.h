@@ -40,7 +40,7 @@ namespace SonikAudio
 
 	public:
 		//コンストラクタ
-		SonikAudioPlayer(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetAudioData, SonikLib::SharedSmtPtr<SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface> SetTskMng);
+		SonikAudioPlayer(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> SetAudioData, SonikLib::SharedSmtPtr<SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface> SetTskMng);
 		//デストラクタ
 		~SonikAudioPlayer(void);
 

@@ -23,7 +23,6 @@ namespace SonikAudioTaskInterface
 	class PlayerTaskInterface
 	{
 	protected:
-		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> ControlData;
 
 	public:
 		//コンストラクタ

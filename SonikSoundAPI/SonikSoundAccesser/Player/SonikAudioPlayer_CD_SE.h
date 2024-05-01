@@ -39,7 +39,7 @@ namespace SonikAudioData
 	class SonikAudioControlDataSetForSE :  public SonikAudioData::SonikAudioControlData
 	{
 	private:
-		SonikLib::SharedSmtPtr<float> m_mastervolume_se;
+		SonikLib::SharedSmtPtr<double> m_CategorySEVol;
 		SonikMathDataBox::Sonik3DPoint* m_3dpos; //3D座標
 		SonikMathDataBox::Sonik3DPoint* m_3ddir; //3D方向
 
@@ -60,7 +60,7 @@ namespace SonikAudioData
 		SonikAudioControlDataSetForSE& operator =(SonikAudioControlDataSetForSE& _this_) = delete;
 
 	public:
-		SonikAudioControlDataSetForSE(SonikLib::SharedSmtPtr<float> _se_mastervolume_, SonikMathDataBox::Sonik3DPoint& _listner_pos_, SonikMathDataBox::Sonik3DPoint& _listner_dir_, SonikAudio::SAudioFormat SetAudioPointer);
+		SonikAudioControlDataSetForSE(SonikLib::SharedSmtPtr<double> _se_mastervolume_, SonikMathDataBox::Sonik3DPoint& _listner_pos_, SonikMathDataBox::Sonik3DPoint& _listner_dir_, SonikAudio::SAudioFormat SetAudioPointer);
 		~SonikAudioControlDataSetForSE(void);
 
 		//データが最終的にミキシングしてほしいボリューム値を取得
@@ -102,11 +102,9 @@ namespace SonikAudioData
 		void GetDirectionXY(double& x, double& y);
 		void GetDirectionXZ(double& x, double& z);
 		void GetDirectionYZ(double& y, double& z);
-		double GetPositionX(void);
-		double GetPositionY(void);
-		double GetPositionZ(void);
-
-
+		double GetDirectionX(void);
+		double GetDirectionY(void);
+		double GetDirectionZ(void);
 
 	};
 
