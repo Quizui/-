@@ -67,17 +67,17 @@ namespace SonikLib
 			pNodes_ = pNodes_->Next;
 			if( pNodes_ == nullptr)
 			{
-				m_lock->Unlock();
+				m_lock->unlock();
 				return false;
 			};
 
 			if( pNodes_->Priority == 0xFFFFFFFF)
 			{
-				m_lock->Unlock();
+				m_lock->unlock();
 				return false;
 			};
 
-			m_lock->Unlock();
+			m_lock->unlock();
 			return true;
 		};
 
@@ -89,11 +89,11 @@ namespace SonikLib
 			pNodes_ = pNodes_->Prev;
 			if(pNodes_ == nullptr)
 			{
-				m_lock->Unlock();
+				m_lock->unlock();
 				return false;
 			};
 
-			m_lock->Unlock();
+			m_lock->unlock();
 			return true;
 		};
 
@@ -106,11 +106,11 @@ namespace SonikLib
 			pNodes_ = pNodes_->Next;
 			if( pNodes_->Priority == 0xFFFFFFFF || pNodes_ == nullptr)
 			{
-				m_lock->Unlock();
+				m_lock->unlock();
 				return false;
 			};
 
-			m_lock->Unlock();
+			m_lock->unlock();
 			return true;
 		};
 		//後置インクリメント オーバーロード
@@ -122,11 +122,11 @@ namespace SonikLib
 			pNodes_ = pNodes_->Next;
 			if( pNodes_->Priority == 0xFFFFFFFF || pNodes_ == nullptr)
 			{
-				m_lock->Unlock();
+				m_lock->unlock();
 				return false;
 			};
 
-			m_lock->Unlock();
+			m_lock->unlock();
 			return true;
 		};
 
@@ -139,11 +139,11 @@ namespace SonikLib
 			pNodes_ = pNodes_->Prev;
 			if(pNodes_ == 0)
 			{
-				m_lock->Unlock();
+				m_lock->unlock();
 				return false;
 			};
 
-			m_lock->Unlock();
+			m_lock->unlock();
 			return true;
 		};
 		//後置デクリメントオーバーロード
@@ -155,11 +155,11 @@ namespace SonikLib
 			pNodes_ = pNodes_->Prev;
 			if(pNodes_ == nullptr)
 			{
-				m_lock->Unlock();
+				m_lock->unlock();
 				return false;
 			};
 
-			m_lock->Unlock();
+			m_lock->unlock();
 			return true;
 		};
 

@@ -323,7 +323,7 @@ namespace SonikLib
 				m_FreeArea = new(std::nothrow) Nodes;
 				if(m_FreeArea == nullptr)
 				{
-					atmlock_.Unlock();
+					atmlock_.unlock();
 					return false;
 				};
 			};
@@ -374,7 +374,7 @@ namespace SonikLib
 							m_FreeArea->Prev = nullptr;
 						};
 
-						atmlock_.Unlock();
+						atmlock_.unlock();
 						return false;
 					};
 
@@ -452,7 +452,7 @@ namespace SonikLib
 
 			};
 
-			atmlock_.Unlock();
+			atmlock_.unlock();
 			return true;
 
 		};
@@ -468,7 +468,7 @@ namespace SonikLib
 
 //			if( !AllocSmtPtr_.GetAlloc(tmpSmtPtr) )
 //			{
-//				atmlock_.Unlock();
+//				atmlock_.unlock();
 //				return false;
 //			};
 
@@ -478,7 +478,7 @@ namespace SonikLib
 				m_FreeArea = new(std::nothrow) Nodes;
 				if(m_FreeArea == nullptr)
 				{
-					atmlock_.Unlock();
+					atmlock_.unlock();
 					return false;
 				};
 			};
@@ -529,7 +529,7 @@ namespace SonikLib
 							m_FreeArea->Prev = nullptr;
 						};
 
-						atmlock_.Unlock();
+						atmlock_.unlock();
 						return false;
 					};
 
@@ -607,7 +607,7 @@ namespace SonikLib
 
 			};
 
-			atmlock_.Unlock();
+			atmlock_.unlock();
 			return true;
 
 		};
@@ -631,7 +631,7 @@ namespace SonikLib
 				if( LinerEnd->NodeValue == 0xFFFFFFFF )
 				{
 					//最後尾に追加したいが　識別番号の最大値が使われているため追加できない。
-					atmlock_.Unlock();
+					atmlock_.unlock();
 					return false;
 				};
 
@@ -640,7 +640,7 @@ namespace SonikLib
 
 //			if( !AllocSmtPtr_.GetAlloc(tmpSmtPtr) )
 //			{
-//				atmlock_.Unlock();
+//				atmlock_.unlock();
 //				return false;
 //			};
 
@@ -650,7 +650,7 @@ namespace SonikLib
 				m_FreeArea = new(std::nothrow) Nodes;
 				if(m_FreeArea == nullptr)
 				{
-					atmlock_.Unlock();
+					atmlock_.unlock();
 					return false;
 				};
 			};
@@ -701,7 +701,7 @@ namespace SonikLib
 							m_FreeArea->Prev = nullptr;
 						};
 
-						atmlock_.Unlock();
+						atmlock_.unlock();
 						return false;
 					};
 
@@ -784,7 +784,7 @@ namespace SonikLib
 
 			};
 
-			atmlock_.Unlock();
+			atmlock_.unlock();
 			return true;
 
 		};
@@ -807,7 +807,7 @@ namespace SonikLib
 				if( LinerEnd->NodeValue == 0xFFFFFFFF )
 				{
 					//最後尾に追加したいが　識別番号の最大値が使われているため追加できない。
-					atmlock_.Unlock();
+					atmlock_.unlock();
 					return false;
 				};
 
@@ -816,7 +816,7 @@ namespace SonikLib
 
 //			if( !AllocSmtPtr_.GetAlloc(tmpSmtPtr) )
 //			{
-//				atmlock_.Unlock();
+//				atmlock_.unlock();
 //				return false;
 //			};
 
@@ -826,7 +826,7 @@ namespace SonikLib
 				m_FreeArea = new(std::nothrow) Nodes;
 				if(m_FreeArea == nullptr)
 				{
-					atmlock_.Unlock();
+					atmlock_.unlock();
 					return false;
 				};
 			};
@@ -877,7 +877,7 @@ namespace SonikLib
 							m_FreeArea->Prev = nullptr;
 						};
 
-						atmlock_.Unlock();
+						atmlock_.unlock();
 						return false;
 					};
 
@@ -960,7 +960,7 @@ namespace SonikLib
 
 			};
 
-			atmlock_.Unlock();
+			atmlock_.unlock();
 			return true;
 
 		};

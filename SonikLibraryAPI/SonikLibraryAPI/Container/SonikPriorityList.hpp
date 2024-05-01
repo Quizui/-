@@ -1262,7 +1262,7 @@ namespace SonikLib
 			if(ItemCount <= 2)
 			{
 				//ソートの必要がない。
-				lock_.Unlock();
+				lock_.unlock();
 				return;
 			};
 
@@ -1301,7 +1301,7 @@ namespace SonikLib
 			//QuickSortCheck
 			//			__QuickSort__();
 
-			lock_.Unlock();
+			lock_.unlock();
 
 			//			Inserted_ = false;
 
@@ -1398,7 +1398,7 @@ namespace SonikLib
 			//			pPrev->Priority = ItemPriority;
 			//			pPrev->Sentinel_ = false;
 
-			lock_.Unlock();
+			lock_.unlock();
 
 			//Inserted_ = true;
 
@@ -1416,7 +1416,7 @@ namespace SonikLib
 			ope_.pNodes_ = LinearTop;
 			ope_.m_lock = &lock_;
 
-			lock_.Unlock();
+			lock_.unlock();
 			return ope_;
 		};
 
@@ -1449,11 +1449,11 @@ namespace SonikLib
 					m_FreeControl = l_rmtarget;
 				}
 
-				lock_.Unlock();
+				lock_.unlock();
 				return true;
 			};
 
-			lock_.Unlock();
+			lock_.unlock();
 			return false;
 		};
 
@@ -1463,7 +1463,7 @@ namespace SonikLib
 
 			if( RmvTargetItr.NullPtrCheck() )
 			{
-				lock_.Unlock();
+				lock_.unlock();
 				return false;
 			};
 
@@ -1471,7 +1471,7 @@ namespace SonikLib
 
 			if( l_rmtarget->Priority  == 0xFFFFFFFF )
 			{
-				lock_.Unlock();
+				lock_.unlock();
 				return false;
 			};
 
@@ -1495,7 +1495,7 @@ namespace SonikLib
 			RmvTargetItr.pNodes_ = LinearTop;
 			RmvTargetItr.m_lock = &lock_;
 
-			lock_.Unlock();
+			lock_.unlock();
 			return true;
 
 		};

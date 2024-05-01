@@ -1,4 +1,4 @@
-14:52:45 **** ビルド of configuration Release_x64 for project SonikLibraryAPI ****
+17:50:08 **** ビルド of configuration Release_x64 for project SonikLibraryAPI ****
 mingw32-make all 
 Building file: ../TimerClock/SonikElapsedTimer.cpp
 Invoking: GCC C++ Compiler
