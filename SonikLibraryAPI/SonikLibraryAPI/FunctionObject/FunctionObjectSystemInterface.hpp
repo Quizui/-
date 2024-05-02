@@ -97,14 +97,12 @@ namespace SonikFunctionObjectDefines
 		};
 
 		//弱い依存のnextタスクを取得します。
-		//nextタスクがない場合、falseを返却します。
 		inline SonikLib::SharedSmtPtr<FunctionObjectSystemInterface> GetNext_weak(void)
 		{
 			return weak_next;
 		};
 
 		//強い依存のnextタスクを取得します。
-		//nextタスクがない場合、falseを返却します。
 		inline SonikLib::SharedSmtPtr<FunctionObjectSystemInterface> GetNext_strong(void)
 		{
 			return strong_next;
@@ -227,28 +225,16 @@ namespace SonikFunctionObjectDefines
 
 		//弱い依存のnextタスクを取得します。
 		//nextタスクがない場合、falseを返却します。
-		inline bool GetNext_weak(SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>>& _getSmtPtr_)
+		inline SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>> GetNext_weak(void)
 		{
-			if(weak_next.IsNullptr())
-			{
-				return false;
-			};
-
-			_getSmtPtr_ = weak_next;
-			return true;
+			return weak_next;
 		};
 
 		//強い依存のnextタスクを取得します。
 		//nextタスクがない場合、falseを返却します。
-		inline bool GetNext_strong(SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>>& _getSmtPtr_)
+		inline SonikLib::SharedSmtPtr<FunctionObjectSystemTemplateInterface<Rtype>> GetNext_strong(void)
 		{
-			if(strong_next.IsNullptr())
-			{
-				return false;
-			};
-
-			_getSmtPtr_ = strong_next;
-			return true;
+			return strong_next;
 		};
 
 		//メソッドステータスの取得
