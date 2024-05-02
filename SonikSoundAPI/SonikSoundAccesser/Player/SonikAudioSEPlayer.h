@@ -5,8 +5,8 @@
  *      Author: owner
  */
 
-#ifndef PLAYER_SONIKAUDIOPLAYER_H_
-#define PLAYER_SONIKAUDIOPLAYER_H_
+#ifndef PLAYER_SONIKAUDIO_SOUNDE_EFFECT_PLAYER_H_
+#define PLAYER_SONIKAUDIO_SOUNDE_EFFECT_PLAYER_H_
 
 #include <stdint.h>
 #include "../../../SmartPointer/SonikSmartPointer.hpp"
@@ -14,8 +14,8 @@
 //前方宣言
 namespace SonikAudioData
 {
-	//大本のクラス。
-	class SonikAudioControlData;
+	//SEという名前ですが、距離と方向を持つ音源全般を扱います。
+	class SonikAudioControlDataSetForSE;
 };
 
 namespace SonikAudioTaskInterface
@@ -32,17 +32,17 @@ namespace SonikMathDataBox
 namespace SonikAudio
 {
 	//いわゆるオーディオコントローラーさん。
-	class SonikAudioPlayer
+	class SonikAudioSEPlayer
 	{
 	private:
-		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> mp_AudioData;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> mp_AudioData;
 		SonikLib::SharedSmtPtr<SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface> mp_TskMng;
 
 	public:
 		//コンストラクタ
-		SonikAudioPlayer(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> SetAudioData, SonikLib::SharedSmtPtr<SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface> SetTskMng);
+		SonikAudioSEPlayer(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetAudioData, SonikLib::SharedSmtPtr<SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface> SetTskMng);
 		//デストラクタ
-		~SonikAudioPlayer(void);
+		~SonikAudioSEPlayer(void);
 
 		//音量のセットとゲット
 		bool SetVolume(float SetValue);
@@ -116,4 +116,4 @@ namespace SonikAudio
 
 
 
-#endif /* PLAYER_SONIKAUDIOPLAYER_H_ */
+#endif /* PLAYER_SONIKAUDIO_SOUNDE_EFFECT_PLAYER_H_ */

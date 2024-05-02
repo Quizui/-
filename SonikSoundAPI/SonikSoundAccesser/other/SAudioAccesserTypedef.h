@@ -18,7 +18,8 @@ namespace SonikAudio
 
 namespace SonikAudio
 {
-	class SonikAudioPlayer;
+	class SonikAudioSEPlayer;
+	class SonikAudioBGMPlayer;
 };
 
 namespace SonikAudio
@@ -32,7 +33,8 @@ namespace SonikAudio
 
 	using SAudioInterface = SonikLib::SharedSmtPtr<SonikAudio::SonikAudioInterface>;
 
-	using SAudioPlayer = SonikLib::SharedSmtPtr<SonikAudio::SonikAudioPlayer>;
+	using SAudioSEPlayer = SonikLib::SharedSmtPtr<SonikAudio::SonikAudioSEPlayer>;
+	using SAudioBGMPlayer = SonikLib::SharedSmtPtr<SonikAudio::SonikAudioBGMPlayer>;
 
 	using SAudioListener = SonikLib::SharedSmtPtr<SonikAudio::SonikAudioListener>;
 

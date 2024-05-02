@@ -10,12 +10,6 @@
 
 #include "../SAudioAccesserTypedef.h"
 
-//前方宣言
-namespace SonikAudioData
-{
-	class SonikAudioControlData;
-};
-
 //インターフェース定義
 namespace SonikAudioTaskInterface
 {

@@ -7,17 +7,18 @@
 
 #include <new>
 
-#include "SonikAudioPlayer.h"
-#include "SonikAudioPlayer_ControlData.h"
+#include "SonikAudioSEPlayer.h"
+#include "SonikAudioPlayer_CD_SE.h"
 #include "../Task/AudioPlayerTaskManager.h"
 #include "../Task/PlayerTask.h"
 #include "../PlayStateEnums.h"
 #include "../../../MathBit/SonikMathDistance.h"
 
+
 namespace SonikAudio
 {
 	//コンストラクタ
-	SonikAudioPlayer::SonikAudioPlayer(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> SetAudioData, SonikLib::SharedSmtPtr<SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface> SetTskMng)
+	SonikAudioSEPlayer::SonikAudioSEPlayer(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetAudioData, SonikLib::SharedSmtPtr<SonikAudioTaskInterface::SonikAudioPlayerTaskManagerInterface> SetTskMng)
 	:mp_AudioData(SetAudioData)
 	,mp_TskMng(SetTskMng)
 	{
@@ -25,17 +26,19 @@ namespace SonikAudio
 	};
 
 	//デストラクタ
-	SonikAudioPlayer::~SonikAudioPlayer(void)
+	SonikAudioSEPlayer::~SonikAudioSEPlayer(void)
 	{
 		//no porcess;
 	};
 
 	//音量のセットとゲット
-	bool SonikAudioPlayer::SetVolume(float SetValue)
+	bool SonikAudioSEPlayer::SetVolume(float SetValue)
 	{
 		SonikAudioPlayerTask::APTask_VolumeChange* l_task = nullptr;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> l_audiodata;
 
-		l_task = new(std::nothrow) SonikAudioPlayerTask::APTask_VolumeChange(mp_AudioData, SetValue);
+		SonikLib::SharedCast_Reinterpret<SonikAudioData::SonikAudioControlDataSetForSE, SonikAudioData::SonikAudioControlData>(mp_AudioData, l_audiodata);
+		l_task = new(std::nothrow) SonikAudioPlayerTask::APTask_VolumeChange(l_audiodata, SetValue);
 		if(l_task == nullptr)
 		{
 			return false;
@@ -44,13 +47,13 @@ namespace SonikAudio
 		return mp_TskMng->AddTask(l_task);
 	};
 
-	const float* SonikAudioPlayer::GetVolume(void)
+	const float* SonikAudioSEPlayer::GetVolume(void)
 	{
 		return mp_AudioData->GetVolume();
 	};
 
 	//ポジションのセットとゲット
-	bool SonikAudioPlayer::SetPosition(double x, double y, double z)
+	bool SonikAudioSEPlayer::SetPosition(double x, double y, double z)
 	{
 		SonikAudioPlayerTask::APTask_PositionChange* l_task = nullptr;
 
@@ -63,7 +66,7 @@ namespace SonikAudio
 		return mp_TskMng->AddTask(l_task);
 
 	};
-	bool SonikAudioPlayer::SetPositionX(double x)
+	bool SonikAudioSEPlayer::SetPositionX(double x)
 	{
 		SonikAudioPlayerTask::APTask_PositionChangeX* l_task = nullptr;
 
@@ -75,7 +78,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetPositionY(double y)
+	bool SonikAudioSEPlayer::SetPositionY(double y)
 	{
 		SonikAudioPlayerTask::APTask_PositionChangeY* l_task = nullptr;
 
@@ -87,7 +90,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetPositionZ(double z)
+	bool SonikAudioSEPlayer::SetPositionZ(double z)
 	{
 		SonikAudioPlayerTask::APTask_PositionChangeZ* l_task = nullptr;
 
@@ -99,7 +102,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetPositionXY(double x, double y)
+	bool SonikAudioSEPlayer::SetPositionXY(double x, double y)
 	{
 		SonikAudioPlayerTask::APTask_PositionChangeXY* l_task = nullptr;
 
@@ -111,7 +114,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetPositionXZ(double x, double z)
+	bool SonikAudioSEPlayer::SetPositionXZ(double x, double z)
 	{
 		SonikAudioPlayerTask::APTask_PositionChangeXZ* l_task = nullptr;
 
@@ -123,7 +126,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetPositionYZ(double y, double z)
+	bool SonikAudioSEPlayer::SetPositionYZ(double y, double z)
 	{
 		SonikAudioPlayerTask::APTask_PositionChangeYZ* l_task = nullptr;
 
@@ -137,38 +140,38 @@ namespace SonikAudio
 	};
 
 	//ポジションのゲット
-	void SonikAudioPlayer::GetPosition(double& x, double& y, double& z)
+	void SonikAudioSEPlayer::GetPosition(double& x, double& y, double& z)
 	{
 		mp_AudioData->GetPositionAll(x, y, z);
-
 	};
-	double SonikAudioPlayer::GetPositionX(void)
+
+	double SonikAudioSEPlayer::GetPositionX(void)
 	{
 		return mp_AudioData->GetPositionX();
 	};
-	double SonikAudioPlayer::GetPositionY(void)
+	double SonikAudioSEPlayer::GetPositionY(void)
 	{
 		return mp_AudioData->GetPositionY();
 	};
-	double SonikAudioPlayer::GetPositionZ(void)
+	double SonikAudioSEPlayer::GetPositionZ(void)
 	{
 		return mp_AudioData->GetPositionZ();
 	};
-	void SonikAudioPlayer::GetPositionXY(double& x, double& y)
+	void SonikAudioSEPlayer::GetPositionXY(double& x, double& y)
 	{
 		mp_AudioData->GetPositionXY(x, y);
 	};
-	void SonikAudioPlayer::GetPositionXZ(double& x, double& z)
+	void SonikAudioSEPlayer::GetPositionXZ(double& x, double& z)
 	{
 		mp_AudioData->GetPositionXZ(x, z);
 	};
-	void SonikAudioPlayer::GetPositionYZ(double& y, double& z)
+	void SonikAudioSEPlayer::GetPositionYZ(double& y, double& z)
 	{
 		mp_AudioData->GetPositionYZ(y, z);
 	};
 
 	//方向のセット
-	bool SonikAudioPlayer::SetDirection(double x, double y, double z)
+	bool SonikAudioSEPlayer::SetDirection(double x, double y, double z)
 	{
 		SonikAudioPlayerTask::APTask_DirectionChange* l_task = nullptr;
 
@@ -180,7 +183,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetDirectionX(double x)
+	bool SonikAudioSEPlayer::SetDirectionX(double x)
 	{
 		SonikAudioPlayerTask::APTask_DirectionChangeX* l_task = nullptr;
 
@@ -192,7 +195,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetDirectionY(double y)
+	bool SonikAudioSEPlayer::SetDirectionY(double y)
 	{
 		SonikAudioPlayerTask::APTask_DirectionChangeY* l_task = nullptr;
 
@@ -204,7 +207,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetDirectionZ(double z)
+	bool SonikAudioSEPlayer::SetDirectionZ(double z)
 	{
 		SonikAudioPlayerTask::APTask_DirectionChangeZ* l_task = nullptr;
 
@@ -216,7 +219,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetDirectionXY(double x, double y)
+	bool SonikAudioSEPlayer::SetDirectionXY(double x, double y)
 	{
 		SonikAudioPlayerTask::APTask_DirectionChangeXY* l_task = nullptr;
 
@@ -228,7 +231,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetDirectionXZ(double x, double z)
+	bool SonikAudioSEPlayer::SetDirectionXZ(double x, double z)
 	{
 		SonikAudioPlayerTask::APTask_DirectionChangeXZ* l_task = nullptr;
 
@@ -240,7 +243,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetDirectionYZ(double y, double z)
+	bool SonikAudioSEPlayer::SetDirectionYZ(double y, double z)
 	{
 		SonikAudioPlayerTask::APTask_DirectionChangeYZ* l_task = nullptr;
 
@@ -254,38 +257,44 @@ namespace SonikAudio
 	};
 
 	//方向(Directionのゲット
-	void SonikAudioPlayer::GetDirection(double& x, double& y, double& z)
+	void SonikAudioSEPlayer::GetDirection(double& x, double& y, double& z)
 	{
 		mp_AudioData->GetDirectionAll(x, y, z);
 	};
-	double SonikAudioPlayer::GetDirectionX(void)
+
+	double SonikAudioSEPlayer::GetDirectionX(void)
 	{
 		return mp_AudioData->GetDirectionX();
 	};
-	double SonikAudioPlayer::GetDirectionY(void)
+
+	double SonikAudioSEPlayer::GetDirectionY(void)
 	{
 		return mp_AudioData->GetDirectionY();
 	};
-	double SonikAudioPlayer::GetDirectionZ(void)
+
+	double SonikAudioSEPlayer::GetDirectionZ(void)
 	{
 		return mp_AudioData->GetDirectionZ();
 	};
-	void SonikAudioPlayer::GetDirectionXY(double& x, double& y)
+
+	void SonikAudioSEPlayer::GetDirectionXY(double& x, double& y)
 	{
 		mp_AudioData->GetDirectionXY(x, y);
 	};
-	void SonikAudioPlayer::GetDirectionXZ(double& x, double& z)
+
+	void SonikAudioSEPlayer::GetDirectionXZ(double& x, double& z)
 	{
 		mp_AudioData->GetDirectionXZ(x, z);
 	};
-	void SonikAudioPlayer::GetDirectionYZ(double& y, double& z)
+
+	void SonikAudioSEPlayer::GetDirectionYZ(double& y, double& z)
 	{
 		mp_AudioData->GetDirectionYZ(y, z);
 	};
 
 	//ポジションコネクトのセット
 	//他のオブジェクトの座標と同期させたいときに使います。
-	bool SonikAudioPlayer::SetPositionConnect(SonikMathDataBox::Sonik3DPoint* _3dpos_)
+	bool SonikAudioSEPlayer::SetPositionConnect(SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	{
 		SonikAudioPlayerTask::APTask_PositionConnectChange* l_task = nullptr;
 
@@ -297,7 +306,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetPositionConnectX(SonikMathDataBox::Sonik3DPoint* _3dpos_)
+	bool SonikAudioSEPlayer::SetPositionConnectX(SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	{
 		SonikAudioPlayerTask::APTask_PositionConnectChangeX* l_task = nullptr;
 
@@ -309,7 +318,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetPositionConnectY(SonikMathDataBox::Sonik3DPoint* _3dpos_)
+	bool SonikAudioSEPlayer::SetPositionConnectY(SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	{
 		SonikAudioPlayerTask::APTask_PositionConnectChangeY* l_task = nullptr;
 
@@ -321,7 +330,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetPositionConnectZ(SonikMathDataBox::Sonik3DPoint* _3dpos_)
+	bool SonikAudioSEPlayer::SetPositionConnectZ(SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	{
 		SonikAudioPlayerTask::APTask_PositionConnectChangeZ* l_task = nullptr;
 
@@ -333,7 +342,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetPositionConnectXY(SonikMathDataBox::Sonik3DPoint* _3dpos_)
+	bool SonikAudioSEPlayer::SetPositionConnectXY(SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	{
 		SonikAudioPlayerTask::APTask_PositionConnectChangeXY* l_task = nullptr;
 
@@ -345,7 +354,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetPositionConnectXZ(SonikMathDataBox::Sonik3DPoint* _3dpos_)
+	bool SonikAudioSEPlayer::SetPositionConnectXZ(SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	{
 		SonikAudioPlayerTask::APTask_PositionConnectChangeXZ* l_task = nullptr;
 
@@ -357,7 +366,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetPositionConnectYZ(SonikMathDataBox::Sonik3DPoint* _3dpos_)
+	bool SonikAudioSEPlayer::SetPositionConnectYZ(SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	{
 		SonikAudioPlayerTask::APTask_PositionConnectChangeYZ* l_task = nullptr;
 
@@ -372,7 +381,7 @@ namespace SonikAudio
 
 	//方向コネクトのセット
 	//他のオブジェクトの座標と同期させたいときに使います。
-	bool SonikAudioPlayer::SetDirectionConnect(SonikMathDataBox::Sonik3DPoint* _3ddir_)
+	bool SonikAudioSEPlayer::SetDirectionConnect(SonikMathDataBox::Sonik3DPoint* _3ddir_)
 	{
 		SonikAudioPlayerTask::APTask_DirectionConnectChange* l_task = nullptr;
 
@@ -384,7 +393,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetDirectionConnectX(SonikMathDataBox::Sonik3DPoint* _3ddir_)
+	bool SonikAudioSEPlayer::SetDirectionConnectX(SonikMathDataBox::Sonik3DPoint* _3ddir_)
 	{
 		SonikAudioPlayerTask::APTask_DirectionConnectChangeX* l_task = nullptr;
 
@@ -396,7 +405,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetDirectionConnectY(SonikMathDataBox::Sonik3DPoint* _3ddir_)
+	bool SonikAudioSEPlayer::SetDirectionConnectY(SonikMathDataBox::Sonik3DPoint* _3ddir_)
 	{
 		SonikAudioPlayerTask::APTask_DirectionConnectChangeY* l_task = nullptr;
 
@@ -408,7 +417,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetDirectionConnectZ(SonikMathDataBox::Sonik3DPoint* _3ddir_)
+	bool SonikAudioSEPlayer::SetDirectionConnectZ(SonikMathDataBox::Sonik3DPoint* _3ddir_)
 	{
 		SonikAudioPlayerTask::APTask_DirectionConnectChangeZ* l_task = nullptr;
 
@@ -420,7 +429,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetDirectionConnectXY(SonikMathDataBox::Sonik3DPoint* _3ddir_)
+	bool SonikAudioSEPlayer::SetDirectionConnectXY(SonikMathDataBox::Sonik3DPoint* _3ddir_)
 	{
 		SonikAudioPlayerTask::APTask_DirectionConnectChangeXY* l_task = nullptr;
 
@@ -432,7 +441,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetDirectionConnectXZ(SonikMathDataBox::Sonik3DPoint* _3ddir_)
+	bool SonikAudioSEPlayer::SetDirectionConnectXZ(SonikMathDataBox::Sonik3DPoint* _3ddir_)
 	{
 		SonikAudioPlayerTask::APTask_DirectionConnectChangeXZ* l_task = nullptr;
 
@@ -444,7 +453,7 @@ namespace SonikAudio
 
 		return mp_TskMng->AddTask(l_task);
 	};
-	bool SonikAudioPlayer::SetDirectionConnectYZ(SonikMathDataBox::Sonik3DPoint* _3ddir_)
+	bool SonikAudioSEPlayer::SetDirectionConnectYZ(SonikMathDataBox::Sonik3DPoint* _3ddir_)
 	{
 		SonikAudioPlayerTask::APTask_DirectionConnectChangeYZ* l_task = nullptr;
 
@@ -459,11 +468,13 @@ namespace SonikAudio
 
 	//オーディオステータス関連
 	//オーディステータスにPlayをセットします。
-	bool SonikAudioPlayer::Play(void)
+	bool SonikAudioSEPlayer::Play(void)
 	{
 		SonikAudioPlayerTask::APTask_StatusChange* l_task = nullptr;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> l_audiodata;
 
-		l_task = new(std::nothrow) SonikAudioPlayerTask::APTask_StatusChange(mp_AudioData, SonikAudioEnum::PlayStateID::PS_Play);
+		SonikLib::SharedCast_Reinterpret<SonikAudioData::SonikAudioControlDataSetForSE, SonikAudioData::SonikAudioControlData>(mp_AudioData, l_audiodata);
+		l_task = new(std::nothrow) SonikAudioPlayerTask::APTask_StatusChange(l_audiodata, SonikAudioEnum::PlayStateID::PS_Play);
 		if(l_task == nullptr)
 		{
 			return false;
@@ -473,11 +484,13 @@ namespace SonikAudio
 
 	};
 	//オーディオステータスをStopにセットします。
-	bool SonikAudioPlayer::Stop(void)
+	bool SonikAudioSEPlayer::Stop(void)
 	{
 		SonikAudioPlayerTask::APTask_StatusChange* l_task = nullptr;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> l_audiodata;
 
-		l_task = new(std::nothrow) SonikAudioPlayerTask::APTask_StatusChange(mp_AudioData, SonikAudioEnum::PlayStateID::PS_Stop);
+		SonikLib::SharedCast_Reinterpret<SonikAudioData::SonikAudioControlDataSetForSE, SonikAudioData::SonikAudioControlData>(mp_AudioData, l_audiodata);
+		l_task = new(std::nothrow) SonikAudioPlayerTask::APTask_StatusChange(l_audiodata, SonikAudioEnum::PlayStateID::PS_Stop);
 		if(l_task == nullptr)
 		{
 			return false;
@@ -487,11 +500,13 @@ namespace SonikAudio
 
 	};
 	//オーディオステータスをSuspend(一時停止)に設定します。
-	bool SonikAudioPlayer::Suspend(void)
+	bool SonikAudioSEPlayer::Suspend(void)
 	{
 		SonikAudioPlayerTask::APTask_StatusChange* l_task = nullptr;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> l_audiodata;
 
-		l_task = new(std::nothrow) SonikAudioPlayerTask::APTask_StatusChange(mp_AudioData, SonikAudioEnum::PlayStateID::PS_SUSPEND);
+		SonikLib::SharedCast_Reinterpret<SonikAudioData::SonikAudioControlDataSetForSE, SonikAudioData::SonikAudioControlData>(mp_AudioData, l_audiodata);
+		l_task = new(std::nothrow) SonikAudioPlayerTask::APTask_StatusChange(l_audiodata, SonikAudioEnum::PlayStateID::PS_SUSPEND);
 		if(l_task == nullptr)
 		{
 			return false;
@@ -501,11 +516,13 @@ namespace SonikAudio
 
 	};
 	//再生終了後リピート再生するかを設定します。true=リピートします。 false=リピートせず停止します。
-	bool SonikAudioPlayer::Repeat(bool RepeatState)
+	bool SonikAudioSEPlayer::Repeat(bool RepeatState)
 	{
 		SonikAudioPlayerTask::APTask_RepeatFlgChange* l_task = nullptr;
+		SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> l_audiodata;
 
-		l_task = new(std::nothrow) SonikAudioPlayerTask::APTask_RepeatFlgChange(mp_AudioData, RepeatState);
+		SonikLib::SharedCast_Reinterpret<SonikAudioData::SonikAudioControlDataSetForSE, SonikAudioData::SonikAudioControlData>(mp_AudioData, l_audiodata);
+		l_task = new(std::nothrow) SonikAudioPlayerTask::APTask_RepeatFlgChange(l_audiodata, RepeatState);
 		if(l_task == nullptr)
 		{
 			return false;

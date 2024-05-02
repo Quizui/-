@@ -1,24 +1,25 @@
 /*
  * PlayerTask.cpp
  *
- *  Created on: 2023/10/19
- *      Author: owner
+ *  Created on: 2024/05/02
+ *      Author: SONIC
  */
 
 #include "PlayerTask.h"
-#include "../Player/SonikAudioPlayer_ControlData.h"
-#include "../Player/SonikAudioPlayer_CD_SE,h"
+#include "../../../MathBit/SonikMathDistance.h"
+#include "../Player/SonikAudioPlayer_CD_SE.h"
 
 namespace SonikAudioPlayerTask
 {
 	//APTask_VolumeChange==============================================
 	//コンストラクタ
-	APTask_VolumeChange::APTask_VolumeChange(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, float VolumeArg)
+	APTask_VolumeChange::APTask_VolumeChange(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> SetData, float VolumeArg)
 	:m_Volume(VolumeArg)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
 		//ControlData = SetData;
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -35,11 +36,12 @@ namespace SonikAudioPlayerTask
 
 	//APTask_StatusChange==============================================
 	//コンストラクタ
-	APTask_StatusChange::APTask_StatusChange(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, SonikAudioEnum::PlayStateID SetValue)
+	APTask_StatusChange::APTask_StatusChange(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> SetData, SonikAudioEnum::PlayStateID SetValue)
 	:m_State(SetValue)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -131,9 +133,10 @@ namespace SonikAudioPlayerTask
 	//コンストラクタ
 	APTask_PositionChangeZ::APTask_PositionChangeZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetValue)
 	:m_value(SetValue)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -154,9 +157,10 @@ namespace SonikAudioPlayerTask
 	APTask_PositionChangeXY::APTask_PositionChangeXY(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetPosX, double SetPosY)
 	:m_PosX(SetPosX)
 	,m_PosY(SetPosY)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -178,9 +182,10 @@ namespace SonikAudioPlayerTask
 	APTask_PositionChangeXZ::APTask_PositionChangeXZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetPosX, double SetPosZ)
 	:m_PosX(SetPosX)
 	,m_PosZ(SetPosZ)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -202,9 +207,10 @@ namespace SonikAudioPlayerTask
 	APTask_PositionChangeYZ::APTask_PositionChangeYZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetPosY, double SetPosZ)
 	:m_PosY(SetPosY)
 	,m_PosZ(SetPosZ)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -227,9 +233,10 @@ namespace SonikAudioPlayerTask
 	:m_Dirx(SetDirx)
 	,m_Diry(SetDiry)
 	,m_Dirz(SetDirz)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -251,9 +258,10 @@ namespace SonikAudioPlayerTask
 	//コンストラクタ
 	APTask_DirectionChangeX::APTask_DirectionChangeX(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetValue)
 	:m_value(SetValue)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -272,9 +280,10 @@ namespace SonikAudioPlayerTask
 	//コンストラクタ
 	APTask_DirectionChangeY::APTask_DirectionChangeY(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetValue)
 	:m_value(SetValue)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -293,9 +302,10 @@ namespace SonikAudioPlayerTask
 	//コンストラクタ
 	APTask_DirectionChangeZ::APTask_DirectionChangeZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetValue)
 	:m_value(SetValue)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -315,9 +325,10 @@ namespace SonikAudioPlayerTask
 	APTask_DirectionChangeXY::APTask_DirectionChangeXY(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetDirX, double SetDirY)
 	:m_DirX(SetDirX)
 	,m_DirY(SetDirY)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -338,9 +349,10 @@ namespace SonikAudioPlayerTask
 	APTask_DirectionChangeXZ::APTask_DirectionChangeXZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetDirX, double SetDirZ)
 	:m_DirX(SetDirX)
 	,m_DirZ(SetDirZ)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -361,9 +373,10 @@ namespace SonikAudioPlayerTask
 	APTask_DirectionChangeYZ::APTask_DirectionChangeYZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, double SetDirY, double SetDirZ)
 	:m_DirY(SetDirY)
 	,m_DirZ(SetDirZ)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -383,9 +396,10 @@ namespace SonikAudioPlayerTask
 	//コンストラクタ
 	APTask_PositionConnectChange::APTask_PositionConnectChange(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	:mp_ConnectPoint(_3dpos_)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -398,16 +412,17 @@ namespace SonikAudioPlayerTask
 	//タスクRUN
 	void APTask_PositionConnectChange::TaskRun(void)
 	{
-		ControlData->SetPositionConnectAll(mp_ConnectPoint);
+		ControlData->GetPositionAll().LinkPointAll(mp_ConnectPoint);
 	};
 
 	//APTask_PositionConnectChangeX==============================================
 	//コンストラクタ
 	APTask_PositionConnectChangeX::APTask_PositionConnectChangeX(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	:mp_ConnectPoint(_3dpos_)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -420,16 +435,17 @@ namespace SonikAudioPlayerTask
 	//タスクRUN
 	void APTask_PositionConnectChangeX::TaskRun(void)
 	{
-		ControlData->SetPositionConnectX(mp_ConnectPoint);
+		ControlData->GetPositionAll().LinkPointX(mp_ConnectPoint);
 	};
 
 	//APTask_PositionConnectChangeY==============================================
 	//コンストラクタ
 	APTask_PositionConnectChangeY::APTask_PositionConnectChangeY(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	:mp_ConnectPoint(_3dpos_)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -442,16 +458,17 @@ namespace SonikAudioPlayerTask
 	//タスクRUN
 	void APTask_PositionConnectChangeY::TaskRun(void)
 	{
-		ControlData->SetPositionConnectY(mp_ConnectPoint);
+		ControlData->GetPositionAll().LinkPointY(mp_ConnectPoint);
 	};
 
 	//APTask_PositionConnectChangeZ==============================================
 	//コンストラクタ
 	APTask_PositionConnectChangeZ::APTask_PositionConnectChangeZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	:mp_ConnectPoint(_3dpos_)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -464,16 +481,17 @@ namespace SonikAudioPlayerTask
 	//タスクRUN
 	void APTask_PositionConnectChangeZ::TaskRun(void)
 	{
-		ControlData->SetPositionConnectZ(mp_ConnectPoint);
+		ControlData->GetPositionAll().LinkPointZ(mp_ConnectPoint);
 	};
 
 	//APTask_PositionConnectChangeXY==============================================
 	//コンストラクタ
 	APTask_PositionConnectChangeXY::APTask_PositionConnectChangeXY(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	:mp_ConnectPoint(_3dpos_)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -486,16 +504,17 @@ namespace SonikAudioPlayerTask
 	//タスクRUN
 	void APTask_PositionConnectChangeXY::TaskRun(void)
 	{
-		ControlData->SetPositionConnectXY(mp_ConnectPoint);
+		ControlData->GetPositionAll().LinkPointXY(mp_ConnectPoint);
 	};
 
 	//APTask_PositionConnectChangeXZ==============================================
 	//コンストラクタ
 	APTask_PositionConnectChangeXZ::APTask_PositionConnectChangeXZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	:mp_ConnectPoint(_3dpos_)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -508,16 +527,17 @@ namespace SonikAudioPlayerTask
 	//タスクRUN
 	void APTask_PositionConnectChangeXZ::TaskRun(void)
 	{
-		ControlData->SetPositionConnectXY(mp_ConnectPoint);
+		ControlData->GetPositionAll().LinkPointXZ(mp_ConnectPoint);
 	};
 
 	//APTask_PositionConnectChangeYZ==============================================
 	//コンストラクタ
 	APTask_PositionConnectChangeYZ::APTask_PositionConnectChangeYZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3dpos_)
 	:mp_ConnectPoint(_3dpos_)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -530,16 +550,17 @@ namespace SonikAudioPlayerTask
 	//タスクRUN
 	void APTask_PositionConnectChangeYZ::TaskRun(void)
 	{
-		ControlData->SetPositionConnectXY(mp_ConnectPoint);
+		ControlData->GetPositionAll().LinkPointXY(mp_ConnectPoint);
 	};
 
 	//APTask_DirectionConnectChange==============================================
 	//コンストラクタ
 	APTask_DirectionConnectChange::APTask_DirectionConnectChange(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_)
 	:mp_ConnectPoint(_3ddir_)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -552,17 +573,17 @@ namespace SonikAudioPlayerTask
 	//タスクRUN
 	void APTask_DirectionConnectChange::TaskRun(void)
 	{
-		ControlData->SetDirectionConnectAll(mp_ConnectPoint);
-
+		ControlData->GetDirectionAll().LinkPointAll(mp_ConnectPoint);
 	};
 
 	//APTask_DirectionConnectChangeX==============================================
 	//コンストラクタ
 	APTask_DirectionConnectChangeX::APTask_DirectionConnectChangeX(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_)
 	:mp_ConnectPoint(_3ddir_)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -575,17 +596,17 @@ namespace SonikAudioPlayerTask
 	//タスクRUN
 	void APTask_DirectionConnectChangeX::TaskRun(void)
 	{
-		ControlData->SetDirectionConnectX(mp_ConnectPoint);
-
+		ControlData->GetDirectionAll().LinkPointX(mp_ConnectPoint);
 	};
 
 	//APTask_DirectionConnectChangeY==============================================
 	//コンストラクタ
 	APTask_DirectionConnectChangeY::APTask_DirectionConnectChangeY(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_)
 	:mp_ConnectPoint(_3ddir_)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -598,17 +619,17 @@ namespace SonikAudioPlayerTask
 	//タスクRUN
 	void APTask_DirectionConnectChangeY::TaskRun(void)
 	{
-		ControlData->SetDirectionConnectY(mp_ConnectPoint);
-
+		ControlData->GetDirectionAll().LinkPointY(mp_ConnectPoint);
 	};
 
 	//APTask_DirectionConnectChangeZ==============================================
 	//コンストラクタ
 	APTask_DirectionConnectChangeZ::APTask_DirectionConnectChangeZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_)
 	:mp_ConnectPoint(_3ddir_)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -621,17 +642,17 @@ namespace SonikAudioPlayerTask
 	//タスクRUN
 	void APTask_DirectionConnectChangeZ::TaskRun(void)
 	{
-		ControlData->SetDirectionConnectZ(mp_ConnectPoint);
-
+		ControlData->GetDirectionAll().LinkPointZ(mp_ConnectPoint);
 	};
 
 	//APTask_DirectionConnectChangeXY==============================================
 	//コンストラクタ
 	APTask_DirectionConnectChangeXY::APTask_DirectionConnectChangeXY(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_)
 	:mp_ConnectPoint(_3ddir_)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -644,17 +665,17 @@ namespace SonikAudioPlayerTask
 	//タスクRUN
 	void APTask_DirectionConnectChangeXY::TaskRun(void)
 	{
-		ControlData->SetDirectionConnectXY(mp_ConnectPoint);
-
+		ControlData->GetDirectionAll().LinkPointXY(mp_ConnectPoint);
 	};
 
 	//APTask_DirectionConnectChangeXZ==============================================
 	//コンストラクタ
 	APTask_DirectionConnectChangeXZ::APTask_DirectionConnectChangeXZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_)
 	:mp_ConnectPoint(_3ddir_)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -667,17 +688,17 @@ namespace SonikAudioPlayerTask
 	//タスクRUN
 	void APTask_DirectionConnectChangeXZ::TaskRun(void)
 	{
-		ControlData->SetDirectionConnectXZ(mp_ConnectPoint);
-
+		ControlData->GetDirectionAll().LinkPointXZ(mp_ConnectPoint);
 	};
 
 	//APTask_DirectionConnectChangeYZ==============================================
 	//コンストラクタ
 	APTask_DirectionConnectChangeYZ::APTask_DirectionConnectChangeYZ(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlDataSetForSE> SetData, SonikMathDataBox::Sonik3DPoint* _3ddir_)
 	:mp_ConnectPoint(_3ddir_)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	};
 
 	//値のセット
@@ -690,17 +711,17 @@ namespace SonikAudioPlayerTask
 	//タスクRUN
 	void APTask_DirectionConnectChangeYZ::TaskRun(void)
 	{
-		ControlData->SetDirectionConnectYZ(mp_ConnectPoint);
-
+		ControlData->GetDirectionAll().LinkPointYZ(mp_ConnectPoint);
 	};
 
 	//APTask_RepeatFlgChange==============================================
 	//コンストラクタ
-	APTask_RepeatFlgChange::APTask_RepeatFlgChange(SonikLib::SharedSmtPtr<SonikAudioDataInterface::SADInterface_PlayerSide> SetData, bool SetValue)
+	APTask_RepeatFlgChange::APTask_RepeatFlgChange(SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData> SetData, bool SetValue)
 	:m_repeat(SetValue)
+	,ControlData(SetData)
 	{
 		//SetData.CastSetPointer(ControlData);
-		SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
+		//SonikLib::SharedCast_Reinterpret<SonikAudioDataInterface::SADInterface_PlayerSide, SonikAudioData::SonikAudioControlData>(SetData, ControlData);
 	}
 
 	//値のセット
@@ -717,5 +738,6 @@ namespace SonikAudioPlayerTask
 
 
 };
+
 
 

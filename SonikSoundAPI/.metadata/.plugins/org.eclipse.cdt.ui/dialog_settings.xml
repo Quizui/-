@@ -2,9 +2,10 @@
 <section name="Workbench">
 	<item key="LastUsedHeaderTemplate" value="デフォルト C++ ヘッダー・テンプレート"/>
 	<item key="LastUsedSourceTemplate" value="デフォルト C++ ソース・テンプレート"/>
-	<item key="org.eclipse.cdt.utils.ui.controls.FileListControl" value="&quot;D:\MyLibrary\include\Audio\SoundSystem\PlatformInterface&quot;"/>
+	<item key="org.eclipse.cdt.utils.ui.controls.FileListControl" value="D:\MyLibrary\include\Audio\SoundSystem\Task"/>
 	<section name="OptionalMessageDialog.hide.">
 		<item key="askReindex.detail" value="0"/>
+		<item key="askReindex" value="true"/>
 	</section>
 	<section name="completion_proposal_size">
 	</section>

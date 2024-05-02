@@ -36,7 +36,7 @@ namespace SonikLib
 namespace SonikAudioData
 {
 	//SEという名前ですが、距離と方向を持つ音源全般を扱います。
-	class SonikAudioControlDataSetForSE :  public SonikAudioData::SonikAudioControlData
+	class SonikAudioControlDataSetForSE : public SonikAudioData::SonikAudioControlData
 	{
 	private:
 		SonikLib::SharedSmtPtr<double> m_CategorySEVol;
@@ -52,7 +52,7 @@ namespace SonikAudioData
 		//effect_pointerlist
 		SonikLib::SharedSmtPtr<SonikLib::SonikFOSTemplateInterface<double>> effect;
 		//RandamAccessArray
-		SonikLib::SharedSmtPtr<SonikLib::SonikFOSTemplateInterface<double>>* RA_effect[sizeof(flgbit_effect) * 8];
+		SonikLib::SharedSmtPtr<SonikLib::SonikFOSTemplateInterface<double>> RA_effect[sizeof(flgbit_effect) * 8];
 
 	private:
 		//コピー禁止
@@ -107,5 +107,6 @@ namespace SonikAudioData
 		double GetDirectionZ(void);
 
 	};
+};
 
 #endif //__PLAYER_SONIKAUDIOPLAYER_CD_SE_H__

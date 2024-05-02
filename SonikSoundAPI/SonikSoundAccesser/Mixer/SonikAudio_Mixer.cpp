@@ -256,7 +256,7 @@ namespace SonikAudio
 		int16_t** p_wave = reinterpret_cast<int16_t**>( ref_itr->GetAudioControlPointer() );
 		const float* volume = ref_itr->GetVolume();
 		double c_vol = 0.0;
-		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
+//		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
 		SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
 		uint32_t _splitsize = (m_samplingRate >> 3);//1chで決定しているので直値で記載。
 		int16_t* _buffer = reinterpret_cast<int16_t*>(mp_buffer);
@@ -306,30 +306,30 @@ namespace SonikAudio
 		int16_t** p_wave = reinterpret_cast<int16_t**>( ref_itr->GetAudioControlPointer() );
 		SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
 		SonikMathDataBox::Sonik3DPoint& lis_dir = mp_Listener->GetDirection();
-		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
-		SonikMathDataBox::Sonik3DPoint& pl_dir = ref_itr->GetDirectionAll();
+//		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
+//		SonikMathDataBox::Sonik3DPoint& pl_dir = ref_itr->GetDirectionAll();
 
 		//uint32_t _splitsize = (m_samplingRate >> 2);//2chで決定しているので直値で記載。/4をシフト演算で..。
 		int16_t* _buffer = reinterpret_cast<int16_t*>(mp_buffer);
 
-		double _dis = SonikMath::Distance(lis_pos, pl_pos) + 0.0000000000001;//0除算対策
-		double _pan = SonikMath::Panning(lis_pos, pl_pos, lis_dir, pl_dir, 1.0, 0.2);
-		double L_pan = 1.0 - _pan;
-		double R_pan = _pan;
-		double master_vol = mp_Listener->GetListenVolume() * (*ref_itr->GetVolume());
-
-		//Distanceの調整
-		double MaxListenVolume = mp_Listener->GetMaxListernDistance();
-		_dis = (MaxListenVolume <= 0) ? 1.0 : 1.0 - (_dis / MaxListenVolume);
+//		double _dis = SonikMath::Distance(lis_pos, pl_pos) + 0.0000000000001;//0除算対策
+//		double _pan = SonikMath::Panning(lis_pos, pl_pos, lis_dir, pl_dir, 1.0, 0.2);
+//		double L_pan = 1.0 - _pan;
+//		double R_pan = _pan;
+//		double master_vol = mp_Listener->GetListenVolume() * (*ref_itr->GetVolume());
+//
+//		//Distanceの調整
+//		double MaxListenVolume = mp_Listener->GetMaxListernDistance();
+//		_dis = (MaxListenVolume <= 0) ? 1.0 : 1.0 - (_dis / MaxListenVolume);
 
 		//for(uint32_t i = 0; i < _splitsize; ++i)
 		for(uint32_t i = 0; i < m_samplingRate; ++i)
 		{
 			//2chなので2ポインタ進めて１回分。
-			(*_buffer) += (*(*p_wave)) * master_vol * _dis * L_pan; // L
+			(*_buffer) += (*(*p_wave));// * master_vol * _dis * L_pan; // L
 			++_buffer;
 			++(*p_wave);
-			(*_buffer) += (*(*p_wave)) * master_vol * _dis * R_pan; // R
+			(*_buffer) += (*(*p_wave));// * master_vol * _dis * R_pan; // R
 			++_buffer;
 			++(*p_wave);
 
@@ -349,7 +349,7 @@ namespace SonikAudio
 		int16_t** p_wave = reinterpret_cast<int16_t**>( ref_itr->GetAudioControlPointer() );
 		const float* volume = ref_itr->GetVolume();
 		double c_vol = 0.0;
-		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
+//		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
 		SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
 		uint32_t _splitsize = (m_samplingRate >> 2);//4chで決定しているので直値で記載。
 		int16_t* _buffer = reinterpret_cast<int16_t*>(mp_buffer);
@@ -387,7 +387,7 @@ namespace SonikAudio
 		int16_t** p_wave = reinterpret_cast<int16_t**>( ref_itr->GetAudioControlPointer() );
 		const float* volume = ref_itr->GetVolume();
 		double c_vol = 0.0;
-		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
+//		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
 		SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
 		uint32_t _splitsize = (m_samplingRate * 0.166667);//6ch(5.1ch)で決定しているので直値で記載。
 		int16_t* _buffer = reinterpret_cast<int16_t*>(mp_buffer);
@@ -425,7 +425,7 @@ namespace SonikAudio
 		int16_t** p_wave = reinterpret_cast<int16_t**>( ref_itr->GetAudioControlPointer() );
 		const float* volume = ref_itr->GetVolume();
 		double c_vol = 0.0;
-		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
+//		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
 		SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
 		uint32_t _splitsize = (m_samplingRate >> 3);//8ch(7.1ch)で決定しているので直値で記載。
 		int16_t* _buffer = reinterpret_cast<int16_t*>(mp_buffer);
@@ -463,7 +463,7 @@ namespace SonikAudio
 		int32_t** p_wave = reinterpret_cast<int32_t**>( ref_itr->GetAudioControlPointer() );
 		const float* volume = ref_itr->GetVolume();
 		double c_vol = 0.0;
-		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
+//		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
 		SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
 		uint32_t _splitsize = m_samplingRate;//1chで決定しているので直値で記載。
 		int32_t* _buffer = reinterpret_cast<int32_t*>(mp_buffer);
@@ -492,7 +492,7 @@ namespace SonikAudio
 		int32_t** p_wave = reinterpret_cast<int32_t**>( ref_itr->GetAudioControlPointer() );
 		const float* volume = ref_itr->GetVolume();
 		double c_vol = 0.0;
-		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
+//		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
 		SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
 		uint32_t _splitsize = (m_samplingRate >> 1);//2chで決定しているので直値で記載。
 		int32_t* _buffer = reinterpret_cast<int32_t*>(mp_buffer);
@@ -524,7 +524,7 @@ namespace SonikAudio
 		int32_t** p_wave = reinterpret_cast<int32_t**>( ref_itr->GetAudioControlPointer() );
 		const float* volume = ref_itr->GetVolume();
 		double c_vol = 0.0;
-		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
+//		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
 		SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
 		uint32_t _splitsize = (m_samplingRate >> 2);//4chで決定しているので直値で記載。
 		int32_t* _buffer = reinterpret_cast<int32_t*>(mp_buffer);
@@ -559,7 +559,7 @@ namespace SonikAudio
 		int32_t** p_wave = reinterpret_cast<int32_t**>( ref_itr->GetAudioControlPointer() );
 		const float* volume = ref_itr->GetVolume();
 		double c_vol = 0.0;
-		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
+//		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
 		SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
 		uint32_t _splitsize = (m_samplingRate * 0.166667);//6ch(5.1ch)で決定しているので直値で記載。
 		int32_t* _buffer = reinterpret_cast<int32_t*>(mp_buffer);
@@ -596,7 +596,7 @@ namespace SonikAudio
 		int32_t** p_wave = reinterpret_cast<int32_t**>( ref_itr->GetAudioControlPointer() );
 		const float* volume = ref_itr->GetVolume();
 		double c_vol = 0.0;
-		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
+//		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
 		SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
 		uint32_t _splitsize = (m_samplingRate >> 3);//8ch(7.1ch)で決定しているので直値で記載。
 		int32_t* _buffer = reinterpret_cast<int32_t*>(mp_buffer);

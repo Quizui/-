@@ -86,7 +86,7 @@ namespace SonikAudioPlayerTask
 
 		l_cls_func_obj->Set_DestroyObjectFlag(false);
 
-		mp_TaskQueue = new(std::nothrow) SonikLib::SonikAtomicQueue<SonikAudioTaskInterface::PlayerTaskInterface*>(QueueItemNum);
+		mp_TaskQueue = new(std::nothrow) SonikLib::Container::SonikAtomicQueue<SonikAudioTaskInterface::PlayerTaskInterface*>(QueueItemNum);
 		if(mp_TaskQueue == nullptr)
 		{
 			l_cls_func_obj.ResetPointer(nullptr);

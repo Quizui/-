@@ -15,9 +15,8 @@ namespace SonikAudioData
 
 	SonikAudioControlDataSetForSE::SonikAudioControlDataSetForSE(SonikLib::SharedSmtPtr<double> _se_mastervolume_, SonikMathDataBox::Sonik3DPoint& _listner_pos_, SonikMathDataBox::Sonik3DPoint& _listner_dir_, SonikAudio::SAudioFormat SetAudioPointer)
 	:SonikAudioControlData(SetAudioPointer)
-	,flgbit_effect(0)
-	,RA_effect{}
 	,m_CategorySEVol(_se_mastervolume_)
+	,flgbit_effect(0)
 	{
 		try
 		{
@@ -86,7 +85,7 @@ namespace SonikAudioData
 	//データが最終的にミキシングしてほしいボリューム値を取得
 	float SonikAudioControlDataSetForSE::GetMixingVolume(void)
 	{
-		double _ret = m_volume * (*m_mastervolume_se);
+		double _ret = m_volume * (*m_CategorySEVol);
 
 		if( flgbit_effect == 0)
 		{
@@ -105,7 +104,7 @@ namespace SonikAudioData
 	};
 
 	//エフェクトのフラグ設定とエフェクトの設定
-	void SonikAudioControlDataSetForSE::SetEffect(SonikAudioEnum::PlayEffectID _effected_)
+	void SonikAudioControlDataSetForSE::EnableEffect(SonikAudioEnum::PlayEffectID _effected_)
 	{
 		if( (flgbit_effect & _effected_) != 0 )
 		{
@@ -122,7 +121,7 @@ namespace SonikAudioData
 		case SonikAudioEnum::PlayEffectID::EF_DISTANCE:
 			{
 				using DISTANCEFUNCOBJ = SonikLib::Members_2_FuncRG<double, SonikMathDataBox::Sonik3DPoint&, SonikMathDataBox::Sonik3DPoint&>;
-				using DISTANCEFUNC = double (*)(double, SonikMathDataBox::Sonik3DPoint&, SonikMathDataBox::Sonik3DPoint&);
+				using DISTANCEFUNC = double (*)(SonikMathDataBox::Sonik3DPoint&, SonikMathDataBox::Sonik3DPoint&);
 
 				l_effectobj = DISTANCEFUNCOBJ::New(static_cast<DISTANCEFUNC>(&SonikMath::Distance), (*m_listner_3dpos), (*m_3dpos));
 			}
@@ -131,7 +130,7 @@ namespace SonikAudioData
 		case SonikAudioEnum::PlayEffectID::EF_PANNING:
 			{
 				using PANINGFUNCOBJ = SonikLib::Members_6_FuncRG<double, SonikMathDataBox::Sonik3DPoint&, SonikMathDataBox::Sonik3DPoint&, SonikMathDataBox::Sonik3DPoint&, SonikMathDataBox::Sonik3DPoint&, double, double>;
-				using PANNINGFUNC = double (*)(double, SonikMathDataBox::Sonik3DPoint&, SonikMathDataBox::Sonik3DPoint&, SonikMathDataBox::Sonik3DPoint&, SonikMathDataBox::Sonik3DPoint&, double, double);
+				using PANNINGFUNC = double (*)(SonikMathDataBox::Sonik3DPoint&, SonikMathDataBox::Sonik3DPoint&, SonikMathDataBox::Sonik3DPoint&, SonikMathDataBox::Sonik3DPoint&, double, double);
 
 				l_effectobj = PANINGFUNCOBJ::New(static_cast<PANNINGFUNC>(&SonikMath::Panning), (*m_listner_3dpos), (*m_3dpos), (*m_listner_3dpos), (*m_listner_3ddir), 1.0, 0.3);
 
@@ -159,7 +158,7 @@ namespace SonikAudioData
 		if( flgbit_effect == 0 )
 		{
 			effect = l_effectobj;
-			RA_effect[l_effected_flpoint];
+			RA_effect[l_effected_flpoint] = l_effectobj;
 
 			flgbit_effect |= static_cast<uint32_t>(_effected_);
 			return;
@@ -216,11 +215,11 @@ namespace SonikAudioData
 
 			//まずは配列から除去
 			tmp_RA_effect = RA_effect[l_effected_flpoint];
-			RA_effect[l_effected_flpoint]->ResetPointer(nullptr);
+			RA_effect[l_effected_flpoint].ResetPointer(nullptr);
 			//次にフラグリストからフラグを下ろす。
 			flgbit_effect &= ~(static_cast<uint32_t>(_disable_effect_));
 			//最後に自身が先頭or自身の身だった場合は先頭の付替。(というか0x01の場合常に先頭のはず)
-			tmp_RA_effect->GetNext_strong(effect);
+			effect = tmp_RA_effect->GetNext_strong();
 
 			return;
 		};
@@ -236,9 +235,9 @@ namespace SonikAudioData
 		if( tmpflg == 0 )
 		{
 			//自分最初であれば先頭ポインタを入れ替えて配列とかから外れる。
-			now->GetNext_strong(effect); //先頭ポインタを自分の次のエフェクトへ切り替え。
+			effect = now->GetNext_strong(); //先頭ポインタを自分の次のエフェクトへ切り替え。
 			//配列から抜ける。
-			RA_effect[l_effected_flpoint]->ResetPointer(nullptr); //配列のスマポを空に
+			RA_effect[l_effected_flpoint].ResetPointer(nullptr); //配列のスマポを空に
 			//フラグを下ろす。
 			flgbit_effect &= ~(static_cast<uint32_t>(_disable_effect_));
 			//終わり。
@@ -250,11 +249,11 @@ namespace SonikAudioData
 		SonikLib::SharedSmtPtr<SonikLib::SonikFOSTemplateInterface<double>> tmpget;
 
 		//付け替え
-		now->GetNext_strong(tmpget);
+		tmpget = now->GetNext_strong();
 		prev->SetNext_Strong(tmpget);
 
 		//配列から抜ける
-		RA_effect[l_effected_flpoint]->ResetPointer(nullptr); //配列のスマポを空に
+		RA_effect[l_effected_flpoint].ResetPointer(nullptr); //配列のスマポを空に
 
 		//フラグを下ろす。
 		flgbit_effect &= ~(static_cast<uint32_t>(_disable_effect_));
@@ -270,42 +269,37 @@ namespace SonikAudioData
 
 	void SonikAudioControlDataSetForSE::SetPositionAll(double x, double y, double z)
 	{
-		(*(m_3dpos->x)) = x;
-		(*(m_3dpos->y)) = y;
-		(*(m_3dpos->z)) = z;
+		m_3dpos->Set3Point(x, y, z);
 	};
 
 	void SonikAudioControlDataSetForSE::SetPositionXY(double x, double y)
 	{
-		(*(m_3dpos->x)) = x;
-		(*(m_3dpos->y)) = y;
+		m_3dpos->SetXY(x, y);
 	};
 
 	void SonikAudioControlDataSetForSE::SetPositionXZ(double x, double z)
 	{
-		(*(m_3dpos->x)) = x;
-		(*(m_3dpos->z)) = z;
+		m_3dpos->SetXZ(x, z);
 	};
 
 	void SonikAudioControlDataSetForSE::SetPositionYZ(double y, double z)
 	{
-		(*(m_3dpos->y)) = y;
-		(*(m_3dpos->z)) = z;
+		m_3dpos->SetYZ(y, z);
 	};
 
 	void SonikAudioControlDataSetForSE::SetPositionX(double x)
 	{
-		(*(m_3dpos->x)) = x;
+		m_3dpos->SetX(x);
 	};
 
 	void SonikAudioControlDataSetForSE::SetPositionY(double y)
 	{
-		(*(m_3dpos->y)) = y;
+		m_3dpos->SetY(y);
 	};
 
 	void SonikAudioControlDataSetForSE::SetPositionZ(double z)
 	{
-		(*(m_3dpos->z)) = z;
+		m_3dpos->SetZ(z);
 	};
 
 	SonikMathDataBox::Sonik3DPoint& SonikAudioControlDataSetForSE::GetPositionAll(void)
@@ -315,42 +309,37 @@ namespace SonikAudioData
 
 	void SonikAudioControlDataSetForSE::GetPositionAll(double& x, double& y, double& z)
 	{
-		x = (*(m_3dpos->x));
-		y = (*(m_3dpos->y));
-		z = (*(m_3dpos->z));
+		m_3dpos->Get3Point(x, y, z);
 	};
 
 	void SonikAudioControlDataSetForSE::GetPositionXY(double& x, double& y)
 	{
-		x = (*(m_3dpos->x));
-		y = (*(m_3dpos->y));
+		m_3dpos->GetXY(x, y);
 	};
 
 	void SonikAudioControlDataSetForSE::GetPositionXZ(double& x, double& z)
 	{
-		x = (*(m_3dpos->x));
-		z = (*(m_3dpos->z));
+		m_3dpos->GetXZ(x, z);
 	};
 
 	void SonikAudioControlDataSetForSE::GetPositionYZ(double& y, double& z)
 	{
-		y = (*(m_3dpos->y));
-		z = (*(m_3dpos->z));
+		m_3dpos->GetYZ(y, z);
 	};
 
 	double SonikAudioControlDataSetForSE::GetPositionX(void)
 	{
-		return (*(m_3dpos->x));
+		return m_3dpos->GetX();
 	};
 
 	double SonikAudioControlDataSetForSE::GetPositionY(void)
 	{
-		return (*(m_3dpos->y));
+		return m_3dpos->GetY();
 	};
 
 	double SonikAudioControlDataSetForSE::GetPositionZ(void)
 	{
-		return (*(m_3dpos->z));
+		return m_3dpos->GetZ();
 	};
 
 	void SonikAudioControlDataSetForSE::SetDirectionALL(SonikMathDataBox::Sonik3DPoint& _3ddir_)
@@ -360,42 +349,37 @@ namespace SonikAudioData
 
 	void SonikAudioControlDataSetForSE::SetDirectionAll(double x, double y, double z)
 	{
-		(*(m_3ddir->x)) = x;
-		(*(m_3ddir->y)) = y;
-		(*(m_3ddir->z)) = z;
+		m_3ddir->Set3Point(x, y, z);
 	};
 
 	void SonikAudioControlDataSetForSE::SetDirectionXY(double x, double y)
 	{
-		(*(m_3ddir->x)) = x;
-		(*(m_3ddir->y)) = y;
+		m_3ddir->SetXY(x, y);
 	};
 
 	void SonikAudioControlDataSetForSE::SetDirectionXZ(double x, double z)
 	{
-		(*(m_3ddir->x)) = x;
-		(*(m_3ddir->z)) = z;
+		m_3ddir->SetXZ(x, z);
 	};
 
 	void SonikAudioControlDataSetForSE::SetDirectionYZ(double y, double z)
 	{
-		(*(m_3ddir->y)) = y;
-		(*(m_3ddir->z)) = z;
+		m_3ddir->SetXY(y, z);
 	};
 
 	void SonikAudioControlDataSetForSE::SetDirectionX(double x)
 	{
-		(*(m_3ddir->x)) = x;
+		m_3ddir->SetX(x);
 	};
 
 	void SonikAudioControlDataSetForSE::SetDirectionY(double y)
 	{
-		(*(m_3ddir->y)) = y;
+		m_3ddir->SetY(y);
 	};
 
 	void SonikAudioControlDataSetForSE::SetDirectionZ(double z)
 	{
-		(*(m_3ddir->z)) = z;
+		m_3ddir->SetZ(z);
 	};
 
 	SonikMathDataBox::Sonik3DPoint& SonikAudioControlDataSetForSE::GetDirectionAll(void)
@@ -405,42 +389,22 @@ namespace SonikAudioData
 
 	void SonikAudioControlDataSetForSE::GetDirectionAll(double& x, double& y, double& z)
 	{
-		(*(m_3ddir->x)) = x;
-		(*(m_3ddir->y)) = y;
-		(*(m_3ddir->z)) = z;
+		m_3ddir->Get3Point(x, y, z);
 	};
 
 	void SonikAudioControlDataSetForSE::GetDirectionXY(double& x, double& y)
 	{
-		x = (*(m_3ddir->x));
-		y = (*(m_3ddir->y));
+		m_3ddir->GetXY(x, y);
 	};
 
 	void SonikAudioControlDataSetForSE::GetDirectionXZ(double& x, double& z)
 	{
-		x = (*(m_3ddir->x));
-		z = (*(m_3ddir->z));
+		m_3ddir->GetXY(x, z);
 	};
 
 	void SonikAudioControlDataSetForSE::GetDirectionYZ(double& y, double& z)
 	{
-		y = (*(m_3ddir->y));
-		z = (*(m_3ddir->z));
-	};
-
-	double SonikAudioControlDataSetForSE::GetPositionX(void)
-	{
-		return (*(m_3ddir->x));
-	};
-
-	double SonikAudioControlDataSetForSE::GetPositionY(void)
-	{
-		return (*(m_3ddir->y));
-	};
-
-	double SonikAudioControlDataSetForSE::GetPositionZ(void)
-	{
-		return (*(m_3ddir->z));
+		m_3ddir->GetXY(y, z);
 	};
 
 
