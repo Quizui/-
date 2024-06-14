@@ -34,7 +34,11 @@ namespace SonikAudio
 	SonikAudio_Implement::~SonikAudio_Implement(void)
 	{
 		//廃棄処理
-		//PlatFormInterface以外はスマートポインタから破棄される。
+		//ミキサを先に破棄しないとプラットフォーム先のバッファリング参照でセグフォを起こす。
+		if( !mp_Mixer.IsNullptr() )
+		{
+			mp_Mixer.ResetPointer(nullptr);
+		};
 
 		//PlatFormInterfaceのライフサイクル管理はAudioInterfaceの管轄のため
 		//ここでDeleteコール。

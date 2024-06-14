@@ -49,22 +49,25 @@ namespace SonikAudioData
 		//1bit_distance
 		//2bit_panning
 		uint32_t flgbit_effect;
-		//effect_pointerlist
-		SonikLib::SharedSmtPtr<SonikLib::SonikFOSTemplateInterface<double>> effect;
-		//RandamAccessArray
-		SonikLib::SharedSmtPtr<SonikLib::SonikFOSTemplateInterface<double>> RA_effect[sizeof(flgbit_effect) * 8];
+
+		using M_SAUDIO_EFFECT_FUNC = void (SonikAudioControlDataSetForSE::*)(double&, double&);
+		M_SAUDIO_EFFECT_FUNC m_effectlist[SonikAudioEnum::PlayEffectID::EF_CNT];
 
 	private:
 		//コピー禁止
 		SonikAudioControlDataSetForSE(SonikAudioControlDataSetForSE& _this_) = delete;
 		SonikAudioControlDataSetForSE& operator =(SonikAudioControlDataSetForSE& _this_) = delete;
 
+	private:
+		void SAC_PRIVATEFUNC_EFFECT_DISTANCE(double& _L_out_, double& _R_out_);
+		void SAC_PRIVATEFUNC_EFFECT_PANNING(double& _L_out_, double& _R_out_);
+
 	public:
 		SonikAudioControlDataSetForSE(SonikLib::SharedSmtPtr<double> _se_mastervolume_, SonikMathDataBox::Sonik3DPoint& _listner_pos_, SonikMathDataBox::Sonik3DPoint& _listner_dir_, SonikAudio::SAudioFormat SetAudioPointer);
 		~SonikAudioControlDataSetForSE(void);
 
 		//データが最終的にミキシングしてほしいボリューム値を取得
-		float GetMixingVolume(void);
+		void GetMixingVolume(double& _GetLMixingValue_, double& _GetRMixingValue_);
 
 		//エフェクトのフラグ設定とエフェクトの設定
 		void EnableEffect(SonikAudioEnum::PlayEffectID _enable_effect_);

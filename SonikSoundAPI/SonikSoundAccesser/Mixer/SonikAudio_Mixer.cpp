@@ -322,14 +322,22 @@ namespace SonikAudio
 //		double MaxListenVolume = mp_Listener->GetMaxListernDistance();
 //		_dis = (MaxListenVolume <= 0) ? 1.0 : 1.0 - (_dis / MaxListenVolume);
 
+		double l_Lvol = 0.0;
+		double l_Rvol = 0.0;
+
+		ref_itr->GetMixingVolume(l_Lvol, l_Rvol);
+
+		l_Lvol = mp_Listener->GetMasterVolume() * l_Lvol;
+		l_Rvol = mp_Listener->GetMasterVolume() * l_Rvol;
+
 		//for(uint32_t i = 0; i < _splitsize; ++i)
 		for(uint32_t i = 0; i < m_samplingRate; ++i)
 		{
 			//2chなので2ポインタ進めて１回分。
-			(*_buffer) += (*(*p_wave));// * master_vol * _dis * L_pan; // L
+			(*_buffer) += (*(*p_wave)) * l_Lvol;// * master_vol * _dis * L_pan; // L
 			++_buffer;
 			++(*p_wave);
-			(*_buffer) += (*(*p_wave));// * master_vol * _dis * R_pan; // R
+			(*_buffer) += (*(*p_wave)) * l_Rvol;// * master_vol * _dis * R_pan; // R
 			++_buffer;
 			++(*p_wave);
 

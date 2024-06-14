@@ -66,6 +66,18 @@ namespace SonikAudio
 		return mp_TskMng->AddTask(l_task);
 
 	};
+
+	//エフェクトセット
+	void SonikAudioSEPlayer::EnableEffect(SonikAudioEnum::PlayEffectID _enable_effectid_)
+	{
+		mp_AudioData->EnableEffect(_enable_effectid_);
+	};
+
+	void SonikAudioSEPlayer::DisableEffecct(SonikAudioEnum::PlayEffectID _disbale_effectid_)
+	{
+		mp_AudioData->DisableEffect(_disbale_effectid_);
+	};
+
 	bool SonikAudioSEPlayer::SetPositionX(double x)
 	{
 		SonikAudioPlayerTask::APTask_PositionChangeX* l_task = nullptr;

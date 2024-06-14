@@ -31,7 +31,7 @@ namespace SonikAudioData
 		~SonikAudioControlDataSetForBGM(void);
 
 		//データが最終的にミキシングしてほしいボリューム値を取得
-		float GetMixingVolume(void);
+		void GetMixingVolume(double& _GetLMixingValue_, double& _GetRMixingValue_);
 
 	};
 

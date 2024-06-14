@@ -26,6 +26,9 @@ namespace SonikAudioEnum
 	{
 		EF_DISTANCE = 1, //Distanceによる減衰を適用します。0x01(1bit目)
 		EF_PANNING	= 2, //Panningによる減衰を適用します。 0x02(2bit目)
+
+		EF_BITMAX = EF_DISTANCE | EF_PANNING, //エフェクトのビットON最大値。
+		EF_CNT = 2, //エフェクトの種類数
 	};
 
 }

@@ -56,7 +56,7 @@ bool PlatFormInitialize(char* DllPath, uint32_t SetBit, uint32_t SetSampling, ui
 		if( DLL_GLOBALPOINTER_SEVEADDRESS == nullptr || DLL_GLOBALPOINTER_SEVEADDRESS == 0 )
 		{
 			DLL_GLOBALPOINTER_SEVEADDRESS = nullptr;
-			lock_.Unlock();
+			lock_.unlock();
 			return false;
 		};
 
@@ -66,13 +66,13 @@ bool PlatFormInitialize(char* DllPath, uint32_t SetBit, uint32_t SetSampling, ui
 			delete DLL_GLOBALPOINTER_SEVEADDRESS;
 			DLL_GLOBALPOINTER_SEVEADDRESS = nullptr;
 
-			lock_.Unlock();
+			lock_.unlock();
 			return false;
 		};
 
 	};
 
-	lock_.Unlock();
+	lock_.unlock();
 
 	_GetAudioInterface_ = DLL_GLOBALPOINTER_SEVEADDRESS;
 	return true;

@@ -80,7 +80,7 @@ namespace SonikAudioData
 		uint64_t Get_UniqueID(void);
 
 		//データが最終的にミキシングしてほしいボリューム値を取得
-		virtual float GetMixingVolume(void) = 0;
+		virtual void GetMixingVolume(double&, double&) = 0;
 
 	};
 

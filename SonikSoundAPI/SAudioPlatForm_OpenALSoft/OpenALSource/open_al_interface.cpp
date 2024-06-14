@@ -15,6 +15,7 @@
 #include "./SAudioAccesserTypedef.h"
 //#include "../AudioFormat/LoadFunction/LoadFunction.h"
 #include "../OpenALFormat.h"
+#include "../../DllAccess/SonikDllAccessManager.h"
 
 
 
@@ -130,7 +131,7 @@ namespace AudioPlatformInterface
 		_dllpath += "/soft_oal";
 
 		SonikLib::SonikDllHandleManager l_dllmng;
-		if( !l_dllmng.DllGetLoad(_dllpath.c_str(), m_openal) )
+		if( !l_dllmng.DllGetLoad(_dllpath.str_c(), m_openal) )
 		{
 			m_OneBufferDataSize = 0;
 			m_SamplingRate = 0;

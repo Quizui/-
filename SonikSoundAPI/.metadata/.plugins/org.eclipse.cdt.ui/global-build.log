@@ -1,197 +1,21 @@
-19:27:42 **** Rebuild of configuration Debug_x64 for project SonikSoundAccesser ****
-Info: Internal Builder is used for build
-clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Player" -O0 -g3 -Wall -c -fmessage-length=0 -o "Player\\SonikAudioPlayer_CD_BGM.o" "..\\Player\\SonikAudioPlayer_CD_BGM.cpp" 
-In file included from <built-in>:469:
-<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
-    4 | #define __cplusplus 202002L
-      |         ^
+18:12:56 **** ÉrÉãÉh of configuration Debug for project SAudioPlatForm_OpenALSoft ****
+mingw32-make all 
+Building file: ../OpenALSource/open_al_interface.cpp
+Invoking: GCC C++ Compiler
+clang++ -std=c++17 -D_DEBUG -D__SONIK_x86_64__ -D_WIN64 -DHAVE_FSEEKO -DFLAC__NO_DLL -I"D:\MyLibrary\include\Audio\SoundSystem" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"OpenALSource/open_al_interface.d" -MT"OpenALSource/open_al_interface.o" -o "OpenALSource/open_al_interface.o" "../OpenALSource/open_al_interface.cpp"
+../OpenALSource/open_al_interface.cpp:154:11: warning: variable 'err_' set but not used [-Wunused-but-set-variable]
+  154 |                 ALCenum err_;
+      |                         ^
 1 warning generated.
-clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Player" -O0 -g3 -Wall -c -fmessage-length=0 -o "Player\\SonikAudioPlayer_CD_SE.o" "..\\Player\\SonikAudioPlayer_CD_SE.cpp" 
-In file included from <built-in>:469:
-<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
-    4 | #define __cplusplus 202002L
-      |         ^
-1 warning generated.
-clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Player" -O0 -g3 -Wall -c -fmessage-length=0 -o "Player\\SonikAudioSEPlayer.o" "..\\Player\\SonikAudioSEPlayer.cpp" 
-In file included from <built-in>:469:
-<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
-    4 | #define __cplusplus 202002L
-      |         ^
-In file included from ..\Player\SonikAudioSEPlayer.cpp:12:
-In file included from ..\Player/../Task/AudioPlayerTaskManager.h:12:
-D:\MyLibrary\include\Audio\SoundSystem\Player/../../../SonikWorkThread/SonikWorkThreadEx.h:32:12: warning: inline namespace reopened as a non-inline namespace [-Winline-namespace-reopened-noninline]
-   32 |         namespace _LIBCPP_ABI_NAMESPACE
-      |                   ^
-      |         inline 
-D:/Development/MSYS64/clang64/include/c++/v1/__config_site:13:31: note: expanded from macro '_LIBCPP_ABI_NAMESPACE'
-   13 | #define _LIBCPP_ABI_NAMESPACE __1
-      |                               ^
-D:/Development/MSYS64/clang64/include/c++/v1/__config:849:1: note: previous definition is here
-  849 | _LIBCPP_BEGIN_NAMESPACE_STD _LIBCPP_END_NAMESPACE_STD
-      | ^
-D:/Development/MSYS64/clang64/include/c++/v1/__config:845:72: note: expanded from macro '_LIBCPP_BEGIN_NAMESPACE_STD'
-  845 | #  define _LIBCPP_BEGIN_NAMESPACE_STD namespace std { inline namespace _LIBCPP_ABI_NAMESPACE {
-      |                                                                        ^
-D:/Development/MSYS64/clang64/include/c++/v1/__config_site:13:31: note: expanded from macro '_LIBCPP_ABI_NAMESPACE'
-   13 | #define _LIBCPP_ABI_NAMESPACE __1
-      |                               ^
-2 warnings generated.
-clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Task" -O0 -g3 -Wall -c -fmessage-length=0 -o "Task\\PlayerTask.o" "..\\Task\\PlayerTask.cpp" 
-In file included from <built-in>:469:
-<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
-    4 | #define __cplusplus 202002L
-      |         ^
-1 warning generated.
-clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Interface" -O0 -g3 -Wall -c -fmessage-length=0 -o "Interface\\SonikAudioCreator.o" "..\\Interface\\SonikAudioCreator.cpp" 
-In file included from <built-in>:469:
-<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
-    4 | #define __cplusplus 202002L
-      |         ^
-1 warning generated.
-clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Player" -O0 -g3 -Wall -c -fmessage-length=0 -o "Player\\SonikAudioPlayer_ControlData.o" "..\\Player\\SonikAudioPlayer_ControlData.cpp" 
-In file included from <built-in>:469:
-<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
-    4 | #define __cplusplus 202002L
-      |         ^
-1 warning generated.
-clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Player" -O0 -g3 -Wall -c -fmessage-length=0 -o "Player\\SonikAudioBGMPlayer.o" "..\\Player\\SonikAudioBGMPlayer.cpp" 
-In file included from <built-in>:469:
-<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
-    4 | #define __cplusplus 202002L
-      |         ^
-In file included from ..\Player\SonikAudioBGMPlayer.cpp:12:
-In file included from ..\Player/../Task/AudioPlayerTaskManager.h:12:
-D:\MyLibrary\include\Audio\SoundSystem\Player/../../../SonikWorkThread/SonikWorkThreadEx.h:32:12: warning: inline namespace reopened as a non-inline namespace [-Winline-namespace-reopened-noninline]
-   32 |         namespace _LIBCPP_ABI_NAMESPACE
-      |                   ^
-      |         inline 
-D:/Development/MSYS64/clang64/include/c++/v1/__config_site:13:31: note: expanded from macro '_LIBCPP_ABI_NAMESPACE'
-   13 | #define _LIBCPP_ABI_NAMESPACE __1
-      |                               ^
-D:/Development/MSYS64/clang64/include/c++/v1/__config:849:1: note: previous definition is here
-  849 | _LIBCPP_BEGIN_NAMESPACE_STD _LIBCPP_END_NAMESPACE_STD
-      | ^
-D:/Development/MSYS64/clang64/include/c++/v1/__config:845:72: note: expanded from macro '_LIBCPP_BEGIN_NAMESPACE_STD'
-  845 | #  define _LIBCPP_BEGIN_NAMESPACE_STD namespace std { inline namespace _LIBCPP_ABI_NAMESPACE {
-      |                                                                        ^
-D:/Development/MSYS64/clang64/include/c++/v1/__config_site:13:31: note: expanded from macro '_LIBCPP_ABI_NAMESPACE'
-   13 | #define _LIBCPP_ABI_NAMESPACE __1
-      |                               ^
-2 warnings generated.
-clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Listener" -O0 -g3 -Wall -c -fmessage-length=0 -o "Listener\\SonikAudioListener.o" "..\\Listener\\SonikAudioListener.cpp" 
-In file included from <built-in>:469:
-<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
-    4 | #define __cplusplus 202002L
-      |         ^
-In file included from ..\Listener\SonikAudioListener.cpp:8:
-..\Listener/SonikAudioListener.h:29:10: warning: private field 'listen_volume' is not used [-Wunused-private-field]
-   29 |                 double listen_volume; //ËÅû„Åì„Åà„Çã„Éú„É™„É•„Éº„É?
-      |                        ^
-2 warnings generated.
-clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Mixer" -O0 -g3 -Wall -c -fmessage-length=0 -o "Mixer\\SonikAudio_Mixer.o" "..\\Mixer\\SonikAudio_Mixer.cpp" 
-In file included from <built-in>:469:
-<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
-    4 | #define __cplusplus 202002L
-      |         ^
-In file included from ..\Mixer\SonikAudio_Mixer.cpp:10:
-In file included from ..\Mixer/SonikAudio_Mixer.h:15:
-D:\MyLibrary\include\Audio\SoundSystem\Mixer/../../../SonikWorkThread/SonikWorkThreadEx.h:32:12: warning: inline namespace reopened as a non-inline namespace [-Winline-namespace-reopened-noninline]
-   32 |         namespace _LIBCPP_ABI_NAMESPACE
-      |                   ^
-      |         inline 
-D:/Development/MSYS64/clang64/include/c++/v1/__config_site:13:31: note: expanded from macro '_LIBCPP_ABI_NAMESPACE'
-   13 | #define _LIBCPP_ABI_NAMESPACE __1
-      |                               ^
-D:/Development/MSYS64/clang64/include/c++/v1/__config:849:1: note: previous definition is here
-  849 | _LIBCPP_BEGIN_NAMESPACE_STD _LIBCPP_END_NAMESPACE_STD
-      | ^
-D:/Development/MSYS64/clang64/include/c++/v1/__config:845:72: note: expanded from macro '_LIBCPP_BEGIN_NAMESPACE_STD'
-  845 | #  define _LIBCPP_BEGIN_NAMESPACE_STD namespace std { inline namespace _LIBCPP_ABI_NAMESPACE {
-      |                                                                        ^
-D:/Development/MSYS64/clang64/include/c++/v1/__config_site:13:31: note: expanded from macro '_LIBCPP_ABI_NAMESPACE'
-   13 | #define _LIBCPP_ABI_NAMESPACE __1
-      |                               ^
-..\Mixer\SonikAudio_Mixer.cpp:260:35: warning: unused variable 'lis_pos' [-Wunused-variable]
-  260 |                 SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
-      |                                                 ^~~~~~~
-..\Mixer\SonikAudio_Mixer.cpp:307:35: warning: unused variable 'lis_pos' [-Wunused-variable]
-  307 |                 SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
-      |                                                 ^~~~~~~
-..\Mixer\SonikAudio_Mixer.cpp:308:35: warning: unused variable 'lis_dir' [-Wunused-variable]
-  308 |                 SonikMathDataBox::Sonik3DPoint& lis_dir = mp_Listener->GetDirection();
-      |                                                 ^~~~~~~
-..\Mixer\SonikAudio_Mixer.cpp:353:35: warning: unused variable 'lis_pos' [-Wunused-variable]
-  353 |                 SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
-      |                                                 ^~~~~~~
-..\Mixer\SonikAudio_Mixer.cpp:391:35: warning: unused variable 'lis_pos' [-Wunused-variable]
-  391 |                 SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
-      |                                                 ^~~~~~~
-..\Mixer\SonikAudio_Mixer.cpp:429:35: warning: unused variable 'lis_pos' [-Wunused-variable]
-  429 |                 SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
-      |                                                 ^~~~~~~
-..\Mixer\SonikAudio_Mixer.cpp:467:35: warning: unused variable 'lis_pos' [-Wunused-variable]
-  467 |                 SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
-      |                                                 ^~~~~~~
-..\Mixer\SonikAudio_Mixer.cpp:496:35: warning: unused variable 'lis_pos' [-Wunused-variable]
-  496 |                 SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
-      |                                                 ^~~~~~~
-..\Mixer\SonikAudio_Mixer.cpp:528:35: warning: unused variable 'lis_pos' [-Wunused-variable]
-  528 |                 SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
-      |                                                 ^~~~~~~
-..\Mixer\SonikAudio_Mixer.cpp:563:35: warning: unused variable 'lis_pos' [-Wunused-variable]
-  563 |                 SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
-      |                                                 ^~~~~~~
-..\Mixer\SonikAudio_Mixer.cpp:600:35: warning: unused variable 'lis_pos' [-Wunused-variable]
-  600 |                 SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
-      |                                                 ^~~~~~~
-13 warnings generated.
-clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Task" -O0 -g3 -Wall -c -fmessage-length=0 -o "Task\\AudioPlayerTaskManager.o" "..\\Task\\AudioPlayerTaskManager.cpp" 
-In file included from <built-in>:469:
-<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
-    4 | #define __cplusplus 202002L
-      |         ^
-In file included from ..\Task\AudioPlayerTaskManager.cpp:8:
-In file included from ..\Task/AudioPlayerTaskManager.h:12:
-D:\MyLibrary\include\Audio\SoundSystem\Task/../../../SonikWorkThread/SonikWorkThreadEx.h:32:12: warning: inline namespace reopened as a non-inline namespace [-Winline-namespace-reopened-noninline]
-   32 |         namespace _LIBCPP_ABI_NAMESPACE
-      |                   ^
-      |         inline 
-D:/Development/MSYS64/clang64/include/c++/v1/__config_site:13:31: note: expanded from macro '_LIBCPP_ABI_NAMESPACE'
-   13 | #define _LIBCPP_ABI_NAMESPACE __1
-      |                               ^
-D:/Development/MSYS64/clang64/include/c++/v1/__config:849:1: note: previous definition is here
-  849 | _LIBCPP_BEGIN_NAMESPACE_STD _LIBCPP_END_NAMESPACE_STD
-      | ^
-D:/Development/MSYS64/clang64/include/c++/v1/__config:845:72: note: expanded from macro '_LIBCPP_BEGIN_NAMESPACE_STD'
-  845 | #  define _LIBCPP_BEGIN_NAMESPACE_STD namespace std { inline namespace _LIBCPP_ABI_NAMESPACE {
-      |                                                                        ^
-D:/Development/MSYS64/clang64/include/c++/v1/__config_site:13:31: note: expanded from macro '_LIBCPP_ABI_NAMESPACE'
-   13 | #define _LIBCPP_ABI_NAMESPACE __1
-      |                               ^
-2 warnings generated.
-clang++ -std=c++20 -D_WIN64 -D__SONIK_x86_64__ -D_DEBUG -D__cplusplus=202002L -DHAVE_FSEEKO -DFLAC__NO_DLL "-ID:\\MyLibrary\\include\\Audio\\SoundSystem\\Interface" -O0 -g3 -Wall -c -fmessage-length=0 -o "Interface\\SonikAudio_Implement.o" "..\\Interface\\SonikAudio_Implement.cpp" 
-In file included from <built-in>:469:
-<command line>:4:9: warning: redefining builtin macro [-Wbuiltin-macro-redefined]
-    4 | #define __cplusplus 202002L
-      |         ^
-In file included from ..\Interface\SonikAudio_Implement.cpp:16:
-In file included from ..\Interface/../Task/AudioPlayerTaskManager.h:12:
-D:\MyLibrary\include\Audio\SoundSystem\Interface/../../../SonikWorkThread/SonikWorkThreadEx.h:32:12: warning: inline namespace reopened as a non-inline namespace [-Winline-namespace-reopened-noninline]
-   32 |         namespace _LIBCPP_ABI_NAMESPACE
-      |                   ^
-      |         inline 
-D:/Development/MSYS64/clang64/include/c++/v1/__config_site:13:31: note: expanded from macro '_LIBCPP_ABI_NAMESPACE'
-   13 | #define _LIBCPP_ABI_NAMESPACE __1
-      |                               ^
-D:/Development/MSYS64/clang64/include/c++/v1/__config:849:1: note: previous definition is here
-  849 | _LIBCPP_BEGIN_NAMESPACE_STD _LIBCPP_END_NAMESPACE_STD
-      | ^
-D:/Development/MSYS64/clang64/include/c++/v1/__config:845:72: note: expanded from macro '_LIBCPP_BEGIN_NAMESPACE_STD'
-  845 | #  define _LIBCPP_BEGIN_NAMESPACE_STD namespace std { inline namespace _LIBCPP_ABI_NAMESPACE {
-      |                                                                        ^
-D:/Development/MSYS64/clang64/include/c++/v1/__config_site:13:31: note: expanded from macro '_LIBCPP_ABI_NAMESPACE'
-   13 | #define _LIBCPP_ABI_NAMESPACE __1
-      |                               ^
-2 warnings generated.
-ar -r libDx64_SonikSoundAccesser.a "Interface\\SonikAudioCreator.o" "Interface\\SonikAudio_Implement.o" "Listener\\SonikAudioListener.o" "Mixer\\SonikAudio_Mixer.o" "Player\\SonikAudioBGMPlayer.o" "Player\\SonikAudioPlayer_CD_BGM.o" "Player\\SonikAudioPlayer_CD_SE.o" "Player\\SonikAudioPlayer_ControlData.o" "Player\\SonikAudioSEPlayer.o" "Task\\AudioPlayerTaskManager.o" "Task\\PlayerTask.o" 
-D:/Development/MSYS64/clang64/bin/ar.exe: warning: creating libDx64_SonikSoundAccesser.a
+Finished building: ../OpenALSource/open_al_interface.cpp
+ 
+Building file: ../DllFunction/DllMain.cpp
+Invoking: GCC C++ Compiler
+clang++ -std=c++17 -D_DEBUG -D__SONIK_x86_64__ -D_WIN64 -DHAVE_FSEEKO -DFLAC__NO_DLL -I"D:\MyLibrary\include\Audio\SoundSystem" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"DllFunction/DllMain.d" -MT"DllFunction/DllMain.o" -o "DllFunction/DllMain.o" "../DllFunction/DllMain.cpp"
+Finished building: ../DllFunction/DllMain.cpp
+ 
+Building target: PlatFormSound_OpenAL.dll
+Invoking: MinGW C++ Linker
+g++ -L"D:\MyLibrary\lib\x64\Debug" -shared -o "PlatFormSound_OpenAL.dll" ./OpenALSource/open_al_interface.o  ./DllFunction/DllMain.o    -lDx64_SonikSoundAccesser -l_Dx64_SonikLibraryAPI -lfftw3
+Finished building target: PlatFormSound_OpenAL.dll
+ 
