@@ -1,4 +1,4 @@
-!SESSION 2024-05-02 13:51:37.344 -----------------------------------------------
+!SESSION 2024-06-14 18:05:48.307 -----------------------------------------------
 eclipse.buildId=4.30.0.20231201-1200
 java.version=17.0.10
 java.vendor=Eclipse Adoptium
@@ -7,9 +7,9 @@ Framework arguments:  -product org.eclipse.epp.package.cpp.product
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.cpp.product -clean
 
 This is a continuation of log file D:\GithubRepo\SonikLibraryAPI\.metadata\.bak_9.log
-Created Time: 2024-05-02 13:57:42.346
+Created Time: 2024-06-14 18:11:03.677
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:42.346
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:03.677
 !MESSAGE エラー: Encountered an ambiguous node "chrono::duration_cast<chrono::seconds>(__value - __hour)" at D:\Development\MSYS64\clang64\include\c++\v1\__chrono\convert_to_tm.h, line 125 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikFrameControl\SonikFrameControl_x64.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "chrono::duration_cast<chrono::seconds>(__value - __hour)" at D:\Development\MSYS64\clang64\include\c++\v1\__chrono\convert_to_tm.h, line 125 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikFrameControl\SonikFrameControl_x64.cpp
@@ -594,7 +594,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:42.352
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:03.682
 !MESSAGE エラー: Encountered an ambiguous node "sizeof(_CharT)" at D:\Development\MSYS64\clang64\include\c++\v1\__format\buffer.h, line 562 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikFrameControl\SonikFrameControl_x64.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "sizeof(_CharT)" at D:\Development\MSYS64\clang64\include\c++\v1\__format\buffer.h, line 562 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikFrameControl\SonikFrameControl_x64.cpp
@@ -1200,7 +1200,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:42.380
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:03.709
 !MESSAGE Error: Encountered an ambiguous node "_NOEXCEPT_(
             !__alloc_traits::propagate_on_container_move_assignment::value ||
             is_nothrow_move_assignable<allocator_type>::value)" at D:\Development\MSYS64\clang64\include\c++\v1\string, line 2001 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikFrameControl\SonikFrameControl_x64.cpp
@@ -1787,7 +1787,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:42.381
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:03.711
 !MESSAGE エラー: Encountered an ambiguous node "_NOEXCEPT_(is_nothrow_move_assignable<allocator_type>::value)" at D:\Development\MSYS64\clang64\include\c++\v1\string, line 2009 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikFrameControl\SonikFrameControl_x64.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_NOEXCEPT_(is_nothrow_move_assignable<allocator_type>::value)" at D:\Development\MSYS64\clang64\include\c++\v1\string, line 2009 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikFrameControl\SonikFrameControl_x64.cpp
@@ -2369,7 +2369,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:42.383
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:03.712
 !MESSAGE エラー: Encountered an ambiguous node "_NOEXCEPT_(is_nothrow_move_assignable<allocator_type>::value)" at D:\Development\MSYS64\clang64\include\c++\v1\string, line 2009 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikFrameControl\SonikFrameControl_x64.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_NOEXCEPT_(is_nothrow_move_assignable<allocator_type>::value)" at D:\Development\MSYS64\clang64\include\c++\v1\string, line 2009 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikFrameControl\SonikFrameControl_x64.cpp
@@ -2959,7 +2959,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:42.390
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:03.721
 !MESSAGE エラー: Encountered an ambiguous node "_NOEXCEPT_(is_nothrow_default_constructible<allocator_type>::value)" at D:\Development\MSYS64\clang64\include\c++\v1\string, line 881 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikFrameControl\SonikFrameControl_x64.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_NOEXCEPT_(is_nothrow_default_constructible<allocator_type>::value)" at D:\Development\MSYS64\clang64\include\c++\v1\string, line 881 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikFrameControl\SonikFrameControl_x64.cpp
@@ -3546,7 +3546,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:42.442
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:03.770
 !MESSAGE エラー: Encountered an ambiguous node "sizeof...(_Args)" at D:\Development\MSYS64\clang64\include\c++\v1\__format\format_arg_store.h, line 252 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikFrameControl\SonikFrameControl_x64.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "sizeof...(_Args)" at D:\Development\MSYS64\clang64\include\c++\v1\__format\format_arg_store.h, line 252 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikFrameControl\SonikFrameControl_x64.cpp
@@ -4160,7 +4160,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:42.443
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:03.771
 !MESSAGE エラー: Encountered an ambiguous node "sizeof...(_Args)" at D:\Development\MSYS64\clang64\include\c++\v1\__format\format_arg_store.h, line 252 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikFrameControl\SonikFrameControl_x64.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "sizeof...(_Args)" at D:\Development\MSYS64\clang64\include\c++\v1\__format\format_arg_store.h, line 252 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikFrameControl\SonikFrameControl_x64.cpp
@@ -4782,7 +4782,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:42.445
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:03.772
 !MESSAGE エラー: Encountered an ambiguous node "sizeof...(_Args)" at D:\Development\MSYS64\clang64\include\c++\v1\__format\format_arg_store.h, line 252 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikFrameControl\SonikFrameControl_x64.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "sizeof...(_Args)" at D:\Development\MSYS64\clang64\include\c++\v1\__format\format_arg_store.h, line 252 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikFrameControl\SonikFrameControl_x64.cpp
@@ -5389,7 +5389,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:42.459
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:03.784
 !MESSAGE エラー: Encountered an ambiguous node "sizeof...(_MArgs)" at D:\Development\MSYS64\clang64\include\c++\v1\mutex, line 537 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikFrameControl\SonikFrameControl_x64.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "sizeof...(_MArgs)" at D:\Development\MSYS64\clang64\include\c++\v1\mutex, line 537 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikFrameControl\SonikFrameControl_x64.cpp
@@ -5986,7 +5986,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:42.779
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:04.081
 !MESSAGE Error while parsing /SonikLibraryAPI/SonikFrameControl/SonikFrameControl_x64.cpp.
 !STACK 0
 java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 3
@@ -6072,7 +6072,7 @@ java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 3
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:43.637
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:04.629
 !MESSAGE エラー: Encountered an ambiguous node "_IterOps<_AlgPolicy>::distance(__first, __last)" at D:\Development\MSYS64\clang64\include\c++\v1\__algorithm\lower_bound.h, line 33 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_IterOps<_AlgPolicy>::distance(__first, __last)" at D:\Development\MSYS64\clang64\include\c++\v1\__algorithm\lower_bound.h, line 33 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
@@ -6467,7 +6467,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:43.640
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:04.630
 !MESSAGE エラー: Encountered an ambiguous node "_IterOps<_AlgPolicy>::distance(__first, __last)" at D:\Development\MSYS64\clang64\include\c++\v1\__algorithm\lower_bound.h, line 33 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_IterOps<_AlgPolicy>::distance(__first, __last)" at D:\Development\MSYS64\clang64\include\c++\v1\__algorithm\lower_bound.h, line 33 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
@@ -6882,7 +6882,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:43.646
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:04.634
 !MESSAGE Error: Encountered an ambiguous node "__indexer_detail::__at_index<_Idx>(
         __indexer_detail::__indexer<
             __tuple_types<_Types...>,
@@ -7299,7 +7299,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:43.653
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:04.640
 !MESSAGE Error: Encountered an ambiguous node "_NOEXCEPT_(is_nothrow_copy_assignable<first_type>::value &&
                    is_nothrow_copy_assignable<second_type>::value)" at D:\Development\MSYS64\clang64\include\c++\v1\__utility\pair.h, line 323 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
 !STACK 0
@@ -7698,7 +7698,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:43.654
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:04.641
 !MESSAGE Error: Encountered an ambiguous node "_NOEXCEPT_(is_nothrow_move_assignable<first_type>::value &&
                    is_nothrow_move_assignable<second_type>::value)" at D:\Development\MSYS64\clang64\include\c++\v1\__utility\pair.h, line 336 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
 !STACK 0
@@ -8096,7 +8096,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:43.676
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:04.656
 !MESSAGE エラー: Encountered an ambiguous node "std::min<_DiffT>(__local_last - __local_first, __last - __first)" at D:\Development\MSYS64\clang64\include\c++\v1\__algorithm\copy.h, line 86 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "std::min<_DiffT>(__local_last - __local_first, __last - __first)" at D:\Development\MSYS64\clang64\include\c++\v1\__algorithm\copy.h, line 86 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
@@ -8496,7 +8496,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:43.679
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:04.657
 !MESSAGE エラー: Encountered an ambiguous node "std::__copy<_AlgPolicy>(__first, __first + __size, __local_first)" at D:\Development\MSYS64\clang64\include\c++\v1\__algorithm\copy.h, line 87 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "std::__copy<_AlgPolicy>(__first, __first + __size, __local_first)" at D:\Development\MSYS64\clang64\include\c++\v1\__algorithm\copy.h, line 87 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
@@ -8896,7 +8896,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:43.681
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:04.658
 !MESSAGE エラー: Encountered an ambiguous node "_IterOps<_AlgPolicy>::next(__first, __last)" at D:\Development\MSYS64\clang64\include\c++\v1\__algorithm\copy_backward.h, line 40 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_IterOps<_AlgPolicy>::next(__first, __last)" at D:\Development\MSYS64\clang64\include\c++\v1\__algorithm\copy_backward.h, line 40 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp

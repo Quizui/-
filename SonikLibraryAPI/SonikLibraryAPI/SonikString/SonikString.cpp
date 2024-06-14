@@ -1954,13 +1954,13 @@ namespace SonikLib
 			};
 		};
 
-		//合計数がbuffer_以内の場合、ReAllocはコールされず、ゴミが後ろに残ってしまうので一旦配列を0クリア
-		std::fill_n(Stringval_, buffer_, 0);
-
 		//memcpy_s(&(reinterpret_cast<char*>(Stringval_)[bufuse_]), (CopySize_ + sizeofsize_), t_his.Stringval_, CopySize_);
 		try
 		{
 			char8_t* l_offsetPoint = Stringval_ + bufuse_;
+			//合計数がbuffer_以内の場合、ReAllocはコールされず、ゴミが後ろに残ってしまうので現在の文字数より後ろの配列部分を0クリア
+			std::fill_n(l_offsetPoint, (buffer_ - bufuse_), 0);
+
 			std::copy_n(t_his.Stringval_, CopySize_, l_offsetPoint);
 
 		}catch(...)
@@ -2015,13 +2015,13 @@ namespace SonikLib
 			};
 		};
 
-		//合計数がbuffer_以内の場合、ReAllocはコールされず、ゴミが後ろに残ってしまうので一旦配列を0クリア
-		std::fill_n(Stringval_, buffer_, 0);
-
 		//memcpy_s(&(reinterpret_cast<char*>(Stringval_)[bufuse_]), (CopySize_ + 1) , Str, CopySize_ );
 		try
 		{
 			char* l_offsetPoint = reinterpret_cast<char*>(Stringval_ + bufuse_);
+			//合計数がbuffer_以内の場合、ReAllocはコールされず、ゴミが後ろに残ってしまうので現在の文字数より後ろの配列部分を0クリア
+			std::fill_n(l_offsetPoint, (buffer_ - bufuse_), 0);
+
 			std::copy_n(Str, CopySize_, l_offsetPoint);
 
 		}catch(...)
@@ -2064,14 +2064,13 @@ namespace SonikLib
 				throw std::bad_alloc();
 			};
 		};
-
-		//合計数がbuffer_以内の場合、ReAllocはコールされず、ゴミが後ろに残ってしまうので一旦配列を0クリア
-		std::fill_n(Stringval_, buffer_, 0);
-
 		//memcpy_s(&(reinterpret_cast<char*>(Stringval_)[bufuse_]), (CopySize_ + 2), w_Str, CopySize_);
 		try
 		{
 			char16_t* l_offsetPoint = reinterpret_cast<char16_t*>(Stringval_ + bufuse_);
+			//合計数がbuffer_以内の場合、ReAllocはコールされず、ゴミが後ろに残ってしまうので現在の文字数より後ろの配列部分を0クリア
+			std::fill_n(reinterpret_cast<char*>(l_offsetPoint), (buffer_ - bufuse_), 0);
+
 			CopySize_ >>= 1;
 			std::copy_n(w_Str, CopySize_, l_offsetPoint);
 
@@ -2137,6 +2136,8 @@ namespace SonikLib
 		{
 
 			wchar_t* l_offsetPoint = reinterpret_cast<wchar_t*>(Stringval_ + bufuse_);
+			//合計数がbuffer_以内の場合、ReAllocはコールされず、ゴミが後ろに残ってしまうので現在の文字数より後ろの配列部分を0クリア
+			std::fill_n(reinterpret_cast<char*>(l_offsetPoint), (buffer_ - bufuse_), 0);
 
 #if WCHAR_MAX <= 0xFFFFU
 			CopySize_ >>= 1;
@@ -2189,14 +2190,13 @@ namespace SonikLib
 			};
 		};
 
-		//合計数がbuffer_以内の場合、ReAllocはコールされず、ゴミが後ろに残ってしまうので一旦配列を0クリア
-		std::fill_n(Stringval_, buffer_, 0);
-
 		//memcpy_s(&(reinterpret_cast<char*>(Stringval_)[bufuse_]), (CopySize_ + 1) , utf8_Str, CopySize_ );
 		try
 		{
 
 			char8_t* l_offsetPoint = reinterpret_cast<char8_t*>(Stringval_ + bufuse_);
+			//合計数がbuffer_以内の場合、ReAllocはコールされず、ゴミが後ろに残ってしまうので現在の文字数より後ろの配列部分を0クリア
+			std::fill_n(reinterpret_cast<char*>(l_offsetPoint), (buffer_ - bufuse_), 0);
 			std::copy_n(utf8_Str, CopySize_, l_offsetPoint);
 
 		}catch(...)

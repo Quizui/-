@@ -64,6 +64,11 @@ namespace SonikLib
 		}
 
 	};
+	//constructor
+	SonikDllHandleManager::SonikDllHandleManager(void)
+	{
+		//no process;
+	};
 
 	//Destructor
 	SonikDllHandleManager::~SonikDllHandleManager(void)

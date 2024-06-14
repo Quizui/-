@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=".unlock();"/>
+		<item key="selection" value="operator +="/>
 		<item key="casesensitive" value="true"/>
 		<item key="incremental" value="true"/>
 		<item key="wrap" value="true"/>
 		<item key="wholeword" value="false"/>
 		<list key="findhistory">
+			<item value="operator +="/>
 			<item value=".Unlock();"/>
 			<item value="-&gt;Unlock();"/>
 			<item value="SonikString"/>
@@ -22,7 +23,6 @@
 			<item value="memcpy"/>
 			<item value="operator +=(const wchar_t*"/>
 			<item value="operator +(const wchar_t"/>
-			<item value="operator +=(const wchar_t"/>
 		</list>
 		<list key="replacehistory">
 			<item value=".unlock();"/>
@@ -46,7 +46,7 @@
 		<item key="DIALOG_WIDTH" value="304"/>
 		<item key="DIALOG_FONT_NAME" value="1|Yu Gothic UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Yu Gothic UI"/>
 		<item key="DIALOG_HEIGHT" value="385"/>
-		<item key="DIALOG_X_ORIGIN" value="862"/>
-		<item key="DIALOG_Y_ORIGIN" value="254"/>
+		<item key="DIALOG_X_ORIGIN" value="846"/>
+		<item key="DIALOG_Y_ORIGIN" value="-127"/>
 	</section>
 </section>

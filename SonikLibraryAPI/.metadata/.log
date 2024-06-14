@@ -1,4 +1,4 @@
-!SESSION 2024-05-02 13:51:37.344 -----------------------------------------------
+!SESSION 2024-06-14 18:05:48.307 -----------------------------------------------
 eclipse.buildId=4.30.0.20231201-1200
 java.version=17.0.10
 java.vendor=Eclipse Adoptium
@@ -7,9 +7,9 @@ Framework arguments:  -product org.eclipse.epp.package.cpp.product
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.cpp.product -clean
 
 This is a continuation of log file D:\GithubRepo\SonikLibraryAPI\.metadata\.bak_7.log
-Created Time: 2024-05-02 13:57:44.195
+Created Time: 2024-06-14 18:11:05.130
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:44.195
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:05.131
 !MESSAGE Error: Encountered an ambiguous node "std::__uses_allocator_construction_args<_Pair>(
       __alloc,
       piecewise_construct,
@@ -646,7 +646,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:44.233
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:05.165
 !MESSAGE Error: Encountered an ambiguous node "_NOEXCEPT_(
             !__alloc_traits::propagate_on_container_move_assignment::value ||
             is_nothrow_move_assignable<allocator_type>::value)" at D:\Development\MSYS64\clang64\include\c++\v1\string, line 2001 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
@@ -1268,7 +1268,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:44.235
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:05.167
 !MESSAGE エラー: Encountered an ambiguous node "_NOEXCEPT_(is_nothrow_move_assignable<allocator_type>::value)" at D:\Development\MSYS64\clang64\include\c++\v1\string, line 2009 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_NOEXCEPT_(is_nothrow_move_assignable<allocator_type>::value)" at D:\Development\MSYS64\clang64\include\c++\v1\string, line 2009 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
@@ -1885,7 +1885,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:44.236
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:05.168
 !MESSAGE エラー: Encountered an ambiguous node "_NOEXCEPT_(is_nothrow_move_assignable<allocator_type>::value)" at D:\Development\MSYS64\clang64\include\c++\v1\string, line 2009 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_NOEXCEPT_(is_nothrow_move_assignable<allocator_type>::value)" at D:\Development\MSYS64\clang64\include\c++\v1\string, line 2009 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
@@ -2510,7 +2510,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:44.243
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:05.174
 !MESSAGE エラー: Encountered an ambiguous node "_NOEXCEPT_(is_nothrow_default_constructible<allocator_type>::value)" at D:\Development\MSYS64\clang64\include\c++\v1\string, line 881 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_NOEXCEPT_(is_nothrow_default_constructible<allocator_type>::value)" at D:\Development\MSYS64\clang64\include\c++\v1\string, line 881 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
@@ -3132,7 +3132,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:45.066
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:05.838
 !MESSAGE エラー: Encountered an ambiguous node "_VSTD::forward<_Visitor>(__visitor)" at D:\Development\MSYS64\clang64\include\c++\v1\variant, line 724 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_VSTD::forward<_Visitor>(__visitor)" at D:\Development\MSYS64\clang64\include\c++\v1\variant, line 724 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
@@ -3195,7 +3195,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:48.510
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:09.811
 !MESSAGE エラー: operator () is not a member of __fn
 !STACK 0
 java.lang.IllegalArgumentException: operator () is not a member of __fn
@@ -3242,7 +3242,7 @@ java.lang.IllegalArgumentException: operator () is not a member of __fn
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:49.254
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:10.555
 !MESSAGE エラー: __get_alt is not a member of __union
 !STACK 0
 java.lang.IllegalArgumentException: __get_alt is not a member of __union
@@ -3290,7 +3290,7 @@ java.lang.IllegalArgumentException: __get_alt is not a member of __union
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:49.256
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:10.557
 !MESSAGE エラー: __at is not a member of __base
 !STACK 0
 java.lang.IllegalArgumentException: __at is not a member of __base
@@ -3336,19 +3336,19 @@ java.lang.IllegalArgumentException: __at is not a member of __base
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:57.449
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:18.802
 !MESSAGE Unexpected overload for binary operator 8: 'operator <'
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:57.450
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:18.804
 !MESSAGE Unexpected overload for binary operator 8: 'operator <'
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:57.483
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:18.835
 !MESSAGE Unexpected overload for binary operator 8: 'operator <'
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:57.484
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:18.836
 !MESSAGE Unexpected overload for binary operator 8: 'operator <'
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:57.560
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:18.910
 !MESSAGE Error while parsing /D:/GithubRepo/SonikLibraryAPI/SonikLibraryAPI/SonikString/SonikString.cpp.
 !STACK 1
 org.eclipse.core.runtime.CoreException: Error while parsing /D:/GithubRepo/SonikLibraryAPI/SonikLibraryAPI/SonikString/SonikString.cpp.
@@ -3365,14 +3365,9 @@ Contains: Error while parsing /D:/Development/MSYS64/clang64/include/c++/v1/__it
 java.lang.StackOverflowError
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor$CollectDeclarationsAction.visit(CPPVisitor.java:1630)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTName.accept(CPPASTName.java:158)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTDeclarator.accept(CPPASTDeclarator.java:206)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTParameterDeclaration.accept(CPPASTParameterDeclaration.java:108)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDeclarator.postAccept(CPPASTFunctionDeclarator.java:292)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTDeclarator.accept(CPPASTDeclarator.java:220)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:208)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTemplateDeclaration.accept(CPPASTTemplateDeclaration.java:131)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompositeTypeSpecifier.accept(CPPASTCompositeTypeSpecifier.java:201)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompositeTypeSpecifier.accept(CPPASTCompositeTypeSpecifier.java:187)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTSimpleDeclaration.accept(CPPASTSimpleDeclaration.java:112)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTemplateDeclaration.accept(CPPASTTemplateDeclaration.java:131)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTNamespaceDefinition.accept(CPPASTNamespaceDefinition.java:144)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTNamespaceDefinition.accept(CPPASTNamespaceDefinition.java:144)
 	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
@@ -4387,24 +4382,22 @@ java.lang.StackOverflowError
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTName.accept(CPPASTName.java:158)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTQualifiedName.accept(CPPASTQualifiedName.java:246)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTDeclarator.accept(CPPASTDeclarator.java:206)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:208)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTNamespaceDefinition.accept(CPPASTNamespaceDefinition.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.getDeclarations(CPPVisitor.java:3056)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTranslationUnit.getDefinitionsInAST(CPPASTTranslationUnit.java:155)
 Contains: Error while parsing /D:/Development/MSYS64/clang64/include/c++/v1/__iterator/move_iterator.h.
 java.lang.StackOverflowError
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor$CollectDeclarationsAction.visit(CPPVisitor.java:1630)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.areEquivalentBindings(CPPVisitor.java:1744)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor$CollectDeclarationsAction.isDeclarationBinding(CPPVisitor.java:1711)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor$CollectDeclarationsAction.visit(CPPVisitor.java:1698)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTName.accept(CPPASTName.java:158)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTDeclarator.accept(CPPASTDeclarator.java:206)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTParameterDeclaration.accept(CPPASTParameterDeclaration.java:108)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDeclarator.postAccept(CPPASTFunctionDeclarator.java:292)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTDeclarator.accept(CPPASTDeclarator.java:220)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTLambdaExpression.accept(CPPASTLambdaExpression.java:168)
-	at org.eclipse.cdt.internal.core.dom.parser.ASTEqualsInitializer.accept(ASTEqualsInitializer.java:64)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTDeclarator.postAccept(CPPASTDeclarator.java:230)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTDeclarator.accept(CPPASTDeclarator.java:220)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTSimpleDeclaration.accept(CPPASTSimpleDeclaration.java:116)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTDeclarationStatement.accept(CPPASTDeclarationStatement.java:82)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:103)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement.accept(CPPASTIfStatement.java:160)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:103)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:225)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:208)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTemplateDeclaration.accept(CPPASTTemplateDeclaration.java:131)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompositeTypeSpecifier.accept(CPPASTCompositeTypeSpecifier.java:201)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTSimpleDeclaration.accept(CPPASTSimpleDeclaration.java:112)
@@ -5413,22 +5406,24 @@ java.lang.StackOverflowError
 	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPLinkage.doAdaptBinding(PDOMCPPLinkage.java:1250)
 	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPLinkage.adaptBinding(PDOMCPPLinkage.java:1205)
 	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPLinkage.adaptBinding(PDOMCPPLinkage.java:1185)
-!SUBENTRY 1 org.eclipse.cdt.core 4 0 2024-05-02 13:57:57.563
+	at org.eclipse.cdt.internal.core.pdom.PDOM.findBindingInLinkage(PDOM.java:1220)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.adaptBinding(PDOM.java:1202)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.adaptBinding(PDOM.java:1185)
+	at org.eclipse.cdt.internal.core.index.CIndex.adaptBinding(CIndex.java:491)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.areEquivalentBindings(CPPVisitor.java:1756)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.areEquivalentBindings(CPPVisitor.java:1744)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor$CollectDeclarationsAction.isDeclarationBinding(CPPVisitor.java:1711)
+!SUBENTRY 1 org.eclipse.cdt.core 4 0 2024-06-14 18:11:18.913
 !MESSAGE Error while parsing /D:/GithubRepo/SonikLibraryAPI/SonikLibraryAPI/SonikString/SonikString.cpp.
-!SUBENTRY 2 org.eclipse.cdt.core 4 0 2024-05-02 13:57:57.563
+!SUBENTRY 2 org.eclipse.cdt.core 4 0 2024-06-14 18:11:18.913
 !MESSAGE Error while parsing /D:/Development/MSYS64/clang64/include/c++/v1/__iterator/counted_iterator.h.
 !STACK 0
 java.lang.StackOverflowError
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor$CollectDeclarationsAction.visit(CPPVisitor.java:1630)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTName.accept(CPPASTName.java:158)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTDeclarator.accept(CPPASTDeclarator.java:206)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTParameterDeclaration.accept(CPPASTParameterDeclaration.java:108)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDeclarator.postAccept(CPPASTFunctionDeclarator.java:292)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTDeclarator.accept(CPPASTDeclarator.java:220)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:208)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTemplateDeclaration.accept(CPPASTTemplateDeclaration.java:131)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompositeTypeSpecifier.accept(CPPASTCompositeTypeSpecifier.java:201)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompositeTypeSpecifier.accept(CPPASTCompositeTypeSpecifier.java:187)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTSimpleDeclaration.accept(CPPASTSimpleDeclaration.java:112)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTemplateDeclaration.accept(CPPASTTemplateDeclaration.java:131)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTNamespaceDefinition.accept(CPPASTNamespaceDefinition.java:144)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTNamespaceDefinition.accept(CPPASTNamespaceDefinition.java:144)
 	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
@@ -6443,26 +6438,24 @@ java.lang.StackOverflowError
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTName.accept(CPPASTName.java:158)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTQualifiedName.accept(CPPASTQualifiedName.java:246)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTDeclarator.accept(CPPASTDeclarator.java:206)
-!SUBENTRY 2 org.eclipse.cdt.core 4 0 2024-05-02 13:57:57.564
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:208)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTNamespaceDefinition.accept(CPPASTNamespaceDefinition.java:144)
+	at org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit.accept(ASTTranslationUnit.java:289)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.getDeclarations(CPPVisitor.java:3056)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTranslationUnit.getDefinitionsInAST(CPPASTTranslationUnit.java:155)
+!SUBENTRY 2 org.eclipse.cdt.core 4 0 2024-06-14 18:11:18.914
 !MESSAGE Error while parsing /D:/Development/MSYS64/clang64/include/c++/v1/__iterator/move_iterator.h.
 !STACK 0
 java.lang.StackOverflowError
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor$CollectDeclarationsAction.visit(CPPVisitor.java:1630)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.areEquivalentBindings(CPPVisitor.java:1744)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor$CollectDeclarationsAction.isDeclarationBinding(CPPVisitor.java:1711)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor$CollectDeclarationsAction.visit(CPPVisitor.java:1698)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTName.accept(CPPASTName.java:158)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTDeclarator.accept(CPPASTDeclarator.java:206)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTParameterDeclaration.accept(CPPASTParameterDeclaration.java:108)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDeclarator.postAccept(CPPASTFunctionDeclarator.java:292)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTDeclarator.accept(CPPASTDeclarator.java:220)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTLambdaExpression.accept(CPPASTLambdaExpression.java:168)
-	at org.eclipse.cdt.internal.core.dom.parser.ASTEqualsInitializer.accept(ASTEqualsInitializer.java:64)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTDeclarator.postAccept(CPPASTDeclarator.java:230)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTDeclarator.accept(CPPASTDeclarator.java:220)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTSimpleDeclaration.accept(CPPASTSimpleDeclaration.java:116)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTDeclarationStatement.accept(CPPASTDeclarationStatement.java:82)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:103)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTIfStatement.accept(CPPASTIfStatement.java:160)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompoundStatement.accept(CPPASTCompoundStatement.java:103)
-	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:225)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition.accept(CPPASTFunctionDefinition.java:208)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTTemplateDeclaration.accept(CPPASTTemplateDeclaration.java:131)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTCompositeTypeSpecifier.accept(CPPASTCompositeTypeSpecifier.java:201)
 	at org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTSimpleDeclaration.accept(CPPASTSimpleDeclaration.java:112)
@@ -7471,8 +7464,15 @@ java.lang.StackOverflowError
 	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPLinkage.doAdaptBinding(PDOMCPPLinkage.java:1250)
 	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPLinkage.adaptBinding(PDOMCPPLinkage.java:1205)
 	at org.eclipse.cdt.internal.core.pdom.dom.cpp.PDOMCPPLinkage.adaptBinding(PDOMCPPLinkage.java:1185)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.findBindingInLinkage(PDOM.java:1220)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.adaptBinding(PDOM.java:1202)
+	at org.eclipse.cdt.internal.core.pdom.PDOM.adaptBinding(PDOM.java:1185)
+	at org.eclipse.cdt.internal.core.index.CIndex.adaptBinding(CIndex.java:491)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.areEquivalentBindings(CPPVisitor.java:1756)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor.areEquivalentBindings(CPPVisitor.java:1744)
+	at org.eclipse.cdt.internal.core.dom.parser.cpp.semantics.CPPVisitor$CollectDeclarationsAction.isDeclarationBinding(CPPVisitor.java:1711)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:58.679
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:20.001
 !MESSAGE エラー: Encountered an ambiguous node "_VSTD::get<_Idx>(__bound_args_)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 67 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikWorkThread\SonikWorkThreadEx.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_VSTD::get<_Idx>(__bound_args_)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 67 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikWorkThread\SonikWorkThreadEx.cpp
@@ -7549,7 +7549,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:58.680
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:20.002
 !MESSAGE エラー: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 67 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikWorkThread\SonikWorkThreadEx.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 67 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikWorkThread\SonikWorkThreadEx.cpp
@@ -7626,7 +7626,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:58.682
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:20.004
 !MESSAGE エラー: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 66 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikWorkThread\SonikWorkThreadEx.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 66 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikWorkThread\SonikWorkThreadEx.cpp
@@ -7698,7 +7698,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:58.684
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:20.005
 !MESSAGE エラー: Encountered an ambiguous node "_VSTD::get<_Idx>(_VSTD::move(__bound_args_))" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 76 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikWorkThread\SonikWorkThreadEx.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_VSTD::get<_Idx>(_VSTD::move(__bound_args_))" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 76 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikWorkThread\SonikWorkThreadEx.cpp
@@ -7785,7 +7785,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:58.684
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:20.006
 !MESSAGE エラー: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 76 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikWorkThread\SonikWorkThreadEx.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 76 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikWorkThread\SonikWorkThreadEx.cpp
@@ -7872,7 +7872,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:58.686
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:20.007
 !MESSAGE エラー: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 75 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikWorkThread\SonikWorkThreadEx.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 75 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikWorkThread\SonikWorkThreadEx.cpp
@@ -7954,7 +7954,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:58.688
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:20.008
 !MESSAGE エラー: Encountered an ambiguous node "_VSTD::get<_Idx>(_VSTD::move(__bound_args_))" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 85 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikWorkThread\SonikWorkThreadEx.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_VSTD::get<_Idx>(_VSTD::move(__bound_args_))" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 85 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikWorkThread\SonikWorkThreadEx.cpp
@@ -8041,7 +8041,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:58.689
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:20.009
 !MESSAGE エラー: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 85 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikWorkThread\SonikWorkThreadEx.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 85 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikWorkThread\SonikWorkThreadEx.cpp
@@ -8128,7 +8128,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:58.690
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:20.010
 !MESSAGE エラー: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 84 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikWorkThread\SonikWorkThreadEx.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "_VSTD::forward<_Args>(__args)" at D:\Development\MSYS64\clang64\include\c++\v1\__functional\perfect_forward.h, line 84 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikWorkThread\SonikWorkThreadEx.cpp
@@ -8210,5 +8210,5 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 1 0 2024-05-02 13:58:04.384
-!MESSAGE Indexed 'SonikLibraryAPI' (29 sources, 1,160 headers) in 54.3 sec: 140,642 declarations; 384,490 references; 0 unresolved inclusions; 662 syntax errors; 4,296 unresolved names (0.81%)
+!ENTRY org.eclipse.cdt.core 1 0 2024-06-14 18:11:25.492
+!MESSAGE Indexed 'SonikLibraryAPI' (29 sources, 1,160 headers) in 51.8 sec: 140,646 declarations; 384,526 references; 0 unresolved inclusions; 662 syntax errors; 4,307 unresolved names (0.81%)

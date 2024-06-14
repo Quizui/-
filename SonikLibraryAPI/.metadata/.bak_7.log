@@ -1,4 +1,4 @@
-!SESSION 2024-05-02 13:51:37.344 -----------------------------------------------
+!SESSION 2024-06-14 18:05:48.307 -----------------------------------------------
 eclipse.buildId=4.30.0.20231201-1200
 java.version=17.0.10
 java.vendor=Eclipse Adoptium
@@ -7,9 +7,9 @@ Framework arguments:  -product org.eclipse.epp.package.cpp.product
 Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.cpp.product -clean
 
 This is a continuation of log file D:\GithubRepo\SonikLibraryAPI\.metadata\.bak_6.log
-Created Time: 2024-05-02 13:57:44.168
+Created Time: 2024-06-14 18:11:05.105
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:44.168
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:05.105
 !MESSAGE Error: Encountered an ambiguous node "_LIBCPP_NOEXCEPT_RETURN(
     _VSTD::__apply_tuple_impl(
         _VSTD::forward<_Fn>(__f), _VSTD::forward<_Tuple>(__t),
@@ -680,7 +680,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:44.170
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:05.107
 !MESSAGE Error: Encountered an ambiguous node "_LIBCPP_NOEXCEPT_RETURN(
     _VSTD::__apply_tuple_impl(
         _VSTD::forward<_Fn>(__f), _VSTD::forward<_Tuple>(__t),
@@ -1356,7 +1356,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:44.172
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:05.109
 !MESSAGE Error: Encountered an ambiguous node "_LIBCPP_NOEXCEPT_RETURN(
     _VSTD::__apply_tuple_impl(
         _VSTD::forward<_Fn>(__f), _VSTD::forward<_Tuple>(__t),
@@ -2032,7 +2032,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:44.174
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:05.110
 !MESSAGE Error: Encountered an ambiguous node "_LIBCPP_NOEXCEPT_RETURN(
     _VSTD::__apply_tuple_impl(
         _VSTD::forward<_Fn>(__f), _VSTD::forward<_Tuple>(__t),
@@ -2716,7 +2716,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:44.176
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:05.111
 !MESSAGE Error: Encountered an ambiguous node "_LIBCPP_NOEXCEPT_RETURN(
     _VSTD::__apply_tuple_impl(
         _VSTD::forward<_Fn>(__f), _VSTD::forward<_Tuple>(__t),
@@ -3400,7 +3400,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:44.178
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:05.112
 !MESSAGE Error: Encountered an ambiguous node "_LIBCPP_NOEXCEPT_RETURN(
     _VSTD::__apply_tuple_impl(
         _VSTD::forward<_Fn>(__f), _VSTD::forward<_Tuple>(__t),
@@ -4069,7 +4069,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:44.180
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:05.114
 !MESSAGE Error: Encountered an ambiguous node "_LIBCPP_NOEXCEPT_RETURN(
     _VSTD::__apply_tuple_impl(
         _VSTD::forward<_Fn>(__f), _VSTD::forward<_Tuple>(__t),
@@ -4738,7 +4738,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:44.181
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:05.115
 !MESSAGE エラー: Encountered an ambiguous node "std::forward<_Tuple1>(__x)" at D:\Development\MSYS64\clang64\include\c++\v1\__memory\uses_allocator_construction.h, line 65 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "std::forward<_Tuple1>(__x)" at D:\Development\MSYS64\clang64\include\c++\v1\__memory\uses_allocator_construction.h, line 65 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
@@ -5379,7 +5379,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:44.183
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:05.119
 !MESSAGE エラー: Encountered an ambiguous node "std::forward<_Tuple2>(__y)" at D:\Development\MSYS64\clang64\include\c++\v1\__memory\uses_allocator_construction.h, line 71 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "std::forward<_Tuple2>(__y)" at D:\Development\MSYS64\clang64\include\c++\v1\__memory\uses_allocator_construction.h, line 71 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
@@ -6028,7 +6028,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:44.185
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:05.120
 !MESSAGE エラー: Encountered an ambiguous node "std::forward<_Tuple2>(__y)" at D:\Development\MSYS64\clang64\include\c++\v1\__memory\uses_allocator_construction.h, line 71 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "std::forward<_Tuple2>(__y)" at D:\Development\MSYS64\clang64\include\c++\v1\__memory\uses_allocator_construction.h, line 71 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
@@ -6685,7 +6685,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:44.186
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:05.122
 !MESSAGE エラー: Encountered an ambiguous node "std::forward<_Tuple2>(__y)" at D:\Development\MSYS64\clang64\include\c++\v1\__memory\uses_allocator_construction.h, line 71 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "std::forward<_Tuple2>(__y)" at D:\Development\MSYS64\clang64\include\c++\v1\__memory\uses_allocator_construction.h, line 71 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
@@ -7326,7 +7326,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:44.190
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:05.124
 !MESSAGE Error: Encountered an ambiguous node "std::__uses_allocator_construction_args<_Pair>(__alloc, piecewise_construct, tuple<>{}, tuple<>{})" at D:\Development\MSYS64\clang64\include\c++\v1\__memory\uses_allocator_construction.h, line 76 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
 !STACK 0
 org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous node "std::__uses_allocator_construction_args<_Pair>(__alloc, piecewise_construct, tuple<>{}, tuple<>{})" at D:\Development\MSYS64\clang64\include\c++\v1\__memory\uses_allocator_construction.h, line 76 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
@@ -7955,7 +7955,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:44.191
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:05.127
 !MESSAGE Error: Encountered an ambiguous node "std::__uses_allocator_construction_args<_Pair>(
       __alloc,
       piecewise_construct,
@@ -8592,7 +8592,7 @@ org.eclipse.cdt.internal.core.parser.ParserException: Encountered an ambiguous n
 	at org.eclipse.cdt.internal.core.pdom.PDOMIndexerJob.run(PDOMIndexerJob.java:160)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
 
-!ENTRY org.eclipse.cdt.core 4 0 2024-05-02 13:57:44.193
+!ENTRY org.eclipse.cdt.core 4 0 2024-06-14 18:11:05.128
 !MESSAGE Error: Encountered an ambiguous node "std::__uses_allocator_construction_args<_Pair>(
       __alloc, piecewise_construct, std::forward_as_tuple(__pair.first), std::forward_as_tuple(__pair.second))" at D:\Development\MSYS64\clang64\include\c++\v1\__memory\uses_allocator_construction.h, line 101 while parsing D:\GithubRepo\SonikLibraryAPI\SonikLibraryAPI\SonikString\SonikString.cpp
 !STACK 0

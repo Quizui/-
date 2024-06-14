@@ -1,4 +1,4 @@
-13:57:14 **** クリーンのみのビルド of configuration Debug_x64 for project SonikLibraryAPI ****
+18:10:37 **** クリーンのみのビルド of configuration Debug_x64 for project SonikLibraryAPI ****
 mingw32-make clean 
 rm -rf ./TimerClock/SonikElapsedTimer.d ./TimerClock/SonikElapsedTimer.o ./TimerClock/SonikElapsedTimer_x64.d ./TimerClock/SonikElapsedTimer_x64.o
 rm -rf ./SonikWorkThread/SonikWorkThreadEx.d ./SonikWorkThread/SonikWorkThreadEx.o ./SonikWorkThread/SonikWorkThreadManagerEx.d ./SonikWorkThread/SonikWorkThreadManagerEx.o
@@ -17,7 +17,7 @@ rm -rf ./Audio/Format/SonikAppleAiffFormat.d ./Audio/Format/SonikAppleAiffFormat
 rm -rf ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.d ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o
 rm -rf lib_Dx64_SonikLibraryAPI.a
  
-13:57:14 **** ビルド of configuration Debug_x64 for project SonikLibraryAPI ****
+18:10:37 **** ビルド of configuration Debug_x64 for project SonikLibraryAPI ****
 mingw32-make all 
 Building file: ../TimerClock/SonikElapsedTimer.cpp
 Invoking: GCC C++ Compiler
@@ -136,11 +136,11 @@ Finished building: ../SonikWorkThread/SonikWorkThreadManagerEx.cpp
 Building file: ../SonikString/WIDE/SonikStringWIDE.cpp
 Invoking: GCC C++ Compiler
 clang++ -std=c++20 -D__SONIK_x86_64__=1 -D_DEBUG -D_WIN64 -I./WIDE -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SonikString/WIDE/SonikStringWIDE.d" -MT"SonikString/WIDE/SonikStringWIDE.o" -o "SonikString/WIDE/SonikStringWIDE.o" "../SonikString/WIDE/SonikStringWIDE.cpp"
-../SonikString/WIDE/SonikStringWIDE.cpp:2385:12: warning: unused variable 'NULLSTR_SIZE' [-Wunused-variable]
- 2385 |                 uint32_t NULLSTR_SIZE = 2;
+../SonikString/WIDE/SonikStringWIDE.cpp:2390:12: warning: unused variable 'NULLSTR_SIZE' [-Wunused-variable]
+ 2390 |                 uint32_t NULLSTR_SIZE = 2;
       |                          ^~~~~~~~~~~~
-../SonikString/WIDE/SonikStringWIDE.cpp:2591:12: warning: unused variable 'NULLSTR_SIZE' [-Wunused-variable]
- 2591 |                 uint32_t NULLSTR_SIZE = 2;
+../SonikString/WIDE/SonikStringWIDE.cpp:2596:12: warning: unused variable 'NULLSTR_SIZE' [-Wunused-variable]
+ 2596 |                 uint32_t NULLSTR_SIZE = 2;
       |                          ^~~~~~~~~~~~
 ../SonikString/WIDE/SonikStringWIDE.cpp:1298:9: warning: unused type alias 'CONST_CHRTYPE' [-Wunused-local-typedef]
  1298 |                 using CONST_CHRTYPE = const char16_t*;
@@ -151,11 +151,11 @@ Finished building: ../SonikString/WIDE/SonikStringWIDE.cpp
 Building file: ../SonikString/UTF8/SonikStringUTF8.cpp
 Invoking: GCC C++ Compiler
 clang++ -std=c++20 -D__SONIK_x86_64__=1 -D_DEBUG -D_WIN64 -I./UTF8 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SonikString/UTF8/SonikStringUTF8.d" -MT"SonikString/UTF8/SonikStringUTF8.o" -o "SonikString/UTF8/SonikStringUTF8.o" "../SonikString/UTF8/SonikStringUTF8.cpp"
-../SonikString/UTF8/SonikStringUTF8.cpp:2385:12: warning: unused variable 'NULLSTR_SIZE' [-Wunused-variable]
- 2385 |                 uint32_t NULLSTR_SIZE = 2;
+../SonikString/UTF8/SonikStringUTF8.cpp:2384:12: warning: unused variable 'NULLSTR_SIZE' [-Wunused-variable]
+ 2384 |                 uint32_t NULLSTR_SIZE = 2;
       |                          ^~~~~~~~~~~~
-../SonikString/UTF8/SonikStringUTF8.cpp:2591:12: warning: unused variable 'NULLSTR_SIZE' [-Wunused-variable]
- 2591 |                 uint32_t NULLSTR_SIZE = 2;
+../SonikString/UTF8/SonikStringUTF8.cpp:2590:12: warning: unused variable 'NULLSTR_SIZE' [-Wunused-variable]
+ 2590 |                 uint32_t NULLSTR_SIZE = 2;
       |                          ^~~~~~~~~~~~
 ../SonikString/UTF8/SonikStringUTF8.cpp:1298:9: warning: unused type alias 'CONST_CHRTYPE' [-Wunused-local-typedef]
  1298 |                 using CONST_CHRTYPE = const char16_t*;
@@ -166,11 +166,11 @@ Finished building: ../SonikString/UTF8/SonikStringUTF8.cpp
 Building file: ../SonikString/UTF16/SonikStringUTF16.cpp
 Invoking: GCC C++ Compiler
 clang++ -std=c++20 -D__SONIK_x86_64__=1 -D_DEBUG -D_WIN64 -I./UTF16 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SonikString/UTF16/SonikStringUTF16.d" -MT"SonikString/UTF16/SonikStringUTF16.o" -o "SonikString/UTF16/SonikStringUTF16.o" "../SonikString/UTF16/SonikStringUTF16.cpp"
-../SonikString/UTF16/SonikStringUTF16.cpp:2385:12: warning: unused variable 'NULLSTR_SIZE' [-Wunused-variable]
- 2385 |                 uint32_t NULLSTR_SIZE = 2;
+../SonikString/UTF16/SonikStringUTF16.cpp:2384:12: warning: unused variable 'NULLSTR_SIZE' [-Wunused-variable]
+ 2384 |                 uint32_t NULLSTR_SIZE = 2;
       |                          ^~~~~~~~~~~~
-../SonikString/UTF16/SonikStringUTF16.cpp:2591:12: warning: unused variable 'NULLSTR_SIZE' [-Wunused-variable]
- 2591 |                 uint32_t NULLSTR_SIZE = 2;
+../SonikString/UTF16/SonikStringUTF16.cpp:2590:12: warning: unused variable 'NULLSTR_SIZE' [-Wunused-variable]
+ 2590 |                 uint32_t NULLSTR_SIZE = 2;
       |                          ^~~~~~~~~~~~
 ../SonikString/UTF16/SonikStringUTF16.cpp:1298:9: warning: unused type alias 'CONST_CHRTYPE' [-Wunused-local-typedef]
  1298 |                 using CONST_CHRTYPE = const char16_t*;

@@ -240,7 +240,7 @@ namespace SonikLib
 			return false;
 		};
 
-		if( FuncQueue_.IsNullptr())
+		if( !FuncQueue_.IsNullptr())
 		{
 			return false;
 		};
@@ -267,7 +267,7 @@ namespace SonikLib
 			return false;
 		};
 
-		if( FuncQueue_.IsNullptr() )
+		if( !FuncQueue_.IsNullptr() )
 		{
 			return false;
 		};

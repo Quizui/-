@@ -232,7 +232,7 @@ namespace SonikMathBit
 		BitValue |= (BitValue << 2);
 		BitValue |= (BitValue << 4);
 
-		return 8 - OnBitCountFor8bit(BitValue);
+		return (8 - OnBitCountFor8bit(BitValue)) + 1;
 
 	};
 
@@ -253,7 +253,7 @@ namespace SonikMathBit
 		BitValue |= (BitValue << 4);
 		BitValue |= (BitValue << 8);
 
-		return 16 - OnBitCountFor16bit(BitValue);
+		return (16 - OnBitCountFor16bit(BitValue)) + 1;
 
 	};
 
@@ -275,7 +275,7 @@ namespace SonikMathBit
 		BitValue |= (BitValue << 8);
 		BitValue |= (BitValue << 16);
 
-		return 32 - OnBitCountFor32bit(BitValue);
+		return (32 - OnBitCountFor32bit(BitValue)) + 1;
 
 	};
 
@@ -298,7 +298,7 @@ namespace SonikMathBit
 		BitValue |= (BitValue << 16);
 		BitValue |= (BitValue << 32);
 
-		return 64 - OnBitCountFor64bit(BitValue);
+		return (64 - OnBitCountFor64bit(BitValue)) + 1;
 
 	};
 
