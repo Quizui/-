@@ -1,0 +1,51 @@
+cmake_minimum_required(VERSION 3.10)
+
+#プロジェクトネーム変数設定
+set(V_ProjectName "SonikLibraryAPI")
+project(${V_ProjectName})
+
+set(CMAKE_VERBOSE_MAKEFILE ON)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_COMPILER "D:/Development/MSYS64/clang64/bin/clang++.exe")
+
+#include directory
+include_directories(${MINGW_HOME}/include)
+
+#Debug_set_arg
+#デバッグ時に有効にするフラグ
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+#set EXPORT_COMPILE_COMMANDS
+#compile_commands.json の出力をONにする。
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+endif()
+
+#debug build
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -std=c++20 -D __cplusplus=202002L -D _DEBUG -D _WIN64 -D __SONIK_x86_64__ -c -fmessage-length=0 -fsanitize=address,undefined,bounds -fno-omit-frame-pointer -Wall")
+
+#release build
+#set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -std=c++20 -D __cplusplus=202002L -D _RELEASE -D _WIN64 -D __SONIK_x86_64__ -c -fmessage-length=0 -fsanitize=address,undefined,bounds -fno-omit-frame-pointer -Wall")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -std=c++20 -D __cplusplus=202002L -D _RELEASE -D _WIN64 -D __SONIK_x86_64__ -c -fmessage-length=0 -Wall")
+
+# Ninjaのパスを明示的に指定
+set(CMAKE_MAKE_PROGRAM "D:/Development/Ninja/ninja")
+
+#ビルドターゲット
+file(GLOB_RECURSE SOURCES "./*.cpp")
+
+#ビルド除外ターゲット
+list(FILTER SOURCES EXCLUDE REGEX "Allocator/back/.*")
+list(FILTER SOURCES EXCLUDE REGEX "MathBit/Used/.*")
+
+#ビルド
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+add_library(Dx64_${V_ProjectName} STATIC ${SOURCES})
+
+else(CMAKE_BUILD_TYPE STREQUAL "Release")
+add_library(Rx64_${V_ProjectName} STATIC ${SOURCES})
+
+endif()
+
+
+#add_executable(TestBuild ${SOURCES})

@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="リソース &apos;SonikLibraryAPI/Logger&apos; を削除" deleteContents="false" description="リソース &apos;SonikLibraryAPI/Logger&apos; を削除" element1="/SonikLibraryAPI/Logger" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1700301505376"/>&#x0A;<refactoring comment="リソース &apos;SonikLibraryAPI/Allocator/SonikTLSFAllocator.h&apos; を削除" deleteContents="false" description="リソース &apos;SonikLibraryAPI/Allocator/SonikTLSFAllocator.h&apos; を削除" element1="/SonikLibraryAPI/Allocator/SonikTLSFAllocator.h" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1700305130430"/>
-</session>

@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="リソース &apos;SonikLibraryAPI/DllAccess/SonikDllObject.h&apos; を削除" deleteContents="false" description="リソース &apos;SonikLibraryAPI/DllAccess/SonikDllObject.h&apos; を削除" element1="/SonikLibraryAPI/DllAccess/SonikDllObject.h" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1592382721788"/>
-</session>

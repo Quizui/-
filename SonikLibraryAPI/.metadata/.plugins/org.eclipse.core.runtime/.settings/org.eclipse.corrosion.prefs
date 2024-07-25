@@ -1,3 +1,0 @@
-corrosion.rslPath=C\:\\Users\\owner\\.local\\bin\\rust-analyzer
-eclipse.preferences.version=1
-org.eclipse.corrosion.Cargo.default_source_containers=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<sourceLookupDirector>\r\n    <sourceContainers duplicates\="false">\r\n        <container memento\="CargoAbsolutePath" typeId\="org.eclipse.corrosion.containerType.absolutePath"/>\r\n        <container memento\="&lt;?xml version\=&quot;1.0&quot; encoding\=&quot;UTF-8&quot; standalone\=&quot;no&quot;?&gt;&\#13;&\#10;&lt;project referencedProjects\=&quot;true&quot;/&gt;&\#13;&\#10;" typeId\="org.eclipse.corrosion.containerType.project"/>\r\n    </sourceContainers>\r\n</sourceLookupDirector>\r\n

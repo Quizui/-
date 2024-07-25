@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Delete 2 resources" deleteContents="false" description="Delete 2 resources" element1="/SonikLibraryAPI/FunctionObject/TemplateFuncDefinition.hpp" element2="/SonikLibraryAPI/FunctionObject/WorkerFunctor_Base.hpp" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="2" stamp="1703326533617"/>&#x0A;<refactoring comment="Delete resource &apos;SonikLibraryAPI/FunctionObject/test&apos;" deleteContents="false" description="Delete resource &apos;SonikLibraryAPI/FunctionObject/test&apos;" element1="/SonikLibraryAPI/FunctionObject/test" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1703355815681"/>
-</session>

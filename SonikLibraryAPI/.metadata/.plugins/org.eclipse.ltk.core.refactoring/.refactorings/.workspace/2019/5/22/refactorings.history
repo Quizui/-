@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="リソース &apos;SonikLibraryAPI/Debug_x64&apos; を削除" deleteContents="false" description="リソース &apos;SonikLibraryAPI/Debug_x64&apos; を削除" element1="/SonikLibraryAPI/Debug_x64" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1559022944286"/>&#x0A;<refactoring comment="リソース &apos;SonikLibraryAPI/Release_x64&apos; を削除" deleteContents="false" description="リソース &apos;SonikLibraryAPI/Release_x64&apos; を削除" element1="/SonikLibraryAPI/Release_x64" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1559031749467"/>
-</session>

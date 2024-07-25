@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="リソース名 &apos;SonikLibraryAPI/RcyFileSystems&apos; を &apos;SonikFileSystems&apos; に変更します" description="リソース &apos;RcyFileSystems&apos; の名前変更" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="RcyFileSystems" name="SonikFileSystems" stamp="1544956981615" updateReferences="true"/>
-</session>
