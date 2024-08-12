@@ -13,8 +13,8 @@
 
 //C++20 以前はchar8_t が無いので。
 #if __cplusplus < 202002L
-              //C++20 以前であれば　char8_t は uint8_t
-              using char8_t = uint8_t;
+    //C++20 以前であれば　char8_t は uint8_t
+    using char8_t = uint8_t;
 #endif
 
 
@@ -54,6 +54,27 @@ namespace SonikLib
 		SonikString(const wchar_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
 		SonikString(const char8_t* SetStr);
 		SonikString(const char8_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+        SonikString(const int8_t SetValue);
+		SonikString(const int8_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+        SonikString(const uint8_t SetValue);
+		SonikString(const uint8_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+        SonikString(const int16_t SetValue);
+		SonikString(const int16_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+        SonikString(const uint16_t SetValue);
+		SonikString(const uint16_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+        SonikString(const int32_t SetValue);
+		SonikString(const int32_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+        SonikString(const uint32_t SetValue);
+		SonikString(const uint32_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+        SonikString(const int64_t SetValue);
+		SonikString(const int64_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+        SonikString(const uint64_t SetValue);
+		SonikString(const uint64_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+        SonikString(const float SetValue);
+		SonikString(const float SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+        SonikString(const double SetValue);
+		SonikString(const double SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+
 
 		~SonikString(void);
 
@@ -86,7 +107,7 @@ namespace SonikLib
 		uint64_t GetCpy_str_utf8(char8_t* dstBuffer = nullptr);
 
 		//define切り替えのStrCopy
-		uint64_t GetCpy_str_definition(char*dstBuffer = nullptr);
+		uint64_t GetCpy_str_definition(char* dstBuffer = nullptr);
 
 		//c:文字列のByte数を取得します。（Null終端文字をカウントに含まない)
 		uint64_t Count_Byte_NotNull(void);
@@ -113,6 +134,16 @@ namespace SonikLib
 		SonikString& operator =(const char16_t* w_Str);
 		SonikString& operator =(const wchar_t* w_Str);
 		SonikString& operator =(const char8_t* utf8_Str);
+        SonikString& operator =(const int8_t SetValue);
+        SonikString& operator =(const uint8_t SetValue);
+        SonikString& operator =(const int16_t SetValue);
+        SonikString& operator =(const uint16_t SetValue);
+        SonikString& operator =(const int32_t SetValue);
+        SonikString& operator =(const uint32_t SetValue);
+        SonikString& operator =(const int64_t SetValue);
+        SonikString& operator =(const uint64_t SetValue);
+        SonikString& operator =(const float SetValue);
+		SonikString& operator =(const double SetValue);
 
 		//各入力フォーマットから現在のバッファに変換して結合します。
 		//コピー元とコピー先が同じオブジェクトの場合、そのまま結合します。
@@ -121,6 +152,16 @@ namespace SonikLib
 		SonikString& operator +=(const char16_t* w_Str);
 		SonikString& operator +=(const wchar_t* w_Str);
 		SonikString& operator +=(const char8_t* utf8_Str);
+        SonikString& operator +=(const int8_t SetValue);
+        SonikString& operator +=(const uint8_t SetValue);
+        SonikString& operator +=(const int16_t SetValue);
+        SonikString& operator +=(const uint16_t SetValue);
+        SonikString& operator +=(const int32_t SetValue);
+        SonikString& operator +=(const uint32_t SetValue);
+        SonikString& operator +=(const int64_t SetValue);
+        SonikString& operator +=(const uint64_t SetValue);
+        SonikString& operator +=(const float SetValue);
+		SonikString& operator +=(const double SetValue);
 
 		//現在のバッファと入力バッファを結合し、別のオブジェクトとして返却します。
 		//コピー元とコピー先が同じオブジェクトの場合、そのまま結合します。
@@ -129,6 +170,16 @@ namespace SonikLib
 		SonikString operator +(const char16_t* w_Str);
 		SonikString operator +(const wchar_t* w_Str);
 		SonikString operator +(const char8_t* utf8_Str);
+        SonikString operator +(const int8_t SetValue);
+        SonikString operator +(const uint8_t SetValue);
+        SonikString operator +(const int16_t SetValue);
+        SonikString operator +(const uint16_t SetValue);
+        SonikString operator +(const int32_t SetValue);
+        SonikString operator +(const uint32_t SetValue);
+        SonikString operator +(const int64_t SetValue);
+        SonikString operator +(const uint64_t SetValue);
+        SonikString operator +(const float SetValue);
+		SonikString operator +(const double SetValue);
 
 		//c: 文字列同士を比較します。(strcmp)
 		//c: 一致の場合true 不一致の場合 falseを返却します。

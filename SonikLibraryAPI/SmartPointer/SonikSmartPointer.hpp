@@ -183,8 +183,64 @@ namespace SonikLib
 			return (*this);
 		};
 
+       inline SharedSmtPtr& operator =(pType*& _pointer_) noexcept
+       {
+            Release();
+            
+            if(_pointer_ == nullptr)
+            {
+                return (*this);
+            };
+            
+            m_Pointer = _pointer_;
+            _pointer_ = nullptr;
+            
+            try
+            {
+                m_Count = new std::atomic<unsigned int>;
+                
+            }catch(std::bad_alloc& e)
+            {
+                delete m_Pointer;
+                m_Pointer = nullptr;
+                
+                throw;
+            };
+            
+            m_Count->store(1);
+            return (*this);
+        };
+       
+       inline SharedSmtPtr& operator =(pType*&& _pointer_) noexcept
+       {
+            Release();
+            
+            if(_pointer_ == nullptr)
+            {
+                return (*this);
+            };
+            
+            m_Pointer = _pointer_;
+            _pointer_ = nullptr;
+            
+            try
+            {
+                m_Count = new std::atomic<unsigned int>;
+                
+            }catch(std::bad_alloc& e)
+            {
+                delete m_Pointer;
+                m_Pointer = nullptr;
+                
+                throw;
+            };
+            
+            m_Count->store(1);
+            return (*this);
+        };
+
 		//MoveEqual
-		SharedSmtPtr& operator =(SharedSmtPtr<pType>&& _SmtPtr_) noexcept
+		inline SharedSmtPtr& operator =(SharedSmtPtr<pType>&& _SmtPtr_) noexcept
 		{
 			//自己代入を解決する実装。
 			if(m_Pointer != _SmtPtr_.m_Pointer)

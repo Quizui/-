@@ -8,6 +8,8 @@
 #include <new>
 #include <algorithm>
 #include <stdint.h>
+#include <stdio.h>
+#include <inttypes.h>
 #include "../SonikCAS/SonikAtomicLock.h"
 #include "../MathBit/MathBit.h"
 #include "./SonikStringConvert.h"
@@ -64,6 +66,27 @@ namespace SonikLib
 		//コンストラクタオーバーロード
 		SonikString_pImpl(const char8_t* SetStr);
 		SonikString_pImpl(const char8_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+		//コンストラクタオーバーロード
+        SonikString_pImpl(const int8_t SetValue);
+		SonikString_pImpl(const int8_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+        SonikString_pImpl(const uint8_t SetValue);
+		SonikString_pImpl(const uint8_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+        SonikString_pImpl(const int16_t SetValue);
+		SonikString_pImpl(const int16_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+        SonikString_pImpl(const uint16_t SetValue);
+		SonikString_pImpl(const uint16_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+        SonikString_pImpl(const int32_t SetValue);
+		SonikString_pImpl(const int32_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+        SonikString_pImpl(const uint32_t SetValue);
+		SonikString_pImpl(const uint32_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+        SonikString_pImpl(const int64_t SetValue);
+		SonikString_pImpl(const int64_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+        SonikString_pImpl(const uint64_t SetValue);
+		SonikString_pImpl(const uint64_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+        SonikString_pImpl(const float SetValue);
+		SonikString_pImpl(const float SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+        SonikString_pImpl(const double SetValue);
+		SonikString_pImpl(const double SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
 
 		//c:コピーコンストラクタ
 		SonikString_pImpl(const SonikString_pImpl& t_his);
@@ -121,7 +144,16 @@ namespace SonikLib
 		SonikString_pImpl& operator =(const char16_t* w_Str);
 		SonikString_pImpl& operator =(const wchar_t* w_Str);
 		SonikString_pImpl& operator =(const char8_t* utf8_Str);
-
+        SonikString_pImpl& operator =(const int8_t SetValue);
+        SonikString_pImpl& operator =(const uint8_t SetValue);
+        SonikString_pImpl& operator =(const int16_t SetValue);
+        SonikString_pImpl& operator =(const uint16_t SetValue);
+        SonikString_pImpl& operator =(const int32_t SetValue);
+        SonikString_pImpl& operator =(const uint32_t SetValue);
+        SonikString_pImpl& operator =(const int64_t SetValue);
+        SonikString_pImpl& operator =(const uint64_t SetValue);
+        SonikString_pImpl& operator =(const float SetValue);
+		SonikString_pImpl& operator =(const double SetValue);
 
 		//c: 各入力フォーマットから現在のバッファに変換して結合します。
 		//c: コピー元とコピー先が同じオブジェクトの場合、そのまま結合します。
@@ -130,6 +162,16 @@ namespace SonikLib
 		SonikString_pImpl& operator +=(const char16_t* w_Str);
 		SonikString_pImpl& operator +=(const wchar_t* w_Str);
 		SonikString_pImpl& operator +=(const char8_t* utf8_Str);
+        SonikString_pImpl& operator +=(const int8_t SetValue);
+        SonikString_pImpl& operator +=(const uint8_t SetValue);
+        SonikString_pImpl& operator +=(const int16_t SetValue);
+        SonikString_pImpl& operator +=(const uint16_t SetValue);
+        SonikString_pImpl& operator +=(const int32_t SetValue);
+        SonikString_pImpl& operator +=(const uint32_t SetValue);
+        SonikString_pImpl& operator +=(const int64_t SetValue);
+        SonikString_pImpl& operator +=(const uint64_t SetValue);
+        SonikString_pImpl& operator +=(const float SetValue);
+		SonikString_pImpl& operator +=(const double SetValue);
 
 		//c: 現在のバッファと入力バッファを結合し、別のオブジェクトとして返却します。
 		//c: コピー元とコピー先が同じオブジェクトの場合、そのまま結合します。
@@ -138,6 +180,16 @@ namespace SonikLib
 		SonikString_pImpl operator +(const char16_t* w_Str);
 		SonikString_pImpl operator +(const wchar_t* w_Str);
 		SonikString_pImpl operator +(const char8_t* utf8_Str);
+        SonikString_pImpl operator +(const int8_t SetValue);
+        SonikString_pImpl operator +(const uint8_t SetValue);
+        SonikString_pImpl operator +(const int16_t SetValue);
+        SonikString_pImpl operator +(const uint16_t SetValue);
+        SonikString_pImpl operator +(const int32_t SetValue);
+        SonikString_pImpl operator +(const uint32_t SetValue);
+        SonikString_pImpl operator +(const int64_t SetValue);
+        SonikString_pImpl operator +(const uint64_t SetValue);
+        SonikString_pImpl operator +(const float SetValue);
+		SonikString_pImpl operator +(const double SetValue);
 
 		//c: 文字列同士を比較します。(strcmp)
 		//c: 一致の場合true 不一致の場合 falseを返却します。
@@ -637,13 +689,1135 @@ namespace SonikLib
 		CType = tmpType;
 	};
 
+    SonikString::SonikString_pImpl::SonikString_pImpl(const int8_t SetValue)
+    :Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+        char SetStr[5]{};
+        snprintf(SetStr, sizeof(SetStr), "%d", SetValue);
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+			if(  l_size == 0 )
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size]{};
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+
+			Stringval_ = new char8_t[buffer_]{};
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
+		};
+
+		//memcpy(Stringval_, SetStr, SrcByte);
+		try
+		{
+			std::copy_n(SetStr, SrcByte, Stringval_);
+		}catch(...)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+    SonikString::SonikString_pImpl::SonikString_pImpl(const int8_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+    :Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+        char SetStr[5]{};
+        snprintf(SetStr, sizeof(SetStr), "%d", SetValue);
+		
+        SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, _setlocale_);
+			if(  l_size == 0)
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size]{};
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, _setlocale_);
+
+			Stringval_ = new char8_t[buffer_]{};
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
+		};
+
+		//memcpy(Stringval_, SetStr, SrcByte);
+		try
+		{
+			std::copy_n(SetStr, SrcByte, Stringval_);
+		}catch(...)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+    SonikString::SonikString_pImpl::SonikString_pImpl(const uint8_t SetValue)
+    :Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+        char SetStr[5]{};
+        snprintf(SetStr, sizeof(SetStr), "%u", SetValue);
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+			if(  l_size == 0 )
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size]{};
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+
+			Stringval_ = new char8_t[buffer_]{};
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
+		};
+
+		//memcpy(Stringval_, SetStr, SrcByte);
+		try
+		{
+			std::copy_n(SetStr, SrcByte, Stringval_);
+		}catch(...)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+    SonikString::SonikString_pImpl::SonikString_pImpl(const uint8_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+    :Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+        char SetStr[5]{};
+        snprintf(SetStr, sizeof(SetStr), "%u", SetValue);
+		
+        SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, _setlocale_);
+			if(  l_size == 0)
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size]{};
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, _setlocale_);
+
+			Stringval_ = new char8_t[buffer_]{};
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
+		};
+
+		//memcpy(Stringval_, SetStr, SrcByte);
+		try
+		{
+			std::copy_n(SetStr, SrcByte, Stringval_);
+		}catch(...)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+    SonikString::SonikString_pImpl::SonikString_pImpl(const int16_t SetValue)
+    :Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+        char SetStr[7]{};
+        snprintf(SetStr, sizeof(SetStr), "%d", SetValue);
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+			if(  l_size == 0 )
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size]{};
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+
+			Stringval_ = new char8_t[buffer_]{};
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
+		};
+
+		//memcpy(Stringval_, SetStr, SrcByte);
+		try
+		{
+			std::copy_n(SetStr, SrcByte, Stringval_);
+		}catch(...)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+    SonikString::SonikString_pImpl::SonikString_pImpl(const int16_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+    :Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+        char SetStr[7]{};
+        snprintf(SetStr, sizeof(SetStr), "%d", SetValue);
+		
+        SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, _setlocale_);
+			if(  l_size == 0)
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size]{};
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, _setlocale_);
+
+			Stringval_ = new char8_t[buffer_]{};
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
+		};
+
+		//memcpy(Stringval_, SetStr, SrcByte);
+		try
+		{
+			std::copy_n(SetStr, SrcByte, Stringval_);
+		}catch(...)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+    SonikString::SonikString_pImpl::SonikString_pImpl(const uint16_t SetValue)
+    :Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+        char SetStr[7]{};
+        snprintf(SetStr, sizeof(SetStr), "%u", SetValue);
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+			if(  l_size == 0 )
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size]{};
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+
+			Stringval_ = new char8_t[buffer_]{};
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
+		};
+
+		//memcpy(Stringval_, SetStr, SrcByte);
+		try
+		{
+			std::copy_n(SetStr, SrcByte, Stringval_);
+		}catch(...)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+    SonikString::SonikString_pImpl::SonikString_pImpl(const uint16_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+    :Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+        char SetStr[7]{};
+        snprintf(SetStr, sizeof(SetStr), "%u", SetValue);
+		
+        SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, _setlocale_);
+			if(  l_size == 0)
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size]{};
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, _setlocale_);
+
+			Stringval_ = new char8_t[buffer_]{};
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
+		};
+
+		//memcpy(Stringval_, SetStr, SrcByte);
+		try
+		{
+			std::copy_n(SetStr, SrcByte, Stringval_);
+		}catch(...)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+    SonikString::SonikString_pImpl::SonikString_pImpl(const int32_t SetValue)
+    :Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+        char SetStr[12]{};
+        snprintf(SetStr, sizeof(SetStr), "%" PRId32, SetValue);
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+			if(  l_size == 0 )
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size]{};
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+
+			Stringval_ = new char8_t[buffer_]{};
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
+		};
+
+		//memcpy(Stringval_, SetStr, SrcByte);
+		try
+		{
+			std::copy_n(SetStr, SrcByte, Stringval_);
+		}catch(...)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+    SonikString::SonikString_pImpl::SonikString_pImpl(const int32_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+    :Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+        char SetStr[12]{};
+        snprintf(SetStr, sizeof(SetStr), "%" PRId32, SetValue);
+		
+        SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, _setlocale_);
+			if(  l_size == 0)
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size]{};
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, _setlocale_);
+
+			Stringval_ = new char8_t[buffer_]{};
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
+		};
+
+		//memcpy(Stringval_, SetStr, SrcByte);
+		try
+		{
+			std::copy_n(SetStr, SrcByte, Stringval_);
+		}catch(...)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+    SonikString::SonikString_pImpl::SonikString_pImpl(const uint32_t SetValue)
+    :Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+        char SetStr[12]{};
+        snprintf(SetStr, sizeof(SetStr), "%" PRIu32, SetValue);
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+			if(  l_size == 0 )
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size]{};
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+
+			Stringval_ = new char8_t[buffer_]{};
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
+		};
+
+		//memcpy(Stringval_, SetStr, SrcByte);
+		try
+		{
+			std::copy_n(SetStr, SrcByte, Stringval_);
+		}catch(...)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+    SonikString::SonikString_pImpl::SonikString_pImpl(const uint32_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+    :Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+        char SetStr[12]{};
+        snprintf(SetStr, sizeof(SetStr), "%" PRIu32, SetValue);
+		
+        SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, _setlocale_);
+			if(  l_size == 0)
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size]{};
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, _setlocale_);
+
+			Stringval_ = new char8_t[buffer_]{};
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
+		};
+
+		//memcpy(Stringval_, SetStr, SrcByte);
+		try
+		{
+			std::copy_n(SetStr, SrcByte, Stringval_);
+		}catch(...)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+    SonikString::SonikString_pImpl::SonikString_pImpl(const int64_t SetValue)
+    :Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+        char SetStr[21]{};
+        snprintf(SetStr, sizeof(SetStr), "%" PRId64, SetValue);
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+			if(  l_size == 0 )
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size]{};
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+
+			Stringval_ = new char8_t[buffer_]{};
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
+		};
+
+		//memcpy(Stringval_, SetStr, SrcByte);
+		try
+		{
+			std::copy_n(SetStr, SrcByte, Stringval_);
+		}catch(...)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+    SonikString::SonikString_pImpl::SonikString_pImpl(const int64_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+    :Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+        char SetStr[21]{};
+        snprintf(SetStr, sizeof(SetStr), "%" PRId64, SetValue);
+		
+        SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, _setlocale_);
+			if(  l_size == 0)
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size]{};
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, _setlocale_);
+
+			Stringval_ = new char8_t[buffer_]{};
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
+		};
+
+		//memcpy(Stringval_, SetStr, SrcByte);
+		try
+		{
+			std::copy_n(SetStr, SrcByte, Stringval_);
+		}catch(...)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+    SonikString::SonikString_pImpl::SonikString_pImpl(const uint64_t SetValue)
+    :Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+        char SetStr[21]{};
+        snprintf(SetStr, sizeof(SetStr), "%" PRIu64, SetValue);
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+			if(  l_size == 0 )
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size]{};
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+
+			Stringval_ = new char8_t[buffer_]{};
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
+		};
+
+		//memcpy(Stringval_, SetStr, SrcByte);
+		try
+		{
+			std::copy_n(SetStr, SrcByte, Stringval_);
+		}catch(...)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+    SonikString::SonikString_pImpl::SonikString_pImpl(const uint64_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+    :Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+        char SetStr[21]{};
+        snprintf(SetStr, sizeof(SetStr), "%" PRIu64, SetValue);
+		
+        SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, _setlocale_);
+			if(  l_size == 0)
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size]{};
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, _setlocale_);
+
+			Stringval_ = new char8_t[buffer_]{};
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
+		};
+
+		//memcpy(Stringval_, SetStr, SrcByte);
+		try
+		{
+			std::copy_n(SetStr, SrcByte, Stringval_);
+		}catch(...)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+    SonikString::SonikString_pImpl::SonikString_pImpl(const float SetValue)
+    :Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+        char SetStr[47]{};
+        snprintf(SetStr, sizeof(SetStr), "%g", SetValue);
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+			if(  l_size == 0 )
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size]{};
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+
+			Stringval_ = new char8_t[buffer_]{};
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
+		};
+
+		//memcpy(Stringval_, SetStr, SrcByte);
+		try
+		{
+			std::copy_n(SetStr, SrcByte, Stringval_);
+		}catch(...)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+    SonikString::SonikString_pImpl::SonikString_pImpl(const float SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+    :Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+        char SetStr[47]{};
+        snprintf(SetStr, sizeof(SetStr), "%g", SetValue);
+		
+        SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, _setlocale_);
+			if(  l_size == 0)
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size]{};
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, _setlocale_);
+
+			Stringval_ = new char8_t[buffer_]{};
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
+		};
+
+		//memcpy(Stringval_, SetStr, SrcByte);
+		try
+		{
+			std::copy_n(SetStr, SrcByte, Stringval_);
+		}catch(...)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+    SonikString::SonikString_pImpl::SonikString_pImpl(const double SetValue)
+    :Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+        char SetStr[94]{};
+        snprintf(SetStr, sizeof(SetStr), "%lg", SetValue);
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+			if(  l_size == 0 )
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size]{};
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+
+			Stringval_ = new char8_t[buffer_]{};
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
+		};
+
+		//memcpy(Stringval_, SetStr, SrcByte);
+		try
+		{
+			std::copy_n(SetStr, SrcByte, Stringval_);
+		}catch(...)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+    SonikString::SonikString_pImpl::SonikString_pImpl(const double SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+    :Stringval_(nullptr)
+	,m_locale(nullptr)
+	,MaxLength_(0)
+	,CType(SCHTYPE_NULLTEXT)
+	,buffer_(100)
+	{
+        char SetStr[94]{};
+        snprintf(SetStr, sizeof(SetStr), "%lg", SetValue);
+		
+        SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(SetStr);
+
+		//NULL文字文追加(+1)して格納
+		uint64_t SrcByte = SonikLibStringConvert::GetStringLengthByte(SetStr) + 1;
+
+		if( SrcByte > buffer_ )
+		{
+			buffer_ = SrcByte;
+		};
+
+		try
+		{
+			uint32_t l_size = 0;
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, nullptr, _setlocale_);
+			if(  l_size == 0)
+			{
+				throw std::bad_alloc();
+			};
+
+			m_locale = new char[l_size]{};
+			SonikLibStringConvert::ConvertLocaleCharacter(l_size, m_locale, _setlocale_);
+
+			Stringval_ = new char8_t[buffer_]{};
+		}catch(std::bad_alloc& e)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+
+		};
+
+		//memcpy(Stringval_, SetStr, SrcByte);
+		try
+		{
+			std::copy_n(SetStr, SrcByte, Stringval_);
+		}catch(...)
+		{
+			delete[] m_locale;
+			delete[] Stringval_;
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		CType = tmpType;
+	};
+
+
 	SonikString::SonikString_pImpl::SonikString_pImpl(const SonikString_pImpl& t_his)
 	:Stringval_(nullptr)
 	,m_locale(nullptr)
 	,MaxLength_(0)
 	,CType(SCHTYPE_UTF16)
 	,buffer_(100)
-{
+    {
 		uint32_t localesize = SonikLibStringConvert::GetStringLengthByte(t_his.m_locale) + 1;
 		try
 		{
@@ -1895,7 +3069,456 @@ namespace SonikLib
 
 		string_operator_lock.unlock();
 		return (*this);
+	};    
+    SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator =(const int8_t SetValue)
+	{
+		string_operator_lock.lock();
+
+        char Str[5]{};
+        snprintf(Str, sizeof(Str), "%d", SetValue);
+
+		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		if(buffer_ < (Size_ + 1))
+		{
+			//null終端分追加
+			if(!this->ReAlloc( Size_ +1 ))
+			{
+				string_operator_lock.unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		std::fill_n(Stringval_, buffer_, 0);
+		if( strcmp(Str, "") == 0 )
+		{
+			CType = SCHTYPE_NULLTEXT;
+			string_operator_lock.unlock();
+			return (*this);
+		};
+
+		CType = SonikLibStringConvert::CheckConvertType(Str);
+
+		//memcpy_s(Stringval_, buffer_ , Str, Size_);
+
+		try
+		{
+			std::copy_n(Str, buffer_, reinterpret_cast<char*>(Stringval_));
+		}catch(...)
+		{
+			string_operator_lock.unlock();
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.unlock();
+		return (*this);
+
 	};
+    SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator =(const uint8_t SetValue)
+    {
+		string_operator_lock.lock();
+
+        char Str[5]{};
+        snprintf(Str, sizeof(Str), "%u", SetValue);
+
+		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		if(buffer_ < (Size_ + 1))
+		{
+			//null終端分追加
+			if(!this->ReAlloc( Size_ +1 ))
+			{
+				string_operator_lock.unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		std::fill_n(Stringval_, buffer_, 0);
+		if( strcmp(Str, "") == 0 )
+		{
+			CType = SCHTYPE_NULLTEXT;
+			string_operator_lock.unlock();
+			return (*this);
+		};
+
+		CType = SonikLibStringConvert::CheckConvertType(Str);
+
+		//memcpy_s(Stringval_, buffer_ , Str, Size_);
+
+		try
+		{
+			std::copy_n(Str, buffer_, reinterpret_cast<char*>(Stringval_));
+		}catch(...)
+		{
+			string_operator_lock.unlock();
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.unlock();
+		return (*this);
+
+	};
+    SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator =(const int16_t SetValue)
+    {
+		string_operator_lock.lock();
+
+        char Str[7]{};
+        snprintf(Str, sizeof(Str), "%d", SetValue);
+
+		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		if(buffer_ < (Size_ + 1))
+		{
+			//null終端分追加
+			if(!this->ReAlloc( Size_ +1 ))
+			{
+				string_operator_lock.unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		std::fill_n(Stringval_, buffer_, 0);
+		if( strcmp(Str, "") == 0 )
+		{
+			CType = SCHTYPE_NULLTEXT;
+			string_operator_lock.unlock();
+			return (*this);
+		};
+
+		CType = SonikLibStringConvert::CheckConvertType(Str);
+
+		//memcpy_s(Stringval_, buffer_ , Str, Size_);
+
+		try
+		{
+			std::copy_n(Str, buffer_, reinterpret_cast<char*>(Stringval_));
+		}catch(...)
+		{
+			string_operator_lock.unlock();
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.unlock();
+		return (*this);
+
+	};
+    SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator =(const uint16_t SetValue)
+    {
+		string_operator_lock.lock();
+
+        char Str[7]{};
+        snprintf(Str, sizeof(Str), "%u", SetValue);
+
+		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		if(buffer_ < (Size_ + 1))
+		{
+			//null終端分追加
+			if(!this->ReAlloc( Size_ +1 ))
+			{
+				string_operator_lock.unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		std::fill_n(Stringval_, buffer_, 0);
+		if( strcmp(Str, "") == 0 )
+		{
+			CType = SCHTYPE_NULLTEXT;
+			string_operator_lock.unlock();
+			return (*this);
+		};
+
+		CType = SonikLibStringConvert::CheckConvertType(Str);
+
+		//memcpy_s(Stringval_, buffer_ , Str, Size_);
+
+		try
+		{
+			std::copy_n(Str, buffer_, reinterpret_cast<char*>(Stringval_));
+		}catch(...)
+		{
+			string_operator_lock.unlock();
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.unlock();
+		return (*this);
+
+	};
+    SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator =(const int32_t SetValue)
+    {
+		string_operator_lock.lock();
+
+        char Str[12]{};
+        snprintf(Str, sizeof(Str), "%" PRId32, SetValue);
+
+		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		if(buffer_ < (Size_ + 1))
+		{
+			//null終端分追加
+			if(!this->ReAlloc( Size_ +1 ))
+			{
+				string_operator_lock.unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		std::fill_n(Stringval_, buffer_, 0);
+		if( strcmp(Str, "") == 0 )
+		{
+			CType = SCHTYPE_NULLTEXT;
+			string_operator_lock.unlock();
+			return (*this);
+		};
+
+		CType = SonikLibStringConvert::CheckConvertType(Str);
+
+		//memcpy_s(Stringval_, buffer_ , Str, Size_);
+
+		try
+		{
+			std::copy_n(Str, buffer_, reinterpret_cast<char*>(Stringval_));
+		}catch(...)
+		{
+			string_operator_lock.unlock();
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.unlock();
+		return (*this);
+
+	};
+    SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator =(const uint32_t SetValue)
+    {
+		string_operator_lock.lock();
+
+        char Str[12]{};
+        snprintf(Str, sizeof(Str), "%" PRIu32, SetValue);
+
+		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		if(buffer_ < (Size_ + 1))
+		{
+			//null終端分追加
+			if(!this->ReAlloc( Size_ +1 ))
+			{
+				string_operator_lock.unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		std::fill_n(Stringval_, buffer_, 0);
+		if( strcmp(Str, "") == 0 )
+		{
+			CType = SCHTYPE_NULLTEXT;
+			string_operator_lock.unlock();
+			return (*this);
+		};
+
+		CType = SonikLibStringConvert::CheckConvertType(Str);
+
+		//memcpy_s(Stringval_, buffer_ , Str, Size_);
+
+		try
+		{
+			std::copy_n(Str, buffer_, reinterpret_cast<char*>(Stringval_));
+		}catch(...)
+		{
+			string_operator_lock.unlock();
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.unlock();
+		return (*this);
+
+	};
+    SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator =(const int64_t SetValue)
+    {
+		string_operator_lock.lock();
+
+        char Str[21]{};
+        snprintf(Str, sizeof(Str), "%" PRId64, SetValue);
+
+		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		if(buffer_ < (Size_ + 1))
+		{
+			//null終端分追加
+			if(!this->ReAlloc( Size_ +1 ))
+			{
+				string_operator_lock.unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		std::fill_n(Stringval_, buffer_, 0);
+		if( strcmp(Str, "") == 0 )
+		{
+			CType = SCHTYPE_NULLTEXT;
+			string_operator_lock.unlock();
+			return (*this);
+		};
+
+		CType = SonikLibStringConvert::CheckConvertType(Str);
+
+		//memcpy_s(Stringval_, buffer_ , Str, Size_);
+
+		try
+		{
+			std::copy_n(Str, buffer_, reinterpret_cast<char*>(Stringval_));
+		}catch(...)
+		{
+			string_operator_lock.unlock();
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.unlock();
+		return (*this);
+
+	};
+    SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator =(const uint64_t SetValue)
+    {
+		string_operator_lock.lock();
+
+        char Str[21]{};
+        snprintf(Str, sizeof(Str), "%" PRIu64, SetValue);
+
+		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		if(buffer_ < (Size_ + 1))
+		{
+			//null終端分追加
+			if(!this->ReAlloc( Size_ +1 ))
+			{
+				string_operator_lock.unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		std::fill_n(Stringval_, buffer_, 0);
+		if( strcmp(Str, "") == 0 )
+		{
+			CType = SCHTYPE_NULLTEXT;
+			string_operator_lock.unlock();
+			return (*this);
+		};
+
+		CType = SonikLibStringConvert::CheckConvertType(Str);
+
+		//memcpy_s(Stringval_, buffer_ , Str, Size_);
+
+		try
+		{
+			std::copy_n(Str, buffer_, reinterpret_cast<char*>(Stringval_));
+		}catch(...)
+		{
+			string_operator_lock.unlock();
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.unlock();
+		return (*this);
+
+	};
+    SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator =(const float SetValue)
+    {
+		string_operator_lock.lock();
+
+        char Str[47]{};
+        snprintf(Str, sizeof(Str), "%g", SetValue);
+
+		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		if(buffer_ < (Size_ + 1))
+		{
+			//null終端分追加
+			if(!this->ReAlloc( Size_ +1 ))
+			{
+				string_operator_lock.unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		std::fill_n(Stringval_, buffer_, 0);
+		if( strcmp(Str, "") == 0 )
+		{
+			CType = SCHTYPE_NULLTEXT;
+			string_operator_lock.unlock();
+			return (*this);
+		};
+
+		CType = SonikLibStringConvert::CheckConvertType(Str);
+
+		//memcpy_s(Stringval_, buffer_ , Str, Size_);
+
+		try
+		{
+			std::copy_n(Str, buffer_, reinterpret_cast<char*>(Stringval_));
+		}catch(...)
+		{
+			string_operator_lock.unlock();
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.unlock();
+		return (*this);
+	};
+    SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator =(const double SetValue)
+    {
+		string_operator_lock.lock();
+
+        char Str[94]{};
+        snprintf(Str, sizeof(Str), "%lg", SetValue);
+
+		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		if(buffer_ < (Size_ + 1))
+		{
+			//null終端分追加
+			if(!this->ReAlloc( Size_ +1 ))
+			{
+				string_operator_lock.unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		std::fill_n(Stringval_, buffer_, 0);
+		if( strcmp(Str, "") == 0 )
+		{
+			CType = SCHTYPE_NULLTEXT;
+			string_operator_lock.unlock();
+			return (*this);
+		};
+
+		CType = SonikLibStringConvert::CheckConvertType(Str);
+
+		//memcpy_s(Stringval_, buffer_ , Str, Size_);
+
+		try
+		{
+			std::copy_n(Str, buffer_, reinterpret_cast<char*>(Stringval_));
+		}catch(...)
+		{
+			string_operator_lock.unlock();
+			throw;
+		};
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.unlock();
+		return (*this);
+	};
+
 
 	SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator +=(const SonikString_pImpl& t_his)
 	{
@@ -2208,6 +3831,486 @@ namespace SonikLib
 		return (*this);
 
 	};
+    SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator +=(const int8_t SetValue)
+    {
+        string_operator_lock.lock();
+
+        char Str[5]{};
+        snprintf(Str, sizeof(Str), "%d", SetValue);
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(Str);
+
+		//コピー元とタイプが違えばコピー元に合わせて変換をかける。
+		if( CType != tmpType )
+		{
+			SetCharacterType(tmpType);
+		};
+
+		//カウントを行い、結合時にはみ出すようなら再確保
+		uint64_t CopySize_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		uint64_t bufuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
+
+		uint64_t newbuffersize = (CopySize_ + bufuse_) + 1;
+		if( newbuffersize > buffer_ )
+		{
+			if( !this->ReAlloc(newbuffersize) )
+			{
+				string_operator_lock.unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		//memcpy_s(&(reinterpret_cast<char*>(Stringval_)[bufuse_]), (CopySize_ + 1) , Str, CopySize_ );
+		try
+		{
+			char* l_offsetPoint = reinterpret_cast<char*>(Stringval_ + bufuse_);
+			//合計数がbuffer_以内の場合、ReAllocはコールされず、ゴミが後ろに残ってしまうので現在の文字数より後ろの配列部分を0クリア
+			std::fill_n(l_offsetPoint, (buffer_ - bufuse_), 0);
+
+			std::copy_n(Str, CopySize_, l_offsetPoint);
+
+		}catch(...)
+		{
+			throw;
+		}
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.unlock();
+		return (*this);
+    };
+    SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator +=(const uint8_t SetValue)
+    {
+        string_operator_lock.lock();
+
+        char Str[5]{};
+        snprintf(Str, sizeof(Str), "%u", SetValue);
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(Str);
+
+		//コピー元とタイプが違えばコピー元に合わせて変換をかける。
+		if( CType != tmpType )
+		{
+			SetCharacterType(tmpType);
+		};
+
+		//カウントを行い、結合時にはみ出すようなら再確保
+		uint64_t CopySize_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		uint64_t bufuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
+
+		uint64_t newbuffersize = (CopySize_ + bufuse_) + 1;
+		if( newbuffersize > buffer_ )
+		{
+			if( !this->ReAlloc(newbuffersize) )
+			{
+				string_operator_lock.unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		//memcpy_s(&(reinterpret_cast<char*>(Stringval_)[bufuse_]), (CopySize_ + 1) , Str, CopySize_ );
+		try
+		{
+			char* l_offsetPoint = reinterpret_cast<char*>(Stringval_ + bufuse_);
+			//合計数がbuffer_以内の場合、ReAllocはコールされず、ゴミが後ろに残ってしまうので現在の文字数より後ろの配列部分を0クリア
+			std::fill_n(l_offsetPoint, (buffer_ - bufuse_), 0);
+
+			std::copy_n(Str, CopySize_, l_offsetPoint);
+
+		}catch(...)
+		{
+			throw;
+		}
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.unlock();
+		return (*this);
+    };
+    SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator +=(const int16_t SetValue)
+    {
+        string_operator_lock.lock();
+
+        char Str[7]{};
+        snprintf(Str, sizeof(Str), "%d", SetValue);
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(Str);
+
+		//コピー元とタイプが違えばコピー元に合わせて変換をかける。
+		if( CType != tmpType )
+		{
+			SetCharacterType(tmpType);
+		};
+
+		//カウントを行い、結合時にはみ出すようなら再確保
+		uint64_t CopySize_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		uint64_t bufuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
+
+		uint64_t newbuffersize = (CopySize_ + bufuse_) + 1;
+		if( newbuffersize > buffer_ )
+		{
+			if( !this->ReAlloc(newbuffersize) )
+			{
+				string_operator_lock.unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		//memcpy_s(&(reinterpret_cast<char*>(Stringval_)[bufuse_]), (CopySize_ + 1) , Str, CopySize_ );
+		try
+		{
+			char* l_offsetPoint = reinterpret_cast<char*>(Stringval_ + bufuse_);
+			//合計数がbuffer_以内の場合、ReAllocはコールされず、ゴミが後ろに残ってしまうので現在の文字数より後ろの配列部分を0クリア
+			std::fill_n(l_offsetPoint, (buffer_ - bufuse_), 0);
+
+			std::copy_n(Str, CopySize_, l_offsetPoint);
+
+		}catch(...)
+		{
+			throw;
+		}
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.unlock();
+		return (*this);
+    };
+    SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator +=(const uint16_t SetValue)
+    {
+        string_operator_lock.lock();
+
+        char Str[7]{};
+        snprintf(Str, sizeof(Str), "%u", SetValue);
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(Str);
+
+		//コピー元とタイプが違えばコピー元に合わせて変換をかける。
+		if( CType != tmpType )
+		{
+			SetCharacterType(tmpType);
+		};
+
+		//カウントを行い、結合時にはみ出すようなら再確保
+		uint64_t CopySize_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		uint64_t bufuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
+
+		uint64_t newbuffersize = (CopySize_ + bufuse_) + 1;
+		if( newbuffersize > buffer_ )
+		{
+			if( !this->ReAlloc(newbuffersize) )
+			{
+				string_operator_lock.unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		//memcpy_s(&(reinterpret_cast<char*>(Stringval_)[bufuse_]), (CopySize_ + 1) , Str, CopySize_ );
+		try
+		{
+			char* l_offsetPoint = reinterpret_cast<char*>(Stringval_ + bufuse_);
+			//合計数がbuffer_以内の場合、ReAllocはコールされず、ゴミが後ろに残ってしまうので現在の文字数より後ろの配列部分を0クリア
+			std::fill_n(l_offsetPoint, (buffer_ - bufuse_), 0);
+
+			std::copy_n(Str, CopySize_, l_offsetPoint);
+
+		}catch(...)
+		{
+			throw;
+		}
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.unlock();
+		return (*this);
+    };
+    SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator +=(const int32_t SetValue)
+    {
+        string_operator_lock.lock();
+
+        char Str[12]{};
+        snprintf(Str, sizeof(Str), "%" PRId32, SetValue);
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(Str);
+
+		//コピー元とタイプが違えばコピー元に合わせて変換をかける。
+		if( CType != tmpType )
+		{
+			SetCharacterType(tmpType);
+		};
+
+		//カウントを行い、結合時にはみ出すようなら再確保
+		uint64_t CopySize_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		uint64_t bufuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
+
+		uint64_t newbuffersize = (CopySize_ + bufuse_) + 1;
+		if( newbuffersize > buffer_ )
+		{
+			if( !this->ReAlloc(newbuffersize) )
+			{
+				string_operator_lock.unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		//memcpy_s(&(reinterpret_cast<char*>(Stringval_)[bufuse_]), (CopySize_ + 1) , Str, CopySize_ );
+		try
+		{
+			char* l_offsetPoint = reinterpret_cast<char*>(Stringval_ + bufuse_);
+			//合計数がbuffer_以内の場合、ReAllocはコールされず、ゴミが後ろに残ってしまうので現在の文字数より後ろの配列部分を0クリア
+			std::fill_n(l_offsetPoint, (buffer_ - bufuse_), 0);
+
+			std::copy_n(Str, CopySize_, l_offsetPoint);
+
+		}catch(...)
+		{
+			throw;
+		}
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.unlock();
+		return (*this);
+    };
+    SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator +=(const uint32_t SetValue)
+    {
+        string_operator_lock.lock();
+
+        char Str[12]{};
+        snprintf(Str, sizeof(Str), "%" PRIu32, SetValue);
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(Str);
+
+		//コピー元とタイプが違えばコピー元に合わせて変換をかける。
+		if( CType != tmpType )
+		{
+			SetCharacterType(tmpType);
+		};
+
+		//カウントを行い、結合時にはみ出すようなら再確保
+		uint64_t CopySize_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		uint64_t bufuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
+
+		uint64_t newbuffersize = (CopySize_ + bufuse_) + 1;
+		if( newbuffersize > buffer_ )
+		{
+			if( !this->ReAlloc(newbuffersize) )
+			{
+				string_operator_lock.unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		//memcpy_s(&(reinterpret_cast<char*>(Stringval_)[bufuse_]), (CopySize_ + 1) , Str, CopySize_ );
+		try
+		{
+			char* l_offsetPoint = reinterpret_cast<char*>(Stringval_ + bufuse_);
+			//合計数がbuffer_以内の場合、ReAllocはコールされず、ゴミが後ろに残ってしまうので現在の文字数より後ろの配列部分を0クリア
+			std::fill_n(l_offsetPoint, (buffer_ - bufuse_), 0);
+
+			std::copy_n(Str, CopySize_, l_offsetPoint);
+
+		}catch(...)
+		{
+			throw;
+		}
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.unlock();
+		return (*this);
+    };
+    SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator +=(const int64_t SetValue)
+    {
+        string_operator_lock.lock();
+
+        char Str[21]{};
+        snprintf(Str, sizeof(Str), "%" PRId64, SetValue);
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(Str);
+
+		//コピー元とタイプが違えばコピー元に合わせて変換をかける。
+		if( CType != tmpType )
+		{
+			SetCharacterType(tmpType);
+		};
+
+		//カウントを行い、結合時にはみ出すようなら再確保
+		uint64_t CopySize_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		uint64_t bufuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
+
+		uint64_t newbuffersize = (CopySize_ + bufuse_) + 1;
+		if( newbuffersize > buffer_ )
+		{
+			if( !this->ReAlloc(newbuffersize) )
+			{
+				string_operator_lock.unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		//memcpy_s(&(reinterpret_cast<char*>(Stringval_)[bufuse_]), (CopySize_ + 1) , Str, CopySize_ );
+		try
+		{
+			char* l_offsetPoint = reinterpret_cast<char*>(Stringval_ + bufuse_);
+			//合計数がbuffer_以内の場合、ReAllocはコールされず、ゴミが後ろに残ってしまうので現在の文字数より後ろの配列部分を0クリア
+			std::fill_n(l_offsetPoint, (buffer_ - bufuse_), 0);
+
+			std::copy_n(Str, CopySize_, l_offsetPoint);
+
+		}catch(...)
+		{
+			throw;
+		}
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.unlock();
+		return (*this);
+    };
+    SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator +=(const uint64_t SetValue)
+    {
+        string_operator_lock.lock();
+
+        char Str[21]{};
+        snprintf(Str, sizeof(Str), "%" PRIu64, SetValue);
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(Str);
+
+		//コピー元とタイプが違えばコピー元に合わせて変換をかける。
+		if( CType != tmpType )
+		{
+			SetCharacterType(tmpType);
+		};
+
+		//カウントを行い、結合時にはみ出すようなら再確保
+		uint64_t CopySize_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		uint64_t bufuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
+
+		uint64_t newbuffersize = (CopySize_ + bufuse_) + 1;
+		if( newbuffersize > buffer_ )
+		{
+			if( !this->ReAlloc(newbuffersize) )
+			{
+				string_operator_lock.unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		//memcpy_s(&(reinterpret_cast<char*>(Stringval_)[bufuse_]), (CopySize_ + 1) , Str, CopySize_ );
+		try
+		{
+			char* l_offsetPoint = reinterpret_cast<char*>(Stringval_ + bufuse_);
+			//合計数がbuffer_以内の場合、ReAllocはコールされず、ゴミが後ろに残ってしまうので現在の文字数より後ろの配列部分を0クリア
+			std::fill_n(l_offsetPoint, (buffer_ - bufuse_), 0);
+
+			std::copy_n(Str, CopySize_, l_offsetPoint);
+
+		}catch(...)
+		{
+			throw;
+		}
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.unlock();
+		return (*this);
+    };
+    SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator +=(const float SetValue)
+    {
+        string_operator_lock.lock();
+
+        char Str[47]{};
+        snprintf(Str, sizeof(Str), "%g", SetValue);
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(Str);
+
+		//コピー元とタイプが違えばコピー元に合わせて変換をかける。
+		if( CType != tmpType )
+		{
+			SetCharacterType(tmpType);
+		};
+
+		//カウントを行い、結合時にはみ出すようなら再確保
+		uint64_t CopySize_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		uint64_t bufuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
+
+		uint64_t newbuffersize = (CopySize_ + bufuse_) + 1;
+		if( newbuffersize > buffer_ )
+		{
+			if( !this->ReAlloc(newbuffersize) )
+			{
+				string_operator_lock.unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		//memcpy_s(&(reinterpret_cast<char*>(Stringval_)[bufuse_]), (CopySize_ + 1) , Str, CopySize_ );
+		try
+		{
+			char* l_offsetPoint = reinterpret_cast<char*>(Stringval_ + bufuse_);
+			//合計数がbuffer_以内の場合、ReAllocはコールされず、ゴミが後ろに残ってしまうので現在の文字数より後ろの配列部分を0クリア
+			std::fill_n(l_offsetPoint, (buffer_ - bufuse_), 0);
+
+			std::copy_n(Str, CopySize_, l_offsetPoint);
+
+		}catch(...)
+		{
+			throw;
+		}
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.unlock();
+		return (*this);
+    };
+    SonikString::SonikString_pImpl& SonikString::SonikString_pImpl::operator +=(const double SetValue)
+    {
+        string_operator_lock.lock();
+
+        char Str[94]{};
+        snprintf(Str, sizeof(Str), "%lg", SetValue);
+
+		SonikLibConvertType tmpType = SonikLibStringConvert::CheckConvertType(Str);
+
+		//コピー元とタイプが違えばコピー元に合わせて変換をかける。
+		if( CType != tmpType )
+		{
+			SetCharacterType(tmpType);
+		};
+
+		//カウントを行い、結合時にはみ出すようなら再確保
+		uint64_t CopySize_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		uint64_t bufuse_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<char*>(Stringval_));
+
+		uint64_t newbuffersize = (CopySize_ + bufuse_) + 1;
+		if( newbuffersize > buffer_ )
+		{
+			if( !this->ReAlloc(newbuffersize) )
+			{
+				string_operator_lock.unlock();
+				throw std::bad_alloc();
+			};
+		};
+
+		//memcpy_s(&(reinterpret_cast<char*>(Stringval_)[bufuse_]), (CopySize_ + 1) , Str, CopySize_ );
+		try
+		{
+			char* l_offsetPoint = reinterpret_cast<char*>(Stringval_ + bufuse_);
+			//合計数がbuffer_以内の場合、ReAllocはコールされず、ゴミが後ろに残ってしまうので現在の文字数より後ろの配列部分を0クリア
+			std::fill_n(l_offsetPoint, (buffer_ - bufuse_), 0);
+
+			std::copy_n(Str, CopySize_, l_offsetPoint);
+
+		}catch(...)
+		{
+			throw;
+		}
+
+		MaxLength_ = SonikLibStringConvert::GetStringCount(reinterpret_cast<char*>(Stringval_));
+
+		string_operator_lock.unlock();
+		return (*this);
+    };
 
 	//現在のバッファと入力バッファを結合し、別のオブジェクトとして返却します。
 	//コピー元とコピー先が同じオブジェクトの場合、そのまま結合します。
@@ -2256,6 +4359,117 @@ namespace SonikLib
 
 		return tmpStr;
 	};
+
+    SonikString::SonikString_pImpl SonikString::SonikString_pImpl::operator +(const int8_t SetValue)
+    {
+		SonikString_pImpl tmpStr = (*this);
+
+        char Str[5]{};
+        snprintf(Str, sizeof(Str), "%d", SetValue);
+
+		tmpStr += Str;
+
+		return tmpStr;
+    };
+    SonikString::SonikString_pImpl SonikString::SonikString_pImpl::operator +(const uint8_t SetValue)
+    {
+		SonikString_pImpl tmpStr = (*this);
+
+        char Str[5]{};
+        snprintf(Str, sizeof(Str), "%u", SetValue);
+
+		tmpStr += Str;
+
+		return tmpStr;
+    };
+    SonikString::SonikString_pImpl SonikString::SonikString_pImpl::operator +(const int16_t SetValue)
+    {
+		SonikString_pImpl tmpStr = (*this);
+
+        char Str[7]{};
+        snprintf(Str, sizeof(Str), "%d", SetValue);
+
+		tmpStr += Str;
+
+		return tmpStr;
+    };
+    SonikString::SonikString_pImpl SonikString::SonikString_pImpl::operator +(const uint16_t SetValue)
+    {
+		SonikString_pImpl tmpStr = (*this);
+
+        char Str[7]{};
+        snprintf(Str, sizeof(Str), "%u", SetValue);
+
+		tmpStr += Str;
+
+		return tmpStr;
+    };
+    SonikString::SonikString_pImpl SonikString::SonikString_pImpl::operator +(const int32_t SetValue)
+    {
+		SonikString_pImpl tmpStr = (*this);
+
+        char Str[12]{};
+        snprintf(Str, sizeof(Str), "%" PRId32, SetValue);
+
+		tmpStr += Str;
+
+		return tmpStr;
+    };
+    SonikString::SonikString_pImpl SonikString::SonikString_pImpl::operator +(const uint32_t SetValue)
+    {
+		SonikString_pImpl tmpStr = (*this);
+
+        char Str[12]{};
+        snprintf(Str, sizeof(Str), "%" PRIu32, SetValue);
+
+		tmpStr += Str;
+
+		return tmpStr;
+    };
+    SonikString::SonikString_pImpl SonikString::SonikString_pImpl::operator +(const int64_t SetValue)
+    {
+		SonikString_pImpl tmpStr = (*this);
+
+        char Str[21]{};
+        snprintf(Str, sizeof(Str), "%" PRId64, SetValue);
+
+		tmpStr += Str;
+
+		return tmpStr;
+    };
+    SonikString::SonikString_pImpl SonikString::SonikString_pImpl::operator +(const uint64_t SetValue)
+    {
+		SonikString_pImpl tmpStr = (*this);
+
+        char Str[21]{};
+        snprintf(Str, sizeof(Str), "%" PRIu64, SetValue);
+
+		tmpStr += Str;
+
+		return tmpStr;
+    };
+    SonikString::SonikString_pImpl SonikString::SonikString_pImpl::operator +(const float SetValue)
+    {
+		SonikString_pImpl tmpStr = (*this);
+
+        char Str[47]{};
+        snprintf(Str, sizeof(Str), "%g", SetValue);
+
+		tmpStr += Str;
+
+		return tmpStr;
+    };
+    SonikString::SonikString_pImpl SonikString::SonikString_pImpl::operator +(const double SetValue)
+    {
+		SonikString_pImpl tmpStr = (*this);
+
+        char Str[94]{};
+        snprintf(Str, sizeof(Str), "%lg", SetValue);
+
+		tmpStr += Str;
+
+		return tmpStr;
+    };
 
 	//c: 文字列同士を比較します。(strcmp)
 	//c: 一致の場合true 不一致の場合 falseを返却します。
@@ -2671,17 +4885,12 @@ namespace SonikLib
 	//c:比較演算子
 	bool SonikString::SonikString_pImpl::Greater(const char* CompareArg2val)
 	{
-		if( strcmp(this->str_c(), CompareArg2val) < 0 )
-		{
-			return true;
-		};
-
-		return false;
+		return strcmp(this->str_c(), CompareArg2val) > 0;
 	};
 
 	bool SonikString::SonikString_pImpl::Less(const char* CompareArg2val)
 	{
-		return this->Greater(CompareArg2val);
+		return strcmp(this->str_c(), CompareArg2val) < 0;
 	};
 
 	bool SonikString::SonikString_pImpl::GreaterEqual(const char* CompareArg2val)
@@ -2849,6 +5058,347 @@ namespace SonikLib
 		};
 
 	};
+    SonikString::SonikString(const int8_t SetValue)
+    {
+		pImpl = 0;
+
+		try
+		{
+            char SetStr[5]{};
+            snprintf(SetStr, sizeof(SetStr), "%d", SetValue);
+
+			pImpl = new SonikString_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+    };
+    SonikString::SonikString(const int8_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+    {
+		pImpl = nullptr;
+
+		try
+		{
+            char SetStr[5]{};
+            snprintf(SetStr, sizeof(SetStr), "%d", SetValue);
+
+			pImpl = new SonikString_pImpl(_setlocale_);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+    };
+    SonikString::SonikString(const uint8_t SetValue)
+    {
+        pImpl = 0;
+
+		try
+		{
+            char SetStr[5]{};
+            snprintf(SetStr, sizeof(SetStr), "%u", SetValue);
+
+			pImpl = new SonikString_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+
+    };
+    SonikString::SonikString(const uint8_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+    {
+		pImpl = nullptr;
+
+		try
+		{
+            char SetStr[5]{};
+            snprintf(SetStr, sizeof(SetStr), "%u", SetValue);
+
+			pImpl = new SonikString_pImpl(_setlocale_);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+    };
+    SonikString::SonikString(const int16_t SetValue)
+    {
+        pImpl = 0;
+
+		try
+		{
+            char SetStr[7]{};
+            snprintf(SetStr, sizeof(SetStr), "%d", SetValue);
+
+			pImpl = new SonikString_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+    };
+    SonikString::SonikString(const int16_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+    {
+		pImpl = nullptr;
+
+		try
+		{
+            char SetStr[7]{};
+            snprintf(SetStr, sizeof(SetStr), "%d", SetValue);
+
+			pImpl = new SonikString_pImpl(_setlocale_);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+    };
+    SonikString::SonikString(const uint16_t SetValue)
+    {
+        pImpl = 0;
+
+		try
+		{
+            char SetStr[7]{};
+            snprintf(SetStr, sizeof(SetStr), "%u", SetValue);
+
+			pImpl = new SonikString_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+    };
+    SonikString::SonikString(const uint16_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+    {
+		pImpl = nullptr;
+
+		try
+		{
+            char SetStr[7]{};
+            snprintf(SetStr, sizeof(SetStr), "%u", SetValue);
+
+			pImpl = new SonikString_pImpl(_setlocale_);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+    };
+    SonikString::SonikString(const int32_t SetValue)
+    {
+        pImpl = 0;
+
+		try
+		{
+            char SetStr[12]{};
+            snprintf(SetStr, sizeof(SetStr), "%" PRId32, SetValue);
+
+			pImpl = new SonikString_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+    };
+    SonikString::SonikString(const int32_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+    {
+		pImpl = nullptr;
+
+		try
+		{
+            char SetStr[12]{};
+            snprintf(SetStr, sizeof(SetStr), "%" PRId32, SetValue);
+
+			pImpl = new SonikString_pImpl(_setlocale_);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+    };
+    SonikString::SonikString(const uint32_t SetValue)
+    {
+        pImpl = 0;
+
+		try
+		{
+            char SetStr[12]{};
+            snprintf(SetStr, sizeof(SetStr), "%" PRIu32, SetValue);
+
+			pImpl = new SonikString_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+    };
+    SonikString::SonikString(const uint32_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+    {
+		pImpl = nullptr;
+
+		try
+		{
+            char SetStr[12]{};
+            snprintf(SetStr, sizeof(SetStr), "%" PRIu32, SetValue);
+
+			pImpl = new SonikString_pImpl(_setlocale_);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+    };
+    SonikString::SonikString(const int64_t SetValue)
+    {
+        pImpl = 0;
+
+		try
+		{
+            char SetStr[21]{};
+            snprintf(SetStr, sizeof(SetStr), "%" PRId64, SetValue);
+
+			pImpl = new SonikString_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+    };
+    SonikString::SonikString(const int64_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+    {
+		pImpl = nullptr;
+
+		try
+		{
+            char SetStr[21]{};
+            snprintf(SetStr, sizeof(SetStr), "%" PRId64, SetValue);
+
+			pImpl = new SonikString_pImpl(_setlocale_);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+    };
+    SonikString::SonikString(const uint64_t SetValue)
+    {
+        pImpl = 0;
+
+		try
+		{
+            char SetStr[21]{};
+            snprintf(SetStr, sizeof(SetStr), "%" PRIu64, SetValue);
+
+			pImpl = new SonikString_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+    };
+    SonikString::SonikString(const uint64_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+    {
+		pImpl = nullptr;
+
+		try
+		{
+            char SetStr[21]{};
+            snprintf(SetStr, sizeof(SetStr), "%" PRIu64, SetValue);
+
+			pImpl = new SonikString_pImpl(_setlocale_);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+    };
+    SonikString::SonikString(const float SetValue)
+    {
+        pImpl = 0;
+
+		try
+		{
+            char SetStr[47]{};
+            snprintf(SetStr, sizeof(SetStr), "%g", SetValue);
+
+			pImpl = new SonikString_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+    };
+    SonikString::SonikString(const float SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+    {
+		pImpl = nullptr;
+
+		try
+		{
+            char SetStr[47]{};
+            snprintf(SetStr, sizeof(SetStr), "%g", SetValue);
+
+			pImpl = new SonikString_pImpl(_setlocale_);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+    };
+    SonikString::SonikString(const double SetValue)
+    {
+        pImpl = 0;
+
+		try
+		{
+            char SetStr[94]{};
+            snprintf(SetStr, sizeof(SetStr), "%lg", SetValue);
+
+			pImpl = new SonikString_pImpl(SonikLibStringConvert::SonikLibConvertLocale::LC_JPN);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+    };
+    SonikString::SonikString(const double SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_)
+    {
+		pImpl = nullptr;
+
+		try
+		{
+            char SetStr[94]{};
+            snprintf(SetStr, sizeof(SetStr), "%lg", SetValue);
+
+			pImpl = new SonikString_pImpl(_setlocale_);
+			(*pImpl) = SetStr;
+		}catch(std::bad_alloc&)
+		{
+			delete pImpl;
+			throw;
+		};
+    };
 
 	SonikString::~SonikString(void)
 	{
@@ -2923,7 +5473,7 @@ namespace SonikLib
 	};
 
 	//define切り替えのStrCopy
-	uint64_t SonikString::GetCpy_str_definition(char*dstBuffer)
+	uint64_t SonikString::GetCpy_str_definition(char* dstBuffer)
 	{
 		return pImpl->GetCpy_str_c(dstBuffer);
 	};
@@ -3013,6 +5563,76 @@ namespace SonikLib
 		return (*this);
 	};
 
+    SonikString& SonikString::operator =(const int8_t SetValue)
+    {
+		(*pImpl) = SetValue;
+
+		return (*this);
+	};
+
+    SonikString& SonikString::operator =(const uint8_t SetValue)
+    {
+		(*pImpl) = SetValue;
+
+		return (*this);
+	};
+
+    SonikString& SonikString::operator =(const int16_t SetValue)
+    {
+		(*pImpl) = SetValue;
+
+		return (*this);
+	};
+    
+    SonikString& SonikString::operator =(const uint16_t SetValue)
+    {
+		(*pImpl) = SetValue;
+
+		return (*this);
+	};
+
+    SonikString& SonikString::operator =(const int32_t SetValue)
+    {
+		(*pImpl) = SetValue;
+
+		return (*this);
+	};
+
+    SonikString& SonikString::operator =(const uint32_t SetValue)
+    {
+		(*pImpl) = SetValue;
+
+		return (*this);
+	};
+
+    SonikString& SonikString::operator =(const int64_t SetValue)
+    {
+		(*pImpl) = SetValue;
+
+		return (*this);
+	};
+
+    SonikString& SonikString::operator =(const uint64_t SetValue)
+    {
+		(*pImpl) = SetValue;
+
+		return (*this);
+	};
+
+    SonikString& SonikString::operator =(const float SetValue)
+    {
+		(*pImpl) = SetValue;
+
+		return (*this);
+	};
+
+    SonikString& SonikString::operator =(const double SetValue)
+    {
+		(*pImpl) = SetValue;
+
+		return (*this);
+	};
+
 	//各入力フォーマットから現在のバッファに変換して結合します。
 	//コピー元とコピー先が同じオブジェクトの場合、そのまま結合します。
 	SonikString& SonikString::operator +=(const SonikString& t_his)
@@ -3046,6 +5666,76 @@ namespace SonikLib
 	SonikString& SonikString::operator +=(const char8_t* utf8_Str)
 	{
 		(*pImpl) += utf8_Str;
+
+		return (*this);
+	};
+
+    SonikString& SonikString::operator +=(const int8_t SetValue)
+    {
+		(*pImpl) += SetValue;
+
+		return (*this);
+	};
+
+    SonikString& SonikString::operator +=(const uint8_t SetValue)
+    {
+		(*pImpl) += SetValue;
+
+		return (*this);
+	};
+
+    SonikString& SonikString::operator +=(const int16_t SetValue)
+    {
+		(*pImpl) += SetValue;
+
+		return (*this);
+	};
+
+    SonikString& SonikString::operator +=(const uint16_t SetValue)
+    {
+		(*pImpl) += SetValue;
+
+		return (*this);
+	};
+
+    SonikString& SonikString::operator +=(const int32_t SetValue)
+    {
+		(*pImpl) += SetValue;
+
+		return (*this);
+	};
+
+    SonikString& SonikString::operator +=(const uint32_t SetValue)
+    {
+		(*pImpl) += SetValue;
+
+		return (*this);
+	};
+
+    SonikString& SonikString::operator +=(const int64_t SetValue)
+    {
+		(*pImpl) += SetValue;
+
+		return (*this);
+	};
+
+    SonikString& SonikString::operator +=(const uint64_t SetValue)
+    {
+		(*pImpl) += SetValue;
+
+		return (*this);
+	};
+
+    SonikString& SonikString::operator +=(const float SetValue)
+    {
+		(*pImpl) += SetValue;
+
+		return (*this);
+	};
+
+    SonikString& SonikString::operator +=(const double SetValue)
+    {
+		(*pImpl) += SetValue;
 
 		return (*this);
 	};
@@ -3096,6 +5786,97 @@ namespace SonikLib
 
 		return str_;
 	};
+
+    SonikString SonikString::operator +(const int8_t SetValue)
+    {
+		SonikString str_;
+
+		(*(str_.pImpl)) = (*pImpl) + SetValue;
+
+		return str_;
+	};
+
+    SonikString SonikString::operator +(const uint8_t SetValue)
+    {
+		SonikString str_;
+
+		(*(str_.pImpl)) = (*pImpl) + SetValue;
+
+		return str_;
+	};
+
+    SonikString SonikString::operator +(const int16_t SetValue)
+    {
+		SonikString str_;
+
+		(*(str_.pImpl)) = (*pImpl) + SetValue;
+
+		return str_;
+	};
+
+    SonikString SonikString::operator +(const uint16_t SetValue)
+    {
+		SonikString str_;
+
+		(*(str_.pImpl)) = (*pImpl) + SetValue;
+
+		return str_;
+	};
+
+    SonikString SonikString::operator +(const int32_t SetValue)
+    {
+		SonikString str_;
+
+		(*(str_.pImpl)) = (*pImpl) + SetValue;
+
+		return str_;
+	};
+
+    SonikString SonikString::operator +(const uint32_t SetValue)
+    {
+		SonikString str_;
+
+		(*(str_.pImpl)) = (*pImpl) + SetValue;
+
+		return str_;
+	};
+
+    SonikString SonikString::operator +(const int64_t SetValue)
+    {
+		SonikString str_;
+
+		(*(str_.pImpl)) = (*pImpl) + SetValue;
+
+		return str_;
+	};
+
+    SonikString SonikString::operator +(const uint64_t SetValue)
+    {
+		SonikString str_;
+
+		(*(str_.pImpl)) = (*pImpl) + SetValue;
+
+		return str_;
+	};
+
+    SonikString SonikString::operator +(const float SetValue)
+    {
+		SonikString str_;
+
+		(*(str_.pImpl)) = (*pImpl) + SetValue;
+
+		return str_;
+	};
+
+    SonikString SonikString::operator +(const double SetValue)
+    {
+		SonikString str_;
+
+		(*(str_.pImpl)) = (*pImpl) + SetValue;
+
+		return str_;
+	};
+
 
 	//c: 文字列同士を比較します。(strcmp)
 	//c: 一致の場合true 不一致の場合 falseを返却します。
