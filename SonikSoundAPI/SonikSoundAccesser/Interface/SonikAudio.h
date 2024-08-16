@@ -8,7 +8,8 @@
 #ifndef INTERFACE_SONIKAUDIO_H_
 #define INTERFACE_SONIKAUDIO_H_
 
-#include "../SAudioAccesserTypedef.h"
+#include <stdint.h>
+#include "../other/SAudioAccesserTypedef.h"
 
 namespace SonikAudio
 {

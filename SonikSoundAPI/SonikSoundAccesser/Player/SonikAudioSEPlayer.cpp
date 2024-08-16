@@ -9,10 +9,9 @@
 
 #include "SonikAudioSEPlayer.h"
 #include "SonikAudioPlayer_CD_SE.h"
-#include "../Task/AudioPlayerTaskManager.h"
 #include "../Task/PlayerTask.h"
-#include "../PlayStateEnums.h"
-#include "../../../MathBit/SonikMathDistance.h"
+#include "../other/PlayStateEnums.h"
+#include "../../MathBit/SonikMathDistance.h"
 
 
 namespace SonikAudio
@@ -47,7 +46,7 @@ namespace SonikAudio
 		return mp_TskMng->AddTask(l_task);
 	};
 
-	const float* SonikAudioSEPlayer::GetVolume(void)
+	float SonikAudioSEPlayer::GetVolume(void)
 	{
 		return mp_AudioData->GetVolume();
 	};

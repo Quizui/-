@@ -6,7 +6,7 @@
  */
 
 #include "SonikAudioPlayer_ControlData.h"
-#include "../../../SmartPointer/SonikSmartPointer.hpp"
+#include "../../SmartPointer/SonikSmartPointer.hpp"
 
 #ifndef PLAYER_SONIKAUDIOPLAYER_CD_BGM_H_
 #define PLAYER_SONIKAUDIOPLAYER_CD_BGM_H_
@@ -30,8 +30,8 @@ namespace SonikAudioData
 		//デストラクタ
 		~SonikAudioControlDataSetForBGM(void);
 
-		//データが最終的にミキシングしてほしいボリューム値を取得
-		void GetMixingVolume(double& _GetLMixingValue_, double& _GetRMixingValue_);
+        //データが属するカテゴリーのボリューム値
+        double GetCategoryVolume(void);
 
 	};
 

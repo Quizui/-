@@ -6,10 +6,7 @@
  */
 
 #include "SonikAudioPlayer_ControlData.h"
-#include "../../Format/SonikAudioFormat.h"
-#include "../../../MathBit/SonikMathDistance.h"
-
-#include <new>
+#include "../Format/SonikAudioFormat.h"
 
 namespace SonikAudioData
 {
@@ -21,6 +18,7 @@ namespace SonikAudioData
 	,m_volume(1.0f)
 	,m_repeat(false)
 	,m_AudioState(SonikAudioEnum::PlayStateID::PS_Stop)
+	,m_CDType(SonikAudioEnum::PlayerCDType::PCDTYPE_BGM)
 	,m_uniqueid((uintptr_t)this)
 	{
 
@@ -82,9 +80,9 @@ namespace SonikAudioData
 
 	};
 	//音量(ボリューム)のゲット
-	const float* SonikAudioControlData::GetVolume(void)
+	float SonikAudioControlData::GetVolume(void)
 	{
-		return &m_volume;
+		return m_volume;
 	};
 
 	//繰り返し(リピート)フラグのゲット

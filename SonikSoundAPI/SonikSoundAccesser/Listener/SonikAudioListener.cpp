@@ -6,8 +6,8 @@
  */
 
 #include "SonikAudioListener.h"
-#include "../../../MathBit/SonikMathDistance.h"
-#include "../../../SmartPointer/SonikSmartPointer.hpp"
+#include "../../MathBit/SonikMathDistance.h"
+#include "../../SmartPointer/SonikSmartPointer.hpp"
 
 #include <new>
 
@@ -81,12 +81,23 @@ namespace SonikAudio
 	void SonikAudioListener::SetMaxListenDistance(double _setmaxdistance_)
 	{
 		max_listen_distance = _setmaxdistance_;
+        if( max_listen_distance == 0 )
+        {
+            max_listen_distance_inv = 0.0;
+            return;
+        };
+        
+        max_listen_distance_inv = 1.0 / max_listen_distance;
 	};
 
-	double SonikAudioListener::GetMaxListernDistance(void)
+	double SonikAudioListener::GetMaxListnerDistance(void)
 	{
 		return max_listen_distance;
 	};
+    double SonikAudioListener::GetMaxListnerDistance_Inv(void)
+    {
+        return max_listen_distance_inv;
+    };
 
 	//全体のマスターボリュームのセットゲット
 	void SonikAudioListener::SetMasterVolume(double _setvolume_)

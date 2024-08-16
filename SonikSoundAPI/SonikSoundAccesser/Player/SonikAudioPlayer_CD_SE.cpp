@@ -6,9 +6,8 @@
  */
 
 #include "SonikAudioPlayer_CD_SE.h"
-#include "../../../MathBit/SonikMathDistance.h"
-#include "../../../MathBit/MathBit.h"
-#include "../../../FunctionObject/FunctionObjectSystemImpl.hpp"
+#include "../../MathBit/SonikMathDistance.h"
+#include "../../MathBit/MathBit.h"
 
 namespace SonikAudioData
 {
@@ -19,8 +18,8 @@ namespace SonikAudioData
 	,flgbit_effect(0)
 	{
 		//m_effectlist
-		m_effectlist[0] = &SonikAudioControlDataSetForSE::SAC_PRIVATEFUNC_EFFECT_DISTANCE;
-		m_effectlist[1] = &SonikAudioControlDataSetForSE::SAC_PRIVATEFUNC_EFFECT_PANNING;
+		//m_effectlist[0] = &SonikAudioControlDataSetForSE::SAC_PRIVATEFUNC_EFFECT_DISTANCE;
+		//m_effectlist[1] = &SonikAudioControlDataSetForSE::SAC_PRIVATEFUNC_EFFECT_PANNING;
 
 
 		try
@@ -87,47 +86,11 @@ namespace SonikAudioData
 
 	};
 
-	//データが最終的にミキシングしてほしいボリューム値を取得
-	void SonikAudioControlDataSetForSE::GetMixingVolume(double& _GetLMixingValue_, double& _GetRMixingValue_)
-	{
-		double l_outvol = m_volume * (*m_CategorySEVol);
-
-		if( flgbit_effect == 0)
-		{
-			_GetLMixingValue_ = l_outvol;
-			_GetRMixingValue_ = l_outvol;
-
-			return;
-		};
-
-		//switch-loop
-		//立っているビットをカウント
-		uint8_t l_bitcnt = SonikMathBit::OnBitCountFor32bit(flgbit_effect);
-		uint32_t l_ControlBit = flgbit_effect;
-		uint8_t l_lsb = 0;
-
-		double l_Lvol = 1.0;
-		double l_Rvol = 1.0;
-		double l_retL = 1.0;
-		double l_retR = 1.0;
-
-		for(uint32_t i=0; i < l_bitcnt; ++i)
-		{
-			//最小ビット位置を取得
-			l_lsb = SonikMathBit::GetLSBFor32bit(l_ControlBit) -1;
-			//該当のビット位置を下げる
-			l_ControlBit &= (~(1 << l_lsb));
-
-			(this->*m_effectlist[l_lsb])(l_Lvol, l_Rvol);
-
-			l_retL *= l_Lvol;
-			l_retR *= l_Rvol;
-
-		};
-
-		_GetLMixingValue_ = l_outvol * l_retL;
-		_GetRMixingValue_ = l_outvol * l_retR;
-	};
+    //データが属するカテゴリーのボリューム値
+    double SonikAudioControlDataSetForSE::GetCategoryVolume(void)
+    {
+        return (*m_CategorySEVol);
+    };
 
 	//エフェクトのフラグ設定とエフェクトの設定
 	void SonikAudioControlDataSetForSE::EnableEffect(SonikAudioEnum::PlayEffectID _effected_)
@@ -155,7 +118,14 @@ namespace SonikAudioData
 
 	};
 
-	void SonikAudioControlDataSetForSE::SAC_PRIVATEFUNC_EFFECT_DISTANCE(double& _L_out_, double& _R_out_)
+    //エフェクトビットの取得
+    uint32_t SonikAudioControlDataSetForSE::GetEffectFlgBit(void)
+    {
+        return flgbit_effect;
+    };
+
+
+/*	void SonikAudioControlDataSetForSE::SAC_PRIVATEFUNC_EFFECT_DISTANCE(double& _L_out_, double& _R_out_)
 	{
 		double ret = SonikMath::Distance((*m_listner_3dpos), (*m_3dpos));
 
@@ -170,7 +140,7 @@ namespace SonikAudioData
 		_L_out_ = (1.0 - ret);
 		_R_out_ = ret;
 	};
-
+*/
 
 	void SonikAudioControlDataSetForSE::SetPositionALL(SonikMathDataBox::Sonik3DPoint& _3dpos_)
 	{

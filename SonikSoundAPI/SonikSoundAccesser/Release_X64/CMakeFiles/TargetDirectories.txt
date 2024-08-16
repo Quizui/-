@@ -1,0 +1,3 @@
+D:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser/Release_x64/CMakeFiles/Rx64_SonikSoundAccesser.dir
+D:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser/Release_x64/CMakeFiles/edit_cache.dir
+D:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser/Release_x64/CMakeFiles/rebuild_cache.dir

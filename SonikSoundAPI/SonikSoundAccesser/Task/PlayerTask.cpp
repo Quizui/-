@@ -6,7 +6,7 @@
  */
 
 #include "PlayerTask.h"
-#include "../../../MathBit/SonikMathDistance.h"
+#include "../../MathBit/SonikMathDistance.h"
 #include "../Player/SonikAudioPlayer_CD_SE.h"
 
 namespace SonikAudioPlayerTask

@@ -11,7 +11,7 @@
 
 #include <new>
 
-#include "SonikAudio_Implement.h"
+#include "./SonikAudio_Implement.h"
 //#include "SonikAudioPlayer_inherit.h"
 #include "../Task/AudioPlayerTaskManager.h"
 #include "../Mixer/SonikAudio_Mixer.h"
@@ -20,6 +20,7 @@
 #include "../Listener/SonikAudioListener.h"
 #include "../Player/SonikAudioBGMPlayer.h"
 #include "../Player/SonikAudioSEPlayer.h"
+#include "../Functions/LoadFunction.h"
 
 
 namespace SonikAudio

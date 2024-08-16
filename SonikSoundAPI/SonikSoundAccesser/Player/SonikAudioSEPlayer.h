@@ -8,9 +8,8 @@
 #ifndef PLAYER_SONIKAUDIO_SOUNDE_EFFECT_PLAYER_H_
 #define PLAYER_SONIKAUDIO_SOUNDE_EFFECT_PLAYER_H_
 
-#include <stdint.h>
-#include "../PlayStateEnums.h"
-#include "../../../SmartPointer/SonikSmartPointer.hpp"
+#include "../other/PlayStateEnums.h"
+#include "../../SmartPointer/SonikSmartPointer.hpp"
 
 //前方宣言
 namespace SonikAudioData
@@ -47,7 +46,7 @@ namespace SonikAudio
 
 		//音量のセットとゲット
 		bool SetVolume(float SetValue);
-		const float* GetVolume(void);
+		float GetVolume(void);
 
 		//エフェクトセット
 		void EnableEffect(SonikAudioEnum::PlayEffectID);

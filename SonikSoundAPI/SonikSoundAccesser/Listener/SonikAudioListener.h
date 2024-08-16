@@ -8,7 +8,7 @@
 #ifndef LISTENER_SONIKAUDIOLISTENER_H_
 #define LISTENER_SONIKAUDIOLISTENER_H_
 
-#include "../../../SmartPointer/SonikSmartPointer.hpp"
+#include "../../SmartPointer/SonikSmartPointer.hpp"
 
 //前方宣言==================================
 namespace SonikMathDataBox
@@ -26,6 +26,7 @@ namespace SonikAudio
 	{
 	private:
 		double max_listen_distance; //聞こえる範囲
+        double max_listen_distance_inv; //聞こえる範囲(逆数)
 		double listen_volume; //聞こえるボリューム
 		SonikMathDataBox::Sonik3DPoint* m_3dpos;	//3D座標
 		SonikMathDataBox::Sonik3DPoint* m_3ddir;  //3D方向
@@ -46,7 +47,8 @@ namespace SonikAudio
 
 		//最大聞こえる距離のセットゲット
 		void SetMaxListenDistance(double _setmaxdistance_);
-		double GetMaxListernDistance(void);
+		double GetMaxListnerDistance(void);
+        double GetMaxListnerDistance_Inv(void);
 
 		//全体のマスターボリュームのセットゲット
 		void SetMasterVolume(double _setvolume_);

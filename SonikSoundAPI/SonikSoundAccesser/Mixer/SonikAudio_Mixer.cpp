@@ -9,13 +9,12 @@
 
 #include "SonikAudio_Mixer.h"
 #include "../Player/SonikAudioPlayer_ControlData.h"
-#include "../../../DllAccess/SonikDllAccessManager.h"
 #include "../PlatformInterface/PlatformAudioInterface.h"
-#include "../../../FunctionObject/FunctionObjectSystemImpl.hpp"
-#include "../../../SmartPointer/SonikSmartPointer.hpp"
+#include "../../FunctionObject/FunctionObjectSystemImpl.hpp"
+#include "../../SmartPointer/SonikSmartPointer.hpp"
 #include "../Listener/SonikAudioListener.h"
-#include "../../../MathBit/SonikNormalize.h"
-#include "../../../MathBit/SonikMathDistance.h"
+#include "../../MathBit/SonikMathDistance.h"
+#include "../Effecter/SonikAudioEffecter.h"
 
 namespace SonikAudio
 {
@@ -27,6 +26,7 @@ namespace SonikAudio
 	,mp_buffer(nullptr)
 	,OneSamplingByteSize(0)
 	,m_samplingRate(0)
+    ,mp_effecter(nullptr)
 	,p_mfunc_(nullptr)
 	{
 
@@ -42,6 +42,11 @@ namespace SonikAudio
 
 			delete mp_thread;
 		};
+
+        if(mp_effecter != nullptr)
+        {
+            delete mp_effecter;
+        };
 
 		//PlatFormInterfaceはDll内でnewされているためDLL側内でDeleteさせるための関数をInterfac側で呼ぶ。
 		//そのためノンタッチ。
@@ -59,6 +64,12 @@ namespace SonikAudio
 	//イニシャライザ
 	bool SonikAudioMixer::Initialize(uint32_t SetAudioListMax, uint32_t FormatBit, uint16_t SetChannel, uint32_t SetSamplingRate, SonikAudioPlatForm::SonikPlatformAudioInterface* Set_PFI_Pointer, SonikLib::SharedSmtPtr<SonikAudio::SonikAudioListener> SetListener)
 	{
+        mp_effecter = new(std::nothrow) SonikAudio::SonikAudioEffecter(SetListener);
+        if(mp_effecter == nullptr)
+        {
+            return false;
+        };
+
 		if(FormatBit == 16)
 		{
 			switch(SetChannel)
@@ -254,7 +265,7 @@ namespace SonikAudio
 	void SonikAudioMixer::Mixing_16bit_1ch(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr)
 	{
 		int16_t** p_wave = reinterpret_cast<int16_t**>( ref_itr->GetAudioControlPointer() );
-		const float* volume = ref_itr->GetVolume();
+		//const float* volume = ref_itr->GetVolume();
 		double c_vol = 0.0;
 //		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
 		SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
@@ -262,7 +273,7 @@ namespace SonikAudio
 		int16_t* _buffer = reinterpret_cast<int16_t*>(mp_buffer);
 		double l_dis = 1.0;//pl_pos.Distance(lis_pos);
 
-		c_vol = (*volume) * l_dis;
+		c_vol = /*(*volume) */ l_dis;
 
 		for(uint32_t i = 0; i < _splitsize; ++i)
 		{
@@ -304,31 +315,12 @@ namespace SonikAudio
 	void SonikAudioMixer::Mixing_16bit_2ch(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr)
 	{
 		int16_t** p_wave = reinterpret_cast<int16_t**>( ref_itr->GetAudioControlPointer() );
-		SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
-		SonikMathDataBox::Sonik3DPoint& lis_dir = mp_Listener->GetDirection();
-//		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
-//		SonikMathDataBox::Sonik3DPoint& pl_dir = ref_itr->GetDirectionAll();
-
-		//uint32_t _splitsize = (m_samplingRate >> 2);//2chで決定しているので直値で記載。/4をシフト演算で..。
 		int16_t* _buffer = reinterpret_cast<int16_t*>(mp_buffer);
-
-//		double _dis = SonikMath::Distance(lis_pos, pl_pos) + 0.0000000000001;//0除算対策
-//		double _pan = SonikMath::Panning(lis_pos, pl_pos, lis_dir, pl_dir, 1.0, 0.2);
-//		double L_pan = 1.0 - _pan;
-//		double R_pan = _pan;
-//		double master_vol = mp_Listener->GetListenVolume() * (*ref_itr->GetVolume());
-//
-//		//Distanceの調整
-//		double MaxListenVolume = mp_Listener->GetMaxListernDistance();
-//		_dis = (MaxListenVolume <= 0) ? 1.0 : 1.0 - (_dis / MaxListenVolume);
 
 		double l_Lvol = 0.0;
 		double l_Rvol = 0.0;
 
-		ref_itr->GetMixingVolume(l_Lvol, l_Rvol);
-
-		l_Lvol = mp_Listener->GetMasterVolume() * l_Lvol;
-		l_Rvol = mp_Listener->GetMasterVolume() * l_Rvol;
+        mp_effecter->SetEffect(ref_itr.GetOperatorValue(), l_Lvol, l_Rvol);
 
 		//for(uint32_t i = 0; i < _splitsize; ++i)
 		for(uint32_t i = 0; i < m_samplingRate; ++i)
@@ -355,7 +347,7 @@ namespace SonikAudio
 	void SonikAudioMixer::Mixing_16bit_4ch(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr)
 	{
 		int16_t** p_wave = reinterpret_cast<int16_t**>( ref_itr->GetAudioControlPointer() );
-		const float* volume = ref_itr->GetVolume();
+		//const float* volume = ref_itr->GetVolume();
 		double c_vol = 0.0;
 //		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
 		SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
@@ -364,7 +356,7 @@ namespace SonikAudio
 
 		double l_dis = 1.0;//pl_pos.Distance(lis_pos);
 
-		c_vol = (*volume) * l_dis;
+		c_vol = /*(*volume) */ l_dis;
 
 
 		for(uint32_t i = 0; i < _splitsize;)
@@ -393,7 +385,7 @@ namespace SonikAudio
 	void SonikAudioMixer::Mixing_16bit_6ch(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr)
 	{
 		int16_t** p_wave = reinterpret_cast<int16_t**>( ref_itr->GetAudioControlPointer() );
-		const float* volume = ref_itr->GetVolume();
+		//const float* volume = ref_itr->GetVolume();
 		double c_vol = 0.0;
 //		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
 		SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
@@ -401,7 +393,7 @@ namespace SonikAudio
 		int16_t* _buffer = reinterpret_cast<int16_t*>(mp_buffer);
 		double l_dis = 1.0;//pl_pos.Distance(lis_pos);
 
-		c_vol = (*volume) * l_dis;
+		c_vol = /*(*volume) */ l_dis;
 
 		for(uint32_t i = 0; i < _splitsize;)
 		{
@@ -431,7 +423,7 @@ namespace SonikAudio
 	void SonikAudioMixer::Mixing_16bit_8ch(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr)
 	{
 		int16_t** p_wave = reinterpret_cast<int16_t**>( ref_itr->GetAudioControlPointer() );
-		const float* volume = ref_itr->GetVolume();
+		//const float* volume = ref_itr->GetVolume();
 		double c_vol = 0.0;
 //		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
 		SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
@@ -439,7 +431,7 @@ namespace SonikAudio
 		int16_t* _buffer = reinterpret_cast<int16_t*>(mp_buffer);
 		double l_dis = 1.0;//pl_pos.Distance(lis_pos);
 
-		c_vol = (*volume) * l_dis;
+		c_vol = /*(*volume) */ l_dis;
 
 		for(uint32_t i = 0; i < _splitsize;)
 		{
@@ -469,7 +461,7 @@ namespace SonikAudio
 	void SonikAudioMixer::Mixing_32bit_1ch(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr)
 	{
 		int32_t** p_wave = reinterpret_cast<int32_t**>( ref_itr->GetAudioControlPointer() );
-		const float* volume = ref_itr->GetVolume();
+		//const float* volume = ref_itr->GetVolume();
 		double c_vol = 0.0;
 //		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
 		SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
@@ -477,7 +469,7 @@ namespace SonikAudio
 		int32_t* _buffer = reinterpret_cast<int32_t*>(mp_buffer);
 		double l_dis = 1.0;//pl_pos.Distance(lis_pos);
 
-		c_vol = (*volume) * l_dis;
+		c_vol = /*(*volume) */ l_dis;
 
 		for(uint32_t i = 0; i < _splitsize; ++i)
 		{
@@ -498,7 +490,7 @@ namespace SonikAudio
 	void SonikAudioMixer::Mixing_32bit_2ch(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr)
 	{
 		int32_t** p_wave = reinterpret_cast<int32_t**>( ref_itr->GetAudioControlPointer() );
-		const float* volume = ref_itr->GetVolume();
+		//const float* volume = ref_itr->GetVolume();
 		double c_vol = 0.0;
 //		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
 		SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
@@ -506,7 +498,7 @@ namespace SonikAudio
 		int32_t* _buffer = reinterpret_cast<int32_t*>(mp_buffer);
 		double l_dis = 1.0;//pl_pos.Distance(lis_pos);
 
-		c_vol = (*volume) * l_dis;
+		c_vol = /*(*volume) */ l_dis;
 
 		for(uint32_t i = 0; i < _splitsize;)
 		{
@@ -530,7 +522,7 @@ namespace SonikAudio
 	void SonikAudioMixer::Mixing_32bit_4ch(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr)
 	{
 		int32_t** p_wave = reinterpret_cast<int32_t**>( ref_itr->GetAudioControlPointer() );
-		const float* volume = ref_itr->GetVolume();
+		//const float* volume = ref_itr->GetVolume();
 		double c_vol = 0.0;
 //		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
 		SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
@@ -538,7 +530,7 @@ namespace SonikAudio
 		int32_t* _buffer = reinterpret_cast<int32_t*>(mp_buffer);
 		double l_dis = 1.0;//pl_pos.Distance(lis_pos);
 
-		c_vol = (*volume) * l_dis;
+		c_vol = /*(*volume) */ l_dis;
 
 		for(uint32_t i = 0; i < _splitsize;)
 		{
@@ -565,7 +557,7 @@ namespace SonikAudio
 	void SonikAudioMixer::Mixing_32bit_6ch(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr)
 	{
 		int32_t** p_wave = reinterpret_cast<int32_t**>( ref_itr->GetAudioControlPointer() );
-		const float* volume = ref_itr->GetVolume();
+		//const float* volume = ref_itr->GetVolume();
 		double c_vol = 0.0;
 //		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
 		SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
@@ -573,7 +565,7 @@ namespace SonikAudio
 		int32_t* _buffer = reinterpret_cast<int32_t*>(mp_buffer);
 		double l_dis = 1.0;//pl_pos.Distance(lis_pos);
 
-		c_vol = (*volume) * l_dis;
+		c_vol = /*(*volume) */ l_dis;
 
 		for(uint32_t i = 0; i < _splitsize;)
 		{
@@ -602,7 +594,7 @@ namespace SonikAudio
 	void SonikAudioMixer::Mixing_32bit_8ch(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr)
 	{
 		int32_t** p_wave = reinterpret_cast<int32_t**>( ref_itr->GetAudioControlPointer() );
-		const float* volume = ref_itr->GetVolume();
+		//const float* volume = ref_itr->GetVolume();
 		double c_vol = 0.0;
 //		SonikMathDataBox::Sonik3DPoint& pl_pos = ref_itr->GetPositionAll();
 		SonikMathDataBox::Sonik3DPoint& lis_pos = mp_Listener->GetPosition();
@@ -610,7 +602,7 @@ namespace SonikAudio
 		int32_t* _buffer = reinterpret_cast<int32_t*>(mp_buffer);
 		double l_dis = 1.0;//pl_pos.Distance(lis_pos);
 
-		c_vol = (*volume) * l_dis;
+		c_vol = /*(*volume) */ l_dis;
 
 		for(uint32_t i = 0; i < _splitsize;)
 		{

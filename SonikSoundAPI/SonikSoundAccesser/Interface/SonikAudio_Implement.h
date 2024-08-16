@@ -9,15 +9,11 @@
 #define INTERFACE_SONIKAUDIO_IMPLEMENT_H_
 //SonikAudioInterface のメイン実装
 
-#include <stdlib.h>
-#include <map>
-#include "SonikAudio.h"
-#include "../../Functions/LoadFunction.h"
-#include "../../Format/SonikAudioFormat.h"
-#include "../../../DllAccess/SonikDllAccessManager.h"
-#include "../SAudioAccesserTypedef.h"
-#include "../../AudioLoadTypedef.h"
-#include "../../../SmartPointer/SonikSmartPointer.hpp"
+#include "./SonikAudio.h"
+#include "../../DllAccess/SonikDllAccessManager.h"
+#include "../other/SAudioAccesserTypedef.h"
+#include "../AudioLoadTypedef.h"
+#include "../../SmartPointer/SonikSmartPointer.hpp"
 
 //各プラットフォームのインターフェースクラスポインタを使うため前方宣言
 namespace SonikAudioPlatForm

@@ -5,14 +5,10 @@
  *      Author: owner
  */
 
-#include <new>
-
 #include "SonikAudioBGMPlayer.h"
 #include "SonikAudioPlayer_CD_BGM.h"
-#include "../Task/AudioPlayerTaskManager.h"
 #include "../Task/PlayerTask.h"
-#include "../PlayStateEnums.h"
-#include "../../../MathBit/SonikMathDistance.h"
+#include "../other/PlayStateEnums.h"
 
 
 namespace SonikAudio
@@ -47,7 +43,7 @@ namespace SonikAudio
 		return mp_TskMng->AddTask(l_task);
 	};
 
-	const float* SonikAudioBGMPlayer::GetVolume(void)
+	float SonikAudioBGMPlayer::GetVolume(void)
 	{
 		return mp_AudioData->GetVolume();
 	};

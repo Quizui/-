@@ -8,7 +8,7 @@
 #ifndef TASK_PLAYERTASKINTERFACE_H_
 #define TASK_PLAYERTASKINTERFACE_H_
 
-#include "../SAudioAccesserTypedef.h"
+#include "../other/SAudioAccesserTypedef.h"
 
 //インターフェース定義
 namespace SonikAudioTaskInterface

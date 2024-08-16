@@ -8,9 +8,9 @@
 #ifndef TASK_AUDIOPLAYERTASKMANAGER_H_
 #define TASK_AUDIOPLAYERTASKMANAGER_H_
 
-#include "PlayerTaskInterface.h"
-#include "../../../SonikWorkThread/SonikWorkThreadEx.h"
-#include "../../../Container/SonikAtomicQueue.hpp"
+#include "./PlayerTaskInterface.h"
+#include "../../SonikWorkThread/SonikWorkThreadEx.h"
+#include "../../Container/SonikAtomicQueue.hpp"
 
 namespace SonikAudioPlayerTask
 {

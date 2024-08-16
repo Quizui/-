@@ -8,9 +8,9 @@
 #ifndef SONIKAUDIOCREATOR_H_
 #define SONIKAUDIOCREATOR_H_
 
-#include "../../../SonikCAS/SonikAtomicLock.h"
-#include "../SAudioAccesserTypedef.h"
-#include "../../../SmartPointer/SonikSmartPointer.hpp"
+#include "../../SonikCAS/SonikAtomicLock.h"
+#include "../other/SAudioAccesserTypedef.h"
+#include "../../SmartPointer/SonikSmartPointer.hpp"
 
 //Singleton Class
 namespace SonikAudio

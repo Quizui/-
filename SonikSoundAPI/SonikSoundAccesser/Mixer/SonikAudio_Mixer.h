@@ -10,9 +10,9 @@
 
 //Audioファイルを加工するミキサーさんです。
 #include <stdint.h>
-#include "../../../Container/SonikPriorityList.hpp"
-#include "../../../SmartPointer/SonikSmartPointer.hpp"
-#include "../../../SonikWorkThread/SonikWorkThreadEx.h"
+#include "../../Container/SonikPriorityList.hpp"
+#include "../../SmartPointer/SonikSmartPointer.hpp"
+#include "../../SonikWorkThread/SonikWorkThreadEx.h"
 
 namespace SonikAudioData
 {
@@ -22,6 +22,7 @@ namespace SonikAudioData
 namespace SonikAudio
 {
 	class SonikAudioListener;
+    class SonikAudioEffecter;
 };
 
 namespace SonikAudioPlatForm
@@ -55,6 +56,9 @@ namespace SonikAudio
 		uint64_t OneSamplingByteSize;
 		//サンプリングレート
 		unsigned long m_samplingRate;
+
+        //エフェクタオブジェクト
+        SonikAudio::SonikAudioEffecter* mp_effecter;
 
 		//関数ポインタ
 		void (SonikAudioMixer::*p_mfunc_)(SonikLib::SonikLinerOperator_PriorityList<SonikLib::SharedSmtPtr<SonikAudioData::SonikAudioControlData>>& ref_itr);

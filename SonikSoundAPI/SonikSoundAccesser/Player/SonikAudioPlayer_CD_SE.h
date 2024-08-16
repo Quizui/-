@@ -9,8 +9,8 @@
 #define __PLAYER_SONIKAUDIOPLAYER_CD_SE_H__
 
 #include "SonikAudioPlayer_ControlData.h"
-#include "../PlayStateEnums.h"
-#include "../../../SmartPointer/SonikSmartPointer.hpp"
+#include "../other/PlayStateEnums.h"
+#include "../../SmartPointer/SonikSmartPointer.hpp"
 
 namespace SonikMathDataBox
 {
@@ -50,28 +50,22 @@ namespace SonikAudioData
 		//2bit_panning
 		uint32_t flgbit_effect;
 
-		using M_SAUDIO_EFFECT_FUNC = void (SonikAudioControlDataSetForSE::*)(double&, double&);
-		M_SAUDIO_EFFECT_FUNC m_effectlist[SonikAudioEnum::PlayEffectID::EF_CNT];
-
 	private:
 		//コピー禁止
 		SonikAudioControlDataSetForSE(SonikAudioControlDataSetForSE& _this_) = delete;
 		SonikAudioControlDataSetForSE& operator =(SonikAudioControlDataSetForSE& _this_) = delete;
 
-	private:
-		void SAC_PRIVATEFUNC_EFFECT_DISTANCE(double& _L_out_, double& _R_out_);
-		void SAC_PRIVATEFUNC_EFFECT_PANNING(double& _L_out_, double& _R_out_);
-
 	public:
 		SonikAudioControlDataSetForSE(SonikLib::SharedSmtPtr<double> _se_mastervolume_, SonikMathDataBox::Sonik3DPoint& _listner_pos_, SonikMathDataBox::Sonik3DPoint& _listner_dir_, SonikAudio::SAudioFormat SetAudioPointer);
 		~SonikAudioControlDataSetForSE(void);
 
-		//データが最終的にミキシングしてほしいボリューム値を取得
-		void GetMixingVolume(double& _GetLMixingValue_, double& _GetRMixingValue_);
+        //データが属するカテゴリーのボリューム値
+        double GetCategoryVolume(void);
 
 		//エフェクトのフラグ設定とエフェクトの設定
 		void EnableEffect(SonikAudioEnum::PlayEffectID _enable_effect_);
 		void DisableEffect(SonikAudioEnum::PlayEffectID _disable_effect_);
+        uint32_t GetEffectFlgBit(void);
 
 		void SetPositionALL(SonikMathDataBox::Sonik3DPoint& _3dpos_);
 		void SetPositionAll(double x, double y, double z);

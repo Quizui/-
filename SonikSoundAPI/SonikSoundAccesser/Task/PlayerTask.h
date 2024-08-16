@@ -9,7 +9,7 @@
 #define TASK_PLAYERTASK_H_
 
 #include "PlayerTaskInterface.h"
-#include "../PlayStateEnums.h"
+#include "../other/PlayStateEnums.h"
 
 //前方宣言
 namespace SonikAudioData

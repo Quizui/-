@@ -5,10 +5,11 @@
  *      Author: SONIC
  */
 
+#include "../../SonikString/SonikString.h"
 #include "./SonikAudioCreator.h"
 #include "../PlatformInterface/PlatformAudioInterface.h"
-#include "../../../SonikString/SonikString.h"
-#include "../../../DllAccess/SonikDllAccessManager.h"
+
+#include "../../DllAccess/SonikDllAccessManager.h"
 #include "./SonikAudio_Implement.h"
 
 

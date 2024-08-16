@@ -9,10 +9,10 @@
 #define PLAYER_SONIKAUDIOPLAYER_CONTROLDATA_H_
 
 #include <stdint.h>
-#include "../../../SonikCAS/SonikAtomicLock.h"
-#include "../PlayStateEnums.h"
-#include "../../AudioLoadTypedef.h"
-#include "../SAudioAccesserTypedef.h"
+#include "../../SonikCAS/SonikAtomicLock.h"
+#include "../other/PlayStateEnums.h"
+#include "../other/PlayerCDType.h"
+#include "../AudioLoadTypedef.h"
 
 namespace SonikMathDataBox
 {
@@ -32,6 +32,7 @@ namespace SonikAudioData
 		float m_volume;									//オーディオの音量
 		bool m_repeat;									//オーディオのリピートフラグ
 		SonikAudioEnum::PlayStateID m_AudioState;		//オーディオのステータス(プレイ、ストップ等)
+		SonikAudioEnum::PlayerCDType m_CDType;          //ControlDataType(エフェクタとかでの判別に必要)
 		uintptr_t m_uniqueid;							//メインインターフェースで管理される番号です。（自信のアドレス値をIDとして使います。)
 
 		//CASLock
@@ -65,7 +66,10 @@ namespace SonikAudioData
 		void SetAudioState(SonikAudioEnum::PlayStateID SetValue);
 
 		//データ自身のマスター音量(ボリューム)のゲット
-		const float* GetVolume(void);
+		float GetVolume(void);
+
+        //データが属するカテゴリーのボリューム値
+        virtual double GetCategoryVolume(void) =0;
 
 		//繰り返し(リピート)フラグのゲット
 		bool GetRepeat(void);
@@ -78,9 +82,6 @@ namespace SonikAudioData
 
 		//Unique IDの取得(マップに登録する時や登録したものを検索するのに使います。
 		uint64_t Get_UniqueID(void);
-
-		//データが最終的にミキシングしてほしいボリューム値を取得
-		virtual void GetMixingVolume(double&, double&) = 0;
 
 	};
 
