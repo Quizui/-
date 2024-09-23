@@ -12,10 +12,10 @@
 
 
 #include "./open_al_interface.h"
-#include "./SAudioAccesserTypedef.h"
-//#include "../AudioFormat/LoadFunction/LoadFunction.h"
+#include "./Audio/AudioLoadTypedef.h"
+#include "./Audio/Functions/LoadFunction.h"
 #include "../OpenALFormat.h"
-#include "../../DllAccess/SonikDllAccessManager.h"
+#include "./DllAccess/SonikDllAccessManager.h"
 
 
 

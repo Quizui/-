@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.13)
 
 #プロジェクトネーム変数設定
-set(V_ProjectName "SonikSoundAccesser")
+set(V_ProjectName "PlatFormSound_OpenAL")
 project(${V_ProjectName})
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -9,22 +9,19 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_COMPILER "D:/Development/MSYS64/clang64/bin/clang++.exe")
 
-# インクルードディレクトリの設定
-include_directories(D:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser)
-include_directories(D:/MyLibrary/include/Audio/Effecter)
-include_directories(D:/MyLibrary/include/Audio/Format)
-include_directories(D:/MyLibrary/include/Audio/Functions)
-include_directories(D:/MyLibrary/include/Audio/Interface)
-include_directories(D:/MyLibrary/include/Audio/Mixer)
-include_directories(D:/MyLibrary/include/Audio/other)
-include_directories(D:/MyLibrary/include/Audio/Player)
-include_directories(D:/MyLibrary/include/Audio)
+#ビルド除外ターゲット
+#list(FILTER SOURCES EXCLUDE REGEX "Function.*")
+#list(FILTER SOURCES EXCLUDE REGEX "MathBit/Used/.*")
+
+#ビルドターゲット
+file(GLOB_RECURSE SOURCES "./*.cpp")
 
 #include directory
-include_directories(${MINGW_HOME}/include)
+include_directories(D:/MyLibrary/include)
 
 #共通define
 add_definitions(-D__SONIK_x86_64__)
+add_definitions(-D__SONIK_DLL_OUTPUT_DEFINE__)
 
 #環境別define
 if(WIN32)
@@ -63,6 +60,14 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_definitions(-D_DEBUG)
 add_definitions(-D__cplusplus=202002L)
 
+#ライブラリリンク先のディレクトリを設定
+link_directories(D:/MyLibrary/lib/x64/Debug)
+
+#ライブラリの名前を設定
+set(LINK_SLIBNAME_FFTW "fftw3")
+set(LINK_SLIBNAME_BASE_API "Dx64_SonikLibraryAPI")
+set(LINK_SLIBNAME_BASE_SOUNDAPI "Dx64_SonikSoundAccesser")
+
 #debug build
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -std=c++20 -fmessage-length=0 -fsanitize=address,undefined,bounds -fno-omit-frame-pointer -Wall")
 
@@ -78,30 +83,24 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_definitions(-D_RELEASE)
 add_definitions(-D__cplusplus=202002L)
 
+#ライブラリリンク先のディレクトリを設定
+link_directories(D:/MyLibrary/lib/x64/Release)
+
+#ライブラリの名前を設定
+set(LINK_SLIBNAME_FFTW "fftw3")
+set(LINK_SLIBNAME_BASE_API "Rx64_SonikLibraryAPI")
+set(LINK_SLIBNAME_BASE_SOUNDAPI "Rx64_SonikSoundAccesser")
+
 #release build
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -std=c++20 -fmessage-length=0 -Wall")
 
 endif()
 
-
-
 # Ninjaのパスを明示的に指定
 set(CMAKE_MAKE_PROGRAM "D:/Development/Ninja/ninja")
 
-#ビルドターゲット
-file(GLOB_RECURSE SOURCES "./*.cpp")
-#ビルド除外ターゲット
-#list(FILTER SOURCES EXCLUDE REGEX "Function.*")
-#list(FILTER SOURCES EXCLUDE REGEX "MathBit/Used/.*")
-
-#ビルド
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-add_library(Dx64_${V_ProjectName} STATIC ${SOURCES})
-
-else(CMAKE_BUILD_TYPE STREQUAL "Release")
-add_library(Rx64_${V_ProjectName} STATIC ${SOURCES})
-
-endif()
-
-
+#共通
+add_library(${V_ProjectName} SHARED ${SOURCES})
+target_link_libraries(${V_ProjectName} ${LINK_SLIBNAME_FFTW} ${LINK_SLIBNAME_BASE_API} ${LINK_SLIBNAME_BASE_SOUNDAPI})
+set_target_properties(${V_ProjectName} PROPERTIES PREFIX "")
 #add_executable(TestBuild ${SOURCES})

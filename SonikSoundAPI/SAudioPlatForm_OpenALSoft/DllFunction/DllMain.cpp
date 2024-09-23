@@ -5,10 +5,10 @@
  *      Author: SONIC
  */
 
-#include "windows.h"
+#include <windows.h>
 
-#include "./PlatformInterface/PlatformAudioInterface.h"
-#include "../../SonikCAS/SonikAtomicLock.h"
+#include "./Audio/PlatformInterface/PlatformAudioInterface.h"
+#include "./SonikCAS/SonikAtomicLock.h"
 #include "SonikAudioDllEntrance.h"
 #include "../OpenALSource/open_al_interface.h"
 

@@ -7,7 +7,7 @@
 
 #include <algorithm>
 
-#include "SonikAudio_Mixer.h"
+#include "./SonikAudio_Mixer.h"
 #include "../Player/SonikAudioPlayer_ControlData.h"
 #include "../PlatformInterface/PlatformAudioInterface.h"
 #include "../../FunctionObject/FunctionObjectSystemImpl.hpp"

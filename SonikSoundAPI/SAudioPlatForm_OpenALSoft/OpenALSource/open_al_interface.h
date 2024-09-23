@@ -12,10 +12,10 @@
 #include <vector>
 #include <stdint.h>
 
-#include "./PlatformInterface/PlatformAudioInterface.h"
-#include "../AudioLoadTypedef.h"
-#include "../Functions/LoadFunction.h"
-#include "../../DllAccess/SonikDllAccessManager.h"
+#include "./Audio/PlatformInterface/PlatformAudioInterface.h"
+#include "./Audio/AudioLoadTypedef.h"
+#include "./Audio//Functions/LoadFunction.h"
+#include "./DllAccess/SonikDllAccessManager.h"
 
 #include "../AL/al.h"
 #include "../AL/alc.h"

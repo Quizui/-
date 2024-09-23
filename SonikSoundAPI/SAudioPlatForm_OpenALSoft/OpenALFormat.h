@@ -18,7 +18,7 @@
 #include "AL/efx-creative.h"
 #include "AL/efx-presets.h"
 
-#include "../../SonikCAS/SonikAtomicLock.h"
+#include "./SonikCAS/SonikAtomicLock.h"
 
 namespace OpenALFormat
 {
