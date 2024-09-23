@@ -13,8 +13,12 @@
 
 //C++20 以前はchar8_t が無いので。
 #if __cplusplus < 202002L
-              //C++20 以前であれば　char8_t は uint8_t
-              using char8_t = uint8_t;
+    //C++20 以前であれば　char8_t は uint8_t
+    using utf8_t = uint8_t;
+#else
+	#include <cuchar>
+	using utf8_t = char8_t;
+
 #endif
 
 
@@ -52,8 +56,8 @@ namespace SonikLib
 		SonikStringUTF8(const char16_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
 		SonikStringUTF8(const wchar_t* SetStr);
 		SonikStringUTF8(const wchar_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
-		SonikStringUTF8(const char8_t* SetStr);
-		SonikStringUTF8(const char8_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
+		SonikStringUTF8(const utf8_t* SetStr);
+		SonikStringUTF8(const utf8_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
         SonikStringUTF8(const int8_t SetValue);
 		SonikStringUTF8(const int8_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
         SonikStringUTF8(const uint8_t SetValue);
@@ -88,10 +92,10 @@ namespace SonikLib
 		//UTF16形式に変換して取得します。(バッファタイプも書き換わります。)
 		const char16_t* str_utf16(void);
 		//UTF8形式に変換して取得します。(バッファタイプも書き換わります。)
-		const char8_t* str_utf8(void);
+		const utf8_t* str_utf8(void);
 
 		//define切り替えのstrゲット
-		const char8_t* definition_str(void);
+		const utf8_t* definition_str(void);
 
 		//SJIS形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
 		//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
@@ -104,10 +108,10 @@ namespace SonikLib
 		uint64_t GetCpy_str_utf16(char16_t* dstBuffer = nullptr);
 		//UTF8形式に変換して、バッファをdstBufferにコピーします。(バッファタイプも書き換わります。)
 		//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
-		uint64_t GetCpy_str_utf8(char8_t* dstBuffer = nullptr);
+		uint64_t GetCpy_str_utf8(utf8_t* dstBuffer = nullptr);
 
 		//define切り替えのStrCopy
-		uint64_t GetCpy_str_definition(char8_t* dstBuffer = nullptr);
+		uint64_t GetCpy_str_definition(utf8_t* dstBuffer = nullptr);
 
 		//c:文字列のByte数を取得します。（Null終端文字をカウントに含まない)
 		uint64_t Count_Byte_NotNull(void);
@@ -133,7 +137,7 @@ namespace SonikLib
 		SonikStringUTF8& operator =(const char* Str);
 		SonikStringUTF8& operator =(const char16_t* w_Str);
 		SonikStringUTF8& operator =(const wchar_t* w_Str);
-		SonikStringUTF8& operator =(const char8_t* utf8_Str);
+		SonikStringUTF8& operator =(const utf8_t* utf8_Str);
         SonikStringUTF8& operator =(const int8_t SetValue);
         SonikStringUTF8& operator =(const uint8_t SetValue);
         SonikStringUTF8& operator =(const int16_t SetValue);
@@ -151,7 +155,7 @@ namespace SonikLib
 		SonikStringUTF8& operator +=(const char* Str);
 		SonikStringUTF8& operator +=(const char16_t* w_Str);
 		SonikStringUTF8& operator +=(const wchar_t* w_Str);
-		SonikStringUTF8& operator +=(const char8_t* utf8_Str);
+		SonikStringUTF8& operator +=(const utf8_t* utf8_Str);
         SonikStringUTF8& operator +=(const int8_t SetValue);
         SonikStringUTF8& operator +=(const uint8_t SetValue);
         SonikStringUTF8& operator +=(const int16_t SetValue);
@@ -169,7 +173,7 @@ namespace SonikLib
 		SonikStringUTF8 operator +(const char* Str);
 		SonikStringUTF8 operator +(const char16_t* w_Str);
 		SonikStringUTF8 operator +(const wchar_t* w_Str);
-		SonikStringUTF8 operator +(const char8_t* utf8_Str);
+		SonikStringUTF8 operator +(const utf8_t* utf8_Str);
         SonikStringUTF8 operator +(const int8_t SetValue);
         SonikStringUTF8 operator +(const uint8_t SetValue);
         SonikStringUTF8 operator +(const int16_t SetValue);
@@ -187,7 +191,7 @@ namespace SonikLib
 		bool operator ==(const char* Str);
 		bool operator ==(const char16_t* w_Str);
 		bool operator ==(const wchar_t* w_Str);
-		bool operator ==(const char8_t* utf8_Str);
+		bool operator ==(const utf8_t* utf8_Str);
 
 		//c: 文字列同士を比較します。(strcmp)
 		//c: 不一致の場合true　一致の場合 falseを返却します。
@@ -195,7 +199,7 @@ namespace SonikLib
 		bool operator !=(const char* Str);
 		bool operator !=(const char16_t* w_Str);
 		bool operator !=(const wchar_t* w_Str);
-		bool operator !=(const char8_t* utf8_Str);
+		bool operator !=(const utf8_t* utf8_Str);
 
 	};
 

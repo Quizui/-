@@ -599,7 +599,7 @@ uint64_t SonikLibStringConvert::GetStringCount(const char32_t* pCheckSrc)
 
 
 //UTF-8をUNICODE(UTF-32)に変換します。
-bool SonikLibStringConvert::ConvertUTF8ToUTF32(const char8_t* pSrc, char32_t* pDest, uint64_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertUTF8ToUTF32(const utf8_t* pSrc, char32_t* pDest, uint64_t* DestBufferSize)
 {
 	if( pSrc == nullptr || (*pSrc) == 0)
 	{
@@ -745,7 +745,7 @@ bool SonikLibStringConvert::ConvertUTF8ToUTF32(const char8_t* pSrc, char32_t* pD
 };
 
 //UNICODE(UTF-32)をUTF-8に変換します。
-bool SonikLibStringConvert::ConvertUTF32ToUTF8(const char32_t* pSrc, char8_t* pDest, uint64_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertUTF32ToUTF8(const char32_t* pSrc, utf8_t* pDest, uint64_t* DestBufferSize)
 {
 	if( pSrc == nullptr || (*pSrc) == 0)
 	{
@@ -765,7 +765,7 @@ bool SonikLibStringConvert::ConvertUTF32ToUTF8(const char32_t* pSrc, char8_t* pD
 	 // x * 4 = x << 2; 終端文字は１Byteでいいので +1 Byte
 	utf8_strcnt_ = (utf32_strcnt_ << 2) + 1;
 
-	char8_t* utf8buffer = new(std::nothrow) char8_t[utf8_strcnt_]{}; //初期化時0クリア
+	utf8_t* utf8buffer = new(std::nothrow) utf8_t[utf8_strcnt_]{}; //初期化時0クリア
 	if(utf8buffer == nullptr)
 	{
 		return false;
@@ -1026,7 +1026,7 @@ bool SonikLibStringConvert::ConvertUTF16ToUTF32(const char16_t* pSrc, char32_t* 
 
 
 //UNICODE(UTF-16)をUTF8に変換します。
-bool SonikLibStringConvert::ConvertUTF16ToUTF8(const char16_t* pSrc, char8_t* pDest, uint64_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertUTF16ToUTF8(const char16_t* pSrc, utf8_t* pDest, uint64_t* DestBufferSize)
 {
 	if( pSrc == nullptr || (*pSrc) == 0)
 	{
@@ -1083,7 +1083,7 @@ bool SonikLibStringConvert::ConvertUTF16ToUTF8(const char16_t* pSrc, char8_t* pD
 
 
 //UTF8をUNICODE(UTF-16)に変換します。
-bool SonikLibStringConvert::ConvertUTF8ToUTF16(const char8_t* pSrc, char16_t* pDest, uint64_t* DestBufferSize)
+bool SonikLibStringConvert::ConvertUTF8ToUTF16(const utf8_t* pSrc, char16_t* pDest, uint64_t* DestBufferSize)
 {
 	if( pSrc == nullptr || (*pSrc) == 0)
 	{
@@ -1142,7 +1142,7 @@ bool SonikLibStringConvert::ConvertUTF8ToUTF16(const char8_t* pSrc, char16_t* pD
 
 //マルチバイト文字列をUTF8文字列に変換します。
 //第１引数の文字列は、可能性の判定として、SJIS判定であれば処理を行います。
-bool SonikLibStringConvert::ConvertMBSToUTF8(const char* pSrc, char8_t* pDest, uint64_t* DestBufferSize, const char* locale)
+bool SonikLibStringConvert::ConvertMBSToUTF8(const char* pSrc, utf8_t* pDest, uint64_t* DestBufferSize, const char* locale)
 {
 	if( pSrc == nullptr || (*pSrc) == 0)
 	{
@@ -1234,7 +1234,7 @@ bool SonikLibStringConvert::ConvertMBSToUTF8(const char* pSrc, char8_t* pDest, u
 //UTF8文字列をマルチバイト文字列に変換します。
 //第１引数の文字列は、可能性の判定として、SJIS判定であれば処理を行います。
 //第１引数の文字列に対して、Null終端がない場合の動作は、strlenと同様にバッファオーバーランを起こします。
-bool SonikLibStringConvert::ConvertUTF8ToMBS(const char8_t* pSrc, char* pDest, uint64_t* DestBufferSize, const char* locale)
+bool SonikLibStringConvert::ConvertUTF8ToMBS(const utf8_t* pSrc, char* pDest, uint64_t* DestBufferSize, const char* locale)
 {
 	if( pSrc == nullptr || (*pSrc) == 0)
 	{
