@@ -6,6 +6,9 @@
  */
 #include "SonikAtomicLock.h"
 
+#include <thread>
+#include <chrono>
+
 namespace SonikLib
 {
 	namespace S_CAS
@@ -34,6 +37,8 @@ namespace SonikLib
 			{
 				//false の場合、 a_right は trueの値に書き換えられるので、falseに戻す。
 				a_right = false;
+				//CPU使用率軽減のためスリープ
+				std::this_thread::sleep_for(std::chrono::nanoseconds(1));
 			};
 
 			//権利が獲得できたら関数を終了。処理を返す。

@@ -40,29 +40,18 @@ namespace SonikLib
 
 	namespace FileSystem
 	{
-		//エンディアン対策で16進数から実数値に変更。コメントに16進数記載
-		enum class OpenMode : uint32_t
+		enum FILEOPENSWITCH
 		{
-			//UNKNOWN
-			OPEN_UNKNOWN            = 0,	    //0x00000000 -> unknow 特殊。不定の証
-
-			//TEXT OPEN
-			OPEN_TXT_READ			= 114,		//0x00000072 -> "r" 読み込み専用(Read Only) エラー + 新規作成不可
-			OPEN_TXT_WRITE			= 119,		//0x00000077 -> "w" 書き込み専用(Write Only)	 内容を消去 + 新規作成可
-			OPEN_TXT_WRITEADD		= 97,		//0x00000061 -> "a" 追加書き込み専用(AddWrite Only) 内容の最後に追記 + 新規作成可
-			OPEN_TXT_READWRITE		= 11122,	//0x00002B72 -> "r+" 読み書き(Read And Write) エラー + 新規作成不可
-			OPEN_TXT_WRITEREAD		= 11127,	//0x00002B77 -> "w+" 書き読み(Write And Read) 内容を消去 + 新規作成可
-			OPEN_TXT_READADDWRITE	= 11105,	//0x00002B61 -> "a+" 読み込みと追加書き込み(Read And AddWrite) 内容の最後に追記 + 新規作成可
-
-			//Binary OPEN
-			OPEN_BIN_READ			= 25202,	//0x00006272 -> "rb" 読み込み専用(Read Only) エラー + 新規作成不可
-			OPEN_BIN_WRITE			= 25207,	//0x00006277 -> "wb" 書き込み専用(Write Only)	 内容を消去 + 新規作成可
-			OPEN_BIN_WRITEADD		= 25185,	//0x00006261 -> "ab" 追加書き込み専用(AddWrite Only) 内容の最後に追記 + 新規作成可
-			OPEN_BIN_READWRITE		= 2843250,	//0x002B6272 -> "rb+" 読み書き(Read And Write) エラー + 新規作成不可
-			OPEN_BIN_WRITEREAD		= 2843255,	//0x002B6277 -> "wb+" 書き読み(Write And Read) 内容を消去 + 新規作成可
-			OPEN_BIN_READADDWRITE	= 2843233,	//0x002B6261 -> "ab+" 読み込みと追加書き込み(Read And AddWrite) 内容の最後に追記 + 新規作成可
-
-		}; // end enum class
+			FOSW_READ		= 0x00000001,
+			FOSW_WRITE		= 0x00000002,
+			FOSW_ADD		= 0x00000004,
+			FOSW_OPENTEXT	= 0x00000008,
+			FOSW_CREATE		= 0x00000010,
+			FOSW_CLEAR		= 0x00000020,
+			FOSW_READSHARE	= 0x00000040,
+			FOSW_WRITESHARE = 0x00000080,
+			FOSW_TEXTMODE	= 0x00000100,
+		};// end enum FILE OPEN SWITCH
 
 	}; //end namespace FileSystem
 
@@ -74,18 +63,17 @@ namespace SonikLib
             private:
                 class InnerFileSystemFunction;
                 InnerFileSystemFunction* mp_f_sys_func;
-
-                FileSystem::OpenMode m_openmode;
+				
                 SonikLib::S_CAS::SonikAtomicLock m_lock;
 
                 using SFSC_VV_FUNC = void (InnerFileSystemFunction::*)(void);
                 using SFSC_U64V_FUNC = uint64_t (InnerFileSystemFunction::*)(void);
                 using SFSC_VU64_FUNC = void (InnerFileSystemFunction::*)(uint64_t);
-                using SFSC_READ_FUNC = void (InnerFileSystemFunction::*)(char*, uint64_t);
-                using SFSC_WRITE_FUNC = void (InnerFileSystemFunction::*)(char*, uint32_t, uint32_t);
+                using SFSC_READ_FUNC = int32_t (InnerFileSystemFunction::*)(char*, uint64_t);
+                using SFSC_WRITE_FUNC = void (InnerFileSystemFunction::*)(char*, uint64_t);
                 using SFSC_WRITESTR_FUNC = void (InnerFileSystemFunction::*)(SonikLib::SonikString&);
-                using SFSC_READLINE_FUNC = void (InnerFileSystemFunction::*)(SonikLib::SonikString&, uint64_t);
-                using SFSC_READLINEQUEUE_FUNC = void (InnerFileSystemFunction::*)(SonikLib::Container::SonikAtomicQueue<SonikLib::SonikString>&, uint64_t);
+                using SFSC_READLINE_FUNC = int32_t (InnerFileSystemFunction::*)(SonikLib::SonikString&, uint64_t);
+                using SFSC_READLINEQUEUE_FUNC = int32_t (InnerFileSystemFunction::*)(SonikLib::Container::SonikAtomicQueue<SonikLib::SonikString>&, uint64_t);
 
                 SFSC_VV_FUNC m_run_vv_func[3];
                 SFSC_U64V_FUNC m_run_u64v_func[2];
@@ -112,7 +100,7 @@ namespace SonikLib
                 static bool CreateFileController(SFileSystemController& _out_);
 
     			//FileOpen
-    			bool OpenFile(SonikLib::SonikString _filepath_, FileSystem::OpenMode _mode_);
+    			bool OpenFile(SonikLib::SonikString _filepath_, uint32_t _open_switch_);
     			//FileClose
     			void CloseFile(void);
 
@@ -129,9 +117,9 @@ namespace SonikLib
     			uint64_t SeekPointGet(void);
 
     			//指定したサイズ文読み込みます。
-    			void Read(char* _buffer_, uint64_t _size_);
+    			int32_t Read(char* _buffer_, uint64_t _size_);
     			//バイナリデータ書き込み用 4バイト配列をreinterpretで渡している場合はblocksizeはsizeof(uint32_t)等...。
-    			void Write(char* _writevalue_, uint32_t _writesize_, uint32_t _writeblocksize_);
+    			void Write(char* _writevalue_, uint64_t _writesize_);
 
     			//SonikStringの吐き出し方法で分けています。
     			//テキストモードでオープンした状態だとファイル内の文字のエンコーディングがUTF-8に代わるといったことはありません。
@@ -144,9 +132,9 @@ namespace SonikLib
     			void Write_UTF16(SonikLib::SonikString& _writevalue_);
 
     			//テキストモード専用　指定された行数文TEXTを読み込みます。
-    			void ReadText_Line(SonikLib::SonikString& _str_, uint64_t GetRowCnt =1);
+    			int32_t ReadText_Line(SonikLib::SonikString& _str_, uint64_t GetRowCnt =1);
     			//テキストモード専用　指定された行数文TEXTを読み込ます。改行は削除され、改行で分割されたQueueとして取得します。
-    			void ReadText_LineQueue(SonikLib::Container::SonikAtomicQueue<SonikString>& _GetLineQueue_, uint64_t GetRowCnt =1);
+    			int32_t ReadText_LineQueue(SonikLib::Container::SonikAtomicQueue<SonikString>& _GetLineQueue_, uint64_t GetRowCnt =1);
 		};
 
     }; //end namespace FileSystemController

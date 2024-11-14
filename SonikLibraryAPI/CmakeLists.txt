@@ -45,6 +45,8 @@ endif()
 #Debug_set_arg
 #デバッグ時に有効にするフラグ
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+message("Debug Setting Compiled [DBG_MESSAGE]}")
+
 #set EXPORT_COMPILE_COMMANDS
 #compile_commands.json の出力をONにする。
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
@@ -60,6 +62,8 @@ endif()
 #Release_set_arg
 #リリース時に有効にするフラグ
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
+
+message("Release Setting Compiled [RELEASE_MESSAGE]}")
 #set EXPORT_COMPILE_COMMANDS
 #compile_commands.json の出力をONにする。
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

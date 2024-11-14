@@ -2873,11 +2873,11 @@ namespace SonikLib
 
 		string_operator_lock.lock();
 
-		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(Str) + 1;
-		if(buffer_ < Size_)
+		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(Str);
+		if(buffer_ < (Size_ + 1))
 		{
 			//null終端分追加
-			if(!this->ReAlloc( Size_))
+			if(!this->ReAlloc( (Size_ + 1)))
 			{
 				string_operator_lock.unlock();
 				throw std::bad_alloc();
@@ -2921,11 +2921,11 @@ namespace SonikLib
 
 		string_operator_lock.lock();
 
-		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(w_Str) + 2;
-		if(buffer_ < Size_)
+		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(w_Str);
+		if(buffer_ < (Size_ + 2))
 		{
 			//null終端分追加
-			if(!this->ReAlloc( Size_ ))
+			if(!this->ReAlloc( (Size_ +2) ))
 			{
 				string_operator_lock.unlock();
 				throw std::bad_alloc();
@@ -2983,11 +2983,11 @@ namespace SonikLib
 		SonikLibConvertType CONVTYPE = SCHTYPE_UTF32;
 #endif
 
-		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast< CONST_CHRTYPE>(w_Str)) + NULLSTR_SIZE;
-		if(buffer_ < Size_)
+		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast< CONST_CHRTYPE>(w_Str));
+		if(buffer_ < (Size_ + NULLSTR_SIZE))
 		{
 			//null終端分追加
-			if(!this->ReAlloc( Size_ ))
+			if(!this->ReAlloc( (Size_ + NULLSTR_SIZE) ))
 			{
 				string_operator_lock.unlock();
 				throw std::bad_alloc();
@@ -3035,11 +3035,11 @@ namespace SonikLib
 
 		string_operator_lock.lock();
 
-		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<const char*>(utf8_Str)) + 1;
-		if(buffer_ < Size_)
+		uint64_t Size_ = SonikLibStringConvert::GetStringLengthByte(reinterpret_cast<const char*>(utf8_Str));
+		if(buffer_ < (Size_ + 1))
 		{
 			//null終端分追加
-			if(!this->ReAlloc( Size_))
+			if(!this->ReAlloc( (Size_+1)))
 			{
 				string_operator_lock.unlock();
 				throw std::bad_alloc();
@@ -3102,7 +3102,7 @@ namespace SonikLib
 
 		try
 		{
-			std::copy_n(Str, buffer_, reinterpret_cast<char*>(Stringval_));
+			std::copy_n(Str, Size_, reinterpret_cast<char*>(Stringval_));
 		}catch(...)
 		{
 			string_operator_lock.unlock();
@@ -3147,7 +3147,7 @@ namespace SonikLib
 
 		try
 		{
-			std::copy_n(Str, buffer_, reinterpret_cast<char*>(Stringval_));
+			std::copy_n(Str, Size_, reinterpret_cast<char*>(Stringval_));
 		}catch(...)
 		{
 			string_operator_lock.unlock();
@@ -3192,7 +3192,7 @@ namespace SonikLib
 
 		try
 		{
-			std::copy_n(Str, buffer_, reinterpret_cast<char*>(Stringval_));
+			std::copy_n(Str, Size_, reinterpret_cast<char*>(Stringval_));
 		}catch(...)
 		{
 			string_operator_lock.unlock();
@@ -3237,7 +3237,7 @@ namespace SonikLib
 
 		try
 		{
-			std::copy_n(Str, buffer_, reinterpret_cast<char*>(Stringval_));
+			std::copy_n(Str, Size_, reinterpret_cast<char*>(Stringval_));
 		}catch(...)
 		{
 			string_operator_lock.unlock();
@@ -3282,7 +3282,7 @@ namespace SonikLib
 
 		try
 		{
-			std::copy_n(Str, buffer_, reinterpret_cast<char*>(Stringval_));
+			std::copy_n(Str, Size_, reinterpret_cast<char*>(Stringval_));
 		}catch(...)
 		{
 			string_operator_lock.unlock();
@@ -3327,7 +3327,7 @@ namespace SonikLib
 
 		try
 		{
-			std::copy_n(Str, buffer_, reinterpret_cast<char*>(Stringval_));
+			std::copy_n(Str, Size_, reinterpret_cast<char*>(Stringval_));
 		}catch(...)
 		{
 			string_operator_lock.unlock();
@@ -3372,7 +3372,7 @@ namespace SonikLib
 
 		try
 		{
-			std::copy_n(Str, buffer_, reinterpret_cast<char*>(Stringval_));
+			std::copy_n(Str, Size_, reinterpret_cast<char*>(Stringval_));
 		}catch(...)
 		{
 			string_operator_lock.unlock();
@@ -3417,7 +3417,7 @@ namespace SonikLib
 
 		try
 		{
-			std::copy_n(Str, buffer_, reinterpret_cast<char*>(Stringval_));
+			std::copy_n(Str, Size_, reinterpret_cast<char*>(Stringval_));
 		}catch(...)
 		{
 			string_operator_lock.unlock();
@@ -3462,7 +3462,7 @@ namespace SonikLib
 
 		try
 		{
-			std::copy_n(Str, buffer_, reinterpret_cast<char*>(Stringval_));
+			std::copy_n(Str, Size_, reinterpret_cast<char*>(Stringval_));
 		}catch(...)
 		{
 			string_operator_lock.unlock();
@@ -3506,7 +3506,7 @@ namespace SonikLib
 
 		try
 		{
-			std::copy_n(Str, buffer_, reinterpret_cast<char*>(Stringval_));
+			std::copy_n(Str, Size_, reinterpret_cast<char*>(Stringval_));
 		}catch(...)
 		{
 			string_operator_lock.unlock();

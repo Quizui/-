@@ -251,6 +251,11 @@ namespace SonikLib
 					return AllocCount;
 				};
 
+				inline uint32_t GetSizeMax(void) noexcept
+				{
+					return MaxCnt;
+				};
+
 				inline bool PushBack(const T& PushItem) noexcept
 				{
 					m_lock.lock();
