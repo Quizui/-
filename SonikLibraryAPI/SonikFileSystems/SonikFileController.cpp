@@ -727,8 +727,18 @@ namespace SonikLib
             m_run_readline_func = &InnerFileSystemFunction::OpenFunction_ReadText_Line;
             m_run_rlqueue_func  = &InnerFileSystemFunction::OpenFunction_ReadText_LineQueue;
 
+            //Writeフラグが立ってなければWrite系は非オープン関数へ
+            if((_open_switch_ & FileSystem::FILEOPENSWITCH::FOSW_WRITE) == 0)
+            {
+                m_run_write_func = &InnerFileSystemFunction::NoOpenFunction_Write;
+
+                m_run_writestr_func[0] = &InnerFileSystemFunction::NoOpenFunction_Write_char;
+                m_run_writestr_func[1] = &InnerFileSystemFunction::NoOpenFunction_Write_UTF8;
+                m_run_writestr_func[2] = &InnerFileSystemFunction::NoOpenFunction_Write_UTF16;
+            };
+
             //テキストモードなら文字列系は非オープン関数へ
-            if(_open_switch_ & FileSystem::FILEOPENSWITCH::FOSW_OPENTEXT)
+            if((_open_switch_ & FileSystem::FILEOPENSWITCH::FOSW_OPENTEXT) == 0)
             {
                 m_run_writestr_func[0] = &InnerFileSystemFunction::NoOpenFunction_Write_char;
                 m_run_writestr_func[1] = &InnerFileSystemFunction::NoOpenFunction_Write_UTF8;
@@ -738,6 +748,13 @@ namespace SonikLib
                 m_run_rlqueue_func  = &InnerFileSystemFunction::NoOpenFunction_ReadText_LineQueue;
             };
 
+            //ADDフラグが立っていればファイルシークを最終へ
+            if(_open_switch_ & FileSystem::FILEOPENSWITCH::FOSW_ADD)
+            {
+                (mp_f_sys_func->*m_run_vv_func[2])();
+            };
+
+            //終了
             m_lock.unlock();
             return true;
 		};

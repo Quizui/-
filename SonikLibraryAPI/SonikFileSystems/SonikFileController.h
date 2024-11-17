@@ -50,7 +50,6 @@ namespace SonikLib
 			FOSW_CLEAR		= 0x00000020,
 			FOSW_READSHARE	= 0x00000040,
 			FOSW_WRITESHARE = 0x00000080,
-			FOSW_TEXTMODE	= 0x00000100,
 		};// end enum FILE OPEN SWITCH
 
 	}; //end namespace FileSystem
