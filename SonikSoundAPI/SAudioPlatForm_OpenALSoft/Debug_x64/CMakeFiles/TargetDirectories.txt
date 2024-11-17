@@ -1,0 +1,3 @@
+D:/TheiaProject_Edit/SonikSoundAPI/SAudioPlatForm_OpenALSoft/Debug_x64/CMakeFiles/PlatFormSound_OpenAL.dir
+D:/TheiaProject_Edit/SonikSoundAPI/SAudioPlatForm_OpenALSoft/Debug_x64/CMakeFiles/edit_cache.dir
+D:/TheiaProject_Edit/SonikSoundAPI/SAudioPlatForm_OpenALSoft/Debug_x64/CMakeFiles/rebuild_cache.dir

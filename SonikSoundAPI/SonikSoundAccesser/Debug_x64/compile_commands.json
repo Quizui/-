@@ -1,0 +1,86 @@
+[
+{
+  "directory": "D:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser/Debug_x64",
+  "command": "D:\\Development\\MSYS64\\clang64\\bin\\clang++.exe -D_DEBUG -D_WIN64 -D__SONIK_x86_64__ -D__cplusplus=202002L -ID:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser -ID:/MyLibrary/include/Audio/Effecter -ID:/MyLibrary/include/Audio/Format -ID:/MyLibrary/include/Audio/Functions -ID:/MyLibrary/include/Audio/Interface -ID:/MyLibrary/include/Audio/Mixer -ID:/MyLibrary/include/Audio/other -ID:/MyLibrary/include/Audio/Player -ID:/MyLibrary/include/Audio -I/include -g -g -std=c++20 -fmessage-length=0 -fsanitize=address,undefined,bounds -fno-omit-frame-pointer -Wall -std=gnu++20 -o CMakeFiles\\Dx64_SonikSoundAccesser.dir\\CMakeFiles\\3.30.0\\CompilerIdCXX\\CMakeCXXCompilerId.cpp.obj -c D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Debug_x64\\CMakeFiles\\3.30.0\\CompilerIdCXX\\CMakeCXXCompilerId.cpp",
+  "file": "D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Debug_x64\\CMakeFiles\\3.30.0\\CompilerIdCXX\\CMakeCXXCompilerId.cpp",
+  "output": "CMakeFiles\\Dx64_SonikSoundAccesser.dir\\CMakeFiles\\3.30.0\\CompilerIdCXX\\CMakeCXXCompilerId.cpp.obj"
+},
+{
+  "directory": "D:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser/Debug_x64",
+  "command": "D:\\Development\\MSYS64\\clang64\\bin\\clang++.exe -D_DEBUG -D_WIN64 -D__SONIK_x86_64__ -D__cplusplus=202002L -ID:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser -ID:/MyLibrary/include/Audio/Effecter -ID:/MyLibrary/include/Audio/Format -ID:/MyLibrary/include/Audio/Functions -ID:/MyLibrary/include/Audio/Interface -ID:/MyLibrary/include/Audio/Mixer -ID:/MyLibrary/include/Audio/other -ID:/MyLibrary/include/Audio/Player -ID:/MyLibrary/include/Audio -I/include -g -g -std=c++20 -fmessage-length=0 -fsanitize=address,undefined,bounds -fno-omit-frame-pointer -Wall -std=gnu++20 -o CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Effecter\\SonikAudioEffecter.cpp.obj -c D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Effecter\\SonikAudioEffecter.cpp",
+  "file": "D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Effecter\\SonikAudioEffecter.cpp",
+  "output": "CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Effecter\\SonikAudioEffecter.cpp.obj"
+},
+{
+  "directory": "D:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser/Debug_x64",
+  "command": "D:\\Development\\MSYS64\\clang64\\bin\\clang++.exe -D_DEBUG -D_WIN64 -D__SONIK_x86_64__ -D__cplusplus=202002L -ID:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser -ID:/MyLibrary/include/Audio/Effecter -ID:/MyLibrary/include/Audio/Format -ID:/MyLibrary/include/Audio/Functions -ID:/MyLibrary/include/Audio/Interface -ID:/MyLibrary/include/Audio/Mixer -ID:/MyLibrary/include/Audio/other -ID:/MyLibrary/include/Audio/Player -ID:/MyLibrary/include/Audio -I/include -g -g -std=c++20 -fmessage-length=0 -fsanitize=address,undefined,bounds -fno-omit-frame-pointer -Wall -std=gnu++20 -o CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Interface\\SonikAudioCreator.cpp.obj -c D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Interface\\SonikAudioCreator.cpp",
+  "file": "D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Interface\\SonikAudioCreator.cpp",
+  "output": "CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Interface\\SonikAudioCreator.cpp.obj"
+},
+{
+  "directory": "D:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser/Debug_x64",
+  "command": "D:\\Development\\MSYS64\\clang64\\bin\\clang++.exe -D_DEBUG -D_WIN64 -D__SONIK_x86_64__ -D__cplusplus=202002L -ID:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser -ID:/MyLibrary/include/Audio/Effecter -ID:/MyLibrary/include/Audio/Format -ID:/MyLibrary/include/Audio/Functions -ID:/MyLibrary/include/Audio/Interface -ID:/MyLibrary/include/Audio/Mixer -ID:/MyLibrary/include/Audio/other -ID:/MyLibrary/include/Audio/Player -ID:/MyLibrary/include/Audio -I/include -g -g -std=c++20 -fmessage-length=0 -fsanitize=address,undefined,bounds -fno-omit-frame-pointer -Wall -std=gnu++20 -o CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Interface\\SonikAudio_Implement.cpp.obj -c D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Interface\\SonikAudio_Implement.cpp",
+  "file": "D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Interface\\SonikAudio_Implement.cpp",
+  "output": "CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Interface\\SonikAudio_Implement.cpp.obj"
+},
+{
+  "directory": "D:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser/Debug_x64",
+  "command": "D:\\Development\\MSYS64\\clang64\\bin\\clang++.exe -D_DEBUG -D_WIN64 -D__SONIK_x86_64__ -D__cplusplus=202002L -ID:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser -ID:/MyLibrary/include/Audio/Effecter -ID:/MyLibrary/include/Audio/Format -ID:/MyLibrary/include/Audio/Functions -ID:/MyLibrary/include/Audio/Interface -ID:/MyLibrary/include/Audio/Mixer -ID:/MyLibrary/include/Audio/other -ID:/MyLibrary/include/Audio/Player -ID:/MyLibrary/include/Audio -I/include -g -g -std=c++20 -fmessage-length=0 -fsanitize=address,undefined,bounds -fno-omit-frame-pointer -Wall -std=gnu++20 -o CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Listener\\SonikAudioListener.cpp.obj -c D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Listener\\SonikAudioListener.cpp",
+  "file": "D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Listener\\SonikAudioListener.cpp",
+  "output": "CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Listener\\SonikAudioListener.cpp.obj"
+},
+{
+  "directory": "D:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser/Debug_x64",
+  "command": "D:\\Development\\MSYS64\\clang64\\bin\\clang++.exe -D_DEBUG -D_WIN64 -D__SONIK_x86_64__ -D__cplusplus=202002L -ID:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser -ID:/MyLibrary/include/Audio/Effecter -ID:/MyLibrary/include/Audio/Format -ID:/MyLibrary/include/Audio/Functions -ID:/MyLibrary/include/Audio/Interface -ID:/MyLibrary/include/Audio/Mixer -ID:/MyLibrary/include/Audio/other -ID:/MyLibrary/include/Audio/Player -ID:/MyLibrary/include/Audio -I/include -g -g -std=c++20 -fmessage-length=0 -fsanitize=address,undefined,bounds -fno-omit-frame-pointer -Wall -std=gnu++20 -o CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Mixer\\SonikAudio_Mixer.cpp.obj -c D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Mixer\\SonikAudio_Mixer.cpp",
+  "file": "D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Mixer\\SonikAudio_Mixer.cpp",
+  "output": "CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Mixer\\SonikAudio_Mixer.cpp.obj"
+},
+{
+  "directory": "D:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser/Debug_x64",
+  "command": "D:\\Development\\MSYS64\\clang64\\bin\\clang++.exe -D_DEBUG -D_WIN64 -D__SONIK_x86_64__ -D__cplusplus=202002L -ID:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser -ID:/MyLibrary/include/Audio/Effecter -ID:/MyLibrary/include/Audio/Format -ID:/MyLibrary/include/Audio/Functions -ID:/MyLibrary/include/Audio/Interface -ID:/MyLibrary/include/Audio/Mixer -ID:/MyLibrary/include/Audio/other -ID:/MyLibrary/include/Audio/Player -ID:/MyLibrary/include/Audio -I/include -g -g -std=c++20 -fmessage-length=0 -fsanitize=address,undefined,bounds -fno-omit-frame-pointer -Wall -std=gnu++20 -o CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Player\\SonikAudioBGMPlayer.cpp.obj -c D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Player\\SonikAudioBGMPlayer.cpp",
+  "file": "D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Player\\SonikAudioBGMPlayer.cpp",
+  "output": "CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Player\\SonikAudioBGMPlayer.cpp.obj"
+},
+{
+  "directory": "D:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser/Debug_x64",
+  "command": "D:\\Development\\MSYS64\\clang64\\bin\\clang++.exe -D_DEBUG -D_WIN64 -D__SONIK_x86_64__ -D__cplusplus=202002L -ID:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser -ID:/MyLibrary/include/Audio/Effecter -ID:/MyLibrary/include/Audio/Format -ID:/MyLibrary/include/Audio/Functions -ID:/MyLibrary/include/Audio/Interface -ID:/MyLibrary/include/Audio/Mixer -ID:/MyLibrary/include/Audio/other -ID:/MyLibrary/include/Audio/Player -ID:/MyLibrary/include/Audio -I/include -g -g -std=c++20 -fmessage-length=0 -fsanitize=address,undefined,bounds -fno-omit-frame-pointer -Wall -std=gnu++20 -o CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Player\\SonikAudioPlayer_CD_BGM.cpp.obj -c D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Player\\SonikAudioPlayer_CD_BGM.cpp",
+  "file": "D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Player\\SonikAudioPlayer_CD_BGM.cpp",
+  "output": "CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Player\\SonikAudioPlayer_CD_BGM.cpp.obj"
+},
+{
+  "directory": "D:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser/Debug_x64",
+  "command": "D:\\Development\\MSYS64\\clang64\\bin\\clang++.exe -D_DEBUG -D_WIN64 -D__SONIK_x86_64__ -D__cplusplus=202002L -ID:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser -ID:/MyLibrary/include/Audio/Effecter -ID:/MyLibrary/include/Audio/Format -ID:/MyLibrary/include/Audio/Functions -ID:/MyLibrary/include/Audio/Interface -ID:/MyLibrary/include/Audio/Mixer -ID:/MyLibrary/include/Audio/other -ID:/MyLibrary/include/Audio/Player -ID:/MyLibrary/include/Audio -I/include -g -g -std=c++20 -fmessage-length=0 -fsanitize=address,undefined,bounds -fno-omit-frame-pointer -Wall -std=gnu++20 -o CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Player\\SonikAudioPlayer_CD_SE.cpp.obj -c D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Player\\SonikAudioPlayer_CD_SE.cpp",
+  "file": "D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Player\\SonikAudioPlayer_CD_SE.cpp",
+  "output": "CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Player\\SonikAudioPlayer_CD_SE.cpp.obj"
+},
+{
+  "directory": "D:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser/Debug_x64",
+  "command": "D:\\Development\\MSYS64\\clang64\\bin\\clang++.exe -D_DEBUG -D_WIN64 -D__SONIK_x86_64__ -D__cplusplus=202002L -ID:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser -ID:/MyLibrary/include/Audio/Effecter -ID:/MyLibrary/include/Audio/Format -ID:/MyLibrary/include/Audio/Functions -ID:/MyLibrary/include/Audio/Interface -ID:/MyLibrary/include/Audio/Mixer -ID:/MyLibrary/include/Audio/other -ID:/MyLibrary/include/Audio/Player -ID:/MyLibrary/include/Audio -I/include -g -g -std=c++20 -fmessage-length=0 -fsanitize=address,undefined,bounds -fno-omit-frame-pointer -Wall -std=gnu++20 -o CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Player\\SonikAudioPlayer_ControlData.cpp.obj -c D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Player\\SonikAudioPlayer_ControlData.cpp",
+  "file": "D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Player\\SonikAudioPlayer_ControlData.cpp",
+  "output": "CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Player\\SonikAudioPlayer_ControlData.cpp.obj"
+},
+{
+  "directory": "D:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser/Debug_x64",
+  "command": "D:\\Development\\MSYS64\\clang64\\bin\\clang++.exe -D_DEBUG -D_WIN64 -D__SONIK_x86_64__ -D__cplusplus=202002L -ID:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser -ID:/MyLibrary/include/Audio/Effecter -ID:/MyLibrary/include/Audio/Format -ID:/MyLibrary/include/Audio/Functions -ID:/MyLibrary/include/Audio/Interface -ID:/MyLibrary/include/Audio/Mixer -ID:/MyLibrary/include/Audio/other -ID:/MyLibrary/include/Audio/Player -ID:/MyLibrary/include/Audio -I/include -g -g -std=c++20 -fmessage-length=0 -fsanitize=address,undefined,bounds -fno-omit-frame-pointer -Wall -std=gnu++20 -o CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Player\\SonikAudioSEPlayer.cpp.obj -c D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Player\\SonikAudioSEPlayer.cpp",
+  "file": "D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Player\\SonikAudioSEPlayer.cpp",
+  "output": "CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Player\\SonikAudioSEPlayer.cpp.obj"
+},
+{
+  "directory": "D:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser/Debug_x64",
+  "command": "D:\\Development\\MSYS64\\clang64\\bin\\clang++.exe -D_DEBUG -D_WIN64 -D__SONIK_x86_64__ -D__cplusplus=202002L -ID:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser -ID:/MyLibrary/include/Audio/Effecter -ID:/MyLibrary/include/Audio/Format -ID:/MyLibrary/include/Audio/Functions -ID:/MyLibrary/include/Audio/Interface -ID:/MyLibrary/include/Audio/Mixer -ID:/MyLibrary/include/Audio/other -ID:/MyLibrary/include/Audio/Player -ID:/MyLibrary/include/Audio -I/include -g -g -std=c++20 -fmessage-length=0 -fsanitize=address,undefined,bounds -fno-omit-frame-pointer -Wall -std=gnu++20 -o CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Release_x64\\CMakeFiles\\3.30.0\\CompilerIdCXX\\CMakeCXXCompilerId.cpp.obj -c D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Release_x64\\CMakeFiles\\3.30.0\\CompilerIdCXX\\CMakeCXXCompilerId.cpp",
+  "file": "D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Release_x64\\CMakeFiles\\3.30.0\\CompilerIdCXX\\CMakeCXXCompilerId.cpp",
+  "output": "CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Release_x64\\CMakeFiles\\3.30.0\\CompilerIdCXX\\CMakeCXXCompilerId.cpp.obj"
+},
+{
+  "directory": "D:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser/Debug_x64",
+  "command": "D:\\Development\\MSYS64\\clang64\\bin\\clang++.exe -D_DEBUG -D_WIN64 -D__SONIK_x86_64__ -D__cplusplus=202002L -ID:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser -ID:/MyLibrary/include/Audio/Effecter -ID:/MyLibrary/include/Audio/Format -ID:/MyLibrary/include/Audio/Functions -ID:/MyLibrary/include/Audio/Interface -ID:/MyLibrary/include/Audio/Mixer -ID:/MyLibrary/include/Audio/other -ID:/MyLibrary/include/Audio/Player -ID:/MyLibrary/include/Audio -I/include -g -g -std=c++20 -fmessage-length=0 -fsanitize=address,undefined,bounds -fno-omit-frame-pointer -Wall -std=gnu++20 -o CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Task\\AudioPlayerTaskManager.cpp.obj -c D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Task\\AudioPlayerTaskManager.cpp",
+  "file": "D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Task\\AudioPlayerTaskManager.cpp",
+  "output": "CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Task\\AudioPlayerTaskManager.cpp.obj"
+},
+{
+  "directory": "D:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser/Debug_x64",
+  "command": "D:\\Development\\MSYS64\\clang64\\bin\\clang++.exe -D_DEBUG -D_WIN64 -D__SONIK_x86_64__ -D__cplusplus=202002L -ID:/TheiaProject_Edit/SonikSoundAPI/SonikSoundAccesser -ID:/MyLibrary/include/Audio/Effecter -ID:/MyLibrary/include/Audio/Format -ID:/MyLibrary/include/Audio/Functions -ID:/MyLibrary/include/Audio/Interface -ID:/MyLibrary/include/Audio/Mixer -ID:/MyLibrary/include/Audio/other -ID:/MyLibrary/include/Audio/Player -ID:/MyLibrary/include/Audio -I/include -g -g -std=c++20 -fmessage-length=0 -fsanitize=address,undefined,bounds -fno-omit-frame-pointer -Wall -std=gnu++20 -o CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Task\\PlayerTask.cpp.obj -c D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Task\\PlayerTask.cpp",
+  "file": "D:\\TheiaProject_Edit\\SonikSoundAPI\\SonikSoundAccesser\\Task\\PlayerTask.cpp",
+  "output": "CMakeFiles\\Dx64_SonikSoundAccesser.dir\\Task\\PlayerTask.cpp.obj"
+}
+]

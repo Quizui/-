@@ -5,16 +5,16 @@
  *      Author: SONIC
  */
 
-#include <map>
-#include <iterator>
+//#include <map>
+//#include <iterator>
 #include <algorithm>
 #include <stdint.h>
 
 
 #include "./open_al_interface.h"
 #include "./Audio/AudioLoadTypedef.h"
-#include "./Audio/Functions/LoadFunction.h"
-#include "../OpenALFormat.h"
+//#include "./Audio/Functions/LoadFunction.h"
+//#include "../OpenALFormat.h"
 #include "./DllAccess/SonikDllAccessManager.h"
 
 

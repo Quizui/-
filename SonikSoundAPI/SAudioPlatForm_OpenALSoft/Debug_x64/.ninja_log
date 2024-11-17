@@ -1,0 +1,12 @@
+# ninja log v6
+14	2277	7499358456073691	CMakeFiles/PlatFormSound_OpenAL.dir/CMakeFiles/3.30.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.obj	46a2db57838b322e
+72	108	7535202391467862	clean	82249a335cda2d95
+221	9088	7499358458147912	CMakeFiles/PlatFormSound_OpenAL.dir/DllFunction/DllMain.cpp.obj	d718b806a90f7b26
+224	9547	7499358458176983	CMakeFiles/PlatFormSound_OpenAL.dir/OpenALSource/open_al_interface.cpp.obj	8980ca1af302e39
+9549	10155	7499358557276410	PlatFormSound_OpenAL.dll	6b5e70b616d22e8b
+9549	10155	7499358557276410	libPlatFormSound_OpenAL.dll.a	6b5e70b616d22e8b
+21	184	7535202405958625	CMakeFiles/PlatFormSound_OpenAL.dir/CMakeFiles/3.30.0/CompilerIdCXX/CMakeCXXCompilerId.cpp.obj	46a2db57838b322e
+27	1823	7535202406013715	CMakeFiles/PlatFormSound_OpenAL.dir/DllFunction/DllMain.cpp.obj	d718b806a90f7b26
+31	1879	7535202406053789	CMakeFiles/PlatFormSound_OpenAL.dir/OpenALSource/open_al_interface.cpp.obj	8980ca1af302e39
+1882	3038	7535202435277295	PlatFormSound_OpenAL.dll	6b5e70b616d22e8b
+1882	3038	7535202435277295	libPlatFormSound_OpenAL.dll.a	6b5e70b616d22e8b

@@ -1,0 +1,20 @@
+[
+{
+  "directory": "D:/TheiaProject_Edit/SonikSoundAPI/SAudioPlatForm_OpenALSoft/Debug_x64",
+  "command": "D:\\Development\\MSYS64\\clang64\\bin\\clang++.exe -DPlatFormSound_OpenAL_EXPORTS -D_DEBUG -D_WIN64 -D__SONIK_DLL_OUTPUT_DEFINE__ -D__SONIK_x86_64__ -D__cplusplus=202002L -ID:/MyLibrary/include -g -g -std=c++20 -fmessage-length=0 -fsanitize=address,undefined,bounds -fno-omit-frame-pointer -Wall -std=gnu++20 -o CMakeFiles\\PlatFormSound_OpenAL.dir\\CMakeFiles\\3.30.0\\CompilerIdCXX\\CMakeCXXCompilerId.cpp.obj -c D:\\TheiaProject_Edit\\SonikSoundAPI\\SAudioPlatForm_OpenALSoft\\Debug_x64\\CMakeFiles\\3.30.0\\CompilerIdCXX\\CMakeCXXCompilerId.cpp",
+  "file": "D:\\TheiaProject_Edit\\SonikSoundAPI\\SAudioPlatForm_OpenALSoft\\Debug_x64\\CMakeFiles\\3.30.0\\CompilerIdCXX\\CMakeCXXCompilerId.cpp",
+  "output": "CMakeFiles\\PlatFormSound_OpenAL.dir\\CMakeFiles\\3.30.0\\CompilerIdCXX\\CMakeCXXCompilerId.cpp.obj"
+},
+{
+  "directory": "D:/TheiaProject_Edit/SonikSoundAPI/SAudioPlatForm_OpenALSoft/Debug_x64",
+  "command": "D:\\Development\\MSYS64\\clang64\\bin\\clang++.exe -DPlatFormSound_OpenAL_EXPORTS -D_DEBUG -D_WIN64 -D__SONIK_DLL_OUTPUT_DEFINE__ -D__SONIK_x86_64__ -D__cplusplus=202002L -ID:/MyLibrary/include -g -g -std=c++20 -fmessage-length=0 -fsanitize=address,undefined,bounds -fno-omit-frame-pointer -Wall -std=gnu++20 -o CMakeFiles\\PlatFormSound_OpenAL.dir\\DllFunction\\DllMain.cpp.obj -c D:\\TheiaProject_Edit\\SonikSoundAPI\\SAudioPlatForm_OpenALSoft\\DllFunction\\DllMain.cpp",
+  "file": "D:\\TheiaProject_Edit\\SonikSoundAPI\\SAudioPlatForm_OpenALSoft\\DllFunction\\DllMain.cpp",
+  "output": "CMakeFiles\\PlatFormSound_OpenAL.dir\\DllFunction\\DllMain.cpp.obj"
+},
+{
+  "directory": "D:/TheiaProject_Edit/SonikSoundAPI/SAudioPlatForm_OpenALSoft/Debug_x64",
+  "command": "D:\\Development\\MSYS64\\clang64\\bin\\clang++.exe -DPlatFormSound_OpenAL_EXPORTS -D_DEBUG -D_WIN64 -D__SONIK_DLL_OUTPUT_DEFINE__ -D__SONIK_x86_64__ -D__cplusplus=202002L -ID:/MyLibrary/include -g -g -std=c++20 -fmessage-length=0 -fsanitize=address,undefined,bounds -fno-omit-frame-pointer -Wall -std=gnu++20 -o CMakeFiles\\PlatFormSound_OpenAL.dir\\OpenALSource\\open_al_interface.cpp.obj -c D:\\TheiaProject_Edit\\SonikSoundAPI\\SAudioPlatForm_OpenALSoft\\OpenALSource\\open_al_interface.cpp",
+  "file": "D:\\TheiaProject_Edit\\SonikSoundAPI\\SAudioPlatForm_OpenALSoft\\OpenALSource\\open_al_interface.cpp",
+  "output": "CMakeFiles\\PlatFormSound_OpenAL.dir\\OpenALSource\\open_al_interface.cpp.obj"
+}
+]
