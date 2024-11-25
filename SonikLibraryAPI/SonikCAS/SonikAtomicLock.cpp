@@ -38,7 +38,7 @@ namespace SonikLib
 				//false の場合、 a_right は trueの値に書き換えられるので、falseに戻す。
 				a_right = false;
 				//CPU使用率軽減のためスリープ
-				std::this_thread::sleep_for(std::chrono::nanoseconds(1));
+				std::this_thread::sleep_for(std::chrono::microseconds(500));
 			};
 
 			//権利が獲得できたら関数を終了。処理を返す。
@@ -56,7 +56,7 @@ namespace SonikLib
 			bool a_right = false;
 
 			//権利が false になるまでビジーループ
-			while( !_lock.compare_exchange_strong(a_right, true, std::memory_order_acq_rel) )
+			if( !_lock.compare_exchange_strong(a_right, true, std::memory_order_acq_rel) )
 			{
 				//false の場合、 a_right は trueの値に書き換えられるので、falseに戻す。
 				return false;

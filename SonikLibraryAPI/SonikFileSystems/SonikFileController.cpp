@@ -467,14 +467,15 @@ namespace SonikLib
             for(uint64_t i =0; i < GetRowCnt; ++i)
             {
                 ret = this->OpenFunction_ReadText_Line(l_getstr, 1);
-                _GetLineQueue_.EnQueue(l_getstr);
-                l_getstr ="";
-                
+
                 if(ret == 0xE0F)
                 {
                     //EOF到達のため終了
                     return ret;
                 };
+
+                _GetLineQueue_.EnQueue(l_getstr);
+                l_getstr ="";
             };
 
             return ret;
@@ -557,7 +558,11 @@ namespace SonikLib
     	//デストラクタ
     	SonikFileSystemController::~SonikFileSystemController(void)
         {
-            CloseFile();
+            if(mp_f_sys_func != nullptr)
+            {
+                CloseFile();
+                delete mp_f_sys_func;
+            };
         };
 
         bool SonikFileSystemController::CreateFileController(SFileSystemController& _out_)
@@ -758,6 +763,34 @@ namespace SonikLib
             m_lock.unlock();
             return true;
 		};
+
+        //FileClose
+    	void SonikFileSystemController::CloseFile(void)
+        {
+            m_lock.lock();
+
+            //クローズ処理
+            (mp_f_sys_func->*m_run_vv_func[0])();
+            //クローズ関数へセット
+            m_run_vv_func[0]    = &InnerFileSystemFunction::NoOpenFunction_CloseFile;
+            m_run_vv_func[1]    = &InnerFileSystemFunction::NoOpenFunction_SeekPointSet_Top;
+            m_run_vv_func[2]    = &InnerFileSystemFunction::NoOpenFunction_SeekPointSet_End;
+            
+            m_run_u64v_func[0]  = &InnerFileSystemFunction::NoOpenFunction_GetFileSize;
+            m_run_u64v_func[1]  = &InnerFileSystemFunction::NoOpenFunction_SeekPointGet;
+            
+            m_run_vu64_func     = &InnerFileSystemFunction::NoOpenFunction_SeekPointSet_Point;
+            m_run_read_func     = &InnerFileSystemFunction::NoOpenFunction_Read;
+            m_run_write_func    = &InnerFileSystemFunction::NoOpenFunction_Write;
+            m_run_writestr_func[0] = &InnerFileSystemFunction::NoOpenFunction_Write_char;
+            m_run_writestr_func[1] = &InnerFileSystemFunction::NoOpenFunction_Write_UTF8;
+            m_run_writestr_func[2] = &InnerFileSystemFunction::NoOpenFunction_Write_UTF16;
+            
+            m_run_readline_func = &InnerFileSystemFunction::NoOpenFunction_ReadText_Line;
+            m_run_rlqueue_func  = &InnerFileSystemFunction::NoOpenFunction_ReadText_LineQueue;
+
+            m_lock.unlock();
+        };
 
 		//現在のファイルサイズの取得
 		uint64_t SonikFileSystemController::GetFileSize(void)
