@@ -166,11 +166,5 @@
   "command": "D:\\Development\\MSYS64\\clang64\\bin\\clang++.exe -D_RELEASE -D_WIN64 -D__SONIK_x86_64__ -D__cplusplus=202002L -I/include -O3 -DNDEBUG -O3 -std=c++20 -fmessage-length=0 -Wall -std=gnu++20 -o CMakeFiles\\Rx64_SonikLibraryAPI.dir\\TimerClock\\SonikElapsedTimer.cpp.obj -c D:\\TheiaProject_Edit\\SonikLibraryAPI\\TimerClock\\SonikElapsedTimer.cpp",
   "file": "D:\\TheiaProject_Edit\\SonikLibraryAPI\\TimerClock\\SonikElapsedTimer.cpp",
   "output": "CMakeFiles\\Rx64_SonikLibraryAPI.dir\\TimerClock\\SonikElapsedTimer.cpp.obj"
-},
-{
-  "directory": "D:/TheiaProject_Edit/SonikLibraryAPI/Release_x64",
-  "command": "D:\\Development\\MSYS64\\clang64\\bin\\clang++.exe -D_RELEASE -D_WIN64 -D__SONIK_x86_64__ -D__cplusplus=202002L -I/include -O3 -DNDEBUG -O3 -std=c++20 -fmessage-length=0 -Wall -std=gnu++20 -o CMakeFiles\\Rx64_SonikLibraryAPI.dir\\TimerClock\\SonikElapsedTimer_x64.cpp.obj -c D:\\TheiaProject_Edit\\SonikLibraryAPI\\TimerClock\\SonikElapsedTimer_x64.cpp",
-  "file": "D:\\TheiaProject_Edit\\SonikLibraryAPI\\TimerClock\\SonikElapsedTimer_x64.cpp",
-  "output": "CMakeFiles\\Rx64_SonikLibraryAPI.dir\\TimerClock\\SonikElapsedTimer_x64.cpp.obj"
 }
 ]
