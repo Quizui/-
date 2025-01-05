@@ -44,10 +44,12 @@ namespace SonikFunctionObjectDefines
 {
 	class FunctionObjectSystemInterface;
 };
+
+//using
 namespace SonikLib
 {
 	using SonikFOSInterface = SonikFunctionObjectDefines::FunctionObjectSystemInterface;
-
+	
 	namespace Container
 	{
 		template<class QueueType>

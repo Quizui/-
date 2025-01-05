@@ -11,15 +11,26 @@
 
 #include "./SonikStringLocaleEnmus.h"
 
-//C++20 以前はchar8_t が無いので。
+ //C++20 以前はchar8_t が無いので。
 #if __cplusplus < 202002L
-    //C++20 以前であれば　char8_t は uint8_t
-	#include <stdint.h>
-    using utf8_t = uint8_t;
+	//C++20 以前であれば　char8_t は uint8_t
+#include <stdint.h>
+using utf8_t = uint8_t;
 #else
-	using utf8_t = char8_t;
+using utf8_t = char8_t;
 
 #endif
+
+
+namespace SonikLib
+{	//スプリット用クラス(Stringクラスそのままコピーはマルチスレッドアクセスでのnewでロックがかかってしまって遅くなるので..。
+	class SonikStringSplitObject;
+	//スプリットクラスで使う用のクラスの前方宣言
+	class SonikString;
+	class SonikStringWIDE;
+	class SonikStringUTF8;
+	class SonikStringUTF16;
+};
 
 namespace BASED_STRINGCLASS_SONIKLIB
 {
@@ -29,18 +40,18 @@ namespace BASED_STRINGCLASS_SONIKLIB
 		class SonikString_pImpl;
 		SonikString_pImpl* pImpl;
 
-    protected:
-        //コンストラクタ
-        SonikStringBase(void);
-        //コピーコンストラクタ
-        SonikStringBase(const SonikStringBase&) = delete;
-        //ムーヴコンストラクタ
-        SonikStringBase(SonikStringBase&&) = delete;
-        //代入演算子
-        SonikStringBase& operator =(const SonikStringBase&) = delete;
+	protected:
+		//コンストラクタ
+		SonikStringBase(void);
+		//コピーコンストラクタ
+		SonikStringBase(const SonikStringBase&) = delete;
+		//ムーヴコンストラクタ
+		SonikStringBase(SonikStringBase&&) = delete;
+		//代入演算子
+		SonikStringBase& operator =(const SonikStringBase&) = delete;
 
 	public:
-        ~SonikStringBase(void);
+		~SonikStringBase(void);
 
 		//ロケールを設定します。
 		bool SetStringLocale(SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
@@ -67,13 +78,13 @@ namespace BASED_STRINGCLASS_SONIKLIB
 		//第１引数を省略してコールした場合はdstに必要なバッファサイズを取得することができます。(単位/1Byte)
 		uint64_t GetCpy_str_utf8(utf8_t* dstBuffer = nullptr);
 
-		//define切り替えのStrCopy
-		uint64_t GetCpy_str_definition(char* dstBuffer = nullptr);
-
 		//c:文字列のByte数を取得します。（Null終端文字をカウントに含まない)
 		uint64_t Count_Byte_NotNull(void);
 		//c:文字列数を取得します。（Null終端文字をカウントに含まない)
 		uint64_t Count_Str_NotNull(void);
+
+		//指定したAsciiコードをデリミタとしてSplitを行います。
+		bool Split_Ascii(const char* delim, SonikLib::SonikStringSplitObject& _split_);
 
 		//文字列中の全角英数字を半角英数字に変換します。
 		bool ConvertFWANtoHWAN(void);
@@ -101,6 +112,38 @@ namespace BASED_STRINGCLASS_SONIKLIB
 
 	};
 
+};
+
+
+namespace SonikLib
+{
+	class SonikStringSplitObject
+	{
+		friend class BASED_STRINGCLASS_SONIKLIB::SonikStringBase;
+
+	private:
+		char* mp_split;
+		uint64_t m_splitCnt;
+		uint64_t textbuffersize;
+
+	private:
+		SonikStringSplitObject(const SonikStringSplitObject& _copy_) = delete;
+		SonikStringSplitObject(SonikStringSplitObject&& _move_) = delete;
+		SonikStringSplitObject& operator =(const SonikStringSplitObject& _copy_) = delete;
+		SonikStringSplitObject& operator =(SonikStringSplitObject&& _move_) = delete;
+
+	public:
+		SonikStringSplitObject(void);
+		~SonikStringSplitObject(void);
+
+		bool GetStr(uint64_t _splitnum_, SonikString& _getstr_);
+		bool GetStr(uint64_t _splitnum_, SonikStringWIDE& _getstr_);
+		bool GetStr(uint64_t _splitnum_, SonikStringUTF8& _getstr_);
+		bool GetStr(uint64_t _splitnum_, SonikStringUTF16& _getstr_);
+
+		bool Split(uint64_t _splitnum_, const char* _delim_, SonikStringSplitObject& _out_);
+
+	};
 };
 
 

@@ -11,7 +11,7 @@
 
 #include "../SonikStringBase.h"
 
-//前方宣言===================================
+ //前方宣言===================================
 namespace SonikLib
 {
 	namespace Container
@@ -49,25 +49,25 @@ namespace SonikLib
 		SonikStringUTF8(const wchar_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
 		SonikStringUTF8(const utf8_t* SetStr);
 		SonikStringUTF8(const utf8_t* SetStr, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
-        SonikStringUTF8(const int8_t SetValue);
+		SonikStringUTF8(const int8_t SetValue);
 		SonikStringUTF8(const int8_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
-        SonikStringUTF8(const uint8_t SetValue);
+		SonikStringUTF8(const uint8_t SetValue);
 		SonikStringUTF8(const uint8_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
-        SonikStringUTF8(const int16_t SetValue);
+		SonikStringUTF8(const int16_t SetValue);
 		SonikStringUTF8(const int16_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
-        SonikStringUTF8(const uint16_t SetValue);
+		SonikStringUTF8(const uint16_t SetValue);
 		SonikStringUTF8(const uint16_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
-        SonikStringUTF8(const int32_t SetValue);
+		SonikStringUTF8(const int32_t SetValue);
 		SonikStringUTF8(const int32_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
-        SonikStringUTF8(const uint32_t SetValue);
+		SonikStringUTF8(const uint32_t SetValue);
 		SonikStringUTF8(const uint32_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
-        SonikStringUTF8(const int64_t SetValue);
+		SonikStringUTF8(const int64_t SetValue);
 		SonikStringUTF8(const int64_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
-        SonikStringUTF8(const uint64_t SetValue);
+		SonikStringUTF8(const uint64_t SetValue);
 		SonikStringUTF8(const uint64_t SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
-        SonikStringUTF8(const float SetValue);
+		SonikStringUTF8(const float SetValue);
 		SonikStringUTF8(const float SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
-        SonikStringUTF8(const double SetValue);
+		SonikStringUTF8(const double SetValue);
 		SonikStringUTF8(const double SetValue, SonikLibStringConvert::SonikLibConvertLocale _setlocale_);
 
 		~SonikStringUTF8(void);
@@ -77,12 +77,6 @@ namespace SonikLib
 
 		//define切り替えのStrCopy
 		uint64_t GetCpy_str_definition(utf8_t* dstBuffer = nullptr);
-
-		//指定したAsciiコードをデリミタとしてSplitを行います。
-		bool SplitForUTF8(uint8_t delim, SonikLib::Container::SonikVariableArrayContainer<SonikLib::SonikStringUTF8>& Container);
-		bool SplitForUTF8(uint8_t delim, SonikLib::Container::SonikVariableArrayContainer<SonikLib::SonikString>& Container);
-		bool SplitForUTF8(uint8_t delim, SonikLib::Container::SonikVariableArrayContainer<SonikLib::SonikStringWIDE>& Container);
-		bool SplitForUTF8(uint8_t delim, SonikLib::Container::SonikVariableArrayContainer<SonikLib::SonikStringUTF16>& Container);
 
 		//各入力フォーマットから現在のバッファに変換して代入します。
 		SonikStringUTF8& operator =(const SonikStringUTF8& t_his);
@@ -97,15 +91,15 @@ namespace SonikLib
 		SonikStringUTF8& operator =(const char16_t* w_Str);
 		SonikStringUTF8& operator =(const wchar_t* w_Str);
 		SonikStringUTF8& operator =(const utf8_t* utf8_Str);
-        SonikStringUTF8& operator =(const int8_t SetValue);
-        SonikStringUTF8& operator =(const uint8_t SetValue);
-        SonikStringUTF8& operator =(const int16_t SetValue);
-        SonikStringUTF8& operator =(const uint16_t SetValue);
-        SonikStringUTF8& operator =(const int32_t SetValue);
-        SonikStringUTF8& operator =(const uint32_t SetValue);
-        SonikStringUTF8& operator =(const int64_t SetValue);
-        SonikStringUTF8& operator =(const uint64_t SetValue);
-        SonikStringUTF8& operator =(const float SetValue);
+		SonikStringUTF8& operator =(const int8_t SetValue);
+		SonikStringUTF8& operator =(const uint8_t SetValue);
+		SonikStringUTF8& operator =(const int16_t SetValue);
+		SonikStringUTF8& operator =(const uint16_t SetValue);
+		SonikStringUTF8& operator =(const int32_t SetValue);
+		SonikStringUTF8& operator =(const uint32_t SetValue);
+		SonikStringUTF8& operator =(const int64_t SetValue);
+		SonikStringUTF8& operator =(const uint64_t SetValue);
+		SonikStringUTF8& operator =(const float SetValue);
 		SonikStringUTF8& operator =(const double SetValue);
 
 		//各入力フォーマットから現在のバッファに変換して結合します。
@@ -118,15 +112,15 @@ namespace SonikLib
 		SonikStringUTF8& operator +=(const char16_t* w_Str);
 		SonikStringUTF8& operator +=(const wchar_t* w_Str);
 		SonikStringUTF8& operator +=(const utf8_t* utf8_Str);
-        SonikStringUTF8& operator +=(const int8_t SetValue);
-        SonikStringUTF8& operator +=(const uint8_t SetValue);
-        SonikStringUTF8& operator +=(const int16_t SetValue);
-        SonikStringUTF8& operator +=(const uint16_t SetValue);
-        SonikStringUTF8& operator +=(const int32_t SetValue);
-        SonikStringUTF8& operator +=(const uint32_t SetValue);
-        SonikStringUTF8& operator +=(const int64_t SetValue);
-        SonikStringUTF8& operator +=(const uint64_t SetValue);
-        SonikStringUTF8& operator +=(const float SetValue);
+		SonikStringUTF8& operator +=(const int8_t SetValue);
+		SonikStringUTF8& operator +=(const uint8_t SetValue);
+		SonikStringUTF8& operator +=(const int16_t SetValue);
+		SonikStringUTF8& operator +=(const uint16_t SetValue);
+		SonikStringUTF8& operator +=(const int32_t SetValue);
+		SonikStringUTF8& operator +=(const uint32_t SetValue);
+		SonikStringUTF8& operator +=(const int64_t SetValue);
+		SonikStringUTF8& operator +=(const uint64_t SetValue);
+		SonikStringUTF8& operator +=(const float SetValue);
 		SonikStringUTF8& operator +=(const double SetValue);
 
 		//現在のバッファと入力バッファを結合し、別のオブジェクトとして返却します。
@@ -139,15 +133,15 @@ namespace SonikLib
 		SonikStringUTF8 operator +(const char16_t* w_Str);
 		SonikStringUTF8 operator +(const wchar_t* w_Str);
 		SonikStringUTF8 operator +(const utf8_t* utf8_Str);
-        SonikStringUTF8 operator +(const int8_t SetValue);
-        SonikStringUTF8 operator +(const uint8_t SetValue);
-        SonikStringUTF8 operator +(const int16_t SetValue);
-        SonikStringUTF8 operator +(const uint16_t SetValue);
-        SonikStringUTF8 operator +(const int32_t SetValue);
-        SonikStringUTF8 operator +(const uint32_t SetValue);
-        SonikStringUTF8 operator +(const int64_t SetValue);
-        SonikStringUTF8 operator +(const uint64_t SetValue);
-        SonikStringUTF8 operator +(const float SetValue);
+		SonikStringUTF8 operator +(const int8_t SetValue);
+		SonikStringUTF8 operator +(const uint8_t SetValue);
+		SonikStringUTF8 operator +(const int16_t SetValue);
+		SonikStringUTF8 operator +(const uint16_t SetValue);
+		SonikStringUTF8 operator +(const int32_t SetValue);
+		SonikStringUTF8 operator +(const uint32_t SetValue);
+		SonikStringUTF8 operator +(const int64_t SetValue);
+		SonikStringUTF8 operator +(const uint64_t SetValue);
+		SonikStringUTF8 operator +(const float SetValue);
 		SonikStringUTF8 operator +(const double SetValue);
 
 		//c: 文字列同士を比較します。(strcmp)

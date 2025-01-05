@@ -229,10 +229,14 @@ namespace SonikAudioLoadFunction
 			delete pWave;
 			delete[] buffers;
 			return false;
+		};
 
-		}
-
-		RefGet_.ResetPointer(pWave);
+		if(!SonikAudio::SAudioFormat::SmartPointerCreate(pWave, RefGet_))
+		{
+			delete pWave;
+			delete[] buffers;
+			return false;
+		};
 
 		delete[] buffers;
 		return true;
@@ -453,12 +457,14 @@ namespace SonikAudioLoadFunction
 		if( !Convret_ )
 		{
 			delete pWave;
-//			delete[] buffers;
 			return false;
+		};
 
-		}
-
-		RefGet_.ResetPointer(pWave);
+		if(!SonikAudio::SAudioFormat::SmartPointerCreate(pWave, RefGet_))
+		{
+			delete pWave;
+			return false;
+		};
 
 		return true;
 
@@ -711,10 +717,14 @@ namespace SonikAudioLoadFunction
 			delete pWave;
 			delete[] buffers;
 			return false;
+		};
 
-		}
-
-		RefGet_.ResetPointer(pWave);
+		if(!SonikAudio::SAudioFormat::SmartPointerCreate(pWave, RefGet_))
+		{
+			delete pWave;
+			delete[] buffers;
+			return false;
+		};
 
 		return true;
 	};

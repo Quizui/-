@@ -106,7 +106,12 @@ namespace SonikLib
 			return false;
 		};
 
-		_GetDllObject.ResetPointer(l_imple);
+		if(!SDllHandle::SmartPointerCreate(l_imple, _GetDllObject))
+		{
+			delete l_imple;
+			m_lock.unlock();
+			return false;
+		};
 
 		m_lock.unlock();
 		return true;
@@ -135,7 +140,12 @@ namespace SonikLib
 			return false;
 		};
 
-		_GetDllObject.ResetPointer(l_imple);
+		if(!SDllHandle::SmartPointerCreate(l_imple, _GetDllObject))
+		{
+			delete l_imple;
+			m_lock.unlock();
+			return false;
+		};
 
 		m_lock.unlock();
 		return true;
@@ -164,7 +174,12 @@ namespace SonikLib
 			return false;
 		};
 
-		_GetDllObject.ResetPointer(l_imple);
+		if(!SDllHandle::SmartPointerCreate(l_imple, _GetDllObject))
+		{
+			delete l_imple;
+			m_lock.unlock();
+			return false;
+		};
 
 		m_lock.unlock();
 		return true;

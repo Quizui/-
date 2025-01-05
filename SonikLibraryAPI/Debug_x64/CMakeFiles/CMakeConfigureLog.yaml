@@ -7,7 +7,7 @@ events:
       - "D:/Development/Cmake/share/cmake-3.30/Modules/CMakeDetermineSystem.cmake:205 (message)"
       - "CMakeLists.txt:5 (project)"
     message: |
-      The system is: Windows - 10.0.22631 - AMD64
+      The system is: Windows - 10.0.26100 - AMD64
   -
     kind: "message-v1"
     backtrace:
@@ -61,8 +61,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-vmw0ik"
-      binary: "D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-vmw0ik"
+      source: "D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-dyik9k"
+      binary: "D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-dyik9k"
     cmakeVariables:
       CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "D:/Development/MSYS64/clang64/bin/clang-scan-deps.exe"
       CMAKE_C_FLAGS: ""
@@ -72,31 +72,31 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-vmw0ik'
+        Change Dir: 'D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-dyik9k'
         
-        Run Build Command(s): D:/Development/Ninja/ninja.exe -v cmTC_b955c
-        [1/2] D:\\Development\\MSYS64\\clang64\\bin\\cc.exe   -v -MD -MT CMakeFiles/cmTC_b955c.dir/CMakeCCompilerABI.c.obj -MF CMakeFiles\\cmTC_b955c.dir\\CMakeCCompilerABI.c.obj.d -o CMakeFiles/cmTC_b955c.dir/CMakeCCompilerABI.c.obj -c D:/Development/Cmake/share/cmake-3.30/Modules/CMakeCCompilerABI.c
-        clang version 17.0.6
+        Run Build Command(s): D:/Development/Ninja/ninja.exe -v cmTC_08737
+        [1/2] D:\\Development\\MSYS64\\clang64\\bin\\cc.exe   -v -MD -MT CMakeFiles/cmTC_08737.dir/CMakeCCompilerABI.c.obj -MF CMakeFiles\\cmTC_08737.dir\\CMakeCCompilerABI.c.obj.d -o CMakeFiles/cmTC_08737.dir/CMakeCCompilerABI.c.obj -c D:/Development/Cmake/share/cmake-3.30/Modules/CMakeCCompilerABI.c
+        clang version 19.1.4
         Target: x86_64-w64-windows-gnu
         Thread model: posix
         InstalledDir: D:/Development/MSYS64/clang64/bin
          (in-process)
-         "D:/Development/MSYS64/clang64/bin/cc.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -fno-use-init-array -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -v -fcoverage-compilation-dir=D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-vmw0ik -resource-dir D:/Development/MSYS64/clang64/lib/clang/17 -dependency-file "CMakeFiles\\\\cmTC_b955c.dir\\\\CMakeCCompilerABI.c.obj.d" -MT CMakeFiles/cmTC_b955c.dir/CMakeCCompilerABI.c.obj -sys-header-deps -internal-isystem D:/Development/MSYS64/clang64/lib/clang/17/include -internal-isystem D:/Development/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem D:/Development/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem D:/Development/MSYS64/clang64/include -fdebug-compilation-dir=D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-vmw0ik -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -exception-model=seh -faddrsig -o CMakeFiles/cmTC_b955c.dir/CMakeCCompilerABI.c.obj -x c D:/Development/Cmake/share/cmake-3.30/Modules/CMakeCCompilerABI.c
-        clang -cc1 version 17.0.6 based upon LLVM 17.0.6 default target x86_64-w64-windows-gnu\x0d
+         "D:/Development/MSYS64/clang64/bin/cc.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -fno-sized-deallocation -fno-use-init-array -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -fdebug-compilation-dir=D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-dyik9k -v -fcoverage-compilation-dir=D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-dyik9k -resource-dir D:/Development/MSYS64/clang64/lib/clang/19 -dependency-file "CMakeFiles\\\\cmTC_08737.dir\\\\CMakeCCompilerABI.c.obj.d" -MT CMakeFiles/cmTC_08737.dir/CMakeCCompilerABI.c.obj -sys-header-deps -internal-isystem D:/Development/MSYS64/clang64/lib/clang/19/include -internal-isystem D:/Development/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem D:/Development/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem D:/Development/MSYS64/clang64/include -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -exception-model=seh -faddrsig -o CMakeFiles/cmTC_08737.dir/CMakeCCompilerABI.c.obj -x c D:/Development/Cmake/share/cmake-3.30/Modules/CMakeCCompilerABI.c\x0d
+        clang -cc1 version 19.1.4 based upon LLVM 19.1.4 default target x86_64-w64-windows-gnu\x0d
         ignoring nonexistent directory "D:/Development/MSYS64/clang64/x86_64-w64-mingw32/include"\x0d
         ignoring nonexistent directory "D:/Development/MSYS64/clang64/x86_64-w64-mingw32/usr/include"\x0d
         #include "..." search starts here:\x0d
         #include <...> search starts here:\x0d
-         D:/Development/MSYS64/clang64/lib/clang/17/include\x0d
+         D:/Development/MSYS64/clang64/lib/clang/19/include\x0d
          D:/Development/MSYS64/clang64/include\x0d
         End of search list.\x0d
-        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && D:\\Development\\MSYS64\\clang64\\bin\\cc.exe  -v -Wl,-v CMakeFiles/cmTC_b955c.dir/CMakeCCompilerABI.c.obj -o cmTC_b955c.exe -Wl,--out-implib,libcmTC_b955c.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
-        clang version 17.0.6
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && D:\\Development\\MSYS64\\clang64\\bin\\cc.exe  -v -Wl,-v CMakeFiles/cmTC_08737.dir/CMakeCCompilerABI.c.obj -o cmTC_08737.exe -Wl,--out-implib,libcmTC_08737.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
+        clang version 19.1.4
         Target: x86_64-w64-windows-gnu
         Thread model: posix
         InstalledDir: D:/Development/MSYS64/clang64/bin
-         "D:/Development/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_b955c.exe D:/Development/MSYS64/clang64/lib/crt2.o D:/Development/MSYS64/clang64/lib/crtbegin.o -LD:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib -LD:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LD:/Development/MSYS64/clang64/lib -LD:/Development/MSYS64/clang64/lib/clang/17/lib/windows -v CMakeFiles/cmTC_b955c.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_b955c.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 D:/Development/MSYS64/clang64/lib/clang/17/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 D:/Development/MSYS64/clang64/lib/clang/17/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 D:/Development/MSYS64/clang64/lib/crtend.o
-        LLD 17.0.6 (compatible with GNU linkers)
+         "D:/Development/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_08737.exe D:/Development/MSYS64/clang64/lib/crt2.o D:/Development/MSYS64/clang64/lib/crtbegin.o -LD:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib -LD:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LD:/Development/MSYS64/clang64/lib -LD:/Development/MSYS64/clang64/lib/clang/19/lib/windows -v CMakeFiles/cmTC_08737.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_08737.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 D:/Development/MSYS64/clang64/lib/clang/19/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 D:/Development/MSYS64/clang64/lib/clang/19/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 D:/Development/MSYS64/clang64/lib/crtend.o
+        LLD 19.1.4 (https://github.com/msys2/MINGW-packages 3f1bdd6825d0aba12e8b55f933989b1cd9665f7e) (compatible with GNU linkers)
         
       exitCode: 0
   -
@@ -109,12 +109,12 @@ events:
       Parsed C implicit include dir info: rv=done
         found start of include info
         found start of implicit include info
-          add: [D:/Development/MSYS64/clang64/lib/clang/17/include]
+          add: [D:/Development/MSYS64/clang64/lib/clang/19/include]
           add: [D:/Development/MSYS64/clang64/include]
         end of search list found
-        collapse include dir [D:/Development/MSYS64/clang64/lib/clang/17/include] ==> [D:/Development/MSYS64/clang64/lib/clang/17/include]
+        collapse include dir [D:/Development/MSYS64/clang64/lib/clang/19/include] ==> [D:/Development/MSYS64/clang64/lib/clang/19/include]
         collapse include dir [D:/Development/MSYS64/clang64/include] ==> [D:/Development/MSYS64/clang64/include]
-        implicit include dirs: [D:/Development/MSYS64/clang64/lib/clang/17/include;D:/Development/MSYS64/clang64/include]
+        implicit include dirs: [D:/Development/MSYS64/clang64/lib/clang/19/include;D:/Development/MSYS64/clang64/include]
       
       
   -
@@ -127,52 +127,52 @@ events:
       Parsed C implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
-        ignore line: [Change Dir: 'D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-vmw0ik']
+        ignore line: [Change Dir: 'D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-dyik9k']
         ignore line: []
-        ignore line: [Run Build Command(s): D:/Development/Ninja/ninja.exe -v cmTC_b955c]
-        ignore line: [[1/2] D:\\Development\\MSYS64\\clang64\\bin\\cc.exe   -v -MD -MT CMakeFiles/cmTC_b955c.dir/CMakeCCompilerABI.c.obj -MF CMakeFiles\\cmTC_b955c.dir\\CMakeCCompilerABI.c.obj.d -o CMakeFiles/cmTC_b955c.dir/CMakeCCompilerABI.c.obj -c D:/Development/Cmake/share/cmake-3.30/Modules/CMakeCCompilerABI.c]
-        ignore line: [clang version 17.0.6]
+        ignore line: [Run Build Command(s): D:/Development/Ninja/ninja.exe -v cmTC_08737]
+        ignore line: [[1/2] D:\\Development\\MSYS64\\clang64\\bin\\cc.exe   -v -MD -MT CMakeFiles/cmTC_08737.dir/CMakeCCompilerABI.c.obj -MF CMakeFiles\\cmTC_08737.dir\\CMakeCCompilerABI.c.obj.d -o CMakeFiles/cmTC_08737.dir/CMakeCCompilerABI.c.obj -c D:/Development/Cmake/share/cmake-3.30/Modules/CMakeCCompilerABI.c]
+        ignore line: [clang version 19.1.4]
         ignore line: [Target: x86_64-w64-windows-gnu]
         ignore line: [Thread model: posix]
         ignore line: [InstalledDir: D:/Development/MSYS64/clang64/bin]
         ignore line: [ (in-process)]
-        ignore line: [ "D:/Development/MSYS64/clang64/bin/cc.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -fno-use-init-array -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -v -fcoverage-compilation-dir=D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-vmw0ik -resource-dir D:/Development/MSYS64/clang64/lib/clang/17 -dependency-file "CMakeFiles\\\\cmTC_b955c.dir\\\\CMakeCCompilerABI.c.obj.d" -MT CMakeFiles/cmTC_b955c.dir/CMakeCCompilerABI.c.obj -sys-header-deps -internal-isystem D:/Development/MSYS64/clang64/lib/clang/17/include -internal-isystem D:/Development/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem D:/Development/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem D:/Development/MSYS64/clang64/include -fdebug-compilation-dir=D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-vmw0ik -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -exception-model=seh -faddrsig -o CMakeFiles/cmTC_b955c.dir/CMakeCCompilerABI.c.obj -x c D:/Development/Cmake/share/cmake-3.30/Modules/CMakeCCompilerABI.c]
-        ignore line: [clang -cc1 version 17.0.6 based upon LLVM 17.0.6 default target x86_64-w64-windows-gnu\x0d]
+        ignore line: [ "D:/Development/MSYS64/clang64/bin/cc.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCCompilerABI.c -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -fno-sized-deallocation -fno-use-init-array -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -fdebug-compilation-dir=D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-dyik9k -v -fcoverage-compilation-dir=D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-dyik9k -resource-dir D:/Development/MSYS64/clang64/lib/clang/19 -dependency-file "CMakeFiles\\\\cmTC_08737.dir\\\\CMakeCCompilerABI.c.obj.d" -MT CMakeFiles/cmTC_08737.dir/CMakeCCompilerABI.c.obj -sys-header-deps -internal-isystem D:/Development/MSYS64/clang64/lib/clang/19/include -internal-isystem D:/Development/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem D:/Development/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem D:/Development/MSYS64/clang64/include -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -exception-model=seh -faddrsig -o CMakeFiles/cmTC_08737.dir/CMakeCCompilerABI.c.obj -x c D:/Development/Cmake/share/cmake-3.30/Modules/CMakeCCompilerABI.c\x0d]
+        ignore line: [clang -cc1 version 19.1.4 based upon LLVM 19.1.4 default target x86_64-w64-windows-gnu\x0d]
         ignore line: [ignoring nonexistent directory "D:/Development/MSYS64/clang64/x86_64-w64-mingw32/include"\x0d]
         ignore line: [ignoring nonexistent directory "D:/Development/MSYS64/clang64/x86_64-w64-mingw32/usr/include"\x0d]
         ignore line: [#include "..." search starts here:\x0d]
         ignore line: [#include <...> search starts here:\x0d]
-        ignore line: [ D:/Development/MSYS64/clang64/lib/clang/17/include\x0d]
+        ignore line: [ D:/Development/MSYS64/clang64/lib/clang/19/include\x0d]
         ignore line: [ D:/Development/MSYS64/clang64/include\x0d]
         ignore line: [End of search list.\x0d]
-        ignore line: [[2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && D:\\Development\\MSYS64\\clang64\\bin\\cc.exe  -v -Wl -v CMakeFiles/cmTC_b955c.dir/CMakeCCompilerABI.c.obj -o cmTC_b955c.exe -Wl --out-implib libcmTC_b955c.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
-        ignore line: [clang version 17.0.6]
+        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && D:\\Development\\MSYS64\\clang64\\bin\\cc.exe  -v -Wl -v CMakeFiles/cmTC_08737.dir/CMakeCCompilerABI.c.obj -o cmTC_08737.exe -Wl --out-implib libcmTC_08737.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
+        ignore line: [clang version 19.1.4]
         ignore line: [Target: x86_64-w64-windows-gnu]
         ignore line: [Thread model: posix]
         ignore line: [InstalledDir: D:/Development/MSYS64/clang64/bin]
-        link line: [ "D:/Development/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_b955c.exe D:/Development/MSYS64/clang64/lib/crt2.o D:/Development/MSYS64/clang64/lib/crtbegin.o -LD:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib -LD:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LD:/Development/MSYS64/clang64/lib -LD:/Development/MSYS64/clang64/lib/clang/17/lib/windows -v CMakeFiles/cmTC_b955c.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_b955c.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 D:/Development/MSYS64/clang64/lib/clang/17/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 D:/Development/MSYS64/clang64/lib/clang/17/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 D:/Development/MSYS64/clang64/lib/crtend.o]
+        link line: [ "D:/Development/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_08737.exe D:/Development/MSYS64/clang64/lib/crt2.o D:/Development/MSYS64/clang64/lib/crtbegin.o -LD:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib -LD:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LD:/Development/MSYS64/clang64/lib -LD:/Development/MSYS64/clang64/lib/clang/19/lib/windows -v CMakeFiles/cmTC_08737.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_08737.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 D:/Development/MSYS64/clang64/lib/clang/19/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 D:/Development/MSYS64/clang64/lib/clang/19/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 D:/Development/MSYS64/clang64/lib/crtend.o]
           arg [D:/Development/MSYS64/clang64/bin/ld.lld] ==> ignore
           arg [-m] ==> ignore
           arg [i386pep] ==> ignore
           arg [-Bdynamic] ==> search dynamic
           arg [-o] ==> ignore
-          arg [cmTC_b955c.exe] ==> ignore
+          arg [cmTC_08737.exe] ==> ignore
           arg [D:/Development/MSYS64/clang64/lib/crt2.o] ==> obj [D:/Development/MSYS64/clang64/lib/crt2.o]
           arg [D:/Development/MSYS64/clang64/lib/crtbegin.o] ==> obj [D:/Development/MSYS64/clang64/lib/crtbegin.o]
           arg [-LD:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib] ==> dir [D:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib]
           arg [-LD:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib] ==> dir [D:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib]
           arg [-LD:/Development/MSYS64/clang64/lib] ==> dir [D:/Development/MSYS64/clang64/lib]
-          arg [-LD:/Development/MSYS64/clang64/lib/clang/17/lib/windows] ==> dir [D:/Development/MSYS64/clang64/lib/clang/17/lib/windows]
+          arg [-LD:/Development/MSYS64/clang64/lib/clang/19/lib/windows] ==> dir [D:/Development/MSYS64/clang64/lib/clang/19/lib/windows]
           arg [-v] ==> ignore
-          arg [CMakeFiles/cmTC_b955c.dir/CMakeCCompilerABI.c.obj] ==> ignore
+          arg [CMakeFiles/cmTC_08737.dir/CMakeCCompilerABI.c.obj] ==> ignore
           arg [--out-implib] ==> ignore
-          arg [libcmTC_b955c.dll.a] ==> ignore
+          arg [libcmTC_08737.dll.a] ==> ignore
           arg [--major-image-version] ==> ignore
           arg [0] ==> ignore
           arg [--minor-image-version] ==> ignore
           arg [0] ==> ignore
           arg [-lmingw32] ==> lib [mingw32]
-          arg [D:/Development/MSYS64/clang64/lib/clang/17/lib/windows/libclang_rt.builtins-x86_64.a] ==> lib [D:/Development/MSYS64/clang64/lib/clang/17/lib/windows/libclang_rt.builtins-x86_64.a]
+          arg [D:/Development/MSYS64/clang64/lib/clang/19/lib/windows/libclang_rt.builtins-x86_64.a] ==> lib [D:/Development/MSYS64/clang64/lib/clang/19/lib/windows/libclang_rt.builtins-x86_64.a]
           arg [-lunwind] ==> lib [unwind]
           arg [-lmoldname] ==> lib [moldname]
           arg [-lmingwex] ==> lib [mingwex]
@@ -182,7 +182,7 @@ events:
           arg [-luser32] ==> lib [user32]
           arg [-lkernel32] ==> lib [kernel32]
           arg [-lmingw32] ==> lib [mingw32]
-          arg [D:/Development/MSYS64/clang64/lib/clang/17/lib/windows/libclang_rt.builtins-x86_64.a] ==> lib [D:/Development/MSYS64/clang64/lib/clang/17/lib/windows/libclang_rt.builtins-x86_64.a]
+          arg [D:/Development/MSYS64/clang64/lib/clang/19/lib/windows/libclang_rt.builtins-x86_64.a] ==> lib [D:/Development/MSYS64/clang64/lib/clang/19/lib/windows/libclang_rt.builtins-x86_64.a]
           arg [-lunwind] ==> lib [unwind]
           arg [-lmoldname] ==> lib [moldname]
           arg [-lmingwex] ==> lib [mingwex]
@@ -190,17 +190,17 @@ events:
           arg [-lkernel32] ==> lib [kernel32]
           arg [D:/Development/MSYS64/clang64/lib/crtend.o] ==> obj [D:/Development/MSYS64/clang64/lib/crtend.o]
         linker tool for 'C': D:/Development/MSYS64/clang64/bin/ld.lld
-        remove lib [D:/Development/MSYS64/clang64/lib/clang/17/lib/windows/libclang_rt.builtins-x86_64.a]
+        remove lib [D:/Development/MSYS64/clang64/lib/clang/19/lib/windows/libclang_rt.builtins-x86_64.a]
         remove lib [msvcrt]
-        remove lib [D:/Development/MSYS64/clang64/lib/clang/17/lib/windows/libclang_rt.builtins-x86_64.a]
+        remove lib [D:/Development/MSYS64/clang64/lib/clang/19/lib/windows/libclang_rt.builtins-x86_64.a]
         remove lib [msvcrt]
         collapse library dir [D:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib] ==> [D:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib]
         collapse library dir [D:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib] ==> [D:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib]
         collapse library dir [D:/Development/MSYS64/clang64/lib] ==> [D:/Development/MSYS64/clang64/lib]
-        collapse library dir [D:/Development/MSYS64/clang64/lib/clang/17/lib/windows] ==> [D:/Development/MSYS64/clang64/lib/clang/17/lib/windows]
+        collapse library dir [D:/Development/MSYS64/clang64/lib/clang/19/lib/windows] ==> [D:/Development/MSYS64/clang64/lib/clang/19/lib/windows]
         implicit libs: [mingw32;unwind;moldname;mingwex;advapi32;shell32;user32;kernel32;mingw32;unwind;moldname;mingwex;kernel32]
         implicit objs: [D:/Development/MSYS64/clang64/lib/crt2.o;D:/Development/MSYS64/clang64/lib/crtbegin.o;D:/Development/MSYS64/clang64/lib/crtend.o]
-        implicit dirs: [D:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib;D:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib;D:/Development/MSYS64/clang64/lib;D:/Development/MSYS64/clang64/lib/clang/17/lib/windows]
+        implicit dirs: [D:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib;D:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib;D:/Development/MSYS64/clang64/lib;D:/Development/MSYS64/clang64/lib/clang/19/lib/windows]
         implicit fwks: []
       
       
@@ -213,7 +213,7 @@ events:
       - "CMakeLists.txt:5 (project)"
     message: |
       Running the C compiler's linker: "D:/Development/MSYS64/clang64/bin/ld.lld" "-v"
-      LLD 17.0.6 (compatible with GNU linkers)
+      LLD 19.1.4 (https://github.com/msys2/MINGW-packages 3f1bdd6825d0aba12e8b55f933989b1cd9665f7e) (compatible with GNU linkers)
   -
     kind: "try_compile-v1"
     backtrace:
@@ -223,8 +223,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-wkx6wm"
-      binary: "D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-wkx6wm"
+      source: "D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-0oo38i"
+      binary: "D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-0oo38i"
     cmakeVariables:
       CMAKE_CXX_COMPILER_CLANG_SCAN_DEPS: "D:/Development/MSYS64/clang64/bin/clang-scan-deps.exe"
       CMAKE_CXX_FLAGS: ""
@@ -235,33 +235,33 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-wkx6wm'
+        Change Dir: 'D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-0oo38i'
         
-        Run Build Command(s): D:/Development/Ninja/ninja.exe -v cmTC_5f4ac
-        [1/2] D:\\Development\\MSYS64\\clang64\\bin\\c++.exe   -v -MD -MT CMakeFiles/cmTC_5f4ac.dir/CMakeCXXCompilerABI.cpp.obj -MF CMakeFiles\\cmTC_5f4ac.dir\\CMakeCXXCompilerABI.cpp.obj.d -o CMakeFiles/cmTC_5f4ac.dir/CMakeCXXCompilerABI.cpp.obj -c D:/Development/Cmake/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp
-        clang version 17.0.6
+        Run Build Command(s): D:/Development/Ninja/ninja.exe -v cmTC_541a3
+        [1/2] D:\\Development\\MSYS64\\clang64\\bin\\c++.exe   -v -MD -MT CMakeFiles/cmTC_541a3.dir/CMakeCXXCompilerABI.cpp.obj -MF CMakeFiles\\cmTC_541a3.dir\\CMakeCXXCompilerABI.cpp.obj.d -o CMakeFiles/cmTC_541a3.dir/CMakeCXXCompilerABI.cpp.obj -c D:/Development/Cmake/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp
+        clang version 19.1.4
         Target: x86_64-w64-windows-gnu
         Thread model: posix
         InstalledDir: D:/Development/MSYS64/clang64/bin
          (in-process)
-         "D:/Development/MSYS64/clang64/bin/c++.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -fno-use-init-array -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -v -fcoverage-compilation-dir=D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-wkx6wm -resource-dir D:/Development/MSYS64/clang64/lib/clang/17 -dependency-file "CMakeFiles\\\\cmTC_5f4ac.dir\\\\CMakeCXXCompilerABI.cpp.obj.d" -MT CMakeFiles/cmTC_5f4ac.dir/CMakeCXXCompilerABI.cpp.obj -sys-header-deps -internal-isystem D:/Development/MSYS64/clang64/x86_64-w64-mingw32/include/c++/v1 -internal-isystem D:/Development/MSYS64/clang64/include/c++/v1 -internal-isystem D:/Development/MSYS64/clang64/lib/clang/17/include -internal-isystem D:/Development/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem D:/Development/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem D:/Development/MSYS64/clang64/include -fdeprecated-macro -fdebug-compilation-dir=D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-wkx6wm -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -exception-model=seh -faddrsig -o CMakeFiles/cmTC_5f4ac.dir/CMakeCXXCompilerABI.cpp.obj -x c++ D:/Development/Cmake/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp
-        clang -cc1 version 17.0.6 based upon LLVM 17.0.6 default target x86_64-w64-windows-gnu
+         "D:/Development/MSYS64/clang64/bin/c++.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -fno-sized-deallocation -fno-use-init-array -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -fdebug-compilation-dir=D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-0oo38i -v -fcoverage-compilation-dir=D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-0oo38i -resource-dir D:/Development/MSYS64/clang64/lib/clang/19 -dependency-file "CMakeFiles\\\\cmTC_541a3.dir\\\\CMakeCXXCompilerABI.cpp.obj.d" -MT CMakeFiles/cmTC_541a3.dir/CMakeCXXCompilerABI.cpp.obj -sys-header-deps -internal-isystem D:/Development/MSYS64/clang64/x86_64-w64-mingw32/include/c++/v1 -internal-isystem D:/Development/MSYS64/clang64/include/c++/v1 -internal-isystem D:/Development/MSYS64/clang64/lib/clang/19/include -internal-isystem D:/Development/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem D:/Development/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem D:/Development/MSYS64/clang64/include -fdeprecated-macro -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -fcxx-exceptions -fexceptions -exception-model=seh -faddrsig -o CMakeFiles/cmTC_541a3.dir/CMakeCXXCompilerABI.cpp.obj -x c++ D:/Development/Cmake/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp
+        clang -cc1 version 19.1.4 based upon LLVM 19.1.4 default target x86_64-w64-windows-gnu
         ignoring nonexistent directory "D:/Development/MSYS64/clang64/x86_64-w64-mingw32/include/c++/v1"
-        ignoring nonexistent directory "D:/Development/MSYS64/clang64/x86_64-w64-mingw32/include"
+        ignoring nonexistent directory "D:/Development/MSYS64/clang64/x86_64-w64-mingw32/include"\x0d
         ignoring nonexistent directory "D:/Development/MSYS64/clang64/x86_64-w64-mingw32/usr/include"\x0d
         #include "..." search starts here:\x0d
         #include <...> search starts here:\x0d
          D:/Development/MSYS64/clang64/include/c++/v1\x0d
-         D:/Development/MSYS64/clang64/lib/clang/17/include\x0d
+         D:/Development/MSYS64/clang64/lib/clang/19/include\x0d
          D:/Development/MSYS64/clang64/include\x0d
         End of search list.\x0d
-        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && D:\\Development\\MSYS64\\clang64\\bin\\c++.exe  -v -Wl,-v CMakeFiles/cmTC_5f4ac.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_5f4ac.exe -Wl,--out-implib,libcmTC_5f4ac.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
-        clang version 17.0.6
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && D:\\Development\\MSYS64\\clang64\\bin\\c++.exe  -v -Wl,-v CMakeFiles/cmTC_541a3.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_541a3.exe -Wl,--out-implib,libcmTC_541a3.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
+        clang version 19.1.4
         Target: x86_64-w64-windows-gnu
         Thread model: posix
         InstalledDir: D:/Development/MSYS64/clang64/bin
-         "D:/Development/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_5f4ac.exe D:/Development/MSYS64/clang64/lib/crt2.o D:/Development/MSYS64/clang64/lib/crtbegin.o -LD:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib -LD:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LD:/Development/MSYS64/clang64/lib -LD:/Development/MSYS64/clang64/lib/clang/17/lib/windows -v CMakeFiles/cmTC_5f4ac.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_5f4ac.dll.a --major-image-version 0 --minor-image-version 0 -lc++ -lmingw32 D:/Development/MSYS64/clang64/lib/clang/17/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 D:/Development/MSYS64/clang64/lib/clang/17/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 D:/Development/MSYS64/clang64/lib/crtend.o
-        LLD 17.0.6 (compatible with GNU linkers)
+         "D:/Development/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_541a3.exe D:/Development/MSYS64/clang64/lib/crt2.o D:/Development/MSYS64/clang64/lib/crtbegin.o -LD:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib -LD:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LD:/Development/MSYS64/clang64/lib -LD:/Development/MSYS64/clang64/lib/clang/19/lib/windows -v CMakeFiles/cmTC_541a3.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_541a3.dll.a --major-image-version 0 --minor-image-version 0 -lc++ -lmingw32 D:/Development/MSYS64/clang64/lib/clang/19/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 D:/Development/MSYS64/clang64/lib/clang/19/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 D:/Development/MSYS64/clang64/lib/crtend.o
+        LLD 19.1.4 (https://github.com/msys2/MINGW-packages 3f1bdd6825d0aba12e8b55f933989b1cd9665f7e) (compatible with GNU linkers)
         
       exitCode: 0
   -
@@ -275,13 +275,13 @@ events:
         found start of include info
         found start of implicit include info
           add: [D:/Development/MSYS64/clang64/include/c++/v1]
-          add: [D:/Development/MSYS64/clang64/lib/clang/17/include]
+          add: [D:/Development/MSYS64/clang64/lib/clang/19/include]
           add: [D:/Development/MSYS64/clang64/include]
         end of search list found
         collapse include dir [D:/Development/MSYS64/clang64/include/c++/v1] ==> [D:/Development/MSYS64/clang64/include/c++/v1]
-        collapse include dir [D:/Development/MSYS64/clang64/lib/clang/17/include] ==> [D:/Development/MSYS64/clang64/lib/clang/17/include]
+        collapse include dir [D:/Development/MSYS64/clang64/lib/clang/19/include] ==> [D:/Development/MSYS64/clang64/lib/clang/19/include]
         collapse include dir [D:/Development/MSYS64/clang64/include] ==> [D:/Development/MSYS64/clang64/include]
-        implicit include dirs: [D:/Development/MSYS64/clang64/include/c++/v1;D:/Development/MSYS64/clang64/lib/clang/17/include;D:/Development/MSYS64/clang64/include]
+        implicit include dirs: [D:/Development/MSYS64/clang64/include/c++/v1;D:/Development/MSYS64/clang64/lib/clang/19/include;D:/Development/MSYS64/clang64/include]
       
       
   -
@@ -294,55 +294,55 @@ events:
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
-        ignore line: [Change Dir: 'D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-wkx6wm']
+        ignore line: [Change Dir: 'D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-0oo38i']
         ignore line: []
-        ignore line: [Run Build Command(s): D:/Development/Ninja/ninja.exe -v cmTC_5f4ac]
-        ignore line: [[1/2] D:\\Development\\MSYS64\\clang64\\bin\\c++.exe   -v -MD -MT CMakeFiles/cmTC_5f4ac.dir/CMakeCXXCompilerABI.cpp.obj -MF CMakeFiles\\cmTC_5f4ac.dir\\CMakeCXXCompilerABI.cpp.obj.d -o CMakeFiles/cmTC_5f4ac.dir/CMakeCXXCompilerABI.cpp.obj -c D:/Development/Cmake/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp]
-        ignore line: [clang version 17.0.6]
+        ignore line: [Run Build Command(s): D:/Development/Ninja/ninja.exe -v cmTC_541a3]
+        ignore line: [[1/2] D:\\Development\\MSYS64\\clang64\\bin\\c++.exe   -v -MD -MT CMakeFiles/cmTC_541a3.dir/CMakeCXXCompilerABI.cpp.obj -MF CMakeFiles\\cmTC_541a3.dir\\CMakeCXXCompilerABI.cpp.obj.d -o CMakeFiles/cmTC_541a3.dir/CMakeCXXCompilerABI.cpp.obj -c D:/Development/Cmake/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [clang version 19.1.4]
         ignore line: [Target: x86_64-w64-windows-gnu]
         ignore line: [Thread model: posix]
         ignore line: [InstalledDir: D:/Development/MSYS64/clang64/bin]
         ignore line: [ (in-process)]
-        ignore line: [ "D:/Development/MSYS64/clang64/bin/c++.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -mrelax-all -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -fno-use-init-array -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -v -fcoverage-compilation-dir=D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-wkx6wm -resource-dir D:/Development/MSYS64/clang64/lib/clang/17 -dependency-file "CMakeFiles\\\\cmTC_5f4ac.dir\\\\CMakeCXXCompilerABI.cpp.obj.d" -MT CMakeFiles/cmTC_5f4ac.dir/CMakeCXXCompilerABI.cpp.obj -sys-header-deps -internal-isystem D:/Development/MSYS64/clang64/x86_64-w64-mingw32/include/c++/v1 -internal-isystem D:/Development/MSYS64/clang64/include/c++/v1 -internal-isystem D:/Development/MSYS64/clang64/lib/clang/17/include -internal-isystem D:/Development/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem D:/Development/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem D:/Development/MSYS64/clang64/include -fdeprecated-macro -fdebug-compilation-dir=D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-wkx6wm -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -exception-model=seh -faddrsig -o CMakeFiles/cmTC_5f4ac.dir/CMakeCXXCompilerABI.cpp.obj -x c++ D:/Development/Cmake/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp]
-        ignore line: [clang -cc1 version 17.0.6 based upon LLVM 17.0.6 default target x86_64-w64-windows-gnu]
+        ignore line: [ "D:/Development/MSYS64/clang64/bin/c++.exe" -cc1 -triple x86_64-w64-windows-gnu -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=none -fmath-errno -ffp-contract=on -fno-rounding-math -mconstructor-aliases -mms-bitfields -funwind-tables=2 -fno-sized-deallocation -fno-use-init-array -target-cpu x86-64 -tune-cpu generic -debugger-tuning=gdb -fdebug-compilation-dir=D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-0oo38i -v -fcoverage-compilation-dir=D:/TheiaProject_Edit/SonikLibraryAPI/Debug_x64/CMakeFiles/CMakeScratch/TryCompile-0oo38i -resource-dir D:/Development/MSYS64/clang64/lib/clang/19 -dependency-file "CMakeFiles\\\\cmTC_541a3.dir\\\\CMakeCXXCompilerABI.cpp.obj.d" -MT CMakeFiles/cmTC_541a3.dir/CMakeCXXCompilerABI.cpp.obj -sys-header-deps -internal-isystem D:/Development/MSYS64/clang64/x86_64-w64-mingw32/include/c++/v1 -internal-isystem D:/Development/MSYS64/clang64/include/c++/v1 -internal-isystem D:/Development/MSYS64/clang64/lib/clang/19/include -internal-isystem D:/Development/MSYS64/clang64/x86_64-w64-mingw32/include -internal-isystem D:/Development/MSYS64/clang64/x86_64-w64-mingw32/usr/include -internal-isystem D:/Development/MSYS64/clang64/include -fdeprecated-macro -ferror-limit 19 -fno-use-cxa-atexit -fgnuc-version=4.2.1 -fskip-odr-check-in-gmf -fcxx-exceptions -fexceptions -exception-model=seh -faddrsig -o CMakeFiles/cmTC_541a3.dir/CMakeCXXCompilerABI.cpp.obj -x c++ D:/Development/Cmake/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [clang -cc1 version 19.1.4 based upon LLVM 19.1.4 default target x86_64-w64-windows-gnu]
         ignore line: [ignoring nonexistent directory "D:/Development/MSYS64/clang64/x86_64-w64-mingw32/include/c++/v1"]
-        ignore line: [ignoring nonexistent directory "D:/Development/MSYS64/clang64/x86_64-w64-mingw32/include"]
+        ignore line: [ignoring nonexistent directory "D:/Development/MSYS64/clang64/x86_64-w64-mingw32/include"\x0d]
         ignore line: [ignoring nonexistent directory "D:/Development/MSYS64/clang64/x86_64-w64-mingw32/usr/include"\x0d]
         ignore line: [#include "..." search starts here:\x0d]
         ignore line: [#include <...> search starts here:\x0d]
         ignore line: [ D:/Development/MSYS64/clang64/include/c++/v1\x0d]
-        ignore line: [ D:/Development/MSYS64/clang64/lib/clang/17/include\x0d]
+        ignore line: [ D:/Development/MSYS64/clang64/lib/clang/19/include\x0d]
         ignore line: [ D:/Development/MSYS64/clang64/include\x0d]
         ignore line: [End of search list.\x0d]
-        ignore line: [[2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && D:\\Development\\MSYS64\\clang64\\bin\\c++.exe  -v -Wl -v CMakeFiles/cmTC_5f4ac.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_5f4ac.exe -Wl --out-implib libcmTC_5f4ac.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
-        ignore line: [clang version 17.0.6]
+        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && D:\\Development\\MSYS64\\clang64\\bin\\c++.exe  -v -Wl -v CMakeFiles/cmTC_541a3.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_541a3.exe -Wl --out-implib libcmTC_541a3.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
+        ignore line: [clang version 19.1.4]
         ignore line: [Target: x86_64-w64-windows-gnu]
         ignore line: [Thread model: posix]
         ignore line: [InstalledDir: D:/Development/MSYS64/clang64/bin]
-        link line: [ "D:/Development/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_5f4ac.exe D:/Development/MSYS64/clang64/lib/crt2.o D:/Development/MSYS64/clang64/lib/crtbegin.o -LD:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib -LD:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LD:/Development/MSYS64/clang64/lib -LD:/Development/MSYS64/clang64/lib/clang/17/lib/windows -v CMakeFiles/cmTC_5f4ac.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_5f4ac.dll.a --major-image-version 0 --minor-image-version 0 -lc++ -lmingw32 D:/Development/MSYS64/clang64/lib/clang/17/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 D:/Development/MSYS64/clang64/lib/clang/17/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 D:/Development/MSYS64/clang64/lib/crtend.o]
+        link line: [ "D:/Development/MSYS64/clang64/bin/ld.lld" -m i386pep -Bdynamic -o cmTC_541a3.exe D:/Development/MSYS64/clang64/lib/crt2.o D:/Development/MSYS64/clang64/lib/crtbegin.o -LD:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib -LD:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib -LD:/Development/MSYS64/clang64/lib -LD:/Development/MSYS64/clang64/lib/clang/19/lib/windows -v CMakeFiles/cmTC_541a3.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_541a3.dll.a --major-image-version 0 --minor-image-version 0 -lc++ -lmingw32 D:/Development/MSYS64/clang64/lib/clang/19/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 D:/Development/MSYS64/clang64/lib/clang/19/lib/windows/libclang_rt.builtins-x86_64.a -lunwind -lmoldname -lmingwex -lmsvcrt -lkernel32 D:/Development/MSYS64/clang64/lib/crtend.o]
           arg [D:/Development/MSYS64/clang64/bin/ld.lld] ==> ignore
           arg [-m] ==> ignore
           arg [i386pep] ==> ignore
           arg [-Bdynamic] ==> search dynamic
           arg [-o] ==> ignore
-          arg [cmTC_5f4ac.exe] ==> ignore
+          arg [cmTC_541a3.exe] ==> ignore
           arg [D:/Development/MSYS64/clang64/lib/crt2.o] ==> obj [D:/Development/MSYS64/clang64/lib/crt2.o]
           arg [D:/Development/MSYS64/clang64/lib/crtbegin.o] ==> obj [D:/Development/MSYS64/clang64/lib/crtbegin.o]
           arg [-LD:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib] ==> dir [D:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib]
           arg [-LD:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib] ==> dir [D:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib]
           arg [-LD:/Development/MSYS64/clang64/lib] ==> dir [D:/Development/MSYS64/clang64/lib]
-          arg [-LD:/Development/MSYS64/clang64/lib/clang/17/lib/windows] ==> dir [D:/Development/MSYS64/clang64/lib/clang/17/lib/windows]
+          arg [-LD:/Development/MSYS64/clang64/lib/clang/19/lib/windows] ==> dir [D:/Development/MSYS64/clang64/lib/clang/19/lib/windows]
           arg [-v] ==> ignore
-          arg [CMakeFiles/cmTC_5f4ac.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
+          arg [CMakeFiles/cmTC_541a3.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
           arg [--out-implib] ==> ignore
-          arg [libcmTC_5f4ac.dll.a] ==> ignore
+          arg [libcmTC_541a3.dll.a] ==> ignore
           arg [--major-image-version] ==> ignore
           arg [0] ==> ignore
           arg [--minor-image-version] ==> ignore
           arg [0] ==> ignore
           arg [-lc++] ==> lib [c++]
           arg [-lmingw32] ==> lib [mingw32]
-          arg [D:/Development/MSYS64/clang64/lib/clang/17/lib/windows/libclang_rt.builtins-x86_64.a] ==> lib [D:/Development/MSYS64/clang64/lib/clang/17/lib/windows/libclang_rt.builtins-x86_64.a]
+          arg [D:/Development/MSYS64/clang64/lib/clang/19/lib/windows/libclang_rt.builtins-x86_64.a] ==> lib [D:/Development/MSYS64/clang64/lib/clang/19/lib/windows/libclang_rt.builtins-x86_64.a]
           arg [-lunwind] ==> lib [unwind]
           arg [-lmoldname] ==> lib [moldname]
           arg [-lmingwex] ==> lib [mingwex]
@@ -352,7 +352,7 @@ events:
           arg [-luser32] ==> lib [user32]
           arg [-lkernel32] ==> lib [kernel32]
           arg [-lmingw32] ==> lib [mingw32]
-          arg [D:/Development/MSYS64/clang64/lib/clang/17/lib/windows/libclang_rt.builtins-x86_64.a] ==> lib [D:/Development/MSYS64/clang64/lib/clang/17/lib/windows/libclang_rt.builtins-x86_64.a]
+          arg [D:/Development/MSYS64/clang64/lib/clang/19/lib/windows/libclang_rt.builtins-x86_64.a] ==> lib [D:/Development/MSYS64/clang64/lib/clang/19/lib/windows/libclang_rt.builtins-x86_64.a]
           arg [-lunwind] ==> lib [unwind]
           arg [-lmoldname] ==> lib [moldname]
           arg [-lmingwex] ==> lib [mingwex]
@@ -360,17 +360,17 @@ events:
           arg [-lkernel32] ==> lib [kernel32]
           arg [D:/Development/MSYS64/clang64/lib/crtend.o] ==> obj [D:/Development/MSYS64/clang64/lib/crtend.o]
         linker tool for 'CXX': D:/Development/MSYS64/clang64/bin/ld.lld
-        remove lib [D:/Development/MSYS64/clang64/lib/clang/17/lib/windows/libclang_rt.builtins-x86_64.a]
+        remove lib [D:/Development/MSYS64/clang64/lib/clang/19/lib/windows/libclang_rt.builtins-x86_64.a]
         remove lib [msvcrt]
-        remove lib [D:/Development/MSYS64/clang64/lib/clang/17/lib/windows/libclang_rt.builtins-x86_64.a]
+        remove lib [D:/Development/MSYS64/clang64/lib/clang/19/lib/windows/libclang_rt.builtins-x86_64.a]
         remove lib [msvcrt]
         collapse library dir [D:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib] ==> [D:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib]
         collapse library dir [D:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib] ==> [D:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib]
         collapse library dir [D:/Development/MSYS64/clang64/lib] ==> [D:/Development/MSYS64/clang64/lib]
-        collapse library dir [D:/Development/MSYS64/clang64/lib/clang/17/lib/windows] ==> [D:/Development/MSYS64/clang64/lib/clang/17/lib/windows]
+        collapse library dir [D:/Development/MSYS64/clang64/lib/clang/19/lib/windows] ==> [D:/Development/MSYS64/clang64/lib/clang/19/lib/windows]
         implicit libs: [c++;mingw32;unwind;moldname;mingwex;advapi32;shell32;user32;kernel32;mingw32;unwind;moldname;mingwex;kernel32]
         implicit objs: [D:/Development/MSYS64/clang64/lib/crt2.o;D:/Development/MSYS64/clang64/lib/crtbegin.o;D:/Development/MSYS64/clang64/lib/crtend.o]
-        implicit dirs: [D:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib;D:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib;D:/Development/MSYS64/clang64/lib;D:/Development/MSYS64/clang64/lib/clang/17/lib/windows]
+        implicit dirs: [D:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib;D:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib;D:/Development/MSYS64/clang64/lib;D:/Development/MSYS64/clang64/lib/clang/19/lib/windows]
         implicit fwks: []
       
       
@@ -383,5 +383,5 @@ events:
       - "CMakeLists.txt:5 (project)"
     message: |
       Running the CXX compiler's linker: "D:/Development/MSYS64/clang64/bin/ld.lld" "-v"
-      LLD 17.0.6 (compatible with GNU linkers)
+      LLD 19.1.4 (https://github.com/msys2/MINGW-packages 3f1bdd6825d0aba12e8b55f933989b1cd9665f7e) (compatible with GNU linkers)
 ...

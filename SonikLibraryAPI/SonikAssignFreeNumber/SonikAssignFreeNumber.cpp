@@ -6,7 +6,7 @@
 namespace SonikLib
 {
     SonikAssignFreeNumber::SonikAssignFreeNumber(void)
-    :m_NowMaxNumber(0)
+        :m_NowMaxNumber(0)
     {
         //initialize membar variable only
     };
@@ -20,19 +20,19 @@ namespace SonikLib
     bool SonikAssignFreeNumber::CreateObject(SonikLib::SharedSmtPtr<SonikAssignFreeNumber>& _get_)
     {
         SonikAssignFreeNumber* l_object = new(std::nothrow) SonikAssignFreeNumber;
-        if(l_object == nullptr)
+        if (l_object == nullptr)
         {
             return false;
         };
 
         //Create bitheader
-        if( !SonikLib::Container::SonikVariableArrayContainer<uint64_t>::CreateContainer(l_object->m_bitheader, 1) )
+        if (!SonikLib::Container::SonikVariableArrayContainer<uint64_t>::CreateContainer(l_object->m_bitheader, 1))
         {
             delete l_object;
             return false;
         };
 
-        if( !SonikLib::Container::SonikVariableArrayContainer<uint64_t>::CreateContainer(l_object->m_bitvalue, 1) )
+        if (!SonikLib::Container::SonikVariableArrayContainer<uint64_t>::CreateContainer(l_object->m_bitvalue, 1))
         {
             delete l_object;
             return false;
@@ -42,7 +42,12 @@ namespace SonikLib
         l_object->m_bitheader->PushBack(l_bitvalue);
         l_object->m_bitvalue->PushBack(l_bitvalue);
 
-        _get_.ResetPointer(l_object);
+        if(!SonikLib::SharedSmtPtr<SonikAssignFreeNumber>::SmartPointerCreate(l_object, _get_))
+        {
+            delete l_object;
+            return false;
+        };
+        
         return true;
     };
 
@@ -58,10 +63,10 @@ namespace SonikLib
 
         SonikLib::Container::SonikVariableArrayContainer<uint64_t>::VACIterator l_itr(m_bitheader->begin());
 
-        while(l_itr != m_bitheader->end())
+        while (l_itr != m_bitheader->end())
         {
-            l_header_lsb = SonikMathBit::GetZEROLSBFor64bit((*l_itr));
-            if(l_header_lsb != -1) //ビット列に0があれば利用可能
+            l_header_lsb = SonikMathBit::GetZEROLSB((*l_itr));
+            if (l_header_lsb != -1) //ビット列に0があれば利用可能
             {
                 break;
             };
@@ -71,10 +76,10 @@ namespace SonikLib
         };
 
         //空き番号があればそれを利用
-        uint64_t bitvalueindex = (64 * (l_header_index -1)) + l_header_lsb;
-        uint64_t ret = SonikMathBit::GetZEROLSBFor64bit((*m_bitvalue)[bitvalueindex]) + (64 * bitvalueindex);
+        uint64_t bitvalueindex = (64 * (l_header_index - 1)) + l_header_lsb;
+        uint64_t ret = SonikMathBit::GetZEROLSB((*m_bitvalue)[bitvalueindex]) + (64 * bitvalueindex);
 
-        if(0x7FFFFFFFFFFFFFFF < ret)
+        if (0x7FFFFFFFFFFFFFFF < ret)
         {
             return -1;
         };
@@ -83,16 +88,16 @@ namespace SonikLib
         (*m_bitvalue)[bitvalueindex] |= static_cast<int64_t>(0b0000000000000000000000000000000000000000000000000000000000000001) << ret;
 
         //操作の結果ビットがすべて1になったらヘッダのビットを1(配下が満タン)状態にする。
-        if( (*m_bitvalue)[bitvalueindex] == 0xFFFFFFFFFFFFFFFF)
+        if ((*m_bitvalue)[bitvalueindex] == 0xFFFFFFFFFFFFFFFF)
         {
             //列のビットをON(1)にしてそこのビット列はすべてONであることを示す。
             (*l_itr) |= static_cast<int64_t>(0b0000000000000000000000000000000000000000000000000000000000000001) << l_header_lsb;
-            
-            if(m_NowMaxNumber < ret)
+
+            if (m_NowMaxNumber < ret)
             {
-                uint64_t l_newvalue =0;
-                
-                if( (*l_itr) == 0xFFFFFFFFFFFFFFFF)
+                uint64_t l_newvalue = 0;
+
+                if ((*l_itr) == 0xFFFFFFFFFFFFFFFF)
                 {
                     //ヘッダがMAXなら、ヘッダをPushBack
                     m_bitheader->PushBack(l_newvalue);
@@ -104,7 +109,7 @@ namespace SonikLib
 
         };
 
-        if(m_NowMaxNumber < ret)
+        if (m_NowMaxNumber < ret)
         {
             //空き番号最大値更新
             m_NowMaxNumber = ret;
@@ -117,7 +122,7 @@ namespace SonikLib
     //空き番号の返還
     void SonikAssignFreeNumber::ReturnNumber(int64_t _lendnumber_)
     {
-        if(0x7FFFFFFFFFFFFFFF < _lendnumber_)
+        if (0x7FFFFFFFFFFFFFFF < _lendnumber_)
         {
             return; // 0x7FFFFFFFFFFFFFFF以上の番号は取得させないので何もしない。
         };
@@ -128,9 +133,9 @@ namespace SonikLib
         uint64_t l_bitvalueindex = _lendnumber_ >> 6;
         uint64_t l_headerindex = l_bitvalueindex >> 6;
         uint64_t l_headerbitpoint = (_lendnumber_ - (64 * 64 * l_headerindex)) >> 6;
-        
-        (*m_bitheader)[l_headerindex] &= ~( static_cast<int64_t>(0b0000000000000000000000000000000000000000000000000000000000000001) << l_headerbitpoint);
-        (*m_bitvalue)[l_bitvalueindex] &= ~( static_cast<int64_t>(0b0000000000000000000000000000000000000000000000000000000000000001) << (_lendnumber_ % 64));
+
+        (*m_bitheader)[l_headerindex] &= ~(static_cast<int64_t>(0b0000000000000000000000000000000000000000000000000000000000000001) << l_headerbitpoint);
+        (*m_bitvalue)[l_bitvalueindex] &= ~(static_cast<int64_t>(0b0000000000000000000000000000000000000000000000000000000000000001) << (_lendnumber_ % 64));
 
         m_lock.unlock();
     };

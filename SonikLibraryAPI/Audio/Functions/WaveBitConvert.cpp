@@ -5,18 +5,14 @@
  *      Author: SONIC
  */
 
-#include <new>
 #include <climits>
 #include <cstdint>
-#include <algorithm>
-#include <string>
-#include <sstream>
+#include <string> //memset
 
 
 #include "../Functions/WaveBitConvert.h"
 
 #include "../../MathBit/SonikNormalize.h"
-#include "../Format/SonikAudioFormat.h"
 #include "../Format/SonikAudioFormat_InnerUse.h"
 #include "fftw3.h"
 

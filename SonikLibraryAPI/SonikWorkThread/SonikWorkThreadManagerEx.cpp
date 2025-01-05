@@ -8,6 +8,7 @@
 #include "SonikWorkThreadManagerEx.h"
 #include "SonikWorkThreadEx.h"
 #include "../Container/SonikAtomicQueue.hpp"
+#include "../FunctionObject/FunctionObjectSystemInterface.hpp"
 
 #include <new>
 #include <condition_variable>
@@ -48,7 +49,7 @@ namespace SonikLib
 
 		lp_mngobj->ManagedThreadNum = UseThreadNum;
 
-		if(!lp_mngobj->m_cond.ResetPointer(new(std::nothrow) std::condition_variable_any))
+		if(!SonikLib::SharedSmtPtr<std::condition_variable_any>::SmartPointerCreate(new(std::nothrow) std::condition_variable_any, lp_mngobj->m_cond))
 		{
 			delete lp_mngobj;
 			return false;
@@ -59,7 +60,10 @@ namespace SonikLib
 			return false;
 		};
 
-		if( !lp_mngobj->JobQueue.ResetPointer(new(std::nothrow) SonikLib::Container::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>(JobBufferSize)) )
+		using l_sharedQueue = SonikLib::SharedSmtPtr<SonikLib::Container::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>>;
+
+		
+		if( !l_sharedQueue::SmartPointerCreate(new(std::nothrow) SonikLib::Container::SonikAtomicQueue<SonikLib::SharedSmtPtr<SonikLib::SonikFOSInterface>>(JobBufferSize), lp_mngobj->JobQueue) )
 		{
 			return false;
 		};
@@ -87,7 +91,8 @@ namespace SonikLib
 			lp_mngobj->m_pThreads[i]->Set_ExternalQueue(lp_mngobj->JobQueue);
 		};
 
-		if( !_out_mng_.ResetPointer(lp_mngobj) )
+		
+		if( !SonikLib::SharedSmtPtr<SonikThreadManagerEx>::SmartPointerCreate(lp_mngobj, _out_mng_) )
 		{
 			delete lp_mngobj;
 			return false;

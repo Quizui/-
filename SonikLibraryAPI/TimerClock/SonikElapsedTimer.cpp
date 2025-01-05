@@ -53,7 +53,7 @@ namespace SonikLib
 	};
 
 	//計測開始時間からの差分を取得します。(ミリ秒)
-	unsigned long SonikElapsedTimer::GetElapsedTime(void)
+	uint64_t SonikElapsedTimer::GetElapsedTime(void)
 	{
 		std::chrono::milliseconds mill = std::chrono::duration_cast<std::chrono::milliseconds>( std::chrono::high_resolution_clock::now().time_since_epoch() );
 
@@ -148,7 +148,7 @@ namespace SonikLib
 	};
 
 	//計測開始時間からの差分を取得します。(マイクロ秒)
-	unsigned long SonikElapsedTimerMicro::GetElapsedTime(void)
+	uint64_t SonikElapsedTimerMicro::GetElapsedTime(void)
 	{
 		std::chrono::microseconds mic = std::chrono::duration_cast<std::chrono::microseconds>( std::chrono::high_resolution_clock::now().time_since_epoch() );
 

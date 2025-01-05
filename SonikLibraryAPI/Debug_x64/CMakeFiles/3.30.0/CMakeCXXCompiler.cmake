@@ -1,7 +1,7 @@
 set(CMAKE_CXX_COMPILER "D:/Development/MSYS64/clang64/bin/c++.exe")
 set(CMAKE_CXX_COMPILER_ARG1 "")
 set(CMAKE_CXX_COMPILER_ID "Clang")
-set(CMAKE_CXX_COMPILER_VERSION "17.0.6")
+set(CMAKE_CXX_COMPILER_VERSION "19.1.4")
 set(CMAKE_CXX_COMPILER_VERSION_INTERNAL "")
 set(CMAKE_CXX_COMPILER_WRAPPER "")
 set(CMAKE_CXX_STANDARD_COMPUTED_DEFAULT "17")
@@ -33,7 +33,7 @@ set(CMAKE_LINKER_LINK "")
 set(CMAKE_LINKER_LLD "")
 set(CMAKE_CXX_COMPILER_LINKER "D:/Development/MSYS64/clang64/bin/ld.lld")
 set(CMAKE_CXX_COMPILER_LINKER_ID "LLD")
-set(CMAKE_CXX_COMPILER_LINKER_VERSION 17.0.6)
+set(CMAKE_CXX_COMPILER_LINKER_VERSION 19.1.4)
 set(CMAKE_CXX_COMPILER_LINKER_FRONTEND_VARIANT GNU)
 set(CMAKE_MT "")
 set(CMAKE_TAPI "CMAKE_TAPI-NOTFOUND")
@@ -87,11 +87,11 @@ endif()
 
 
 
-set(CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES "D:/Development/MSYS64/clang64/include/c++/v1;D:/Development/MSYS64/clang64/lib/clang/17/include;D:/Development/MSYS64/clang64/include")
+set(CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES "D:/Development/MSYS64/clang64/include/c++/v1;D:/Development/MSYS64/clang64/lib/clang/19/include;D:/Development/MSYS64/clang64/include")
 set(CMAKE_CXX_IMPLICIT_LINK_LIBRARIES "c++;mingw32;unwind;moldname;mingwex;advapi32;shell32;user32;kernel32;mingw32;unwind;moldname;mingwex;kernel32")
-set(CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES "D:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib;D:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib;D:/Development/MSYS64/clang64/lib;D:/Development/MSYS64/clang64/lib/clang/17/lib/windows")
+set(CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES "D:/Development/MSYS64/clang64/x86_64-w64-mingw32/lib;D:/Development/MSYS64/clang64/x86_64-w64-mingw32/mingw/lib;D:/Development/MSYS64/clang64/lib;D:/Development/MSYS64/clang64/lib/clang/19/lib/windows")
 set(CMAKE_CXX_IMPLICIT_LINK_FRAMEWORK_DIRECTORIES "")
-set(CMAKE_CXX_COMPILER_CLANG_RESOURCE_DIR "D:/Development/MSYS64/clang64/lib/clang/17")
+set(CMAKE_CXX_COMPILER_CLANG_RESOURCE_DIR "D:/Development/MSYS64/clang64/lib/clang/19")
 
 set(CMAKE_CXX_COMPILER_IMPORT_STD "")
 ### Imported target for C++23 standard library

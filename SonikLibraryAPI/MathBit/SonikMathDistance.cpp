@@ -20,17 +20,27 @@ namespace SonikMathDataBox
 	{
 		try
 		{
-			x.ResetPointer(new double);
-			y.ResetPointer(new double);
-			z.ResetPointer(new double);
+			if(!SonikLib::SharedSmtPtr<double>::SmartPointerCreate(new double, x))
+			{
+				throw std::bad_alloc();
+			};
+			if(!SonikLib::SharedSmtPtr<double>::SmartPointerCreate(new double, y))
+			{
+				throw std::bad_alloc();
+			};
+			if(!SonikLib::SharedSmtPtr<double>::SmartPointerCreate(new double, z))
+			{
+				throw std::bad_alloc();
+			};
+
 			(*x) = _x_;
 			(*y) = _y_;
 			(*z) = _z_;
 		}catch(std::bad_alloc&)
 		{
-			x.ResetPointer(nullptr);
-			y.ResetPointer(nullptr);
-			z.ResetPointer(nullptr);
+			x = SonikLib::SharedSmtPtr<double>();
+			y = SonikLib::SharedSmtPtr<double>();
+			z = SonikLib::SharedSmtPtr<double>();
 			throw;
 		};
 
@@ -386,7 +396,7 @@ namespace SonikMathDataBox
 		(*l_newvec[2]) = (*(this->z));
 
 		//現在の値を使用した自分の座標を新しく持つ。
-		if(!x.ResetPointer(l_newvec[0]))
+		if(!SonikLib::SharedSmtPtr<double>::SmartPointerCreate(l_newvec[0], x))
 		{
 			delete l_newvec[0];
 			delete l_newvec[1];
@@ -394,19 +404,19 @@ namespace SonikMathDataBox
 			return false;
 		};
 
-		if( !y.ResetPointer(l_newvec[1]) )
+		if( !SonikLib::SharedSmtPtr<double>::SmartPointerCreate(l_newvec[1], y) )
 		{
-			x.ResetPointer(nullptr);
+			x = SonikLib::SharedSmtPtr<double>();
 			delete l_newvec[1];
 			delete l_newvec[2];
 
 			return false;
 		};
 
-		if( !z.ResetPointer(l_newvec[2]) )
+		if( !SonikLib::SharedSmtPtr<double>::SmartPointerCreate(l_newvec[2], z) )
 		{
-			x.ResetPointer(nullptr);
-			y.ResetPointer(nullptr);
+			x = SonikLib::SharedSmtPtr<double>();
+			y = SonikLib::SharedSmtPtr<double>();
 			delete l_newvec[2];
 
 			return false;
@@ -448,16 +458,16 @@ namespace SonikMathDataBox
 		(*l_newvec[1]) = (*(this->y));
 
 		//現在の値を使用した自分の座標を新しく持つ。
-		if(!x.ResetPointer(l_newvec[0]))
+		if(!SonikLib::SharedSmtPtr<double>::SmartPointerCreate(l_newvec[0], x))
 		{
 			delete l_newvec[0];
 			delete l_newvec[1];
 			return false;
 		};
 
-		if( !y.ResetPointer(l_newvec[1]) )
+		if( !SonikLib::SharedSmtPtr<double>::SmartPointerCreate(l_newvec[1], y) )
 		{
-			x.ResetPointer(nullptr);
+			x =SonikLib::SharedSmtPtr<double>();
 			delete l_newvec[1];
 			return false;
 		};
@@ -498,16 +508,16 @@ namespace SonikMathDataBox
 		(*l_newvec[1]) = (*(this->z));
 
 		//現在の値を使用した自分の座標を新しく持つ。
-		if(!x.ResetPointer(l_newvec[0]))
+		if(!SonikLib::SharedSmtPtr<double>::SmartPointerCreate(l_newvec[0], x))
 		{
 			delete l_newvec[0];
 			delete l_newvec[1];
 			return false;
 		};
 
-		if( !z.ResetPointer(l_newvec[1]) )
+		if( !SonikLib::SharedSmtPtr<double>::SmartPointerCreate(l_newvec[1], z) )
 		{
-			x.ResetPointer(nullptr);
+			x = SonikLib::SharedSmtPtr<double>();
 			return false;
 		};
 
@@ -548,7 +558,7 @@ namespace SonikMathDataBox
 		(*l_newvec[1]) = (*(this->z));
 
 		//現在の値を使用した自分の座標を新しく持つ。
-		if( !y.ResetPointer(l_newvec[0]) )
+		if( !SonikLib::SharedSmtPtr<double>::SmartPointerCreate(l_newvec[0], y) )
 		{
 			delete l_newvec[0];
 			delete l_newvec[1];
@@ -556,9 +566,9 @@ namespace SonikMathDataBox
 			return false;
 		};
 
-		if( !z.ResetPointer(l_newvec[1]) )
+		if( !SonikLib::SharedSmtPtr<double>::SmartPointerCreate(l_newvec[1], z) )
 		{
-			y.ResetPointer(nullptr);
+			y = SonikLib::SharedSmtPtr<double>();
 			delete l_newvec[1];
 
 			return false;
@@ -583,7 +593,7 @@ namespace SonikMathDataBox
 		(*l_newvec) = (*(this->x));
 
 		//現在の値を使用した自分の座標を新しく持つ。
-		if(!x.ResetPointer(l_newvec))
+		if(!SonikLib::SharedSmtPtr<double>::SmartPointerCreate(l_newvec, x))
 		{
 			delete l_newvec;
 			return false;
@@ -608,7 +618,7 @@ namespace SonikMathDataBox
 		(*l_newvec) = (*(this->y));
 
 		//現在の値を使用した自分の座標を新しく持つ。
-		if(!y.ResetPointer(l_newvec))
+		if(!SonikLib::SharedSmtPtr<double>::SmartPointerCreate(l_newvec, y))
 		{
 			delete l_newvec;
 			return false;
@@ -633,7 +643,7 @@ namespace SonikMathDataBox
 		(*l_newvec) = (*(this->z));
 
 		//現在の値を使用した自分の座標を新しく持つ。
-		if(!z.ResetPointer(l_newvec))
+		if(!SonikLib::SharedSmtPtr<double>::SmartPointerCreate(l_newvec, z))
 		{
 			delete l_newvec;
 			return false;

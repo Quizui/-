@@ -44,7 +44,7 @@ namespace SonikLib
 		void SetStartTime(void);
 
 		//計測開始時間からの差分を取得します。(ミリ秒)
-		unsigned long GetElapsedTime(void);
+		uint64_t GetElapsedTime(void);
 
 		//計測開始時間から、インターバル時間を過ぎているかどうかを確認します。
 		//インターバル時間を設定した場合、そのインターバル時間を過ぎていれば trueを返却します。
@@ -88,7 +88,7 @@ namespace SonikLib
 		void SetStartTime(void);
 
 		//計測開始時間からの差分を取得します。(マイクロ秒)
-		unsigned long GetElapsedTime(void);
+		uint64_t GetElapsedTime(void);
 
 		//計測開始時間から、インターバル時間を過ぎているかどうかを確認します。
 		//インターバル時間を設定した場合、そのインターバル時間を過ぎていれば trueを返却します。

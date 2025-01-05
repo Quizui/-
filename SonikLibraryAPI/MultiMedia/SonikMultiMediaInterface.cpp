@@ -56,14 +56,23 @@ namespace SonikLib
 		SonikLib::SharedSmtPtr<SonikLib::SonikMMAudioInfo> retval;
 
 		SonikLib::AudioInfoImple* imple_ = new(std::nothrow) SonikLib::AudioInfoImple;
-		retval.ResetPointer(imple_);
+		if(imple_ == nullptr)
+		{
+			return retval;
+		};
 
-		//c スレッドは、COMコンポーネントとのやり取りで発生するすべてのスレッド同期作業を
-		//c COMが背後で面倒見てほしいと宣言
+		if(!SonikLib::SharedSmtPtr<SonikLib::SonikMMAudioInfo>::SmartPointerCreate(imple_, retval))
+		{
+			delete imple_;
+			return retval;
+		};
+
+		//スレッドは、COMコンポーネントとのやり取りで発生するすべてのスレッド同期作業を
+		//COMが背後で面倒見てほしいと宣言
 		ComState = CoInitializeEx( nullptr, COINIT_APARTMENTTHREADED);
 
-		//c スレッドは、COMコンポーネントとのやり取りで発生するすべてのスレッド同期作業を
-		//c 自分で行うと宣言
+		//スレッドは、COMコンポーネントとのやり取りで発生するすべてのスレッド同期作業を
+		//自分で行うと宣言
 //		ComState = CoInitializeEx( nullptr, COINIT_MULTITHREADED);
 
 		if( FAILED(ComState) )
@@ -353,7 +362,16 @@ namespace SonikLib
 		SonikLib::SharedSmtPtr<SonikLib::SonikMMAudioInfo> retval;
 
 		SonikLib::AudioInfoImple* imple_ = new(std::nothrow) SonikLib::AudioInfoImple;
-		retval.ResetPointer(imple_);
+		if(imple_ == nullptr)
+		{
+			return retval;
+		};
+
+		if(!SonikLib::SharedSmtPtr<SonikLib::SonikMMAudioInfo>::SmartPointerCreate(imple_, retval))
+		{
+			delete imple_;
+			return retval;
+		};
 
 		//c スレッドは、COMコンポーネントとのやり取りで発生するすべてのスレッド同期作業を
 		//c COMが背後で面倒見てほしいと宣言

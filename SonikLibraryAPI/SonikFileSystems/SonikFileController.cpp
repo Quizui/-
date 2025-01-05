@@ -231,7 +231,7 @@ namespace SonikLib
                 l_size -= UINT32_MAX;
             };
             
-            WriteFile(m_file, l_buf_control, UINT32_MAX, nullptr, nullptr);
+            WriteFile(m_file, l_buf_control, l_size, nullptr, nullptr);
             delete[] l_buffer;
 
         #elif defined(__linux__)
@@ -263,7 +263,7 @@ namespace SonikLib
                 l_size -= UINT32_MAX;
             };
             
-            WriteFile(m_file, l_buf_control, UINT32_MAX, nullptr, nullptr);
+            WriteFile(m_file, l_buf_control, l_size, nullptr, nullptr);
             delete[] l_buffer;
 
         #elif defined(__linux__)
@@ -295,7 +295,7 @@ namespace SonikLib
                 l_size -= UINT32_MAX;
             };
             
-            WriteFile(m_file, l_buf_control, UINT32_MAX, nullptr, nullptr);
+            WriteFile(m_file, l_buf_control, l_size, nullptr, nullptr);
             delete[] l_buffer;
 
         #elif defined(__linux__)
@@ -584,7 +584,7 @@ namespace SonikLib
 
             ptmp->mp_f_sys_func = ptmp_inner;
 
-			if(!_out_.ResetPointer(ptmp))
+			if(!SFileSystemController::SmartPointerCreate(ptmp, _out_))
 			{
 				delete ptmp;
 				return false;
@@ -711,6 +711,8 @@ namespace SonikLib
                 return false;
             };
 
+            mp_f_sys_func->m_file = l_filehandle;
+            
 #elif defined(__linux__)
 
 #endif
